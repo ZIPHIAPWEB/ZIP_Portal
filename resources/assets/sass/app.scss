@@ -1,0 +1,25 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+//Admin-LTE
+@import '~admin-lte/dist/css/AdminLTE';
+@import '~admin-lte/dist/css/skins/all-skins';
+
+//font-awesome
+@import '~font-awesome/scss/font-awesome';
+
+//plugins
+@import '~admin-lte/plugins/bootstrap-slider/slider';
+@import '~admin-lte/plugins/pace/pace';
+@import '~admin-lte/plugins/iCheck/all.css';
+@import '~admin-lte/plugins/timepicker/bootstrap-timepicker.css';
+
+//datatables
+@import url(https://cdn.datatables.net/v/bs/dt-1.10.16/af-2.2.2/b-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.css);
