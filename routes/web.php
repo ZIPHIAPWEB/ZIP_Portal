@@ -19,7 +19,6 @@ Route::prefix('auth')->group(function() {
     Route::post('/reset/password', 'Auth\ResetPasswordController@reset')->name('post.password.reset');
     Route::get('/reset/password/{token?}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 });
-
 Route::prefix('portal')->group(function() {
     Route::view('/', 'welcome')->name('page.welcome')->middleware('verify');
     Route::view('/sa/dash', 'pages.dashboard.dash-superadmin')->name('dash.superadmin');
@@ -38,11 +37,10 @@ Route::prefix('portal')->group(function() {
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
 });
-
 Route::prefix('coor')->group(function() {
-    Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
+    Route::get('/show', 'CoordinatorController@showCoordinators')->name('coor.show');
+    Route::get('/single/{id}', 'CoordinatorController@showCoordinator')->name('coor.single');
 });
-
 Route::prefix('guard')->group(function() {
     Route::view('/verify', 'auth.not-verified')->name('verify');
     Route::view('/notactivated', 'auth.not-activated')->name('not.activated');
