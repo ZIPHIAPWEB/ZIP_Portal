@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,12 +16,9 @@ class PermissionController extends Controller
 
     public function viewPermission()
     {
-        $permission = Permission::select(['id', 'name', 'display_name', 'description', 'created_at'])->get();
+        $permission = Permission::orderBy('created_at', 'desc')->paginate(10);
 
-        return datatables()->of($permission)
-            ->addColumn('action', function($permission){
-                return '<button class="btn btn-success btn-flat btn-xs" data="edit" data-id="'. $permission->id .'"><span class="fa fa-edit"></span></button>&nbsp;<button class="btn btn-danger btn-flat btn-xs" data="delete" data-id="'. $permission->id .'"><span class="fa fa-trash"></span></button>';
-            })->toJson();
+        return UserResource::collection($permission);
     }
 
     public function storePermission(Request $request)

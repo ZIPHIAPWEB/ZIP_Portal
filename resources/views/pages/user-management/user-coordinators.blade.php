@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-@endsection()
+@endsection
 
 @section('script')
     <script>
@@ -46,43 +46,39 @@
                 this.loadCoordinators();
             },
             methods: {
-                loadCoordinators: function() {
-                    let vm = this;
-                    fetch('/coor/show')
-                    .then((response) => response.json())
-                    .then(function(response) {
-                        vm.coordinators = response.data;
-                        vm.links = response.links;
-                        vm.meta = response.meta;
-                        console.log(vm.links);
-                        console.log(vm.meta);
-                        console.log(vm.coordinators);
-                    }).catch(function(error){
+                loadCoordinators() {
+                    axios('/coor/show')
+                    .then((response) => {
+                        this.coordinators = response.data.data;
+                        this.links = response.data.links;
+                        this.meta = response.data.meta;
+
+                        console.log(this.links);
+                        console.log(this.meta);
+                        console.log(this.coordinators);
+
+                    }).catch((error) => {
                         console.log(error);
                     });
                 },
-                view: function(id) {
-                    let vm = this;
-                    fetch(`/coor/single/${id}`)
-                        .then((response) => response.json())
-                        .then(function(response) {
-                            console.log(response.data);
-                            vm.coordinator = response.data;
-                        }).catch(function(error) {
+                view(id) {
+                    axios(`/coor/single/${id}`)
+                        .then((response) => {
+                            console.log(response.data.data);
+                            this.coordinator = response.data.data;
+                        }).catch((error) => {
                             console.log(error)
                     });
                 },
-                deactivate: function(id) {
-                    let vm = this;
-                    fetch(`/coor/single/${id}`)
-                        .then((response) => response.json())
-                        .then(function(response) {
-                            console.log(response.data);
-                        }).catch(function(error) {
+                deactivate(id) {
+                    axios(`/coor/single/${id}`)
+                        .then((response) => {
+                            console.log(response.data.data);
+                        }).catch((error) => {
                             console.log(error);
-                    })
+                    });
                 }
             }
         });
     </script>
-@endsection()
+@endsection
