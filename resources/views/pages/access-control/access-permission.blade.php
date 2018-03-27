@@ -7,7 +7,23 @@
         <div class="col-xs-12">
             <div class="box box-primary with-border">
                 <div class="box-body">
-                    <button @click="createPermission()" class="btn btn-primary btn-flat btn-sm pull-right m-b-10"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
+                    <form action="" class="form-inline">
+                        <div class="form-group">
+                            <label for="from-date">From Date: </label>
+                            <input type="date" name="from-date" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="to-date">To Date: </label>
+                            <input type="date" name="to-date" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control input-sm" name="" id="">
+                                <option value="">Select</option>
+                            </select>
+                            <button type="submit" class="btn btn-warning btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span>&nbsp; Filter</button>
+                        </div>
+                        <button @click="createPermission()" class="btn btn-primary btn-flat btn-sm pull-right m-b-10"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
+                    </form>
                     <table id="permission-table" class="table table-bordered table-striped">
                         <thead>
                         <th>#</th>
@@ -31,6 +47,25 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li>
+                                <a href="#">«</a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">»</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
