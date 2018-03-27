@@ -3,160 +3,179 @@
 @section('title', 'Roles')
 
 @section('content')
-    <div class="col-xs-12">
-        <div class="box box-primary">
-            <div class="box-body">
-                <table id="role-table" class="table table-bordered table-striped">
-                    <thead>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Display Name</th>
-                    <th>Description</th>
-                    <th>Created At</th>
-                    <th>Action</th>
-                    </thead>
-                </table>
+    <div id="app">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <button @click="createRole()" class="btn btn-primary btn-flat btn-sm m-b-10 pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
+                    <table id="role-table" class="table table-bordered table-striped">
+                        <thead>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Display Name</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                        <tr v-for="role in roles.data">
+                            <td>@{{ role.id }}</td>
+                            <td>@{{ role.name }}</td>
+                            <td>@{{ role.display_name }}</td>
+                            <td>@{{ role.description }}</td>
+                            <td>@{{ role.created_at }}</td>
+                            <td>
+                                <button @click="editRole(role.id)"  class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button @click="deleteRole(role.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li>
+                                <a @click="previous()" href="#">«</a>
+                            </li>
+                            <li>
+                                <a>@{{ current_page }}</a>
+                            </li>
+                            <li>
+                                <a href="#">of</a>
+                            </li>
+                            <li>
+                                <a>@{{ last_page }}</a>
+                            </li>
+                            <li>
+                                <a @click="next()" href="#">»</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="role-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="role-form">
-                        <div class="form-group">
-                            <label for="role-name">Name:</label>
-                            <input name="role-name" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="role-display-name">Display Name:</label>
-                            <input name="role-display-name" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="role-description">Description:</label>
-                            <input name="role-description" type="text" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="submit" class="btn btn-success btn-flat btn-block">Save changes</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        <div class="modal fade" id="role-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="role-form">
+                            <div class="form-group">
+                                <label for="role-name">Name:</label>
+                                <input name="role-name" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="role-display-name">Display Name:</label>
+                                <input name="role-display-name" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="role-description">Description:</label>
+                                <input name="role-description" type="text" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button @click="storeRole()" id="btn-action" class="btn btn-success btn-flat btn-block">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
 @endsection()
 
 @section('script')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ready(function(){
-            var dt = $('#role-table').dataTable({
-                'processing': true,
-                'serverSide': true,
-                'ordering'    : true,
-                'autoWidth'   : false,
-                'ajax': '{{ route('role.view') }}',
-                'dom': '<"row"<"pull-right"><"pull-left">><"row"<"pull-right m-r-15"B><"pull-left filter">>tr<"row"<"pull-right m-r-15"p><"pull-left m-l-15"i>>',
-                'buttons': [
-                    {
-                        className: 'btn btn-default btn-flat btn-sm',
-                        text: '<span class="fa fa-plus-circle"></span>&nbsp;Create',
-                        action: function(e, dt, node, config){
-                            $('#role-modal').find('.modal-title').text('Create New Role');
-                            $('#role-modal').find('#submit').text('Save');
-                            $('#role-form').attr('action', '/role/store');
-                            $('#role-form')[0].reset();
+        const app = new Vue({
+            el: '#app',
+            data: {
+                roles: [],
+                links: [],
+                current_page: '',
+                last_page: ''
+            },
+            mounted: function() {
+                this.loadRoles();
+            },
+            methods: {
+                previous() {
+                    axios(this.links.prev)
+                        .then((response) => {
+                            this.roles = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                next() {
+                    axios(this.links.next)
+                        .then((response) => {
+                            this.roles = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                loadRoles() {
+                    axios('/role/view')
+                        .then((response) => {
+                            this.roles = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                createRole() {
+                    $('#role-form').attr('action', '/role/store');
+                    $('#role-modal').modal('show');
+                    $('.modal-title').text('Create Role');
+                    $('#btn-action').text('Save Role');
+                },
+                editRole(id) {
+                    axios(`/role/edit/${id}`)
+                        .then((response) => {
+                            $('#role-form').attr('action', `/role/update/${id}`);
                             $('#role-modal').modal('show');
-                        }
-                    }
-                ],
-                'columns': [
-                    { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'display_name', name: 'display_name' },
-                    { data: 'description', name: 'description' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'action', name: 'action' }
-                ]
-            });
+                            $('.modal-title').text('Edit Role');
+                            $('#btn-action').text('Update Role');
 
-            $('#role-table tbody').on('click', 'td button', function() {
-                var data = $(this).attr('data');
-                var dataId = $(this).attr('data-id');
+                            $('input[name=role-name]').val(response.data.name);
+                            $('input[name=role-display-name]').val(response.data.display_name);
+                            $('input[name=role-description]').val(response.data.description);
+                        }).catch((error) => {
+                            console.log(error);
+                    })
+                },
+                storeRole() {
+                    let url = $('#role-form').attr('action');
+                    let formData = new FormData($('#role-form')[0]);
 
-                switch(data) {
-                    case 'edit':
-                        $.ajax({
-                            type: 'ajax',
-                            url: '/role/edit/'+dataId,
-                            method: 'get',
-                            dataType: 'json',
-                            contentType: false,
-                            processData: false,
-                            success: function(response) {
-                                $('#role-form').attr('action', '/role/update/'+dataId);
-                                $('#role-modal').find('.modal-title').text('Update Role');
-                                $('#role-modal').find('#submit').text('Update');
-                                $('input[name=role-name]').val(response['name']);
-                                $('input[name=role-display-name]').val(response['display_name']);
-                                $('input[name=role-description]').val(response['description']);
-
-                                $('#role-modal').modal('show');
-                                dt.api().ajax.reload();
-                            },
-                            error: function(response) {
-                                console.log(response);
-                            }
-                        });
-                        break;
-
-                    case 'delete':
-                        $.ajax({
-                            type: 'ajax',
-                            url: '/role/delete/'+dataId,
-                            method: 'get',
-                            dataType: 'json',
-                            success: function(response) {
-                                dt.api().ajax.reload();
-                            },
-                            error: function(response) {
-                                console.log(response);
-                            }
-                        });
-                        break;
+                    axios({url: url, method: 'post', data: formData})
+                        .then((response) => {
+                            this.loadRoles();
+                            $('#role-modal').modal('hide');
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                deleteRole(id) {
+                    axios(`/role/delete/${id}`)
+                        .then((response) => {
+                            alert('Role Deleted!');
+                            this.loadRoles();
+                        }).catch((error) => {
+                            console.log(error);
+                    })
                 }
-            });
-
-            $('#submit').click(function() {
-                var formData = new FormData($('#role-form')[0]);
-                var url = $('#role-form').attr('action');
-
-                $.ajax({
-                    type: 'ajax',
-                    url: url,
-                    method: 'post',
-                    data: formData,
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        dt.api().ajax.reload();
-                        $('#role-modal').modal('hide');
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
+            }
         });
     </script>
 @endsection()

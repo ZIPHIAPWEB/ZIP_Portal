@@ -16,7 +16,7 @@ class PermissionController extends Controller
 
     public function viewPermission()
     {
-        $permission = Permission::orderBy('created_at', 'desc')->paginate(10);
+        $permission = Permission::orderBy('created_at', 'desc')->paginate(5);
 
         return UserResource::collection($permission);
     }

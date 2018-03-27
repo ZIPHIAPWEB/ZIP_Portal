@@ -7,23 +7,7 @@
         <div class="col-xs-12">
             <div class="box box-primary with-border">
                 <div class="box-body">
-                    <form action="" class="form-inline">
-                        <div class="form-group">
-                            <label for="from-date">From Date: </label>
-                            <input type="date" name="from-date" class="form-control input-sm">
-                        </div>
-                        <div class="form-group">
-                            <label for="to-date">To Date: </label>
-                            <input type="date" name="to-date" class="form-control input-sm">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control input-sm" name="" id="">
-                                <option value="">Select</option>
-                            </select>
-                            <button type="submit" class="btn btn-warning btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span>&nbsp; Filter</button>
-                        </div>
-                        <button @click="createPermission()" class="btn btn-primary btn-flat btn-sm pull-right m-b-10"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
-                    </form>
+                    <button @click="createPermission()" class="btn btn-primary btn-flat btn-sm pull-right m-b-10"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
                     <table id="permission-table" class="table table-bordered table-striped">
                         <thead>
                         <th>#</th>
@@ -50,19 +34,19 @@
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
                             <li>
-                                <a href="#">«</a>
+                                <a @click="previous()" href="#">«</a>
                             </li>
                             <li>
-                                <a href="#">1</a>
+                                <a>@{{ current_page }}</a>
                             </li>
                             <li>
-                                <a href="#">2</a>
+                                <a href="#">of</a>
                             </li>
                             <li>
-                                <a href="#">3</a>
+                                <a>@{{ last_page }}</a>
                             </li>
                             <li>
-                                <a href="#">»</a>
+                                <a @click="next()" href="#">»</a>
                             </li>
                         </ul>
                     </div>
@@ -108,16 +92,43 @@
             el: '#app',
             data: {
                 permissions: [],
+                links: [],
+                current_page: '',
+                last_page: ''
             },
             mounted: function() {
                 this.loadPermissions();
             },
             methods: {
+                previous() {
+                    axios(this.links.prev)
+                        .then((response) => {
+                            this.permissions = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                next() {
+                    axios(this.links.next)
+                        .then((response) => {
+                            this.permissions = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
                 loadPermissions() {
                     axios(`/permission/view`)
                         .then((response) => {
-                            console.log(response.data);
                             this.permissions = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
                         }).catch((error) => {
                             console.log(error);
                     })
