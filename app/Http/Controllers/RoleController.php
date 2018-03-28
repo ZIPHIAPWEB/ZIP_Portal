@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SuperAdminResource;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,12 +16,9 @@ class RoleController extends Controller
 
     public function viewRoles()
     {
-        $roles = Role::select(['id', 'name', 'display_name', 'description', 'created_at'])->get();
+        $roles = Role::orderBy('created_at', 'desc')->paginate(10);
 
-        return datatables()->of($roles)
-            ->addColumn('action', function($role){
-                return '<button class="btn btn-success btn-flat btn-xs" data="edit" data-id="'. $role->id .'"><span class="fa fa-edit"></span></button>&nbsp;<button class="btn btn-danger btn-flat btn-xs" data="delete" data-id="'. $role->id .'"><span class="fa fa-trash"></span></button>';
-            })->toJson();
+        return SuperAdminResource::collection($roles);
     }
 
     public function storeRoles(Request $request)
