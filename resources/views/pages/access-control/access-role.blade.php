@@ -66,14 +66,17 @@
                             <div class="form-group">
                                 <label for="role-name">Name:</label>
                                 <input name="role-name" type="text" class="form-control">
+                                <span class="help-block"></span>
                             </div>
                             <div class="form-group">
                                 <label for="role-display-name">Display Name:</label>
                                 <input name="role-display-name" type="text" class="form-control">
+                                <span class="help-block"></span>
                             </div>
                             <div class="form-group">
                                 <label for="role-description">Description:</label>
                                 <input name="role-description" type="text" class="form-control">
+                                <span class="help-block"></span>
                             </div>
                         </form>
                     </div>
@@ -94,7 +97,8 @@
                 roles: [],
                 links: [],
                 current_page: '',
-                last_page: ''
+                last_page: '',
+                errors: []
             },
             mounted: function() {
                 this.loadRoles();
@@ -171,6 +175,7 @@
                             $('#role-modal').modal('hide');
                         }).catch((error) => {
                             console.log(error);
+                            this.errors = error.errors;
                     })
                 }
             }
