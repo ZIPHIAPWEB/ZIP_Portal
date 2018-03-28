@@ -43,6 +43,10 @@ Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
 });
 
+Route::prefix('stud')->group(function() {
+    Route::get('/show', 'StudentController@showStudent')->name('stud.show');
+});
+
 Route::prefix('guard')->group(function() {
     Route::view('/verify', 'auth.not-verified')->name('verify');
     Route::view('/notactivated', 'auth.not-activated')->name('not.activated');
