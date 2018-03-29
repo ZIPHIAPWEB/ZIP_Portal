@@ -23,10 +23,6 @@
 
 @section('script')
     <script>
-        $(document).ready(function() {
-            var sponsorDT = $('#sponsor-table').dataTable({
 
-            });
-        });
     </script>
 @endsection

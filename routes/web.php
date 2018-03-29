@@ -64,6 +64,10 @@ Route::prefix('permission')->group(function() {
     Route::get('/delete/{id}', 'PermissionController@deletePermission')->name('permission.delete');
 });
 
+Route::prefix('program')->group(function() {
+    Route::get('/view', 'ProgramController@viewProgram')->name('program.view');
+});
+
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
