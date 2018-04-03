@@ -27,8 +27,8 @@
                                 <td>@{{ program.description }}</td>
                                 <td>
                                     <button class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
-                                    <button class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
-                                    <button class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                    <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                    <button @click="deleteProgram(program.id)" class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -94,24 +94,24 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create Program</h4>
+                        <h4 class="modal-title">@{{ modal_title }}</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="program-name">Name</label>
-                            <input type="text" class="form-control" placeholder="Type Program Name...">
+                            <input v-model="program.name" type="text" class="form-control" placeholder="Type Program Name...">
                         </div>
                         <div class="form-group">
                             <label for="program-display-name">Display Name</label>
-                            <input type="text" class="form-control" placeholder="Type Display Name...">
+                            <input v-model="program.display_name" type="text" class="form-control" placeholder="Type Display Name...">
                         </div>
                         <div class="form-group">
                             <label for="program-description">Description</label>
-                            <input type="text" class="form-control" placeholder="Type Description...">
+                            <input v-model="program.description" type="text" class="form-control" placeholder="Type Description...">
                         </div>
                     </div>
                     <div class="modal-footer clearfix">
-                        <button class="btn btn-success btn-flat btn-block">Save Program</button>
+                        <button @click="storeProgram()" class="btn btn-success btn-flat btn-block">@{{ button }} Program</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -125,16 +125,24 @@
             el: '#app',
             data: {
                 programs: [],
+                program: {
+                    name: '',
+                    display_name: '',
+                    description: ''
+                },
                 links: [],
                 current_page: '',
-                last_page: ''
+                last_page: '',
+                modal_title: '',
+                url: '',
+                button: ''
             },
             mounted: function() {
                 this.loadPrograms();
             },
             methods: {
                 previous() {
-                    axios(this.links.prev)
+                    axios.get(this.links.prev)
                         .then((response) => {
                             console.log(response);
                         }).catch((error) => {
@@ -142,7 +150,7 @@
                     });
                 },
                 next() {
-                    axios(this.links.next)
+                    axios.get(this.links.next)
                         .then((response) => {
                             console.log(response);
                         }).catch((error) => {
@@ -150,7 +158,7 @@
                     });
                 },
                 loadPrograms() {
-                    axios('/program/view')
+                    axios.get('/program/view')
                         .then((response) => {
                             this.programs = response.data.data;
                             this.links = response.data.links;
@@ -161,7 +169,46 @@
                     });
                 },
                 createProgram() {
+                    this.url = '/program/store';
+                    this.modal_title = 'Create Program';
+                    this.button = 'Save';
+                    this.program.name = '';
+                    this.program.display_name = '';
+                    this.program.description = '';
+
                     $('#program-single-modal').modal('show');
+                },
+                editProgram(id) {
+                    this.modal_title = 'Edit Program';
+                    this.url = `/program/${id}/update`;
+                    this.button = 'Update';
+                    axios.get(`/program/edit/${id}`)
+                        .then((response) => {
+                            this.program.name = response.data.data.name;
+                            this.program.display_name = response.data.data.display_name;
+                            this.program.description = response.data.data.description;
+                            $('#program-single-modal').modal('show');
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                storeProgram() {
+                    axios.post(this.url, this.program)
+                        .then((response) => {
+                            this.loadPrograms();
+                            $('#program-single-modal').modal('hide');
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                deleteProgram(id) {
+                    axios.get(`/program/delete/${id}`)
+                        .then((response) => {
+                            this.loadPrograms();
+                            $('#program-single-modal').modal('hide');
+                        }).catch((error) => {
+                            console.log(error);
+                    })
                 }
             }
         });

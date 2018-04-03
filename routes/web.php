@@ -66,6 +66,10 @@ Route::prefix('permission')->group(function() {
 
 Route::prefix('program')->group(function() {
     Route::get('/view', 'ProgramController@viewProgram')->name('program.view');
+    Route::post('/store', 'ProgramController@storeProgram')->name('program.store');
+    Route::get('/edit/{id}', 'ProgramController@editProgram')->name('program.edit');
+    Route::post('/{id}/update', 'ProgramController@updateProgram')->name('program.update');
+    Route::get('/delete/{id}', 'ProgramController@deleteProgram')->name('program.delete');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
