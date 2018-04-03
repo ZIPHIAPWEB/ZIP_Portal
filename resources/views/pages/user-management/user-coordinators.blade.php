@@ -18,7 +18,10 @@
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr v-for="coordinator in coordinators.data">
+                            <tr v-if="coordinators.data.length === 0">
+                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                            </tr>
+                            <tr v-else v-for="coordinator in coordinators.data">
                                 <td>@{{ coordinator.id }}</td>
                                 <td>@{{ coordinator.name }}</td>
                                 <td>@{{ coordinator.email }}</td>
