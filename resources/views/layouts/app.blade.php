@@ -54,6 +54,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-html5-1.5.1/datatables.min.js"></script>
 <!-- page script -->
+@yield('script')
 <script type="text/javascript">
     // To make Pace works on Ajax calls
     $(document).ajaxStart(function () {
@@ -67,6 +68,5 @@
         })
     });
 </script>
-@yield('script')
 </body>
 </html>

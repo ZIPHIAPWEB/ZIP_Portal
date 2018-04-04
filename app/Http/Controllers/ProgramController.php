@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SuperAdminResource;
 use App\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProgramController extends Controller
 {
@@ -17,6 +18,12 @@ class ProgramController extends Controller
 
     public function storeProgram(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name'          =>  'required',
+            'display_name'  =>  'required',
+            'description'   =>  'required'
+        ])->validate();
+
         Program::create([
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
@@ -35,6 +42,12 @@ class ProgramController extends Controller
 
     public function updateProgram(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name'          =>  'required',
+            'display_name'  =>  'required',
+            'description'   =>  'required'
+        ])->validate();
+        
         Program::find($id)->update([
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
