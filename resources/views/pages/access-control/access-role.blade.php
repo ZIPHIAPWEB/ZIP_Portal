@@ -59,26 +59,26 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 id="modal-title" class="modal-title">Modal title</h4>
+                        <h4 id="modal-title" class="modal-title">@{{ title }}</h4>
                     </div>
                     <div class="modal-body">
                         <form id="role-form">
                             <div class="form-group">
                                 <label for="role-name">Name:</label>
-                                <input name="role-name" type="text" class="form-control">
+                                <input v-model="role.name" name="role-name" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="role-display-name">Display Name:</label>
-                                <input name="role-display-name" type="text" class="form-control">
+                                <input v-model="role.display_name" name="role-display-name" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="role-description">Description:</label>
-                                <input name="role-description" type="text" class="form-control">
+                                <input v-model="role.description" name="role-description" type="text" class="form-control">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button @click="storeRole()" id="submit" class="btn btn-success btn-flat btn-block">Save changes</button>
+                        <button @click="storeRole()" id="submit" class="btn btn-success btn-flat btn-block">@{{ button }} changes</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -91,17 +91,25 @@
         const app = new Vue({
             el: '#app',
             data: {
+                role: {
+                    name: '',
+                    display_name: '',
+                    description: ''
+                },
                 roles: [],
                 links: [],
                 current_page: '',
-                last_page: ''
+                last_page: '',
+                url: '',
+                title: '',
+                button: ''
             },
             mounted: function() {
                 this.loadRoles();
             },
             methods: {
                 previous() {
-                    axios(this.links.prev)
+                    axios.get(this.links.prev)
                         .then((response) => {
                             this.roles = response.data;
                             this.links = response.data.links;
@@ -112,7 +120,7 @@
                     })
                 },
                 next() {
-                    axios(this.links.next)
+                    axios.get(this.links.next)
                         .then((response) => {
                             this.roles = response.data;
                             this.links = response.data.links;
@@ -123,7 +131,7 @@
                     })
                 },
                 loadRoles() {
-                    axios('/role/view')
+                    axios.get('/role/view')
                         .then((response) => {
                             this.roles = response.data;
                             this.links = response.data.links;
@@ -134,28 +142,34 @@
                     });
                 },
                 createRole() {
-                    $('#role-form').attr('action', '/role/store');
-                    $('#role-form')[0].reset();
-                    $('.modal-title').text('Add Role');
-                    $('#submit').text('Save');
+                    this.url = '/role/store';
+                    this.title = 'Add Role';
+                    this.button = 'Save';
+
+                    this.role.name = '';
+                    this.role.display_name = '';
+                    this.role.description = '';
+
                     $('#role-modal').modal('show');
                 },
                 editRole(id) {
-                    axios(`/role/edit/${id}`)
+                    axios.get(`/role/edit/${id}`)
                         .then((response) => {
-                            $('#role-form').attr('action', `/role/update/${id}`);
-                            $('.modal-title').text('Edit Role');
-                            $('#submit').text('Update');
-                            $('input[name=role-name]').val(response.data.name);
-                            $('input[name=role-display-name]').val(response.data.display_name);
-                            $('input[name=role-description]').val(response.data.description);
+                            this.url = `/role/update/${id}`;
+                            this.title = 'Edit Role';
+                            this.button = 'Update';
+
+                            this.role.name = response.data.name;
+                            this.role.display_name = response.data.display_name;
+                            this.role.description = response.data.description;
+
                             $('#role-modal').modal('show');
                         }).catch((error) => {
                             console.log(error);
                     });
                 },
                 deleteRole(id) {
-                    axios(`/role/delete/${id}`)
+                    axios.get(`/role/delete/${id}`)
                         .then((response) => {
                             this.loadRoles();
                         }).catch((error) => {
@@ -163,14 +177,12 @@
                     });
                 },
                 storeRole() {
-                    let url = $('#role-form').attr('action');
-                    let formData = new FormData($('#role-form')[0]);
-                    axios({ url: url, method: 'post', data: formData })
+                    axios.post(this.url, this.role)
                         .then((response) => {
                             this.loadRoles();
                             $('#role-modal').modal('hide');
                         }).catch((error) => {
-                            console.log(error);
+                            console.log(error.response);
                     })
                 }
             }
