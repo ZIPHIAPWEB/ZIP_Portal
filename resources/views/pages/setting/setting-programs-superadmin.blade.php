@@ -10,7 +10,6 @@
                     <button @click="createProgram()" class="btn btn-primary btn-flat btn-sm pull-right m-b-10"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
                     <table id="program-table" class="table table-striped table-bordered">
                         <thead>
-                            <th>#</th>
                             <th>Name</th>
                             <th>Display Name</th>
                             <th>Description</th>
@@ -21,12 +20,11 @@
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
                             <tr v-else v-for="program in programs">
-                                <td>@{{ program.id }}</td>
                                 <td>@{{ program.name }}</td>
                                 <td>@{{ program.display_name }}</td>
                                 <td>@{{ program.description }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
+                                    <button @click="viewRequirements(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
                                     <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteProgram(program.id)" class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
@@ -61,29 +59,65 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h4 class="modal-title">@{{ program.display_name }} Requirements</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body clearfix">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="">Name</label>
+                                    <input v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <input v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                </div>
+
+                                <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                            </div>
+                        </div>
                         <table id="program-single-table" class="table table-striped table-bordered">
                             <thead>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Display Name</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Application Form</td>
-                                    <td>Application Form</td>
+                                <tr v-if="requirements.length === 0">
+                                    <td valign="top" colspan="15" class="text-center">No Records</td>
+                                </tr>
+                                <tr v-else v-for="requirement in requirements">
+                                    <td>@{{ requirement.id }}</td>
+                                    <td>@{{ requirement.name }}</td>
+                                    <td>@{{ requirement.description }}</td>
                                     <td>
-                                        <button class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
-                                        <button class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                        <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li>
+                                <a @click="previousRequirement()">«</a>
+                            </li>
+                            <li>
+                                <a>@{{ req_current_page }}</a>
+                            </li>
+                            <li>
+                                <a>of</a>
+                            </li>
+                            <li>
+                                <a>@{{ req_last_page }}</a>
+                            </li>
+                            <li>
+                                <a @click="nextRequirement()">»</a>
+                            </li>
+                        </ul>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -135,7 +169,19 @@
                 last_page: '',
                 modal_title: '',
                 url: '',
-                button: ''
+                button: '',
+
+                requirements: [],
+                requirement: {
+                    program_id: '',
+                    name: '',
+                    description: ''
+                },
+                req_links: [],
+                req_current_page: '',
+                req_last_page: '',
+                req_url: '',
+                req_button: '',
             },
             mounted: function() {
                 this.loadPrograms();
@@ -144,7 +190,10 @@
                 previous() {
                     axios.get(this.links.prev)
                         .then((response) => {
-                            console.log(response);
+                            this.programs = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -152,7 +201,10 @@
                 next() {
                     axios.get(this.links.next)
                         .then((response) => {
-                            console.log(response);
+                            this.programs = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -209,6 +261,93 @@
                         }).catch((error) => {
                             console.log(error);
                     })
+                },
+                loadRequirements(id) {
+                    axios.get(`/program/${id}/requirements/view`)
+                        .then((response) => {
+                            this.requirements = response.data.data;
+                            this.req_links = response.data.links;
+                            this.req_current_page = response.data.meta.current_page;
+                            this.req_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                nextRequirement() {
+                    axios.get(this.req_links.next)
+                        .then((response) => {
+                            this.requirements = response.data.data;
+                            this.req_links = response.data.links;
+                            this.req_current_page = response.data.meta.current_page;
+                            this.req_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                prevRequirement() {
+                    axios.get(this.req_links.prev)
+                        .then((response) => {
+                            this.requirements = response.data.data;
+                            this.req_links = response.data.links;
+                            this.req_current_page = response.data.meta.current_page;
+                            this.req_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                viewRequirements(id) {
+                    axios.get(`/program/edit/${id}`)
+                        .then((response) => {
+                            this.loadRequirements(id);
+                            this.program.name = response.data.data.name;
+                            this.program.display_name = response.data.data.display_name;
+                            this.program.description = response.data.data.description;
+
+                            this.req_url = '/program/requirement/store';
+                            this.req_button = 'Add';
+                            this.requirement.program_id = id;
+                            $('#program-modal').modal('show');
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                editRequirement(id) {
+                    axios.get(`/program/requirement/${id}/edit`)
+                        .then((response) => {
+                            this.req_url = `/program/requirement/${id}/update`;
+                            this.req_button = 'Update';
+                            this.requirement.name = response.data.data.name;
+                            this.requirement.description = response.data.data.description;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                storeRequirement() {
+                    axios.post(this.req_url, this.requirement)
+                        .then((response) => {
+                            if (this.req_button === 'Update') {
+                                alert('Requirement Updated');
+                                this.req_button = 'Add';
+                                this.requirement.name = '';
+                                this.requirement.description = '';
+                            } else {
+                                this.requirement.name = '';
+                                this.requirement.description = '';
+                                alert('Requirement Added');
+                            }
+
+                            this.loadRequirements(this.requirement.program_id);
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                deleteRequirement(id) {
+                    axios.get(`/program/requirement/${id}/delete`)
+                        .then((response) => {
+                            this.loadRequirements(this.requirement.program_id);
+                        }).catch((error) => {
+                            console.log(error);
+                    });
                 }
             }
         });

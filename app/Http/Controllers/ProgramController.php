@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
 use App\Program;
+use App\ProgramRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,6 +61,8 @@ class ProgramController extends Controller
     public function deleteProgram($id)
     {
         Program::find($id)->delete();
+
+        ProgramRequirement::where('program_id', $id)->delete();
 
         return response()->json(['message'  =>  'Program Deleted']);
     }

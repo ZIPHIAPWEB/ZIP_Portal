@@ -70,6 +70,12 @@ Route::prefix('program')->group(function() {
     Route::get('/edit/{id}', 'ProgramController@editProgram')->name('program.edit');
     Route::post('/{id}/update', 'ProgramController@updateProgram')->name('program.update');
     Route::get('/delete/{id}', 'ProgramController@deleteProgram')->name('program.delete');
+
+    Route::get('/{id}/requirements/view', 'ProgramRequirementController@viewRequirements')->name('program.requirements.view');
+    Route::post('/requirement/store', 'ProgramRequirementController@storeRequirement')->name('program.requirements.store');
+    Route::get('/requirement/{id}/edit', 'ProgramRequirementController@editRequirement')->name('program.requirements.edit');
+    Route::post('/requirement/{id}/update', 'ProgramRequirementController@updateRequirement')->name('program.requirement.update');
+    Route::get('/requirement/{id}/delete', 'ProgramRequirementController@deleteRequirement')->name('program.requirement.delete');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
