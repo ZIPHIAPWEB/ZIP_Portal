@@ -24,15 +24,15 @@ class RoleController extends Controller
     public function storeRoles(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'role-name'           => 'required',
-            'role-display-name'   => 'required',
-            'role-description'    => 'required'
+            'name'           => 'required',
+            'display_name'   => 'required',
+            'description'    => 'required'
         ])->validate();
 
         Role::create([
-            'name'                => $request->input('role-name'),
-            'display_name'        => $request->input('role-display-name'),
-            'description'         => $request->input('role-description')
+            'name'                => $request->input('name'),
+            'display_name'        => $request->input('display_name'),
+            'description'         => $request->input('description')
         ]);
 
         return response()->json(['message' => 'Stored']);
@@ -46,15 +46,15 @@ class RoleController extends Controller
     public function updateRoles(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'role-name'           => 'required',
-            'role-display-name'   => 'required',
-            'role-description'    => 'required'
+            'name'           => 'required',
+            'display_name'   => 'required',
+            'description'    => 'required'
         ])->validate();
 
         Role::find($id)->update([
-            'name'                => $request->input('role-name'),
-            'display_name'        => $request->input('role-display-name'),
-            'description'         => $request->input('role-description')
+            'name'                => $request->input('name'),
+            'display_name'        => $request->input('display_name'),
+            'description'         => $request->input('description')
         ]);
 
         return response()->json(['message' => 'Updated']);
