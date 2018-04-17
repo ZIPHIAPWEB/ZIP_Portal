@@ -66,11 +66,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="">Name</label>
-                                    <input v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                    <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Description</label>
-                                    <input v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                    <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
                                 </div>
 
                                 <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
@@ -128,15 +128,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="program-name">Name</label>
-                            <input v-model="program.name" type="text" class="form-control" placeholder="Type Program Name...">
+                            <input @keyup.enter="storeProgram()" v-model="program.name" type="text" class="form-control" placeholder="Type Program Name...">
                         </div>
                         <div class="form-group">
                             <label for="program-display-name">Display Name</label>
-                            <input v-model="program.display_name" type="text" class="form-control" placeholder="Type Display Name...">
+                            <input @keyup.enter="storeProgram()" v-model="program.display_name" type="text" class="form-control" placeholder="Type Display Name...">
                         </div>
                         <div class="form-group">
                             <label for="program-description">Description</label>
-                            <input v-model="program.description" type="text" class="form-control" placeholder="Type Description...">
+                            <input @keyup.enter="storeProgram()" v-model="program.description" type="text" class="form-control" placeholder="Type Description...">
                         </div>
                     </div>
                     <div class="modal-footer clearfix">
