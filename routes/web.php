@@ -78,6 +78,20 @@ Route::prefix('program')->group(function() {
     Route::get('/requirement/{id}/delete', 'ProgramRequirementController@deleteRequirement')->name('program.requirement.delete');
 });
 
+Route::prefix('sponsor')->group(function() {
+    Route::get('/view', 'SponsorController@view')->name('sponsor.view');
+    Route::post('/store', 'SponsorController@store')->name('sponsor.store');
+    Route::get('/{id}/edit', 'SponsorController@edit')->name('sponsor.edit');
+    Route::post('/{id}/update', 'SponsorController@update')->name('sponsor.update');
+    Route::get('/{id}/delete', 'SponsorController@delete')->name('sponsor.delete');
+
+    Route::get('/{id}/requirements/view', 'SponsorRequirementController@view')->name('sponsor.requirement.view');
+    Route::post('/requirement/store', 'SponsorRequirementController@store')->name('sponsor.requirement.store');
+    Route::get('/requirement/{id}/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
+    Route::post('/requirement/{id}/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
+    Route::get('/requirement/{id}/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
+});
+
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {

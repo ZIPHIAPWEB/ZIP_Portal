@@ -63,9 +63,6 @@
                     </div>
                     <div class="modal-body clearfix">
                         <div class="box box-primary">
-                            <div class="box-header with-border">
-
-                            </div>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="">Name</label>
@@ -81,7 +78,6 @@
                         </div>
                         <table id="program-single-table" class="table table-striped table-bordered">
                             <thead>
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Action</th>
@@ -91,7 +87,6 @@
                                     <td valign="top" colspan="15" class="text-center">No Records</td>
                                 </tr>
                                 <tr v-else v-for="requirement in requirements">
-                                    <td>@{{ requirement.id }}</td>
                                     <td>@{{ requirement.name }}</td>
                                     <td>@{{ requirement.description }}</td>
                                     <td>
