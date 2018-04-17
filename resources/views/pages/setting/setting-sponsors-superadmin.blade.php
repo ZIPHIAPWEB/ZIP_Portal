@@ -68,11 +68,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="">Name</label>
-                                    <input v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                    <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Description</label>
-                                    <input v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                    <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
                                 </div>
 
                                 <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
@@ -131,15 +131,15 @@
                         <form action="">
                             <div class="form-group">
                                 <label for="sponsor-name">Name</label>
-                                <input v-model="sponsor.name" type="text" name="sponsor-name" class="form-control" placeholder="Enter Sponsor Name...">
+                                <input @keyup.enter="storeSponsor()" v-model="sponsor.name" type="text" name="sponsor-name" class="form-control" placeholder="Enter Sponsor Name...">
                             </div>
                             <div class="form-group">
                                 <label for="sponsor-display-name">Display Name</label>
-                                <input v-model="sponsor.display_name" type="text" name="sponsor-display-name" class="form-control" placeholder="Enter Sponsor Display Name...">
+                                <input @keyup.enter="storeSponsor()" v-model="sponsor.display_name" type="text" name="sponsor-display-name" class="form-control" placeholder="Enter Sponsor Display Name...">
                             </div>
                             <div class="form-group">
                                 <label for="sponsor-description">Description</label>
-                                <input v-model="sponsor.description" type="text" name="sponsor-description" class="form-control" placeholder="Enter Sponsor Description...">
+                                <input @keyup.enter="storeSponsor()" v-model="sponsor.description" type="text" name="sponsor-description" class="form-control" placeholder="Enter Sponsor Description...">
                             </div>
                         </form>
                     </div>
