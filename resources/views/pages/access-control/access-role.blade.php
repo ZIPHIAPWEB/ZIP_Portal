@@ -65,15 +65,15 @@
                         <form id="role-form">
                             <div class="form-group">
                                 <label for="role-name">Name:</label>
-                                <input v-model="role.name" name="role-name" type="text" class="form-control">
+                                <input @keyup.enter="storeRole()" v-model="role.name" name="role-name" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="role-display-name">Display Name:</label>
-                                <input v-model="role.display_name" name="role-display-name" type="text" class="form-control">
+                                <input @keyup.enter="storeRole()" v-model="role.display_name" name="role-display-name" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="role-description">Description:</label>
-                                <input v-model="role.description" name="role-description" type="text" class="form-control">
+                                <input @keyup.enter="storeRole()" v-model="role.description" name="role-description" type="text" class="form-control">
                             </div>
                         </form>
                     </div>
