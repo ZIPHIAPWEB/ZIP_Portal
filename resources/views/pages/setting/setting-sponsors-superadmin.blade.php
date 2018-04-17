@@ -21,10 +21,10 @@
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
                             <tr v-else v-for="sponsor in sponsors">
-                                <td>@{{ sponsor.name }}</td>
-                                <td>@{{ sponsor.display_name }}</td>
-                                <td>@{{ sponsor.description }}</td>
-                                <td>@{{ sponsor.created_at }}</td>
+                                <td v-text="sponsor.name"></td>
+                                <td v-text="sponsor.display_name"></td>
+                                <td v-text="sponsor.description"></td>
+                                <td v-text="sponsor.created_at"></td>
                                 <td>
                                     <button @click="createRequirements(sponsor.id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-plus"></span></button>
                                     <button @click="editSponsor(sponsor.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -40,13 +40,13 @@
                             <a @click="prev()">«</a>
                         </li>
                         <li>
-                            <a>@{{ current_page }}</a>
+                            <a v-text="current_page"></a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>@{{ last_page }}</a>
+                            <a v-text="last_page"></a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
@@ -89,8 +89,8 @@
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
                             <tr v-else v-for="requirement in requirements">
-                                <td>@{{ requirement.name }}</td>
-                                <td>@{{ requirement.description }}</td>
+                                <td v-text="requirement.name"></td>
+                                <td v-text="requirement.description"></td>
                                 <td>
                                     <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
@@ -103,13 +103,13 @@
                                 <a @click="previousRequirement()">«</a>
                             </li>
                             <li>
-                                <a>@{{ req_current_page }}</a>
+                                <a v-text="req_current_page"></a>
                             </li>
                             <li>
                                 <a>of</a>
                             </li>
                             <li>
-                                <a>@{{ req_last_page }}</a>
+                                <a v-text="req_last_page"></a>
                             </li>
                             <li>
                                 <a @click="nextRequirement()">»</a>

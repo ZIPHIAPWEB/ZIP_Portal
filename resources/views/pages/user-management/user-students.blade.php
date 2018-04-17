@@ -26,16 +26,20 @@
                         </thead>
                         <tbody>
                             <tr v-for="student in students.data">
-                                <td>@{{ student.user_id }}</td>
-                                <td>@{{ student.created_at }}</td>
-                                <td>@{{ student.application_status }}</td>
-                                <td>@{{ student.application_id }}</td>
-                                <td>@{{ student.first_name }} &nbsp; @{{ student.middle_name[0] }} &nbsp; @{{ student.last_name }}</td>
-                                <td>@{{ student.school }}</td>
-                                <td>@{{ student.home_number }}</td>
-                                <td>@{{ student.home_number }}</td>
-                                <td>@{{ student.email }}</td>
-                                <td class="text-bold">@{{ student.verified === 1 ? 'Activated' : 'Not Yet Activated' }}</td>
+                                <td v-text="student.user_id"></td>
+                                <td v-text="student.created_at"></td>
+                                <td v-text="student.application_status"></td>
+                                <td v-text="student.application_id"></td>
+                                <td>
+                                    <label v-text="student.first_name"></label>&nbsp;
+                                    <label v-text="student.middle_name[0]"></>&nbsp;
+                                    <label v-text="student.last_name"></label>
+                                </td>
+                                <td v-text="student.school"></td>
+                                <td v-text="student.home_number"></td>
+                                <td v-text="student.home_number"></td>
+                                <td v-text="student.email"></td>
+                                <td v-text="student.verified === 1 ? 'Activated' : 'Not Yet Activated'" class="text-bold"></td>
                                 <td>
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span>&nbsp; View</button>&nbsp;
                                 </td>
@@ -49,13 +53,13 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a>@{{ current_page }}</a>
+                            <a v-text="current_page"></a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>@{{ last_page }}</a>
+                            <a v-text="last_page"></a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
@@ -93,7 +97,7 @@
                                                 <td style="width: 200px">
                                                     Application Status
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.application_status }}
                                                 </td>
                                             </tr>
@@ -101,7 +105,7 @@
                                                 <td>
                                                     Visa Interview Status
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.visa_interview_status }}
                                                 </td>
                                             </tr>
@@ -114,7 +118,7 @@
                                                 <td style="width: 200px">
                                                     Fullname
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
                                                 </td>
                                             </tr>
@@ -122,7 +126,7 @@
                                                 <td>
                                                     Birth Date
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.birthdate }}
                                                 </td>
                                             </tr>
@@ -130,7 +134,7 @@
                                                 <td>
                                                     Gender
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.gender }}
                                                 </td>
                                             </tr>
@@ -138,7 +142,7 @@
                                                 <td>
                                                     Address
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.address }}
                                                 </td>
                                             </tr>
@@ -146,7 +150,7 @@
                                                 <td>
                                                     Home Number
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.home_number }}
                                                 </td>
                                             </tr>
@@ -154,7 +158,7 @@
                                                 <td>
                                                     Mobile Number
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.mobile_number }}
                                                 </td>
                                             </tr>
@@ -162,7 +166,7 @@
                                                 <td>
                                                     College
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.school }}
                                                 </td>
                                             </tr>
@@ -170,7 +174,7 @@
                                                 <td>
                                                     Course
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.course }}
                                                 </td>
                                             </tr>
@@ -178,7 +182,7 @@
                                                 <td>
                                                     Year Level
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.year }}
                                                 </td>
                                             </tr>
@@ -186,7 +190,7 @@
                                                 <td>
                                                     Skype
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.skype_id }}
                                                 </td>
                                             </tr>
@@ -194,7 +198,7 @@
                                                 <td>
                                                     Program ID Number
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.program_id_no }}
                                                 </td>
                                             </tr>
@@ -202,7 +206,7 @@
                                                 <td>
                                                     SEVIS ID
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.sevis_id }}
                                                 </td>
                                             </tr>
@@ -210,7 +214,7 @@
                                                 <td>
                                                     Host Company
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.host_company_id }}
                                                 </td>
                                             </tr>
@@ -218,7 +222,7 @@
                                                 <td>
                                                     Position
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.position }}
                                                 </td>
                                             </tr>
@@ -226,7 +230,7 @@
                                                 <td>
                                                     Location
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.location }}
                                                 </td>
                                             </tr>
@@ -234,7 +238,7 @@
                                                 <td>
                                                     Stipend
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.stipend }}
                                                 </td>
                                             </tr>
@@ -242,7 +246,7 @@
                                                 <td>
                                                     Position
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.position }}
                                                 </td>
                                             </tr>
@@ -250,7 +254,7 @@
                                                 <td>
                                                     Facebook Email
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.fb_email }}
                                                 </td>
                                             </tr>
@@ -258,7 +262,7 @@
                                                 <td>
                                                     Program Start Date
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.program_start_date }}
                                                 </td>
                                             </tr>
@@ -266,7 +270,7 @@
                                                 <td>
                                                     Program End Date
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.program_end_date }}
                                                 </td>
                                             </tr>
@@ -274,7 +278,7 @@
                                                 <td>
                                                     Departure Date
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.date_of_departure }}
                                                 </td>
                                             </tr>
@@ -282,7 +286,7 @@
                                                 <td>
                                                     Arrival Date
                                                 </td>
-                                                <td class="text-bold">
+                                                <td v-cloak class="text-bold">
                                                     @{{ student.date_of_arrival }}
                                                 </td>
                                             </tr>

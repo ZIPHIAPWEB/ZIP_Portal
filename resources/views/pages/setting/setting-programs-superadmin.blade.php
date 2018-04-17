@@ -20,9 +20,9 @@
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
                             <tr v-else v-for="program in programs">
-                                <td>@{{ program.name }}</td>
-                                <td>@{{ program.display_name }}</td>
-                                <td>@{{ program.description }}</td>
+                                <td v-text="program.name"></td>
+                                <td v-text="program.display_name"></td>
+                                <td v-text="program.description"></td>
                                 <td>
                                     <button @click="viewRequirements(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
                                     <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
@@ -38,13 +38,13 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a>@{{ current_page }}</a>
+                            <a v-text="current_page"></a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>@{{ last_page }}</a>
+                            <a v-text="last_page"></a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
@@ -59,7 +59,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">@{{ program.display_name }} Requirements</h4>
+                        <h4 class="modal-title" v-cloak>@{{ program.display_name }} Requirements</h4>
                     </div>
                     <div class="modal-body clearfix">
                         <div class="box box-primary">
@@ -87,8 +87,8 @@
                                     <td valign="top" colspan="15" class="text-center">No Records</td>
                                 </tr>
                                 <tr v-else v-for="requirement in requirements">
-                                    <td>@{{ requirement.name }}</td>
-                                    <td>@{{ requirement.description }}</td>
+                                    <td v-text="requirement.name"></td>
+                                    <td v-text="requirement.description"></td>
                                     <td>
                                         <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                         <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
@@ -101,13 +101,13 @@
                                 <a @click="previousRequirement()">«</a>
                             </li>
                             <li>
-                                <a>@{{ req_current_page }}</a>
+                                <a v-text="req_current_page"></a>
                             </li>
                             <li>
                                 <a>of</a>
                             </li>
                             <li>
-                                <a>@{{ req_last_page }}</a>
+                                <a v-text="req_last_page"></a>
                             </li>
                             <li>
                                 <a @click="nextRequirement()">»</a>
