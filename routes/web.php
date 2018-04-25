@@ -34,6 +34,7 @@ Route::prefix('portal')->group(function() {
 
     Route::view('/sa/s/programs', 'pages.setting.setting-programs-superadmin')->name('s.programs');
     Route::view('/sa/s/sponsors', 'pages.setting.setting-sponsors-superadmin')->name('s.sponsors');
+    Route::view('/sa/s/host', 'pages.setting.setting-host-company-superadmin')->name('s.host');
 
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
