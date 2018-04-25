@@ -1,4 +1,5 @@
 <?php
+Route::view('/', 'welcome')->name('page.welcome');
 
 Route::prefix('auth')->group(function() {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -21,7 +22,7 @@ Route::prefix('auth')->group(function() {
 });
 
 Route::prefix('portal')->group(function() {
-    Route::view('/', 'welcome')->name('page.welcome')->middleware('verify');
+
     Route::view('/sa/dash', 'pages.dashboard.dash-superadmin')->name('dash.superadmin');
     Route::view('/sa/ac/role', 'pages.access-control.access-role')->name('ac.role');
     Route::view('/sa/ac/permission', 'pages.access-control.access-permission')->name('ac.permission');
@@ -100,10 +101,5 @@ Route::prefix('sponsor')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $user = \App\User::where('id', Auth::user()->id)->with('roles')->first();
-    $roles =  $user->roles;
 
-    foreach($roles as $role) {
-        return $role->name;
-    }
 });
