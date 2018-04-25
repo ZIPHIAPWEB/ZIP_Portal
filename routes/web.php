@@ -22,7 +22,7 @@ Route::prefix('auth')->group(function() {
 });
 
 Route::prefix('portal')->group(function() {
-
+    Route::view('/', 'pages.welcome')->middleware('verify');
     Route::view('/sa/dash', 'pages.dashboard.dash-superadmin')->name('dash.superadmin');
     Route::view('/sa/ac/role', 'pages.access-control.access-role')->name('ac.role');
     Route::view('/sa/ac/permission', 'pages.access-control.access-permission')->name('ac.permission');
