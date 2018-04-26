@@ -32,7 +32,7 @@
                                 <td v-text="student.application_id"></td>
                                 <td>
                                     <label v-text="student.first_name"></label>&nbsp;
-                                    <label v-text="student.middle_name[0]"></>&nbsp;
+                                    <label v-text="student.middle_name[0]"></label>&nbsp;
                                     <label v-text="student.last_name"></label>
                                 </td>
                                 <td v-text="student.school"></td>
