@@ -34,19 +34,19 @@
                 <div class="box-footer">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li>
-                            <a>«</a>
+                            <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a>1</a>
+                            <a>@{{ current_page }}</a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>1</a>
+                            <a>@{{ last_page }}</a>
                         </li>
                         <li>
-                            <a>»</a>
+                            <a @click="next()">»</a>
                         </li>
                     </ul>
                 </div>
@@ -109,7 +109,6 @@
                             this.links = response.data.links;
                             this.current_page = response.data.meta.current_page;
                             this.last_page = response.data.meta.last_page;
-                            console.log(response.data);
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -152,6 +151,28 @@
                             console.log(response);
                         }).catch((error) => {
                             console.log(error);
+                    });
+                },
+                previous() {
+                    axios.get(this.links.prev)
+                        .then((response) => {
+                            this.hosts = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                            console.log(error);
+                    });
+                },
+                next() {
+                    axios.get(this.links.next)
+                        .then((response) => {
+                            this.hosts = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
                     });
                 }
             }
