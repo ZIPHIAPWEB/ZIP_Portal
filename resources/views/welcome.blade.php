@@ -25,7 +25,21 @@
                 <li class="nav-item" role="presentation"><a class="nav-link text-white slide-section" href="#programs" data-bs-hover-animate="pulse">PROGRAMS</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link text-white slide-section" href="#contact" data-bs-hover-animate="pulse">CONTACT</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link text-white" href="#" data-bs-hover-animate="pulse">FAQS</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
+                @if(Auth::guest())
+                    <li class="nav-item" role="presentation"><a class="nav-link text-white btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
+                @else
+                    <li class="nav-item" role="presentation">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ route('login') }}">My Portal</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
