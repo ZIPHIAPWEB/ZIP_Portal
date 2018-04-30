@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZIP</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -15,62 +15,48 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 </head>
 
-<body style="font-family:Montserrat, sans-serif;font-weight:normal;">
+<body>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top" style="padding:0;padding-top:16px;padding-bottom:16px;background-color:rgba(0,0,0,0.53);color:#000000;">
-    <div class="container"><a class="navbar-brand text-white" href="#" style="margin-left:0;font-weight:bold;">ZIP Travel Philippines</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand text-white" href="{{ route('welcome') }}" style="margin-left:0;font-weight:bold;">ZIP Travel Philippines</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div
                 class="collapse navbar-collapse flex-row-reverse" id="navcol-1">
             <ul class="nav navbar-nav">
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#about" data-bs-hover-animate="pulse">ABOUT</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white slide-section" href="#programs" data-bs-hover-animate="pulse">PROGRAMS</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white slide-section" href="#contact" data-bs-hover-animate="pulse">CONTACT</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white" href="#" data-bs-hover-animate="pulse">FAQS</a></li>
-                @if(Auth::guest())
-                    <li class="nav-item" role="presentation"><a class="nav-link text-white btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
-                @else
-                    <li class="nav-item" role="presentation">
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ route('login') }}">My Portal</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-                            </div>
-                        </div>
-                    </li>
-                @endif
+                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#about" data-bs-hover-animate="pulse">ABOUT US</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#programs" data-bs-hover-animate="pulse">PROGRAMS</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#contact" data-bs-hover-animate="pulse">CONTACT</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-white" href="{{ route('faqs') }}" data-bs-hover-animate="pulse">FAQS</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link text-white active btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <header class="container v-header">
     <div class="fullscreen-video-wrap"><video width="560" height="315" autoplay="" preload="auto" muted="" loop="">
-            <source src="https://player.vimeo.com/external/158148793.hd.mp4?s=8e8741dbee251d5c35a759718d4b0976fbf38b6f&amp;amp;profile_id=119&amp;amp;oauth2_token_id=57447761" type="video/mp4"></video>
-
-        <div
-                class="header-overlay" style="background-color:rgba(48,49,51,0.57);"></div>
+            <source src="{{ asset('assets/video/Sequence1.mp4') }}" type="video/mp4"></video>
+        <div class="header-overlay"></div>
     </div>
 </header>
 <section id="about">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                <h2 class="text-center text-xl-left header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" style="font-weight:bold;font-family:Montserrat, sans-serif;">ABOUT THE COMPANY</h2>
+                <h2 class="text-center text-xl-left header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">ABOUT THE COMPANY</h2>
                 <p class="text-justify text-wrap" style="padding:0;margin:0px;margin-left:40px;margin-right:40px;">Zip Travel Philippines is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges and travels in the United States and in Australia.&nbsp;<br><br>As a global company,
                     Zip Travel has been in the business for over twenty five (25) years and has helped thousands of students worldwide obtain the opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State.&nbsp;We
                     have 4 offices in the Philippines with our main office located on Manila and branch offices in Cebu, Davao and Pampanga. We also have offices in Europe for European students and have offices in Tennessee, New York, California,
                     Florida, South Carolina and Texas through our visa sponsors.&nbsp;<br><a class="btn btn-primary" role="button" href="#" style="background-color:rgb(6,20,89);margin-top:13px;margin-bottom:13px;"><strong>READ MORE</strong></a></p>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6" style="padding:0;"><img src="{{ asset('assets/img/30547103_10209023119574526_1203608868_o.jpg') }}" data-bs-hover-animate="pulse" class="img-scale" style="background-size:cover;background-repeat:no-repeat;"></div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6" style="padding:0;">
+                <img src="{{ asset('assets/img/30547103_10209023119574526_1203608868_o.jpg') }}" data-bs-hover-animate="pulse" class="img-scale" style="background-size:cover;background-repeat:no-repeat;">
+            </div>
         </div>
     </div>
 </section>
-<section>
-    <div class="container-fluid" style="padding:0;background:linear-gradient(to right, #06124a, #071766);">
+<section class="section-gradient">
+    <div class="container-fluid" style="padding:0;">
         <div class="row no-gutters">
             <div class="col">
-                <h2 class="text-center text-xl-left text-white header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" style="font-weight:bold;">INTERNATIONAL MEMBERSHIP</h2>
+                <h2 class="text-center text-xl-left text-white header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">INTERNATIONAL MEMBERSHIP</h2>
                 <div class="row" style="background-color:#ffffff;margin:44px;">
                     <div class="col-xl-6">
                         <p class="text-justify" style="margin:6px;padding:28px;margin-top:30px;">Zip Travel Philippines is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges and travels in the United States and in Australia.&nbsp;<br><br>As a global
@@ -84,7 +70,7 @@
                             <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
                                  style="padding:0;"><img src="{{ asset('assets/img/3.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
                             <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/1024_highup.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
+                                 style="padding:0;"><img src="{{ asset('assets/img/1024highup.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
                             <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
                                  style="padding:0;"><img src="{{ asset('assets/img/5.png') }}" width="150px" height="150px" style="width:85%;height:94%;padding:12px;"></div>
                             <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
@@ -108,7 +94,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h2 class="text-center text-xl-left" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" style="margin:43px 0px 9px 40px;font-weight:bold;">WHAT WE DO</h2>
+                <h2 class="text-center text-xl-left header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" style="margin:43px 0px 9px 40px">WHAT WE DO</h2>
                 <p class="text-justify" style="margin-left:40px;margin-right:40px;">Providing FIlipino students and those from other countries an inter-cultural opportunities to become familiar with company-specific and U.S technologies through U.S based training while obtaining a better understanding of one another
                     and the world around them.</p>
             </div>
@@ -133,7 +119,7 @@
         </div>
     </div>
 </section>
-<section id="programs" style="background:linear-gradient(to right, #06124a, #071766);margin-top:20px;">
+<section id="programs" class="section-gradient" style="margin-top:20px;">
     <div class="container-fluid" style="padding:0;">
         <div class="row no-gutters">
             <div class="col">
@@ -144,7 +130,7 @@
             <div class="col-12 d-flex flex-column justify-content-center align-self-baseline mx-auto">
                 <div class="row no-gutters d-flex">
                     <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url(&quot;assets/img/spring.jpg&quot;);background-position:center;background-repeat:no-repeat;">
+                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/spring.jpg') }});background-position:center;background-repeat:no-repeat;">
                             <div class="media-body">
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>WORK TRAVEL PROGRAM - SPRING</strong></h6>
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>3 months (March - June)</em></h6>
@@ -154,7 +140,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url(&quot;assets/img/summer.jpg&quot;);background-position:center;background-repeat:no-repeat;">
+                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/summer.jpg') }});background-position:center;background-repeat:no-repeat;">
                             <div class="media-body">
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>WORK TRAVEL PROGRAM - SUMMER</strong></h6>
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>3 months (May - August)</em></h6>
@@ -164,7 +150,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url(&quot;assets/img/intern.jpg&quot;);background-position:center;background-repeat:no-repeat;">
+                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/intern.jpg') }});background-position:center;background-repeat:no-repeat;">
                             <div class="media-body">
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>INTERNSHIP PROGRAM</strong></h6>
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>6 to 12 months (Year Round)</em></h6>
@@ -173,7 +159,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url(&quot;assets/img/career.jpg&quot;);background-position:center;background-repeat:no-repeat;">
+                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/career.jpg') }});background-position:center;background-repeat:no-repeat;">
                             <div class="media-body">
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>CAREER TRAINING PROGRAM</strong></h6>
                                 <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>12 months (Year Round)</em></h6>
@@ -192,33 +178,33 @@
             <div class="col">
                 <h2 class="header-title">APPLICATION GUIDE</h2>
                 <div class="row" style="margin-top:25px;">
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 1</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/register.jpg') }});background-size:cover;background-position:center;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 1</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/register.jpg') }});background-size:cover;background-position:center;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;margin-top:15px;">Register online at www.ziptravel.com.ph</p>
                     </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 2</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/orientation.jpeg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 2</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/orientation.jpeg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;margin-top:15px;">Program Orientation and Assessment</p>
                     </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 3</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/host_company.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 3</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/host_company.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;">U.S. Host Company Interview</p>
                     </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 4</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/j1_visa.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 4</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/j1_visa.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;margin-top:15px;">Processing of J1 Visa</p>
                     </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 5</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/preparation.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 5</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/preparation.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;margin-top:15px;">Preparation for Departure to U.S.A</p>
                     </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center" data-aos="flip-right" data-aos-once="true">
-                        <h6 style="font-weight:bold;">Step 6</h6><img class="rounded-circle" width="100px" height="100px" data-bs-hover-animate="pulse" style="padding:0px;background-image:url({{ asset('assets/img/program_proper.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
+                        <h6 style="font-weight:bold;">Step 6</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/program_proper.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
                         <p
                                 class="text-center" style="font-size:13px;margin-top:15px;">Program Proper and Monitoring</p>
                     </div>
@@ -230,8 +216,7 @@
 <div class="carousel slide" data-ride="carousel" id="carousel-1" style="width:100%;height:auto;">
     <div class="carousel-inner" role="listbox" style="background-image:url({{ asset('assets/img/zipbg.jpg') }});width:100%;height:519px;min-height:519px;">
         <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
-            <div class="media d-flex flex-column justify-content-center align-items-center align-content-center">
-                <img class="rounded-circle mr-3" width="150px" height="150px" style="margin:0;margin-right:0px;margin-bottom:10px;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:url({{ asset('assets/img/desk.jpg') }});">
+            <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle mr-3" width="150px" height="150px" style="margin:0;margin-right:0px;margin-bottom:10px;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:url({{ asset('assets/img/desk.jpg') }});">
                 <div
                         class="media-body">
                     <h5 class="text-center text-white"><strong>Jan Marc T. Cerezo</strong><br></h5>
@@ -257,7 +242,7 @@
 </div>
 <div class="map-clean"><iframe allowfullscreen="" frameborder="0" width="100%" height="450" src="https://www.google.com/maps/embed/v1/search?key=AIzaSyDaEw6o8OhJvRQnTF3gI_tibMejtfasOlY&amp;q=Zip+Travel+Philippines+(Inner+Outer+Travel%2C+Inc)&amp;zoom=15"></iframe></div>
 <div
-        id="contact" class="footer-dark" style="background:linear-gradient(to right, #06124a, #071766);">
+        id="contact" class="footer-dark section-gradient">
     <footer>
         <div class="container">
             <div class="row no-gutters">
@@ -305,21 +290,11 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left:17px;padding-right:17px;">
                     <form>
                         <h5 style="font-weight:bold;">FOR INQUIRIES</h5>
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea>
-                        </div>
-                        <div class="form-group d-flex flex-row-reverse">
-                            <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-                        </div>
+                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);"></div>
+                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);"></div>
+                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);"></div>
+                        <div class="form-group"><textarea class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea></div>
+                        <div class="form-group d-flex flex-row-reverse"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
                     </form>
                 </div>
                 <div class="col-12">
@@ -334,7 +309,7 @@
     </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
 <script src="{{ asset('assets/js/script.min.js') }}"></script>

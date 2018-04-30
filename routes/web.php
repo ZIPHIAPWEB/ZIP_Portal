@@ -1,5 +1,6 @@
 <?php
 Route::view('/', 'welcome')->name('welcome');
+Route::view('/faqs', 'faqs')->name('faqs');
 
 Route::prefix('auth')->group(function() {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
