@@ -34,6 +34,7 @@ Route::prefix('portal')->group(function() {
 
     Route::view('/sa/s/programs', 'pages.setting.setting-programs-superadmin')->name('s.programs');
     Route::view('/sa/s/sponsors', 'pages.setting.setting-sponsors-superadmin')->name('s.sponsors');
+    Route::view('/sa/s/host', 'pages.setting.setting-host-company-superadmin')->name('s.host');
 
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
@@ -83,6 +84,14 @@ Route::prefix('program')->group(function() {
     Route::get('/requirement/{id}/edit', 'ProgramRequirementController@editRequirement')->name('program.requirements.edit');
     Route::post('/requirement/{id}/update', 'ProgramRequirementController@updateRequirement')->name('program.requirement.update');
     Route::get('/requirement/{id}/delete', 'ProgramRequirementController@deleteRequirement')->name('program.requirement.delete');
+});
+
+Route::prefix('host')->group(function() {
+    Route::get('/view', 'HostCompanyController@viewHost')->name('host.view');
+    Route::post('/store', 'HostCompanyController@storeHost')->name('host.store');
+    Route::get('/edit/{id}', 'HostCompanyController@editHost')->name('host.edit');
+    Route::post('/{id}/update', 'HostCompanyController@updateHost')->name('host.update');
+    Route::get('/delete/{id}', 'HostCompanyController@deleteHost')->name('host.delete');
 });
 
 Route::prefix('sponsor')->group(function() {
