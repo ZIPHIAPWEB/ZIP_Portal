@@ -39,13 +39,13 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a>@{{ current_page }}</a>
+                            <a v-text="current_page"></a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>@{{ last_page }}</a>
+                            <a v-text="last_page"></a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
@@ -72,10 +72,26 @@
             },
             methods: {
                 previous() {
-
+                    axios.get(this.links.prev)
+                        .then((response) => {
+                            this.coordinators = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page
+                        }).catch((error) => {
+                            console.log(error);
+                    })
                 },
                 next() {
-
+                    axios.get(this.links.next)
+                        .then((response) => {
+                            this.coordinators = response.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page
+                        }).catch((error) => {
+                        console.log(error);
+                    })
                 },
                 loadCoordinators() {
                     axios.get('/coor/show')
