@@ -18,11 +18,11 @@
                         </thead>
                         <tbody>
                             <tr v-for="school in schools">
-                                <td>@{{ school.name }}</td>
-                                <td>@{{ school.display_name }}</td>
-                                <td>@{{ school.description }}</td>
-                                <td>@{{ school.created_at }}</td>
-                                <td>
+                                <td v-cloak>@{{ school.name }}</td>
+                                <td v-cloak>@{{ school.display_name }}</td>
+                                <td v-cloak>@{{ school.description }}</td>
+                                <td v-cloak>@{{ school.created_at }}</td>
+                                <td v-cloak>
                                     <button @click="editSchool(school.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteSchool(school.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
@@ -36,13 +36,13 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a v-text="current_page"></a>
+                            <a v-cloak>@{{ current_page }}</a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a v-text="last_page"></a>
+                            <a v-cloak>@{{ last_page }}</a>
                         </li>
                         <li>
                             <a @click="next()">»</a>

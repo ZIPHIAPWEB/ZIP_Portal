@@ -20,10 +20,10 @@
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
                             <tr v-else v-for="host in hosts">
-                                <td>@{{ host.name }}</td>
-                                <td>@{{ host.states }}</td>
-                                <td>@{{ host.created_at }}</td>
-                                <td>
+                                <td v-cloak>@{{ host.name }}</td>
+                                <td v-cloak>@{{ host.states }}</td>
+                                <td v-cloak>@{{ host.created_at }}</td>
+                                <td v-cloak>
                                     <button @click="editHost(host.id)" class="btn btn-success btn-xs btn-flat"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteHost(host.id)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
@@ -37,13 +37,13 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a>@{{ current_page }}</a>
+                            <a v-cloak>@{{ current_page }}</a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a>@{{ last_page }}</a>
+                            <a v-cloak>@{{ last_page }}</a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
