@@ -129,10 +129,10 @@
                             this.title = 'Edit';
                             this.button = 'Update';
                             this.url = `/host/${id}/update`;
+                            $('#host-modal').modal('show');
                         }).catch((error) => {
                             console.log(error);
                     });
-                    $('#host-modal').modal('show');
                 },
                 storeHost() {
                     axios.post(this.url, this.host)
