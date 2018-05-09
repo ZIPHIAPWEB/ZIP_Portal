@@ -35,6 +35,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/programs', 'pages.setting.setting-programs-superadmin')->name('s.programs');
     Route::view('/sa/s/sponsors', 'pages.setting.setting-sponsors-superadmin')->name('s.sponsors');
     Route::view('/sa/s/host', 'pages.setting.setting-host-company-superadmin')->name('s.host');
+    Route::view('/sa/s/school', 'pages.setting.setting-school-superadmin')->name('s.school');
 
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
@@ -106,6 +107,14 @@ Route::prefix('sponsor')->group(function() {
     Route::get('/requirement/{id}/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
     Route::post('/requirement/{id}/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
     Route::get('/requirement/{id}/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
+});
+
+Route::prefix('school')->group(function() {
+    Route::get('/view', 'SchoolController@view')->name('school.view');
+    Route::post('/store', 'SchoolController@store')->name('school.store');
+    Route::get('/{id}/edit', 'SchoolController@edit')->name('school.edit');
+    Route::post('{id}/update', 'SchoolController@update')->name('school.update');
+    Route::post('{id}/delete', 'SchoolController@delete')->name('school.delete');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');

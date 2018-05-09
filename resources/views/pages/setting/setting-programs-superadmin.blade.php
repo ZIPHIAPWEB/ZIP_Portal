@@ -197,7 +197,7 @@
                     axios.get(this.links.next)
                         .then((response) => {
                             this.programs = response.data.data;
-                            this.links = response.data.links;
+                            this.links = r.esponse.data.links;
                             this.current_page = response.data.meta.current_page;
                             this.last_page = response.data.meta.last_page;
                         }).catch((error) => {
