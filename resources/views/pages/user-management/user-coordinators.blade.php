@@ -78,7 +78,7 @@
 
                 },
                 loadCoordinators() {
-                    axios('/coor/show')
+                    axios.get('/coor/show')
                         .then((response) => {
                             this.coordinators = response.data;
                             this.links = response.data.links;
