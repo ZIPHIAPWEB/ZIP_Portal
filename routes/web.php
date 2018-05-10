@@ -41,6 +41,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
+
+    Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
 });
 
 Route::prefix('coor')->group(function() {
@@ -50,6 +52,10 @@ Route::prefix('coor')->group(function() {
 Route::prefix('stud')->group(function() {
     Route::get('/show', 'StudentController@showStudent')->name('stud.show');
     Route::get('/view/{id}', 'StudentController@viewStudent')->name('stud.view');
+    Route::get('/requirement/basic/{programId}', 'StudentController@loadBasicRequirements')->name('stud.requirement.basic');
+    Route::post('/requirement/basic/upload/{id}', 'StudentController@uploadBasicRequirement')->name('stud.requirement.basic.upload');
+    Route::post('/requirement/basic/remove/{id}', 'StudentController@removeBasicRequirement')->name('stud.requirement.basic.remove');
+
 });
 
 Route::prefix('guard')->group(function() {

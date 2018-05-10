@@ -127,7 +127,7 @@
             @if(Auth::user()->hasRole('student'))
                 <li class="header">My Requirements</li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('req.basic') }}">
                         <i class="fa fa-book"></i>
                         <span><small>Basic Requirements</small></span>
                         <span class="pull-right-container">
@@ -137,8 +137,8 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-plane"></i>
-                        <span><small>Visa Requirements</small></span>
+                        <i class="fa fa-dollar"></i>
+                        <span><small>Payment Requirements</small></span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-red">0</small>
                         </span>
@@ -146,8 +146,8 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-dollar"></i>
-                        <span><small>Payment Requirements</small></span>
+                        <i class="fa fa-plane"></i>
+                        <span><small>Visa Requirements</small></span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-red">0</small>
                         </span>
