@@ -98,7 +98,7 @@
                         </table>
                         <ul class="pagination pagination-sm no-margin pull-right">
                             <li>
-                                <a @click="previousRequirement()">«</a>
+                                <a @click="prevRequirement()">«</a>
                             </li>
                             <li>
                                 <a v-cloak>@{{ req_current_page }}</a>
