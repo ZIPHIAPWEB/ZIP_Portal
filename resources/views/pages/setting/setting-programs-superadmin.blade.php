@@ -24,7 +24,7 @@
                                 <td v-cloak>@{{ program.display_name }}</td>
                                 <td v-cloak>@{{ program.description }}</td>
                                 <td v-cloak>
-                                    <button @click="viewRequirements(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
+                                    <button @click="viewAllRequirement(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
                                     <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteProgram(program.id)" class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
@@ -62,57 +62,125 @@
                         <h4 class="modal-title" v-cloak>@{{ program.display_name }} Requirements</h4>
                     </div>
                     <div class="modal-body clearfix">
-                        <div class="box box-primary">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="">Name</label>
-                                    <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab_1" data-toggle="tab" aria-expanded="true">Basic</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_2" data-toggle="tab" aria-expanded="false">Payment</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_1">
+                                    <div class="box box-primary">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="">Name</label>
+                                                <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Description</label>
+                                                <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                            </div>
+
+                                            <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                        </div>
+                                    </div>
+                                    <table id="program-single-table" class="table table-striped table-bordered">
+                                        <thead>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-if="requirements.length === 0">
+                                            <td valign="top" colspan="15" class="text-center">No Records</td>
+                                        </tr>
+                                        <tr v-else v-for="requirement in requirements">
+                                            <td v-cloak>@{{ requirement.name }}</td>
+                                            <td v-cloak>@{{ requirement.description }}</td>
+                                            <td v-cloak>
+                                                <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                                <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                        <li>
+                                            <a @click="prevRequirement()">«</a>
+                                        </li>
+                                        <li>
+                                            <a v-cloak>@{{ req_current_page }}</a>
+                                        </li>
+                                        <li>
+                                            <a>of</a>
+                                        </li>
+                                        <li>
+                                            <a v-cloak>@{{ req_last_page }}</a>
+                                        </li>
+                                        <li>
+                                            <a @click="nextRequirement()">»</a>
+                                        </li>
+                                    </ul>
                                 </div>
 
-                                <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                <div class="tab-pane" id="tab_2">
+                                    <div class="box box-success">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="">Name</label>
+                                                <input @keyup.enter="storePayment()" v-model="payment.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Description</label>
+                                                <input @keyup.enter="storePayment()" v-model="payment.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                            </div>
+
+                                            <button @click="storePayment()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ payment_button }}</button>
+                                        </div>
+                                    </div>
+                                    <table id="program-single-table" class="table table-striped table-bordered">
+                                        <thead>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-if="payments.length === 0">
+                                            <td valign="top" colspan="15" class="text-center">No Records</td>
+                                        </tr>
+                                        <tr v-else v-for="payment in payments">
+                                            <td v-cloak>@{{ payment.name }}</td>
+                                            <td v-cloak>@{{ payment.description }}</td>
+                                            <td v-cloak>
+                                                <button @click="editPayment(payment.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                                <button @click="deletePayment(payment.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <ul class="pagination pagination-sm no-margin pull-right">
+                                        <li>
+                                            <a @click="prevPayment()">«</a>
+                                        </li>
+                                        <li>
+                                            <a v-cloak>@{{ payment_current_page }}</a>
+                                        </li>
+                                        <li>
+                                            <a>of</a>
+                                        </li>
+                                        <li>
+                                            <a v-cloak>@{{ payment_last_page }}</a>
+                                        </li>
+                                        <li>
+                                            <a @click="nextPayment()">»</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <table id="program-single-table" class="table table-striped table-bordered">
-                            <thead>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                <tr v-if="requirements.length === 0">
-                                    <td valign="top" colspan="15" class="text-center">No Records</td>
-                                </tr>
-                                <tr v-else v-for="requirement in requirements">
-                                    <td v-cloak>@{{ requirement.name }}</td>
-                                    <td v-cloak>@{{ requirement.description }}</td>
-                                    <td v-cloak>
-                                        <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
-                                        <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li>
-                                <a @click="previousRequirement()">«</a>
-                            </li>
-                            <li>
-                                <a v-cloak>@{{ req_current_page }}</a>
-                            </li>
-                            <li>
-                                <a>of</a>
-                            </li>
-                            <li>
-                                <a v-cloak>@{{ req_last_page }}</a>
-                            </li>
-                            <li>
-                                <a @click="nextRequirement()">»</a>
-                            </li>
-                        </ul>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -177,11 +245,28 @@
                 req_last_page: '',
                 req_url: '',
                 req_button: '',
+
+                payments: [],
+                payment: {
+                    program_id: '',
+                    name: '',
+                    description: '',
+                },
+                payment_links: [],
+                payment_current_page: '',
+                payment_last_page: '',
+                payment_url: '',
+                payment_button: ''
             },
             mounted: function() {
                 this.loadPrograms();
             },
             methods: {
+                viewAllRequirement(programId) {
+                    this.viewRequirements(programId);
+                    this.viewPayments(programId);
+                },
+                // Program CRUD
                 previous() {
                     axios.get(this.links.prev)
                         .then((response) => {
@@ -257,6 +342,7 @@
                             console.log(error);
                     })
                 },
+                //Requirements CRUD
                 loadRequirements(id) {
                     axios.get(`/program/${id}/requirements/view`)
                         .then((response) => {
@@ -342,6 +428,94 @@
                             this.loadRequirements(this.requirement.program_id);
                         }).catch((error) => {
                             console.log(error);
+                    });
+                },
+                //Payment CRUD
+                loadPayments(id) {
+                    axios.get(`/program/${id}/payments/view`)
+                        .then((response) => {
+                            this.payments = response.data.data;
+                            this.payment_links = response.data.links;
+                            this.payment_current_page = response.data.meta.current_page;
+                            this.payment_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                nextPayment() {
+                    axios.get(this.payment_links.next)
+                        .then((response) => {
+                            this.payments = response.data.data;
+                            this.payment_links = response.data.links;
+                            this.payment_current_page = response.data.meta.current_page;
+                            this.payment_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                prevPayment() {
+                    axios.get(this.payment_links.prev)
+                        .then((response) => {
+                            this.payments = response.data.data;
+                            this.payment_links = response.data.links;
+                            this.payment_current_page = response.data.meta.current_page;
+                            this.payment_last_page = response.data.meta.last_page;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                viewPayments(id) {
+                    axios.get(`/program/edit/${id}`)
+                        .then((response) => {
+                            this.loadPayments(id);
+                            this.program.name = response.data.data.name;
+                            this.program.display_name = response.data.data.display_name;
+                            this.program.description = response.data.data.description;
+
+                            this.payment_url = '/program/payment/store';
+                            this.payment_button = 'Add';
+                            this.payment.program_id = id;
+                            $('#program-modal').modal('show');
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                editPayment(id) {
+                    axios.get(`/program/payment/${id}/edit`)
+                        .then((response) => {
+                            this.payment_url = `/program/payment/${id}/update`;
+                            this.payment_button = 'Update';
+                            this.payment.name = response.data.data.name;
+                            this.payment.description = response.data.data.description;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                storePayment() {
+                    axios.post(this.payment_url, this.payment)
+                        .then((response) => {
+                            if (this.payment_button === 'Update') {
+                                alert('Requirement Updated');
+                                this.payment_button = 'Add';
+                                this.payment.name = '';
+                                this.payment.description = '';
+                            } else {
+                                this.payment.name = '';
+                                this.payment.description = '';
+                                alert('Requirement Added');
+                            }
+
+                            this.loadPayments(this.payment.program_id);
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                deletePayment(id) {
+                    axios.get(`/program/payment/${id}/delete`)
+                        .then((response) => {
+                            this.loadPayments(this.payment.program_id);
+                        }).catch((error) => {
+                        console.log(error);
                     });
                 }
             }
