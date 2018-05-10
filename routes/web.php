@@ -91,6 +91,12 @@ Route::prefix('program')->group(function() {
     Route::get('/requirement/{id}/edit', 'ProgramRequirementController@editRequirement')->name('program.requirements.edit');
     Route::post('/requirement/{id}/update', 'ProgramRequirementController@updateRequirement')->name('program.requirement.update');
     Route::get('/requirement/{id}/delete', 'ProgramRequirementController@deleteRequirement')->name('program.requirement.delete');
+
+    Route::get('/{id}/payments/view', 'ProgramPaymentController@viewPayments')->name('program.payments.view');
+    Route::post('/payment/store', 'ProgramPaymentController@storePayment')->name('program.payment.store');
+    Route::get('/payment/{id}/edit', 'ProgramPaymentController@editPayment')->name('program.payment.edit');
+    Route::post('/payment/{id}/update', 'ProgramPaymentController@updatePayment')->name('program.payment.update');
+    Route::get('/payment/{id}/delete', 'ProgramPaymentController@deletePayment')->name('program.payment.delete');
 });
 
 Route::prefix('host')->group(function() {
