@@ -10,7 +10,7 @@
                     <h3 class="box-title text-center">Basic Requirement</h3>
                 </div>
                 <div class="box-body">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-condensed">
                         <thead>
                             <th>Requirements</th>
                             <th class="text-center">Status</th>
@@ -20,12 +20,12 @@
                             <tr v-for="requirement in requirements">
                                 <td v-cloak>@{{ requirement.name }}</td>
                                 <td v-cloak class="text-center">
-                                        <span v-if="requirement.status" class="fa fa-check fa-2x" style="color: green;"></span>
-                                        <span v-else class="fa fa-remove fa-2x" style="color: red"></span>
+                                        <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
+                                        <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td v-cloak class="text-center">
-                                    <button @click="selectFile(requirement)" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-sm btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                    <button @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
                         </tbody>
