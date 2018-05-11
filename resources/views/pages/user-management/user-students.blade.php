@@ -88,7 +88,7 @@
                                     <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
                                 </li>
                             </ul>
-                            <div class="tab-content no-padding">
+                            <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
                                     <label class="control-label">Application Status</label>
                                     <table class="table table-condensed table-striped table-bordered">
