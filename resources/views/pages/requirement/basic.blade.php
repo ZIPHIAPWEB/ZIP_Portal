@@ -14,7 +14,7 @@
                         <thead>
                             <th>Requirements</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             <tr v-for="requirement in requirements">
@@ -23,8 +23,9 @@
                                         <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
                                         <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
-                                <td v-cloak class="text-center">
+                                <td v-cloak>
                                     <button @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <a v-if="requirement.path" class="btn btn-primary btn-xs btn-flat" :href="requirement.path" download><span class="glyphicon glyphicon-download"></span> Download File</a>
                                     <button @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
@@ -67,7 +68,7 @@
                 file: ''
             },
             mounted: function() {
-                this.loadRequirements(6)
+                this.loadRequirements(9)
             },
             methods: {
                 loadRequirements(programId) {
@@ -95,7 +96,7 @@
 
                     axios.post(`/stud/requirement/basic/upload/${this.pReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
+                            this.loadRequirements(9);
                             $('#file-upload').modal('hide');
                             console.log(response);
                         }).catch((error) => {
@@ -106,7 +107,7 @@
                     this.bReqId = requirement.bReqId;
                     axios.post(`/stud/requirement/basic/remove/${this.bReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
+                            this.loadRequirements(9);
                             console.log(response);
                         }).catch((error) => {
                             alert('No file to remove');

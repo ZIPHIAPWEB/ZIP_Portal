@@ -23,11 +23,27 @@ class ProgramRequirementController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        ProgramRequirement::create([
-            'program_id'    =>  $request->input('program_id'),
-            'name'          =>  $request->input('name'),
-            'description'   =>  $request->input('description')
-        ]);
+        if ($request->hasFile('file')) {
+            $destinationPath = '/requirements/basic/';
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
+            $file->move($destinationPath, $filename);
+
+            ProgramRequirement::create([
+                'program_id'    =>  $request->input('program_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  $destinationPath . $filename
+            ]);
+        } else {
+            ProgramRequirement::create([
+                'program_id'    =>  $request->input('program_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  ''
+            ]);
+        }
 
         return response()->json(['message'  =>  'Requirement Added']);
     }
@@ -46,17 +62,36 @@ class ProgramRequirementController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        ProgramRequirement::find($id)->update([
-            'program_id'    =>  $request->input('program_id'),
-            'name'          =>  $request->input('name'),
-            'description'   =>  $request->input('description')
-        ]);
+        if ($request->hasFile('file')) {
+            $destinationPath = '/requirements/basic/';
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
+            $file->move($destinationPath, $filename);
+
+            ProgramRequirement::find($id)->update([
+                'program_id'    =>  $request->input('program_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  $destinationPath . $filename
+            ]);
+        } else {
+            ProgramRequirement::find($id)->update([
+                'program_id'    =>  $request->input('program_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  ''
+            ]);
+        }
 
         return response()->json(['message'  =>  'Requirement Updated']);
+
+        return response()->json($filename);
     }
 
     public function deleteRequirement($id)
     {
+
         ProgramRequirement::find($id)->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);

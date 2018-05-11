@@ -35,7 +35,7 @@ class StudentController extends Controller
     public function loadBasicRequirements($programId)
     {
         $basic = ProgramRequirement::leftjoin('basic_requirements', 'program_requirements.id', '=', 'basic_requirements.requirement_id')
-                            ->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'basic_requirements.status'])
+                            ->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
                             ->where('program_id', $programId)
                             ->orderBy('name', 'asc')
                             ->get();
