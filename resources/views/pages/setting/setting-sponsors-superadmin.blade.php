@@ -78,7 +78,7 @@
                                 <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
                             </div>
                         </div>
-                        <table id="program-single-table" class="table table-striped table-bordered">
+                        <table id="program-single-table" class="table table-striped table-bordered table-condensed">
                             <thead>
                             <th>Name</th>
                             <th>Description</th>

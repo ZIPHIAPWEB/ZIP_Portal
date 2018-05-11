@@ -61,7 +61,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" v-cloak>@{{ program.display_name }} Requirements</h4>
                     </div>
-                    <div class="modal-body clearfix">
+                    <div class="modal-body">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="active">
@@ -72,7 +72,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab_1">
+                                <div class="tab-pane clearfix active" id="tab_1">
                                     <div class="box box-primary">
                                         <div class="box-body">
                                             <div class="form-group">
@@ -87,7 +87,7 @@
                                             <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
                                         </div>
                                     </div>
-                                    <table id="program-single-table" class="table table-striped table-bordered">
+                                    <table id="program-single-table" class="table table-striped table-bordered table-condensed">
                                         <thead>
                                         <th>Name</th>
                                         <th>Description</th>
@@ -126,7 +126,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="tab-pane" id="tab_2">
+                                <div class="tab-pane clearfix" id="tab_2">
                                     <div class="box box-success">
                                         <div class="box-body">
                                             <div class="form-group">
@@ -141,7 +141,7 @@
                                             <button @click="storePayment()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ payment_button }}</button>
                                         </div>
                                     </div>
-                                    <table id="program-single-table" class="table table-striped table-bordered">
+                                    <table id="program-single-table" class="table table-striped table-bordered table-condensed">
                                         <thead>
                                         <th>Name</th>
                                         <th>Description</th>
