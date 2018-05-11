@@ -43,6 +43,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
 
     Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
+    Route::view('/s/requirement/payment', 'pages.requirement.payment')->name('req.payment');
 });
 
 Route::prefix('coor')->group(function() {
@@ -52,10 +53,14 @@ Route::prefix('coor')->group(function() {
 Route::prefix('stud')->group(function() {
     Route::get('/show', 'StudentController@showStudent')->name('stud.show');
     Route::get('/view/{id}', 'StudentController@viewStudent')->name('stud.view');
+
     Route::get('/requirement/basic/{programId}', 'StudentController@loadBasicRequirements')->name('stud.requirement.basic');
     Route::post('/requirement/basic/upload/{id}', 'StudentController@uploadBasicRequirement')->name('stud.requirement.basic.upload');
     Route::post('/requirement/basic/remove/{id}', 'StudentController@removeBasicRequirement')->name('stud.requirement.basic.remove');
 
+    Route::get('/requirement/payment/{programId}', 'StudentController@loadPaymentRequirements')->name('stud.requirement.payment');
+    Route::post('/requirement/payment/upload/{id}', 'StudentController@uploadPaymentRequirement')->name('stud.requirement.payment.upload');
+    Route::post('/requirement/payment/remove/{id}', 'StudentController@removePaymentRequirement')->name('stud.requirement.payment.remove');
 });
 
 Route::prefix('guard')->group(function() {

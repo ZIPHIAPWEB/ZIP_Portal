@@ -136,7 +136,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('req.payment') }}">
                         <i class="fa fa-dollar"></i>
                         <span><small>Payment Requirements</small></span>
                         <span class="pull-right-container">

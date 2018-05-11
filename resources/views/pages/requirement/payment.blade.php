@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Basic Requirement')
+@section('title', 'Payment Requirement')
 
 @section('content')
     <div id="app">
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title text-center">Basic Requirement</h3>
+                    <h3 class="box-title text-center">Payment Requirement</h3>
                 </div>
                 <div class="box-body">
                     <table class="table table-bordered table-striped">
@@ -16,19 +16,19 @@
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody>
+                        <thead v-cloak>
                             <tr v-for="requirement in requirements">
-                                <td v-cloak>@{{ requirement.name }}</td>
-                                <td v-cloak class="text-center">
-                                        <span v-if="requirement.status" class="fa fa-check fa-2x" style="color: green;"></span>
-                                        <span v-else class="fa fa-remove fa-2x" style="color: red"></span>
+                                <td>@{{ requirement.name }}</td>
+                                <td class="text-center">
+                                    <span v-if="requirement.status" class="fa fa-check fa-2x" style="color: green;"></span>
+                                    <span v-else class="fa fa-remove fa-2x" style="color: red"></span>
                                 </td>
-                                <td v-cloak class="text-center">
-                                    <button @click="selectFile(requirement)" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-sm btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                <td class="text-center">
+                                    <button @click="selectFile(requirement)" class="btn btn-default btn-flat btn-sm"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-sm"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
-                        </tbody>
+                        </thead>
                     </table>
                 </div>
             </div>
@@ -67,11 +67,11 @@
                 file: ''
             },
             mounted: function() {
-                this.loadRequirements(6)
+                this.loadRequirements(6);
             },
             methods: {
                 loadRequirements(programId) {
-                    axios.get(`/stud/requirement/basic/${programId}`)
+                    axios.get(`/stud/requirement/payment/${programId}`)
                         .then((response) => {
                             this.requirements = response.data.data;
                             console.log(response.data.data);
@@ -82,6 +82,8 @@
                 selectFile(requirement) {
                     this.pReqId = requirement.pReqId;
                     this.modalTitle = requirement.name;
+
+                    console.log(requirement);
                     $('#file-upload').modal('show');
                 },
                 handleFileUpload() {
@@ -93,18 +95,18 @@
 
                     formData.append('file', this.file);
 
-                    axios.post(`/stud/requirement/basic/upload/${this.pReqId}`)
+                    axios.post(`/stud/requirement/payment/upload/${this.pReqId}`)
                         .then((response) => {
                             this.loadRequirements(6);
                             $('#file-upload').modal('hide');
                             console.log(response);
                         }).catch((error) => {
                             console.log(error);
-                    });
+                    })
                 },
                 removeFile(requirement) {
                     this.bReqId = requirement.bReqId;
-                    axios.post(`/stud/requirement/basic/remove/${this.bReqId}`)
+                    axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
                         .then((response) => {
                             this.loadRequirements(6);
                             console.log(response);
@@ -113,6 +115,6 @@
                     })
                 }
             }
-        });
+        })
     </script>
 @endsection

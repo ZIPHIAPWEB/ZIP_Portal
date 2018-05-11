@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\BasicRequirement;
 use App\Http\Resources\SuperAdminResource;
+use App\PaymentRequirement;
+use App\ProgramPayment;
 use App\ProgramRequirement;
 use App\Student;
 use App\User;
@@ -35,7 +37,8 @@ class StudentController extends Controller
         $basic = ProgramRequirement::leftjoin('basic_requirements', 'program_requirements.id', '=', 'basic_requirements.requirement_id')
                             ->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'basic_requirements.status'])
                             ->where('program_id', $programId)
-                            ->orderBy('name', 'asc')->get();
+                            ->orderBy('name', 'asc')
+                            ->get();
 
         return new SuperAdminResource($basic);
     }
@@ -55,5 +58,33 @@ class StudentController extends Controller
         BasicRequirement::find($id)->delete();
 
         return response()->json(['message' => 'File Removed!']);
+    }
+
+    public function loadPaymentRequirements($programId)
+    {
+        $payment = ProgramPayment::leftjoin('payment_requirements', 'program_payments.id', '=', 'payment_requirements.requirement_id')
+                            ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
+                            ->where('program_id', $programId)
+                            ->orderBy('name', 'asc')
+                            ->get();
+
+        return new SuperAdminResource($payment);
+    }
+
+    public function uploadPaymentRequirement(Request $request, $id)
+    {
+        PaymentRequirement::create([
+            'requirement_id'    =>  $id,
+            'status'            =>  true,
+        ]);
+
+        return response()->json(['message'  =>  'File Uploaded']);
+    }
+
+    public function removePaymentRequirement($id)
+    {
+        PaymentRequirement::find($id)->delete();
+
+        return response()->json(['message'  =>  'File Removed']);
     }
 }
