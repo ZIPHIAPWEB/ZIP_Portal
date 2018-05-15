@@ -418,10 +418,10 @@
                         formData.append('description', this.requirement.description);
                         formData.append('file', this.requirement.file);
                     axios.post(this.req_url, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                         .then((response) => {
                             if (this.req_button === 'Update') {
                                 alert('Requirement Updated');

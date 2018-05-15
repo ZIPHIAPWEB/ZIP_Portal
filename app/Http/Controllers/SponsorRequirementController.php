@@ -23,11 +23,27 @@ class SponsorRequirementController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        SponsorRequirement::create([
-            'sponsor_id'    =>  $request->input('sponsor_id'),
-            'name'  =>  $request->input('name'),
-            'description'   =>  $request->input('description')
-        ]);
+        if ($request->hasFile('file')) {
+            $destinationPath = 'requirements/sponsors/';
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
+            $file->move($destinationPath, $filename);
+
+            SponsorRequirement::create([
+                'sponsor_id'    =>  $request->input('sponsor_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  '/' . $destinationPath . $filename
+            ]);
+        } else {
+            SponsorRequirement::create([
+                'program_id'    =>  $request->input('sponsor_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  ''
+            ]);
+        }
 
         return response()->json(['message'  =>  'Requirement Added']);
     }
@@ -46,10 +62,27 @@ class SponsorRequirementController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        SponsorRequirement::find($id)->update([
-            'name'          =>  $request->input('name'),
-            'description'   =>  $request->input('description')
-        ]);
+        if ($request->hasFile('file')) {
+            $destinationPath = 'requirements/sponsors/';
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
+            $file->move($destinationPath, $filename);
+
+            SponsorRequirement::find($id)->update([
+                'sponsor_id'    =>  $request->input('sponsor_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  '/' . $destinationPath . $filename
+            ]);
+        } else {
+            SponsorRequirement::find($id)->update([
+                'program_id'    =>  $request->input('sponsor_id'),
+                'name'          =>  $request->input('name'),
+                'description'   =>  $request->input('description'),
+                'path'          =>  ''
+            ]);
+        }
 
         return response()->json(['message'  =>  'Requirement Updated']);
     }

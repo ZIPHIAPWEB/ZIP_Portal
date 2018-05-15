@@ -66,22 +66,28 @@
                     <div class="modal-body clearfix">
                         <div class="box box-primary">
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="">Name</label>
-                                    <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
-                                </div>
-
-                                <button @click="storeRequirement()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                <form enctype="multipart/form-data" @submit.prevent="storeRequirement()">
+                                    <div class="form-group">
+                                        <label for="">Name</label>
+                                        <input v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Description</label>
+                                        <input v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">File (Optional)</label>
+                                        <input type="file" ref="file" @change="handleFileUpload">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                </form>
                             </div>
                         </div>
                         <table id="program-single-table" class="table table-striped table-bordered table-condensed">
                             <thead>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Path</th>
                             <th>Action</th>
                             </thead>
                             <tbody>
@@ -91,6 +97,7 @@
                             <tr v-else v-for="requirement in requirements">
                                 <td v-cloak>@{{ requirement.name }}</td>
                                 <td v-cloak>@{{ requirement.description }}</td>
+                                <td v-cloak>@{{ requirement.path }}</td>
                                 <td v-cloak>
                                     <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
@@ -176,7 +183,8 @@
                 requirement: {
                     sponsor_id: '',
                     name: '',
-                    description: ''
+                    description: '',
+                    file: ''
                 },
                 req_url: '',
                 req_links: [],
@@ -309,13 +317,21 @@
                     });
                 },
                 storeRequirement() {
-                    axios.post(this.req_url, this.requirement)
+                    let formData = new FormData();
+                        formData.append('sponsor_id', this.requirement.sponsor_id);
+                        formData.append('name', this.requirement.name);
+                        formData.append('description', this.requirement.description);
+                        formData.append('file', this.requirement.file);
+                    axios.post(this.req_url, formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                         .then((response) => {
-                            this.req_url = '/sponsor/requirement/store';
                             this.req_button = 'Add';
-
                             this.requirement.name = '';
                             this.requirement.description = '';
+
                             this.viewRequirements(this.requirement.sponsor_id);
                         }).catch((error) => {
                         console.log(error);
@@ -330,6 +346,9 @@
                             console.log(error);
                     })
                 },
+                handleFileUpload() {
+                    this.requirement.file = this.$refs.file.files[0];
+                }
             }
         });
     </script>

@@ -9,6 +9,7 @@ class SponsorRequirement extends Model
     protected $fillable = [
         'sponsor_id',
         'name',
-        'description'
+        'description',
+        'path'
     ];
 }
