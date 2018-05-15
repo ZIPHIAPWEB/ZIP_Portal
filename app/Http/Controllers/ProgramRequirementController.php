@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SuperAdminResource;
 use App\ProgramRequirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProgramRequirementController extends Controller
@@ -24,7 +26,7 @@ class ProgramRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = '/requirements/basic/';
+            $destinationPath = 'requirements/basic/';
             $file = $request->file('file');
             $extenstion = $file->getClientOriginalExtension();
             $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
@@ -34,7 +36,7 @@ class ProgramRequirementController extends Controller
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  $destinationPath . $filename
+                'path'          =>  '/'.$destinationPath . $filename
             ]);
         } else {
             ProgramRequirement::create([
@@ -63,7 +65,7 @@ class ProgramRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = '/requirements/basic/';
+            $destinationPath = 'requirements/basic/';
             $file = $request->file('file');
             $extenstion = $file->getClientOriginalExtension();
             $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
@@ -73,7 +75,7 @@ class ProgramRequirementController extends Controller
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  $destinationPath . $filename
+                'path'          =>  '/'.$destinationPath . $filename
             ]);
         } else {
             ProgramRequirement::find($id)->update([
@@ -85,15 +87,13 @@ class ProgramRequirementController extends Controller
         }
 
         return response()->json(['message'  =>  'Requirement Updated']);
-
-        return response()->json($filename);
     }
 
     public function deleteRequirement($id)
     {
-
+        //$requirement = ProgramRequirement::find($id);
+        //File::delete($requirement->path);
         ProgramRequirement::find($id)->delete();
-
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
 }
