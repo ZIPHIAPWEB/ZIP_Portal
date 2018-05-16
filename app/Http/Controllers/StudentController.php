@@ -7,8 +7,10 @@ use App\Http\Resources\SuperAdminResource;
 use App\PaymentRequirement;
 use App\ProgramPayment;
 use App\ProgramRequirement;
+use App\SponsorRequirement;
 use App\Student;
 use App\User;
+use App\VisaRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,5 +88,33 @@ class StudentController extends Controller
         PaymentRequirement::find($id)->delete();
 
         return response()->json(['message'  =>  'File Removed']);
+    }
+
+    public function loadVisaRequirements($sponsorId)
+    {
+        $visa = SponsorRequirement::leftjoin('visa_requirements', 'sponsor_requirements.id', '=', 'visa_requirements.requirement_id')
+                            ->select(['visa_requirements.id as bReqId', 'sponsor_requirements.id as pReqId', 'sponsor_requirements.name', 'visa_requirements.status', 'sponsor_requirements.path'])
+                            ->where('sponsor_id', $sponsorId)
+                            ->orderBy('name', 'asc')
+                            ->get();
+
+        return SuperAdminResource::collection($visa);
+    }
+
+    public function uploadVisaRequirement(Request $request, $id)
+    {
+        VisaRequirement::create([
+            'requirement_id'    =>  $id,
+            'status'            =>  true
+        ]);
+
+        return response()->json(['message'  =>  'File Uploaded']);
+    }
+
+    public function removeVisaRequirement($id)
+    {
+        VisaRequirement::find($id)->delete();
+
+        return response()->json(['message'  => 'File Removed']);
     }
 }

@@ -20,8 +20,8 @@
                             <tr v-for="requirement in requirements">
                                 <td v-cloak>@{{ requirement.name }}</td>
                                 <td v-cloak class="text-center">
-                                        <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
-                                        <span v-else class="fa fa-remove" style="color: red"></span>
+                                    <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
+                                    <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td v-cloak>
                                     <button @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>

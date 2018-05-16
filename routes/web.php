@@ -44,6 +44,7 @@ Route::prefix('portal')->group(function() {
 
     Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
     Route::view('/s/requirement/payment', 'pages.requirement.payment')->name('req.payment');
+    Route::view('/s/requirement/visa', 'pages.requirement.sponsor')->name('req.visa');
 });
 
 Route::prefix('coor')->group(function() {
@@ -61,6 +62,10 @@ Route::prefix('stud')->group(function() {
     Route::get('/requirement/payment/{programId}', 'StudentController@loadPaymentRequirements')->name('stud.requirement.payment');
     Route::post('/requirement/payment/upload/{id}', 'StudentController@uploadPaymentRequirement')->name('stud.requirement.payment.upload');
     Route::post('/requirement/payment/remove/{id}', 'StudentController@removePaymentRequirement')->name('stud.requirement.payment.remove');
+
+    Route::get('/requirement/visa/{sponsorId}', 'StudentController@loadVisaRequirements')->name('stud.requirement.visa');
+    Route::post('/requirement/visa/upload/{id}', 'StudentController@uploadVisaRequirement')->name('stud.requirement.visa.upload');
+    Route::post('/requirement/visa/remove/{id}', 'StudentController@removeVisaRequirement')->name('stud.requirement.visa.remove');
 });
 
 Route::prefix('guard')->group(function() {

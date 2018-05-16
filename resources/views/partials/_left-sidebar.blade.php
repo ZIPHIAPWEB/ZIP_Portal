@@ -145,7 +145,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('req.visa') }}">
                         <i class="fa fa-plane"></i>
                         <span><small>Visa Requirements</small></span>
                         <span class="pull-right-container">

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Payment Requirement')
+@section('title', 'Visa Sponsor Requirement')
 
 @section('content')
     <div id="app">
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title text-center">Payment Requirement</h3>
+                    <h3 class="box-title text-center">Visa Sponsor Requirement</h3>
                 </div>
                 <div class="box-body">
                     <table class="table table-bordered table-striped table-condensed">
@@ -23,9 +23,10 @@
                                     <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
                                     <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
-                                <td class="text-center">
-                                    <button @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                <td>
+                                    <button @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <a v-if="requirement.path" class="btn btn-primary btn-xs btn-flat" :href="requirement.path" download><span class="glyphicon glyphicon-download"></span> Download File</a>
+                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -33,7 +34,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="file-upload" tabindex="-1" role="dialog">
             <form @submit.prevent="submitFile()" enctype="multipart/form-data">
                 <div class="modal-dialog modal-md" role="document">
@@ -67,49 +67,43 @@
                 file: ''
             },
             mounted: function() {
-                this.loadRequirements(6);
+                this.loadRequirements(22);
             },
             methods: {
-                loadRequirements(programId) {
-                    axios.get(`/stud/requirement/payment/${programId}`)
+                loadRequirements(sponsorId) {
+                    axios.get(`/stud/requirement/visa/${sponsorId}`)
                         .then((response) => {
                             this.requirements = response.data.data;
-                            console.log(response.data.data);
                         }).catch((error) => {
                             console.log(error);
-                    })
+                    });
                 },
                 selectFile(requirement) {
                     this.pReqId = requirement.pReqId;
                     this.modalTitle = requirement.name;
-
-                    console.log(requirement);
                     $('#file-upload').modal('show');
                 },
                 handleFileUpload() {
                     this.file = this.$refs.file.files[0];
-                    console.log(this.file);
                 },
                 submitFile() {
                     let formData = new FormData();
 
                     formData.append('file', this.file);
 
-                    axios.post(`/stud/requirement/payment/upload/${this.pReqId}`)
+                    axios.post(`/stud/requirement/visa/upload/${this.pReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
+                            this.loadRequirements(22);
                             $('#file-upload').modal('hide');
-                            console.log(response);
                         }).catch((error) => {
                             console.log(error);
                     })
                 },
                 removeFile(requirement) {
                     this.bReqId = requirement.bReqId;
-                    axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
+                    axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
-                            console.log(response);
+                            this.loadRequirements(22);
                         }).catch((error) => {
                             alert('No file to remove');
                     })
