@@ -42,6 +42,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
 
+    Route::view('/s/register-form', 'pages.requirement.register-form')->name('register.form');
     Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
     Route::view('/s/requirement/payment', 'pages.requirement.payment')->name('req.payment');
     Route::view('/s/requirement/visa', 'pages.requirement.sponsor')->name('req.visa');
@@ -66,6 +67,10 @@ Route::prefix('stud')->group(function() {
     Route::get('/requirement/visa/{sponsorId}', 'StudentController@loadVisaRequirements')->name('stud.requirement.visa');
     Route::post('/requirement/visa/upload/{id}', 'StudentController@uploadVisaRequirement')->name('stud.requirement.visa.upload');
     Route::post('/requirement/visa/remove/{id}', 'StudentController@removeVisaRequirement')->name('stud.requirement.visa.remove');
+
+    Route::post('/validateDetails', 'StudentController@validatePersonalDetails')->name('stud.validate.details');
+    Route::post('/details/store', 'StudentController@storePersonalDetails')->name('stud.store.details');
+
 });
 
 Route::prefix('guard')->group(function() {
@@ -137,6 +142,11 @@ Route::prefix('school')->group(function() {
     Route::get('/{id}/edit', 'SchoolController@edit')->name('school.edit');
     Route::post('{id}/update', 'SchoolController@update')->name('school.update');
     Route::post('{id}/delete', 'SchoolController@delete')->name('school.delete');
+});
+
+Route::prefix('helper')->group(function() {
+    Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
+    Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');

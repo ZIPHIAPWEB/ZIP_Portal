@@ -16,6 +16,7 @@ class Student extends Model
         'address',
         'home_number',
         'mobile_number',
+        'course',
         'school',
         'year',
         'skype_id',

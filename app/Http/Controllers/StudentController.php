@@ -12,10 +12,68 @@ use App\Student;
 use App\User;
 use App\VisaRequirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
+    public function validatePersonalDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstName'     =>  'required',
+            'middleName'    =>  'required',
+            'lastName'      =>  'required',
+            'birthDate'     =>  'required',
+            'gender'        =>  'required',
+            'homeNumber'    =>  'required',
+            'mobileNumber'  =>  'required',
+            'address'       =>  'required',
+            'school'        =>  'required',
+            'year'          =>  'required',
+            'course'        =>  'required',
+            'program_id'    =>  'required',
+            'fb_email'      =>  'required',
+            'skype_id'      =>  'required'
+        ])->validate();
+    }
+
+    public function storePersonalDetails(Request $request)
+    {
+        Student::create([
+            'user_id'               =>  Auth::user()->id,
+            'first_name'            =>  $request->input('firstName'),
+            'middle_name'           =>  $request->input('middleName'),
+            'last_name'             =>  $request->input('lastName'),
+            'birthdate'             =>  $request->input('birthDate'),
+            'gender'                =>  $request->input('gender'),
+            'home_number'           =>  $request->input('homeNumber'),
+            'mobile_number'         =>  $request->input('mobileNumber'),
+            'address'               =>  $request->input('address'),
+            'school'                =>  $request->input('school'),
+            'year'                  =>  $request->input('year'),
+            'course'                =>  $request->input('course'),
+            'program_id'            =>  $request->input('program_id'),
+            'fb_email'              =>  $request->input('fb_email'),
+            'skype_id'              =>  $request->input('skype_id'),
+            'program_id_no'         =>  '',
+            'sevis_id'              =>  '',
+            'host_company_id'       =>  '',
+            'position'              =>  '',
+            'location'              =>  '',
+            'stipend'               =>  '',
+            'visa_interview_status' =>  '',
+            'program_start_date'    =>  '',
+            'program_end_date'      =>  '',
+            'visa_sponsor_id'       =>  '',
+            'date_of_departure'     =>  '',
+            'date_of_arrival'       =>  '',
+            'application_id'        =>  '',
+            'application_status'    =>  'Applicant'
+        ]);
+
+        return response()->json(['message' => 'Personal Details Updated']);
+    }
+
     public function showStudent()
     {
         $students = User::join('students', 'users.id', '=', 'students.user_id')
