@@ -64,10 +64,11 @@
                 modalTitle: '',
                 pReqId: '',
                 bReqId: '',
-                file: ''
+                file: '',
+                sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}"
             },
             mounted: function() {
-                this.loadRequirements(22);
+                this.loadRequirements(this.sponsor_id);
             },
             methods: {
                 loadRequirements(sponsorId) {
