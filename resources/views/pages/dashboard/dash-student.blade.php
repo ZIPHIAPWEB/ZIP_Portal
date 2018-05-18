@@ -15,8 +15,8 @@
                         <table class="table table-striped table-bordered table-condensed m-b-10">
                             <tbody>
                                 <tr>
-                                    <td>Application ID</td>
-                                    <td class="text-bold text-red">@{{ student.application_id }}</td>
+                                    <td>Application Status</td>
+                                    <td class="text-bold text-red">@{{ student.application_status }}</td>
                                 </tr>
                                 <tr>
                                     <td>Visa Interview Status</td>
@@ -24,8 +24,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <label class="label-control">Hired Company Details</label>
-                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                        <label v-if="student.host_company_id" class="label-control">Hired Company Details</label>
+                        <table v-if="student.host_company_id" class="table table-striped table-bordered table-condensed m-b-10">
                             <tbody>
                                 <tr>
                                     <td>Host Company</td>
@@ -162,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div v-if="student.visa_sponsor_id" class="container">
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <h3 class="box-title text-center">Visa Requirements</h3>
