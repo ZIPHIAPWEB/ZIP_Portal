@@ -11,9 +11,106 @@
                         <h3 class="box-title ">Student Details</h3>
                     </div>
                     <div class="box-body">
-                        <div class="col-xs-4">
-                            <img src="#" alt="" class="img-responsive">
-                        </div>
+                        <label class="label-control">Program Status</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Application ID</td>
+                                    <td class="text-bold text-red">@{{ student.application_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Visa Interview Status</td>
+                                    <td>@{{ student.view_interview_status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Hired Company Details</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Host Company</td>
+                                    <td>@{{ student.host_company_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>@{{ student.position }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td>@{{ student.location }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Stipend</td>
+                                    <td>@{{ student.stipend }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Other Contact Details</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Facebook Account</td>
+                                    <td>@{{ student.fb_email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Skype ID</td>
+                                    <td>@{{ student.skype_id }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Student Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td>First Name</td>
+                                <td class="text-bold">@{{ student.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td class="text-bold">@{{ student.middle_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td class="text-bold">@{{ student.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td class="text-bold">@{{ student.birthdate }}</td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td class="text-bold">@{{ student.gender }}</td>
+                            </tr>
+                            <tr>
+                                <td>Home Number</td>
+                                <td class="text-bold">@{{ student.home_number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile Number</td>
+                                <td class="text-bold">@{{ student.mobile_number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td class="text-bold">@{{ student.address }}</td>
+                            </tr>
+                            <tr>
+                                <td>School</td>
+                                <td class="text-bold">@{{ student.school }}</td>
+                            </tr>
+                            <tr>
+                                <td>Year Level</td>
+                                <td class="text-bold">@{{ student.year }}</td>
+                            </tr>
+                            <tr>
+                                <td>Course</td>
+                                <td class="text-bold">@{{ student.course }}</td>
+                            </tr>
+                            <tr>
+                                <td>Program</td>
+                                <td class="text-bold">@{{ student.program }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -117,16 +214,32 @@
         const app = new Vue({
             el: '#app',
             data: {
+                student: [],
                 basicRequirements: [],
                 paymentRequirements: [],
-                visaRequirements: []
+                visaRequirements: [],
+                user_id: '{{ Auth::user()->id }}',
+            },
+            created: function() {
+                this.loadStudentDetails();
             },
             mounted: function() {
-                this.loadBasicRequirements(8);
-                this.loadPaymentRequirements(6);
-                this.loadVisaRequirements(22);
+                setTimeout(() => {
+                    this.loadBasicRequirements(this.student.program_id);
+                    this.loadPaymentRequirements(this.student.program_id);
+                    this.loadVisaRequirements(this.student.visa_sponsor_id);
+                }, 500);
             },
             methods: {
+                loadStudentDetails() {
+                    axios.get(`/stud/view/${this.user_id}`)
+                        .then((response) => {
+                            this.student = response.data.data;
+                            this.program_id = response.data.data.program_id;
+                        }).catch((error) => {
+                            console.log(error);
+                    })
+                },
                 loadBasicRequirements(programId) {
                     axios.get(`/stud/requirement/basic/${programId}`)
                         .then((response) => {

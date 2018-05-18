@@ -41,7 +41,11 @@ class checkIfEmailIsVerified
                     return redirect()->route('dash.admin');
                 }
                 if (Auth::user()->hasRole('student')) {
-                    return redirect()->route('dash.student');
+                    if (!Auth::user()->isFilled) {
+                        return redirect()->route('register.form');
+                    } else {
+                        return redirect()->route('dash.student');
+                    }
                 }
                 if (Auth::user()->hasRole('coordinator')) {
                     return redirect()->route('dash.coordinator');

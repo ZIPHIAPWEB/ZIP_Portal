@@ -65,10 +65,11 @@
                 modalTitle: '',
                 pReqId: '',
                 bReqId: '',
-                file: ''
+                file: '',
+                program_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->program_id }}"
             },
             mounted: function() {
-                this.loadRequirements(9)
+                this.loadRequirements(this.program_id);
             },
             methods: {
                 loadRequirements(programId) {
