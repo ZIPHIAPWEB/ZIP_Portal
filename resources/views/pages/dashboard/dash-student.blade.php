@@ -11,6 +11,54 @@
                         <h3 class="box-title ">Student Details</h3>
                     </div>
                     <div class="box-body">
+                        <label class="label-control">Program Status</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Application ID</td>
+                                    <td class="text-bold text-red">@{{ student.application_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Visa Interview Status</td>
+                                    <td>@{{ student.view_interview_status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Hired Company Details</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Host Company</td>
+                                    <td>@{{ student.host_company_id }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>@{{ student.position }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td>@{{ student.location }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Stipend</td>
+                                    <td>@{{ student.stipend }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Other Contact Details</label>
+                        <table class="table table-striped table-bordered table-condensed m-b-10">
+                            <tbody>
+                                <tr>
+                                    <td>Facebook Account</td>
+                                    <td>@{{ student.fb_email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Skype ID</td>
+                                    <td>@{{ student.skype_id }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="label-control">Student Details</label>
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
@@ -46,14 +94,6 @@
                                 <td class="text-bold">@{{ student.address }}</td>
                             </tr>
                             <tr>
-                                <td>Facebook Email</td>
-                                <td class="text-bold">@{{ student.fb_email }}</td>
-                            </tr>
-                            <tr>
-                                <td>Skype ID</td>
-                                <td class="text-bold">@{{ student.skype_id }}</td>
-                            </tr>
-                            <tr>
                                 <td>School</td>
                                 <td class="text-bold">@{{ student.school }}</td>
                             </tr>
@@ -67,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td>Program</td>
-                                <td class="text-bold">@{{ student.program_id }}</td>
+                                <td class="text-bold">@{{ student.program }}</td>
                             </tr>
                             </tbody>
                         </table>

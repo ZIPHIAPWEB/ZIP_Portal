@@ -87,7 +87,13 @@ class StudentController extends Controller
 
     public function viewStudent($id)
     {
-        $student = Student::where('user_id', $id)->first();
+        $student = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
+                          ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
+                          ->leftjoin('schools', 'students.school', '=', 'schools.id')
+                          ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
+                          ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as host_company'])
+                          ->where('user_id', $id)
+                          ->first();
 
         return new SuperAdminResource($student);
     }

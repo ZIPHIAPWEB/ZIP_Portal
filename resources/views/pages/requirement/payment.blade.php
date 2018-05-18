@@ -98,7 +98,7 @@
 
                     axios.post(`/stud/requirement/payment/upload/${this.pReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
+                            this.loadRequirements(this.program_id);
                             $('#file-upload').modal('hide');
                             console.log(response);
                         }).catch((error) => {
@@ -109,7 +109,7 @@
                     this.bReqId = requirement.bReqId;
                     axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
                         .then((response) => {
-                            this.loadRequirements(6);
+                            this.loadRequirements(this.program_id);
                             console.log(response);
                         }).catch((error) => {
                             alert('No file to remove');
