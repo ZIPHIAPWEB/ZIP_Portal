@@ -13,7 +13,9 @@ use App\User;
 use App\VisaRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use function Sodium\randombytes_random16;
 
 class StudentController extends Controller
 {
@@ -111,16 +113,29 @@ class StudentController extends Controller
 
     public function uploadBasicRequirement(Request $request, $id)
     {
-        BasicRequirement::create([
-            'requirement_id'    =>  $id,
-            'status'            =>  true
-        ]);
+        if (!BasicRequirement::where('requirement_id', $id)->first()) {
+            if ($request->hasFile('file')) {
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $path = $request->file('file')
+                                ->storeAs('public/basic', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' .$extension);
 
-        return response()->json(['message' => 'File Uploaded!']);
+                BasicRequirement::create([
+                    'requirement_id'    =>  $id,
+                    'status'            =>  true,
+                    'path'              =>  $path
+                ]);
+
+                return response()->json(['message' => 'File Uploaded!']);
+            }
+        }
+
+        return response()->json(['message'  =>  'File Already Uploaded']);
     }
 
     public function removeBasicRequirement($id)
     {
+        Storage::delete(BasicRequirement::find($id)->first()->path);
+
         BasicRequirement::find($id)->delete();
 
         return response()->json(['message' => 'File Removed!']);
@@ -139,16 +154,29 @@ class StudentController extends Controller
 
     public function uploadPaymentRequirement(Request $request, $id)
     {
-        PaymentRequirement::create([
-            'requirement_id'    =>  $id,
-            'status'            =>  true,
-        ]);
+        if (!PaymentRequirement::where('requirement_id', $id)->first()) {
+            if ($request->hasFile('file')) {
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $path = $request->file('file')
+                                ->storeAs('public/payment', $request->user()->name . '-' . date('Ymd') .uniqid() . '.' .$extension);
 
-        return response()->json(['message'  =>  'File Uploaded']);
+                PaymentRequirement::create([
+                    'requirement_id'    =>  $id,
+                    'status'            =>  true,
+                    'path'              =>  $path
+                ]);
+
+                return response()->json(['message'  =>  'File Uploaded']);
+            }
+        }
+
+        return response()->json(['message'  =>  'File Already Uploaded']);
     }
 
     public function removePaymentRequirement($id)
     {
+        Storage::delete(PaymentRequirement::find($id)->first()->path);
+
         PaymentRequirement::find($id)->delete();
 
         return response()->json(['message'  =>  'File Removed']);
@@ -167,16 +195,28 @@ class StudentController extends Controller
 
     public function uploadVisaRequirement(Request $request, $id)
     {
-        VisaRequirement::create([
-            'requirement_id'    =>  $id,
-            'status'            =>  true
-        ]);
+        if (!VisaRequirement::where('requirement_id', $id)->first()) {
+            if ($request->hasFile('file')) {
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $path = $request->file('file')
+                                ->storeAs('public/visa', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' . $extension);
 
-        return response()->json(['message'  =>  'File Uploaded']);
+                VisaRequirement::create([
+                    'requirement_id'    =>  $id,
+                    'status'            =>  true,
+                    'path'              =>  $path
+                ]);
+
+                return response()->json(['message'  =>  'File Uploaded']);
+            }
+        }
+
+        return response()->json(['message'  =>  'File Already Uploaded']);
     }
 
     public function removeVisaRequirement($id)
     {
+        Storage::delete(VisaRequirement::find($id)->first()->path);
         VisaRequirement::find($id)->delete();
 
         return response()->json(['message'  => 'File Removed']);

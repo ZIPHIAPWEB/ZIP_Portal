@@ -152,5 +152,5 @@ Route::prefix('helper')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-
+    return \Illuminate\Support\Facades\Storage::download('public/visa/Student-201805195aff74ae94538.jpg');
 });

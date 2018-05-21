@@ -92,7 +92,11 @@
 
                     formData.append('file', this.file);
 
-                    axios.post(`/stud/requirement/visa/upload/${this.pReqId}`)
+                    axios.post(`/stud/requirement/visa/upload/${this.pReqId}`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                         .then((response) => {
                             this.loadRequirements(22);
                             $('#file-upload').modal('hide');

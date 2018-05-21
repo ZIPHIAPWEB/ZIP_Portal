@@ -95,9 +95,13 @@
 
                     formData.append('file', this.file);
 
-                    axios.post(`/stud/requirement/basic/upload/${this.pReqId}`)
+                    axios.post(`/stud/requirement/basic/upload/${this.pReqId}`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                         .then((response) => {
-                            this.loadRequirements(9);
+                            this.loadRequirements(this.program_id);
                             $('#file-upload').modal('hide');
                             console.log(response);
                         }).catch((error) => {
@@ -108,7 +112,7 @@
                     this.bReqId = requirement.bReqId;
                     axios.post(`/stud/requirement/basic/remove/${this.bReqId}`)
                         .then((response) => {
-                            this.loadRequirements(9);
+                            this.loadRequirements(this.program_id);
                             console.log(response);
                         }).catch((error) => {
                             alert('No file to remove');

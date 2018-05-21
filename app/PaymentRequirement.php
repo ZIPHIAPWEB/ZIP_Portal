@@ -8,6 +8,7 @@ class PaymentRequirement extends Model
 {
     protected $fillable = [
         'requirement_id',
-        'status'
+        'status',
+        'path'
     ];
 }

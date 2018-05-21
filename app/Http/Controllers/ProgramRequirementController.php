@@ -26,17 +26,13 @@ class ProgramRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = 'requirements/basic/';
-            $file = $request->file('file');
-            $extenstion = $file->getClientOriginalExtension();
-            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
-            $file->move($destinationPath, $filename);
+            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
 
             ProgramRequirement::create([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  '/'.$destinationPath . $filename
+                'path'          =>  $path
             ]);
         } else {
             ProgramRequirement::create([
@@ -65,17 +61,13 @@ class ProgramRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = 'requirements/basic/';
-            $file = $request->file('file');
-            $extenstion = $file->getClientOriginalExtension();
-            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
-            $file->move($destinationPath, $filename);
+            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
 
             ProgramRequirement::find($id)->update([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  '/'.$destinationPath . $filename
+                'path'          =>  $path
             ]);
         } else {
             ProgramRequirement::find($id)->update([
@@ -91,8 +83,8 @@ class ProgramRequirementController extends Controller
 
     public function deleteRequirement($id)
     {
-        //$requirement = ProgramRequirement::find($id);
-        //File::delete($requirement->path);
+        $requirement = ProgramRequirement::find($id);
+        Storage::delete($requirement->path);
         ProgramRequirement::find($id)->delete();
         return response()->json(['message'  =>  'Requirement Deleted']);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SuperAdminResource;
 use App\SponsorRequirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SponsorRequirementController extends Controller
@@ -24,17 +25,13 @@ class SponsorRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = 'requirements/sponsors/';
-            $file = $request->file('file');
-            $extenstion = $file->getClientOriginalExtension();
-            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
-            $file->move($destinationPath, $filename);
+            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
             SponsorRequirement::create([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  '/' . $destinationPath . $filename
+                'path'          =>  $path,
             ]);
         } else {
             SponsorRequirement::create([
@@ -63,17 +60,13 @@ class SponsorRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $destinationPath = 'requirements/sponsors/';
-            $file = $request->file('file');
-            $extenstion = $file->getClientOriginalExtension();
-            $filename = preg_replace('/\s+/', '_', $request->input('name')) . '.' . $extenstion;
-            $file->move($destinationPath, $filename);
+            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
             SponsorRequirement::find($id)->update([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
-                'path'          =>  '/' . $destinationPath . $filename
+                'path'          =>  $path
             ]);
         } else {
             SponsorRequirement::find($id)->update([
@@ -89,6 +82,8 @@ class SponsorRequirementController extends Controller
 
     public function delete($id)
     {
+        $requirement = SponsorRequirement::find($id);
+        Storage::delete($requirement->path);
         SponsorRequirement::find($id)->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);
