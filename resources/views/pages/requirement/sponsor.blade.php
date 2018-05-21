@@ -98,7 +98,7 @@
                         }
                     })
                         .then((response) => {
-                            this.loadRequirements(22);
+                            this.loadRequirements(this.sponsor_id);
                             $('#file-upload').modal('hide');
                         }).catch((error) => {
                             console.log(error);
@@ -108,7 +108,7 @@
                     this.bReqId = requirement.bReqId;
                     axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
                         .then((response) => {
-                            this.loadRequirements(22);
+                            this.loadRequirements(this.sponsor_id);
                         }).catch((error) => {
                             alert('No file to remove');
                     })

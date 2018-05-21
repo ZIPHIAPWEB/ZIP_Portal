@@ -62,6 +62,8 @@ class SponsorRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
+            Storage::delete(SponsorRequirement::find($id)->path);
+
             SponsorRequirement::find($id)->update([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
@@ -69,6 +71,10 @@ class SponsorRequirementController extends Controller
                 'path'          =>  $path
             ]);
         } else {
+            if (SponsorRequirement::find($id)->path) {
+                Storage::delete(SponsorRequirement::find($id)->path);
+            }
+
             SponsorRequirement::find($id)->update([
                 'program_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
@@ -82,8 +88,7 @@ class SponsorRequirementController extends Controller
 
     public function delete($id)
     {
-        $requirement = SponsorRequirement::find($id);
-        Storage::delete($requirement->path);
+        Storage::delete(SponsorRequirement::find($id)->path);
         SponsorRequirement::find($id)->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);

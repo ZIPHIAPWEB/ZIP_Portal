@@ -63,6 +63,8 @@ class ProgramRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
 
+            Storage::delete(ProgramRequirement::find($id)->path);
+
             ProgramRequirement::find($id)->update([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
@@ -70,6 +72,10 @@ class ProgramRequirementController extends Controller
                 'path'          =>  $path
             ]);
         } else {
+            if (ProgramRequirement::find($id)->path) {
+                Storage::delete(ProgramRequirement::find($id)->path);
+            }
+
             ProgramRequirement::find($id)->update([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
