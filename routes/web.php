@@ -149,6 +149,11 @@ Route::prefix('helper')->group(function() {
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
 });
 
+Route::prefix('download')->group(function() {
+    Route::get('/basic/form/{id}', 'DownloadController@downloadBasic')->name('download.basic');
+    Route::get('/sponsor/form/{id}', 'DownloadController@downloadSponsor')->name('download.sponsor');
+});
+
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
