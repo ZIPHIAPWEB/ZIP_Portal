@@ -228,7 +228,7 @@
                     this.loadBasicRequirements(this.student.program_id);
                     this.loadPaymentRequirements(this.student.program_id);
                     this.loadVisaRequirements(this.student.visa_sponsor_id);
-                }, 500);
+                }, 1000);
             },
             methods: {
                 loadStudentDetails() {
