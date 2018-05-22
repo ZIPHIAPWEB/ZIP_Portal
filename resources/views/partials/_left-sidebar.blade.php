@@ -1,5 +1,5 @@
 <!-- Left side column. contains the sidebar -->
-<aside class="main-sidebar">
+<aside class="main-sidebar" id="sidenav">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
@@ -106,23 +106,7 @@
 
             @endif
 
-            @if(Auth::user()->hasRole('coordinator'))
-                <li class="header">Program</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-key"></i>
-                        <span><small>Students</small></span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i><small>Summer Work and Travel</small></a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i><small>Internship</small></a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i><small>Career Training</small></a></li>
-                    </ul>
-                </li>
-            @endif
+            @yield('sidenav')
 
             @if(Auth::user()->hasRole('student'))
                 <li class="header">My Requirements</li>

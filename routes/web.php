@@ -46,10 +46,13 @@ Route::prefix('portal')->group(function() {
     Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
     Route::view('/s/requirement/payment', 'pages.requirement.payment')->name('req.payment');
     Route::view('/s/requirement/visa', 'pages.requirement.sponsor')->name('req.visa');
+
+    Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
 });
 
 Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
+    Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
 });
 
 Route::prefix('stud')->group(function() {

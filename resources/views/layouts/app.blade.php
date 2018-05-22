@@ -52,7 +52,6 @@
 </div>
 <!-- ./wrapper -->
 <script src="{{ asset('js/app.js') }}"></script>
-<!-- page script -->
 @yield('script')
 <script type="text/javascript">
     // To make Pace works on Ajax calls
