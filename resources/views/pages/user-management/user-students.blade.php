@@ -143,246 +143,240 @@
                                 <li>
                                     <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
                                 </li>
+                                <li>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
                                     <label class="control-label">Application Status</label>
                                     <table class="table table-condensed table-striped table-bordered">
                                         <tbody>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Application Status
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.application_status }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Visa Interview Status
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.visa_interview_status }}
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td style="width: 200px">
+                                                Application Status
+                                            </td>
+                                            <td v-cloak class="text-bold text-center">
+                                                @{{ student.application_status }}
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-primary btn-flat btn-xs">Assessed</button>
+                                                <button class="btn btn-info btn-flat btn-xs">Confirmed</button>
+                                                <button class="btn btn-success btn-flat btn-xs">Hired</button>
+                                                <button class="btn btn-default btn-flat btn-xs">For Visa Interview</button>
+                                                <button class="btn btn-warning btn-flat btn-xs">Cancel</button>
+                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Visa Interview Status
+                                            </td>
+                                            <td v-cloak class="text-bold text-center">
+                                                @{{ student.visa_interview_status }}
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-success btn-flat btn-xs">Approved</button>
+                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                     <label class="control-label">Personal Details</label>
                                     <table class="table table-condensed table-striped table-bordered">
                                         <tbody>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Fullname
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Birth Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.birthdate }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Gender
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.gender }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Home Number
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.home_number }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Mobile Number
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.mobile_number }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    College
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.school }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Course
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.course }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Year Level
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.year }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Skype
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.skype_id }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Program ID Number
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.program_id_no }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    SEVIS ID
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.sevis_id }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Host Company
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.host_company_id }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Position
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.position }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Location
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.location }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Stipend
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.stipend }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Position
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.position }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Facebook Email
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.fb_email }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Program Start Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.program_start_date }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Program End Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.program_end_date }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Departure Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.date_of_departure }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Arrival Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.date_of_arrival }}
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td style="width: 200px">
+                                                Fullname
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Birth Date
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.birthdate }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Gender
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.gender }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Address
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.address }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Home Number
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.home_number }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Mobile Number
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.mobile_number }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Skype
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.skype_id }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Facebook Email
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.fb_email }}
+                                            </td>
+                                        </tr>
                                         </tbody>
+                                    </table>
+                                    <label class="control-label">School Details</label>
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <tr>
+                                            <td style="width: 200px">
+                                                College
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.school }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Course
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.course }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Year Level
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.year }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <label class="control-label">Visa Interview Details</label>
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <tr>
+                                            <td style="width: 200px">
+                                                Program ID Number
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.program_id_no }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                SEVIS ID
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.sevis_id }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <label class="control-label">Host Company Details</label>
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <tr>
+                                            <td style="width: 200px">
+                                                Host Company
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.host_company_id }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Position
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.position }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Start Date</td>
+                                            <td>@{{ student.program_start_date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>End Date</td>
+                                            <td>@{{ student.program_end_date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Stipend
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.stipend }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <label class="control-label">Flight Details</label>
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <tr>
+                                            <td style="width: 200px">
+                                                Departure Date
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.date_of_departure }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Arrival Date
+                                            </td>
+                                            <td v-cloak class="text-bold">
+                                                @{{ student.date_of_arrival }}
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="tab-pane" id="tab-basic-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                            <th>
-                                                Requirement
-                                            </th>
-                                            <th class="text-center">
-                                                Status
-                                            </th>
-                                            <th class="text-center">
-                                                Action
-                                            </th>
+                                        <th>
+                                            Requirement
+                                        </th>
+                                        <th class="text-center">
+                                            Status
+                                        </th>
+                                        <th class="text-center">
+                                            Action
+                                        </th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Application Form</td>
-                                                <td class="text-center">
-                                                    <span class="fa fa-check"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Application Form</td>
-                                                <td class="text-center">
-                                                    <span class="fa fa-times"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
+                                        <tr v-for="requirement in basicRequirements">
+                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -400,26 +394,45 @@
                                         </th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Application Form</td>
-                                                <td class="text-center">
-                                                    <span class="fa fa-times"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Application Form</td>
-                                                <td class="text-center">
-                                                    <span class="fa fa-check"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
+                                        <tr v-for="requirement in paymentRequirements">
+                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane " id="tab-visa-req">
+                                    <table class="table table-condensed table-striped table-bordered">
+                                        <thead>
+                                        <th>
+                                            Requirement
+                                        </th>
+                                        <th class="text-center">
+                                            Status
+                                        </th>
+                                        <th class="text-center">
+                                            Action
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="requirement in visaRequirements">
+                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                <button @click="downloadVisaRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
