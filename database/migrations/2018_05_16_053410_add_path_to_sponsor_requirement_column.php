@@ -26,7 +26,7 @@ class AddPathToSponsorRequirementColumn extends Migration
     public function down()
     {
         Schema::table('sponsor_requirements', function (Blueprint $table) {
-            //
+            $table->dropColumn('path');
         });
     }
 }

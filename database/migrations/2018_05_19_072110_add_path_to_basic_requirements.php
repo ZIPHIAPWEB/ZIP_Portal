@@ -26,7 +26,7 @@ class AddPathToBasicRequirements extends Migration
     public function down()
     {
         Schema::table('basic_requirements', function (Blueprint $table) {
-            //
+            $table->dropColumn('path');
         });
     }
 }

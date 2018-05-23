@@ -3,6 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('sidenav')
+    <li class="header">General</li>
+    <li>
+        <a href="{{ route('dash.coordinator') }}">
+            <i class="fa fa-dashboard"></i> <span><small>Dashboard</small></span>
+        </a>
+    </li>
     <li class="header">Program</li>
     <li class="treeview" id="coordinator">
         <a href="#">

@@ -26,7 +26,7 @@ class AddPathToVisaRequirements extends Migration
     public function down()
     {
         Schema::table('visa_requirements', function (Blueprint $table) {
-            //
+            $table->dropColumn('path');
         });
     }
 }

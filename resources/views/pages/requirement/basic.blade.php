@@ -2,6 +2,43 @@
 
 @section('title', 'Basic Requirement')
 
+@section('sidenav')
+    <li class="header">General</li>
+    <li>
+        <a href="{{ route('dash.student') }}">
+            <i class="fa fa-user"></i> <span><small>My Profile</small></span>
+        </a>
+    </li>
+    <li class="header">My Requirements</li>
+    <li>
+        <a href="{{ route('req.basic') }}">
+            <i class="fa fa-book"></i>
+            <span><small>Basic Requirements</small></span>
+            <span class="pull-right-container">
+                            <small class="label pull-right bg-red">0</small>
+                        </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('req.payment') }}">
+            <i class="fa fa-dollar"></i>
+            <span><small>Payment Requirements</small></span>
+            <span class="pull-right-container">
+                            <small class="label pull-right bg-red">0</small>
+                        </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('req.visa') }}">
+            <i class="fa fa-plane"></i>
+            <span><small>Visa Requirements</small></span>
+            <span class="pull-right-container">
+                            <small class="label pull-right bg-red">0</small>
+                        </span>
+        </a>
+    </li>
+@endsection
+
 @section('content')
     <div id="app">
         <div class="col-xs-12">

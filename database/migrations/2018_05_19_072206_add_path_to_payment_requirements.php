@@ -26,7 +26,7 @@ class AddPathToPaymentRequirements extends Migration
     public function down()
     {
         Schema::table('payment_requirements', function (Blueprint $table) {
-            //
+            $table->dropColumn('path');
         });
     }
 }

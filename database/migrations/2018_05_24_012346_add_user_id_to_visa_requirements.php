@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPathColumnToProgramRequirements extends Migration
+class AddUserIdToVisaRequirements extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPathColumnToProgramRequirements extends Migration
      */
     public function up()
     {
-        Schema::table('program_requirements', function (Blueprint $table) {
-            $table->string('path');
+        Schema::table('visa_requirements', function (Blueprint $table) {
+            $table->integer('user_id')->after('id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddPathColumnToProgramRequirements extends Migration
      */
     public function down()
     {
-        Schema::table('program_requirements', function (Blueprint $table) {
-            $table->dropColumn('path');
+        Schema::table('visa_requirements', function (Blueprint $table) {
+            $table->dropColumn('user_id');
         });
     }
 }

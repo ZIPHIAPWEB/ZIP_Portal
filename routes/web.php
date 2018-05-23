@@ -53,6 +53,10 @@ Route::prefix('portal')->group(function() {
 Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
     Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
+
+    Route::get('/requirement/basic/{programId}/{userId}', 'CoordinatorController@loadBasicRequirements')->name('coor.basic.requirements');
+    Route::get('/requirement/payment/{programId}/{userId}', 'CoordinatorController@loadPaymentRequirements')->name('coor.basic.requirements');
+    Route::get('/requirement/visa/{sponsorId}/{userId}', 'CoordinatorController@loadVisaRequirements')->name('coor.visa.requirements');
 });
 
 Route::prefix('stud')->group(function() {
@@ -155,10 +159,20 @@ Route::prefix('helper')->group(function() {
 Route::prefix('download')->group(function() {
     Route::get('/basic/form/{id}', 'DownloadController@downloadBasic')->name('download.basic');
     Route::get('/sponsor/form/{id}', 'DownloadController@downloadSponsor')->name('download.sponsor');
+
+    Route::get('/basic/requirement/{id}', 'DownloadController@downloadBasicRequirement')->name('download.basic.requirement');
+    Route::get('/payment/requirement/{id}', 'DownloadController@downloadPaymentRequirement')->name('download.payment.requirement');
+    Route::get('/visa/requirement/{id}', 'DownloadController@downloadVisaRequirement')->name('download.visa.requirement');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    return \Illuminate\Support\Facades\Storage::download('public/visa/Student-201805195aff74ae94538.jpg');
+    $program = \App\ProgramRequirement::leftjoin('basic_requirements', function($join) {
+        $join->on('basic_requirements.requirement_id', 'program_requirements.id');
+    })->select(['program_requirements.*', 'basic_requirements.*'])
+        ->where('basic_requirements.user_id', \Illuminate\Support\Facades\Auth::user()->id)
+        ->where('program_requirements.program_id', 9)->get();
+
+    return \App\Http\Resources\SuperAdminResource::collection($program);
 });

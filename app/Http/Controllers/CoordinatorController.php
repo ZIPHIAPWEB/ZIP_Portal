@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Coordinator;
 use App\Http\Resources\SuperAdminResource;
+use App\ProgramPayment;
+use App\ProgramRequirement;
 use App\Role;
+use App\SponsorRequirement;
 use App\User;
 use App\Student;
 use Illuminate\Http\Request;
@@ -27,6 +30,44 @@ class CoordinatorController extends Controller
         return SuperAdminResource::collection($students);
     }
 
+    public function loadBasicRequirements($programId, $userId)
+    {
+        $program = ProgramRequirement::leftjoin('basic_requirements', function($join) use ($userId){
+            $join->on('basic_requirements.requirement_id', 'program_requirements.id')
+                ->where('basic_requirements.user_id', $userId);
+        })->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
+            ->where('program_requirements.program_id', $programId)->get();
+
+        return new SuperAdminResource($program);
+    }
+
+    public function loadPaymentRequirements($programId, $userId)
+    {
+        $payment = ProgramPayment::leftjoin('payment_requirements', function($join) use ($userId){
+            $join->on('program_payments.id', '=', 'payment_requirements.requirement_id')
+                 ->where('payment_requirements.user_id', $userId);
+        })
+                 ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
+                 ->where('program_payments.program_id', $programId)
+                 ->orderBy('name', 'asc')
+                 ->get();
+
+        return new SuperAdminResource($payment);
+    }
+
+    public function loadVisaRequirements($sponsorId, $userId)
+    {
+        $visa = SponsorRequirement::leftjoin('visa_requirements', function($join) use ($userId) {
+            $join->on('sponsor_requirements.id', '=', 'visa_requirements.requirement_id')
+                 ->where('visa_requirements.user_id', $userId);
+          })->select(['visa_requirements.id as bReqId', 'sponsor_requirements.id as pReqId', 'sponsor_requirements.name', 'visa_requirements.status'])
+            ->where('sponsor_requirements.sponsor_id', $sponsorId)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return new SuperAdminResource($visa);
+    }
+    
     public function showCoordinator()
     {
         $coordinator = User::whereRoleIs('coordinator')->paginate(10);

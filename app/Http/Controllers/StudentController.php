@@ -94,7 +94,7 @@ class StudentController extends Controller
                           ->leftjoin('schools', 'students.school', '=', 'schools.id')
                           ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
                           ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as host_company'])
-                          ->where('user_id', $id)
+                          ->where('students.user_id', $id)
                           ->first();
 
         return new SuperAdminResource($student);
@@ -102,13 +102,19 @@ class StudentController extends Controller
 
     public function loadBasicRequirements($programId)
     {
-        $basic = ProgramRequirement::leftjoin('basic_requirements', 'program_requirements.id', '=', 'basic_requirements.requirement_id')
+        /*$basic = ProgramRequirement::leftjoin('basic_requirements', 'program_requirements.id', '=', 'basic_requirements.requirement_id')
                             ->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
-                            ->where('program_id', $programId)
+                            ->where('program_requirements.program_id', $programId)
                             ->orderBy('name', 'asc')
-                            ->get();
+                            ->get(); */
 
-        return new SuperAdminResource($basic);
+        $program = \App\ProgramRequirement::leftjoin('basic_requirements', function($join) {
+            $join->on('basic_requirements.requirement_id', 'program_requirements.id')
+                 ->where('basic_requirements.user_id', Auth::user()->id);
+                    })->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
+                 ->where('program_requirements.program_id', $programId)->get();
+
+        return new SuperAdminResource($program);
     }
 
     public function uploadBasicRequirement(Request $request, $id)
@@ -120,6 +126,7 @@ class StudentController extends Controller
                                 ->storeAs('public/basic', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' .$extension);
 
                 BasicRequirement::create([
+                    'user_id'           =>  Auth::user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
@@ -143,11 +150,14 @@ class StudentController extends Controller
 
     public function loadPaymentRequirements($programId)
     {
-        $payment = ProgramPayment::leftjoin('payment_requirements', 'program_payments.id', '=', 'payment_requirements.requirement_id')
-                            ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
-                            ->where('program_id', $programId)
-                            ->orderBy('name', 'asc')
-                            ->get();
+        $payment = ProgramPayment::leftjoin('payment_requirements', function($join) {
+            $join->on('program_payments.id', '=', 'payment_requirements.requirement_id')
+                 ->where('payment_requirements.user_id', Auth::user()->id);
+                })
+                 ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
+                 ->where('program_id', $programId)
+                 ->orderBy('name', 'asc')
+                 ->get();
 
         return new SuperAdminResource($payment);
     }
@@ -161,6 +171,7 @@ class StudentController extends Controller
                                 ->storeAs('public/payment', $request->user()->name . '-' . date('Ymd') .uniqid() . '.' .$extension);
 
                 PaymentRequirement::create([
+                    'user_id'           =>  Auth::user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
@@ -184,9 +195,12 @@ class StudentController extends Controller
 
     public function loadVisaRequirements($sponsorId)
     {
-        $visa = SponsorRequirement::leftjoin('visa_requirements', 'sponsor_requirements.id', '=', 'visa_requirements.requirement_id')
+        $visa = SponsorRequirement::leftjoin('visa_requirements', function($join) {
+                            $join->on('sponsor_requirements.id', '=', 'visa_requirements.requirement_id')
+                                 ->where('visa_requirements.user_id', Auth::user()->id);
+                            })
                             ->select(['visa_requirements.id as bReqId', 'sponsor_requirements.id as pReqId', 'sponsor_requirements.name', 'visa_requirements.status', 'sponsor_requirements.path'])
-                            ->where('sponsor_id', $sponsorId)
+                            ->where('sponsor_requirements.sponsor_id', $sponsorId)
                             ->orderBy('name', 'asc')
                             ->get();
 
