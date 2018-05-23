@@ -143,7 +143,7 @@
                                 <li>
                                     <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
                                 </li>
-                                <li>
+                                <li v-if="student.visa_sponsor_id">
                                     <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
                                 </li>
                             </ul>
@@ -452,6 +452,9 @@
             data: {
                 student: [],
                 students: [],
+                basicRequirements: [],
+                paymentRequirements: [],
+                visaRequirements:[],
                 links: [],
                 current_page: '',
                 last_page: ''
@@ -497,10 +500,61 @@
                     axios(`/stud/view/${id}`)
                         .then((response) => {
                             this.student = response.data.data;
+                            this.loadBasicRequirements(response.data.data.program_id, id);
+                            this.loadPaymentRequirements(response.data.data.program_id, id);
+                            this.loadVisaRequirements(response.data.data.visa_sponsor_id, id);
                         }).catch((error) => {
                             console.log(error);
                     });
                     $('#student-modal').modal('show');
+                },
+                loadBasicRequirements(programId, userId) {
+                    axios.get(`/coor/requirement/basic/${programId}/${userId}`)
+                        .then((response) => {
+                            this.basicRequirements = response.data.data;
+                        })
+                },
+                downloadBasicRequirement(id) {
+                    axios.get(`/download/basic/requirement/${id}`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
+                },
+                loadPaymentRequirements(programId, userId) {
+                    axios.get(`/coor/requirement/payment/${programId}/${userId}`)
+                        .then((response) => {
+                            this.paymentRequirements = response.data.data;
+                        })
+                },
+                downloadPaymentRequirement(id) {
+                    axios.get(`/download/payment/requirement/${id}`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
+                },
+                loadVisaRequirements(sponsorId, userId) {
+                    axios.get(`/coor/requirement/visa/${sponsorId}/${userId}`)
+                        .then((response) => {
+                            this.visaRequirements = response.data.data;
+                        })
+                },
+                downloadVisaRequirement(id) {
+                    axios.get(`/download/visa/requirement/${id}`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
                 }
             }
         })
