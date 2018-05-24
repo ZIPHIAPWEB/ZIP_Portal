@@ -112,7 +112,9 @@ class StudentController extends Controller
             $join->on('basic_requirements.requirement_id', 'program_requirements.id')
                  ->where('basic_requirements.user_id', Auth::user()->id);
                     })->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
-                 ->where('program_requirements.program_id', $programId)->get();
+                 ->where('program_requirements.program_id', $programId)
+                 ->orderBy('name', 'asc')
+                 ->get();
 
         return new SuperAdminResource($program);
     }
