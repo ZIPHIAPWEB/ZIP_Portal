@@ -104,8 +104,7 @@
                                                 <button class="btn btn-primary btn-flat btn-xs">Assessed</button>
                                                 <button class="btn btn-info btn-flat btn-xs">Confirmed</button>
                                                 <button class="btn btn-success btn-flat btn-xs">Hired</button>
-                                                <button class="btn btn-default btn-flat btn-xs">For Visa Interview</button>
-                                                <button class="btn btn-warning btn-flat btn-xs">Cancel</button>
+                                                <button class="btn btn-warning btn-flat btn-xs">For Visa Interview</button>
                                                 <button class="btn btn-danger btn-flat btn-xs">Denied</button>
                                             </td>
                                         </tr>

@@ -154,6 +154,10 @@ Route::prefix('school')->group(function() {
 Route::prefix('helper')->group(function() {
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
+
+    Route::get('/applicant/{filter}', 'HelperController@applicantCount')->name('helper.applicant');
+    Route::get('/visa/{filter}', 'HelperController@visaCount')->name('helper.visa');
+    Route::get('/program/{filter}', 'HelperController@programCount')->name('helper.program');
 });
 
 Route::prefix('download')->group(function() {
