@@ -41,71 +41,154 @@
 
 @section('content')
     <div id="app">
-        <div class="col-md-3">
+        <div class="col-md-3" v-cloak>
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/350x350" alt="User profile picture"/>
-                    <h3 class="profile-username text-center">Nina Mcintire</h3>
-                    <p class="text-muted text-center">Software Engineer</p>
+                    <h3 class="profile-username text-center">@{{ student.first_name }} &nbsp; @{{ student.middle_name[0] }} &nbsp; @{{ student.last_name }}</h3>
+                    <p class="text-muted text-center">@{{ student.position }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Followers</b>
-                            <a class="pull-right">1,322</a>
+                            <b>Application Status</b>
+                            <a class="pull-right text-green">@{{ student.application_status }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Following</b>
-                            <a class="pull-right">543</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Friends</b>
-                            <a class="pull-right">13,287</a>
+                            <b>Visa Interview Status</b>
+                            <a v-if="student.visa_interview_status" class="pull-right text-green"><small>@{{ student.visa_interview_status }}</small></a>
+                            <a v-else class="pull-right text-red"><small>Your Coordinator Will Verify</small></a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">About Me</h3>
+                    <label for="" class="control-label">About</label>
                 </div>
                 <div class="box-body">
                     <strong>
-                        <i class="fa fa-book"></i>
-                        Education
+                        <i class="fa fa-address-card"></i>
+                        Home Address
                     </strong>
-                    <p class="text-muted">B.S. in Computer Science from the University of Tennessee at Knoxville</p>
+                    <p class="text-muted">@{{ student.address }}</p>
                     <hr>
                     <strong>
-                        <i class="fa fa-book"></i>
-                        Education
+                        <i class="fa fa-calendar"></i>
+                        Date of Birth
                     </strong>
-                    <p class="text-muted">B.S. in Computer Science from the University of Tennessee at Knoxville</p>
+                    <p class="text-muted">@{{ student.birthdate }}</p>
                     <hr>
                     <strong>
-                        <i class="fa fa-book"></i>
-                        Education
+                        <i class="fa fa-phone"></i>
+                        Contacts
                     </strong>
-                    <p class="text-muted">B.S. in Computer Science from the University of Tennessee at Knoxville</p>
+                    <p class="text-muted">@{{ student.home_number }}/@{{ student.mobile_number }}</p>
                     <hr>
+                    <strong>
+                        <i class="fa fa-envelope"></i>
+                        E-mail Address
+                    </strong>
+                    <p class="text-muted">@{{ student.fb_email }}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <label for="" class="control-label">Host Company Details</label>
+                </div>
+                <div class="box-body">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <td style="width: 35%;">Host Company</td>
+                                <td>@{{ student.host_company }}</td>
+                            </tr>
+                            <tr>
+                                <td>Position</td>
+                                <td>@{{ student.position }}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>@{{ student.location }}</td>
+                            </tr>
+                            <tr>
+                                <td>Stipend</td>
+                                <td>@{{ student.stipend }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#activity" data-toggle="tab" aria-expanded="true">Basic Requirementments</a>
+                        <a href="#activity" data-toggle="tab" aria-expanded="true">
+                            <label for="" class="control-label">Basic Requirementments</label>
+                        </a>
                     </li>
                     <li class="">
-                        <a href="#timeline" data-toggle="tab" aria-expanded="false">Payment Requirements</a>
+                        <a href="#timeline" data-toggle="tab" aria-expanded="false">
+                            <label for="" class="control-label">Payment Requirementments</label>
+                        </a>
                     </li>
                     <li class="">
-                        <a href="#settings" data-toggle="tab" aria-expanded="false">Visa Requirements</a>
+                        <a href="#settings" data-toggle="tab" aria-expanded="false">
+                            <label for="" class="control-label">Visa Requirementments</label>
+                        </a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="activity"></div>
-                    <div class="tab-pane" id="timeline"></div>
-                    <div class="tab-pane" id="settings"></div>
+                    <div class="tab-pane active" id="activity">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                                <th style="width: 75%;">Requirements</th>
+                                <th class="text-center">Status</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="requirement in basicRequirements">
+                                    <td>@{{ requirement.name }}</td>
+                                    <td class="text-center">
+                                        <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                        <span v-else style="color: red;" class="fa fa-remove"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="timeline">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <th style="width: 75%;">Requirements</th>
+                            <th class="text-center">Status</th>
+                            </thead>
+                            <tbody>
+                            <tr v-for="requirement in paymentRequirements">
+                                <td>@{{ requirement.name }}</td>
+                                <td class="text-center">
+                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                    <span v-else style="color: red;" class="fa fa-remove"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="settings">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <th style="width: 75%;">Requirements</th>
+                            <th class="text-center">Status</th>
+                            </thead>
+                            <tbody>
+                            <tr v-for="requirement in visaRequirements">
+                                <td>@{{ requirement.name }}</td>
+                                <td class="text-center">
+                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                    <span v-else style="color: red;" class="fa fa-remove"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
