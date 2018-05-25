@@ -41,181 +41,149 @@
 
 @section('content')
     <div id="app">
-        <div class="col-xs-12">
-            <div class="container">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title ">Student Details</h3>
-                    </div>
-                    <div class="box-body">
-                        <label class="label-control">Program Status</label>
-                        <table class="table table-striped table-bordered table-condensed m-b-10">
-                            <tbody>
-                                <tr>
-                                    <td>Application Status</td>
-                                    <td class="text-bold text-red">@{{ student.application_status }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Visa Interview Status</td>
-                                    <td>@{{ student.view_interview_status }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label v-if="student.host_company_id" class="label-control">Hired Company Details</label>
-                        <table v-if="student.host_company_id" class="table table-striped table-bordered table-condensed m-b-10">
-                            <tbody>
-                                <tr>
-                                    <td>Host Company</td>
-                                    <td>@{{ student.host_company_id }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Position</td>
-                                    <td>@{{ student.position }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Location</td>
-                                    <td>@{{ student.location }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Stipend</td>
-                                    <td>@{{ student.stipend }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label class="label-control">Other Contact Details</label>
-                        <table class="table table-striped table-bordered table-condensed m-b-10">
-                            <tbody>
-                                <tr>
-                                    <td>Facebook Account</td>
-                                    <td>@{{ student.fb_email }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Skype ID</td>
-                                    <td>@{{ student.skype_id }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label class="label-control">Student Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                            <tr>
-                                <td>First Name</td>
-                                <td class="text-bold">@{{ student.first_name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Middle Name</td>
-                                <td class="text-bold">@{{ student.middle_name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td class="text-bold">@{{ student.last_name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Date of Birth</td>
-                                <td class="text-bold">@{{ student.birthdate }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td class="text-bold">@{{ student.gender }}</td>
-                            </tr>
-                            <tr>
-                                <td>Home Number</td>
-                                <td class="text-bold">@{{ student.home_number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Mobile Number</td>
-                                <td class="text-bold">@{{ student.mobile_number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td class="text-bold">@{{ student.address }}</td>
-                            </tr>
-                            <tr>
-                                <td>School</td>
-                                <td class="text-bold">@{{ student.school }}</td>
-                            </tr>
-                            <tr>
-                                <td>Year Level</td>
-                                <td class="text-bold">@{{ student.year }}</td>
-                            </tr>
-                            <tr>
-                                <td>Course</td>
-                                <td class="text-bold">@{{ student.course }}</td>
-                            </tr>
-                            <tr>
-                                <td>Program</td>
-                                <td class="text-bold">@{{ student.program }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="col-md-3" v-cloak>
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/350x350" alt="User profile picture"/>
+                    <h3 class="profile-username text-center">@{{ student.first_name }} &nbsp; @{{ student.middle_name[0] }} &nbsp; @{{ student.last_name }}</h3>
+                    <p class="text-muted text-center">@{{ student.position }}</p>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Application Status</b>
+                            <a class="pull-right text-green">@{{ student.application_status }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Visa Interview Status</b>
+                            <a v-if="student.visa_interview_status" class="pull-right text-green"><small>@{{ student.visa_interview_status }}</small></a>
+                            <a v-else class="pull-right text-red"><small>Your Coordinator Will Verify</small></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="container">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title text-center">Payment Details</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered table-striped table-condensed">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <label for="" class="control-label">About</label>
+                </div>
+                <div class="box-body">
+                    <strong>
+                        <i class="fa fa-address-card"></i>
+                        Home Address
+                    </strong>
+                    <p class="text-muted">@{{ student.address }}</p>
+                    <hr>
+                    <strong>
+                        <i class="fa fa-calendar"></i>
+                        Date of Birth
+                    </strong>
+                    <p class="text-muted">@{{ student.birthdate }}</p>
+                    <hr>
+                    <strong>
+                        <i class="fa fa-phone"></i>
+                        Contacts
+                    </strong>
+                    <p class="text-muted">@{{ student.home_number }}/@{{ student.mobile_number }}</p>
+                    <hr>
+                    <strong>
+                        <i class="fa fa-envelope"></i>
+                        E-mail Address
+                    </strong>
+                    <p class="text-muted">@{{ student.fb_email }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <label for="" class="control-label">Host Company Details</label>
+                </div>
+                <div class="box-body">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <td style="width: 35%;">Host Company</td>
+                                <td>@{{ student.host_company }}</td>
+                            </tr>
+                            <tr>
+                                <td>Position</td>
+                                <td>@{{ student.position }}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>@{{ student.location }}</td>
+                            </tr>
+                            <tr>
+                                <td>Stipend</td>
+                                <td>@{{ student.stipend }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#activity" data-toggle="tab" aria-expanded="true">
+                            <label for="" class="control-label">Basic Requirementments</label>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#timeline" data-toggle="tab" aria-expanded="false">
+                            <label for="" class="control-label">Payment Requirementments</label>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#settings" data-toggle="tab" aria-expanded="false">
+                            <label for="" class="control-label">Visa Requirementments</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="activity">
+                        <table class="table table-striped table-bordered table-condensed">
                             <thead>
-                            <th>Requirements</th>
-                            <th class="text-center">Uploaded</th>
+                                <th style="width: 75%;">Requirements</th>
+                                <th class="text-center">Status</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="requirement in basicRequirements">
+                                    <td>@{{ requirement.name }}</td>
+                                    <td class="text-center">
+                                        <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                        <span v-else style="color: red;" class="fa fa-remove"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="timeline">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <th style="width: 75%;">Requirements</th>
+                            <th class="text-center">Status</th>
                             </thead>
                             <tbody>
                             <tr v-for="requirement in paymentRequirements">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
-                                    <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
-                                    <span v-else class="fa fa-remove" style="color: red;"></span>
+                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                    <span v-else style="color: red;" class="fa fa-remove"></span>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="box box-danger">
-                    <div class="box-header with-border">
-                        <h3 class="box-title text-center">Basic Requirement</h3>
-                    </div>
-                    <div class="box-body" v-cloak>
-                        <table class="table table-bordered table-striped table-condensed">
+                    <div class="tab-pane" id="settings">
+                        <table class="table table-striped table-bordered table-condensed">
                             <thead>
-                            <th>Requirements</th>
-                            <th class="text-center">Uploaded</th>
-                            </thead>
-                            <tbody>
-                            <tr v-for="requirement in basicRequirements">
-                                <td>@{{ requirement.name }}</td>
-                                <td class="text-center">
-                                    <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
-                                    <span v-else class="fa fa-remove" style="color: red;"></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div v-if="student.visa_sponsor_id" class="container">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title text-center">Visa Requirements</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered table-striped table-condensed">
-                            <thead>
-                            <th>Requirements</th>
-                            <th class="text-center">Uploaded</th>
+                            <th style="width: 75%;">Requirements</th>
+                            <th class="text-center">Status</th>
                             </thead>
                             <tbody>
                             <tr v-for="requirement in visaRequirements">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
-                                    <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
-                                    <span v-else class="fa fa-remove" style="color: red;"></span>
+                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                    <span v-else style="color: red;" class="fa fa-remove"></span>
                                 </td>
                             </tr>
                             </tbody>
