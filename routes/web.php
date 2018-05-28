@@ -169,14 +169,20 @@ Route::prefix('download')->group(function() {
     Route::get('/visa/requirement/{id}', 'DownloadController@downloadVisaRequirement')->name('download.visa.requirement');
 });
 
+Route::prefix('filter')->group(function() {
+    Route::get('/student/{programId}/{name?}', 'FilterController@filterStudentBy')->name('filter.student');
+    Route::get('/status/{programId}/{status?}', 'FilterController@filterStatus')->name('filter.status');
+});
+
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $program = \App\ProgramRequirement::leftjoin('basic_requirements', function($join) {
-        $join->on('basic_requirements.requirement_id', 'program_requirements.id');
-    })->select(['program_requirements.*', 'basic_requirements.*'])
-        ->where('basic_requirements.user_id', \Illuminate\Support\Facades\Auth::user()->id)
-        ->where('program_requirements.program_id', 9)->get();
+    $students = \App\Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
+        ->leftjoin('schools', 'students.school', '=', 'schools.id')
+        ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
+        ->where('program_id' , 'like' , '%')
+        ->where('application_status', 'like', '%')
+        ->paginate(20);
 
-    return \App\Http\Resources\SuperAdminResource::collection($program);
+    return \App\Http\Resources\SuperAdminResource::collection($students);
 });

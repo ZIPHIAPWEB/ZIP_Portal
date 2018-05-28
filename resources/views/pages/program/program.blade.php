@@ -32,6 +32,22 @@
                     <h3 class="box-title text-center">{{ \App\Program::find($program)->name }} Students</h3>
                 </div>
                 <div class="box-body">
+                    <form action="" class="form-inline pull-left m-b-10">
+                        <div class="form-group-sm pull-left">
+                            <label for="" class="control-label">Filter By</label>
+                            <select v-model="filterStatus" class="form-control">
+                                <option value="" selected>All</option>
+                                <option value="New Applicant">New Applicant</option>
+                                <option value="Assessed">Assessed</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Hired">Hired</option>
+                                <option value="For Visa Interview">For Visa Interview</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="form-group-sm pull-right">
+                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By Name">
+                    </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
                             <td>Date of Application</td>
@@ -62,6 +78,25 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="box-footer">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li>
+                            <a @click="next()" href="#">«</a>
+                        </li>
+                        <li>
+                            <a href="#">@{{ current_page }}</a>
+                        </li>
+                        <li>
+                            <a href="#">to</a>
+                        </li>
+                        <li>
+                            <a href="#">@{{ last_page }}</a>
+                        </li>
+                        <li>
+                            <a @click="previous()" href="#">»</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -415,16 +450,66 @@
                 student: [],
                 basicRequirements: [],
                 paymentRequirements: [],
-                visaRequirements: []
+                visaRequirements: [],
+                links: [],
+                current_page: '',
+                last_page: '',
+                filterName: '',
+                filterStatus: ''
             },
             mounted: function() {
                 this.loadStudents(programId);
             },
+            watch: {
+                filterName: function() {
+                    if (this.filterName) {
+                        axios.get(`/filter/student/${programId}/${this.filterName}`)
+                            .then((response) => {
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            })
+                    } else {
+                        this.loadStudents(programId)
+                    }
+                },
+                filterStatus: function() {
+                    axios.get(`/filter/status/${programId}/${this.filterStatus}`)
+                        .then((response) => {
+                            this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        })
+                }
+            },
             methods: {
+                next() {
+                    axios.get(this.links.next)
+                        .then((response) => {
+                            this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        })
+                },
+                previous() {
+                    axios.get(this.links.prev)
+                        .then((response) => {
+                            this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
+                        })
+                },
                 loadStudents(programId) {
                     axios.get(`/coor/program/${programId}`)
                         .then((response) => {
                             this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.current_page = response.data.meta.current_page;
+                            this.last_page = response.data.meta.last_page;
                         })
                 },
                 viewStudent(studentId) {
