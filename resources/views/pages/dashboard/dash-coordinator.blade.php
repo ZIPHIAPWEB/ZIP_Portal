@@ -153,7 +153,7 @@
                                     this.assessed = response.data;
                                     break;
                                 case 'Confirmed':
-                                    this.assessed = response.data;
+                                    this.confirmed = response.data;
                                     break;
                                 case 'Hired':
                                     this.hired = response.data;
