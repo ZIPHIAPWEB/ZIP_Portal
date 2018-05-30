@@ -101,6 +101,7 @@
             </div>
         </div>
 
+
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -125,22 +126,34 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
+                                    <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    Application ID
+                                                </td>
+                                                <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <label class="control-label">Application Status</label>
                                     <table class="table table-condensed table-striped table-bordered">
                                         <tbody>
                                         <tr>
-                                            <td style="width: 200px">
+                                            <td style="width: 25%">
                                                 Application Status
                                             </td>
                                             <td v-cloak class="text-bold text-center">
-                                                @{{ student.application_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-primary btn-flat btn-xs">Assessed</button>
-                                                <button class="btn btn-info btn-flat btn-xs">Confirmed</button>
-                                                <button class="btn btn-success btn-flat btn-xs">Hired</button>
-                                                <button class="btn btn-warning btn-flat btn-xs">For Visa Interview</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
+                                                <div class="form-group-sm">
+                                                    <select @change="setApplicationStatus(appStatus)" v-model="appStatus" class="form-control">
+                                                        <option value="">@{{ student.application_status }}</option>
+                                                        <option value="Assessed">Assessed</option>
+                                                        <option value="Confirmed">Confirmed</option>
+                                                        <option value="Hired">Hired</option>
+                                                        <option value="Denied">Denied</option>
+                                                        <option value="Canceled">Cancel</option>
+                                                    </select>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -148,11 +161,13 @@
                                                 Visa Interview Status
                                             </td>
                                             <td v-cloak class="text-bold text-center">
-                                                @{{ student.visa_interview_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-success btn-flat btn-xs">Approved</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
+                                                <div class="form-group-sm">
+                                                    <select @change="setInterviewStatus(visaStatus)" v-model="visaStatus" class="form-control">
+                                                        <option value="">@{{ student.visa_interview_status }}</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Denied">Denied</option>
+                                                    </select>
+                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -259,16 +274,40 @@
                                             <td style="width: 200px">
                                                 Program ID Number
                                             </td>
-                                            <td v-cloak class="text-bold">
+                                            <td v-if="!program_no" v-cloak class="text-bold">
                                                 @{{ student.program_id_no }}
+                                                <a @click="program_no=true" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                            </td>
+                                            <td v-else>
+                                                <div class="input-group">
+                                                    <input :value="student.program_id_no" type="text" class="form-control input-sm">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                    <span class="input-group-btn">
+                                                        <button @click="program_no=false" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 SEVIS ID
                                             </td>
-                                            <td v-cloak class="text-bold">
+                                            <td v-if="!sevis_id" v-cloak class="text-bold">
                                                 @{{ student.sevis_id }}
+                                                <a @click="sevis_id=true" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                            </td>
+                                            <td v-else>
+                                                <div class="input-group">
+                                                    <input :value="student.sevis_id" type="text" class="form-control input-sm">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                    <span class="input-group-btn">
+                                                        <button @click="sevis_id=false" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -455,7 +494,12 @@
                 current_page: '',
                 last_page: '',
                 filterName: '',
-                filterStatus: ''
+                filterStatus: '',
+                appStatus: '',
+                visaStatus: '',
+
+                program_no: false,
+                sevis_id: false,
             },
             mounted: function() {
                 this.loadStudents(programId);
@@ -569,6 +613,60 @@
                             document.body.appendChild(link);
                             link.click();
                         })
+                },
+                setApplicationStatus(status) {
+                    this.appStatus = '';
+                    switch (status) {
+                        case 'Assessed':
+                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Confirmed':
+                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Hired':
+                            alert(status);
+                            break;
+                        case 'For Visa Interview':
+                            alert(status);
+                            break;
+                        case 'Denied':
+                            alert(status);
+                            break;
+                        case 'Canceled':
+                            alert(status);
+                            break;
+                    }
+                },
+                setInterviewStatus(status) {
+                    this.visaStatus = '';
+                    switch (status) {
+                        case 'Approved':
+                            axios.post(`/coor/${this.student.user_id}/visa/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Denied':
+                            axios.post(`/coor/${this.student.user_id}/visa/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                    }
                 }
             }
         })
