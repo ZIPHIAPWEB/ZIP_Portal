@@ -27,40 +27,55 @@
 @section('content')
     <div id="app">
         <div class="col-xs-12">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Coordinator Details</h3>
                         <a @click="refresh()" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
                     </div>
                     <div class="box-body">
-                        <div class="col-xs-4">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ confirmed }} <br>
-                                <label for="">Hired:</label> @{{ hired }} <br>
-                                <label for="">Denied:</label> @{{ denied }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ visaInterview }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <label for="" class="control-label">Program</label>
-                            <div class="col-xs-12">
-                                <label for="">Summer Work and Travel - Spring:</label> @{{ swtSpring }}<br>
-                                <label for="">Summer Work and Travel - Summer:</label> @{{ swtSummer }} <br>
-                                <label for="">Internship:</label> @{{ internship }} <br>
-                                <label for="">Career Training:</label> @{{ careerTraining }} <br>
-                            </div>
-                        </div>
+                        <label for="" class="label-control">Applicant</label>
+                        <table class="table table-condensed table-striped table-bordered m-b-10">
+                            <tbody>
+                                <tr class="active">
+                                    <td style="width: 50%">New Applicant</td>
+                                    <td class="text-center">@{{ newApplicant }}</td>
+                                </tr>
+                                <tr class="info">
+                                    <td>Assessed</td>
+                                    <td class="text-center">@{{ assessed }}</td>
+                                </tr>
+                                <tr class="success">
+                                    <td>Confirmed</td>
+                                    <td class="text-center">@{{ confirmed }}</td>
+                                </tr>
+                                <tr class="warning">
+                                    <td>Hired</td>
+                                    <td class="text-center">@{{ hired }}</td>
+                                </tr>
+                                <tr class="danger">
+                                    <td>Denied</td>
+                                    <td class="text-center">@{{ denied }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label for="" class="label-control">Visa Interview</label>
+                        <table class="table table-condensed table-striped table-bordered m-b 10">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 50%;">For Visa Interview</td>
+                                    <td class="text-center">@{{ visaInterview }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td class="text-center">@{{ visaApproved }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Denied</td>
+                                    <td class="text-center">@{{ visaDenied }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -153,7 +168,7 @@
                                     this.assessed = response.data;
                                     break;
                                 case 'Confirmed':
-                                    this.assessed = response.data;
+                                    this.confirmed = response.data;
                                     break;
                                 case 'Hired':
                                     this.hired = response.data;
