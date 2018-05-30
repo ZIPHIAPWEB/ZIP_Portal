@@ -155,8 +155,8 @@ Route::prefix('helper')->group(function() {
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
 
-    Route::get('/applicant/{filter}', 'HelperController@applicantCount')->name('helper.applicant');
-    Route::get('/visa/{filter}', 'HelperController@visaCount')->name('helper.visa');
+    Route::get('/applicant/{filter}/{program?}', 'HelperController@applicantCount')->name('helper.applicant');
+    Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');
     Route::get('/program/{filter}', 'HelperController@programCount')->name('helper.program');
 });
 
