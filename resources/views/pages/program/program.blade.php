@@ -100,7 +100,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -125,207 +124,473 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
-                                    <label class="control-label">Application Status</label>
-                                    <table class="table table-condensed table-striped table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Application Status
-                                            </td>
-                                            <td v-cloak class="text-bold text-center">
-                                                @{{ student.application_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-primary btn-flat btn-xs">Assessed</button>
-                                                <button class="btn btn-info btn-flat btn-xs">Confirmed</button>
-                                                <button class="btn btn-success btn-flat btn-xs">Hired</button>
-                                                <button class="btn btn-warning btn-flat btn-xs">For Visa Interview</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Visa Interview Status
-                                            </td>
-                                            <td v-cloak class="text-bold text-center">
-                                                @{{ student.visa_interview_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-success btn-flat btn-xs">Approved</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <label class="control-label">Personal Details</label>
-                                    <table class="table table-condensed table-striped table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Fullname
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Birth Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.birthdate }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Gender
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.gender }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Address
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.address }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Home Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.home_number }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Mobile Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.mobile_number }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Skype
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.skype_id }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Facebook Email
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.fb_email }}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <label class="control-label">School Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                College
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.school }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Course
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.course }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Year Level
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.year }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Visa Interview Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Program ID Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.program_id_no }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                SEVIS ID
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.sevis_id }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Host Company Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Host Company
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.host_company_id }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Position
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.position }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Start Date</td>
-                                            <td>@{{ student.program_start_date }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>End Date</td>
-                                            <td>@{{ student.program_end_date }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Stipend
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.stipend }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Flight Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Departure Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.date_of_departure }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Arrival Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.date_of_arrival }}
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <section id="application-id">
+                                        <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    Application ID
+                                                </td>
+                                                <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="application-status">
+                                        <label class="control-label">Application Status</label>
+                                        <table class="table table-condensed table-striped table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width: 25%">
+                                                    Application Status
+                                                </td>
+                                                <td v-cloak class="text-bold text-center">
+                                                    <div class="form-group-sm">
+                                                        <select @change="setApplicationStatus(appStatus)" v-model="appStatus" class="form-control">
+                                                            <option value="">@{{ student.application_status }}</option>
+                                                            <option value="Assessed">Assessed</option>
+                                                            <option value="Confirmed">Confirmed</option>
+                                                            <option value="Hired">Hired</option>
+                                                            <option value="For Visa Interview">For Visa Interview</option>
+                                                            <option value="Canceled">Cancel</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Visa Interview Status
+                                                </td>
+                                                <td v-cloak class="text-bold text-center">
+                                                    <div class="form-group-sm">
+                                                        <select @change="setInterviewStatus(visaStatus)" v-model="visaStatus" class="form-control">
+                                                            <option value="">@{{ student.visa_interview_status }}</option>
+                                                            <option value="Approved">Approved</option>
+                                                            <option value="Denied">Denied</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                <transition name="slide-fade">
+                                    <section v-if="show.hired">
+                                        <div class="box box-primary">
+                                            <div class="box-header">
+                                                <div class="box-tools pull-right">
+                                                    <button @click="show.hired = false" class="btn btn-box-tool">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="form-group col-xs-6">
+                                                    <label for="" class="control-label">Host Company</label>
+                                                    <select v-model="host.name" class="form-control input-sm">
+                                                        <option value="">Select Host Company</option>
+                                                        <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label for="" class="control-label">Position</label>
+                                                    <input v-model="host.position" type="text" class="form-control input-sm" placeholder="Position">
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="control-label">Place of Assignment</label>
+                                                    <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="control-label">Stipend</label>
+                                                    <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Stipend">
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="control-label">Start Date</label>
+                                                    <input v-model="host.start" type="date" class="form-control input-sm">
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="control-label">End Date</label>
+                                                    <input v-model="host.end" type="date" class="form-control input-sm">
+                                                </div>
+                                                <div class="form-group col-xs-12">
+                                                    <label class="control-label">Visa Sponsor</label>
+                                                    <select v-model="host.sponsor" class="form-control input-sm">
+                                                        <option value="" selected>Select Visa Sponsor</option>
+                                                        <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-12">
+                                                    <button @click="submitHostCompany" class="btn btn-primary btn-sm btn-flat btn-block">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section v-if="show.visa">
+                                        <div class="box box-primary">
+                                            <div class="box-header">
+                                                <div class="box-tools pull-right">
+                                                    <button @click="show.visa = false" class="btn btn-box-tool">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <form action="">
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="label-control">SEVIS ID</label>
+                                                        <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="control-label">Program ID</label>
+                                                        <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <label class="control-label">Interview Schedule</label>
+                                                        <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group-sm col-xs-12">
+                                                        <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </transition>
+                                    <section id="personal-details">
+                                        <label class="control-label">Personal Details</label>
+                                        <table class="table table-condensed table-striped table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    Fullname
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Birth Date
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.birthdate }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Gender
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.gender }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Address
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Home Number
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.home_number }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Mobile Number
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.mobile_number }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Skype
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.skype_id }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Facebook Email
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.fb_email }}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="school-details">
+                                        <label class="control-label">School Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    College
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.school }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Course
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.course }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Year Level
+                                                </td>
+                                                <td v-cloak class="text-bold">
+                                                    @{{ student.year }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview'" id="host-company-details">
+                                        <label class="control-label">Host Company Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    Host Company
+                                                </td>
+                                                <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.company }}
+                                                    <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select host company</option>
+                                                            <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('host_company_id', field); setting.host.nameIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.nameIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Position
+                                                </td>
+                                                <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.position }}
+                                                    <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter position title">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.positionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Start Date</td>
+                                                <td v-if="!setting.host.startIsEdit">
+                                                    @{{ student.program_start_date }}
+                                                    <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('program_start_date', field); setting.host.startIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.startIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>End Date</td>
+                                                <td v-if="!setting.host.endIsEdit">
+                                                    @{{ student.program_end_date }}
+                                                    <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('program_start_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Stipend
+                                                </td>
+                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.stipend }}
+                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Visa Sponsor
+                                                </td>
+                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.sponsor }}
+                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select visa sponsor</option>
+                                                            <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section v-if="student.application_status == 'For Visa Interview'" id="visa-interview-details">
+                                        <label class="control-label">Visa Interview Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    Program ID Number
+                                                </td>
+                                                <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.program_id_no }}
+                                                    <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                        <button @click="updateField('program_id_no', field); setting.visa.programIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                        <span class="input-group-btn">
+                                                        <button @click="setting.visa.programIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    SEVIS ID
+                                                </td>
+                                                <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.sevis_id }}
+                                                    <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                        <button @click="updateField('sevis_id', field); setting.visa.sevisIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                        <span class="input-group-btn">
+                                                        <button @click="setting.visa.sevisIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Interview Schedule</td>
+                                                <td v-if="!setting.visa.scheduleIsEdit">
+                                                    @{{ student.visa_interview_schedule }}
+                                                    <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                        <button @click="updateField('visa_interview_schedule', field); setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                        <span class="input-group-btn">
+                                                        <button @click="setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section v-if="student.application_status == 'For Visa Interview'" id="flight-details">
+                                        <label class="control-label">Flight Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td style="width: 200px">
+                                                    Departure Date
+                                                </td>
+                                                <td v-if="!setting.flight.departureIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.date_of_departure }}
+                                                    <a @click="hideField('departure')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                        <button @click="updateField('date_of_departure', field); setting.flight.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                        <span class="input-group-btn">
+                                                        <button @click="setting.flight.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Arrival Date
+                                                </td>
+                                                <td v-if="!setting.flight.arrivalIsEdit" v-cloak class="text-bold">
+                                                    @{{ student.date_of_arrival }}
+                                                    <a @click="hideField('arrival')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                        <button @click="updateField('date_of_arrival', field); setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                        <span class="input-group-btn">
+                                                        <button @click="setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
                                 </div>
                                 <div class="tab-pane" id="tab-basic-req">
                                     <table class="table table-condensed table-striped table-bordered">
@@ -421,6 +686,19 @@
 @endsection
 
 @section('script')
+    <style scope>
+        .slide-fade-enter-active {
+            transition: all .3s linear;
+        }
+        .slide-fade-leave-active {
+            transition: all .3s linear;
+        }
+        .slide-fade-enter, .slide-fade-leave-to
+            /* .slide-fade-leave-active below version 2.1.8 */ {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+    </style>
     <script>
         let programId = '{{ $program }}';
 
@@ -446,6 +724,8 @@
         const app = new Vue({
             el: '#app',
             data: {
+                hosts: [],
+                sponsors: [],
                 students: [],
                 student: [],
                 basicRequirements: [],
@@ -455,10 +735,55 @@
                 current_page: '',
                 last_page: '',
                 filterName: '',
-                filterStatus: ''
+                filterStatus: '',
+                appStatus: '',
+                visaStatus: '',
+
+                show: {
+                    hired: false,
+                    visa: false
+                },
+
+                field: '',
+
+                host: {
+                    name: '',
+                    position: '',
+                    place: '',
+                    stipend: '',
+                    start: '',
+                    end: '',
+                    sponsor: ''
+                },
+                visa: {
+                    sevis: '',
+                    programId: '',
+                    schedule: ''
+                },
+                setting: {
+                    host: {
+                        nameIsEdit: false,
+                        positionIsEdit: false,
+                        startIsEdit: false,
+                        endIsEdit: false,
+                        stipendIsEdit: false,
+                        sponsorIsEdit: false
+                    },
+                    visa: {
+                        programIsEdit: false,
+                        sevisIsEdit: false,
+                        scheduleIsEdit: false
+                    },
+                    flight: {
+                        departureIsEdit: false,
+                        arrivalIsEdit: false
+                    }
+                },
             },
             mounted: function() {
                 this.loadStudents(programId);
+                this.loadHostCompany();
+                this.loadVisaSponsor();
             },
             watch: {
                 filterName: function() {
@@ -560,6 +885,18 @@
                             this.visaRequirements = response.data.data;
                         })
                 },
+                loadHostCompany() {
+                    axios.get(`/helper/host/view`)
+                        .then((response) => {
+                            this.hosts = response.data.data;
+                        })
+                },
+                loadVisaSponsor() {
+                    axios.get(`/helper/sponsor/view`)
+                        .then((response) => {
+                            this.sponsors = response.data.data;
+                        })
+                },
                 downloadVisaRequirement(id) {
                     axios.get(`/download/visa/requirement/${id}`)
                         .then((response) => {
@@ -569,6 +906,265 @@
                             document.body.appendChild(link);
                             link.click();
                         })
+                },
+                setApplicationStatus(status) {
+                    this.appStatus = '';
+                    switch (status) {
+                        case 'Assessed':
+                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Confirmed':
+                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Hired':
+                            this.show.hired = true;
+                            this.show.visa = false;
+                            break;
+                        case 'For Visa Interview':
+                            this.show.visa = true;
+                            this.show.hired = false;
+                            break;
+                        case 'Canceled':
+                            alert(status);
+                            break;
+                    }
+                },
+                setInterviewStatus(status) {
+                    this.visaStatus = '';
+                    switch (status) {
+                        case 'Approved':
+                            axios.post(`/coor/${this.student.user_id}/visa/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                        case 'Denied':
+                            axios.post(`/coor/${this.student.user_id}/visa/${status}`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    alert(response.data);
+                                });
+                            break;
+                    }
+                },
+                submitHostCompany() {
+                    let formData = new FormData();
+                        formData.append('name', this.host.name);
+                        formData.append('position', this.host.position);
+                        formData.append('place', this.host.place);
+                        formData.append('stipend', this.host.stipend);
+                        formData.append('start', this.host.start);
+                        formData.append('end', this.host.end);
+                        formData.append('sponsor', this.host.sponsor);
+                    axios.post(`/coor/host/submit/${this.student.user_id}`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.show.hired = false;
+                        })
+                },
+                submitForVisaInterview() {
+                    let formData = new FormData();
+                        formData.append('sevis', this.visa.sevis);
+                        formData.append('program', this.visa.programId);
+                        formData.append('schedule', this.visa.schedule);
+                    axios.post(`/coor/visa/submit/${this.student.user_id}`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.show.visa = false;
+                        })
+                },
+                updateField(field, input) {
+                    let formData = new FormData();
+                        formData.append('field', input);
+                    axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                        })
+                },
+                hideField(field) {
+                    switch (field) {
+                        case 'name' :
+                            this.setting.host.nameIsEdit = true;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'position' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = true;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'start' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = true;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'end' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = true;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'stipend' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = true;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'sponsor' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = true;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'sevis' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = true;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'program' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = true;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'schedule' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = true;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'departure' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flight.departureIsEdit = true;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'arrival' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = true;
+                            break;
+                    }
                 }
             }
         })

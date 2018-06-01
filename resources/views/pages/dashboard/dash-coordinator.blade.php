@@ -367,7 +367,6 @@
                                             this.intern.denied = response.data;
                                             break;
                                     }
-                                    break;
                                 case 'Career Training':
                                     switch (filter) {
                                         case 'New Applicant':

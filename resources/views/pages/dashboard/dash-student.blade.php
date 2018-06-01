@@ -50,12 +50,12 @@
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Application Status</b>
-                            <a class="pull-right text-green">@{{ student.application_status }}</a>
+                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
                         <li class="list-group-item">
                             <b>Visa Interview Status</b>
-                            <a v-if="student.visa_interview_status" class="pull-right text-green"><small>@{{ student.visa_interview_status }}</small></a>
-                            <a v-else class="pull-right text-red"><small>Your Coordinator Will Verify</small></a>
+                            <a v-if="student.visa_interview_status" class="pull-right text-green text-sm">@{{ student.visa_interview_status }}</a>
+                            <a v-else class="pull-right text-red">Your Coordinator Will Verify</a>
                         </li>
                     </ul>
                 </div>

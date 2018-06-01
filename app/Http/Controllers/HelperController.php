@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\HostCompany;
 use App\Http\Resources\SuperAdminResource;
 use App\Program;
 use App\School;
+use App\Sponsor;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -22,6 +24,20 @@ class HelperController extends Controller
         $programs = Program::orderBy('name', 'asc')->get();
 
         return new SuperAdminResource($programs);
+    }
+
+    public function hostHelper()
+    {
+        $hosts = HostCompany::orderBy('name', 'asc')->get();
+
+        return new SuperAdminResource($hosts);
+    }
+
+    public function sponsorHelper()
+    {
+        $sponsors = Sponsor::orderBy('name', 'asc')->get();
+
+        return new SuperAdminResource($sponsors);
     }
 
     public function applicantCount($filter, $program = null)

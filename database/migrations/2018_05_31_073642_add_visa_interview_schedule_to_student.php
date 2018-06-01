@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddVisaInterviewScheduleToStudent extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('students', function (Blueprint $table) {
+            $table->date('visa_interview_schedule')->after('visa_interview_status');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('students', function (Blueprint $table) {
+            $table->dropColumn('visa_interview_schedule');
+        });
+    }
+}

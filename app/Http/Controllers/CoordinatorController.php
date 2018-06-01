@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Coordinator;
 use App\Http\Resources\SuperAdminResource;
+use App\Program;
 use App\ProgramPayment;
 use App\ProgramRequirement;
 use App\Role;
@@ -67,11 +68,110 @@ class CoordinatorController extends Controller
 
         return new SuperAdminResource($visa);
     }
-    
+
     public function showCoordinator()
     {
         $coordinator = User::whereRoleIs('coordinator')->paginate(10);
 
         return SuperAdminResource::collection($coordinator);
+    }
+
+    public function SetApplicationStatus($id, $status)
+    {
+        $programId = Student::where('user_id', $id)->first()->program_id;
+        switch ($status) {
+            case 'Assessed' :
+                Student::where('user_id', $id)->update([
+                    'application_id'        =>  '',
+                    'application_status'    =>  $status
+                ]);
+
+                return 'Student Assessed!';
+                break;
+            case 'Confirmed' :
+                $count = \App\Student::where('program_id', $programId)
+                                     ->where('application_status', 'Confirmed')
+                                     ->where('program_id', 9)
+                                     ->count() + 1;
+                $cCount = \App\Student::where('program_id', $programId)
+                                     ->where('application_status', 'Canceled')
+                                     ->whereNotNull('application_id')
+                                     ->where('program_id', 9)
+                                     ->count();
+                $total = $count + $cCount;
+
+                Student::where('user_id', $id)->update([
+                    'application_id'        =>  Program::find($programId)->description.'-'.date('Y').'0'.$total,
+                    'application_status'    =>  $status
+                ]);
+                return 'Student Confirmed';
+                break;
+
+            case 'Hired' :
+                Student::where('user_id', $id)->update([
+                    'application_status'    =>  $status
+                ]);
+                return 'Hired';
+                break;
+
+            case 'For Visa Interview' :
+                Student::where('user_id', $id)->update([
+                    'application_status'    =>  $status
+                ]);
+                return 'For Visa Interview';
+                break;
+
+            case 'Canceled' :
+                Student::where('user_id', $id)->update([
+                    'application_status'    =>  $status
+                ]);
+                return 'Canceled';
+                break;
+        }
+    }
+
+    public function SetVisaInterviewStatus($id, $status)
+    {
+        Student::where('user_id', $id)->update([
+            'visa_interview_status' =>  $status
+        ]);
+
+        return 'Status '.$status;
+    }
+    public function SubmitHostCompany(Request $request, $id)
+    {
+        Student::where('user_id', $id)->update([
+            'application_status'    =>  'Hired',
+            'host_company_id'       =>  $request->input('name'),
+            'position'              =>  $request->input('position'),
+            'location'              =>  $request->input('place'),
+            'stipend'               =>  $request->input('stipend'),
+            'program_start_date'    =>  $request->input('start'),
+            'program_end_date'      =>  $request->input('end'),
+            'visa_sponsor_id'       =>  $request->input('sponsor')
+        ]);
+
+        return 'Submitted!';
+    }
+
+    public function SubmitForVisaInterview(Request $request, $id)
+    {
+        Student::where('user_id', $id)->update([
+            'application_status'        =>  'For Visa Interview',
+            'sevis_id'                  =>  $request->input('sevis'),
+            'program_id_no'             =>  $request->input('program'),
+            'visa_interview_schedule'   =>  $request->input('schedule')
+        ]);
+
+        return 'Submitted!';
+    }
+
+    public function UpdateField(Request $request, $field, $id)
+    {
+        Student::where('user_id', $id)->update([
+            $field  =>  $request->input('field')
+        ]);
+
+        return $field . ' Updated!';
     }
 }

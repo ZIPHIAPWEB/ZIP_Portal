@@ -57,6 +57,12 @@ Route::prefix('coor')->group(function() {
     Route::get('/requirement/basic/{programId}/{userId}', 'CoordinatorController@loadBasicRequirements')->name('coor.basic.requirements');
     Route::get('/requirement/payment/{programId}/{userId}', 'CoordinatorController@loadPaymentRequirements')->name('coor.basic.requirements');
     Route::get('/requirement/visa/{sponsorId}/{userId}', 'CoordinatorController@loadVisaRequirements')->name('coor.visa.requirements');
+
+    Route::post('{id}/application/{status}', 'CoordinatorController@SetApplicationStatus')->name('coor.application.status');
+    Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
+    Route::post('/host/submit/{id}', 'CoordinatorController@SubmitHostCompany')->name('coor.host.submit');
+    Route::post('/visa/submit/{id}', 'CoordinatorController@SubmitForVisaInterview')->name('coor.visa.submit');
+    Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
 });
 
 Route::prefix('stud')->group(function() {
@@ -154,6 +160,8 @@ Route::prefix('school')->group(function() {
 Route::prefix('helper')->group(function() {
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
+    Route::get('/host/view', 'HelperController@hostHelper')->name('helper.host');
+    Route::get('/sponsor/view', 'HelperController@sponsorHelper')->name('helper.sponsor');
 
     Route::get('/applicant/{filter}/{program?}', 'HelperController@applicantCount')->name('helper.applicant');
     Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');
@@ -177,12 +185,13 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $students = \App\Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-        ->leftjoin('schools', 'students.school', '=', 'schools.id')
-        ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
-        ->where('program_id' , 'like' , '%')
-        ->where('application_status', 'like', '%')
-        ->paginate(20);
-
-    return \App\Http\Resources\SuperAdminResource::collection($students);
+    $count = \App\Student::where('application_status', 'Confirmed')
+                         ->where('program_id', 9)
+                         ->count();
+    $cCount = \App\Student::where('application_status', 'Canceled')
+                         ->whereNotNull('application_id')
+                         ->where('program_id', 9)
+                         ->count();
+    $total = $count + $cCount;
+    return $count;
 });
