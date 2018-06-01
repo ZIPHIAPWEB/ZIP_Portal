@@ -138,7 +138,6 @@ class CoordinatorController extends Controller
 
         return 'Status '.$status;
     }
-
     public function SubmitHostCompany(Request $request, $id)
     {
         Student::where('user_id', $id)->update([
