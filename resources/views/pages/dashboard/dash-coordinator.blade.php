@@ -80,7 +80,7 @@
                                 <label for="">Assessed:</label> @{{ spring.assessed }} <br>
                                 <label for="">Confirmed:</label> @{{ spring.confirmed }} <br>
                                 <label for="">Hired:</label> @{{ spring.hired }} <br>
-                                <label for="">Denied:</label> @{{ spring.denied }} <br>
+                                <label for="">Denied:</label> @{{ spring.canceled }} <br>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -110,7 +110,7 @@
                                 <label for="">Assessed:</label> @{{ summer.assessed }} <br>
                                 <label for="">Confirmed:</label> @{{ summer.confirmed }} <br>
                                 <label for="">Hired:</label> @{{ summer.hired }} <br>
-                                <label for="">Denied:</label> @{{ summer.denied }} <br>
+                                <label for="">Denied:</label> @{{ summer.canceled }} <br>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -140,7 +140,7 @@
                                 <label for="">Assessed:</label> @{{ intern.assessed }} <br>
                                 <label for="">Confirmed:</label> @{{ intern.confirmed }} <br>
                                 <label for="">Hired:</label> @{{ intern.hired }} <br>
-                                <label for="">Denied:</label> @{{ intern.denied }} <br>
+                                <label for="">Denied:</label> @{{ intern.canceled }} <br>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -170,7 +170,7 @@
                                 <label for="">Assessed:</label> @{{ career.assessed }} <br>
                                 <label for="">Confirmed:</label> @{{ career.confirmed }} <br>
                                 <label for="">Hired:</label> @{{ career.hired }} <br>
-                                <label for="">Denied:</label> @{{ career.denied }} <br>
+                                <label for="">Denied:</label> @{{ career.canceled }} <br>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -218,7 +218,7 @@
                 assessed: 0,
                 confirmed: 0,
                 hired: 0,
-                denied: 0,
+                canceled: 0,
 
                 visaApproved: 0,
                 visaDenied: 0,
@@ -234,7 +234,7 @@
                     assessed: 0,
                     confirmed: 0,
                     hired: 0,
-                    denied: 0,
+                    canceled: 0,
                     visaApproved: 0,
                     visaDenied: 0,
                     visaInterview: 0
@@ -244,7 +244,7 @@
                     assessed: 0,
                     confirmed: 0,
                     hired: 0,
-                    denied: 0,
+                    canceled: 0,
                     visaApproved: 0,
                     visaDenied: 0,
                     visaInterview: 0
@@ -254,7 +254,7 @@
                     assessed: 0,
                     confirmed: 0,
                     hired: 0,
-                    denied: 0,
+                    canceled: 0,
                     visaApproved: 0,
                     visaDenied: 0,
                     visaInterview: 0
@@ -264,7 +264,7 @@
                     assessed: 0,
                     confirmed: 0,
                     hired: 0,
-                    denied: 0,
+                    canceled: 0,
                     visaApproved: 0,
                     visaDenied: 0,
                     visaInterview: 0
@@ -282,7 +282,7 @@
 
                     this.visaCount('Approved', program[i]);
                     this.visaCount('Denied', program[i]);
-                    this.visaCount('For Visa Interview', program[i]);
+                    this.applicantCount('For Visa Interview', program[i]);
                 }
 
                 this.programCount(5);
@@ -300,7 +300,7 @@
 
                     this.visaCount('Approved', program);
                     this.visaCount('Denied', program);
-                    this.visaCount('For Visa Interview', program);
+                    this.applicantCount('For Visa Interview', program);
 
                     this.programCount(5);
                     this.programCount(9);
@@ -325,8 +325,11 @@
                                         case 'Hired':
                                             this.summer.hired = response.data;
                                             break;
-                                        case 'Denied':
-                                            this.summer.denied = response.data;
+                                        case 'Canceled':
+                                            this.summer.canceled = response.data;
+                                            break;
+                                        case 'For Visa Interview':
+                                            this.summer.visaInterview = response.data;
                                             break;
                                     }
                                     break;
@@ -344,8 +347,11 @@
                                         case 'Hired':
                                             this.spring.hired = response.data;
                                             break;
-                                        case 'Denied':
-                                            this.spring.denied = response.data;
+                                        case 'Canceled':
+                                            this.spring.canceled = response.data;
+                                            break;
+                                        case 'For Visa Interview':
+                                            this.spring.visaInterview = response.data;
                                             break;
                                     }
                                     break;
@@ -363,8 +369,11 @@
                                         case 'Hired':
                                             this.intern.hired = response.data;
                                             break;
-                                        case 'Denied':
-                                            this.intern.denied = response.data;
+                                        case 'Canceled':
+                                            this.intern.canceled = response.data;
+                                            break;
+                                        case 'For Visa Interview':
+                                            this.intern.visaInterview = response.data;
                                             break;
                                     }
                                 case 'Career Training':
@@ -381,8 +390,11 @@
                                         case 'Hired':
                                             this.career.hired = response.data;
                                             break;
-                                        case 'Denied':
-                                            this.career.denied = response.data;
+                                        case 'Canceled':
+                                            this.career.canceled = response.data;
+                                            break;
+                                        case 'For Visa Interview':
+                                            this.career.visaInterview = response.data;
                                             break;
                                     }
                                     break;
@@ -400,8 +412,11 @@
                                         case 'Hired':
                                             this.hired = response.data;
                                             break;
-                                        case 'Denied':
-                                            this.denied = response.data;
+                                        case 'Canceled':
+                                            this.canceled = response.data;
+                                            break;
+                                        case 'For Visa Interview':
+                                            this.visaInterview = response.data;
                                             break;
                                     }
                                     break;
@@ -420,8 +435,35 @@
                                         case 'Denied':
                                             this.summer.visaDenied = response.data;
                                             break;
-                                        case 'For Visa Interview':
-                                            this.summer.visaInterview = response.data;
+                                    }
+                                    break;
+                                case 'Summer Work and Travel - Spring':
+                                    switch (filter) {
+                                        case 'Approved':
+                                            this.spring.visaApproved = response.data;
+                                            break;
+                                        case 'Denied':
+                                            this.spring.visaDenied = response.data;
+                                            break;
+                                    }
+                                    break;
+                                case 'Career Training':
+                                    switch (filter) {
+                                        case 'Approved':
+                                            this.career.visaApproved = response.data;
+                                            break;
+                                        case 'Denied':
+                                            this.career.visaDenied = response.data;
+                                            break;
+                                    }
+                                    break;
+                                case 'Internship':
+                                    switch (filter) {
+                                        case 'Approved':
+                                            this.intern.visaApproved = response.data;
+                                            break;
+                                        case 'Denied':
+                                            this.intern.visaDenied = response.data;
                                             break;
                                     }
                                     break;
@@ -432,9 +474,6 @@
                                             break;
                                         case 'Denied':
                                             this.visaDenied = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.visaInterview = response.data;
                                             break;
                                     }
                                     break;

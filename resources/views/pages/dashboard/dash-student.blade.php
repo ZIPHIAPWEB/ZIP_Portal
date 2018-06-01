@@ -45,7 +45,7 @@
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/350x350" alt="User profile picture"/>
-                    <h3 class="profile-username text-center">@{{ student.first_name }} &nbsp; @{{ student.middle_name[0] }} &nbsp; @{{ student.last_name }}</h3>
+                    <h3 class="profile-username text-center">@{{ student.first_name }} &nbsp; @{{ student.middle_name.charAt(0) }} &nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.position }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -101,7 +101,7 @@
                         <tbody>
                             <tr>
                                 <td style="width: 35%;">Host Company</td>
-                                <td>@{{ student.host_company }}</td>
+                                <td>@{{ student.company }}</td>
                             </tr>
                             <tr>
                                 <td>Position</td>
@@ -114,6 +114,10 @@
                             <tr>
                                 <td>Stipend</td>
                                 <td>@{{ student.stipend }}</td>
+                            </tr>
+                            <tr>
+                                <td>Visa Sponsor</td>
+                                <td>@{{ student.sponsor }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -225,10 +229,8 @@
                 visaRequirements: [],
                 user_id: '{{ Auth::user()->id }}',
             },
-            created: function() {
-                this.loadStudentDetails();
-            },
             mounted: function() {
+                this.loadStudentDetails();
                 setTimeout(() => {
                     this.loadBasicRequirements(this.student.program_id);
                     this.loadPaymentRequirements(this.student.program_id);
