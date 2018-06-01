@@ -60,6 +60,10 @@ Route::prefix('coor')->group(function() {
 
     Route::post('{id}/application/{status}', 'CoordinatorController@SetApplicationStatus')->name('coor.application.status');
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
+
+    Route::post('/host/submit/{id}', 'CoordinatorController@SubmitHostCompany')->name('coor.host.submit');
+    Route::post('/visa/submit/{id}', 'CoordinatorController@SubmitForVisaInterview')->name('coor.visa.submit');
+    Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
 });
 
 Route::prefix('stud')->group(function() {
@@ -157,6 +161,8 @@ Route::prefix('school')->group(function() {
 Route::prefix('helper')->group(function() {
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
+    Route::get('/host/view', 'HelperController@hostHelper')->name('helper.host');
+    Route::get('/sponsor/view', 'HelperController@sponsorHelper')->name('helper.sponsor');
 
     Route::get('/applicant/{filter}/{program?}', 'HelperController@applicantCount')->name('helper.applicant');
     Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');

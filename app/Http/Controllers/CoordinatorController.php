@@ -68,7 +68,7 @@ class CoordinatorController extends Controller
 
         return new SuperAdminResource($visa);
     }
-    
+
     public function showCoordinator()
     {
         $coordinator = User::whereRoleIs('coordinator')->paginate(10);
@@ -127,13 +127,6 @@ class CoordinatorController extends Controller
                 ]);
                 return 'Canceled';
                 break;
-
-            case 'Denied' :
-                Student::where('user_id', $id)->update([
-                    'application_status'    =>  $status
-                ]);
-                return 'Denied';
-                break;
         }
     }
 
@@ -144,5 +137,42 @@ class CoordinatorController extends Controller
         ]);
 
         return 'Status '.$status;
+    }
+
+    public function SubmitHostCompany(Request $request, $id)
+    {
+        Student::where('user_id', $id)->update([
+            'application_status'    =>  'Hired',
+            'host_company_id'       =>  $request->input('name'),
+            'position'              =>  $request->input('position'),
+            'location'              =>  $request->input('place'),
+            'stipend'               =>  $request->input('stipend'),
+            'program_start_date'    =>  $request->input('start'),
+            'program_end_date'      =>  $request->input('end'),
+            'visa_sponsor_id'       =>  $request->input('sponsor')
+        ]);
+
+        return 'Submitted!';
+    }
+
+    public function SubmitForVisaInterview(Request $request, $id)
+    {
+        Student::where('user_id', $id)->update([
+            'application_status'        =>  'For Visa Interview',
+            'sevis_id'                  =>  $request->input('sevis'),
+            'program_id_no'             =>  $request->input('program'),
+            'visa_interview_schedule'   =>  $request->input('schedule')
+        ]);
+
+        return 'Submitted!';
+    }
+
+    public function UpdateField(Request $request, $field, $id)
+    {
+        Student::where('user_id', $id)->update([
+            $field  =>  $request->input('field')
+        ]);
+
+        return $field . ' Updated!';
     }
 }
