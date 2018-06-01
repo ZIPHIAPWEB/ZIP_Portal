@@ -100,11 +100,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> afdf97f6cdc97c4b716d930ff36b5973897e9cac
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -138,7 +133,6 @@
                                                 </td>
                                                 <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
                                             </tr>
-<<<<<<< HEAD
                                             </tbody>
                                         </table>
                                     </section>
