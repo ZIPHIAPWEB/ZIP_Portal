@@ -20,12 +20,13 @@ class FilterController extends Controller
             return SuperAdminResource::collection($students);
     }
 
-    public function filterStatus($programId, $status = null)
+    public function filterStatus($programId, $from, $to, $status = null)
     {
         $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
             ->leftjoin('schools', 'students.school', '=', 'schools.id')
             ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
             ->where('program_id', $programId)
+            ->whereBetween('students.created_at', [$from, $to])
             ->where('application_status', 'like', '%'.$status.'%')
             ->paginate(20);
 
