@@ -32,10 +32,18 @@
                     <h3 class="box-title text-center">{{ \App\Program::find($program)->name }} Students</h3>
                 </div>
                 <div class="box-body">
-                    <form action="" class="form-inline pull-left m-b-10">
-                        <div class="form-group-sm pull-left">
+                    <form @submit.prevent="filterStatus()" class="form-inline pull-left m-b-10">
+                        <div class="form-group">
+                            <label for="" class="control-label">From Date:</label>
+                            <input v-model="filter.from" type="date" class="form-control input-sm">
+                        </div>&nbsp;
+                        <div class="form-group">
+                            <label for="" class="control-label">To Date:</label>
+                            <input v-model="filter.to" type="date" class="form-control input-sm">
+                        </div>&nbsp;
+                        <div class="form-group">
                             <label for="" class="control-label">Filter By</label>
-                            <select v-model="filterStatus" class="form-control">
+                            <select v-model="filter.status" class="form-control input-sm">
                                 <option value="" selected>All</option>
                                 <option value="New Applicant">New Applicant</option>
                                 <option value="Assessed">Assessed</option>
@@ -44,22 +52,33 @@
                                 <option value="For Visa Interview">For Visa Interview</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                            <download-excel
+                                    class="btn btn-success btn-flat btn-sm"
+                                    :data="testData"
+                                    :fields="testField"
+                                    name="{{ date('Ymd') }}.xls"
+                                    title="ZIP Generated Report">
+                                <span class="glyphicon glyphicon-export"></span> Export
+                            </download-excel>
+                        </div>
                     </form>
                     <div class="form-group-sm pull-right">
                         <input v-model="filterName" type="text" class="form-control" placeholder="Search By Name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                            <td>Date of Application</td>
-                            <td>Status</td>
-                            <td>Application ID</td>
-                            <td>Full Name</td>
-                            <td>Program</td>
-                            <td>Course</td>
-                            <td>Contact</td>
-                            <td>School</td>
-                            <td>Recent Activity</td>
-                            <td>Action</td>
+                            <th>Date of Application</th>
+                            <th>Status</th>
+                            <th>Application ID</th>
+                            <th>Full Name</th>
+                            <th>Program</th>
+                            <th>Course</th>
+                            <th>Contact</th>
+                            <th>School</th>
+                            <th>Recent Activity</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             <tr v-for="student in students">
@@ -235,23 +254,21 @@
                                                 </div>
                                             </div>
                                             <div class="box-body">
-                                                <form action="">
-                                                    <div class="form-group col-xs-6">
-                                                        <label class="label-control">SEVIS ID</label>
-                                                        <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
-                                                    </div>
-                                                    <div class="form-group col-xs-6">
-                                                        <label class="control-label">Program ID</label>
-                                                        <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
-                                                    </div>
-                                                    <div class="form-group col-xs-12">
-                                                        <label class="control-label">Interview Schedule</label>
-                                                        <input v-model="visa.schedule" type="date" class="form-control input-sm">
-                                                    </div>
-                                                    <div class="form-group-sm col-xs-12">
-                                                        <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
-                                                    </div>
-                                                </form>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="label-control">SEVIS ID</label>
+                                                    <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
+                                                </div>
+                                                <div class="form-group col-xs-6">
+                                                    <label class="control-label">Program ID</label>
+                                                    <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
+                                                </div>
+                                                <div class="form-group col-xs-12">
+                                                    <label class="control-label">Interview Schedule</label>
+                                                    <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                </div>
+                                                <div class="form-group-sm col-xs-12">
+                                                    <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -735,10 +752,33 @@
                 current_page: '',
                 last_page: '',
                 filterName: '',
-                filterStatus: '',
+                filter: {
+                    from: '',
+                    to: '',
+                    status: ''
+                },
                 appStatus: '',
                 visaStatus: '',
-
+                testData: [],
+                testField: {
+                    "Date of Application"            : "created_at",
+                    "Application ID"                 : "application_id",
+                    "Fullname"                       : "first_name",
+                    "Program"                        : "program",
+                    "School"                         : "school",
+                    "Course"                         : "course",
+                    "Contact"                        : "home_number",
+                    "E-mail Address"                 : "fb_email",
+                    "Status"                         : "application_status",
+                    "Host Company Assignment"        : "company",
+                    "Place of Assignment"            : "location",
+                    "Stipend"                        : "stipend",
+                    "VISA Appoinment"                : "visa_interview_schedule",
+                    "Departure Date"                 : "date_of_departure",
+                    "Arrival Date"                   : "date_of_arrival",
+                    "Program Start Date"             : "program_start_date",
+                    "Program End Date"               : "program_end_date"
+                },
                 show: {
                     hired: false,
                     visa: false
@@ -791,6 +831,7 @@
                         axios.get(`/filter/student/${programId}/${this.filterName}`)
                             .then((response) => {
                                 this.students = response.data.data;
+                                this.testData = response.data.data;
                                 this.links = response.data.links;
                                 this.current_page = response.data.meta.current_page;
                                 this.last_page = response.data.meta.last_page;
@@ -798,19 +839,24 @@
                     } else {
                         this.loadStudents(programId)
                     }
-                },
-                filterStatus: function() {
-                    axios.get(`/filter/status/${programId}/${this.filterStatus}`)
+                }
+            },
+            methods: {
+                filterStatus () {
+                    axios.get(`/filter/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
                         .then((response) => {
                             this.students = response.data.data;
                             this.links = response.data.links;
                             this.current_page = response.data.meta.current_page;
                             this.last_page = response.data.meta.last_page;
                         })
-                }
-            },
-            methods: {
-                next() {
+
+                    axios.get(`/helper/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
+                        .then((response) => {
+                            this.testData = response.data.data;
+                        })
+                },
+                next () {
                     axios.get(this.links.next)
                         .then((response) => {
                             this.students = response.data.data;
@@ -819,7 +865,7 @@
                             this.last_page = response.data.meta.last_page;
                         })
                 },
-                previous() {
+                previous () {
                     axios.get(this.links.prev)
                         .then((response) => {
                             this.students = response.data.data;
@@ -828,16 +874,17 @@
                             this.last_page = response.data.meta.last_page;
                         })
                 },
-                loadStudents(programId) {
+                loadStudents (programId) {
                     axios.get(`/coor/program/${programId}`)
                         .then((response) => {
                             this.students = response.data.data;
+                            this.testData = response.data.data;
                             this.links = response.data.links;
                             this.current_page = response.data.meta.current_page;
                             this.last_page = response.data.meta.last_page;
                         })
                 },
-                viewStudent(studentId) {
+                viewStudent (studentId) {
                     axios.get(`/stud/view/${studentId}`)
                         .then((response) => {
                             this.student = response.data.data;
@@ -847,13 +894,13 @@
                             $('#student-modal').modal('show');
                         })
                 },
-                loadBasicRequirements(programId, userId) {
+                loadBasicRequirements (programId, userId) {
                     axios.get(`/coor/requirement/basic/${programId}/${userId}`)
                         .then((response) => {
                             this.basicRequirements = response.data.data;
                         })
                 },
-                downloadBasicRequirement(id) {
+                downloadBasicRequirement (id) {
                     axios.get(`/download/basic/requirement/${id}`)
                         .then((response) => {
                             const link = document.createElement('a');
@@ -863,13 +910,13 @@
                             link.click();
                         })
                 },
-                loadPaymentRequirements(programId, userId) {
+                loadPaymentRequirements (programId, userId) {
                     axios.get(`/coor/requirement/payment/${programId}/${userId}`)
                         .then((response) => {
                             this.paymentRequirements = response.data.data;
                         })
                 },
-                downloadPaymentRequirement(id) {
+                downloadPaymentRequirement (id) {
                     axios.get(`/download/payment/requirement/${id}`)
                         .then((response) => {
                             const link = document.createElement('a');

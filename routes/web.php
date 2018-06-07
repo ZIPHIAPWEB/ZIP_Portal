@@ -166,6 +166,8 @@ Route::prefix('helper')->group(function() {
     Route::get('/applicant/{filter}/{program?}', 'HelperController@applicantCount')->name('helper.applicant');
     Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');
     Route::get('/program/{filter}', 'HelperController@programCount')->name('helper.program');
+
+    Route::get('/status/{programId}/{from}/{to}/{status?}', 'HelperController@exportToExcel')->name('export.data');
 });
 
 Route::prefix('download')->group(function() {
@@ -179,7 +181,7 @@ Route::prefix('download')->group(function() {
 
 Route::prefix('filter')->group(function() {
     Route::get('/student/{programId}/{name?}', 'FilterController@filterStudentBy')->name('filter.student');
-    Route::get('/status/{programId}/{status?}', 'FilterController@filterStatus')->name('filter.status');
+    Route::get('/status/{programId}/{from}/{to}/{status?}', 'FilterController@filterStatus')->name('filter.status');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
