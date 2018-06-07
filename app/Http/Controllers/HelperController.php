@@ -44,7 +44,7 @@ class HelperController extends Controller
     {
         if ($program) {
             $count = Student::where('application_status', $filter)
-                ->where('program_id', 'like', '%'.Program::where('display_name', $program)->first()->id.'%')
+                ->where('program_id', 'like', '%' . Program::where('display_name', $program)->first()->id . '%')
                 ->count();
         } else {
             $count = Student::where('application_status', $filter)
@@ -58,7 +58,7 @@ class HelperController extends Controller
     {
         if ($program) {
             $count = Student::where('visa_interview_status', $filter)
-                ->where('program_id', 'like', '%'.Program::where('display_name', $program)->first()->id)
+                ->where('program_id', 'like', '%' . Program::where('display_name', $program)->first()->id)
                 ->count();
         } else {
             $count = Student::where('visa_interview_status', $filter)
@@ -73,5 +73,18 @@ class HelperController extends Controller
         $count = Student::where('program_id', $filter)->count();
 
         return response()->json($count);
+    }
+
+    public function exportToExcel($programId, $from, $to, $status = null)
+    {
+        $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
+            ->leftjoin('schools', 'students.school', '=', 'schools.id')
+            ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
+            ->where('program_id', $programId)
+            ->whereBetween('students.created_at', [$from, $to])
+            ->where('application_status', 'like', '%'.$status.'%')
+            ->get();
+
+        return SuperAdminResource::collection($students);
     }
 }
