@@ -26,159 +26,83 @@
 
 @section('content')
     <div id="app" v-cloak>
-        <div class="col-xs-12">
+        <div class="col-xs 12">
             <div class="container">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Summary Details</h3>
-                        <a @click="refresh()" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
+                        <h3 class="box-title">Statistic Summary of {{ date('Y') }}</h3>
+                        <div class="pull-right">
+                            <select v-model="summaryFilter" class="form-control input-sm">
+                                <option value="All">All</option>
+                                <option value="SWT - Spring">Summer Work and Travel - Spring</option>
+                                <option value="SWT - Summer">Summer Work and Travel - Summer</option>
+                                <option value="Career Training">Career Training</option>
+                                <option value="Internship">Internship</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="box-body">
-                        <div class="col-xs-4">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ confirmed }} <br>
-                                <label for="">Hired:</label> @{{ hired }} <br>
-                                <label for="">Denied:</label> @{{ denied }} <br>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">New Applicant</span>
+                                    <span class="progress-number">@{{ summary.newApplicant }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" :style="{ width: summary.newApplicant / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-group">
+                                    <span class="progress-text">Confirmed</span>
+                                    <span class="progress-number">@{{ summary.confirmed }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" :style="{ width: summary.confirmed / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Assessed</span>
+                                    <span class="progress-number">@{{ summary.assessed }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-aqua" :style="{ width: summary.assessed / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-group">
+                                    <span class="progress-text">Hired</span>
+                                    <span class="progress-number">@{{ summary.hired }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-warning" :style="{ width: summary.hired / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xs-4">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ visaInterview }} <br>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">For Visa Interview</span>
+                                    <span class="progress-number">@{{ summary.forVisaInterview }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-aqua progress-bar-striped" :style="{ width: summary.forVisaInterview / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <label for="" class="control-label">Program</label>
-                            <div class="col-xs-12">
-                                <label for="">Summer Work and Travel - Spring:</label> @{{ swtSpring }}<br>
-                                <label for="">Summer Work and Travel - Summer:</label> @{{ swtSummer }} <br>
-                                <label for="">Internship:</label> @{{ internship }} <br>
-                                <label for="">Career Training:</label> @{{ careerTraining }} <br>
+                            <div class="col-xs-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">Visa Approved</span>
+                                    <span class="progress-number">@{{ summary.visaApproved }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-yellow progress-bar-striped" :style="{ width: summary.visaApproved / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="container">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Summer Work and Travel - Spring Details</h3>
-                        <a @click="refresh('Summer Work and Travel - Spring')" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-xs-6">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ spring.newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ spring.assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ spring.confirmed }} <br>
-                                <label for="">Hired:</label> @{{ spring.hired }} <br>
-                                <label for="">Denied:</label> @{{ spring.canceled }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ spring.visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ spring.visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ spring.visaInterview }} <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="container">
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Summer Work and Travel - Summer Details</h3>
-                        <a @click="refresh('Summer Work and Travel - Summer')" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-xs-6">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ summer.newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ summer.assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ summer.confirmed }} <br>
-                                <label for="">Hired:</label> @{{ summer.hired }} <br>
-                                <label for="">Denied:</label> @{{ summer.canceled }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ summer.visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ summer.visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ summer.visaInterview }} <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="container">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Internship Details</h3>
-                        <a @click="refresh('Internship')" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-xs-6">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ intern.newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ intern.assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ intern.confirmed }} <br>
-                                <label for="">Hired:</label> @{{ intern.hired }} <br>
-                                <label for="">Denied:</label> @{{ intern.canceled }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ intern.visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ intern.visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ intern.visaInterview }} <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="container">
-                <div class="box box-danger">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Career Training Details</h3>
-                        <a @click="refresh('Career Training')" href="#" class="pull-right"><span class="glyphicon glyphicon-refresh"></span></a>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-xs-6">
-                            <label class="control-label">Applicant</label>
-                            <div class="col-xs-12">
-                                <label for="">New Applicant:</label> @{{ career.newApplicant }} <br>
-                                <label for="">Assessed:</label> @{{ career.assessed }} <br>
-                                <label for="">Confirmed:</label> @{{ career.confirmed }} <br>
-                                <label for="">Hired:</label> @{{ career.hired }} <br>
-                                <label for="">Denied:</label> @{{ career.canceled }} <br>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <label for="" class="control-label">Visa</label>
-                            <div class="col-xs-12">
-                                <label for="">Approved:</label> @{{ career.visaApproved }} <br>
-                                <label for="">Denied:</label> @{{ career.visaDenied }} <br>
-                                <label for="">For Visa Interview:</label> @{{ career.visaInterview }} <br>
+                            <div class="col-xs-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">Visa Denied</span>
+                                    <span class="progress-number">@{{ summary.visaDenied }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width: summary.visaDenied / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,287 +138,64 @@
         const app = new Vue({
             el: '#app',
             data: {
-                newApplicant: 0,
-                assessed: 0,
-                confirmed: 0,
-                hired: 0,
-                canceled: 0,
-
-                visaApproved: 0,
-                visaDenied: 0,
-                visaInterview: 0,
-
-                swtSpring: 0,
-                swtSummer: 0,
-                internship: 0,
-                careerTraining: 0,
-
-                summer: {
+                totalStudents: 0,
+                summary: {
                     newApplicant: 0,
                     assessed: 0,
                     confirmed: 0,
                     hired: 0,
-                    canceled: 0,
+                    forVisaInterview: 0,
                     visaApproved: 0,
-                    visaDenied: 0,
-                    visaInterview: 0
+                    visaDenied: 0
                 },
-                spring: {
-                    newApplicant: 0,
-                    assessed: 0,
-                    confirmed: 0,
-                    hired: 0,
-                    canceled: 0,
-                    visaApproved: 0,
-                    visaDenied: 0,
-                    visaInterview: 0
-                },
-                career: {
-                    newApplicant: 0,
-                    assessed: 0,
-                    confirmed: 0,
-                    hired: 0,
-                    canceled: 0,
-                    visaApproved: 0,
-                    visaDenied: 0,
-                    visaInterview: 0
-                },
-                intern: {
-                    newApplicant: 0,
-                    assessed: 0,
-                    confirmed: 0,
-                    hired: 0,
-                    canceled: 0,
-                    visaApproved: 0,
-                    visaDenied: 0,
-                    visaInterview: 0
+                summaryFilter: ''
+            },
+            watch: {
+                summaryFilter: function (value) {
+                    this.TotalApplicants(value);
+                    this.CountApplicants('New Applicant', value);
+                    this.CountApplicants('Assessed', value);
+                    this.CountApplicants('Confirmed', value);
+                    this.CountApplicants('Hired', value);
+                    this.CountApplicants('For Visa Interview', value);
+                    this.CountApplicants('Approved', value);
+                    this.CountApplicants('Denied', value);
                 }
             },
-            mounted: function() {
-                let program = ['', 'Summer Work and Travel - Summer', 'Summer Work and Travel - Spring', 'Internship', 'Career Training'];
-                console.log(program[0]);
-                for (let i = 0; i < program.length; i++) {
-                    this.applicantCount('New Applicant', program[i]);
-                    this.applicantCount('Assessed', program[i]);
-                    this.applicantCount('Confirmed', program[i]);
-                    this.applicantCount('Hired', program[i]);
-                    this.applicantCount('Denied', program[i]);
-
-                    this.visaCount('Approved', program[i]);
-                    this.visaCount('Denied', program[i]);
-                    this.applicantCount('For Visa Interview', program[i]);
-                }
-
-                this.programCount(5);
-                this.programCount(9);
-                this.programCount(7);
-                this.programCount(8);
+            mounted () {
+                this.summaryFilter = 'All';
             },
             methods: {
-                refresh(program) {
-                    this.applicantCount('New Applicant', program);
-                    this.applicantCount('Assessed', program);
-                    this.applicantCount('Confirmed', program);
-                    this.applicantCount('Hired', program);
-                    this.applicantCount('Denied', program);
-
-                    this.visaCount('Approved', program);
-                    this.visaCount('Denied', program);
-                    this.applicantCount('For Visa Interview', program);
-
-                    this.programCount(5);
-                    this.programCount(9);
-                    this.programCount(7);
-                    this.programCount(8);
-                },
-                applicantCount(filter, program) {
-                    axios.get(`/helper/applicant/${filter}/${program}`)
+                TotalApplicants (program) {
+                    axios.get(`/helper/applicant/${program}`)
                         .then((response) => {
-                            switch (program) {
-                                case 'Summer Work and Travel - Summer':
-                                    switch (filter) {
-                                        case 'New Applicant':
-                                            this.summer.newApplicant = response.data;
-                                            break;
-                                        case 'Assessed':
-                                            this.summer.assessed = response.data;
-                                            break;
-                                        case 'Confirmed':
-                                            this.summer.confirmed = response.data;
-                                            break;
-                                        case 'Hired':
-                                            this.summer.hired = response.data;
-                                            break;
-                                        case 'Canceled':
-                                            this.summer.canceled = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.summer.visaInterview = response.data;
-                                            break;
-                                    }
-                                    break;
-                                case 'Summer Work and Travel - Spring':
-                                    switch (filter) {
-                                        case 'New Applicant':
-                                            this.spring.newApplicant = response.data;
-                                            break;
-                                        case 'Assessed':
-                                            this.spring.assessed = response.data;
-                                            break;
-                                        case 'Confirmed':
-                                            this.spring.confirmed = response.data;
-                                            break;
-                                        case 'Hired':
-                                            this.spring.hired = response.data;
-                                            break;
-                                        case 'Canceled':
-                                            this.spring.canceled = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.spring.visaInterview = response.data;
-                                            break;
-                                    }
-                                    break;
-                                case 'Internship':
-                                    switch (filter) {
-                                        case 'New Applicant':
-                                            this.intern.newApplicant = response.data;
-                                            break;
-                                        case 'Assessed':
-                                            this.intern.assessed = response.data;
-                                            break;
-                                        case 'Confirmed':
-                                            this.intern.confirmed = response.data;
-                                            break;
-                                        case 'Hired':
-                                            this.intern.hired = response.data;
-                                            break;
-                                        case 'Canceled':
-                                            this.intern.canceled = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.intern.visaInterview = response.data;
-                                            break;
-                                    }
-                                case 'Career Training':
-                                    switch (filter) {
-                                        case 'New Applicant':
-                                            this.career.newApplicant = response.data;
-                                            break;
-                                        case 'Assessed':
-                                            this.career.assessed = response.data;
-                                            break;
-                                        case 'Confirmed':
-                                            this.career.confirmed = response.data;
-                                            break;
-                                        case 'Hired':
-                                            this.career.hired = response.data;
-                                            break;
-                                        case 'Canceled':
-                                            this.career.canceled = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.career.visaInterview = response.data;
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    switch (filter) {
-                                        case 'New Applicant':
-                                            this.newApplicant = response.data;
-                                            break;
-                                        case 'Assessed':
-                                            this.assessed = response.data;
-                                            break;
-                                        case 'Confirmed':
-                                            this.confirmed = response.data;
-                                            break;
-                                        case 'Hired':
-                                            this.hired = response.data;
-                                            break;
-                                        case 'Canceled':
-                                            this.canceled = response.data;
-                                            break;
-                                        case 'For Visa Interview':
-                                            this.visaInterview = response.data;
-                                            break;
-                                    }
-                                    break;
-                            }
+                            this.totalStudents = response.data;
                         })
                 },
-                visaCount(filter, program) {
-                    axios.get(`/helper/visa/${filter}/${program}`)
+                CountApplicants (status, program) {
+                    axios.get(`/helper/${status}/${program}`)
                         .then((response) => {
-                            switch (program) {
-                                case 'Summer Work and Travel - Summer':
-                                    switch (filter) {
-                                        case 'Approved':
-                                            this.summer.visaApproved = response.data;
-                                            break;
-                                        case 'Denied':
-                                            this.summer.visaDenied = response.data;
-                                            break;
-                                    }
+                            switch (status) {
+                                case 'New Applicant':
+                                    this.summary.newApplicant = response.data;
                                     break;
-                                case 'Summer Work and Travel - Spring':
-                                    switch (filter) {
-                                        case 'Approved':
-                                            this.spring.visaApproved = response.data;
-                                            break;
-                                        case 'Denied':
-                                            this.spring.visaDenied = response.data;
-                                            break;
-                                    }
+                                case 'Assessed':
+                                    this.summary.assessed = response.data;
                                     break;
-                                case 'Career Training':
-                                    switch (filter) {
-                                        case 'Approved':
-                                            this.career.visaApproved = response.data;
-                                            break;
-                                        case 'Denied':
-                                            this.career.visaDenied = response.data;
-                                            break;
-                                    }
+                                case 'Confirmed':
+                                    this.summary.confirmed = response.data;
                                     break;
-                                case 'Internship':
-                                    switch (filter) {
-                                        case 'Approved':
-                                            this.intern.visaApproved = response.data;
-                                            break;
-                                        case 'Denied':
-                                            this.intern.visaDenied = response.data;
-                                            break;
-                                    }
+                                case 'Hired':
+                                    this.summary.hired = response.data;
                                     break;
-                                default:
-                                    switch (filter) {
-                                        case 'Approved':
-                                            this.visaApproved = response.data;
-                                            break;
-                                        case 'Denied':
-                                            this.visaDenied = response.data;
-                                            break;
-                                    }
+                                case 'For Visa Interview':
+                                    this.summary.forVisaInterview = response.data;
                                     break;
-                            }
-                        })
-                },
-                programCount(filter) {
-                    axios.get(`/helper/program/${filter}`)
-                        .then((response) => {
-                            switch (filter) {
-                                case 5:
-                                    this.swtSpring = response.data;
+                                case 'Approved':
+                                    this.summary.visaApproved = response.data;
                                     break;
-                                case 9:
-                                    this.swtSummer = response.data;
-                                    break;
-                                case 7:
-                                    this.internship = response.data;
-                                    break;
-                                case 8:
-                                    this.careerTraining = response.data;
+                                case 'Denied':
+                                    this.summary.visaDenied = response.data;
                                     break;
                             }
                         })

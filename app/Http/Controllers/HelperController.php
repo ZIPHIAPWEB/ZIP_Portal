@@ -40,14 +40,25 @@ class HelperController extends Controller
         return new SuperAdminResource($sponsors);
     }
 
-    public function applicantCount($filter, $program = null)
+    public function applicantCount($program)
     {
-        if ($program) {
-            $count = Student::where('application_status', $filter)
-                ->where('program_id', 'like', '%' . Program::where('display_name', $program)->first()->id . '%')
-                ->count();
+        if ($program == 'All') {
+            $count = Student::count();
         } else {
-            $count = Student::where('application_status', $filter)
+            $count = Student::where('program_id', Program::where('name', $program)->first()->id)
+                ->count();
+        }
+
+        return response()->json($count);
+    }
+
+    public function statusCount($status, $program)
+    {
+        if ($program == 'All') {
+            $count = Student::where('application_status', $status)->count();
+        } else {
+            $count = Student::where('program_id', Program::where('name', $program)->first()->id)
+                ->where('application_status', $status)
                 ->count();
         }
 
