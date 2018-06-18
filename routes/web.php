@@ -163,7 +163,8 @@ Route::prefix('helper')->group(function() {
     Route::get('/host/view', 'HelperController@hostHelper')->name('helper.host');
     Route::get('/sponsor/view', 'HelperController@sponsorHelper')->name('helper.sponsor');
 
-    Route::get('/applicant/{filter}/{program?}', 'HelperController@applicantCount')->name('helper.applicant');
+    Route::get('/applicant/{program}', 'HelperController@applicantCount')->name('helper.applicant');
+    Route::get('/{status}/{program}', 'HelperController@statusCount')->name('helper.status.count');
     Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');
     Route::get('/program/{filter}', 'HelperController@programCount')->name('helper.program');
 
@@ -187,13 +188,35 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $count = \App\Student::where('application_status', 'Confirmed')
-                         ->where('program_id', 9)
-                         ->count();
-    $cCount = \App\Student::where('application_status', 'Canceled')
-                         ->whereNotNull('application_id')
-                         ->where('program_id', 9)
-                         ->count();
-    $total = $count + $cCount;
-    return $count;
+    $counts = \App\Summary::select(['year', 'label', 'value'])->where('label', 'For Visa Interview')->distinct('year')->get();
+    $year = array();
+    $value = array();
+
+    foreach ($counts as $count) {
+        array_push($year, $count->year);
+        array_push($value, $count->value);
+    }
+
+    return response()->json([
+            array(
+                'label' => '# of Votes',
+                'data'  => $value,
+                'backgroundColor' => array(
+                    'red'
+                ),
+                'borderColor' => array(
+                    'black'
+                )
+            ),
+            array(
+                'label' => '# of Test',
+                'data'  => $value,
+                'backgroundColor' => array(
+                    'blue'
+                ),
+                'borderColor' => array(
+                    'black'
+                )
+            )
+    ]);
 });
