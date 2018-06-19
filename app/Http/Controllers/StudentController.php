@@ -80,7 +80,9 @@ class StudentController extends Controller
     public function showStudent()
     {
         $students = User::join('students', 'users.id', '=', 'students.user_id')
-                        ->select(['users.name', 'users.email', 'users.verified', 'students.*'])
+                        ->leftjoin('programs', 'students.program_id', '=', 'programs.id')
+                        ->leftjoin('schools', 'students.school', '=', 'schools.id')
+                        ->select(['users.name', 'users.email', 'users.verified', 'students.*', 'programs.display_name as program', 'schools.display_name as college'])
                         ->whereRoleIs('student')
                         ->orderBy('created_at', 'desc')
                         ->paginate(10);
