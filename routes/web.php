@@ -167,6 +167,7 @@ Route::prefix('helper')->group(function() {
     Route::get('/{status}/{program}', 'HelperController@statusCount')->name('helper.status.count');
     Route::get('/visa/{filter}/{program?}', 'HelperController@visaCount')->name('helper.visa');
     Route::get('/program/{filter}', 'HelperController@programCount')->name('helper.program');
+    Route::get('/accounts/{filter}/{role}', 'HelperController@registeredAccounts')->name('helper.accounts');
 
     Route::get('/status/{programId}/{from}/{to}/{status?}', 'HelperController@exportToExcel')->name('export.data');
 });

@@ -59,34 +59,205 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <center><h3 class="box-title"><b>User Statistics</b></h3></center>
-            </div>
-            <div class="box-body">
-
-            </div>
-        </div>
-        <div class="box box-danger">
-            <div class="box-header with-border">
-                <center><h3 class="box-title"><b>User Statistics</b></h3></center>
-            </div>
-            <div class="box-body">
-
-            </div>
-        </div>
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <center><h3 class="box-title"><b>User Statistics</b></h3></center>
-            </div>
-            <div class="box-body">
-
+    <div id="app" v-cloak>
+        <div class="col-md-12">
+            <div class="container">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><b>Program Statistics</b></h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">New Applicant</span>
+                                    <span class="progress-number">@{{ summary.newApplicant }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" :style="{ width : summary.newApplicant / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Confirmed</span>
+                                    <span class="progress-number">@{{ summary.confirmed }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" :style="{ width : summary.confirmed / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Assessed</span>
+                                    <span class="progress-number">@{{ summary.assessed }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-aqua" :style="{ width : summary.assessed / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Hired</span>
+                                    <span class="progress-number">@{{ summary.hired }}/@{{ totalStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-warning" :style="{ width : summary.hired / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">For Visa Interview</span>
+                                    <span class="progress-number">@{{ summary.forVisaInterview }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-aqua progress-bar-striped" :style="{ width : summary.forVisaInterview / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">Visa Approved</span>
+                                    <span class="progress-number">@{{ summary.visaApproved }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-yellow progress-bar-striped" :style="{ width : summary.visaApproved / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="progress-group">
+                                    <span class="progress-text">Visa Denied</span>
+                                    <span class="progress-number">@{{ summary.visaDenied }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width : summary.visaDenied / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><b>Account Statistics</b></h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Activated Account(s)</span>
+                                    <span class="progress-number">@{{ accounts.activated }}/@{{ accounts.totalUsers }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width :  accounts.activated / accounts.totalUsers * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Not Yet Activated Account(s)</span>
+                                    <span class="progress-number">@{{ accounts.unactivated }}/@{{ accounts.totalUsers }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-warning progress-bar-striped" :style="{ width :  accounts.unactivated / accounts.totalUsers * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection()
 
 @section('script')
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                totalStudents: 0,
+                summary: {
+                    newApplicant: 0,
+                    assessed: 0,
+                    confirmed: 0,
+                    hired: 0,
+                    forVisaInterview: 0,
+                    visaApproved: 0,
+                    visaDenied: 0
+                },
+                accounts: {
+                    totalUsers: 0,
+                    activated: 0,
+                    unactivated: 0
+                }
+            },
+            mounted: function () {
+                this.TotalApplicants();
+                this.CountApplicants('New Applicant');
+                this.CountApplicants('Assessed');
+                this.CountApplicants('Confirmed');
+                this.CountApplicants('Hired');
+                this.CountApplicants('For Visa Interview');
+                this.CountApplicants('Approved');
+                this.CountApplicants('Denied');
 
+                this.CountUsers('All', 'student');
+                this.CountUsers(1, 'student');
+                this.CountUsers(0, 'student');
+            },
+            methods: {
+                TotalApplicants () {
+                    axios.get(`/helper/applicant/All`)
+                        .then((response) => {
+                            this.totalStudents = response.data;
+                        })
+                },
+                CountApplicants (status) {
+                    axios.get(`/helper/${status}/All`)
+                        .then((response) => {
+                            switch (status) {
+                                case 'New Applicant':
+                                    this.summary.newApplicant = response.data;
+                                    break;
+                                case 'Assessed':
+                                    this.summary.assessed = response.data;
+                                    break;
+                                case 'Confirmed':
+                                    this.summary.confirmed = response.data;
+                                    break;
+                                case 'Hired':
+                                    this.summary.hired = response.data;
+                                    break;
+                                case 'For Visa Interview':
+                                    this.summary.forVisaInterview = response.data;
+                                    break;
+                                case 'Approved':
+                                    this.summary.visaApproved = response.data;
+                                    break;
+                                case 'Denied':
+                                    this.summary.visaDenied = response.data;
+                                    break;
+                            }
+                        })
+                },
+                CountUsers (status, role) {
+                    axios.get(`/helper/accounts/${status}/${role}`)
+                        .then((response) => {
+                            switch (status) {
+                                case 1:
+                                    this.accounts.activated = response.data;
+                                    break;
+
+                                case 0:
+                                    this.accounts.unactivated = response.data;
+                                    break;
+                                default:
+                                    this.accounts.totalUsers = response.data;
+                                    break;
+                            }
+                        })
+                }
+            }
+        })
+    </script>
 @endsection()

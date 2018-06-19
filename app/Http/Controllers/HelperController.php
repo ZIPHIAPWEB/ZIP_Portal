@@ -8,6 +8,7 @@ use App\Program;
 use App\School;
 use App\Sponsor;
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 
 class HelperController extends Controller
@@ -83,6 +84,19 @@ class HelperController extends Controller
     {
         $count = Student::where('program_id', $filter)->count();
 
+        return response()->json($count);
+    }
+
+    public function registeredAccounts($status, $role)
+    {
+        if ($status == 'All') {
+            $count = User::whereRoleIs($role)->count();
+        } else {
+            $count = User::where('verified', $status)
+                ->whereRoleIs($role)
+                ->count();
+
+        }
         return response()->json($count);
     }
 
