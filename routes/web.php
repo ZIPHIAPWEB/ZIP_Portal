@@ -86,6 +86,11 @@ Route::prefix('stud')->group(function() {
 
 });
 
+Route::prefix('sa')->group(function() {
+    Route::get('/coor/actions/view/{id}', 'SuperAdminController@loadCoordinationActions')->name('sa.coor.actions.view');
+    Route::get('/activity/logs/{id}', 'SuperAdminController@loadActivityLogs')->name('sa.activity.logs');
+});
+
 Route::prefix('guard')->group(function() {
     Route::view('/verify', 'auth.not-verified')->name('verify');
     Route::view('/notactivated', 'auth.not-activated')->name('not.activated');

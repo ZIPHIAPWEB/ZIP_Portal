@@ -94,7 +94,7 @@
                                 <td>@{{ student.college }}</td>
                                 <td>@{{ student.verified | verify }}</td>
                                 <td>
-                                    <button @click="ViewStudent()" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
                                     <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
@@ -153,16 +153,24 @@
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
                                     <section id="application-status">
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Application ID</td>
+                                                    <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                         <label class="control-label">Application Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
                                             <tr>
                                                 <td style="width: 35%;">Application Status</td>
-                                                <td class="text-bold">New Applicant</td>
+                                                <td class="text-bold">@{{ student.application_status }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Visa Interview Status</td>
-                                                <td class="text-bold">Approved</td>
+                                                <td class="text-bold">@{{ student.visa_interview_status }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -173,35 +181,35 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 35%">Fullname</td>
-                                                    <td class="text-bold">Mergenio, Renz D.</td>
+                                                    <td class="text-bold">@{{ student.first_name }} @{{ student.last_name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Birthdate</td>
-                                                    <td class="text-bold">January 28, 1996</td>
+                                                    <td class="text-bold">@{{ student.birthdate }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gender</td>
-                                                    <td class="text-bold">MALE</td>
+                                                    <td class="text-bold">@{{ student.gender }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Address</td>
-                                                    <td class="text-bold">Bagong Silang, Caloocan City</td>
+                                                    <td class="text-bold">@{{ student.address }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Home Number</td>
-                                                    <td class="text-bold">09123456789</td>
+                                                    <td class="text-bold">@{{ student.home_number }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Mobile Number</td>
-                                                    <td class="text-bold">09123456789</td>
+                                                    <td class="text-bold">@{{ student.mobile_number }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Skype</td>
-                                                    <td class="text-bold">live:rmergenio_1</td>
+                                                    <td class="text-bold">@{{ student.skype_id }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Facebook Email</td>
-                                                    <td class="text-bold">renz.mergenio@yahoo.com</td>
+                                                    <td class="text-bold">@{{ student.fb_email }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -212,15 +220,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 35%">College</td>
-                                                    <td class="text-bold">University Of Caloocan City</td>
+                                                    <td class="text-bold">@{{ student.college }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Course</td>
-                                                    <td class="text-bold">Course One</td>
+                                                    <td class="text-bold">@{{ student.course }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Year Level</td>
-                                                    <td class="text-bold">First Year</td>
+                                                    <td class="text-bold">@{{ student.year }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -231,27 +239,27 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 35%">Host Company</td>
-                                                    <td class="text-bold">RENZ</td>
+                                                    <td class="text-bold">@{{ student.company }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Position</td>
-                                                    <td class="text-bold">IT Specialist</td>
+                                                    <td class="text-bold">@{{ student.position }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Start Date</td>
-                                                    <td class="text-bold">2018-06-04</td>
+                                                    <td class="text-bold">@{{ student.program_start_date }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>End Date</td>
-                                                    <td class="text-bold">2018-06-04</td>
+                                                    <td class="text-bold">@{{ student.program_end_date }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Stipend</td>
-                                                    <td class="text-bold">Stipend</td>
+                                                    <td class="text-bold">@{{ student.stipend }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Visa Sponsor</td>
-                                                    <td class="text-bold">Cristina</td>
+                                                    <td class="text-bold">@{{ student.sponsor }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -262,15 +270,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 35%;">Program ID Number</td>
-                                                    <td class="text-bold">1234567890</td>
+                                                    <td class="text-bold">@{{ student.program_id_no }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>SEVIS ID</td>
-                                                    <td class="text-bold">1234567890</td>
+                                                    <td class="text-bold">@{{ student.sevis_id }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Interview Schedule</td>
-                                                    <td class="text-bold">1234567890</td>
+                                                    <td class="text-bold">@{{ student.visa_interview_schedule }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -281,11 +289,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 35%;">Departure Date</td>
-                                                    <td class="text-bold">Dkfjskldjfklsd</td>
+                                                    <td class="text-bold">@{{ student.date_of_departure }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Arrival Date</td>
-                                                    <td class="text-bold">fklsdjklfsjdklf</td>
+                                                    <td class="text-bold">@{{ student.date_of_arrival }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -298,10 +306,11 @@
                                             <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>NBI Clearance</td>
+                                            <tr v-for="requirement in requirements.basic">
+                                                <td>@{{ requirement.name }}</td>
                                                 <td class="text-center">
-                                                    <span class="fa fa-check"></span>
+                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-remove text-red"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -314,12 +323,13 @@
                                         <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>NBI Clearance</td>
-                                            <td class="text-center">
-                                                <span class="fa fa-check"></span>
-                                            </td>
-                                        </tr>
+                                            <tr v-for="requirement in requirements.payment">
+                                                <td>@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-remove text-red"></span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -330,10 +340,11 @@
                                         <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>NBI Clearance</td>
+                                        <tr v-for="requirement in requirements.visa">
+                                            <td>@{{ requirement.name }}</td>
                                             <td class="text-center">
-                                                <span class="fa fa-check"></span>
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-remove text-red"></span>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -347,9 +358,9 @@
                                             <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Renz Mergenio</td>
-                                                <td class="text-center">fjakljdslfjskldajflksadjfklsj</td>
+                                            <tr v-for="item in actions">
+                                                <td>@{{ item.first_name }} @{{ item.last_name }}</td>
+                                                <td class="text-center">@{{ item.actions }}</td>
                                                 <td class="text-center">
                                                     <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                                 </td>
@@ -364,14 +375,8 @@
                                             <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Renz Mergenio Logged In</td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Renz Mergenio Logged In</td>
+                                            <tr v-for="log in logs">
+                                                <td>@{{ log.activity }}</td>
                                                 <td class="text-center">
                                                     <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                                 </td>
@@ -397,6 +402,13 @@
                 student: {},
                 links: [],
                 meta: [],
+                requirements: {
+                    basic: [],
+                    payment: [],
+                    visa: []
+                },
+                actions: [],
+                logs: [],
                 search: ''
             },
             watch: {
@@ -444,8 +456,44 @@
                             this.meta = response.data.meta;
                         })
                 },
-                ViewStudent: function () {
+                ViewStudent: function (student) {
+                    this.student = student;
+                    this.ViewBasicRequirements(student.program_id, student.user_id);
+                    this.ViewPaymentRequirements(student.program_id, student.user_id);
+                    this.ViewVisaRequirements(student.visa_sponsor_id, student.user_id);
+                    this.ViewCoordinatorActions(student.user_id);
+                    this.ViewActivityLogs(student.user_id);
                     $('#student-modal').modal('show');
+                },
+                ViewBasicRequirements: function (programId, userId) {
+                    axios.get(`/coor/requirement/basic/${programId}/${userId}`)
+                        .then((response) => {
+                            this.requirements.basic = response.data.data;
+                        })
+                },
+                ViewPaymentRequirements: function (programId, userId) {
+                    axios.get(`/coor/requirement/payment/${programId}/${userId}`)
+                        .then((response) => {
+                            this.requirements.payment = response.data.data;
+                        })
+                },
+                ViewVisaRequirements: function (sponsorId, userId) {
+                    axios.get(`/coor/requirement/visa/${sponsorId}/${userId}`)
+                        .then((response) => {
+                            this.requirements.visa = response.data.data;
+                        })
+                },
+                ViewCoordinatorActions: function (userId) {
+                    axios.get(`/sa/coor/actions/view/${userId}`)
+                        .then((response) => {
+                            this.actions = response.data.data;
+                        })
+                },
+                ViewActivityLogs: function (userId) {
+                    axios.get(`/sa/activity/logs/${userId}`)
+                        .then((response) => {
+                            this.logs = response.data.data;
+                        })
                 },
                 DeleteStudent: function (id) {
                     alert(id);
