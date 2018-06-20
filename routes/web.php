@@ -86,6 +86,11 @@ Route::prefix('stud')->group(function() {
 
 });
 
+Route::prefix('sa')->group(function() {
+    Route::get('/coor/actions/view/{id}', 'SuperAdminController@loadCoordinationActions')->name('sa.coor.actions.view');
+    Route::get('/activity/logs/{id}', 'SuperAdminController@loadActivityLogs')->name('sa.activity.logs');
+});
+
 Route::prefix('guard')->group(function() {
     Route::view('/verify', 'auth.not-verified')->name('verify');
     Route::view('/notactivated', 'auth.not-activated')->name('not.activated');
@@ -184,6 +189,8 @@ Route::prefix('download')->group(function() {
 Route::prefix('filter')->group(function() {
     Route::get('/student/{programId}/{name?}', 'FilterController@filterStudentBy')->name('filter.student');
     Route::get('/status/{programId}/{from}/{to}/{status?}', 'FilterController@filterStatus')->name('filter.status');
+
+    Route::get('/sa/student/{lastname}', 'FilterController@filterSuperAdminStudent')->name('filter.sa.student');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');

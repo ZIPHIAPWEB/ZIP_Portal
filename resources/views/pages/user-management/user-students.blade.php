@@ -59,45 +59,43 @@
 @endsection
 
 @section('content')
-    <div id="app">
+    <div id="app" v-cloak>
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <b>Students</b>
+                    <h3 class="box-title">Students</h3>
                 </div>
                 <div class="box-body">
-                    <table class="table table-condensed table-striped table-bordered">
+                    <div class="form-group pull-right">
+                        <input v-model="search" type="text" class="form-control input-sm" placeholder="Search Name">
+                    </div>
+                    <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                            <th>#</th>
                             <th>Date of Application</th>
-                            <th>Application Status</th>
+                            <th>Status</th>
                             <th>Application ID</th>
                             <th>Fullname</th>
-                            <th>College</th>
+                            <th>Program</th>
                             <th>Course</th>
                             <th>Contact</th>
-                            <th>Email</th>
-                            <th>Status</th>
+                            <th>School</th>
+                            <th>Activated</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr v-for="student in students.data">
-                                <td v-text="student.user_id"></td>
-                                <td v-text="student.created_at"></td>
-                                <td v-text="student.application_status"></td>
-                                <td v-text="student.application_id"></td>
+                            <tr v-for="student in students">
+                                <td>@{{ student.created_at }}</td>
+                                <td>@{{ student.application_status }}</td>
+                                <td>@{{ student.application_id | isEmpty }}</td>
+                                <td>@{{ student.first_name }} @{{ student.middle_name[0] }}. @{{ student.last_name }}</td>
+                                <td>@{{ student.program }}</td>
+                                <td>@{{ student.course }}</td>
+                                <td>@{{ student.home_number }}/@{{ student.mobile_number }}</td>
+                                <td>@{{ student.college }}</td>
+                                <td>@{{ student.verified | verify }}</td>
                                 <td>
-                                    <label v-text="student.first_name"></label>&nbsp;
-                                    <label v-text="student.middle_name[0]"></label>&nbsp;
-                                    <label v-text="student.last_name"></label>
-                                </td>
-                                <td v-text="student.school"></td>
-                                <td v-text="student.home_number"></td>
-                                <td v-text="student.home_number"></td>
-                                <td v-text="student.email"></td>
-                                <td v-text="student.verified === 1 ? 'Activated' : 'Not Yet Activated'" class="text-bold"></td>
-                                <td>
-                                    <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span>&nbsp; View</button>&nbsp;
+                                    <button @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -106,25 +104,24 @@
                 <div class="box-footer clearfix">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li>
-                            <a @click="previous()">«</a>
+                            <a @click="PreviousPage()" href="#">«</a>
                         </li>
                         <li>
-                            <a v-text="current_page"></a>
+                            <a>@{{ meta.current_page }}</a>
                         </li>
                         <li>
-                            <a>of</a>
+                            <a>to</a>
                         </li>
                         <li>
-                            <a v-text="last_page"></a>
+                            <a>@{{ meta.last_page }}</a>
                         </li>
                         <li>
-                            <a @click="next()">»</a>
+                            <a @click="NextPage()" href="#">»</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -143,305 +140,256 @@
                                 <li>
                                     <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
                                 </li>
-                                <li v-if="student.visa_sponsor_id">
+                                <li>
                                     <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-coordinator-actions" data-toggle="tab" aria-expanded="true">Coordinator's Actions</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-recent-activities" data-toggle="tab" aria-expanded="true">Recent Activities</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
-                                    <label class="control-label">Application Status</label>
-                                    <table class="table table-condensed table-striped table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Application Status
-                                            </td>
-                                            <td v-cloak class="text-bold text-center">
-                                                @{{ student.application_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-primary btn-flat btn-xs">Assessed</button>
-                                                <button class="btn btn-info btn-flat btn-xs">Confirmed</button>
-                                                <button class="btn btn-success btn-flat btn-xs">Hired</button>
-                                                <button class="btn btn-default btn-flat btn-xs">For Visa Interview</button>
-                                                <button class="btn btn-warning btn-flat btn-xs">Cancel</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Visa Interview Status
-                                            </td>
-                                            <td v-cloak class="text-bold text-center">
-                                                @{{ student.visa_interview_status }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-success btn-flat btn-xs">Approved</button>
-                                                <button class="btn btn-danger btn-flat btn-xs">Denied</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <label class="control-label">Personal Details</label>
-                                    <table class="table table-condensed table-striped table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Fullname
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Birth Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.birthdate }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Gender
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.gender }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Address
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.address }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Home Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.home_number }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Mobile Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.mobile_number }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Skype
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.skype_id }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Facebook Email
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.fb_email }}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <label class="control-label">School Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                College
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.school }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Course
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.course }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Year Level
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.year }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Visa Interview Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Program ID Number
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.program_id_no }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                SEVIS ID
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.sevis_id }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Host Company Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Host Company
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.host_company_id }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Position
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.position }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Start Date</td>
-                                            <td>@{{ student.program_start_date }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>End Date</td>
-                                            <td>@{{ student.program_end_date }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Stipend
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.stipend }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <label class="control-label">Flight Details</label>
-                                    <table class="table table-striped table-bordered table-condensed">
-                                        <tr>
-                                            <td style="width: 200px">
-                                                Departure Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.date_of_departure }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Arrival Date
-                                            </td>
-                                            <td v-cloak class="text-bold">
-                                                @{{ student.date_of_arrival }}
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <section id="application-status">
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Application ID</td>
+                                                    <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <label class="control-label">Application Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width: 35%;">Application Status</td>
+                                                <td class="text-bold">@{{ student.application_status }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Visa Interview Status</td>
+                                                <td class="text-bold">@{{ student.visa_interview_status }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="personal-details">
+                                        <label class="control-label">Personal Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">Fullname</td>
+                                                    <td class="text-bold">@{{ student.first_name }} @{{ student.last_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Birthdate</td>
+                                                    <td class="text-bold">@{{ student.birthdate }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    <td class="text-bold">@{{ student.gender }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td class="text-bold">@{{ student.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Home Number</td>
+                                                    <td class="text-bold">@{{ student.home_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mobile Number</td>
+                                                    <td class="text-bold">@{{ student.mobile_number }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Skype</td>
+                                                    <td class="text-bold">@{{ student.skype_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Facebook Email</td>
+                                                    <td class="text-bold">@{{ student.fb_email }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="school-details">
+                                        <label class="control-label">School Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">College</td>
+                                                    <td class="text-bold">@{{ student.college }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Course</td>
+                                                    <td class="text-bold">@{{ student.course }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Year Level</td>
+                                                    <td class="text-bold">@{{ student.year }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="host-company">
+                                        <label class="control-label">Host Company Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">Host Company</td>
+                                                    <td class="text-bold">@{{ student.company }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Position</td>
+                                                    <td class="text-bold">@{{ student.position }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td class="text-bold">@{{ student.program_start_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td class="text-bold">@{{ student.program_end_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Stipend</td>
+                                                    <td class="text-bold">@{{ student.stipend }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Visa Sponsor</td>
+                                                    <td class="text-bold">@{{ student.sponsor }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="visa-interview">
+                                        <label class="control-label">Visa Interview Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Program ID Number</td>
+                                                    <td class="text-bold">@{{ student.program_id_no }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SEVIS ID</td>
+                                                    <td class="text-bold">@{{ student.sevis_id }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Interview Schedule</td>
+                                                    <td class="text-bold">@{{ student.visa_interview_schedule }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="flight-details">
+                                        <label class="control-label">Flight Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Departure Date</td>
+                                                    <td class="text-bold">@{{ student.date_of_departure }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Arrival Date</td>
+                                                    <td class="text-bold">@{{ student.date_of_arrival }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
                                 </div>
-                                <div class="tab-pane" id="tab-basic-req">
-                                    <table class="table table-condensed table-striped table-bordered">
+                                <div class="tab-pane m-t-10" id="tab-basic-req">
+                                    <table class="table table-striped table-bordered table-condensed">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th style="width: 50%;">Requirements</th>
+                                            <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="requirement in basicRequirements">
+                                            <tr v-for="requirement in requirements.basic">
+                                                <td>@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-remove text-red"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-payment-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                        <th style="width: 50%;">Requirements</th>
+                                        <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="requirement in requirements.payment">
+                                                <td>@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-remove text-red"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-visa-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                        <th style="width: 50%;">Requirements</th>
+                                        <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="requirement in requirements.visa">
                                             <td>@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                <span v-else class="fa fa-times text-red"></span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <span v-else class="fa fa-remove text-red"></span>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane " id="tab-payment-req">
-                                    <table class="table table-condensed table-striped table-bordered">
+                                <div class="tab-pane m-t-10" id="tab-coordinator-actions">
+                                    <table class="table table-striped table-bordered table-condensed">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th>Coordinator</th>
+                                            <th class="text-center">Logs</th>
+                                            <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="requirement in paymentRequirements">
-                                            <td>@{{ requirement.name }}</td>
-                                            <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                <span v-else class="fa fa-times text-red"></span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                            </td>
-                                        </tr>
+                                            <tr v-for="item in actions">
+                                                <td>@{{ item.first_name }} @{{ item.last_name }}</td>
+                                                <td class="text-center">@{{ item.actions }}</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane " id="tab-visa-req">
-                                    <table class="table table-condensed table-striped table-bordered">
+                                <div class="tab-pane m-t-10" id="tab-recent-activities">
+                                    <table class="table table-striped table-bordered table-condensed">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th style="width: 75%">Activity Logs</th>
+                                            <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="requirement in visaRequirements">
-                                            <td>@{{ requirement.name }}</td>
-                                            <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                <span v-else class="fa fa-times text-red"></span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                <button @click="downloadVisaRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                            </td>
-                                        </tr>
+                                            <tr v-for="log in logs">
+                                                <td>@{{ log.activity }}</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
     </div>
 @endsection()
 
@@ -450,111 +398,121 @@
         const app = new Vue({
             el: '#app',
             data: {
-                student: [],
                 students: [],
-                basicRequirements: [],
-                paymentRequirements: [],
-                visaRequirements:[],
+                student: {},
                 links: [],
-                current_page: '',
-                last_page: ''
+                meta: [],
+                requirements: {
+                    basic: [],
+                    payment: [],
+                    visa: []
+                },
+                actions: [],
+                logs: [],
+                search: ''
             },
-            mounted: function() {
-                this.loadStudents();
+            watch: {
+                search: function (value) {
+                    if (value) {
+                        this.FilterStudents(value);
+                    } else {
+                        this.LoadStudents();
+                    }
+                }
+            },
+            mounted () {
+                this.LoadStudents();
             },
             methods: {
-                previous() {
-                    axios(this.links.prev)
+                PreviousPage: function () {
+                    axios.get(this.links.prev)
                         .then((response) => {
-                            this.students = response.data;
+                            this.students = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                            console.log(error);
-                    });
+                            this.meta = response.data.meta;
+                        })
                 },
-                next() {
-                    axios(this.links.next)
+                NextPage: function () {
+                    axios.get(this.links.next)
                         .then((response) => {
-                            this.students = response.data;
+                            this.students = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                        console.log(error);
-                    });
+                            this.meta = response.data.meta;
+                        })
                 },
-                loadStudents() {
-                    axios('/stud/show')
+                LoadStudents: function () {
+                    axios.get(`/stud/show`)
                         .then((response) => {
-                            this.students = response.data;
+                            this.students = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                            console.log(error);
-                    });
+                            this.meta = response.data.meta
+                        })
                 },
-                viewStudent(id) {
-                    axios(`/stud/view/${id}`)
+                FilterStudents: function (lastName) {
+                    axios.get(`/filter/sa/student/${lastName}`)
                         .then((response) => {
-                            this.student = response.data.data;
-                            this.loadBasicRequirements(response.data.data.program_id, id);
-                            this.loadPaymentRequirements(response.data.data.program_id, id);
-                            this.loadVisaRequirements(response.data.data.visa_sponsor_id, id);
-                        }).catch((error) => {
-                            console.log(error);
-                    });
+                            this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.meta = response.data.meta;
+                        })
+                },
+                ViewStudent: function (student) {
+                    this.student = student;
+                    this.ViewBasicRequirements(student.program_id, student.user_id);
+                    this.ViewPaymentRequirements(student.program_id, student.user_id);
+                    this.ViewVisaRequirements(student.visa_sponsor_id, student.user_id);
+                    this.ViewCoordinatorActions(student.user_id);
+                    this.ViewActivityLogs(student.user_id);
                     $('#student-modal').modal('show');
                 },
-                loadBasicRequirements(programId, userId) {
+                ViewBasicRequirements: function (programId, userId) {
                     axios.get(`/coor/requirement/basic/${programId}/${userId}`)
                         .then((response) => {
-                            this.basicRequirements = response.data.data;
+                            this.requirements.basic = response.data.data;
                         })
                 },
-                downloadBasicRequirement(id) {
-                    axios.get(`/download/basic/requirement/${id}`)
-                        .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
-                        })
-                },
-                loadPaymentRequirements(programId, userId) {
+                ViewPaymentRequirements: function (programId, userId) {
                     axios.get(`/coor/requirement/payment/${programId}/${userId}`)
                         .then((response) => {
-                            this.paymentRequirements = response.data.data;
+                            this.requirements.payment = response.data.data;
                         })
                 },
-                downloadPaymentRequirement(id) {
-                    axios.get(`/download/payment/requirement/${id}`)
-                        .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
-                        })
-                },
-                loadVisaRequirements(sponsorId, userId) {
+                ViewVisaRequirements: function (sponsorId, userId) {
                     axios.get(`/coor/requirement/visa/${sponsorId}/${userId}`)
                         .then((response) => {
-                            this.visaRequirements = response.data.data;
+                            this.requirements.visa = response.data.data;
                         })
                 },
-                downloadVisaRequirement(id) {
-                    axios.get(`/download/visa/requirement/${id}`)
+                ViewCoordinatorActions: function (userId) {
+                    axios.get(`/sa/coor/actions/view/${userId}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            this.actions = response.data.data;
                         })
+                },
+                ViewActivityLogs: function (userId) {
+                    axios.get(`/sa/activity/logs/${userId}`)
+                        .then((response) => {
+                            this.logs = response.data.data;
+                        })
+                },
+                DeleteStudent: function (id) {
+                    alert(id);
+                }
+            },
+            filters: {
+                verify: value => {
+                    if (value === 1) {
+                        return 'Activated';
+                    } else {
+                        return 'Not Yet Activated';
+                    }
+                },
+                isEmpty: value => {
+                    if (!value) {
+                        return 'Not confirmed Yet';
+                    } else {
+                        return value;
+                    }
                 }
             }
         })
