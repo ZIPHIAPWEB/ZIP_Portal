@@ -67,7 +67,7 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group pull-right">
-                        <input type="text" class="form-control input-sm" placeholder="Search Name">
+                        <input v-model="search" type="text" class="form-control input-sm" placeholder="Search Name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
@@ -94,7 +94,8 @@
                                 <td>@{{ student.college }}</td>
                                 <td>@{{ student.verified | verify }}</td>
                                 <td>
-                                    <button class="btn btn-default btn-flat btn-xs">View</button>
+                                    <button @click="ViewStudent()" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -121,6 +122,269 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Basic Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-coordinator-actions" data-toggle="tab" aria-expanded="true">Coordinator's Actions</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-recent-activities" data-toggle="tab" aria-expanded="true">Recent Activities</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active m-t-10" id="tab-profile">
+                                    <section id="application-status">
+                                        <label class="control-label">Application Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                            <tr>
+                                                <td style="width: 35%;">Application Status</td>
+                                                <td class="text-bold">New Applicant</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Visa Interview Status</td>
+                                                <td class="text-bold">Approved</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="personal-details">
+                                        <label class="control-label">Personal Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">Fullname</td>
+                                                    <td class="text-bold">Mergenio, Renz D.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Birthdate</td>
+                                                    <td class="text-bold">January 28, 1996</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    <td class="text-bold">MALE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td class="text-bold">Bagong Silang, Caloocan City</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Home Number</td>
+                                                    <td class="text-bold">09123456789</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mobile Number</td>
+                                                    <td class="text-bold">09123456789</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Skype</td>
+                                                    <td class="text-bold">live:rmergenio_1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Facebook Email</td>
+                                                    <td class="text-bold">renz.mergenio@yahoo.com</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="school-details">
+                                        <label class="control-label">School Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">College</td>
+                                                    <td class="text-bold">University Of Caloocan City</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Course</td>
+                                                    <td class="text-bold">Course One</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Year Level</td>
+                                                    <td class="text-bold">First Year</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="host-company">
+                                        <label class="control-label">Host Company Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%">Host Company</td>
+                                                    <td class="text-bold">RENZ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Position</td>
+                                                    <td class="text-bold">IT Specialist</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td class="text-bold">2018-06-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td class="text-bold">2018-06-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Stipend</td>
+                                                    <td class="text-bold">Stipend</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Visa Sponsor</td>
+                                                    <td class="text-bold">Cristina</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="visa-interview">
+                                        <label class="control-label">Visa Interview Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Program ID Number</td>
+                                                    <td class="text-bold">1234567890</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SEVIS ID</td>
+                                                    <td class="text-bold">1234567890</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Interview Schedule</td>
+                                                    <td class="text-bold">1234567890</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="flight-details">
+                                        <label class="control-label">Flight Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 35%;">Departure Date</td>
+                                                    <td class="text-bold">Dkfjskldjfklsd</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Arrival Date</td>
+                                                    <td class="text-bold">fklsdjklfsjdklf</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-basic-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <th style="width: 50%;">Requirements</th>
+                                            <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>NBI Clearance</td>
+                                                <td class="text-center">
+                                                    <span class="fa fa-check"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-payment-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                        <th style="width: 50%;">Requirements</th>
+                                        <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>NBI Clearance</td>
+                                            <td class="text-center">
+                                                <span class="fa fa-check"></span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-visa-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                        <th style="width: 50%;">Requirements</th>
+                                        <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>NBI Clearance</td>
+                                            <td class="text-center">
+                                                <span class="fa fa-check"></span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-coordinator-actions">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <th>Coordinator</th>
+                                            <th class="text-center">Logs</th>
+                                            <th class="text-center">Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Renz Mergenio</td>
+                                                <td class="text-center">fjakljdslfjskldajflksadjfklsj</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-recent-activities">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <th style="width: 75%">Activity Logs</th>
+                                            <th class="text-center">Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Renz Mergenio Logged In</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Renz Mergenio Logged In</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection()
 
@@ -130,8 +394,19 @@
             el: '#app',
             data: {
                 students: [],
+                student: {},
                 links: [],
-                meta: []
+                meta: [],
+                search: ''
+            },
+            watch: {
+                search: function (value) {
+                    if (value) {
+                        this.FilterStudents(value);
+                    } else {
+                        this.LoadStudents();
+                    }
+                }
             },
             mounted () {
                 this.LoadStudents();
@@ -160,6 +435,20 @@
                             this.links = response.data.links;
                             this.meta = response.data.meta
                         })
+                },
+                FilterStudents: function (lastName) {
+                    axios.get(`/filter/sa/student/${lastName}`)
+                        .then((response) => {
+                            this.students = response.data.data;
+                            this.links = response.data.links;
+                            this.meta = response.data.meta;
+                        })
+                },
+                ViewStudent: function () {
+                    $('#student-modal').modal('show');
+                },
+                DeleteStudent: function (id) {
+                    alert(id);
                 }
             },
             filters: {
