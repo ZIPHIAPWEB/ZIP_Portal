@@ -73,7 +73,10 @@ class CoordinatorController extends Controller
 
     public function showCoordinator()
     {
-        $coordinator = User::whereRoleIs('coordinator')->paginate(10);
+        $coordinator = User::leftjoin('coordinators', 'users.id', '=', 'coordinators.user_id')
+                           ->select(['coordinators.*', 'users.email', 'users.name'])
+                           ->whereRoleIs('coordinator')
+                           ->paginate(10);
 
         return SuperAdminResource::collection($coordinator);
     }

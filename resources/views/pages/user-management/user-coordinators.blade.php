@@ -59,7 +59,7 @@
 @endsection
 
 @section('content')
-    <div id="app">
+    <div id="app" v-cloak>
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -68,22 +68,34 @@
                 <div class="box-body">
                     <table id="coordinator-table" class="table table-bordered table-striped">
                         <thead>
-                            <th>#</th>
+                            <th></th>
                             <th>Username</th>
                             <th>E-mail</th>
+                            <th>Fullname</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Contact</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
-                            <tr v-if="coordinators.data.length === 0">
+                            <tr v-if="coordinators.length === 0">
                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                             </tr>
-                            <tr v-else v-for="coordinator in coordinators.data">
-                                <td>@{{ coordinator.id }}</td>
+                            <tr v-else v-for="coordinator in coordinators">
+                                <td class="text-center">
+                                    <i v-if="coordinator.isOnline" class="fa fa-circle text-success"></i>
+                                    <i v-else class="fa fa-circle text-danger"></i>
+                                </td>
                                 <td>@{{ coordinator.name }}</td>
                                 <td>@{{ coordinator.email }}</td>
+                                <td>@{{ coordinator.first_name }} @{{ coordinator.last_name }}</td>
+                                <td>@{{ coordinator.department }}</td>
+                                <td>@{{ coordinator.position }}</td>
+                                <td>@{{ coordinator.contact }}</td>
                                 <td>
-                                    <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span>&nbsp; View</button>
-                                    <button class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ coordinator.verified === 0 ? 'Activate' : 'Deactivate' }}</button>
+                                    <button @click="ViewLogs(coordinator)" class="btn btn-default btn-flat btn-xs"><i class="fa fa-file"></i>&nbsp; Logs</button>
+                                    <button class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ !coordinator.verified ? 'Deactivate' : 'Activate' }}</button>
+                                    <button @click="DeleteCoordinator(coordinator.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span>&nbsp; Delete</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -95,18 +107,48 @@
                             <a @click="previous()">«</a>
                         </li>
                         <li>
-                            <a v-text="current_page"></a>
+                            <a>@{{ meta.current_page }}</a>
                         </li>
                         <li>
                             <a>of</a>
                         </li>
                         <li>
-                            <a v-text="last_page"></a>
+                            <a>@{{ meta.last_page }}</a>
                         </li>
                         <li>
                             <a @click="next()">»</a>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="logs-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                                <th>Client</th>
+                                <th class="text-center">Logs</th>
+                                <th class="text-center">Action</th>
+                            </thead>
+                            <tbody>
+                                <tr v-if="actions.length === 0">
+                                    <td valign="top" colspan="15" class="text-center">No Records</td>
+                                </tr>
+                                <tr v-else v-for="item in actions">
+                                    <td>@{{ item.first_name }} @{{ item.last_name }}</td>
+                                    <td>@{{ item.actions }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,45 +162,55 @@
             data: {
                 coordinators: [],
                 links: [],
-                current_page: '',
-                last_page: ''
+                meta: [],
+                actions: []
             },
             mounted: function() {
                 this.loadCoordinators();
             },
             methods: {
-                previous() {
+                previous: function () {
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.coordinators = response.data;
+                            this.coordinators = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page
+                            this.meta = response.data.meta;
                         }).catch((error) => {
                             console.log(error);
                     })
                 },
-                next() {
+                next: function () {
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.coordinators = response.data;
+                            this.coordinators = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page
+                            this.meta = response.data.meta;
                         }).catch((error) => {
                         console.log(error);
                     })
                 },
-                loadCoordinators() {
+                loadCoordinators: function () {
                     axios.get('/coor/show')
                         .then((response) => {
-                            this.coordinators = response.data;
+                            this.coordinators = response.data.data;
                             this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page
+                            this.meta = response.data.meta;
                         }).catch((error) => {
                             console.log(error);
                     });
+                },
+                ViewLogs: function (coordinator) {
+                    this.ViewActions(coordinator.id);
+                    $('#logs-modal').modal('show');
+                },
+                ViewActions: function (userId) {
+                    axios.get(`/sa/coor/actions/view/coordinator/${userId}`)
+                        .then((response) => {
+                            this.actions = response.data.data;
+                        })
+                },
+                DeleteCoordinator: function (userId) {
+                    console.log(`${userId} deleted...`);
                 }
             }
         });

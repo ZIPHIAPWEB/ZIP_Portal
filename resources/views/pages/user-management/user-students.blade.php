@@ -340,13 +340,13 @@
                                         <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="requirement in requirements.visa">
-                                            <td>@{{ requirement.name }}</td>
-                                            <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                <span v-else class="fa fa-remove text-red"></span>
-                                            </td>
-                                        </tr>
+                                            <tr v-for="requirement in requirements.visa">
+                                                <td>@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-remove text-red"></span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -358,7 +358,10 @@
                                             <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="item in actions">
+                                            <tr v-if="actions.length === 0">
+                                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                                            </tr>
+                                            <tr v-else v-for="item in actions">
                                                 <td>@{{ item.first_name }} @{{ item.last_name }}</td>
                                                 <td class="text-center">@{{ item.actions }}</td>
                                                 <td class="text-center">
@@ -375,7 +378,10 @@
                                             <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="log in logs">
+                                            <tr v-if="logs.length === 0">
+                                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                                            </tr>
+                                            <tr v-else v-for="log in logs">
                                                 <td>@{{ log.activity }}</td>
                                                 <td class="text-center">
                                                     <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
@@ -484,7 +490,7 @@
                         })
                 },
                 ViewCoordinatorActions: function (userId) {
-                    axios.get(`/sa/coor/actions/view/${userId}`)
+                    axios.get(`/sa/coor/actions/view/student/${userId}`)
                         .then((response) => {
                             this.actions = response.data.data;
                         })
