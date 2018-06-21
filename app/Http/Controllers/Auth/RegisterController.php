@@ -90,7 +90,8 @@ class RegisterController extends Controller
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
             'vToken'    => str_random(40),
-            'verified'  => false
+            'verified'  => false,
+            'isOnline'  => false
         ]);
 
         $user->attachRole('student');
@@ -107,6 +108,7 @@ class RegisterController extends Controller
             'password'  => bcrypt( $data['password']),
             'vToken'    => '',
             'verified'  => false,
+            'isOnline'  => false
         ]);
 
         $user->attachRole('coordinator');

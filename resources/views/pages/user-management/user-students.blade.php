@@ -484,7 +484,7 @@
                         })
                 },
                 ViewCoordinatorActions: function (userId) {
-                    axios.get(`/sa/coor/actions/view/${userId}`)
+                    axios.get(`/sa/coor/actions/view/student/${userId}`)
                         .then((response) => {
                             this.actions = response.data.data;
                         })
