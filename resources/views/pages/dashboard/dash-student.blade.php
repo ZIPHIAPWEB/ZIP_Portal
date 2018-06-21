@@ -4,7 +4,7 @@
 
 @section('sidenav')
     <li class="header">General</li>
-    <li>
+    <li class="active">
         <a href="{{ route('dash.student') }}">
             <i class="fa fa-user"></i> <span><small>My Profile</small></span>
         </a>
@@ -13,39 +13,36 @@
     <li>
         <a href="{{ route('req.basic') }}">
             <i class="fa fa-book"></i>
-            <span><small>Basic Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
+            <span>
+                <small>Basic Requirements</small>
+            </span>
         </a>
     </li>
     <li>
         <a href="{{ route('req.payment') }}">
             <i class="fa fa-dollar"></i>
-            <span><small>Payment Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
+            <span>
+                <small>Payment Requirements</small>
+            </span>
         </a>
     </li>
     <li>
         <a href="{{ route('req.visa') }}">
             <i class="fa fa-plane"></i>
-            <span><small>Visa Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
+            <span>
+                <small>Visa Requirements</small>
+            </span>
         </a>
     </li>
 @endsection
 
 @section('content')
-    <div id="app">
-        <div class="col-md-3" v-cloak>
+    <div id="app" v-cloak>
+        <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/350x350" alt="User profile picture"/>
-                    <h3 class="profile-username text-center">@{{ student.first_name }} &nbsp; @{{ student.middle_name.charAt(0) }} &nbsp; @{{ student.last_name }}</h3>
+                    <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.position }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -101,23 +98,65 @@
                         <tbody>
                             <tr>
                                 <td style="width: 35%;">Host Company</td>
-                                <td>@{{ student.company }}</td>
+                                <td class="text-bold">@{{ student.company }}</td>
                             </tr>
                             <tr>
                                 <td>Position</td>
-                                <td>@{{ student.position }}</td>
+                                <td class="text-bold">@{{ student.position }}</td>
                             </tr>
                             <tr>
                                 <td>Location</td>
-                                <td>@{{ student.location }}</td>
+                                <td class="text-bold">@{{ student.location }}</td>
                             </tr>
                             <tr>
                                 <td>Stipend</td>
-                                <td>@{{ student.stipend }}</td>
+                                <td class="text-bold">@{{ student.stipend }}</td>
                             </tr>
                             <tr>
                                 <td>Visa Sponsor</td>
-                                <td>@{{ student.sponsor }}</td>
+                                <td class="text-bold">@{{ student.sponsor }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box box-primary">
+                <div class="box-header with-header">
+                    <label for="" class="control-label">Visa Interview Details</label>
+                </div>
+                <div class="box-body">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <td style="width: 35%;">Program ID Number</td>
+                                <td class="text-bold">@{{ student.program_id_no }}</td>
+                            </tr>
+                            <tr>
+                                <td>SEVIS ID</td>
+                                <td class="text-bold">@{{ student.sevis_id }}</td>
+                            </tr>
+                            <tr>
+                                <td>Interview Schedule</td>
+                                <td class="text-bold">@{{ student.visa_interview_schedule }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box box-primary">
+                <div class="box-header with-header">
+                    <label class="control-label">Flight Details</label>
+                </div>
+                <div class="box-body">
+                    <table class="table table-striped table-bordered table-condensed">
+                        <tbody>
+                            <tr>
+                                <td style="width: 35%;">Departure Date</td>
+                                <td class="text-bold">@{{ student.date_of_departure }}</td>
+                            </tr>
+                            <tr>
+                                <td>Arrival Date</td>
+                                <td class="text-bold">@{{ student.date_of_arrival }}</td>
                             </tr>
                         </tbody>
                     </table>

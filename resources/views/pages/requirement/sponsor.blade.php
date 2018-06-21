@@ -14,27 +14,18 @@
         <a href="{{ route('req.basic') }}">
             <i class="fa fa-book"></i>
             <span><small>Basic Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
         </a>
     </li>
     <li>
         <a href="{{ route('req.payment') }}">
             <i class="fa fa-dollar"></i>
             <span><small>Payment Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
         </a>
     </li>
-    <li>
+    <li class="active">
         <a href="{{ route('req.visa') }}">
             <i class="fa fa-plane"></i>
             <span><small>Visa Requirements</small></span>
-            <span class="pull-right-container">
-                            <small class="label pull-right bg-red">0</small>
-                        </span>
         </a>
     </li>
 @endsection
