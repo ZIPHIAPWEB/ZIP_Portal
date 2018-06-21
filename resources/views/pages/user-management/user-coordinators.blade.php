@@ -136,7 +136,10 @@
                                 <th class="text-center">Action</th>
                             </thead>
                             <tbody>
-                                <tr v-for="item in actions">
+                                <tr v-if="actions.length === 0">
+                                    <td valign="top" colspan="15" class="text-center">No Records</td>
+                                </tr>
+                                <tr v-else v-for="item in actions">
                                     <td>@{{ item.first_name }} @{{ item.last_name }}</td>
                                     <td>@{{ item.actions }}</td>
                                     <td class="text-center">
