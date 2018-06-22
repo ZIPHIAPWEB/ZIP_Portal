@@ -60,8 +60,6 @@ Route::prefix('coor')->group(function() {
 
     Route::post('{id}/application/{status}', 'CoordinatorController@SetApplicationStatus')->name('coor.application.status');
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
-    Route::post('/host/submit/{id}', 'CoordinatorController@SubmitHostCompany')->name('coor.host.submit');
-    Route::post('/visa/submit/{id}', 'CoordinatorController@SubmitForVisaInterview')->name('coor.visa.submit');
     Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
 });
 

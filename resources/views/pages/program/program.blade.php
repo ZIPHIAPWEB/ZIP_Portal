@@ -1016,7 +1016,7 @@
                         formData.append('start', this.host.start);
                         formData.append('end', this.host.end);
                         formData.append('sponsor', this.host.sponsor);
-                    axios.post(`/coor/host/submit/${this.student.user_id}`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/Hired`, formData)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
@@ -1028,7 +1028,7 @@
                         formData.append('sevis', this.visa.sevis);
                         formData.append('program', this.visa.programId);
                         formData.append('schedule', this.visa.schedule);
-                    axios.post(`/coor/visa/submit/${this.student.user_id}`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/For Visa Interview`, formData)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);

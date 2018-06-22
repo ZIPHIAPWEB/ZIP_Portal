@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Coordinator;
+use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
 use App\Program;
 use App\ProgramPayment;
@@ -12,6 +13,7 @@ use App\SponsorRequirement;
 use App\User;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoordinatorController extends Controller
 {
@@ -81,7 +83,7 @@ class CoordinatorController extends Controller
         return SuperAdminResource::collection($coordinator);
     }
 
-    public function SetApplicationStatus($id, $status)
+    public function SetApplicationStatus(Request $request, $id, $status)
     {
         $programId = Student::where('user_id', $id)->first()->program_id;
         switch ($status) {
@@ -89,6 +91,12 @@ class CoordinatorController extends Controller
                 Student::where('user_id', $id)->update([
                     'application_id'        =>  '',
                     'application_status'    =>  $status
+                ]);
+
+                CoordinatorAction::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Assessed.',
                 ]);
 
                 return 'Student Assessed!';
@@ -109,20 +117,51 @@ class CoordinatorController extends Controller
                     'application_id'        =>  Program::find($programId)->description.'-'.date('Y').'0'.$total,
                     'application_status'    =>  $status
                 ]);
+
+                CoordinatorAction::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Confirmed.',
+                ]);
+
                 return 'Student Confirmed';
                 break;
 
             case 'Hired' :
                 Student::where('user_id', $id)->update([
-                    'application_status'    =>  $status
+                    'application_status'    =>  'Hired',
+                    'host_company_id'       =>  $request->input('name'),
+                    'position'              =>  $request->input('position'),
+                    'location'              =>  $request->input('place'),
+                    'stipend'               =>  $request->input('stipend'),
+                    'program_start_date'    =>  $request->input('start'),
+                    'program_end_date'      =>  $request->input('end'),
+                    'visa_sponsor_id'       =>  $request->input('sponsor')
                 ]);
+
+                CoordinatorAction::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Hired.',
+                ]);
+
                 return 'Hired';
                 break;
 
             case 'For Visa Interview' :
                 Student::where('user_id', $id)->update([
-                    'application_status'    =>  $status
+                    'application_status'        =>  'For Visa Interview',
+                    'sevis_id'                  =>  $request->input('sevis'),
+                    'program_id_no'             =>  $request->input('program'),
+                    'visa_interview_schedule'   =>  $request->input('schedule')
                 ]);
+
+                CoordinatorAction::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to For Visa Interview.',
+                ]);
+
                 return 'For Visa Interview';
                 break;
 
@@ -130,6 +169,13 @@ class CoordinatorController extends Controller
                 Student::where('user_id', $id)->update([
                     'application_status'    =>  $status
                 ]);
+
+                CoordinatorAction::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Canceled.',
+                ]);
+
                 return 'Canceled';
                 break;
         }
@@ -142,33 +188,6 @@ class CoordinatorController extends Controller
         ]);
 
         return 'Status '.$status;
-    }
-    public function SubmitHostCompany(Request $request, $id)
-    {
-        Student::where('user_id', $id)->update([
-            'application_status'    =>  'Hired',
-            'host_company_id'       =>  $request->input('name'),
-            'position'              =>  $request->input('position'),
-            'location'              =>  $request->input('place'),
-            'stipend'               =>  $request->input('stipend'),
-            'program_start_date'    =>  $request->input('start'),
-            'program_end_date'      =>  $request->input('end'),
-            'visa_sponsor_id'       =>  $request->input('sponsor')
-        ]);
-
-        return 'Submitted!';
-    }
-
-    public function SubmitForVisaInterview(Request $request, $id)
-    {
-        Student::where('user_id', $id)->update([
-            'application_status'        =>  'For Visa Interview',
-            'sevis_id'                  =>  $request->input('sevis'),
-            'program_id_no'             =>  $request->input('program'),
-            'visa_interview_schedule'   =>  $request->input('schedule')
-        ]);
-
-        return 'Submitted!';
     }
 
     public function UpdateField(Request $request, $field, $id)
