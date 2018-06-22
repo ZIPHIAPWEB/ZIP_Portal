@@ -74,7 +74,7 @@ class CoordinatorController extends Controller
     public function showCoordinator()
     {
         $coordinator = User::leftjoin('coordinators', 'users.id', '=', 'coordinators.user_id')
-                           ->select(['coordinators.*', 'users.email', 'users.name'])
+                           ->select(['coordinators.*', 'users.email', 'users.name', 'users.verified'])
                            ->whereRoleIs('coordinator')
                            ->paginate(10);
 

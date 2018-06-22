@@ -94,7 +94,7 @@
                                 <td>@{{ coordinator.contact }}</td>
                                 <td>
                                     <button @click="ViewLogs(coordinator)" class="btn btn-default btn-flat btn-xs"><i class="fa fa-file"></i>&nbsp; Logs</button>
-                                    <button class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ !coordinator.verified ? 'Deactivate' : 'Activate' }}</button>
+                                    <button @click="ActivateCoordinator(coordinator.verified, coordinator.user_id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ coordinator.verified ? 'Deactivate' : 'Activate' }}</button>
                                     <button @click="DeleteCoordinator(coordinator.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span>&nbsp; Delete</button>
                                 </td>
                             </tr>
@@ -208,6 +208,38 @@
                         .then((response) => {
                             this.actions = response.data.data;
                         })
+                },
+                ActivateCoordinator: function (isActivated, userId) {
+                    switch (isActivated) {
+                        case 0:
+                            axios.post(`/sa/coor/activate/${userId}`)
+                                .then((response) => {
+                                    swal({
+                                        toast: true,
+                                        position: 'top-end',
+                                        title: 'Activated!',
+                                        type: 'success',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                });
+                            break;
+
+                        case 1:
+                            axios.post(`/sa/coor/deactivate/${userId}`)
+                                .then((response) => {
+                                    swal({
+                                        toast: true,
+                                        position: 'top-end',
+                                        title: 'Deactivated !',
+                                        type: 'warning',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                });
+                            break;
+                    }
+                    this.loadCoordinators();
                 },
                 DeleteCoordinator: function (userId) {
                     console.log(`${userId} deleted...`);

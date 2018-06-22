@@ -17,6 +17,7 @@ try {
     require('admin-lte/plugins/input-mask/jquery.inputmask');
     require('admin-lte/plugins/jQueryUI/jquery-ui');
     require('admin-lte/plugins/timepicker/bootstrap-timepicker');
+    window.swal = require('sweetalert2')
 } catch (e) {}
 
     /**

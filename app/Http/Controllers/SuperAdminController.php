@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
 use App\Log;
+use App\User;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -35,5 +36,23 @@ class SuperAdminController extends Controller
                    ->paginate(20);
 
         return SuperAdminResource::collection($logs);
+    }
+
+    public function activateCoordinator($userId)
+    {
+        User::find($userId)->update([
+            'verified'  =>  true
+        ]);
+
+        return response()->json(['message' => 'Coordinator Activated!']);
+    }
+
+    public function deactivateCoordinator($userId)
+    {
+        User::find($userId)->update([
+            'verified'  =>  false
+        ]);
+
+        return response()->json(['message' => 'Coordinator Deactivated']);
     }
 }

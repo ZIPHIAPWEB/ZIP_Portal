@@ -89,6 +89,9 @@ Route::prefix('stud')->group(function() {
 Route::prefix('sa')->group(function() {
     Route::get('/coor/actions/view/{role}/{id}', 'SuperAdminController@loadCoordinationActions')->name('sa.coor.actions.view');
     Route::get('/activity/logs/{id}', 'SuperAdminController@loadActivityLogs')->name('sa.activity.logs');
+
+    Route::post('/coor/activate/{id}', 'SuperAdminController@activateCoordinator')->name('sa.activate.coor');
+    Route::post('/coor/deactivate/{id}', 'SuperAdminController@deactivateCoordinator')->name('sa.deactivate.coor');
 });
 
 Route::prefix('guard')->group(function() {
