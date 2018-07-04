@@ -28,6 +28,7 @@ class Student extends Model
         'stipend',
         'fb_email',
         'visa_interview_status',
+        'visa_interview_schedule',
         'program_start_date',
         'program_end_date',
         'visa_sponsor_id',

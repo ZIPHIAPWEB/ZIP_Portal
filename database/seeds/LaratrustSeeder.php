@@ -59,7 +59,9 @@ class LaratrustSeeder extends Seeder
                 'email'     => $key.'@app.com',
                 'password'  => bcrypt('password'),
                 'vToken'    => str_random(40),
-                'verified'  => false
+                'verified'  => false,
+                'isOnline'  => false,
+                'isFilled'  => false
             ]);
 
             $user->attachRole($role);

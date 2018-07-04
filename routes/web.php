@@ -20,6 +20,10 @@ Route::prefix('auth')->group(function() {
 
     Route::post('/reset/password', 'Auth\ResetPasswordController@reset')->name('post.password.reset');
     Route::get('/reset/password/{token?}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
+    Route::get('/google', 'Auth\LoginController@redirectToProvider')->name('google.login');
+    Route::get('/google/callback', 'Auth\LoginController@handleProviderCallback');
+
 });
 
 Route::prefix('portal')->group(function() {

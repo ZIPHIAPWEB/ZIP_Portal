@@ -63,7 +63,7 @@ class StudentController extends Controller
             'position'                  =>  '',
             'location'                  =>  '',
             'stipend'                   =>  '',
-            'visa_interview_status'     =>  '',
+            'visa_interview_status'     =>  'Pending',
             'visa_interview_schedule'   =>  '',
             'program_start_date'        =>  '',
             'program_end_date'          =>  '',
@@ -71,7 +71,7 @@ class StudentController extends Controller
             'date_of_departure'         =>  '',
             'date_of_arrival'           =>  '',
             'application_id'            =>  '',
-            'application_status'        =>  'Applicant'
+            'application_status'        =>  'New Applicant'
         ]);
 
         return response()->json(['message' => 'Personal Details Updated']);

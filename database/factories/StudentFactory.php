@@ -24,6 +24,7 @@ $factory->define(\App\Student::class, function (Faker $faker) {
         'stipend'                   => $faker->randomNumber(),
         'fb_email'                  => $faker->email,
         'visa_interview_status'     => 'No Schedule',
+        'visa_interview_schedule'   => '',
         'program_start_date'        => $faker->date('Y-m-d'),
         'program_end_date'          => $faker->date('Y-m-d'),
         'visa_sponsor_id'           => $faker->randomNumber(),
@@ -32,5 +33,6 @@ $factory->define(\App\Student::class, function (Faker $faker) {
         'application_id'            => $faker->randomNumber(),
         'program_id'                => $faker->randomNumber(),
         'application_status'        => 'New Applicant',
+        'course'                    => $faker->randomElement(array('HRM', 'IT', 'CS'))
     ];
 });

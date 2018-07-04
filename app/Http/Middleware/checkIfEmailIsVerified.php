@@ -57,5 +57,7 @@ class checkIfEmailIsVerified
         } else {
             return redirect()->route('login')->withErrors('Please Sign-in First!');
         }
+
+        return $next($request);
     }
 }
