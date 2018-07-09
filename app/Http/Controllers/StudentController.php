@@ -41,6 +41,10 @@ class StudentController extends Controller
 
     public function storePersonalDetails(Request $request)
     {
+        User::find(Auth::user()->id)->update([
+            'isFilled'  =>  true
+        ]);
+
         Student::create([
             'user_id'                   =>  Auth::user()->id,
             'first_name'                =>  $request->input('firstName'),

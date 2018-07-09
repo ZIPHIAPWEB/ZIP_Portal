@@ -8,8 +8,15 @@ class Summary extends Model
 {
     protected $fillable = [
         'year',
-        'label',
-        'value',
-        'program'
+        'program',
+        'total',
+        'new_applicant',
+        'assessed',
+        'confirmed',
+        'hired',
+        'for_visa_interview',
+        'visa_approved',
+        'visa_denied',
+        'cancel'
     ];
 }

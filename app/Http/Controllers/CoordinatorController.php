@@ -102,15 +102,41 @@ class CoordinatorController extends Controller
                 return 'Student Assessed!';
                 break;
             case 'Confirmed' :
-                $count = \App\Student::where('program_id', $programId)
-                                     ->where('application_status', 'Confirmed')
-                                     ->where('program_id', 9)
-                                     ->count() + 1;
-                $cCount = \App\Student::where('program_id', $programId)
-                                     ->where('application_status', 'Canceled')
-                                     ->whereNotNull('application_id')
-                                     ->where('program_id', 9)
-                                     ->count();
+                $program = Program::where('id', $programId)->description;
+                switch ($program) {
+                    case 'SWT-SM':
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->whereBetween([])
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                            ->where('application_status', 'Canceled')
+                            ->whereBetween([])
+                            ->whereNotNull('application_id')
+                            ->count();
+                        break;
+                    case 'SWT-SP':
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->whereBetween([])
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                            ->where('application_status', 'Canceled')
+                            ->whereBetween([])
+                            ->whereNotNull('application_id')
+                            ->count();
+                        break;
+                    default:
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                            ->where('application_status', 'Canceled')
+                            ->whereNotNull('application_id')
+                            ->count();
+                        break;
+                }
+
                 $total = $count + $cCount;
 
                 Student::where('user_id', $id)->update([

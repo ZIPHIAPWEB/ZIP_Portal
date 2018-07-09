@@ -14,7 +14,7 @@ class AddVisaInterviewScheduleToStudent extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->date('visa_interview_schedule')->after('visa_interview_status');
+            $table->string('visa_interview_schedule')->after('visa_interview_status');
         });
     }
 
