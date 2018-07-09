@@ -15,10 +15,17 @@ class CreateSummariesTable extends Migration
     {
         Schema::create('summaries', function (Blueprint $table) {
             $table->increments('id');
-            $table->year('year');
-            $table->string('label');
-            $table->integer('value');
+            $table->string('year');
             $table->string('program');
+            $table->string('total');
+            $table->integer('new_applicant');
+            $table->integer('assessed');
+            $table->integer('confirmed');
+            $table->integer('hired');
+            $table->integer('for_visa_interview');
+            $table->integer('visa_approved');
+            $table->integer('visa_denied');
+            $table->integer('cancel');
             $table->timestamps();
         });
     }

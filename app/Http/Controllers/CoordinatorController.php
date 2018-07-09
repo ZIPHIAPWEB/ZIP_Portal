@@ -12,6 +12,7 @@ use App\Role;
 use App\SponsorRequirement;
 use App\User;
 use App\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,15 +103,47 @@ class CoordinatorController extends Controller
                 return 'Student Assessed!';
                 break;
             case 'Confirmed' :
-                $count = \App\Student::where('program_id', $programId)
-                                     ->where('application_status', 'Confirmed')
-                                     ->where('program_id', 9)
-                                     ->count() + 1;
-                $cCount = \App\Student::where('program_id', $programId)
-                                     ->where('application_status', 'Canceled')
-                                     ->whereNotNull('application_id')
-                                     ->where('program_id', 9)
-                                     ->count();
+                $program = Program::where('id', $programId)->first()->description;
+                switch ($program) {
+                    case 'SWT-SM':
+                        $dt1 = Carbon::createFromDate(date('Y'), 3, 1);
+                        $dt2 = Carbon::createFromDate(date('Y'), 6, 31);
+
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->whereBetween('created_at', [$dt1, $dt2])
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                                ->where('application_status', 'Canceled')
+                                ->whereBetween('created_at', [$dt1, $dt2])
+                                ->whereNotNull('application_id')
+                                ->count();
+                        break;
+                    case 'SWT-SP':
+                        $dt1 = Carbon::createFromDate(date('Y'), 5, 1);
+                        $dt2 = Carbon::createFromDate(date('Y'), 8, 31);
+
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->whereBetween('created_at', [$dt1, $dt2])
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                                ->where('application_status', 'Canceled')
+                                ->whereBetween('created_at', [$dt1, $dt2])
+                                ->whereNotNull('application_id')
+                                ->count();
+                        break;
+                    default:
+                        $count = Student::where('program_id', $programId)
+                                ->where('application_status', 'Confirmed')
+                                ->count() + 1;
+                        $cCount = Student::where('program_id', $programId)
+                                ->where('application_status', 'Canceled')
+                                ->whereNotNull('application_id')
+                                ->count();
+                        break;
+                }
+
                 $total = $count + $cCount;
 
                 Student::where('user_id', $id)->update([

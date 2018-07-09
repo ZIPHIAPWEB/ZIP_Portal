@@ -35,7 +35,7 @@ class SponsorRequirementController extends Controller
             ]);
         } else {
             SponsorRequirement::create([
-                'program_id'    =>  $request->input('sponsor_id'),
+                'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  ''
