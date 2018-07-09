@@ -201,35 +201,7 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $counts = \App\Summary::select(['year', 'label', 'value'])->where('label', 'For Visa Interview')->distinct('year')->get();
-    $year = array();
-    $value = array();
+    $dt = \Carbon\Carbon::createFromDate(date('Y'), 6, 30);
 
-    foreach ($counts as $count) {
-        array_push($year, $count->year);
-        array_push($value, $count->value);
-    }
-
-    return response()->json([
-            array(
-                'label' => '# of Votes',
-                'data'  => $value,
-                'backgroundColor' => array(
-                    'red'
-                ),
-                'borderColor' => array(
-                    'black'
-                )
-            ),
-            array(
-                'label' => '# of Test',
-                'data'  => $value,
-                'backgroundColor' => array(
-                    'blue'
-                ),
-                'borderColor' => array(
-                    'black'
-                )
-            )
-    ]);
+    return $dt->toDateTimeString();
 });
