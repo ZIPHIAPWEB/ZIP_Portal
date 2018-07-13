@@ -143,471 +143,478 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
-                                    <section id="application-id">
-                                        <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td style="width: 25%">
-                                                    Application ID
-                                                </td>
-                                                <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </section>
-                                    <section id="application-status">
-                                        <label class="control-label">Application Status</label>
-                                        <table class="table table-condensed table-striped table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td style="width: 25%">
-                                                    Application Status
-                                                </td>
-                                                <td v-cloak class="text-bold text-center">
-                                                    <div class="form-group-sm">
-                                                        <select @change="setApplicationStatus(appStatus)" v-model="appStatus" class="form-control">
-                                                            <option value="">@{{ student.application_status }}</option>
-                                                            <option value="Assessed">Assessed</option>
-                                                            <option value="Confirmed">Confirmed</option>
-                                                            <option value="Hired">Hired</option>
-                                                            <option value="For Visa Interview">For Visa Interview</option>
-                                                            <option value="Canceled">Cancel</option>
-                                                        </select>
+                                    <div class="box box-solid">
+                                        <div class="box-body">
+                                            <section id="application-id">
+                                                <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="width: 25%">
+                                                            Application ID
+                                                        </td>
+                                                        <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                            <section id="application-status">
+                                                <label class="control-label">Application Status</label>
+                                                <table class="table table-condensed table-striped table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="width: 25%">
+                                                            Application Status
+                                                        </td>
+                                                        <td v-cloak class="text-bold text-center">
+                                                            <div class="form-group-sm">
+                                                                <select @change="setApplicationStatus(appStatus)" v-model="appStatus" class="form-control">
+                                                                    <option value="">@{{ student.application_status }}</option>
+                                                                    <option value="Assessed">Assessed</option>
+                                                                    <option value="Confirmed">Confirmed</option>
+                                                                    <option value="Hired">Hired</option>
+                                                                    <option value="For Visa Interview">For Visa Interview</option>
+                                                                    <option value="Canceled">Cancel</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Visa Interview Status
+                                                        </td>
+                                                        <td v-cloak class="text-bold text-center">
+                                                            <div class="form-group-sm">
+                                                                <select @change="setInterviewStatus(visaStatus)" v-model="visaStatus" class="form-control">
+                                                                    <option value="">@{{ student.visa_interview_status }}</option>
+                                                                    <option value="Approved">Approved</option>
+                                                                    <option value="Denied">Denied</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                            <transition name="slide-fade">
+                                                <section v-if="show.hired">
+                                                    <div class="box box-primary">
+                                                        <div class="box-header">
+                                                            <div class="box-tools pull-right">
+                                                                <button @click="show.hired = false" class="btn btn-box-tool">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="form-group col-xs-6">
+                                                                <label for="" class="control-label">Host Company</label>
+                                                                <select v-model="host.name" class="form-control input-sm">
+                                                                    <option value="">Select Host Company</option>
+                                                                    <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label for="" class="control-label">Position</label>
+                                                                <input v-model="host.position" type="text" class="form-control input-sm" placeholder="Position">
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="control-label">Place of Assignment</label>
+                                                                <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="control-label">Stipend</label>
+                                                                <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Stipend">
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="control-label">Start Date</label>
+                                                                <input v-model="host.start" type="date" class="form-control input-sm">
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="control-label">End Date</label>
+                                                                <input v-model="host.end" type="date" class="form-control input-sm">
+                                                            </div>
+                                                            <div class="form-group col-xs-12">
+                                                                <label class="control-label">Visa Sponsor</label>
+                                                                <select v-model="host.sponsor" class="form-control input-sm">
+                                                                    <option value="" selected>Select Visa Sponsor</option>
+                                                                    <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-xs-12">
+                                                                <button @click="submitHostCompany" class="btn btn-primary btn-sm btn-flat btn-block">Submit</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Visa Interview Status
-                                                </td>
-                                                <td v-cloak class="text-bold text-center">
-                                                    <div class="form-group-sm">
-                                                        <select @change="setInterviewStatus(visaStatus)" v-model="visaStatus" class="form-control">
-                                                            <option value="">@{{ student.visa_interview_status }}</option>
-                                                            <option value="Approved">Approved</option>
-                                                            <option value="Denied">Denied</option>
-                                                        </select>
+                                                </section>
+                                                <section v-if="show.visa">
+                                                    <div class="box box-primary">
+                                                        <div class="box-header">
+                                                            <div class="box-tools pull-right">
+                                                                <button @click="show.visa = false" class="btn btn-box-tool">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="label-control">SEVIS ID</label>
+                                                                <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
+                                                            </div>
+                                                            <div class="form-group col-xs-6">
+                                                                <label class="control-label">Program ID</label>
+                                                                <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
+                                                            </div>
+                                                            <div class="form-group col-xs-12">
+                                                                <label class="control-label">Interview Schedule</label>
+                                                                <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                            </div>
+                                                            <div class="form-group-sm col-xs-12">
+                                                                <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </section>
-                                <transition name="slide-fade">
-                                    <section v-if="show.hired">
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <div class="box-tools pull-right">
-                                                    <button @click="show.hired = false" class="btn btn-box-tool">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body">
-                                                <div class="form-group col-xs-6">
-                                                    <label for="" class="control-label">Host Company</label>
-                                                    <select v-model="host.name" class="form-control input-sm">
-                                                        <option value="">Select Host Company</option>
-                                                        <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label for="" class="control-label">Position</label>
-                                                    <input v-model="host.position" type="text" class="form-control input-sm" placeholder="Position">
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label class="control-label">Place of Assignment</label>
-                                                    <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label class="control-label">Stipend</label>
-                                                    <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Stipend">
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label class="control-label">Start Date</label>
-                                                    <input v-model="host.start" type="date" class="form-control input-sm">
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label class="control-label">End Date</label>
-                                                    <input v-model="host.end" type="date" class="form-control input-sm">
-                                                </div>
-                                                <div class="form-group col-xs-12">
-                                                    <label class="control-label">Visa Sponsor</label>
-                                                    <select v-model="host.sponsor" class="form-control input-sm">
-                                                        <option value="" selected>Select Visa Sponsor</option>
-                                                        <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-xs-12">
-                                                    <button @click="submitHostCompany" class="btn btn-primary btn-sm btn-flat btn-block">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <section v-if="show.visa">
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <div class="box-tools pull-right">
-                                                    <button @click="show.visa = false" class="btn btn-box-tool">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body">
-                                                <div class="form-group col-xs-6">
-                                                    <label class="label-control">SEVIS ID</label>
-                                                    <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
-                                                </div>
-                                                <div class="form-group col-xs-6">
-                                                    <label class="control-label">Program ID</label>
-                                                    <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
-                                                </div>
-                                                <div class="form-group col-xs-12">
-                                                    <label class="control-label">Interview Schedule</label>
-                                                    <input v-model="visa.schedule" type="date" class="form-control input-sm">
-                                                </div>
-                                                <div class="form-group-sm col-xs-12">
-                                                    <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </transition>
-                                    <section id="personal-details">
-                                        <label class="control-label">Personal Details</label>
-                                        <table class="table table-condensed table-striped table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Fullname
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Birth Date
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.birthdate }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Gender
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.gender }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Home Number
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.home_number }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Mobile Number
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.mobile_number }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Skype
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.skype_id }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Facebook Email
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.fb_email }}
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </section>
-                                    <section id="school-details">
-                                        <label class="control-label">School Details</label>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    College
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.school }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Course
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.course }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Year Level
-                                                </td>
-                                                <td v-cloak class="text-bold">
-                                                    @{{ student.year }}
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </section>
-                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview'" id="host-company-details">
-                                        <label class="control-label">Host Company Details</label>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Host Company
-                                                </td>
-                                                <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.company }}
-                                                    <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
-                                                            <option value="">Select host company</option>
-                                                            <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
-                                                        </select>
-                                                        <span class="input-group-btn">
+                                                </section>
+                                            </transition>
+                                            <section id="personal-details">
+                                                <label class="control-label">Personal Details</label>
+                                                <table class="table table-condensed table-striped table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="width: 200px">
+                                                            Fullname
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Birth Date
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.birthdate }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Gender
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.gender }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Address
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.address }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Home Number
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.home_number }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Mobile Number
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.mobile_number }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Skype
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.skype_id }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Facebook Email
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.fb_email }}
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                            <section id="school-details">
+                                                <label class="control-label">School Details</label>
+                                                <table class="table table-striped table-bordered table-condensed">
+                                                    <tr>
+                                                        <td style="width: 200px">
+                                                            College
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.school }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Course
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.course }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Year Level
+                                                        </td>
+                                                        <td v-cloak class="text-bold">
+                                                            @{{ student.year }}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </section>
+                                            <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview'" id="host-company-details">
+                                                <label class="control-label">Host Company Details</label>
+                                                <table class="table table-striped table-bordered table-condensed">
+                                                    <tr>
+                                                        <td style="width: 200px">
+                                                            Host Company
+                                                        </td>
+                                                        <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.company }}
+                                                            <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <select v-model="field" class="form-control input-sm">
+                                                                    <option value="">Select host company</option>
+                                                                    <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
+                                                                </select>
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('host_company_id', field); setting.host.nameIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.nameIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Position
-                                                </td>
-                                                <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.position }}
-                                                    <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter position title">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Position
+                                                        </td>
+                                                        <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.position }}
+                                                            <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter position title">
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.positionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Start Date</td>
-                                                <td v-if="!setting.host.startIsEdit">
-                                                    @{{ student.program_start_date }}
-                                                    <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Start Date</td>
+                                                        <td v-if="!setting.host.startIsEdit">
+                                                            @{{ student.program_start_date }}
+                                                            <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="date" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('program_start_date', field); setting.host.startIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.startIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>End Date</td>
-                                                <td v-if="!setting.host.endIsEdit">
-                                                    @{{ student.program_end_date }}
-                                                    <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>End Date</td>
+                                                        <td v-if="!setting.host.endIsEdit">
+                                                            @{{ student.program_end_date }}
+                                                            <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="date" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('program_start_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Stipend
-                                                </td>
-                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.stipend }}
-                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Stipend
+                                                        </td>
+                                                        <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.stipend }}
+                                                            <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Visa Sponsor
-                                                </td>
-                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.sponsor }}
-                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
-                                                            <option value="">Select visa sponsor</option>
-                                                            <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
-                                                        </select>
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Visa Sponsor
+                                                        </td>
+                                                        <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.sponsor }}
+                                                            <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <select v-model="field" class="form-control input-sm">
+                                                                    <option value="">Select visa sponsor</option>
+                                                                    <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
+                                                                </select>
+                                                                <span class="input-group-btn">
                                                             <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                             <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="visa-interview-details">
-                                        <label class="control-label">Visa Interview Details</label>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Program ID Number
-                                                </td>
-                                                <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.program_id_no }}
-                                                    <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </section>
+                                            <section v-if="student.application_status == 'For Visa Interview'" id="visa-interview-details">
+                                                <label class="control-label">Visa Interview Details</label>
+                                                <table class="table table-striped table-bordered table-condensed">
+                                                    <tr>
+                                                        <td style="width: 200px">
+                                                            Program ID Number
+                                                        </td>
+                                                        <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.program_id_no }}
+                                                            <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                         <button @click="updateField('program_id_no', field); setting.visa.programIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                     </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                         <button @click="setting.visa.programIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                     </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    SEVIS ID
-                                                </td>
-                                                <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.sevis_id }}
-                                                    <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            SEVIS ID
+                                                        </td>
+                                                        <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.sevis_id }}
+                                                            <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                         <button @click="updateField('sevis_id', field); setting.visa.sevisIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                     </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                         <button @click="setting.visa.sevisIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                     </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Interview Schedule</td>
-                                                <td v-if="!setting.visa.scheduleIsEdit">
-                                                    @{{ student.visa_interview_schedule }}
-                                                    <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interview Schedule</td>
+                                                        <td v-if="!setting.visa.scheduleIsEdit">
+                                                            @{{ student.visa_interview_schedule }}
+                                                            <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="date" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                         <button @click="updateField('visa_interview_schedule', field); setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                     </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                         <button @click="setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                     </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="flight-details">
-                                        <label class="control-label">Flight Details</label>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td style="width: 200px">
-                                                    Departure Date
-                                                </td>
-                                                <td v-if="!setting.flight.departureIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.date_of_departure }}
-                                                    <a @click="hideField('departure')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </section>
+                                            <section v-if="student.application_status == 'For Visa Interview'" id="flight-details">
+                                                <label class="control-label">Flight Details</label>
+                                                <table class="table table-striped table-bordered table-condensed">
+                                                    <tr>
+                                                        <td style="width: 200px">
+                                                            Departure Date
+                                                        </td>
+                                                        <td v-if="!setting.flight.departureIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.date_of_departure }}
+                                                            <a @click="hideField('departure')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                         <button @click="updateField('date_of_departure', field); setting.flight.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                     </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                         <button @click="setting.flight.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                     </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Arrival Date
-                                                </td>
-                                                <td v-if="!setting.flight.arrivalIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.date_of_arrival }}
-                                                    <a @click="hideField('arrival')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Arrival Date
+                                                        </td>
+                                                        <td v-if="!setting.flight.arrivalIsEdit" v-cloak class="text-bold">
+                                                            @{{ student.date_of_arrival }}
+                                                            <a @click="hideField('arrival')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                        </td>
+                                                        <td v-else>
+                                                            <div class="input-group">
+                                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                                <span class="input-group-btn">
                                                         <button @click="updateField('date_of_arrival', field); setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                     </span>
-                                                        <span class="input-group-btn">
+                                                                <span class="input-group-btn">
                                                         <button @click="setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                     </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </section>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </section>
+                                        </div>
+                                        <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="tab-basic-req">
                                     <table class="table table-condensed table-striped table-bordered">
@@ -623,17 +630,17 @@
                                         </th>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="requirement in basicRequirements">
-                                                <td>@{{ requirement.name }}</td>
-                                                <td class="text-center">
-                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                    <span v-else class="fa fa-times text-red"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
+                                        <tr v-for="requirement in basicRequirements">
+                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -651,17 +658,17 @@
                                         </th>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="requirement in paymentRequirements">
-                                                <td>@{{ requirement.name }}</td>
-                                                <td class="text-center">
-                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
-                                                    <span v-else class="fa fa-times text-red"></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
-                                                    <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                                </td>
-                                            </tr>
+                                        <tr v-for="requirement in paymentRequirements">
+                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -741,6 +748,7 @@
         const app = new Vue({
             el: '#app',
             data: {
+                loading: false,
                 hosts: [],
                 sponsors: [],
                 students: [],
@@ -952,10 +960,12 @@
                 },
                 setApplicationStatus(status) {
                     this.appStatus = '';
+                    this.loading = true;
                     switch (status) {
                         case 'Assessed':
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
+                                    this.loading = false;
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
                                     alert(response.data);
@@ -964,6 +974,7 @@
                         case 'Confirmed':
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
+                                    this.loading = false;
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
                                     alert(response.data);

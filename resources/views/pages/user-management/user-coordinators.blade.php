@@ -88,7 +88,7 @@
                                 </td>
                                 <td>@{{ coordinator.name }}</td>
                                 <td>@{{ coordinator.email }}</td>
-                                <td>@{{ coordinator.first_name }} @{{ coordinator.last_name }}</td>
+                                <td>@{{ coordinator.firstName }} @{{ coordinator.lastName }}</td>
                                 <td>@{{ coordinator.department }}</td>
                                 <td>@{{ coordinator.position }}</td>
                                 <td>@{{ coordinator.contact }}</td>

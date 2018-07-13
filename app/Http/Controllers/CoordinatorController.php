@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Coordinator;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
+use App\Notifications\CoordinatorResponse;
 use App\Program;
 use App\ProgramPayment;
 use App\ProgramRequirement;
@@ -14,6 +15,7 @@ use App\User;
 use App\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class CoordinatorController extends Controller
@@ -77,7 +79,7 @@ class CoordinatorController extends Controller
     public function showCoordinator()
     {
         $coordinator = User::leftjoin('coordinators', 'users.id', '=', 'coordinators.user_id')
-                           ->select(['coordinators.*', 'users.email', 'users.name', 'users.verified'])
+                           ->select(['coordinators.*', 'users.email', 'users.name', 'users.verified', 'users.isOnline'])
                            ->whereRoleIs('coordinator')
                            ->paginate(10);
 
@@ -86,7 +88,13 @@ class CoordinatorController extends Controller
 
     public function SetApplicationStatus(Request $request, $id, $status)
     {
-        $programId = Student::where('user_id', $id)->first()->program_id;
+        $program = User::join('students', 'users.id', '=', 'students.user_id')
+                       ->select(['students.*', 'users.email'])
+                       ->where('users.id', $id)
+                       ->first();
+
+        $coordinator = Coordinator::where('user_id', Auth::user()->id)->first();
+
         switch ($status) {
             case 'Assessed' :
                 Student::where('user_id', $id)->update([
@@ -100,20 +108,26 @@ class CoordinatorController extends Controller
                     'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Assessed.',
                 ]);
 
+                $data = [
+                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'Assessed'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+
                 return 'Student Assessed!';
                 break;
             case 'Confirmed' :
-                $program = Program::where('id', $programId)->first()->description;
                 switch ($program) {
                     case 'SWT-SM':
                         $dt1 = Carbon::createFromDate(date('Y'), 3, 1);
                         $dt2 = Carbon::createFromDate(date('Y'), 6, 31);
 
-                        $count = Student::where('program_id', $programId)
+                        $count = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Confirmed')
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->count() + 1;
-                        $cCount = Student::where('program_id', $programId)
+                        $cCount = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Canceled')
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->whereNotNull('application_id')
@@ -123,21 +137,21 @@ class CoordinatorController extends Controller
                         $dt1 = Carbon::createFromDate(date('Y'), 5, 1);
                         $dt2 = Carbon::createFromDate(date('Y'), 8, 31);
 
-                        $count = Student::where('program_id', $programId)
+                        $count = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Confirmed')
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->count() + 1;
-                        $cCount = Student::where('program_id', $programId)
+                        $cCount = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Canceled')
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->whereNotNull('application_id')
                                 ->count();
                         break;
                     default:
-                        $count = Student::where('program_id', $programId)
+                        $count = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Confirmed')
                                 ->count() + 1;
-                        $cCount = Student::where('program_id', $programId)
+                        $cCount = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Canceled')
                                 ->whereNotNull('application_id')
                                 ->count();
@@ -147,7 +161,7 @@ class CoordinatorController extends Controller
                 $total = $count + $cCount;
 
                 Student::where('user_id', $id)->update([
-                    'application_id'        =>  Program::find($programId)->description.'-'.date('Y').'0'.$total,
+                    'application_id'        =>  Program::find($program->program_id)->description.'-'.date('Y').'0'.$total,
                     'application_status'    =>  $status
                 ]);
 
@@ -156,6 +170,13 @@ class CoordinatorController extends Controller
                     'client_id' =>  $id,
                     'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Confirmed.',
                 ]);
+
+                $data = [
+                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'Confirmed'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
                 return 'Student Confirmed';
                 break;
@@ -178,6 +199,13 @@ class CoordinatorController extends Controller
                     'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Hired.',
                 ]);
 
+                $data = [
+                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'Hired'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+
                 return 'Hired';
                 break;
 
@@ -194,6 +222,13 @@ class CoordinatorController extends Controller
                     'client_id' =>  $id,
                     'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to For Visa Interview.',
                 ]);
+
+                $data = [
+                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'For Visa Interview'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
                 return 'For Visa Interview';
                 break;

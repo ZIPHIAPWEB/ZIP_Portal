@@ -201,9 +201,10 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $student = \App\Student::where('user_id', \Illuminate\Support\Facades\Auth::user()->id)->first();
-    $requirement = \App\ProgramRequirement::where('id', 1)->first();
-    $data = collect($student);
+    $program = \App\User::join('students', 'users.id', '=', 'students.user_id')
+        ->select(['students.*', 'users.email'])
+        ->where('users.id', 6)
+        ->first();;
 
-    dd($data->combine($requirement));
+   return $program;
 });
