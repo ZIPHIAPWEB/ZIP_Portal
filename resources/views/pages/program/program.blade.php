@@ -244,6 +244,9 @@
                                                                 <button @click="submitHostCompany" class="btn btn-primary btn-sm btn-flat btn-block">Submit</button>
                                                             </div>
                                                         </div>
+                                                        <div class="overlay" :style="{ display: loading.hired ? 'block' : 'none' }">
+                                                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                                                        </div>
                                                     </div>
                                                 </section>
                                                 <section v-if="show.visa">
@@ -271,6 +274,9 @@
                                                             <div class="form-group-sm col-xs-12">
                                                                 <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
                                                             </div>
+                                                        </div>
+                                                        <div class="overlay" :style="{ display: loading.visa ? 'block' : 'none' }">
+                                                            <i class="fa fa-circle-o-notch fa-spin"></i>
                                                         </div>
                                                     </div>
                                                 </section>
@@ -611,7 +617,7 @@
                                                 </table>
                                             </section>
                                         </div>
-                                        <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                        <div class="overlay" :style="{ display: loading.status ? 'block' : 'none' }">
                                             <i class="fa fa-circle-o-notch fa-spin"></i>
                                         </div>
                                     </div>
@@ -748,7 +754,11 @@
         const app = new Vue({
             el: '#app',
             data: {
-                loading: false,
+                loading: {
+                    status: false,
+                    hired: false,
+                    visa: false
+                },
                 hosts: [],
                 sponsors: [],
                 students: [],
@@ -960,23 +970,25 @@
                 },
                 setApplicationStatus(status) {
                     this.appStatus = '';
-                    this.loading = true;
                     switch (status) {
                         case 'Assessed':
+                            this.loading.status = true;
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
-                                    this.loading = false;
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
+                                    this.loading.status = false;
                                     alert(response.data);
                                 });
                             break;
                         case 'Confirmed':
+                            this.loading.status = true;
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
-                                    this.loading = false;
+
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
+                                    this.loading.status = false;
                                     alert(response.data);
                                 });
                             break;
@@ -1015,6 +1027,7 @@
                     }
                 },
                 submitHostCompany() {
+                    this.loading.hired = true;
                     let formData = new FormData();
                         formData.append('name', this.host.name);
                         formData.append('position', this.host.position);
@@ -1027,10 +1040,12 @@
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
+                            this.loading.hired = false;
                             this.show.hired = false;
                         })
                 },
                 submitForVisaInterview() {
+                    this.loading.visa = true;
                     let formData = new FormData();
                         formData.append('sevis', this.visa.sevis);
                         formData.append('program', this.visa.programId);
@@ -1039,6 +1054,7 @@
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
+                            this.loading.visa = false;
                             this.show.visa = false;
                         })
                 },
