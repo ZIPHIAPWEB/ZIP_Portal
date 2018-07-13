@@ -201,7 +201,9 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $dt = \Carbon\Carbon::createFromDate(date('Y'), 6, 30);
+    $student = \App\Student::where('user_id', \Illuminate\Support\Facades\Auth::user()->id)->first();
+    $requirement = \App\ProgramRequirement::where('id', 1)->first();
+    $data = collect($student);
 
-    return $dt->toDateTimeString();
+    dd($data->combine($requirement));
 });

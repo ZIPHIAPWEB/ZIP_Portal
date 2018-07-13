@@ -71,11 +71,19 @@
                             <h4 class="modal-title">Upload @{{ modalTitle }}</h4>
                         </div>
                         <div class="modal-body">
-                            <input type="file" ref="file" @change="handleFileUpload()">
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <input type="file" ref="file" @change="handleFileUpload()">
+                                </div>
+                                <div class="box-footer">
+                                    <button class="btn btn-primary btn-flat btn-block">Upload File</button>
+                                </div>
+                                <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-footer clearfix">
-                            <button class="btn btn-primary btn-flat btn-block">Upload File</button>
-                        </div>
+
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </form>
@@ -93,7 +101,8 @@
                 pReqId: '',
                 bReqId: '',
                 file: '',
-                program_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->program_id }}"
+                program_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->program_id }}",
+                loading: false
             },
             mounted: function() {
                 this.loadRequirements(this.program_id);
@@ -120,6 +129,7 @@
                     console.log(this.file);
                 },
                 submitFile() {
+                    this.loading = true;
                     let formData = new FormData();
 
                     formData.append('file', this.file);
@@ -130,6 +140,7 @@
                         }
                     })
                         .then((response) => {
+                            this.loading = false;
                             this.loadRequirements(this.program_id);
                             $('#file-upload').modal('hide');
                             console.log(response);

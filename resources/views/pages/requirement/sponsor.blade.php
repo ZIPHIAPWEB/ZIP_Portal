@@ -71,10 +71,17 @@
                             <h4 class="modal-title">Upload @{{ modalTitle }}</h4>
                         </div>
                         <div class="modal-body">
-                            <input type="file" ref="file" @change="handleFileUpload()">
-                        </div>
-                        <div class="modal-footer clearfix">
-                            <button class="btn btn-primary btn-flat btn-block">Upload File</button>
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <input type="file" ref="file" @change="handleFileUpload()">
+                                </div>
+                                <div class="box-footer">
+                                    <button class="btn btn-primary btn-flat btn-block">Upload File</button>
+                                </div>
+                                <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                                </div>
+                            </div>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -93,7 +100,8 @@
                 pReqId: '',
                 bReqId: '',
                 file: '',
-                sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}"
+                sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}",
+                loading: false
             },
             mounted: function() {
                 this.loadRequirements(this.sponsor_id);
@@ -116,6 +124,7 @@
                     this.file = this.$refs.file.files[0];
                 },
                 submitFile() {
+                    this.loading = true;
                     let formData = new FormData();
 
                     formData.append('file', this.file);
@@ -126,6 +135,7 @@
                         }
                     })
                         .then((response) => {
+                            this.loading = false;
                             this.loadRequirements(this.sponsor_id);
                             $('#file-upload').modal('hide');
                         }).catch((error) => {

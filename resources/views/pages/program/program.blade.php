@@ -919,11 +919,7 @@
                 downloadPaymentRequirement (id) {
                     axios.get(`/download/payment/requirement/${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            console.log(response.data);
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BasicRequirement;
 use App\Http\Resources\SuperAdminResource;
+use App\Notifications\StudentUploadedFile;
 use App\PaymentRequirement;
 use App\ProgramPayment;
 use App\ProgramRequirement;
@@ -13,6 +14,7 @@ use App\User;
 use App\VisaRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use function Sodium\randombytes_random16;
@@ -143,6 +145,14 @@ class StudentController extends Controller
                     'path'              =>  $path
                 ]);
 
+                $student = Student::where('user_id', Auth::user()->id)->first();
+                $data = [
+                    'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
+                    'requirement'   => ProgramRequirement::find($id)->name
+                ];
+
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+
                 return response()->json(['message' => 'File Uploaded!']);
             }
         }
@@ -188,6 +198,15 @@ class StudentController extends Controller
                     'path'              =>  $path
                 ]);
 
+                $student = Student::where('user_id', Auth::user()->id)->first();
+
+                $data = [
+                    'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
+                    'requirement'   => ProgramPayment::find($id)->name
+                ];
+
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+
                 return response()->json(['message'  =>  'File Uploaded']);
             }
         }
@@ -231,6 +250,15 @@ class StudentController extends Controller
                     'status'            =>  true,
                     'path'              =>  $path
                 ]);
+
+                $student = Student::where('user_id', Auth::user()->id)->first();
+
+                $data = [
+                    'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
+                    'requirement'   => ProgramPayment::find($id)->name
+                ];
+
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
 
                 return response()->json(['message'  =>  'File Uploaded']);
             }
