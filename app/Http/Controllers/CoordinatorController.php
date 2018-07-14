@@ -105,7 +105,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Assessed.',
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Assessed.',
                 ]);
 
                 $data = [
@@ -168,7 +168,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Confirmed.',
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Confirmed.',
                 ]);
 
                 $data = [
@@ -196,7 +196,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Hired.',
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Hired.',
                 ]);
 
                 $data = [
@@ -220,7 +220,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to For Visa Interview.',
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to For Visa Interview.',
                 ]);
 
                 $data = [
@@ -241,7 +241,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->first_name . ' set the application status to Canceled.',
+                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Canceled.',
                 ]);
 
                 return 'Canceled';

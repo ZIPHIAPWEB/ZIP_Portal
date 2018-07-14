@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
 use App\Log;
+use App\Notifications\ActivationNotification;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class SuperAdminController extends Controller
 {
@@ -16,14 +18,16 @@ class SuperAdminController extends Controller
             case 'student':
                 $actions = CoordinatorAction::join('coordinators', 'coordinator_actions.user_id', '=', 'coordinators.user_id')
                     ->where('coordinator_actions.client_id', $userId)
-                    ->select(['coordinator_actions.*', 'coordinators.first_name', 'coordinators.last_name'])
-                    ->paginate(20);
+                    ->select(['coordinator_actions.*', 'coordinators.firstName', 'coordinators.lastName'])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
                 break;
             case 'coordinator':
                 $actions = CoordinatorAction::join('students', 'coordinator_actions.client_id', '=', 'students.user_id')
                     ->where('coordinator_actions.user_id', $userId)
                     ->select(['coordinator_actions.*', 'students.first_name', 'students.last_name'])
-                    ->paginate(20);
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
                 break;
         }
 
@@ -40,18 +44,34 @@ class SuperAdminController extends Controller
 
     public function activateCoordinator($userId)
     {
-        User::find($userId)->update([
+        $user = User::find($userId);
+
+        $user->update([
             'verified'  =>  true
         ]);
+
+        $data = [
+            'status' => 'Activated'
+        ];
+
+        Notification::route('mail', $user->email)->notify(new ActivationNotification($data));
 
         return response()->json(['message' => 'Coordinator Activated!']);
     }
 
     public function deactivateCoordinator($userId)
     {
-        User::find($userId)->update([
+        $user = User::find($userId);
+
+        $user->update([
             'verified'  =>  false
         ]);
+
+        $data = [
+            'status' => 'Deactivated'
+        ];
+
+        Notification::route('mail', $user->email)->notify(new ActivationNotification($data));
 
         return response()->json(['message' => 'Coordinator Deactivated']);
     }

@@ -200,7 +200,7 @@
                     });
                 },
                 ViewLogs: function (coordinator) {
-                    this.ViewActions(coordinator.id);
+                    this.ViewActions(coordinator.user_id);
                     $('#logs-modal').modal('show');
                 },
                 ViewActions: function (userId) {
@@ -216,12 +216,13 @@
                                 .then((response) => {
                                     swal({
                                         toast: true,
-                                        position: 'top-end',
+                                        position: 'top',
                                         title: 'Activated!',
                                         type: 'success',
                                         showConfirmButton: false,
                                         timer: 3000
                                     })
+                                    this.loadCoordinators();
                                 });
                             break;
 
@@ -230,16 +231,17 @@
                                 .then((response) => {
                                     swal({
                                         toast: true,
-                                        position: 'top-end',
+                                        position: 'top',
                                         title: 'Deactivated !',
                                         type: 'warning',
                                         showConfirmButton: false,
                                         timer: 3000
                                     })
+                                    this.loadCoordinators();
                                 });
                             break;
                     }
-                    this.loadCoordinators();
+
                 },
                 DeleteCoordinator: function (userId) {
                     console.log(`${userId} deleted...`);

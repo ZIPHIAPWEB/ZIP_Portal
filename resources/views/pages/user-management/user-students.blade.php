@@ -362,7 +362,7 @@
                                                 <td valign="top" colspan="15" class="text-center">No Records</td>
                                             </tr>
                                             <tr v-else v-for="item in actions">
-                                                <td>@{{ item.first_name }} @{{ item.last_name }}</td>
+                                                <td>@{{ item.firstName }} @{{ item.lastName }}</td>
                                                 <td class="text-center">@{{ item.actions }}</td>
                                                 <td class="text-center">
                                                     <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
