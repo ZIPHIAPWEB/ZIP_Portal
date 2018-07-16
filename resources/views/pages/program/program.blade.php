@@ -83,7 +83,7 @@
                         <tbody>
                             <tr v-for="student in students">
                                 <td>@{{ student.created_at }}</td>
-                                <td>@{{ student.application_status }}</td>
+                                <td><span class="label label-success">@{{ student.application_status }}</span></td>
                                 <td>@{{ student.application_id }}</td>
                                 <td>@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
                                 <td>@{{ student.program }}</td>

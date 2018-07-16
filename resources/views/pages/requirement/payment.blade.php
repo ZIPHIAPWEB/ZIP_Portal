@@ -66,24 +66,21 @@
             <form @submit.prevent="submitFile()" enctype="multipart/form-data">
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
+                        <div class="overlay-wrapper">
+                            <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                <i class="fa fa-circle-o-notch fa-spin"></i>
+                            </div>
+                        </div>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Upload @{{ modalTitle }}</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="box box-solid">
-                                <div class="box-body">
-                                    <input type="file" ref="file" @change="handleFileUpload()">
-                                </div>
-                                <div class="box-footer">
-                                    <button class="btn btn-primary btn-flat btn-block">Upload File</button>
-                                </div>
-                                <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
-                                    <i class="fa fa-circle-o-notch fa-spin"></i>
-                                </div>
-                            </div>
+                            <input type="file" ref="file" @change="handleFileUpload()">
                         </div>
-
+                        <div class="modal-footer">
+                            <button class="btn btn-primary btn-flat btn-block">Upload File</button>
+                        </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </form>
