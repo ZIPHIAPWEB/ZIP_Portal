@@ -72,7 +72,7 @@
                             <h4 class="modal-title">Upload @{{ modalTitle }}</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="box box-primary">
+                            <div class="box box-solid">
                                 <div class="box-body">
                                     <input type="file" ref="file" @change="handleFileUpload()">
                                 </div>

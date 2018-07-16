@@ -247,7 +247,8 @@
                     skype_id: '',
                     fb_email: ''
                 },
-                errors: []
+                errors: [],
+                loading: false
             },
             mounted: function () {
                 $('#agreement-modal').modal('show');
@@ -262,9 +263,10 @@
 
                 },
                 submit() {
+                    this.loading = true;
                     axios.post(`/stud/details/store`, this.student)
                         .then((response) => {
-                            console.log(response);
+
                             location.href = '{{ route('dash.student') }}'
                         }).catch((error) => {
                             console.log(error);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BasicRequirement;
 use App\Http\Resources\SuperAdminResource;
+use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\PaymentRequirement;
 use App\ProgramPayment;
@@ -146,9 +147,16 @@ class StudentController extends Controller
                 ]);
 
                 $student = Student::where('user_id', Auth::user()->id)->first();
+                $requirement = ProgramRequirement::find($id);
+
+                Log::create([
+                    'user_id'   => Auth::user()->id,
+                    'activity'  => 'Uploaded a ' . $requirement->name
+                ]);
+
                 $data = [
                     'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
-                    'requirement'   => ProgramRequirement::find($id)->name
+                    'requirement'   => $requirement->name
                 ];
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
@@ -199,10 +207,16 @@ class StudentController extends Controller
                 ]);
 
                 $student = Student::where('user_id', Auth::user()->id)->first();
+                $requirement = ProgramPayment::find($id);
+
+                Log::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'activity'  =>  'Uploaded a ' . $requirement->name
+                ]);
 
                 $data = [
                     'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
-                    'requirement'   => ProgramPayment::find($id)->name
+                    'requirement'   => $requirement->name
                 ];
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
@@ -246,16 +260,23 @@ class StudentController extends Controller
                                 ->storeAs('public/visa', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' . $extension);
 
                 VisaRequirement::create([
+                    'user_id'           => Auth::user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
                 ]);
 
                 $student = Student::where('user_id', Auth::user()->id)->first();
+                $requirement = SponsorRequirement::find($id);
+
+                Log::create([
+                    'user_id'   =>  Auth::user()->id,
+                    'activity'  =>  'Uploaded a ' . $requirement->name
+                ]);
 
                 $data = [
                     'student'       => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
-                    'requirement'   => ProgramPayment::find($id)->name
+                    'requirement'   => $requirement->name
                 ];
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
