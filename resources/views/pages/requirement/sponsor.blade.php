@@ -67,10 +67,8 @@
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
                         <div class="overlay-wrapper">
-                            <div class="overlay">
-                                <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
-                                    <i class="fa fa-circle-o-notch fa-spin"></i>
-                                </div>
+                            <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                                <i class="fa fa-circle-o-notch fa-spin"></i>
                             </div>
                         </div>
                         <div class="modal-header">
@@ -138,18 +136,50 @@
                             this.loading = false;
                             this.loadRequirements(this.sponsor_id);
                             $('#file-upload').modal('hide');
+                            swal({
+                                title: response.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
                         }).catch((error) => {
-                            console.log(error);
+                            this.loading = false;
+                            swal({
+                                title: 'An Error has occur!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back'
+                            })
                     })
                 },
                 removeFile(requirement) {
-                    this.bReqId = requirement.bReqId;
-                    axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
-                        .then((response) => {
-                            this.loadRequirements(this.sponsor_id);
-                        }).catch((error) => {
-                            alert('No file to remove');
-                    })
+                   swal({
+                       title: 'Are you sure?',
+                       text: 'This action is irreversable',
+                       type: 'warning',
+                       showCancelButton: true,
+                       confirmButtonText: 'Yes, delete it!',
+                       confirmButtonColor: 'red',
+                       showLoaderOnConfirm: true,
+                       }).then((isConfirm) => {
+                           if (isConfirm.value) {
+                               swal.showLoading();
+                               this.bReqId = requirement.bReqId;
+                               axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
+                                   .then((response) => {
+                                       this.loadRequirements(this.sponsor_id);
+                                       swal({
+                                           title: 'Success',
+                                           type: 'success',
+                                           confirmButtonText: 'Continue'
+                                       })
+                                   }).catch((error) => {
+                                       swal({
+                                           title: 'An Error has occur',
+                                           type: 'error',
+                                           confirmButtonText: 'Go Back!'
+                                       })
+                               })
+                           }
+                   })
                 },
                 downloadFile(requirement) {
                     axios.get(`/download/sponsor/form/${requirement.pReqId}`)

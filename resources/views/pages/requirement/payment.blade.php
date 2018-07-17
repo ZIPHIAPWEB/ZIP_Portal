@@ -68,7 +68,7 @@
                     <div class="modal-content">
                         <div class="overlay-wrapper">
                             <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
-                                <i class="fa fa-circle-o-notch fa-spin"></i>
+                                <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                             </div>
                         </div>
                         <div class="modal-header">
@@ -140,19 +140,50 @@
                             this.loading = false;
                             this.loadRequirements(this.program_id);
                             $('#file-upload').modal('hide');
-                            console.log(response);
+                            swal({
+                                title: response.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
                         }).catch((error) => {
-                            console.log(error);
+                            this.loading = false;
+                            swal({
+                                title: 'An Error has occur!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back'
+                            })
                     })
                 },
                 removeFile(requirement) {
-                    this.bReqId = requirement.bReqId;
-                    axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
-                        .then((response) => {
-                            this.loadRequirements(this.program_id);
-                            console.log(response);
-                        }).catch((error) => {
-                            alert('No file to remove');
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                    }).then((isConfirm) => {
+                        if (isConfirm.value) {
+                            swal.showLoading();
+                            this.bReqId = requirement.bReqId;
+                            this.bReqId = requirement.bReqId;
+                            axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
+                                .then((response) => {
+                                    this.loadRequirements(this.program_id);
+                                    swal({
+                                        title: response.data.message,
+                                        type: 'success',
+                                        confirmButtonText: 'Continue'
+                                    })
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                            })
+                        }
                     })
                 }
             }
