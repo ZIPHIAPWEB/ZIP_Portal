@@ -19,9 +19,8 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{{ route('logout') }}"><span class="fa fa-sign-out"></span></a>
+                    <a href="{{ route('logout') }}"><span class="fa fa-sign-out"></span> Logout</a>
                 </li>
-
             </ul>
         </div>
     </nav>

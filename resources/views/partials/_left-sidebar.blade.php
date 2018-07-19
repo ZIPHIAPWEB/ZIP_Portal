@@ -10,9 +10,12 @@
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
                 @foreach(Auth::user()->roles as $role)
-                <small>{{ $role->display_name }}</small>
+                    @if($role->display_name !== 'Student')
+                    <small>{{ $role->display_name }}</small>
+                    @else
+                    <small>{{ \App\Program::find(\App\Student::where('user_id', Auth::user()->id)->first()->program_id)->description }}</small>
+                    @endif
                 @endforeach
-
             </div>
         </div>
 

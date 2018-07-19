@@ -181,7 +181,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr v-if="student.application_status === 'For Visa Interview'">
                                                 <td>
                                                     Visa Interview Status
                                                 </td>
@@ -970,8 +970,18 @@
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
                                     this.loading = false;
-                                    alert(response.data);
-                                });
+                                    swal({
+                                        title: response.data,
+                                        type: 'success',
+                                        confirmButtonText: 'Continue'
+                                    })
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'Something went wrong!',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                            });
                             break;
                         case 'Confirmed':
                             this.loading = true;
@@ -981,8 +991,18 @@
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
                                     this.loading = false;
-                                    alert(response.data);
-                                });
+                                    swal({
+                                        title: response.data,
+                                        type: 'success',
+                                        confirmButtonText: 'Continue'
+                                    })
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'Something went wrong!',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                            });
                             break;
                         case 'Hired':
                             this.show.hired = true;
@@ -1034,7 +1054,18 @@
                             this.viewStudent(this.student.user_id);
                             this.loading = false;
                             this.show.hired = false;
-                        })
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
                 },
                 submitForVisaInterview() {
                     this.loading = true;
@@ -1048,16 +1079,40 @@
                             this.viewStudent(this.student.user_id);
                             this.loading = false;
                             this.show.visa = false;
-                        })
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
                 },
                 updateField(field, input) {
+                    this.loading = true;
                     let formData = new FormData();
                         formData.append('field', input);
                     axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
                         .then((response) => {
+                            this.loading = false;
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
-                        })
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
+                            })
+                    })
                 },
                 hideField(field) {
                     switch (field) {

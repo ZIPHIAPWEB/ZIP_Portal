@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <button class="btn btn-primary btn-flat btn-block">Validate</button>
+                                        <button type="submit" class="btn btn-primary btn-flat btn-block">Validate</button>
                                     </div>
                                 </div>
                             </form>
