@@ -216,8 +216,8 @@
                                 .then((response) => {
                                     swal({
                                         toast: true,
-                                        position: 'top',
-                                        title: 'Activated!',
+                                        position: 'top-right',
+                                        title: response.data.message,
                                         type: 'success',
                                         showConfirmButton: false,
                                         timer: 3000
@@ -231,8 +231,8 @@
                                 .then((response) => {
                                     swal({
                                         toast: true,
-                                        position: 'top',
-                                        title: 'Deactivated !',
+                                        position: 'top-right',
+                                        title: response.data.message,
                                         type: 'warning',
                                         showConfirmButton: false,
                                         timer: 3000

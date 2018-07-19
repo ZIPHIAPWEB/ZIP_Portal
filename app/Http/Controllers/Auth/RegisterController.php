@@ -60,7 +60,7 @@ class RegisterController extends Controller
     protected function coorValidator(array $data)
     {
         return Validator::make($data, [
-            'username'          => 'required|string|max:255|unique:users',
+            'name'              => 'required|string|max:255|unique:users',
             'email'             => 'required|string|email|max:255|unique:users',
             'password'          => 'required|string|min:6|confirmed',
             'first-name'        => 'required',
@@ -104,7 +104,7 @@ class RegisterController extends Controller
     protected function coorCreate(array $data)
     {
         $user = User::create([
-            'name'      => $data['username'],
+            'name'      => $data['name'],
             'email'     => $data['email'],
             'password'  => bcrypt( $data['password']),
             'vToken'    => '',

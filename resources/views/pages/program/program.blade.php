@@ -495,11 +495,11 @@
                                                             <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
                                                         </select>
                                                         <span class="input-group-btn">
-                                                    <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
+                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
                                                         <span class="input-group-btn">
-                                                    <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -55,11 +55,12 @@
                             <a v-else class="pull-right text-red">Your Coordinator Will Verify</a>
                         </li>
                     </ul>
+                    <button class="btn btn-primary btn-block" @click="viewProfile()">View Profile</button>
                 </div>
             </div>
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <label for="" class="control-label">About</label>
+                    <label for="" class="control-label">Schedule of Events</label>
                 </div>
                 <div class="box-body">
                     <strong>
@@ -68,23 +69,6 @@
                     </strong>
                     <p class="text-muted">@{{ student.address }}</p>
                     <hr>
-                    <strong>
-                        <i class="fa fa-calendar"></i>
-                        Date of Birth
-                    </strong>
-                    <p class="text-muted">@{{ student.birthdate }}</p>
-                    <hr>
-                    <strong>
-                        <i class="fa fa-phone"></i>
-                        Contacts
-                    </strong>
-                    <p class="text-muted">@{{ student.home_number }}/@{{ student.mobile_number }}</p>
-                    <hr>
-                    <strong>
-                        <i class="fa fa-envelope"></i>
-                        E-mail Address
-                    </strong>
-                    <p class="text-muted">@{{ student.fb_email }}</p>
                 </div>
             </div>
         </div>
@@ -236,7 +220,7 @@
             </div>
         </div>
 
-        <div class="modal" id="file-upload" tabindex="-1" role="dialog">
+        <div class="modal" id="file-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <form>
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -254,6 +238,265 @@
                 </div><!-- /.modal-dialog -->
             </form>
         </div><!-- /.modal -->
+
+        <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="overlay-wrapper" :style="{ display: loading ? 'block' : 'none' }">
+                            <div class="overlay">
+                                <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <label class="control-label">Personal Details</label>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20%;">First name</td>
+                                        <td v-if="!setting.firstNameIsEdit" class="text-center">
+                                            @{{ student.first_name }}
+                                            <a @click="hideField('firstName');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Middle name</td>
+                                        <td v-if="!setting.middleNameIsEdit" class="text-center">
+                                            @{{ student.middle_name }}
+                                            <a @click="hideField('middleName');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last name</td>
+                                        <td v-if="!setting.lastNameIsEdit" class="text-center">
+                                            @{{ student.last_name }}
+                                            <a @click="hideField('lastName');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Birthdate</td>
+                                        <td v-if="!setting.birthDateIsEdit" class="text-center">
+                                            @{{ student.birthdate }}
+                                            <a @click="hideField('birthdate');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="date" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td v-if="!setting.genderIsEdit" class="text-center">
+                                            @{{ student.gender }}
+                                            <a @click="hideField('gender');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <select v-model="field" class="form-control input-sm">
+                                                    <option value="">Select gender</option>
+                                                    <option value="MALE">Male</option>
+                                                    <option value="FEMALE">Female</option>
+                                                </select>
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label class="control-label">Contact Details</label>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20%;">Address</td>
+                                        <td v-if="!setting.addressIsEdit" class="text-center">
+                                            @{{ student.address }}
+                                            <a @click="hideField('address');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Home number</td>
+                                        <td v-if="!setting.homeNumberIsEdit" class="text-center">
+                                            @{{ student.home_number }}
+                                            <a @click="hideField('homeNumber');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="number" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile number</td>
+                                        <td v-if="!setting.mobileNumberIsEdit" class="text-center">
+                                            @{{ student.mobile_number }}
+                                            <a @click="hideField('mobileNumber');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="number" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                        <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    </span>
+                                                <span class="input-group-btn">
+                                                        <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label class="control-label">School Details</label>
+                            <table class="table table-striped table-bordered table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20%;">School</td>
+                                        <td v-if="!setting.schoolIsEdit" class="text-center">
+                                            @{{ student.school }}
+                                            <a @click="hideField('school');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <select v-model="field" class="form-control input-sm">
+                                                    <option value="">Select school</option>
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button @click="updateField('school', field); setting.schoolIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                                <span class="input-group-btn">
+                                                    <button @click="setting.schoolIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Course</td>
+                                        <td v-if="!setting.courseIsEdit" class="text-center">
+                                            @{{ student.course }}
+                                            <a @click="hideField('course');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                    <button @click="updateField('course', field); setting.courseIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                                <span class="input-group-btn">
+                                                    <button @click="setting.courseIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Skype ID</td>
+                                        <td v-if="!setting.skypeIdIsEdit" class="text-center">
+                                            @{{ student.skype_id }}
+                                            <a @click="hideField('skypeId');" href="#" class="pull-right">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                        </td>
+                                        <td v-else>
+                                            <div class="input-group">
+                                                <input v-model="field" type="text" class="form-control input-sm">
+                                                <span class="input-group-btn">
+                                                    <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                                <span class="input-group-btn">
+                                                    <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
 @endsection
 
@@ -267,6 +510,21 @@
                 paymentRequirements: [],
                 visaRequirements: [],
                 user_id: '{{ Auth::user()->id }}',
+                setting: {
+                    firstNameIsEdit: false,
+                    middleNameIsEdit: false,
+                    lastNameIsEdit: false,
+                    birthDateIsEdit: false,
+                    genderIsEdit: false,
+                    addressIsEdit: false,
+                    homeNumberIsEdit: false,
+                    mobileNumberIsEdit: false,
+                    schoolIsEdit: false,
+                    courseIsEdit: false,
+                    skypeIdIsEdit: false
+                },
+                field: '',
+                loading: false
             },
             mounted: function() {
                 this.loadStudentDetails();
@@ -312,6 +570,179 @@
                         }).catch((error) => {
                             console.log(error);
                     });
+                },
+                viewProfile() {
+                    $('#profile-modal').modal('show');
+                },
+                updateField(field, input) {
+                    this.loading = true;
+                    let formData = new FormData();
+                    formData.append('field', input);
+                    axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
+                        .then((response) => {
+                            this.loading = false;
+                            this.field = '';
+                            this.loadStudentDetails();
+                            swal({
+                                title: `${field} Updated!`,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            this.loading = false;
+                            swal({
+                                title: 'Something went wrong',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
+                },
+                hideField(field) {
+                    switch (field) {
+                        case 'firstName':
+                            this.setting.firstNameIsEdit = true;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'middleName':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = true;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'lastName':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = true;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'birthdate':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = true;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'gender':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = true;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'address':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = true;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'homeNumber':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = true;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'mobileNumber':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = true;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'school':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = true;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'course':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = true;
+                            this.setting.skypeIdIsEdit = false;
+                            break;
+                        case 'skypeId':
+                            this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = true;
+                            break;
+                    }
                 }
             }
         });
