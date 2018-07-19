@@ -18,29 +18,29 @@
                             <form @submit.prevent="validate()">
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                                        <label for="">First Name:</label>
+                                        <label for="">First Name: <i class="text-red">*</i></label>
                                         <input v-model="student.firstName" type="text" class="form-control">
                                         <span class="help-block text-red" v-if="errors.firstName">@{{ errors.firstName[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                                        <label for="">Middle Name:</label>
+                                        <label for="">Middle Name: <i class="text-red">*</i></label>
                                         <input v-model="student.middleName" type="text" class="form-control">
                                         <span class="help-block text-red" v-if="errors.middleName">@{{ errors.middleName[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                                        <label for="">Last Name:</label>
+                                        <label for="">Last Name: <i class="text-red">*</i></label>
                                         <input v-model="student.lastName" type="text" class="form-control">
                                         <span class="help-block text-red" v-if="errors.lastName">@{{ errors.lastName[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Date of Birth:</label>
+                                        <label for="">Date of Birth: <i class="text-red">*</i></label>
                                         <input v-model="student.birthDate" type="date" class="form-control">
                                         <span class="help-block text-red" v-if="errors.birthDate">@{{ errors.birthDate[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Gender:</label>
+                                        <label for="">Gender: <i class="text-red">*</i></label>
                                         <select v-model="student.gender" class="form-control ">
                                             <option value="">Select Gender</option>
                                             <option value="MALE">Male</option>
@@ -56,33 +56,33 @@
                                         <span class="help-block text-red" v-if="errors.homeNumber">@{{ errors.homeNumber[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Mobile Number:</label>
+                                        <label for="">Mobile Number: <i class="text-red">*</i></label>
                                         <input v-model="student.mobileNumber" type="number" class="form-control" maxlength="11">
                                         <span class="help-block text-red" v-if="errors.mobileNumber">@{{ errors.mobileNumber[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">Address:</label>
+                                        <label for="">Address: <i class="text-red">*</i></label>
                                         <textarea v-model="student.address" class="form-control"></textarea>
                                         <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Facebook Email</label>
+                                        <label for="">Facebook Email <i class="text-red">*</i></label>
                                         <input v-model="student.fb_email" type="email" class="form-control">
                                         <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Skype ID</label>
+                                        <label for="">Skype ID <i class="text-red">*</i></label>
                                         <input v-model="student.skype_id" type="text" class="form-control">
                                         <span class="help-block text-red" v-if="errors.skype_id">@{{ errors.skype_id[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">School:</label>
+                                        <label for="">School: <i class="text-red">*</i></label>
                                         <select v-model="student.school" class="form-control">
                                             <option value="" active>Select School</option>
                                             <option v-for="item in schools" :value="item.id">@{{ item.name }}</option>
@@ -90,27 +90,28 @@
                                         <span class="help-block text-red" v-if="errors.school">@{{ errors.school[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Year Level:</label>
+                                        <label for="">Year Level: <i class="text-red">*</i></label>
                                         <select v-model="student.year" class="form-control">
                                             <option value="" active>Select year level</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
                                             <option value="Third Year">Third Year</option>
                                             <option value="Fourth Year">Fourth Year</option>
+                                            <option value="Graduated">Graduated</option>
                                         </select>
                                         <span class="help-block text-red" v-if="errors.year">@{{ errors.year[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">Course:</label>
+                                        <label for="">Course: <i class="text-red">*</i></label>
                                         <input v-model="student.course" type="text" class="form-control">
                                         <span class="help-block text-red" v-if="errors.course">@{{ errors.course[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">Program:</label>
+                                        <label for="">Program: <i class="text-red">*</i></label>
                                         <select v-model="student.program_id" class="form-control">
                                             <option value="" active>Select your program</option>
                                             <option v-for="program in programs" :value="program.id">@{{ program.display_name }}</option>

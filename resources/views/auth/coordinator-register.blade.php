@@ -56,6 +56,7 @@
                                     <div class="form-group has-feedback">
                                         <select name="department" id="department" class="form-control">
                                             <option selected>Department</option>
+                                            <option value="Sample">Samplesss</option>
                                         </select>
                                     </div>
                                 </div>
@@ -63,6 +64,7 @@
                                     <div class="form-group has-feedback">
                                         <select name="position" id="position" class="form-control">
                                             <option selected>Position</option>
+                                            <option value="Sample">Sample</option>
                                         </select>
                                     </div>
                                 </div>
@@ -84,7 +86,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <input name="username" type="text" class="form-control" placeholder="Username">
+                                        <input name="name" type="text" class="form-control" placeholder="Username">
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                 </div>
