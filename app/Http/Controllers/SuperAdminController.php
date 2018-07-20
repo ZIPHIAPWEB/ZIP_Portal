@@ -44,6 +44,8 @@ class SuperAdminController extends Controller
 
     public function activateCoordinator($userId)
     {
+        $when = now()->addSeconds(10);
+
         $user = User::find($userId);
 
         $user->update([
@@ -54,13 +56,15 @@ class SuperAdminController extends Controller
             'status' => 'Activated'
         ];
 
-        Notification::route('mail', $user->email)->notify(new ActivationNotification($data));
+        Notification::route('mail', $user->email)->notify((new ActivationNotification($data))->delay($when));
 
         return response()->json(['message' => 'Coordinator Activated!']);
     }
 
     public function deactivateCoordinator($userId)
     {
+        $when = now()->addSeconds(10);
+
         $user = User::find($userId);
 
         $user->update([
@@ -71,7 +75,7 @@ class SuperAdminController extends Controller
             'status' => 'Deactivated'
         ];
 
-        Notification::route('mail', $user->email)->notify(new ActivationNotification($data));
+        Notification::route('mail', $user->email)->notify((new ActivationNotification($data))->delay($when));
 
         return response()->json(['message' => 'Coordinator Deactivated']);
     }

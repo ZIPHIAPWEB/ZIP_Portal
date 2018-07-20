@@ -240,262 +240,262 @@
         </div><!-- /.modal -->
 
         <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="overlay-wrapper" :style="{ display: loading ? 'block' : 'none' }">
-                            <div class="overlay">
-                                <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
-                            </div>
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="overlay-wrapper" :style="{ display: loading ? 'block' : 'none' }">
+                        <div class="overlay">
+                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                         </div>
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"></h4>
-                        </div>
-                        <div class="modal-body">
-                            <label class="control-label">Personal Details</label>
-                            <table class="table table-striped table-bordered table-condensed">
-                                <tbody>
-                                    <tr>
-                                        <td style="width: 20%;">First name</td>
-                                        <td v-if="!setting.firstNameIsEdit" class="text-center">
-                                            @{{ student.first_name }}
-                                            <a @click="hideField('firstName');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Middle name</td>
-                                        <td v-if="!setting.middleNameIsEdit" class="text-center">
-                                            @{{ student.middle_name }}
-                                            <a @click="hideField('middleName');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Last name</td>
-                                        <td v-if="!setting.lastNameIsEdit" class="text-center">
-                                            @{{ student.last_name }}
-                                            <a @click="hideField('lastName');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Birthdate</td>
-                                        <td v-if="!setting.birthDateIsEdit" class="text-center">
-                                            @{{ student.birthdate }}
-                                            <a @click="hideField('birthdate');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="date" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gender</td>
-                                        <td v-if="!setting.genderIsEdit" class="text-center">
-                                            @{{ student.gender }}
-                                            <a @click="hideField('gender');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <select v-model="field" class="form-control input-sm">
-                                                    <option value="">Select gender</option>
-                                                    <option value="MALE">Male</option>
-                                                    <option value="FEMALE">Female</option>
-                                                </select>
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <label class="control-label">Contact Details</label>
-                            <table class="table table-striped table-bordered table-condensed">
-                                <tbody>
-                                    <tr>
-                                        <td style="width: 20%;">Address</td>
-                                        <td v-if="!setting.addressIsEdit" class="text-center">
-                                            @{{ student.address }}
-                                            <a @click="hideField('address');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Home number</td>
-                                        <td v-if="!setting.homeNumberIsEdit" class="text-center">
-                                            @{{ student.home_number }}
-                                            <a @click="hideField('homeNumber');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="number" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mobile number</td>
-                                        <td v-if="!setting.mobileNumberIsEdit" class="text-center">
-                                            @{{ student.mobile_number }}
-                                            <a @click="hideField('mobileNumber');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="number" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                        <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                    </span>
-                                                <span class="input-group-btn">
-                                                        <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                    </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <label class="control-label">School Details</label>
-                            <table class="table table-striped table-bordered table-condensed">
-                                <tbody>
-                                    <tr>
-                                        <td style="width: 20%;">School</td>
-                                        <td v-if="!setting.schoolIsEdit" class="text-center">
-                                            @{{ student.school }}
-                                            <a @click="hideField('school');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <select v-model="field" class="form-control input-sm">
-                                                    <option value="">Select school</option>
-                                                </select>
-                                                <span class="input-group-btn">
-                                                    <button @click="updateField('school', field); setting.schoolIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                    </div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <label class="control-label">Personal Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%;">First name</td>
+                                    <td v-if="!setting.firstNameIsEdit" class="text-center">
+                                        @{{ student.first_name }}
+                                        <a @click="hideField('firstName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
-                                                <span class="input-group-btn">
-                                                    <button @click="setting.schoolIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                 </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Course</td>
-                                        <td v-if="!setting.courseIsEdit" class="text-center">
-                                            @{{ student.course }}
-                                            <a @click="hideField('course');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                    <button @click="updateField('course', field); setting.courseIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Middle name</td>
+                                    <td v-if="!setting.middleNameIsEdit" class="text-center">
+                                        @{{ student.middle_name }}
+                                        <a @click="hideField('middleName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
-                                                <span class="input-group-btn">
-                                                    <button @click="setting.courseIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                 </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Skype ID</td>
-                                        <td v-if="!setting.skypeIdIsEdit" class="text-center">
-                                            @{{ student.skype_id }}
-                                            <a @click="hideField('skypeId');" href="#" class="pull-right">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                        </td>
-                                        <td v-else>
-                                            <div class="input-group">
-                                                <input v-model="field" type="text" class="form-control input-sm">
-                                                <span class="input-group-btn">
-                                                    <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Last name</td>
+                                    <td v-if="!setting.lastNameIsEdit" class="text-center">
+                                        @{{ student.last_name }}
+                                        <a @click="hideField('lastName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
-                                                <span class="input-group-btn">
-                                                    <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                 </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Birthdate</td>
+                                    <td v-if="!setting.birthDateIsEdit" class="text-center">
+                                        @{{ student.birthdate }}
+                                        <a @click="hideField('birthdate');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td v-if="!setting.genderIsEdit" class="text-center">
+                                        @{{ student.gender }}
+                                        <a @click="hideField('gender');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <select v-model="field" class="form-control input-sm">
+                                                <option value="">Select gender</option>
+                                                <option value="MALE">Male</option>
+                                                <option value="FEMALE">Female</option>
+                                            </select>
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="control-label">Contact Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%;">Address</td>
+                                    <td v-if="!setting.addressIsEdit" class="text-center">
+                                        @{{ student.address }}
+                                        <a @click="hideField('address');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Home number</td>
+                                    <td v-if="!setting.homeNumberIsEdit" class="text-center">
+                                        @{{ student.home_number }}
+                                        <a @click="hideField('homeNumber');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="number" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile number</td>
+                                    <td v-if="!setting.mobileNumberIsEdit" class="text-center">
+                                        @{{ student.mobile_number }}
+                                        <a @click="hideField('mobileNumber');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="number" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="control-label">School Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%;">School</td>
+                                    <td v-if="!setting.schoolIsEdit" class="text-center">
+                                        @{{ student.school }}
+                                        <a @click="hideField('school');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <select v-model="field" class="form-control input-sm">
+                                                <option value="">Select school</option>
+                                            </select>
+                                            <span class="input-group-btn">
+                                                <button @click="updateField('school', field); setting.schoolIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="setting.schoolIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Course</td>
+                                    <td v-if="!setting.courseIsEdit" class="text-center">
+                                        @{{ student.course }}
+                                        <a @click="hideField('course');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateField('course', field); setting.courseIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="setting.courseIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Skype ID</td>
+                                    <td v-if="!setting.skypeIdIsEdit" class="text-center">
+                                        @{{ student.skype_id }}
+                                        <a @click="hideField('skypeId');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     </div>
 @endsection

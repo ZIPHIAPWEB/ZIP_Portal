@@ -66,16 +66,16 @@
                     <b>Coordinator</b>
                 </div>
                 <div class="box-body">
-                    <table id="coordinator-table" class="table table-bordered table-striped">
+                    <table id="coordinator-table" class="table table-bordered table-striped table-condensed">
                         <thead>
                             <th></th>
-                            <th>Username</th>
-                            <th>E-mail</th>
-                            <th>Fullname</th>
-                            <th>Department</th>
-                            <th>Position</th>
-                            <th>Contact</th>
-                            <th>Action</th>
+                            <th class="text-center">Username</th>
+                            <th class="text-center">E-mail</th>
+                            <th class="text-center">Fullname</th>
+                            <th class="text-center">Department</th>
+                            <th class="text-center">Position</th>
+                            <th class="text-center">Contact</th>
+                            <th class="text-center">Action</th>
                         </thead>
                         <tbody>
                             <tr v-if="coordinators.length === 0">
@@ -86,13 +86,13 @@
                                     <i v-if="coordinator.isOnline" class="fa fa-circle text-success"></i>
                                     <i v-else class="fa fa-circle text-danger"></i>
                                 </td>
-                                <td>@{{ coordinator.name }}</td>
-                                <td>@{{ coordinator.email }}</td>
-                                <td>@{{ coordinator.firstName }} @{{ coordinator.lastName }}</td>
-                                <td>@{{ coordinator.department }}</td>
-                                <td>@{{ coordinator.position }}</td>
-                                <td>@{{ coordinator.contact }}</td>
-                                <td>
+                                <td class="text-sm text-center">@{{ coordinator.name }}</td>
+                                <td class="text-sm text-center">@{{ coordinator.email }}</td>
+                                <td class="text-sm text-center">@{{ coordinator.firstName }} @{{ coordinator.lastName }}</td>
+                                <td class="text-sm text-center">@{{ coordinator.department }}</td>
+                                <td class="text-sm text-center">@{{ coordinator.position }}</td>
+                                <td class="text-sm text-center">@{{ coordinator.contact }}</td>
+                                <td class="text-center">
                                     <button @click="ViewLogs(coordinator)" class="btn btn-default btn-flat btn-xs"><i class="fa fa-file"></i>&nbsp; Logs</button>
                                     <button @click="ActivateCoordinator(coordinator.verified, coordinator.user_id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ coordinator.verified ? 'Deactivate' : 'Activate' }}</button>
                                     <button @click="DeleteCoordinator(coordinator.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span>&nbsp; Delete</button>
@@ -140,8 +140,8 @@
                                     <td valign="top" colspan="15" class="text-center">No Records</td>
                                 </tr>
                                 <tr v-else v-for="item in actions">
-                                    <td>@{{ item.first_name }} @{{ item.last_name }}</td>
-                                    <td>@{{ item.actions }}</td>
+                                    <td class="text-sm">@{{ item.first_name }} @{{ item.last_name }}</td>
+                                    <td class="text-center text-sm">@{{ item.actions }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                     </td>

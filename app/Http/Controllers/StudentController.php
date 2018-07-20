@@ -133,6 +133,8 @@ class StudentController extends Controller
 
     public function uploadBasicRequirement(Request $request, $id)
     {
+        $when = now()->addSeconds(10);
+
         if (!BasicRequirement::where('requirement_id', $id)->first()) {
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
@@ -159,7 +161,7 @@ class StudentController extends Controller
                     'requirement'   => $requirement->name
                 ];
 
-                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
                 return response()->json(['message' => 'File Uploaded!']);
             }
@@ -193,6 +195,8 @@ class StudentController extends Controller
 
     public function uploadPaymentRequirement(Request $request, $id)
     {
+        $when = now()->addSeconds(10);
+
         if (!PaymentRequirement::where('requirement_id', $id)->first()) {
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
@@ -219,7 +223,7 @@ class StudentController extends Controller
                     'requirement'   => $requirement->name
                 ];
 
-                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
                 return response()->json(['message'  =>  'File Uploaded']);
             }
@@ -253,6 +257,8 @@ class StudentController extends Controller
 
     public function uploadVisaRequirement(Request $request, $id)
     {
+        $when = now()->addSeconds(10);
+
         if (!VisaRequirement::where('requirement_id', $id)->first()) {
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
@@ -279,7 +285,7 @@ class StudentController extends Controller
                     'requirement'   => $requirement->name
                 ];
 
-                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
                 return response()->json(['message'  =>  'File Uploaded']);
             }

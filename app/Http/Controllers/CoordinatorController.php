@@ -88,6 +88,8 @@ class CoordinatorController extends Controller
 
     public function SetApplicationStatus(Request $request, $id, $status)
     {
+        $when = now()->addSeconds(10);
+
         $program = User::join('students', 'users.id', '=', 'students.user_id')
                        ->select(['students.*', 'users.email'])
                        ->where('users.id', $id)
@@ -113,7 +115,7 @@ class CoordinatorController extends Controller
                     'status'        => 'Assessed'
                 ];
 
-                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
 
                 return 'Student Assessed!';
                 break;
@@ -176,7 +178,7 @@ class CoordinatorController extends Controller
                     'status'        => 'Confirmed'
                 ];
 
-                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
 
                 return 'Student Confirmed';
                 break;
@@ -204,7 +206,7 @@ class CoordinatorController extends Controller
                     'status'        => 'Hired'
                 ];
 
-                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
 
                 return 'Hired';
                 break;
@@ -228,7 +230,7 @@ class CoordinatorController extends Controller
                     'status'        => 'For Visa Interview'
                 ];
 
-                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
 
                 return 'For Visa Interview';
                 break;
