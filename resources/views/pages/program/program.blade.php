@@ -82,14 +82,14 @@
                         </thead>
                         <tbody>
                             <tr v-for="student in students">
-                                <td>@{{ student.created_at }}</td>
-                                <td><span class="label label-warning">@{{ student.application_status }}</span></td>
-                                <td>@{{ student.application_id }}</td>
-                                <td>@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
-                                <td>@{{ student.program }}</td>
-                                <td>@{{ student.course }}</td>
-                                <td>@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td>@{{ student.school }}</td>
+                                <td class="text-sm">@{{ student.created_at }}</td>
+                                <td><span class="label label-warning text-sm">@{{ student.application_status }}</span></td>
+                                <td class="text-sm">@{{ student.application_id }}</td>
+                                <td class="text-sm">@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
+                                <td class="text-sm">@{{ student.program }}</td>
+                                <td class="text-sm">@{{ student.course }}</td>
+                                <td class="text-sm">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
+                                <td class="text-sm">@{{ student.school }}</td>
                                 <td></td>
                                 <td>
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
@@ -152,10 +152,10 @@
                                         <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
                                             <tbody>
                                             <tr>
-                                                <td style="width: 25%">
+                                                <td class="text-sm" style="width: 25%">
                                                     Application ID
                                                 </td>
-                                                <td class="text-center text-bold text-green">@{{ student.application_id }}</td>
+                                                <td class="text-center text-bold text-green text-sm">@{{ student.application_id }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -165,7 +165,7 @@
                                         <table class="table table-condensed table-striped table-bordered">
                                             <tbody>
                                             <tr>
-                                                <td style="width: 25%">
+                                                <td class="text-sm" style="width: 25%">
                                                     Application Status
                                                 </td>
                                                 <td v-cloak class="text-bold text-center">
@@ -283,66 +283,66 @@
                                         <table class="table table-condensed table-striped table-bordered">
                                             <tbody>
                                             <tr>
-                                                <td style="width: 200px">
+                                                <td class="text-sm" style="width: 200px">
                                                     Fullname
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.last_name }}, @{{ student.first_name }} @{{ student.middle_name }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Birth Date
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.birthdate }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Gender
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.gender }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Address
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.address }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Home Number
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.home_number }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Mobile Number
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.mobile_number }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Skype
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.skype_id }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Facebook Email
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.fb_email }}
                                                 </td>
                                             </tr>
@@ -353,26 +353,26 @@
                                         <label class="control-label">School Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td style="width: 200px">
+                                                <td class="text-sm" style="width: 200px">
                                                     College
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.school }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Course
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.course }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Year Level
                                                 </td>
-                                                <td v-cloak class="text-bold">
+                                                <td v-cloak class="text-sm text-bold">
                                                     @{{ student.year }}
                                                 </td>
                                             </tr>
@@ -382,11 +382,11 @@
                                         <label class="control-label">Host Company Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td style="width: 200px">
+                                                <td class="text-sm" style="width: 200px">
                                                     Host Company
                                                 </td>
                                                 <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.company }}
+                                                    <label class="text-sm">@{{ student.company }}</label>
                                                     <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -405,11 +405,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Position
                                                 </td>
                                                 <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.position }}
+                                                    <label class="text-sm">@{{ student.position }}</label>
                                                     <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -425,9 +425,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Start Date</td>
+                                                <td class="text-sm">Start Date</td>
                                                 <td v-if="!setting.host.startIsEdit">
-                                                    @{{ student.program_start_date }}
+                                                    <label class="text-sm">@{{ student.program_start_date }}</label>
                                                     <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -443,9 +443,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>End Date</td>
+                                                <td class="text-sm">End Date</td>
                                                 <td v-if="!setting.host.endIsEdit">
-                                                    @{{ student.program_end_date }}
+                                                    <label class="text-sm">@{{ student.program_end_date }}</label>
                                                     <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -461,11 +461,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Stipend
                                                 </td>
                                                 <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.stipend }}
+                                                    <label class="text-sm">@{{ student.stipend }}</label>
                                                     <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -481,11 +481,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Visa Sponsor
                                                 </td>
                                                 <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.sponsor }}
+                                                    <label class="text-sm">@{{ student.sponsor }}</label>
                                                     <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -509,11 +509,11 @@
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td style="width: 200px">
+                                                <td class="text-sm" style="width: 200px">
                                                     Program ID Number
                                                 </td>
                                                 <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.program_id_no }}
+                                                    <label class="text-sm">@{{ student.program_id_no }}</label>
                                                     <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -529,11 +529,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     SEVIS ID
                                                 </td>
                                                 <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.sevis_id }}
+                                                    <label class="text-sm">@{{ student.sevis_id }}</label>
                                                     <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -549,9 +549,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Interview Schedule</td>
+                                                <td class="text-sm">
+                                                    Interview Schedule
+                                                </td>
                                                 <td v-if="!setting.visa.scheduleIsEdit">
-                                                    @{{ student.visa_interview_schedule }}
+                                                    <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
                                                     <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -572,11 +574,11 @@
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td style="width: 200px">
+                                                <td class="text-sm" style="width: 200px">
                                                     Departure Date
                                                 </td>
                                                 <td v-if="!setting.flight.departureIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.date_of_departure }}
+                                                    <label class="text-sm">@{{ student.date_of_departure }}</label>
                                                     <a @click="hideField('departure')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -592,11 +594,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <td class="text-sm">
                                                     Arrival Date
                                                 </td>
                                                 <td v-if="!setting.flight.arrivalIsEdit" v-cloak class="text-bold">
-                                                    @{{ student.date_of_arrival }}
+                                                    <label class="text-sm">@{{ student.date_of_arrival }}</label>
                                                     <a @click="hideField('arrival')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -629,7 +631,7 @@
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in basicRequirements">
-                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
@@ -657,7 +659,7 @@
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in paymentRequirements">
-                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
@@ -685,7 +687,7 @@
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in visaRequirements">
-                                            <td>@{{ requirement.name }}</td>
+                                            <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>

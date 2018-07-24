@@ -60,15 +60,29 @@
             </div>
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <i class="fa fa-calendar"></i>
                     <label for="" class="control-label">Schedule of Events</label>
                 </div>
                 <div class="box-body">
-                    <strong>
-                        <i class="fa fa-address-card"></i>
-                        Home Address
-                    </strong>
-                    <p class="text-muted">@{{ student.address }}</p>
-                    <hr>
+                    <ul class="products-list product-list-in-box">
+                        <li class="item" v-if="events == 0">
+                            No Upcoming Event
+                        </li>
+                        <li v-else class="item" v-for="event in events">
+                            <div class="product-img">
+                                <img src="http://via.placeholder.com/50x50" alt="">
+                            </div>
+                            <div class="product-info">
+                                <a href="javascript:void(0)" class="product-title" @click="viewEvent(event.id)">
+                                    @{{ event.name }}
+                                    <span class="label label-primary pull-right">@{{ event.date }}</span>
+                                </a>
+                                <span class="product-description">
+                                    @{{ event.description }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -220,7 +234,7 @@
             </div>
         </div>
 
-        <div class="modal" id="file-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal fade" id="file-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <form>
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -248,6 +262,7 @@
                         </div>
                     </div>
                     <div class="modal-header">
+                        <label for="" class="control-label"><i class="fa fa-user"></i>  User Profile</label>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"></h4>
                     </div>
@@ -256,9 +271,9 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td style="width: 20%;">First name</td>
+                                    <td class="text-sm" style="width: 20%;">First name</td>
                                     <td v-if="!setting.firstNameIsEdit" class="text-center">
-                                        @{{ student.first_name }}
+                                        <label class="text-sm text-bold"> @{{ student.first_name }}</label>
                                         <a @click="hideField('firstName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -276,9 +291,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Middle name</td>
+                                    <td class="text-sm">Middle name</td>
                                     <td v-if="!setting.middleNameIsEdit" class="text-center">
-                                        @{{ student.middle_name }}
+                                        <label class="text-sm text-bold">@{{ student.middle_name }}</label>
                                         <a @click="hideField('middleName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -296,9 +311,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Last name</td>
+                                    <td class="text-sm">Last name</td>
                                     <td v-if="!setting.lastNameIsEdit" class="text-center">
-                                        @{{ student.last_name }}
+                                        <label class="text-sm text-bold">@{{ student.last_name }}</label>
                                         <a @click="hideField('lastName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -316,9 +331,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Birthdate</td>
+                                    <td class="text-sm">Birthdate</td>
                                     <td v-if="!setting.birthDateIsEdit" class="text-center">
-                                        @{{ student.birthdate }}
+                                        <label class="text-sm text-bold">@{{ student.birthdate }}</label>
                                         <a @click="hideField('birthdate');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -336,9 +351,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Gender</td>
+                                    <td class="text-sm">Gender</td>
                                     <td v-if="!setting.genderIsEdit" class="text-center">
-                                        @{{ student.gender }}
+                                        <label class="text-sm text-bold">@{{ student.gender }}</label>
                                         <a @click="hideField('gender');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -365,9 +380,9 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td style="width: 20%;">Address</td>
+                                    <td class="text-sm" style="width: 20%;">Address</td>
                                     <td v-if="!setting.addressIsEdit" class="text-center">
-                                        @{{ student.address }}
+                                        <label class="text-sm text-bold">@{{ student.address }}</label>
                                         <a @click="hideField('address');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -385,9 +400,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Home number</td>
+                                    <td class="text-sm">Home number</td>
                                     <td v-if="!setting.homeNumberIsEdit" class="text-center">
-                                        @{{ student.home_number }}
+                                        <label class="text-sm text-bold">@{{ student.home_number }}</label>
                                         <a @click="hideField('homeNumber');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -405,9 +420,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Mobile number</td>
+                                    <td class="text-sm">Mobile number</td>
                                     <td v-if="!setting.mobileNumberIsEdit" class="text-center">
-                                        @{{ student.mobile_number }}
+                                        <label class="text-sm text-bold">@{{ student.mobile_number }}</label>
                                         <a @click="hideField('mobileNumber');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -430,9 +445,9 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td style="width: 20%;">School</td>
+                                    <td class="text-sm" style="width: 20%;">School</td>
                                     <td v-if="!setting.schoolIsEdit" class="text-center">
-                                        @{{ student.school }}
+                                        <label class="text-sm text-bold">@{{ student.school }}</label>
                                         <a @click="hideField('school');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -452,9 +467,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Course</td>
+                                    <td class="text-sm">Course</td>
                                     <td v-if="!setting.courseIsEdit" class="text-center">
-                                        @{{ student.course }}
+                                        <label class="text-sm text-bold">@{{ student.course }}</label>
                                         <a @click="hideField('course');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -472,9 +487,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Skype ID</td>
+                                    <td class="text-sm">Skype ID</td>
                                     <td v-if="!setting.skypeIdIsEdit" class="text-center">
-                                        @{{ student.skype_id }}
+                                        <label class="text-sm text-bold">@{{ student.skype_id }}</label>
                                         <a @click="hideField('skypeId');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -497,6 +512,34 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
+        <div class="modal fade" id="view-event" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <form>
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="box box-solid">
+                                <div class="box-body">
+                                    <div>
+                                        <label>@{{ event.name }}</label>
+                                        <label class="pull-right">@{{ event.date }}</label>
+                                    </div>
+                                    <div class="m-t-10">
+                                        <p class="text-justify">
+                                            @{{ event.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </form>
+        </div><!-- /.modal -->
     </div>
 @endsection
 
@@ -509,6 +552,8 @@
                 basicRequirements: [],
                 paymentRequirements: [],
                 visaRequirements: [],
+                events: [],
+                event: [],
                 user_id: '{{ Auth::user()->id }}',
                 setting: {
                     firstNameIsEdit: false,
@@ -528,6 +573,7 @@
             },
             mounted: function() {
                 this.loadStudentDetails();
+                this.loadEvents();
                 setTimeout(() => {
                     this.loadBasicRequirements(this.student.program_id);
                     this.loadPaymentRequirements(this.student.program_id);
@@ -571,8 +617,20 @@
                             console.log(error);
                     });
                 },
+                loadEvents() {
+                    axios.get('/event/view')
+                        .then((response) => {
+                            this.events = response.data.data;
+                        }).catch((error) => {
+                            console.log(error);
+                    })
+                },
                 viewProfile() {
                     $('#profile-modal').modal('show');
+                },
+                viewEvent(id) {
+                    this.event = _.find(this.events, (obj) => { return obj.id === id });
+                    $('#view-event').modal('show');
                 },
                 updateField(field, input) {
                     this.loading = true;

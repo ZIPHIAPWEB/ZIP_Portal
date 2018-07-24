@@ -41,6 +41,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/host', 'pages.setting.setting-host-company-superadmin')->name('s.host');
     Route::view('/sa/s/school', 'pages.setting.setting-school-superadmin')->name('s.school');
 
+    Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
+
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
@@ -165,6 +167,14 @@ Route::prefix('school')->group(function() {
     Route::get('/{id}/edit', 'SchoolController@edit')->name('school.edit');
     Route::post('{id}/update', 'SchoolController@update')->name('school.update');
     Route::post('{id}/delete', 'SchoolController@delete')->name('school.delete');
+});
+
+Route::prefix('event')->group(function() {
+    Route::get('/view', 'EventController@view')->name('event.view');
+    Route::post('/store', 'EventController@store')->name('event.store');
+    Route::get('/{id}/edit', 'EventController@edit')->name('event.edit');
+    Route::post('/{id}/update', 'EventController@update')->name('event.update');
+    Route::post('/{id}/delete', 'EventController@delete')->name('event.delete');
 });
 
 Route::prefix('helper')->group(function() {

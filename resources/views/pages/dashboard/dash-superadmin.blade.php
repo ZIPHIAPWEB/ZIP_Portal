@@ -12,7 +12,7 @@
     <li class="treeview {{ Route::currentRouteNamed('um.students') ? 'active' : '' }}{{ Route::currentRouteNamed('um.coordinators') ? 'active' : '' }}{{ Route::currentRouteNamed('um.sponsors') ? 'active' : '' }}">
         <a href="#">
             <i class="fa fa-users"></i>
-            <span><small>User Management</small></span>
+            <span class="text-sm">User Management</span>
             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -26,7 +26,7 @@
     <li class="treeview {{ Route::currentRouteNamed('ac.role') ? 'active' : '' }}{{ Route::currentRouteNamed('ac.permission') ? 'active' : '' }}">
         <a href="#">
             <i class="fa fa-key"></i>
-            <span><small>Access Control Management</small></span>
+            <span class="text-sm">Access Control Management</span>
             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -36,9 +36,15 @@
             <li class="{{ Route::currentRouteNamed('ac.permission') ? 'active' : '' }}"><a href="{{ route('ac.permission') }}"><i class="fa fa-circle-o"></i> <small>Permissions</small></a></li>
         </ul>
     </li>
+    <li class="{{ Route::currentRouteNamed('sa.events') ? 'active' : '' }}">
+        <a href="{{ route('sa.events') }}">
+            <i class="fa fa-calendar"></i> <span class="text-sm">Event Management</span>
+        </a>
+    </li>
     <li>
         <a href="#">
-            <i class="fa fa-desktop"></i> <span><small>Website Content Management</small></span>
+            <i class="fa fa-desktop"></i>
+            <span class="text-sm">Website Content Management</span>
         </a>
     </li>
     <li class="header">Settings</li>
