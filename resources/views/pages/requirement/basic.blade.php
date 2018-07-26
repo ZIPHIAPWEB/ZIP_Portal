@@ -123,7 +123,6 @@
                 },
                 handleFileUpload() {
                     this.file = this.$refs.file.files[0];
-                    console.log(this.file);
                 },
                 submitFile() {
                     this.loading = true;

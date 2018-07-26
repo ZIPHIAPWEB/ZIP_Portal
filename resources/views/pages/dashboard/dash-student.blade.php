@@ -41,9 +41,11 @@
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/350x350" alt="User profile picture"/>
+                    <a href="javascript:void(0)" @click="selectPhoto()">
+                        <img class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
+                    </a>
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
-                    <p class="text-muted text-center">@{{ student.position }}</p>
+                    <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Application Status</b>
@@ -89,6 +91,7 @@
         <div class="col-md-9">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <span class="fa fa-building"></span>
                     <label for="" class="control-label">Host Company Details</label>
                 </div>
                 <div class="box-body">
@@ -120,6 +123,7 @@
             </div>
             <div class="box box-primary">
                 <div class="box-header with-header">
+                    <span class="fa fa-cc-visa"></span>
                     <label for="" class="control-label">Visa Interview Details</label>
                 </div>
                 <div class="box-body">
@@ -143,6 +147,7 @@
             </div>
             <div class="box box-primary">
                 <div class="box-header with-header">
+                    <span class="fa fa-plane"></span>
                     <label class="control-label">Flight Details</label>
                 </div>
                 <div class="box-body">
@@ -164,16 +169,19 @@
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#activity" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-file"></span>
                             <label for="" class="control-label">Basic Requirementments</label>
                         </a>
                     </li>
                     <li class="">
                         <a href="#timeline" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-credit-card"></span>
                             <label for="" class="control-label">Payment Requirementments</label>
                         </a>
                     </li>
                     <li class="">
                         <a href="#settings" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-book"></span>
                             <label for="" class="control-label">Visa Requirementments</label>
                         </a>
                     </li>
@@ -233,25 +241,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="file-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-            <form>
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"></h4>
-                        </div>
-                        <div class="modal-body">
-
-                        </div>
-                        <div class="modal-footer clearfix">
-                            <button class="btn btn-primary btn-flat btn-block">Upload File</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </form>
-        </div><!-- /.modal -->
 
         <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
@@ -540,6 +529,23 @@
                 </div><!-- /.modal-dialog -->
             </form>
         </div><!-- /.modal -->
+
+        <div class="modal fade" id="photo-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="file" ref="file" @change="handleFileUpload()">
+                        </div>
+                        <div class="modal-footer clearfix">
+                            <button @click="uploadPhoto()" class="btn btn-primary btn-flat btn-block">Upload File</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
 @endsection
 
@@ -569,7 +575,8 @@
                     skypeIdIsEdit: false
                 },
                 field: '',
-                loading: false
+                loading: false,
+                file: ''
             },
             mounted: function() {
                 this.loadStudentDetails();
@@ -580,7 +587,15 @@
                     this.loadVisaRequirements(this.student.visa_sponsor_id);
                 }, 1000);
             },
+            filters: {
+                avatar: function (value) {
+                    return `/storage/${value}`
+                }
+            },
             methods: {
+                handleFileUpload () {
+                    this.file = this.$refs.file.files[0];
+                },
                 loadStudentDetails() {
                     axios.get(`/stud/view/${this.user_id}`)
                         .then((response) => {
@@ -631,6 +646,28 @@
                 viewEvent(id) {
                     this.event = _.find(this.events, (obj) => { return obj.id === id });
                     $('#view-event').modal('show');
+                },
+                selectPhoto () {
+                    $('#photo-upload').modal('show');
+                },
+                uploadPhoto () {
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios.post(`/stud/photo/upload`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                        .then((response) => {
+                            this.loadStudentDetails();
+                            $('#photo-upload').modal('hide');
+                            swal({
+                                title: 'Success',
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        });
                 },
                 updateField(field, input) {
                     this.loading = true;

@@ -13,6 +13,7 @@ use App\SponsorRequirement;
 use App\Student;
 use App\User;
 use App\VisaRequirement;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -101,13 +102,14 @@ class StudentController extends Controller
 
     public function viewStudent($id)
     {
-        $student = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-                          ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
-                          ->leftjoin('schools', 'students.school', '=', 'schools.id')
-                          ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
-                          ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
-                          ->where('students.user_id', $id)
-                          ->first();
+        $student = User::join('students', 'users.id', '=', 'students.user_id')
+                       ->leftjoin('programs', 'students.program_id', '=', 'programs.id')
+                       ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
+                       ->leftjoin('schools', 'students.school', '=', 'schools.id')
+                       ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
+                       ->select(['users.profile_picture','students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
+                       ->where('students.user_id', $id)
+                       ->first();
 
         return new SuperAdminResource($student);
     }
@@ -142,17 +144,17 @@ class StudentController extends Controller
                                 ->storeAs('public/basic', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' .$extension);
 
                 BasicRequirement::create([
-                    'user_id'           =>  Auth::user()->id,
+                    'user_id'           =>  $request->user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
                 ]);
 
-                $student = Student::where('user_id', Auth::user()->id)->first();
+                $student = Student::where('user_id', $request->user()->id)->first();
                 $requirement = ProgramRequirement::find($id);
 
                 Log::create([
-                    'user_id'   => Auth::user()->id,
+                    'user_id'   => $request->user()->id,
                     'activity'  => 'Uploaded a ' . $requirement->name
                 ]);
 
@@ -204,17 +206,17 @@ class StudentController extends Controller
                                 ->storeAs('public/payment', $request->user()->name . '-' . date('Ymd') .uniqid() . '.' .$extension);
 
                 PaymentRequirement::create([
-                    'user_id'           =>  Auth::user()->id,
+                    'user_id'           =>  $request->user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
                 ]);
 
-                $student = Student::where('user_id', Auth::user()->id)->first();
+                $student = Student::where('user_id', $request->user()->id)->first();
                 $requirement = ProgramPayment::find($id);
 
                 Log::create([
-                    'user_id'   =>  Auth::user()->id,
+                    'user_id'   => $request->user()->id,
                     'activity'  =>  'Uploaded a ' . $requirement->name
                 ]);
 
@@ -266,17 +268,17 @@ class StudentController extends Controller
                                 ->storeAs('public/visa', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' . $extension);
 
                 VisaRequirement::create([
-                    'user_id'           => Auth::user()->id,
+                    'user_id'           =>  $request->user()->id,
                     'requirement_id'    =>  $id,
                     'status'            =>  true,
                     'path'              =>  $path
                 ]);
 
-                $student = Student::where('user_id', Auth::user()->id)->first();
+                $student = Student::where('user_id', $request->user()->id)->first();
                 $requirement = SponsorRequirement::find($id);
 
                 Log::create([
-                    'user_id'   =>  Auth::user()->id,
+                    'user_id'   =>  $request->user()->id,
                     'activity'  =>  'Uploaded a ' . $requirement->name
                 ]);
 
@@ -300,5 +302,22 @@ class StudentController extends Controller
         VisaRequirement::find($id)->delete();
 
         return response()->json(['message'  => 'File Removed']);
+    }
+
+    public function uploadProfilePicture(Request $request)
+    {
+        if ($request->hasFile('file')) {
+
+            $path = $request->file('file')
+                            ->store('avatar', 'public');
+
+            Storage::disk('public')->delete($request->user()->profile_picture);
+
+            User::find($request->user()->id)->update([
+                'profile_picture'   =>  $path
+            ]);
+
+            return response()->json($request->user()->profile_picture);
+        }
     }
 }

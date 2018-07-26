@@ -88,6 +88,8 @@ Route::prefix('stud')->group(function() {
     Route::post('/validateDetails', 'StudentController@validatePersonalDetails')->name('stud.validate.details');
     Route::post('/details/store', 'StudentController@storePersonalDetails')->name('stud.store.details');
 
+    Route::post('/photo/upload', 'StudentController@uploadProfilePicture')->name('stud.upload.profile');
+
 });
 
 Route::prefix('sa')->group(function() {
