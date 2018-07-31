@@ -66,14 +66,19 @@
                     <button @click="createRole()" class="btn btn-primary btn-flat btn-sm m-b-10 pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp; Create</button>
                     <table id="role-table" class="table table-bordered table-striped">
                         <thead>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Display Name</th>
-                        <th>Description</th>
-                        <th>Created At</th>
-                        <th>Action</th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Display Name</th>
+                            <th>Description</th>
+                            <th>Created At</th>
+                            <th>Action</th>
                         </thead>
-                        <tbody>
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
                             <tr v-for="role in roles.data">
                                 <td>@{{ role.id }}</td>
                                 <td>@{{ role.name }}</td>
@@ -83,6 +88,13 @@
                                 <td>
                                     <button @click="editRole(role.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteRole(role.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -158,41 +170,66 @@
                 last_page: '',
                 url: '',
                 title: '',
-                button: ''
+                button: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
                 this.loadRoles();
             },
             methods: {
                 previous() {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.roles = response.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.roles = response.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     })
                 },
                 next() {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.roles = response.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.roles = response.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                         console.log(error);
                     })
                 },
                 loadRoles() {
+                    this.loading.table = true;
                     axios.get('/role/view')
                         .then((response) => {
-                            this.roles = response.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.roles = response.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });

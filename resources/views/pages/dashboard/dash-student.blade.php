@@ -170,19 +170,19 @@
                     <li class="active">
                         <a href="#activity" data-toggle="tab" aria-expanded="true">
                             <span class="fa fa-file"></span>
-                            <label for="" class="control-label">Basic Requirementments</label>
+                            <label for="" class="control-label">Basic Requirements</label>
                         </a>
                     </li>
                     <li class="">
                         <a href="#timeline" data-toggle="tab" aria-expanded="false">
                             <span class="fa fa-credit-card"></span>
-                            <label for="" class="control-label">Payment Requirementments</label>
+                            <label for="" class="control-label">Payment Requirements</label>
                         </a>
                     </li>
                     <li class="">
                         <a href="#settings" data-toggle="tab" aria-expanded="false">
                             <span class="fa fa-book"></span>
-                            <label for="" class="control-label">Visa Requirementments</label>
+                            <label for="" class="control-label">Visa Requirements</label>
                         </a>
                     </li>
                 </ul>

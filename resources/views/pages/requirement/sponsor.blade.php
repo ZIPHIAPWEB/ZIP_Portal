@@ -44,17 +44,29 @@
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody v-cloak>
-                            <tr v-for="requirement in requirements">
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="requirement in requirements">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
                                     <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
                                     <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td>
-                                    <button @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <button v-if="!requirement.status" @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                     <button v-if="requirement.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span> Download File</button>
-                                    <button @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                    <button v-if="requirement.status" @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -67,7 +79,7 @@
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
                         <div class="overlay-wrapper">
-                            <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                            <div class="overlay" :style="{ display: loading.uploading ? 'block' : 'none' }">
                                 <i class="fa fa-circle-o-notch fa-spin"></i>
                             </div>
                         </div>
@@ -99,16 +111,27 @@
                 bReqId: '',
                 file: '',
                 sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}",
-                loading: false
+                loading: {
+                    uploading: false,
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
                 this.loadRequirements(this.sponsor_id);
             },
             methods: {
                 loadRequirements(sponsorId) {
+                    this.loading.table = true;
                     axios.get(`/stud/requirement/visa/${sponsorId}`)
                         .then((response) => {
-                            this.requirements = response.data.data;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.requirements = response.data.data;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -122,7 +145,7 @@
                     this.file = this.$refs.file.files[0];
                 },
                 submitFile() {
-                    this.loading = true;
+                    this.loading.uploading = true;
                     let formData = new FormData();
 
                     formData.append('file', this.file);
@@ -133,7 +156,7 @@
                         }
                     })
                         .then((response) => {
-                            this.loading = false;
+                            this.loading.uploading = false;
                             this.loadRequirements(this.sponsor_id);
                             $('#file-upload').modal('hide');
                             swal({

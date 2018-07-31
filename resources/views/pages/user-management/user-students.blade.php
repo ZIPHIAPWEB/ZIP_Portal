@@ -89,8 +89,13 @@
                             <th class="text-center">Activated</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-for="student in students">
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="student in students">
                                 <td class="text-sm">@{{ student.created_at }}</td>
                                 <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }}</label></td>
                                 <td class="text-center text-sm">@{{ student.application_id }}</td>
@@ -108,6 +113,13 @@
                                     <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
+                        </tbody>
+                        <tbody v-else>
+                        <tr>
+                            <td valign="top" colspan="15" class="text-center">
+                                No Records
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -425,7 +437,11 @@
                 },
                 actions: [],
                 logs: [],
-                search: ''
+                search: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             watch: {
                 search: function (value) {
@@ -441,35 +457,63 @@
             },
             methods: {
                 PreviousPage: function () {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 NextPage: function () {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 LoadStudents: function () {
+                    this.loading.table = true;
                     axios.get(`/stud/show`)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 FilterStudents: function (lastName) {
+                    this.loading.table = true;
                     axios.get(`/filter/sa/student/${lastName}`)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 ViewStudent: function (student) {

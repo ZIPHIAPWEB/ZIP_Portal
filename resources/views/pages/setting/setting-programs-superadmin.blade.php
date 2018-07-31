@@ -78,9 +78,11 @@
                             <th>Description</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-if="programs.length === 0">
-                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                        <tbody v-if="hasRecords.table">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
                             </tr>
                             <tr v-else v-for="program in programs">
                                 <td v-cloak>@{{ program.name }}</td>
@@ -91,6 +93,13 @@
                                     <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteProgram(program.id)" class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                               <td valign="top" colspan="15" class="text-center">
+                                   No Records
+                               </td>
                             </tr>
                         </tbody>
                     </table>
@@ -327,7 +336,13 @@
                 payment_current_page: '',
                 payment_last_page: '',
                 payment_url: '',
-                payment_button: ''
+                payment_button: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: {
+                    table : true
+                }
             },
             mounted: function() {
                 this.loadPrograms();
@@ -339,34 +354,55 @@
                 },
                 // Program CRUD
                 previous() {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.programs = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords.table = true;
+                                this.programs = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords.table = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
                 },
                 next() {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.programs = response.data.data;
-                            this.links = r.esponse.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords.table = true;
+                                this.programs = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords.table = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
                 },
                 loadPrograms() {
+                    this.loading.table = true;
                     axios.get('/program/view')
                         .then((response) => {
-                            this.programs = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords.table = true;
+                                this.programs = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords.table = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });

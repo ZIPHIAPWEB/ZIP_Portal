@@ -79,8 +79,13 @@
                             <th>Created At</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-for="school in schools">
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="school in schools">
                                 <td v-cloak>@{{ school.name }}</td>
                                 <td v-cloak>@{{ school.display_name }}</td>
                                 <td v-cloak>@{{ school.description }}</td>
@@ -88,6 +93,13 @@
                                 <td v-cloak>
                                     <button @click="editSchool(school.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteSchool(school.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -162,7 +174,11 @@
                 url: '',
                 links: [],
                 current_page: '',
-                last_page: ''
+                last_page: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
                 this.loadSchool();
@@ -191,12 +207,19 @@
                     });
                 },
                 loadSchool() {
+                    this.loading.table = true;
                     axios.get('/school/view')
                         .then((response) => {
-                            this.schools = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.schools = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });

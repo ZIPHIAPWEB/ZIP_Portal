@@ -80,8 +80,13 @@
                             <th>Recent Activity</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-for="student in students">
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="student in students">
                                 <td class="text-sm">@{{ student.created_at }}</td>
                                 <td><span class="label label-warning text-sm">@{{ student.application_status }}</span></td>
                                 <td class="text-sm">@{{ student.application_id }}</td>
@@ -93,6 +98,13 @@
                                 <td></td>
                                 <td>
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -123,7 +135,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="overlay-wrapper">
-                        <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                        <div class="overlay" :style="{ display: loading.modal ? 'block' : 'none' }">
                             <i class="fa fa-circle-o-notch fa-spin"></i>
                         </div>
                     </div>
@@ -748,7 +760,11 @@
         const app = new Vue({
             el: '#app',
             data: {
-                loading: false,
+                loading: {
+                    modal: false,
+                    table: false
+                },
+                hasRecords: true,
                 hosts: [],
                 sponsors: [],
                 students: [],
@@ -836,14 +852,23 @@
             watch: {
                 filterName: function() {
                     if (this.filterName) {
+                        this.loading.table = true;
                         axios.get(`/filter/student/${programId}/${this.filterName}`)
                             .then((response) => {
-                                this.students = response.data.data;
-                                this.testData = response.data.data;
-                                this.links = response.data.links;
-                                this.current_page = response.data.meta.current_page;
-                                this.last_page = response.data.meta.last_page;
-                            })
+                                this.loading.table = false;
+                                if (response.data.data.length > 0) {
+                                    this.hasRecords = true;
+                                    this.students = response.data.data;
+                                    this.testData = response.data.data;
+                                    this.links = response.data.links;
+                                    this.current_page = response.data.meta.current_page;
+                                    this.last_page = response.data.meta.last_page;
+                                } else {
+                                    this.hasRecords = false;
+                                }
+                            }).catch((error) => {
+                                this.loading.table = false;
+                        })
                     } else {
                         this.loadStudents(programId)
                     }
@@ -851,45 +876,83 @@
             },
             methods: {
                 filterStatus () {
+                    this.loading.table = true;
                     axios.get(`/filter/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
-                        })
+                            this.loading.table = false;
+                            if  (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
+                        }).catch((error) => {
+                            this.loading.table = false;
+                    })
 
                     axios.get(`/helper/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
                         .then((response) => {
-                            this.testData = response.data.data;
-                        })
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.testData = response.data.data;
+                            } else {
+                                this.hasRecords = false;
+                            }
+                        }).catch((error) => {
+                            this.loading.table = false;
+                    })
                 },
                 next () {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if  (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 previous () {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if  (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 loadStudents (programId) {
+                    this.loading.table = true;
                     axios.get(`/coor/program/${programId}`)
                         .then((response) => {
-                            this.students = response.data.data;
-                            this.testData = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.testData = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                 },
                 viewStudent (studentId) {
@@ -966,12 +1029,12 @@
                     this.appStatus = '';
                     switch (status) {
                         case 'Assessed':
-                            this.loading = true;
+                            this.loading.modal = true;
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
-                                    this.loading = false;
+                                    this.loading.modal = false;
                                     swal({
                                         title: response.data,
                                         type: 'success',
@@ -986,13 +1049,13 @@
                             });
                             break;
                         case 'Confirmed':
-                            this.loading = true;
+                            this.loading.modal = true;
                             axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                 .then((response) => {
 
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
-                                    this.loading = false;
+                                    this.loading.modal = false;
                                     swal({
                                         title: response.data,
                                         type: 'success',
@@ -1041,7 +1104,7 @@
                     }
                 },
                 submitHostCompany() {
-                    this.loading = true;
+                    this.loading.modal = true;
                     let formData = new FormData();
                         formData.append('name', this.host.name);
                         formData.append('position', this.host.position);
@@ -1054,7 +1117,7 @@
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
-                            this.loading = false;
+                            this.loading.modal = false;
                             this.show.hired = false;
                             swal({
                                 title: response.data,
@@ -1070,7 +1133,7 @@
                     })
                 },
                 submitForVisaInterview() {
-                    this.loading = true;
+                    this.loading.modal = true;
                     let formData = new FormData();
                         formData.append('sevis', this.visa.sevis);
                         formData.append('program', this.visa.programId);
@@ -1079,7 +1142,7 @@
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
-                            this.loading = false;
+                            this.loading.modal = false;
                             this.show.visa = false;
                             swal({
                                 title: response.data,
@@ -1095,12 +1158,12 @@
                     })
                 },
                 updateField(field, input) {
-                    this.loading = true;
+                    this.loading.modal = true;
                     let formData = new FormData();
                         formData.append('field', input);
                     axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
                         .then((response) => {
-                            this.loading = false;
+                            this.loading.modal = false;
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
                             swal({

@@ -74,15 +74,20 @@
                 </div>
                 <div class="box-body">
                     <button @click="createEvent()" class="btn btn-primary btn-flat btn-sm pull-right m-b-5"><span class="fa fa-plus"></span> Create</button>
-                    <table class="table table-bordered table-striped table-condensed" style="table-layout: fixed;">
+                    <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                            <th style="width: 10%">Event Date</th>
-                            <th class="text-center" style="width: 10%;">Event Name</th>
+                            <th>Event Date</th>
+                            <th class="text-center">Event Name</th>
                             <th class="text-center">Event Description</th>
-                            <th class="text-center" style="width: 10%">Action</th>
+                            <th class="text-center">Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-for="event in events">
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="event in events">
                                 <td>@{{ event.date }}</td>
                                 <td class="text-sm text-center">@{{ event.name }}</td>
                                 <td class="text-center text-sm" style="display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@{{ event.description }}</td>
@@ -93,6 +98,13 @@
                                     <button @click="deleteEvent(event.id)" class="btn btn-danger btn-flat btn-xs">
                                         <span class="fa fa-trash"></span>
                                     </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -142,16 +154,27 @@
                     name: '',
                     description: ''
                 },
-                url: ''
+                url: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function () {
                 this.loadEvents();
             },
             methods: {
                 loadEvents() {
+                    this.loading.table = true;
                     axios.get('/event/view')
                         .then((response) => {
-                            this.events = response.data.data;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.events = response.data.data;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         })
                         .catch((error) => {
                             console.log(error);

@@ -78,9 +78,11 @@
                             <th>Created At</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-if="hosts.length === 0">
-                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
                             </tr>
                             <tr v-else v-for="host in hosts">
                                 <td v-cloak>@{{ host.name }}</td>
@@ -89,6 +91,13 @@
                                 <td v-cloak>
                                     <button @click="editHost(host.id)" class="btn btn-success btn-xs btn-flat"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteHost(host.id)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr v-else>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -159,19 +168,30 @@
                 },
                 links: [],
                 current_page: '',
-                last_page: ''
+                last_page: '',
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
                 this.loadHost();
             },
             methods: {
                 loadHost() {
+                    this.loading.table = true;
                     axios.get('/host/view')
                         .then((response) => {
-                            this.hosts = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.hosts = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -217,23 +237,37 @@
                     });
                 },
                 previous() {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.hosts = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.hosts = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
                 },
                 next() {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.hosts = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.hosts = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                         console.log(error);
                     });

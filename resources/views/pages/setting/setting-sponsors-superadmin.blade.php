@@ -79,9 +79,11 @@
                             <th>Created At</th>
                             <th>Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-if="sponsors.length === 0">
-                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
                             </tr>
                             <tr v-else v-for="sponsor in sponsors">
                                 <td v-cloak>@{{ sponsor.name }}</td>
@@ -92,6 +94,13 @@
                                     <button @click="createRequirements(sponsor.id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-plus"></span></button>
                                     <button @click="editSponsor(sponsor.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button @click="deleteSponsor(sponsor.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -252,30 +261,48 @@
                 req_url: '',
                 req_links: [],
                 req_current_page: 1,
-                req_last_page: 1
+                req_last_page: 1,
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
-                this.viewSponsor();
+                this.loadSponsor();
             },
             methods: {
                 prev() {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.sponsors = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.sponsors = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
                 },
                 next() {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.sponsors = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.sponsors = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -290,13 +317,20 @@
                     this.button = 'Add';
                     $('#create-sponsor-modal').modal('show');
                 },
-                viewSponsor() {
+                loadSponsor() {
+                    this.loading.table = true;
                     axios.get('/sponsor/view')
                         .then((response) => {
-                            this.sponsors = response.data.data;
-                            this.links = response.data.links;
-                            this.current_page = response.data.meta.current_page;
-                            this.last_page = response.data.meta.last_page;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.sponsors = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });

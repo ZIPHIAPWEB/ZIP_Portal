@@ -84,9 +84,11 @@
                             <th class="text-center">Contact</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody>
-                            <tr v-if="coordinators.length === 0">
-                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                        <tbody v-if="hasRecords">
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
                             </tr>
                             <tr v-else v-for="coordinator in coordinators">
                                 <td class="text-center">
@@ -103,6 +105,13 @@
                                     <button @click="ViewLogs(coordinator)" class="btn btn-default btn-flat btn-xs"><i class="fa fa-file"></i>&nbsp; Logs</button>
                                     <button @click="ActivateCoordinator(coordinator.verified, coordinator.user_id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-cogs"></span>&nbsp; @{{ coordinator.verified ? 'Deactivate' : 'Activate' }}</button>
                                     <button @click="DeleteCoordinator(coordinator.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span>&nbsp; Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
                                 </td>
                             </tr>
                         </tbody>
@@ -170,38 +179,63 @@
                 coordinators: [],
                 links: [],
                 meta: [],
-                actions: []
+                actions: [],
+                loading: {
+                    table: false
+                },
+                hasRecords: true
             },
             mounted: function() {
                 this.loadCoordinators();
             },
             methods: {
                 previous: function () {
+                    this.loading.table = true;
                     axios.get(this.links.prev)
                         .then((response) => {
-                            this.coordinators = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.coordinators = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
-                            console.log(error);
+                            this.hasRecords = false;
                     })
                 },
                 next: function () {
+                    this.loading.table = true;
                     axios.get(this.links.next)
                         .then((response) => {
-                            this.coordinators = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.coordinators = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
-                        console.log(error);
+                            this.hasRecords = false;
                     })
                 },
                 loadCoordinators: function () {
+                    this.loading.table = true;
                     axios.get('/coor/show')
                         .then((response) => {
-                            this.coordinators = response.data.data;
-                            this.links = response.data.links;
-                            this.meta = response.data.meta;
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.coordinators = response.data.data;
+                                this.links = response.data.links;
+                                this.meta = response.data.meta;
+                            } else {
+                                this.hasRecords = false;
+                            }
                         }).catch((error) => {
                             console.log(error);
                     });
