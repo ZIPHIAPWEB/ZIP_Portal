@@ -185,25 +185,26 @@
                         confirmButtonText: 'Yes, delete it!',
                         confirmButtonColor: 'red',
                         showLoaderOnConfirm: true,
-                    }).then((isConfirm) => {
-                        if (isConfirm.value) {
-                            swal.showLoading();
+                        preConfirm: (remove) => {
                             this.bReqId = requirement.bReqId;
-                            this.bReqId = requirement.bReqId;
-                            axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
+                            return axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
                                 .then((response) => {
-                                    this.loadRequirements(this.program_id);
-                                    swal({
-                                        title: response.data.message,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    })
+                                    return response;
                                 }).catch((error) => {
-                                    swal({
-                                        title: 'An Error has occur',
-                                        type: 'error',
-                                        confirmButtonText: 'Go Back!'
-                                    })
+                                swal({
+                                    title: 'An Error has occur',
+                                    type: 'error',
+                                    confirmButtonText: 'Go Back!'
+                                })
+                            })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.loadRequirements(this.program_id);
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
                             })
                         }
                     })

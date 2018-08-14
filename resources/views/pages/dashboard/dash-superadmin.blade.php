@@ -41,8 +41,8 @@
             <i class="fa fa-calendar"></i> <span class="text-sm">Event Management</span>
         </a>
     </li>
-    <li>
-        <a href="#">
+    <li class="{{ Route::currentRouteNamed('sa.cms') ? 'active' : '' }}">
+        <a href="{{ route('sa.cms') }}">
             <i class="fa fa-desktop"></i>
             <span class="text-sm">Website Content Management</span>
         </a>

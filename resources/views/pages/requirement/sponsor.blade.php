@@ -182,26 +182,28 @@
                        confirmButtonText: 'Yes, delete it!',
                        confirmButtonColor: 'red',
                        showLoaderOnConfirm: true,
-                       }).then((isConfirm) => {
-                           if (isConfirm.value) {
-                               swal.showLoading();
-                               this.bReqId = requirement.bReqId;
-                               axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
-                                   .then((response) => {
-                                       this.loadRequirements(this.sponsor_id);
-                                       swal({
-                                           title: 'Success',
-                                           type: 'success',
-                                           confirmButtonText: 'Continue'
-                                       })
-                                   }).catch((error) => {
-                                       swal({
-                                           title: 'An Error has occur',
-                                           type: 'error',
-                                           confirmButtonText: 'Go Back!'
-                                       })
+                       preConfirm: () => {
+                           this.bReqId = requirement.bReqId;
+                           return axios.post(`/stud/requirement/visa/remove/${this.bReqId}`)
+                               .then((response) => {
+                                   return response;
+                               }).catch((error) => {
+                               swal({
+                                   title: 'An Error has occur',
+                                   type: 'error',
+                                   confirmButtonText: 'Go Back!'
                                })
-                           }
+                           })
+                       }
+                   }).then((result) => {
+                       if (result.value) {
+                           this.loadRequirements(this.sponsor_id);
+                           swal({
+                               title: 'Success',
+                               type: 'success',
+                               confirmButtonText: 'Continue'
+                           })
+                       }
                    })
                 },
                 downloadFile(requirement) {

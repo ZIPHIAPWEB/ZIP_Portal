@@ -128,9 +128,9 @@ class StudentController extends Controller
                     })->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
                  ->where('program_requirements.program_id', $programId)
                  ->orderBy('name', 'asc')
-                 ->get();
+                 ->paginate(4);
 
-        return new SuperAdminResource($program);
+        return SuperAdminResource::collection($program);
     }
 
     public function uploadBasicRequirement(Request $request, $id)
@@ -165,7 +165,9 @@ class StudentController extends Controller
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
-                return response()->json(['message' => 'File Uploaded!']);
+                return response()->json(['message' => 'File Uploaded!'], 200);
+            } else {
+                return response()->json(['message' => 'File Not Uploaded'], 422);
             }
         }
 
@@ -190,9 +192,9 @@ class StudentController extends Controller
                  ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
                  ->where('program_id', $programId)
                  ->orderBy('name', 'asc')
-                 ->get();
+                 ->paginate(4);
 
-        return new SuperAdminResource($payment);
+        return SuperAdminResource::collection($payment);
     }
 
     public function uploadPaymentRequirement(Request $request, $id)
@@ -227,7 +229,9 @@ class StudentController extends Controller
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
-                return response()->json(['message'  =>  'File Uploaded']);
+                return response()->json(['message'  =>  'File Uploaded'], 200);
+            } else {
+                return response()->json(['message'  =>  'File Not Uploaded'], 422);
             }
         }
 
@@ -252,7 +256,7 @@ class StudentController extends Controller
                             ->select(['visa_requirements.id as bReqId', 'sponsor_requirements.id as pReqId', 'sponsor_requirements.name', 'visa_requirements.status', 'sponsor_requirements.path'])
                             ->where('sponsor_requirements.sponsor_id', $sponsorId)
                             ->orderBy('name', 'asc')
-                            ->get();
+                            ->paginate(4);
 
         return SuperAdminResource::collection($visa);
     }
@@ -289,7 +293,9 @@ class StudentController extends Controller
 
                 Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data))->delay($when));
 
-                return response()->json(['message'  =>  'File Uploaded']);
+                return response()->json(['message'  =>  'File Uploaded'], 200);
+            } else {
+                return response()->json(['message'  =>  'File Not Uploaded'], 422);
             }
         }
 

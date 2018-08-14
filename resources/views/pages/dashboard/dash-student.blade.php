@@ -57,7 +57,7 @@
                             <a v-else class="pull-right text-red">Your Coordinator Will Verify</a>
                         </li>
                     </ul>
-                    <button class="btn btn-primary btn-block" @click="viewProfile()">View Profile</button>
+                    <button class="btn btn-primary btn-block btn-flat" @click="viewProfile()">View Profile</button>
                 </div>
             </div>
             <div class="box box-primary">
@@ -194,7 +194,7 @@
                                 <th class="text-center">Status</th>
                             </thead>
                             <tbody>
-                                <tr v-for="requirement in basicRequirements">
+                                <tr v-for="requirement in basicRequirements.data">
                                     <td>@{{ requirement.name }}</td>
                                     <td class="text-center">
                                         <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
@@ -203,6 +203,14 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="clearfix">
+                            <button v-if="basicRequirements.links.prev" @click="pagination(basicRequirements.links.prev, 'basic')" class="btn btn-default btn-xs btn-flat pull-left">
+                                <span class="fa fa-arrow-left"></span>
+                            </button>
+                            <button v-if="basicRequirements.links.next" @click="pagination(basicRequirements.links.next, 'basic')" class="btn btn-default btn-xs btn-flat pull-right">
+                                <span class="fa fa-arrow-right"></span>
+                            </button>
+                        </div>
                     </div>
                     <div class="tab-pane" id="timeline">
                         <table class="table table-striped table-bordered table-condensed">
@@ -211,7 +219,7 @@
                             <th class="text-center">Status</th>
                             </thead>
                             <tbody>
-                            <tr v-for="requirement in paymentRequirements">
+                            <tr v-for="requirement in paymentRequirements.data">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
                                     <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
@@ -220,6 +228,14 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="clearfix">
+                            <button v-if="paymentRequirements.links.prev" @click="pagination(paymentRequirements.links.prev, 'payment')" class="btn btn-default btn-xs btn-flat pull-left">
+                                <span class="fa fa-arrow-left"></span>
+                            </button>
+                            <button v-if="paymentRequirements.links.next" @click="pagination(paymentRequirements.links.next, 'payment')" class="btn btn-default btn-xs btn-flat pull-right">
+                                <span class="fa fa-arrow-right"></span>
+                            </button>
+                        </div>
                     </div>
                     <div class="tab-pane" id="settings">
                         <table class="table table-striped table-bordered table-condensed">
@@ -228,7 +244,7 @@
                             <th class="text-center">Status</th>
                             </thead>
                             <tbody>
-                            <tr v-for="requirement in visaRequirements">
+                            <tr v-for="requirement in visaRequirements.data">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
                                     <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
@@ -237,6 +253,14 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="clearfix">
+                            <button v-if="visaRequirements.links.prev" @click="pagination(visaRequirements.links.prev, 'visa')" class="btn btn-default btn-xs btn-flat pull-left">
+                                <span class="fa fa-arrow-left"></span>
+                            </button>
+                            <button v-if="visaRequirements.links.next" @click="pagination(visaRequirements.links.next, 'visa')" class="btn btn-default btn-xs btn-flat pull-right">
+                                <span class="fa fa-arrow-right"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -555,9 +579,24 @@
             el: '#app',
             data: {
                 student: [],
-                basicRequirements: [],
-                paymentRequirements: [],
-                visaRequirements: [],
+                basicRequirements: {
+                    links: {
+                        prev: '',
+                        next: ''
+                    }
+                },
+                paymentRequirements:{
+                    links: {
+                        prev: '',
+                        next: ''
+                    }
+                },
+                visaRequirements: {
+                    links: {
+                        prev: '',
+                        next: ''
+                    }
+                },
                 events: [],
                 event: [],
                 user_id: '{{ Auth::user()->id }}',
@@ -608,8 +647,7 @@
                 loadBasicRequirements(programId) {
                     axios.get(`/stud/requirement/basic/${programId}`)
                         .then((response) => {
-                            this.basicRequirements = response.data.data;
-                            console.log(response.data.data);
+                            this.basicRequirements = response.data;
                         }).catch((error) => {
                         console.log(error);
                     });
@@ -617,8 +655,7 @@
                 loadPaymentRequirements(programId) {
                     axios.get(`/stud/requirement/payment/${programId}`)
                         .then((response) => {
-                            this.paymentRequirements = response.data.data;
-                            console.log(response.data.data);
+                            this.paymentRequirements = response.data;
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -626,8 +663,7 @@
                 loadVisaRequirements(sponsorId) {
                     axios.get(`/stud/requirement/visa/${sponsorId}`)
                         .then((response) => {
-                            this.visaRequirements = response.data.data;
-                            console.log(response.data.data);
+                            this.visaRequirements = response.data;
                         }).catch((error) => {
                             console.log(error);
                     });
@@ -639,6 +675,22 @@
                         }).catch((error) => {
                             console.log(error);
                     })
+                },
+                pagination(link, type) {
+                    axios.get(link)
+                        .then((response) => {
+                            switch (type) {
+                                case 'basic':
+                                    this.basicRequirements = response.data;
+                                    break;
+                                case 'payment':
+                                    this.paymentRequirements = response.data;
+                                    break;
+                                case 'visa':
+                                    this.visaRequirements = response.data;
+                                    break;
+                            }
+                        })
                 },
                 viewProfile() {
                     $('#profile-modal').modal('show');

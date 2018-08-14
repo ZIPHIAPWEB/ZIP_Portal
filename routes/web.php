@@ -42,6 +42,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/school', 'pages.setting.setting-school-superadmin')->name('s.school');
 
     Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
+    Route::view('/sa/cms', 'pages.cms.content-management')->name('sa.cms');
 
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');

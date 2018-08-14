@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Visa Sponsors')
+@section('title', 'Content Management')
 
 @section('sidenav')
     <li class="{{ Route::currentRouteNamed('dash.superadmin') ? 'active' : '' }}">
@@ -65,9 +65,56 @@
 @endsection
 
 @section('content')
+    <div id="app">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#one" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-file"></span>
+                            <label for="" class="control-label">Header</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#two" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-file"></span>
+                            <label for="" class="control-label">Header</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#three" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-file"></span>
+                            <label for="" class="control-label">Header</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#four" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-file"></span>
+                            <label for="" class="control-label">Header</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="one">
 
-@endsection()
+                    </div>
+                    <div class="tab-pane" id="two">
+
+                    </div>
+                    <div class="tab-pane" id="three">
+
+                    </div>
+                    <div class="tab-pane" id="four">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
 @section('script')
+    <script>
 
-@endsection()
+    </script>
+@endsection

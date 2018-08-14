@@ -38,12 +38,11 @@
     </li>
     <li class="{{ Route::currentRouteNamed('sa.events') ? 'active' : '' }}">
         <a href="{{ route('sa.events') }}">
-            <i class="fa fa-calendar"></i>
-            <span class="text-sm">Event Management</span>
+            <i class="fa fa-calendar"></i> <span class="text-sm">Event Management</span>
         </a>
     </li>
-    <li>
-        <a href="#">
+    <li class="{{ Route::currentRouteNamed('sa.cms') ? 'active' : '' }}">
+        <a href="{{ route('sa.cms') }}">
             <i class="fa fa-desktop"></i>
             <span class="text-sm">Website Content Management</span>
         </a>
@@ -53,8 +52,8 @@
         <a href="#">
             <i class="fa fa-gear"></i> <span><small>General</small></span>
             <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
         </a>
         <ul class="treeview-menu">
             <li class="{{ Route::currentRouteNamed('s.programs') ? 'active' : '' }}"><a href="{{ route('s.programs') }}"><i class="fa fa-circle-o"></i> <small>Program</small></a></li>
