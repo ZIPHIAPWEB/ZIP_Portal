@@ -79,7 +79,8 @@ class StudentController extends Controller
             'date_of_departure'         =>  '',
             'date_of_arrival'           =>  '',
             'application_id'            =>  '',
-            'application_status'        =>  'New Applicant'
+            'application_status'        =>  'New Applicant',
+            'coordinator_id'            =>  ''
         ]);
 
         return response()->json(['message' => 'Personal Details Updated']);
@@ -107,7 +108,8 @@ class StudentController extends Controller
                        ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
                        ->leftjoin('schools', 'students.school', '=', 'schools.id')
                        ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
-                       ->select(['users.profile_picture','students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
+                       ->leftjoin('coordinators', 'students.coordinator_id', '=', 'coordinators.user_id')
+                       ->select(['users.profile_picture','students.*', 'coordinators.firstName as coor_first', 'coordinators.lastName as coor_last', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
                        ->where('students.user_id', $id)
                        ->first();
 

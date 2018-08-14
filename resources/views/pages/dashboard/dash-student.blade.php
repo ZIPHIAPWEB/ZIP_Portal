@@ -51,10 +51,9 @@
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Visa Interview Status</b>
-                            <a v-if="student.visa_interview_status" class="pull-right text-green text-sm">@{{ student.visa_interview_status }}</a>
-                            <a v-else class="pull-right text-red">Your Coordinator Will Verify</a>
+                        <li class="list-group-item" v-if="student.application_status !== 'New Applicant'">
+                            <b>Program Coordinator</b>
+                            <a class="pull-right text-green text-sm">@{{ student.coor_first }} @{{ student.coor_last }}</a>
                         </li>
                     </ul>
                     <button class="btn btn-primary btn-block btn-flat" @click="viewProfile()">View Profile</button>
@@ -123,7 +122,7 @@
             </div>
             <div class="box box-primary">
                 <div class="box-header with-header">
-                    <span class="fa fa-cc-visa"></span>
+                    <span class="fa fa-flag"></span>
                     <label for="" class="control-label">Visa Interview Details</label>
                 </div>
                 <div class="box-body">
@@ -140,6 +139,10 @@
                             <tr>
                                 <td>Interview Schedule</td>
                                 <td class="text-bold">@{{ student.visa_interview_schedule }}</td>
+                            </tr>
+                            <tr>
+                                <td>Visa Interview Status</td>
+                                <td class="text-bold">@{{ student.visa_interview_status }}</td>
                             </tr>
                         </tbody>
                     </table>

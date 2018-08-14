@@ -101,7 +101,8 @@ class CoordinatorController extends Controller
             case 'Assessed' :
                 Student::where('user_id', $id)->update([
                     'application_id'        =>  '',
-                    'application_status'    =>  $status
+                    'application_status'    =>  $status,
+                    'coordinator_id'        =>  $request->user()->id
                 ]);
 
                 CoordinatorAction::create([
