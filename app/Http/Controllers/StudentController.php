@@ -27,11 +27,9 @@ class StudentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'firstName'     =>  'required',
-            'middleName'    =>  'required',
             'lastName'      =>  'required',
             'birthDate'     =>  'required',
             'gender'        =>  'required',
-            'homeNumber'    =>  'required',
             'mobileNumber'  =>  'required',
             'address'       =>  'required',
             'school'        =>  'required',

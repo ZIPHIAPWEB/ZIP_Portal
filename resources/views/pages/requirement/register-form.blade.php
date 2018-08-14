@@ -23,9 +23,8 @@
                                         <span class="help-block text-red" v-if="errors.firstName">@{{ errors.firstName[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
-                                        <label for="">Middle Name: <i class="text-red">*</i></label>
+                                        <label for="">Middle Name: </label>
                                         <input v-model="student.middleName" type="text" class="form-control">
-                                        <span class="help-block text-red" v-if="errors.middleName">@{{ errors.middleName[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name: <i class="text-red">*</i></label>
@@ -53,7 +52,6 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
                                         <input v-model="student.homeNumber" type="number" class="form-control" maxlength="11">
-                                        <span class="help-block text-red" v-if="errors.homeNumber">@{{ errors.homeNumber[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
