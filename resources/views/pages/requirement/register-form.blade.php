@@ -20,7 +20,7 @@
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name: <i class="text-red">*</i></label>
                                         <input v-model="student.firstName" type="text" class="form-control">
-                                        <span class="help-block text-red" v-if="errors.firstName">@{{ errors.firstName[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.first_name">@{{ errors.first_name[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Middle Name: </label>
@@ -29,14 +29,14 @@
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name: <i class="text-red">*</i></label>
                                         <input v-model="student.lastName" type="text" class="form-control">
-                                        <span class="help-block text-red" v-if="errors.lastName">@{{ errors.lastName[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.last_name">@{{ errors.last_name[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Date of Birth: <i class="text-red">*</i></label>
                                         <input v-model="student.birthDate" type="date" class="form-control">
-                                        <span class="help-block text-red" v-if="errors.birthDate">@{{ errors.birthDate[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.birthdate">@{{ errors.birthdate[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Gender: <i class="text-red">*</i></label>
@@ -56,7 +56,7 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
                                         <input v-model="student.mobileNumber" type="number" class="form-control" maxlength="11">
-                                        <span class="help-block text-red" v-if="errors.mobileNumber">@{{ errors.mobileNumber[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -83,7 +83,7 @@
                                         <label for="">School: <i class="text-red">*</i></label>
                                         <select v-model="student.school" class="form-control">
                                             <option value="" active>Select School</option>
-                                            <option v-for="item in schools" :value="item.id">@{{ item.name }}</option>
+                                            <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
                                         </select>
                                         <span class="help-block text-red" v-if="errors.school">@{{ errors.school[0] }}</span>
                                     </div>
@@ -112,7 +112,7 @@
                                         <label for="">Program: <i class="text-red">*</i></label>
                                         <select v-model="student.program_id" class="form-control">
                                             <option value="" active>Select your program</option>
-                                            <option v-for="program in programs" :value="program.id">@{{ program.display_name }}</option>
+                                            <option v-for="program in programs" :value="{ id: program.id, name: program.display_name }">@{{ program.display_name }}</option>
                                         </select>
                                         <span class="help-block text-red" v-if="errors.program_id">@{{ errors.program_id[0] }}</span>
                                     </div>
@@ -128,11 +128,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="agreement-modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="agreement-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">ZIP Travel Philippines</h4>
                     </div>
                     <div class="modal-body">
@@ -145,12 +144,12 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <div class="modal fade" id="verify-modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="verify-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Inputted Details</h4>
+                        <h4 class="modal-title">Please review the details provided to ensure accuracy then submit</h4>
                     </div>
                     <div class="modal-body">
                         <table class="table table-striped table-bordered table-condensed">
@@ -197,7 +196,7 @@
                                 </tr>
                                 <tr>
                                     <td>School</td>
-                                    <td class="text-bold">@{{ student.school }}</td>
+                                    <td class="text-bold">@{{ student.school.name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Year Level</td>
@@ -209,7 +208,7 @@
                                 </tr>
                                 <tr>
                                     <td>Program</td>
-                                    <td class="text-bold">@{{ student.program_id }}</td>
+                                    <td class="text-bold">@{{ student.program_id.name }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -229,7 +228,9 @@
             el: '#app',
             data: {
                 schools: [],
+                school: [],
                 programs: [],
+                program: [],
                 student : {
                     firstName: '',
                     middleName: '',
@@ -262,8 +263,23 @@
 
                 },
                 submit() {
+                    let formData = new FormData();
+                    formData.append('first_name', this.student.firstName);
+                    formData.append('middle_name', this.student.middleName);
+                    formData.append('last_name', this.student.lastName);
+                    formData.append('birthdate', this.student.birthDate);
+                    formData.append('gender', this.student.gender);
+                    formData.append('home_number', this.student.homeNumber);
+                    formData.append('mobile_number', this.student.mobileNumber);
+                    formData.append('address', this.student.address);
+                    formData.append('fb_email', this.student.fb_email);
+                    formData.append('skype_id', this.student.skype_id);
+                    formData.append('school', this.student.school.id);
+                    formData.append('year', this.student.year);
+                    formData.append('course', this.student.course);
+                    formData.append('program_id', this.student.program_id.id);
                     this.loading = true;
-                    axios.post(`/stud/details/store`, this.student)
+                    axios.post(`/stud/details/store`, formData)
                         .then((response) => {
 
                             location.href = '{{ route('dash.student') }}'
@@ -272,7 +288,22 @@
                     });
                 },
                 validate() {
-                    axios.post(`/stud/validateDetails`, this.student)
+                    let formData = new FormData();
+                    formData.append('first_name', this.student.firstName);
+                    formData.append('middle_name', this.student.middleName);
+                    formData.append('last_name', this.student.lastName);
+                    formData.append('birthdate', this.student.birthDate);
+                    formData.append('gender', this.student.gender);
+                    formData.append('home_number', this.student.homeNumber);
+                    formData.append('mobile_number', this.student.mobileNumber);
+                    formData.append('address', this.student.address);
+                    formData.append('fb_email', this.student.fb_email);
+                    formData.append('skype_id', this.student.skype_id);
+                    formData.append('school', this.student.school.id);
+                    formData.append('year', this.student.year);
+                    formData.append('course', this.student.course);
+                    formData.append('program_id', this.student.program_id.id);
+                    axios.post(`/stud/validateDetails`, formData)
                         .then((response) => {
                             $('#verify-modal').modal('show');
                         }).catch((error) => {

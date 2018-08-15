@@ -13,31 +13,29 @@ use App\SponsorRequirement;
 use App\Student;
 use App\User;
 use App\VisaRequirement;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use function Sodium\randombytes_random16;
 
 class StudentController extends Controller
 {
     public function validatePersonalDetails(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'firstName'     =>  'required',
-            'lastName'      =>  'required',
-            'birthDate'     =>  'required',
-            'gender'        =>  'required',
-            'mobileNumber'  =>  'required',
-            'address'       =>  'required',
-            'school'        =>  'required',
-            'year'          =>  'required',
-            'course'        =>  'required',
-            'program_id'    =>  'required',
-            'fb_email'      =>  'required',
-            'skype_id'      =>  'required'
+            'first_name'        =>  'required',
+            'last_name'         =>  'required',
+            'birthdate'         =>  'required',
+            'gender'            =>  'required',
+            'mobile_number'     =>  'required',
+            'address'           =>  'required',
+            'school'            =>  'required',
+            'year'              =>  'required',
+            'course'            =>  'required',
+            'program_id'        =>  'required',
+            'fb_email'          =>  'required',
+            'skype_id'          =>  'required'
         ])->validate();
     }
 
@@ -49,13 +47,13 @@ class StudentController extends Controller
 
         Student::create([
             'user_id'                   =>  Auth::user()->id,
-            'first_name'                =>  $request->input('firstName'),
-            'middle_name'               =>  $request->input('middleName'),
-            'last_name'                 =>  $request->input('lastName'),
-            'birthdate'                 =>  $request->input('birthDate'),
+            'first_name'                =>  $request->input('first_name'),
+            'middle_name'               =>  $request->input('middle_name'),
+            'last_name'                 =>  $request->input('last_name'),
+            'birthdate'                 =>  $request->input('birthdate'),
             'gender'                    =>  $request->input('gender'),
-            'home_number'               =>  $request->input('homeNumber'),
-            'mobile_number'             =>  $request->input('mobileNumber'),
+            'home_number'               =>  $request->input('home_number'),
+            'mobile_number'             =>  $request->input('mobile_number'),
             'address'                   =>  $request->input('address'),
             'school'                    =>  $request->input('school'),
             'year'                      =>  $request->input('year'),
