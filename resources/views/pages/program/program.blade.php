@@ -395,6 +395,29 @@
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
                                                 <td class="text-sm" style="width: 200px">
+                                                    Visa Sponsor
+                                                </td>
+                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.sponsor }}</label>
+                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select visa sponsor</option>
+                                                            <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
                                                     Host Company
                                                 </td>
                                                 <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
@@ -418,6 +441,26 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
+                                                    Location
+                                                </td>
+                                                <td v-if="!setting.host.locationIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.location }}</label>
+                                                    <a @click="hideField('location')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('location', field); setting.host.locationIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.locationIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
                                                     Position
                                                 </td>
                                                 <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
@@ -432,6 +475,26 @@
                                                 </span>
                                                         <span class="input-group-btn">
                                                     <button @click="setting.host.positionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Stipend
+                                                </td>
+                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.stipend }}</label>
+                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
+                                                        <span class="input-group-btn">
+                                                    <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                                        <span class="input-group-btn">
+                                                    <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                 </span>
                                                     </div>
                                                 </td>
@@ -469,49 +532,6 @@
                                                         <span class="input-group-btn">
                                                     <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                 </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Stipend
-                                                </td>
-                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.stipend }}</label>
-                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Visa Sponsor
-                                                </td>
-                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.sponsor }}</label>
-                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
-                                                </td>
-                                                <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
-                                                            <option value="">Select visa sponsor</option>
-                                                            <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
-                                                        </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -828,6 +848,7 @@
                     host: {
                         nameIsEdit: false,
                         positionIsEdit: false,
+                        locationIsEdit: false,
                         startIsEdit: false,
                         endIsEdit: false,
                         stipendIsEdit: false,
@@ -1184,6 +1205,7 @@
                         case 'name' :
                             this.setting.host.nameIsEdit = true;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1199,6 +1221,23 @@
                         case 'position' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = true;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'location' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = true;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1229,6 +1268,7 @@
                         case 'end' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = true;
                             this.setting.host.stipendIsEdit = false;
@@ -1244,6 +1284,7 @@
                         case 'stipend' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = true;
@@ -1259,6 +1300,7 @@
                         case 'sponsor' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1274,6 +1316,7 @@
                         case 'sevis' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1289,6 +1332,7 @@
                         case 'program' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1304,6 +1348,7 @@
                         case 'schedule' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1319,6 +1364,7 @@
                         case 'departure' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1334,6 +1380,7 @@
                         case 'arrival' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;

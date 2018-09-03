@@ -214,10 +214,7 @@ Route::prefix('filter')->group(function() {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 
 Route::get('/test', function() {
-    $program = \App\User::join('students', 'users.id', '=', 'students.user_id')
-        ->select(['students.*', 'users.email'])
-        ->where('users.id', 6)
-        ->first();;
+    $test = \Carbon\Carbon::now()->addYear(1)->format('Y');
 
-   return $program;
+    return $test;
 });

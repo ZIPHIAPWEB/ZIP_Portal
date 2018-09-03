@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SuperAdminResource;
 use App\ProgramRequirement;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 

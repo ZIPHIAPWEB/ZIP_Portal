@@ -124,10 +124,10 @@ class CoordinatorController extends Controller
                 switch ($program) {
                     case 'SWT-SM':
                         $dt1 = Carbon::createFromDate(date('Y'), 3, 1);
-                        $dt2 = Carbon::createFromDate(date('Y'), 6, 31);
+                        $dt2 = Carbon::createFromDate(date('Y'), 6, 31)->addYear(1);
 
                         $count = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Confirmed')
+                                ->whereIn('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->count() + 1;
                         $cCount = Student::where('program_id', $program->program_id)
@@ -138,10 +138,10 @@ class CoordinatorController extends Controller
                         break;
                     case 'SWT-SP':
                         $dt1 = Carbon::createFromDate(date('Y'), 5, 1);
-                        $dt2 = Carbon::createFromDate(date('Y'), 8, 31);
+                        $dt2 = Carbon::createFromDate(date('Y') + 1, 8, 31)->addYear(1);
 
                         $count = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Confirmed')
+                                ->whereIn('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
                                 ->whereBetween('created_at', [$dt1, $dt2])
                                 ->count() + 1;
                         $cCount = Student::where('program_id', $program->program_id)
@@ -152,7 +152,7 @@ class CoordinatorController extends Controller
                         break;
                     default:
                         $count = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Confirmed')
+                                ->where('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
                                 ->count() + 1;
                         $cCount = Student::where('program_id', $program->program_id)
                                 ->where('application_status', 'Canceled')
@@ -162,9 +162,10 @@ class CoordinatorController extends Controller
                 }
 
                 $total = $count + $cCount;
+                $total += 1;
 
                 Student::where('user_id', $id)->update([
-                    'application_id'        =>  Program::find($program->program_id)->description.'-'.date('Y').'0'.$total,
+                    'application_id'        =>  Program::find($program->program_id)->description.'-'. Carbon::now()->addYear(1)->format('Y')  .'0'. $total,
                     'application_status'    =>  $status
                 ]);
 
