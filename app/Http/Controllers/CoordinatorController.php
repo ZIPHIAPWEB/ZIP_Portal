@@ -191,6 +191,7 @@ class CoordinatorController extends Controller
                     'host_company_id'       =>  $request->input('name'),
                     'position'              =>  $request->input('position'),
                     'location'              =>  $request->input('place'),
+                    'housing_details'       =>  $request->input('housing'),
                     'stipend'               =>  $request->input('stipend'),
                     'program_start_date'    =>  $request->input('start'),
                     'program_end_date'      =>  $request->input('end'),

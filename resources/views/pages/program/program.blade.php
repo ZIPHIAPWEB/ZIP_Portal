@@ -237,8 +237,8 @@
                                                         <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
                                                     </div>
                                                     <div class="form-group col-xs-6">
-                                                        <label class="control-label">Stipend</label>
-                                                        <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Stipend">
+                                                        <label class="control-label">Housing Address</label>
+                                                        <input v-model="host.housing" type="text" class="form-control input-sm" placeholder="Housing address">
                                                     </div>
                                                     <div class="form-group col-xs-6">
                                                         <label class="control-label">Start Date</label>
@@ -248,7 +248,11 @@
                                                         <label class="control-label">End Date</label>
                                                         <input v-model="host.end" type="date" class="form-control input-sm">
                                                     </div>
-                                                    <div class="form-group col-xs-12">
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="control-label">Stipend</label>
+                                                        <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Stipend">
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
                                                         <label class="control-label">Visa Sponsor</label>
                                                         <select v-model="host.sponsor" class="form-control input-sm">
                                                             <option value="" selected>Select Visa Sponsor</option>
@@ -455,6 +459,26 @@
                                                         </span>
                                                         <span class="input-group-btn">
                                                             <button @click="setting.host.locationIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Housing Address
+                                                </td>
+                                                <td v-if="!setting.host.housingIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.housing_details }}</label>
+                                                    <a @click="hideField('housing')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('housing_details', field); setting.host.housingIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.host.housingIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                                         </span>
                                                     </div>
                                                 </td>
@@ -849,6 +873,7 @@
                         nameIsEdit: false,
                         positionIsEdit: false,
                         locationIsEdit: false,
+                        housingIsEdit: false,
                         startIsEdit: false,
                         endIsEdit: false,
                         stipendIsEdit: false,
@@ -1130,6 +1155,7 @@
                         formData.append('name', this.host.name);
                         formData.append('position', this.host.position);
                         formData.append('place', this.host.place);
+                        formData.append('housing', this.host.housing);
                         formData.append('stipend', this.host.stipend);
                         formData.append('start', this.host.start);
                         formData.append('end', this.host.end);
@@ -1206,6 +1232,7 @@
                             this.setting.host.nameIsEdit = true;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1222,6 +1249,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = true;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1238,6 +1266,24 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = true;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.schedule = false;
+
+                            this.setting.flight.departureIsEdit = false;
+                            this.setting.flight.arrivalIsEdit = false;
+                            break;
+                        case 'housing' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = true;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1253,6 +1299,8 @@
                         case 'start' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = true;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1269,6 +1317,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = true;
                             this.setting.host.stipendIsEdit = false;
@@ -1285,6 +1334,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = true;
@@ -1301,6 +1351,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1317,6 +1368,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1333,6 +1385,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1349,6 +1402,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1365,6 +1419,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;
@@ -1381,6 +1436,7 @@
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
                             this.setting.host.startIsEdit = false;
                             this.setting.host.endIsEdit = false;
                             this.setting.host.stipendIsEdit = false;

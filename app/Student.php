@@ -25,6 +25,7 @@ class Student extends Model
         'host_company_id',
         'position',
         'location',
+        'housing_details',
         'stipend',
         'fb_email',
         'visa_interview_status',
