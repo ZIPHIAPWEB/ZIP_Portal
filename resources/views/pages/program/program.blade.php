@@ -891,6 +891,7 @@
                 },
             },
             mounted: function() {
+                this.listen();
                 this.loadStudents(programId);
                 this.loadHostCompany();
                 this.loadVisaSponsor();
@@ -921,6 +922,12 @@
                 }
             },
             methods: {
+                listen () {
+                    Echo.channel('coordinator')
+                        .listen('FileUploadedEvent', (e) => {
+                            console.log(e);
+                        });
+                },
                 filterStatus () {
                     this.loading.table = true;
                     axios.get(`/filter/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
