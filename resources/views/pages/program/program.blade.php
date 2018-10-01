@@ -1219,6 +1219,7 @@
                                 confirmButtonText: 'Continue'
                             })
                         }).catch((error) => {
+                            this.loading.modal = false;
                             swal({
                                 title: 'Something went wrong!',
                                 type: 'error',

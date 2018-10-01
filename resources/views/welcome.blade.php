@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ZIP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -287,20 +288,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left:17px;padding-right:17px;">
-                    <form>
+                <div id="inquiry" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left:17px;padding-right:17px;">
+                    <form @submit.prevent="SUBMIT_INQUIRY">
                         <h5 style="font-weight:bold;">FOR INQUIRIES</h5>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);"></div>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);"></div>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);"></div>
-                        <div class="form-group"><textarea class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea></div>
+                        <div class="form-group"><input v-model="inquiry.name" class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);"></div>
+                        <div class="form-group"><input v-model="inquiry.email" class="form-control form-control-sm" type="email" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);"></div>
+                        <div class="form-group"><input v-model="inquiry.subject" class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);"></div>
+                        <div class="form-group"><textarea v-model="inquiry.message" class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea></div>
                         <div class="form-group d-flex flex-row-reverse"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
                     </form>
                 </div>
                 <div class="col-12">
                     <div class="row no-gutters">
                         <div class="col d-flex justify-content-start align-items-center align-content-center" style="margin-top:25px;">
-                            <h6 style="margin-bottom:0px;font-size:10px;">@ 2018 Zip Travel PH</h6>
+                            <h6 style="margin-bottom:0px;font-size:10px;">@ {{ date('Y') }} Zip Travel PH</h6>
                         </div>
                     </div>
                 </div>
@@ -313,6 +314,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
 <script src="{{ asset('assets/js/script.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript">
+    const inquiry = new Vue({
+        el: '#inquiry',
+        data: {
+            inquiry: {
+                name: '',
+                email: '',
+                subject: '',
+                message: ''
+            }
+        },
+        methods: {
+            SUBMIT_INQUIRY: function () {
+                let formData = new FormData();
+                formData.append('name', this.inquiry.name);
+                formData.append('email', this.inquiry.email);
+                formData.append('subject', this.inquiry.subject);
+                formData.append('message', this.inquiry.message);
+
+                axios.post('/submitInquiry', formData)
+                    .then((response) => {
+                        this.inquiry.name = '';
+                        this.inquiry.email = '';
+                        this.inquiry.subject = '';
+                        this.inquiry.message = '';
+
+                        alert(response.data.message);
+                    })
+                    .catch(function (error) {
+                        console.log(error['errors']);
+                    })
+            }
+        }
+    })
+</script>
 </body>
 
 </html>
