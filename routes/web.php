@@ -212,6 +212,7 @@ Route::prefix('filter')->group(function() {
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
+Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
 Route::get('/test', function() {
     $test = \Carbon\Carbon::now()->addYear(1)->format('Y');
