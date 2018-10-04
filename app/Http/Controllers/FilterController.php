@@ -15,21 +15,32 @@ class FilterController extends Controller
             ->leftjoin('schools', 'students.school', '=', 'schools.id')
             ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
             ->where('program_id', $programId)
-            ->where('last_name', 'like', '%' . $name . '%')
+            ->Where('last_name', 'like', '%' . $name . '%')
+            ->orWhere('first_name', 'like', '%' . $name . '%')
+            ->orWhere('middle_name', 'like', '%' . $name . '%')
             ->paginate(20);
 
         return SuperAdminResource::collection($students);
     }
 
-    public function filterStatus($programId, $from, $to, $status = null)
+    public function filterStatus(Request $request)
     {
-        $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-            ->leftjoin('schools', 'students.school', '=', 'schools.id')
-            ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
-            ->where('program_id', $programId)
-            ->whereBetween('students.created_at', [$from, $to])
-            ->where('application_status', 'like', '%' . $status . '%')
-            ->paginate(20);
+        if  ($request->input('from') == null) {
+            $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
+                ->leftjoin('schools', 'students.school', '=', 'schools.id')
+                ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
+                ->where('program_id', $request->input('program_id'))
+                ->where('application_status', 'like', '%' . $request->input('status') . '%')
+                ->paginate(20);
+        } else {
+            $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
+                ->leftjoin('schools', 'students.school', '=', 'schools.id')
+                ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
+                ->where('program_id', $request->input('program_id'))
+                ->whereBetween('students.created_at', [$request->input('from'), $request->input('to')])
+                ->where('application_status', 'like', '%' . $request->input('status') . '%')
+                ->paginate(20);
+        }
 
         return SuperAdminResource::collection($students);
     }

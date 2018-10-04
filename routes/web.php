@@ -206,7 +206,7 @@ Route::prefix('download')->group(function() {
 
 Route::prefix('filter')->group(function() {
     Route::get('/student/{programId}/{name?}', 'FilterController@filterStudentBy')->name('filter.student');
-    Route::get('/status/{programId}/{from}/{to}/{status?}', 'FilterController@filterStatus')->name('filter.status');
+    Route::post('/status', 'FilterController@filterStatus')->name('filter.status');
 
     Route::get('/sa/student/{lastname}', 'FilterController@filterSuperAdminStudent')->name('filter.sa.student');
 });

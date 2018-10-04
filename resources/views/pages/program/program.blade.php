@@ -56,7 +56,7 @@
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                             <download-excel
                                     class="btn btn-success btn-flat btn-sm"
-                                    :data="testData"
+                                    :data="students"
                                     :fields="testField"
                                     name="{{ date('Ymd') }}.xls"
                                     title="ZIP Generated Report">
@@ -65,20 +65,20 @@
                         </div>
                     </form>
                     <div class="form-group-sm pull-right">
-                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By Name">
+                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By First Name, Middle Name, or Last Name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                            <th>Date of Application</th>
-                            <th>Status</th>
-                            <th>Application ID</th>
-                            <th>Full Name</th>
-                            <th>Program</th>
-                            <th>Course</th>
-                            <th>Contact</th>
-                            <th>School</th>
-                            <th>Recent Activity</th>
-                            <th>Action</th>
+                            <th class="text-center" style="width: 10%">Date of Application</th>
+                            <th class="text-center" style="width: 10%">Status</th>
+                            <th class="text-center" style="width: 10%">Application ID</th>
+                            <th class="text-center" style="width: 10%">Full Name</th>
+                            <th class="text-center" style="width: 10%">Program</th>
+                            <th class="text-center" style="width: 10%">Course</th>
+                            <th class="text-center" style="width: 10%">Contact</th>
+                            <th class="text-center" style="width: 10%">School</th>
+                            <th class="text-center" style="width: 10%">Recent Activity</th>
+                            <th class="text-center" style="width: 10%">Action</th>
                         </thead>
                         <tbody v-if="hasRecords">
                             <tr v-if="loading.table">
@@ -87,16 +87,16 @@
                                 </td>
                             </tr>
                             <tr v-else v-for="student in students">
-                                <td class="text-sm">@{{ student.created_at }}</td>
-                                <td><span class="label label-warning text-sm">@{{ student.application_status }}</span></td>
-                                <td class="text-sm">@{{ student.application_id }}</td>
-                                <td class="text-sm">@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
-                                <td class="text-sm">@{{ student.program }}</td>
-                                <td class="text-sm">@{{ student.course }}</td>
-                                <td class="text-sm">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td class="text-sm">@{{ student.school }}</td>
-                                <td></td>
-                                <td>
+                                <td class="text-sm text-center">@{{ student.created_at }}</td>
+                                <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
+                                <td class="text-sm text-center">@{{ student.application_id }}</td>
+                                <td class="text-sm text-center">@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
+                                <td class="text-sm text-center">@{{ student.program }}</td>
+                                <td class="text-sm text-center">@{{ student.course }}</td>
+                                <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
+                                <td class="text-sm text-center">@{{ student.school }}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
                                 </td>
                             </tr>
@@ -922,8 +922,13 @@
             },
             methods: {
                 filterStatus () {
+                    let formData = new FormData();
+                    formData.append('program_id', programId);
+                    formData.append('status', this.filter.status);
+                    formData.append('from', this.filter.from);
+                    formData.append('to', this.filter.to);
                     this.loading.table = true;
-                    axios.get(`/filter/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
+                    axios.post(`/filter/status`, formData)
                         .then((response) => {
                             this.loading.table = false;
                             if  (response.data.data.length > 0) {
@@ -932,19 +937,6 @@
                                 this.links = response.data.links;
                                 this.current_page = response.data.meta.current_page;
                                 this.last_page = response.data.meta.last_page;
-                            } else {
-                                this.hasRecords = false;
-                            }
-                        }).catch((error) => {
-                            this.loading.table = false;
-                    })
-
-                    axios.get(`/helper/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)
-                        .then((response) => {
-                            this.loading.table = false;
-                            if (response.data.data.length > 0) {
-                                this.hasRecords = true;
-                                this.testData = response.data.data;
                             } else {
                                 this.hasRecords = false;
                             }

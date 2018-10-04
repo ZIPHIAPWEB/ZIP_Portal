@@ -3,7 +3,7 @@
 @section('title', 'Registration Form')
 
 @section('content')
-    <div id="app">
+    <div id="app" v-cloak>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 m-t-50">
@@ -90,7 +90,7 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Year Level: <i class="text-red">*</i></label>
                                         <select v-model="student.year" class="form-control">
-                                            <option value="" active>Select year level</option>
+                                            <option value="" selected>Select year level</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
                                             <option value="Third Year">Third Year</option>
@@ -135,10 +135,17 @@
                         <h4 class="modal-title">ZIP Travel Philippines</h4>
                     </div>
                     <div class="modal-body">
-
+                        <div class="text-justify">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis cumque esse et, expedita fugit inventore iure laborum mollitia nesciunt perspiciatis, provident saepe sequi velit voluptate? Modi pariatur soluta voluptatem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deserunt dicta earum enim est ex incidunt maiores maxime natus, officiis, saepe sunt ut, vero! Ad delectus fuga impedit magni natus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, consequatur ea error hic recusandae sapiente temporibus unde? Aliquid, amet cumque ipsam, itaque laborum magnam minima necessitatibus recusandae rerum sequi voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate eaque est iure laudantium quo repellat suscipit, totam! Cum cumque mollitia praesentium, quia quibusdam quo repudiandae sunt tenetur veniam voluptate.
+                            <br><br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
+                            <br><br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
+                        </div>
                     </div>
                     <div class="modal-footer clearfix">
-                        <button class="btn btn-danger btn-flat btn-sm pull-right">I Decline</button>
+                        <a href="{{ route('logout') }}" class="btn btn-danger btn-flat btn-sm pull-right">I Decline</a>
                         <button @click="agree" class="btn btn-success btn-flat btn-sm pull-right m-r-5">I Agree</button>
                     </div>
                 </div><!-- /.modal-content -->
@@ -259,9 +266,6 @@
                 agree() {
                     $('#agreement-modal').modal('hide');
                 },
-                disagree() {
-
-                },
                 submit() {
                     let formData = new FormData();
                     formData.append('first_name', this.student.firstName);
@@ -303,6 +307,7 @@
                     formData.append('year', this.student.year);
                     formData.append('course', this.student.course);
                     formData.append('program_id', this.student.program_id.id);
+
                     axios.post(`/stud/validateDetails`, formData)
                         .then((response) => {
                             $('#verify-modal').modal('show');
