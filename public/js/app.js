@@ -35148,9 +35148,15 @@ window.Vue = __webpack_require__(214);
 
 Vue.component('download-excel', __webpack_require__(261));
 Vue.component('chart-component', __webpack_require__(265));
-//const app = new Vue({
-//    el: '#app'
-//});
+
+var notification = new Vue({
+    created: function created() {
+        var userID = $('meta[name="userId"]').attr('content');
+        Echo.private('App.User.' + userID).notification(function (notification) {
+            console.log('test');
+        });
+    }
+});
 
 /***/ }),
 /* 166 */
@@ -35220,7 +35226,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
   key: 'c5b05f94ebf0bbe47369',
   cluster: 'ap1',
-  encrypted: false
+  encrypted: true
 });
 
 /***/ }),

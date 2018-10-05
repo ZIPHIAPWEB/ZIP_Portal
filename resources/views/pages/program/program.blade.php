@@ -804,6 +804,7 @@
         const app = new Vue({
             el: '#app',
             data: {
+                auth: '{{ Auth::user()->id }}',
                 loading: {
                     modal: false,
                     table: false
@@ -891,7 +892,6 @@
                 },
             },
             mounted: function() {
-                this.listen();
                 this.loadStudents(programId);
                 this.loadHostCompany();
                 this.loadVisaSponsor();
@@ -921,13 +921,14 @@
                     }
                 }
             },
+            created: function () {
+                Echo.private(`App.User.${this.auth}`)
+                    .notification((notification) => {
+                        console.log(notification);
+                        console.log('test');
+                    });
+            },
             methods: {
-                listen () {
-                    Echo.channel('coordinator')
-                        .listen('FileUploadedEvent', (e) => {
-                            console.log(e);
-                        });
-                },
                 filterStatus () {
                     this.loading.table = true;
                     axios.get(`/filter/status/${programId}/${this.filter.from}/${this.filter.to}/${this.filter.status}`)

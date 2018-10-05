@@ -32,7 +32,7 @@ class StudentUploadedFile extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'broadcast'];
     }
 
     /**
@@ -47,6 +47,12 @@ class StudentUploadedFile extends Notification implements ShouldQueue
                                 ->markdown('mail.uploaded', ['data' => $this->data]);
     }
 
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'data' => $this->data
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *
