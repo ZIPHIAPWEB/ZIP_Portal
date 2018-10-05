@@ -14,7 +14,7 @@ class AddProgramCoordinatorToStuentTable extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->integer('coordinator_id')->after('application_status');
+            $table->integer('coordinator_id')->after('application_status')->nullable(true);
         });
     }
 

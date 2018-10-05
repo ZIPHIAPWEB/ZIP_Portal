@@ -77,7 +77,6 @@ class StudentController extends Controller
             'date_of_arrival'           =>  '',
             'application_id'            =>  '',
             'application_status'        =>  'New Applicant',
-            'coordinator_id'            =>  ''
         ]);
 
         return response()->json(['message' => 'Personal Details Updated']);
