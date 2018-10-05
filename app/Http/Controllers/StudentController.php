@@ -66,7 +66,7 @@ class StudentController extends Controller
             'host_company_id'           =>  '',
             'position'                  =>  '',
             'location'                  =>  '',
-            'housing_address'           =>  '',
+            'housing_details'           =>  '',
             'stipend'                   =>  '',
             'visa_interview_status'     =>  'Pending',
             'visa_interview_schedule'   =>  '',
