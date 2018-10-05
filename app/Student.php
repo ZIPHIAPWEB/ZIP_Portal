@@ -38,5 +38,6 @@ class Student extends Model
         'application_id',
         'program_id',
         'application_status',
+        'coordinator_id'
     ];
 }
