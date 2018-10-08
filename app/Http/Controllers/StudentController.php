@@ -161,7 +161,7 @@ class StudentController extends Controller
                     'requirement'   => $requirement->name
                 ];
 
-                Notification::route('mail', 'system@ziptravel.com.ph')->notify((new StudentUploadedFile($data)));
+                Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
 
                 return response()->json(['message' => 'File Uploaded!'], 200);
             } else {
