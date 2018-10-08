@@ -693,7 +693,6 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
@@ -721,7 +720,6 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
@@ -749,7 +747,6 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn btn-default btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadVisaRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
