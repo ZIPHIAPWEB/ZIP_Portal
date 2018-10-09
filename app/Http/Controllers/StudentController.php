@@ -139,7 +139,7 @@ class StudentController extends Controller
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $path = $request->file('file')
-                                ->storeAs('public/basic', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' .$extension);
+                                ->storeAs('public/'. $request->user()->email .'/basic',  date('Ymd') . uniqid() . '.' .$extension);
 
                 BasicRequirement::create([
                     'user_id'           =>  $request->user()->id,
@@ -174,11 +174,11 @@ class StudentController extends Controller
 
     public function removeBasicRequirement($id)
     {
-        Storage::delete(BasicRequirement::find($id)->first()->path);
+        Storage::delete(BasicRequirement::find($id)->path);
 
         BasicRequirement::find($id)->delete();
 
-        return response()->json(['message' => 'File Removed!']);
+        return response()->json(['message' => 'File Removed']);
     }
 
     public function loadPaymentRequirements($programId)
@@ -203,7 +203,7 @@ class StudentController extends Controller
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $path = $request->file('file')
-                                ->storeAs('public/payment', $request->user()->name . '-' . date('Ymd') .uniqid() . '.' .$extension);
+                                ->storeAs('public/'. $request->user()->email . '/payment',  date('Ymd') .uniqid() . '.' .$extension);
 
                 PaymentRequirement::create([
                     'user_id'           =>  $request->user()->id,
@@ -238,7 +238,7 @@ class StudentController extends Controller
 
     public function removePaymentRequirement($id)
     {
-        Storage::delete(PaymentRequirement::find($id)->first()->path);
+        Storage::delete(PaymentRequirement::find($id)->path);
 
         PaymentRequirement::find($id)->delete();
 
@@ -267,7 +267,7 @@ class StudentController extends Controller
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $path = $request->file('file')
-                                ->storeAs('public/visa', $request->user()->name . '-' . date('Ymd') . uniqid() . '.' . $extension);
+                                ->storeAs('public/' . $request->user()->email . '/visa',  date('Ymd') . uniqid() . '.' . $extension);
 
                 VisaRequirement::create([
                     'user_id'           =>  $request->user()->id,
@@ -302,7 +302,7 @@ class StudentController extends Controller
 
     public function removeVisaRequirement($id)
     {
-        Storage::delete(VisaRequirement::find($id)->first()->path);
+        Storage::delete(VisaRequirement::find($id)->path);
         VisaRequirement::find($id)->delete();
 
         return response()->json(['message'  => 'File Removed']);

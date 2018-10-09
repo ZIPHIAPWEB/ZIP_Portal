@@ -186,8 +186,7 @@
                         confirmButtonColor: 'red',
                         showLoaderOnConfirm: true,
                         preConfirm: (remove) => {
-                            this.bReqId = requirement.bReqId;
-                            return axios.post(`/stud/requirement/payment/remove/${this.bReqId}`)
+                            return axios.post(`/stud/requirement/payment/remove/${requirement.bReqId}`)
                                 .then((response) => {
                                     return response;
                                 }).catch((error) => {
