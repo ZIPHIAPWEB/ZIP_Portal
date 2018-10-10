@@ -24,7 +24,7 @@ class DownloadController extends Controller
 
     public function downloadBasicRequirement($id)
     {
-        return Storage::url(BasicRequirement::find($id)->path);
+        return Storage::disk('local')->url(BasicRequirement::find($id)->path);
     }
 
     public function downloadPaymentRequirement($id)
