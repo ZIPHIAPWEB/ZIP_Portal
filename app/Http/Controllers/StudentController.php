@@ -139,7 +139,7 @@ class StudentController extends Controller
             if ($request->hasFile('file')) {
                 $extension = $request->file('file')->getClientOriginalExtension();
                 $path = $request->file('file')
-                                ->storeAs('public/'. $request->user()->email .'/basic',  date('Ymd') . uniqid() . '.' .$extension);
+                                ->storeAs($request->user()->email,  date('Ymd') . uniqid() . '.' .$extension, 'public');
 
                 BasicRequirement::create([
                     'user_id'           =>  $request->user()->id,
@@ -174,7 +174,7 @@ class StudentController extends Controller
 
     public function removeBasicRequirement($id)
     {
-        Storage::delete(BasicRequirement::find($id)->path);
+        Storage::disk('public')->delete(BasicRequirement::find($id)->path);
 
         BasicRequirement::find($id)->delete();
 

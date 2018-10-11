@@ -1009,8 +1009,10 @@
                 downloadBasicRequirement (id) {
                     axios.get(`/download/basic/requirement/${id}`)
                         .then((response) => {
+                            console.log(response.data);
                             const link = document.createElement('a');
                             link.href = response.data;
+                            link.setAttribute('download', '');
                             document.body.appendChild(link);
                             link.click();
                         })

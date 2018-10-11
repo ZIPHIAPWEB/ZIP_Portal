@@ -51,8 +51,15 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => url()->to('/').'/storage',
             'visibility' => 'public',
+        ],
+
+        'uploaded' => [
+            'driver' => 'local',
+            'root' => public_path('files'),
+            'url' => url()->to('/') . '/files',
+            'visibility' => 'public'
         ],
 
         's3' => [
