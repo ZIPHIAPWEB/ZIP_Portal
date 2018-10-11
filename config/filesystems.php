@@ -55,6 +55,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'uploaded_files' => [
+            'driver' => 'local',
+            'root' => public_path('uploaded'),
+            'url' => url()->to('/') . '/uploaded',
+            'visibility' => 'public'
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
