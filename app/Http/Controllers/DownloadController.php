@@ -48,7 +48,7 @@ class DownloadController extends Controller
         if (File::exists(public_path('backup'))) {
             $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
         } else {
-            mkdir(public_path('backup'), 765, true, true);
+            File::makeDirectory(public_path('backup'), 0765, true, true);
             $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
         }
 
