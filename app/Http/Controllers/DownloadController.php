@@ -45,7 +45,7 @@ class DownloadController extends Controller
     {
         $uniqueID = User::find($id)->email;
 
-        if (File::exist(public_path('backup'))) {
+        if (File::exists(public_path('backup'))) {
             $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
         } else {
             mkdir(public_path('backup'), 765, true, true);
