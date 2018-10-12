@@ -9,6 +9,7 @@ use App\SponsorRequirement;
 use App\User;
 use App\VisaRequirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use ZipArchive;
@@ -43,7 +44,13 @@ class DownloadController extends Controller
     public function downloadStudentFiles($id)
     {
         $uniqueID = User::find($id)->email;
-        $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
+
+        if (File::exist(public_path('backup'))) {
+            $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
+        } else {
+            mkdir(public_path('backup'), 765, true, true);
+            $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
+        }
 
         return response()->json(asset('backup/'. $uniqueID . '.zip'));
     }
