@@ -202,6 +202,8 @@ Route::prefix('download')->group(function() {
     Route::get('/basic/requirement/{id}', 'DownloadController@downloadBasicRequirement')->name('download.basic.requirement');
     Route::get('/payment/requirement/{id}', 'DownloadController@downloadPaymentRequirement')->name('download.payment.requirement');
     Route::get('/visa/requirement/{id}', 'DownloadController@downloadVisaRequirement')->name('download.visa.requirement');
+
+    Route::get('/student/{id}/files', 'DownloadController@downloadStudentFiles')->name('download.student.files');
 });
 
 Route::prefix('filter')->group(function() {

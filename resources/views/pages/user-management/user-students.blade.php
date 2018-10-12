@@ -109,6 +109,7 @@
                                 </td>
                                 <td>
                                     <button @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button @click="ExtractFiles(student.user_id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span></button>
                                     <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                                 </td>
                             </tr>
@@ -556,6 +557,16 @@
                 },
                 DeleteStudent: function (id) {
                     alert(id);
+                },
+                ExtractFiles: function (id) {
+                    axios.get(`/download/student/${id}/files`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
                 }
             }
         })
