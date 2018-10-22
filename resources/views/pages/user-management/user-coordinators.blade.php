@@ -68,6 +68,9 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <b>Coordinator</b>
+                    <div class="pull-right">
+                        <button @click="loadCoordinators" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="coordinator-table" class="table table-bordered table-striped table-condensed">

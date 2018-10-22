@@ -30,6 +30,9 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title text-center">{{ \App\Program::find($program)->name }} Students</h3>
+                    <div class="pull-right">
+                        <button @click="loadStudents()" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <form @submit.prevent="filterStatus()" class="form-inline pull-left m-b-10">
@@ -888,7 +891,7 @@
                 },
             },
             mounted: function() {
-                this.loadStudents(programId);
+                this.loadStudents();
                 this.loadHostCompany();
                 this.loadVisaSponsor();
             },
@@ -973,7 +976,7 @@
                             }
                         })
                 },
-                loadStudents (programId) {
+                loadStudents () {
                     this.loading.table = true;
                     axios.get(`/coor/program/${programId}`)
                         .then((response) => {

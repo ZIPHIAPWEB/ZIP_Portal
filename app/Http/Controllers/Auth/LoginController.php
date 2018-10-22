@@ -77,6 +77,10 @@ class LoginController extends Controller
         } else {
             $user = User::find($socialProvider->user_id);
 
+            $user->update([
+                'isOnline'  =>  true
+            ]);
+
             auth()->login($user, false);
 
             return redirect(url('/portal'));

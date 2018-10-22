@@ -68,6 +68,9 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Students</h3>
+                    <div class="pull-right">
+                        <button @click="LoadStudents" class="btn btn-default btn-xs push-right"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div class="form-group pull-right">
