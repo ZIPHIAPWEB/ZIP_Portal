@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\BasicRequirement;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
 use App\Log;
 use App\Notifications\ActivationNotification;
+use App\PaymentRequirement;
+use App\Student;
 use App\User;
+use App\VisaRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class SuperAdminController extends Controller
 {
@@ -78,5 +83,25 @@ class SuperAdminController extends Controller
         Notification::route('mail', $user->email)->notify((new ActivationNotification($data))->delay($when));
 
         return response()->json(['message' => 'Coordinator Deactivated']);
+    }
+
+    public function deleteUserAccount(Request $request)
+    {
+        $userId = $request->input('userId');
+        $user = User::find($userId);
+
+        if ($user) {
+            BasicRequirement::where('user_id', $userId)->delete();
+            PaymentRequirement::where('user_id', $userId)->delete();
+            VisaRequirement::where('user_id', $userId)->delete();
+            Log::where('user_id', $userId)->delete();
+
+
+            Storage::disk('uploaded_files')->deleteDirectory('uploaded/'. $user->email);
+
+            return response()->json(['message' => 'User account successfully deleted!']);
+        } else {
+            return response()->json(['message' => 'Something went wrong!'],500);
+        }
     }
 }

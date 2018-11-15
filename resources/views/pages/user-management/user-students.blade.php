@@ -557,7 +557,36 @@
                         })
                 },
                 DeleteStudent: function (id) {
-                    alert(id);
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post('/sa/user/delete', { userId : id })
+                                .then((response) => {
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.LoadStudents();
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    });
                 },
                 ExtractFiles: function (id) {
                     axios.get(`/download/student/${id}/files`)

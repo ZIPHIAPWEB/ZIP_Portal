@@ -58,7 +58,7 @@ return [
         'uploaded_files' => [
             'driver' => 'local',
             'root' => public_path('uploaded'),
-            'url' => url()->to('/') . '/uploaded',
+            'url' => env('APP_URL') . '/uploaded',
             'visibility' => 'public'
         ],
 

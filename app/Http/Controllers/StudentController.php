@@ -77,6 +77,7 @@ class StudentController extends Controller
             'date_of_arrival'           =>  '',
             'application_id'            =>  '',
             'application_status'        =>  'New Applicant',
+            'coordinator_id'            =>  0
         ]);
 
         return response()->json(['message' => 'Personal Details Updated']);
@@ -169,7 +170,7 @@ class StudentController extends Controller
             }
         }
 
-        return response()->json(['message'  =>  'File Already Uploaded']);
+        return response()->json(['message'  =>  'File Already Uploaded'], 422);
     }
 
     public function removeBasicRequirement($id)

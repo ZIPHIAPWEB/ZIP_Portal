@@ -26,14 +26,14 @@
             </span>
         </a>
     </li>
-    <li>
-        <a href="{{ route('req.visa') }}">
-            <i class="fa fa-plane"></i>
-            <span>
-                <small>Visa Requirements</small>
-            </span>
-        </a>
-    </li>
+    @if (\App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id)
+        <li class="active">
+            <a href="{{ route('req.visa') }}">
+                <i class="fa fa-plane"></i>
+                <span><small>Visa Requirements</small></span>
+            </a>
+        </li>
+    @endif
 @endsection
 
 @section('content')
