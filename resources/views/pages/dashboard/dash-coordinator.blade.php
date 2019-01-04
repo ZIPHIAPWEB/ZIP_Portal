@@ -2,28 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@section('sidenav')
-    <li class="header">General</li>
-    <li>
-        <a href="{{ route('dash.coordinator') }}">
-            <i class="fa fa-dashboard"></i> <span><small>Dashboard</small></span>
-        </a>
-    </li>
-    <li class="header">Program</li>
-    <li class="treeview" id="coordinator">
-        <a href="#">
-            <i class="fa fa-key"></i>
-            <span><small>Student's Program(s)</small></span>
-            <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-        </a>
-        <ul class="treeview-menu" >
-            <li v-for="program in programs"><a :href="url + program.id"><i class="fa fa-circle-o"></i><small>@{{ program.name }}</small></a></li>
-        </ul>
-    </li>
-@endsection
-
 @section('content')
     <div id="app" v-cloak>
         <div class="col-xs 12">
@@ -119,6 +97,7 @@
         const sidenav = new Vue({
             el: '#sidenav',
             data: {
+                auth: {{ \App\Coordinator::where('user_id', Auth::user()->id)->first()->program }},
                 url: '/portal/c/program/',
                 programs: []
             },

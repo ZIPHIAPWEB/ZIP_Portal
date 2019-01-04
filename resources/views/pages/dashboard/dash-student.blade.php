@@ -2,40 +2,6 @@
 
 @section('title', 'Students')
 
-@section('sidenav')
-    <li class="header">General</li>
-    <li class="active">
-        <a href="{{ route('dash.student') }}">
-            <i class="fa fa-user"></i> <span><small>My Profile</small></span>
-        </a>
-    </li>
-    <li class="header">My Requirements</li>
-    <li>
-        <a href="{{ route('req.basic') }}">
-            <i class="fa fa-book"></i>
-            <span>
-                <small>Basic Requirements</small>
-            </span>
-        </a>
-    </li>
-    <li>
-        <a href="{{ route('req.payment') }}">
-            <i class="fa fa-dollar"></i>
-            <span>
-                <small>Payment Requirements</small>
-            </span>
-        </a>
-    </li>
-    @if (\App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id)
-        <li class="active">
-            <a href="{{ route('req.visa') }}">
-                <i class="fa fa-plane"></i>
-                <span><small>Visa Requirements</small></span>
-            </a>
-        </li>
-    @endif
-@endsection
-
 @section('content')
     <div id="app" v-cloak>
         <div class="col-md-3">

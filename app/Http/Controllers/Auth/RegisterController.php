@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'first-name'        => 'required',
             'middle-name'       => 'required',
             'last-name'         => 'required',
-            'department'        => 'required',
+            'program'           => 'required',
             'contact-1'         => 'required'
         ]);
     }
@@ -120,7 +120,7 @@ class RegisterController extends Controller
             'firstName'     => $data['first-name'],
             'middleName'    => $data['middle-name'],
             'lastName'      => $data['last-name'],
-            'department'    => $data['department'],
+            'program'       => $data['program'],
             'position'      => $data['position'],
             'contact'       => $data['contact-1']
         ]);

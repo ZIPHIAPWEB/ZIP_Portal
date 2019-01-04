@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class="container">
+    <div class="container" id="coordinator-register">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 m-t-100 m-t-150">
                 <div class="register-logo">
@@ -54,18 +54,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <select name="department" id="department" class="form-control">
-                                            <option selected>Department</option>
-                                            <option value="Sample">Samplesss</option>
+                                        <select name="program" id="program" class="form-control">
+                                            <option selected>Program</option>
+                                            <option v-for="program in programs.data" :value="program.id">@{{ program.display_name }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <select name="position" id="position" class="form-control">
-                                            <option selected>Position</option>
-                                            <option value="Sample">Sample</option>
-                                        </select>
+                                        <input name="position" type="text" class="form-control" placeholder="Position">
                                     </div>
                                 </div>
                             </div>
@@ -134,5 +131,23 @@
                 increaseArea: '20%' // optional
             });
         });
+
+        const CoordinatorRegister = new Vue({
+            el: '#coordinator-register',
+            data: {
+                programs: []
+            },
+            mounted: function () {
+                this.GET_PROGRAMS();
+            },
+            methods: {
+                GET_PROGRAMS: function () {
+                    axios.get('/helper/program/view')
+                        .then((response) => {
+                            this.programs = response.data;
+                        })
+                }
+            }
+        })
     </script>
 @endsection()

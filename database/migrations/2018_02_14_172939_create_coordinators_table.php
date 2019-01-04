@@ -19,7 +19,7 @@ class CreateCoordinatorsTable extends Migration
             $table->string('firstName');
             $table->string('middleName');
             $table->string('lastName');
-            $table->string('department');
+            $table->integer('program');
             $table->string('position');
             $table->string('contact');
             $table->timestamps();

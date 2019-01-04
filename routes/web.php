@@ -57,6 +57,9 @@ Route::prefix('portal')->group(function() {
     Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
 });
 
+Route::view('/chat', 'pages.chatbox')->name('portal.chat');
+Route::view('/chat-student', 'pages.chatbox-student')->name('portal.chat-student');
+
 Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
     Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
@@ -212,6 +215,12 @@ Route::prefix('filter')->group(function() {
     Route::post('/status', 'FilterController@filterStatus')->name('filter.status');
 
     Route::get('/sa/student/{lastname}', 'FilterController@filterSuperAdminStudent')->name('filter.sa.student');
+});
+
+Route::prefix('chat')->group(function () {
+    Route::get('/getContacts', 'ChatController@get_contacts')->name('chat.get.contacts');
+    Route::get('/getMessages', 'ChatController@get_messages')->name('chat.get.messages');
+    Route::post('/sendMessage', 'ChatController@send_message')->name('chat.post.message');
 });
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
