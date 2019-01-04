@@ -350,7 +350,7 @@
                 storeSponsor() {
                     axios.post(this.url, this.sponsor)
                         .then((response) => {
-                            this.viewSponsor();
+                            this.loadSponsor();
                             this.sponsor.name = '';
                             this.sponsor.display_name = '';
                             this.sponsor.description = '';
@@ -363,7 +363,7 @@
                 deleteSponsor(id) {
                     axios.get(`/sponsor/${id}/delete`)
                         .then((response) => {
-                            this.viewSponsor();
+                            this.loadSponsor();
                         }).catch((error) => {
                         console.log(error);
                     });
