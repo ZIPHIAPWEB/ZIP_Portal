@@ -33,7 +33,7 @@ class CoordinatorController extends Controller
             ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
             ->leftjoin('schools', 'students.school', '=', 'schools.id')
             ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
-            ->leftjoin($temp, 'students.user_id', '=', 'logs.user_id')
+            ->join($temp, 'students.user_id', '=', 'logs.user_id')
             ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company', 'logs.activity'])
             ->where('program_id', $id)
             ->paginate(20);
