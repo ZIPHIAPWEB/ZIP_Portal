@@ -103,7 +103,7 @@
                                 <td class="text-sm text-center">@{{ student.course }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
                                 <td class="text-sm text-center">@{{ student.school }}</td>
-                                <td class="text-center"></td>
+                                <td class="text-center">@{{ student.activity }}</td>
                                 <td class="text-center">
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
                                 </td>

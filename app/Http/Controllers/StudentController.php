@@ -174,11 +174,17 @@ class StudentController extends Controller
         return response()->json(['message'  =>  'File Already Uploaded'], 422);
     }
 
-    public function removeBasicRequirement($id)
+    public function removeBasicRequirement(Request $request, $id)
     {
         Storage::disk('uploaded_files')->delete(BasicRequirement::find($id)->path);
 
         BasicRequirement::find($id)->delete();
+        $requirement = ProgramRequirement::find($id);
+
+        Log::create([
+            'user_id'   =>  $request->user()->id,
+            'activity'  =>  'Deleted a ' . $requirement->name
+        ]);
 
         return response()->json(['message' => 'File Removed']);
     }

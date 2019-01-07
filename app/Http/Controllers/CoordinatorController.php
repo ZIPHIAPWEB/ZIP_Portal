@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Coordinator;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
@@ -15,6 +14,7 @@ use App\User;
 use App\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,11 +27,14 @@ class CoordinatorController extends Controller
 
     public function loadStudents($id)
     {
+        $temp = DB::raw("(SELECT * FROM logs ORDER BY created_at DESC LIMIT 1) as logs");
+
         $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
             ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
             ->leftjoin('schools', 'students.school', '=', 'schools.id')
             ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
-            ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
+            ->leftjoin($temp, 'students.user_id', '=', 'logs.user_id')
+            ->select(['students.*', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company', 'logs.activity'])
             ->where('program_id', $id)
             ->paginate(20);
 
