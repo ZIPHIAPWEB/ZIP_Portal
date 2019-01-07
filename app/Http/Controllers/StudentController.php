@@ -91,7 +91,7 @@ class StudentController extends Controller
                         ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
                         ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
                         ->select(['users.name', 'users.email', 'users.verified', 'students.*', 'programs.display_name as program', 'schools.display_name as college', 'host_companies.name as company', 'sponsors.name as sponsor'])
-                        ->where('students.program_id', '%'. $request->input('program_id') .'%')
+                        ->where('students.program_id', 'like', '%'. $request->input('program_id') .'%')
                         ->whereRoleIs('student')
                         ->orderBy('created_at', 'desc')
                         ->paginate(10);
