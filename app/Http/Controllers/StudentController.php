@@ -244,11 +244,17 @@ class StudentController extends Controller
         return response()->json(['message'  =>  'File Already Uploaded']);
     }
 
-    public function removePaymentRequirement($id)
+    public function removePaymentRequirement(Request $request, $id)
     {
         Storage::disk('uploaded_files')->delete(PaymentRequirement::find($id)->path);
 
         PaymentRequirement::find($id)->delete();
+        $requirement = ProgramPayment::find($id);
+
+        Log::create([
+            'user_id'   =>  $request->user()->id,
+            'activity'  =>  'Deleted a ' . $requirement->name
+        ]);
 
         return response()->json(['message'  =>  'File Removed']);
     }
@@ -308,10 +314,16 @@ class StudentController extends Controller
         return response()->json(['message'  =>  'File Already Uploaded']);
     }
 
-    public function removeVisaRequirement($id)
+    public function removeVisaRequirement(Request $request, $id)
     {
         Storage::disk('uploaded_files')->delete(VisaRequirement::find($id)->path);
         VisaRequirement::find($id)->delete();
+        $requirement = SponsorRequirement::find($id);
+
+        Log::create([
+            'user_id'   =>  $request->user()->id,
+            'activity'  =>  'Deleted a ' . $requirement->name
+        ]);
 
         return response()->json(['message'  => 'File Removed']);
     }
