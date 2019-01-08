@@ -127,7 +127,7 @@ class StudentController extends Controller
                  ->where('basic_requirements.user_id', Auth::user()->id);
                     })->select(['basic_requirements.id as bReqId', 'program_requirements.id as pReqId', 'program_requirements.name', 'program_requirements.path', 'basic_requirements.status'])
                  ->where('program_requirements.program_id', $programId)
-                 ->orderBy('program_requirements.created_at', 'desc')
+                 ->orderBy('program_requirements.created_at', 'asc')
                  ->get();
 
         return SuperAdminResource::collection($program);
@@ -197,7 +197,7 @@ class StudentController extends Controller
                 })
                  ->select(['payment_requirements.id as bReqId', 'program_payments.id as pReqId', 'program_payments.name', 'payment_requirements.status'])
                  ->where('program_id', $programId)
-                 ->orderBy('program_payments.created_at', 'desc')
+                 ->orderBy('program_payments.created_at', 'asc')
                  ->get();
 
         return SuperAdminResource::collection($payment);
@@ -267,7 +267,7 @@ class StudentController extends Controller
                             })
                             ->select(['visa_requirements.id as bReqId', 'sponsor_requirements.id as pReqId', 'sponsor_requirements.name', 'visa_requirements.status', 'sponsor_requirements.path'])
                             ->where('sponsor_requirements.sponsor_id', $sponsorId)
-                            ->orderBy('sponsor_requirements.created_at', 'desc')
+                            ->orderBy('sponsor_requirements.created_at', 'asc')
                             ->get();
 
         return SuperAdminResource::collection($visa);
