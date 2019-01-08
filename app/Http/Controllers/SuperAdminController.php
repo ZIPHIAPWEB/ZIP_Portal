@@ -42,6 +42,7 @@ class SuperAdminController extends Controller
     public function loadActivityLogs($userId)
     {
         $logs = Log::where('user_id', $userId)
+                   ->orderBy('created_at', 'desc')
                    ->paginate(20);
 
         return SuperAdminResource::collection($logs);
