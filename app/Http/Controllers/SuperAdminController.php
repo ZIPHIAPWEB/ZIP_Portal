@@ -91,6 +91,8 @@ class SuperAdminController extends Controller
         $user = User::find($userId);
 
         if ($user) {
+            $user->delete();
+            Student::where('user_id', $userId)->delete();
             BasicRequirement::where('user_id', $userId)->delete();
             PaymentRequirement::where('user_id', $userId)->delete();
             VisaRequirement::where('user_id', $userId)->delete();
