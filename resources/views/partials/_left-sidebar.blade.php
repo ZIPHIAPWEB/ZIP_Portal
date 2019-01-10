@@ -80,6 +80,9 @@
                     </ul>
                 </li>
             @endif
+            @if(Auth::user()->hasRole('administrator'))
+                @yield('sidenav');
+            @endif
             @if(Auth::user()->hasRole('coordinator'))
                 <li class="header">General</li>
                 <li>

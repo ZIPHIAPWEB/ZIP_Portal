@@ -55,6 +55,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/s/requirement/visa', 'pages.requirement.sponsor')->name('req.visa');
 
     Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
+    Route::get('/c/program-admin/{id}', 'CoordinatorController@adminProgram')->name('admin.program');
 });
 
 Route::view('/chat', 'pages.chatbox')->name('portal.chat');

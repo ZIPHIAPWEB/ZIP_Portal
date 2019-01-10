@@ -21,7 +21,7 @@ class checkIfEmailIsVerified
                 if (Auth::user()->hasRole('superadmin')) {
                     return redirect()->route('dash.superadmin');
                 }
-                if (Auth::user()->hasRole('admin')) {
+                if (Auth::user()->hasRole('administrator')) {
                     return redirect()->route('dash.admin');
                 }
                 if (Auth::user()->hasRole('student')) {

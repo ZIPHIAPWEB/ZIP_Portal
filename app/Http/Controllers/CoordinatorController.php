@@ -26,6 +26,11 @@ class CoordinatorController extends Controller
         return view('pages.program.program')->with('program', $id);
     }
 
+    public function adminProgram($id)
+    {
+        return view('pages.program.program-admin')->with('program', $id);
+    }
+
     public function loadStudents($id)
     {
         $temp = Log::select(['*'])->orderBy('created_at', 'desc')->first();
@@ -112,11 +117,11 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Assessed.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Assessed.',
                 ]);
 
                 $data = [
-                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
                     'status'        => 'Assessed'
                 ];
 
@@ -176,11 +181,11 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Confirmed.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name :$coordinator->firstName . ' set the application status to Confirmed.',
                 ]);
 
                 $data = [
-                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
                     'status'        => 'Confirmed'
                 ];
 
@@ -205,11 +210,11 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Hired.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Hired.',
                 ]);
 
                 $data = [
-                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
                     'status'        => 'Hired'
                 ];
 
@@ -229,11 +234,11 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to For Visa Interview.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For Visa Interview.',
                 ]);
 
                 $data = [
-                    'coordinator'   => $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
                     'status'        => 'For Visa Interview'
                 ];
 
@@ -250,7 +255,7 @@ class CoordinatorController extends Controller
                 CoordinatorAction::create([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  Coordinator::where('user_id', Auth::user()->id)->first()->firstName . ' set the application status to Canceled.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Canceled.',
                 ]);
 
                 return 'Canceled';
@@ -264,7 +269,7 @@ class CoordinatorController extends Controller
             'visa_interview_status' =>  $status
         ]);
 
-        return 'Status '.$status;
+        return 'Status '. $status;
     }
 
     public function UpdateField(Request $request, $field, $id)

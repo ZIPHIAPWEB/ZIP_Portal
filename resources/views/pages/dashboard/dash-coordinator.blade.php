@@ -97,7 +97,6 @@
         const sidenav = new Vue({
             el: '#sidenav',
             data: {
-                auth: {{ \App\Coordinator::where('user_id', Auth::user()->id)->first()->program }},
                 url: '/portal/c/program/',
                 programs: []
             },
