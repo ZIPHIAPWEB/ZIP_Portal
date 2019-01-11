@@ -18,14 +18,12 @@ class ChatController extends Controller
     {
         if (Auth::user()->hasRole('student')) {
             $contacts = Coordinator::where('program', $request->input('program_id'))
-                ->where('firstName', 'like', '%'. $request->input('search') . '%')
-                ->orWhere('lastName', 'like', '%'. $request->input('search') . '%')
+                ->where('lastName', 'like', '%'. $request->input('search') . '%')
                 ->select(['coordinators.user_id', 'coordinators.firstName', 'coordinators.lastName'])
                 ->get();
         } else {
             $contacts = Student::where('program_id', $request->input('program_id'))
-                ->where('first_name', 'like', '%'. $request->input('search') . '%')
-                ->orWhere('last_name', 'like', '%'. $request->input('search') . '%')
+                ->where('last_name', 'like', '%'. $request->input('search') . '%')
                 ->select(['students.user_id', 'students.first_name', 'students.last_name'])
                 ->get();
         }
