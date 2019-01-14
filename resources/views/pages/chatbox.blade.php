@@ -22,16 +22,15 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <div class="mailbox-controls clearfix">
-                        <!-- Check all button -->
+                        <!--
                         <div class="pull-right">
                             1-50/200
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                             </div>
-                            <!-- /.btn-group -->
                         </div>
-                        <!-- /.pull-right -->
+                        -->
                     </div>
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
