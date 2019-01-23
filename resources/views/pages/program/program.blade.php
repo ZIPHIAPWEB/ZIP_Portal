@@ -701,6 +701,7 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
+                                                <button @click="openInNewTab(requirement.bReqId)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
                                                 <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
@@ -1007,6 +1008,13 @@
                             this.loadPaymentRequirements(programId, response.data.data.user_id);
                             this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
                             $('#student-modal').modal('show');
+                        })
+                },
+                openInNewTab ($id) {
+                    axios.get(`/download/basic/requirement/${id}`)
+                        .then((response) => {
+                            let win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 loadBasicRequirements (programId, userId) {

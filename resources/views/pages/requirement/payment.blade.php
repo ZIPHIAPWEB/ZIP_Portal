@@ -59,6 +59,7 @@
                                     <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td class="text-center">
+                                    <button v-if="requirement.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</button>
                                     <button v-if="!requirement.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                     <button v-else @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
@@ -209,6 +210,13 @@
                             })
                         }
                     })
+                },
+                openInNewTab(requirement) {
+                    axios.get(`/download/payment/requirement/${requirement.pReqId}`)
+                        .then((response) => {
+                            win = window.open(response.data, '_blank');
+                            win.focus();
+                        })
                 }
             }
         })

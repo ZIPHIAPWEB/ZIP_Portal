@@ -17,10 +17,12 @@
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
+                        <!--
                         <li class="list-group-item" v-if="student.application_status !== 'New Applicant'">
                             <b>Program Coordinator</b>
                             <a class="pull-right text-green text-sm">@{{ student.coor_first }} @{{ student.coor_last }}</a>
                         </li>
+                        -->
                     </ul>
                     <button class="btn btn-primary btn-block btn-flat" @click="viewProfile()">View Profile</button>
                 </div>
@@ -54,134 +56,371 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <span class="fa fa-building"></span>
-                    <label for="" class="control-label">Host Company Details</label>
-                </div>
-                <div class="box-body">
-                    <table class="table table-striped table-bordered table-condensed">
-                        <tbody>
-                            <tr>
-                                <td style="width: 35%;">Host Company</td>
-                                <td class="text-bold">@{{ student.company }}</td>
-                            </tr>
-                            <tr>
-                                <td>Position</td>
-                                <td class="text-bold">@{{ student.position }}</td>
-                            </tr>
-                            <tr>
-                                <td>Location</td>
-                                <td class="text-bold">@{{ student.location }}</td>
-                            </tr>
-                            <tr>
-                                <td>Stipend</td>
-                                <td class="text-bold">@{{ student.stipend }}</td>
-                            </tr>
-                            <tr>
-                                <td>Visa Sponsor</td>
-                                <td class="text-bold">@{{ student.sponsor }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="box box-primary">
-                <div class="box-header with-header">
-                    <span class="fa fa-flag"></span>
-                    <label for="" class="control-label">Visa Interview Details</label>
-                </div>
-                <div class="box-body">
-                    <table class="table table-striped table-bordered table-condensed">
-                        <tbody>
-                            <tr>
-                                <td style="width: 35%;">Program ID Number</td>
-                                <td class="text-bold">@{{ student.program_id_no }}</td>
-                            </tr>
-                            <tr>
-                                <td>SEVIS ID</td>
-                                <td class="text-bold">@{{ student.sevis_id }}</td>
-                            </tr>
-                            <tr>
-                                <td>Interview Schedule</td>
-                                <td class="text-bold">@{{ student.visa_interview_schedule }}</td>
-                            </tr>
-                            <tr>
-                                <td>Visa Interview Status</td>
-                                <td class="text-bold">@{{ student.visa_interview_status }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="box box-primary">
-                <div class="box-header with-header">
-                    <span class="fa fa-plane"></span>
-                    <label class="control-label">Flight Details</label>
-                </div>
-                <div class="box-body">
-                    <table class="table table-striped table-bordered table-condensed">
-                        <tbody>
-                            <tr>
-                                <td style="width: 35%;">Departure Date</td>
-                                <td class="text-bold">@{{ student.date_of_departure }}</td>
-                            </tr>
-                            <tr>
-                                <td>Arrival Date</td>
-                                <td class="text-bold">@{{ student.date_of_arrival }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#activity" data-toggle="tab" aria-expanded="true">
+                        <a href="#profile" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-user"></span>
+                            <label for="" class="control-label">Profile</label>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#basic" data-toggle="tab" aria-expanded="false">
                             <span class="fa fa-file"></span>
                             <label for="" class="control-label">Basic Requirements</label>
                         </a>
                     </li>
                     <li class="">
-                        <a href="#timeline" data-toggle="tab" aria-expanded="false">
-                            <span class="fa fa-credit-card"></span>
+                        <a href="#payment" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-file"></span>
                             <label for="" class="control-label">Payment Requirements</label>
                         </a>
                     </li>
                     <li class="">
-                        <a href="#settings" data-toggle="tab" aria-expanded="false">
-                            <span class="fa fa-book"></span>
+                        <a href="#visa" data-toggle="tab" aria-expanded="false">
+                            <span class="fa fa-plane"></span>
                             <label for="" class="control-label">Visa Requirements</label>
                         </a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="activity">
+                    <div class="tab-pane active" id="profile">
+                        <label class="control-label">Application Details</label>
                         <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                                <th style="width: 75%;">Requirements</th>
-                                <th class="text-center">Status</th>
-                            </thead>
                             <tbody>
-                                <tr v-for="requirement in basicRequirements.data">
-                                    <td>@{{ requirement.name }}</td>
-                                    <td class="text-center">
-                                        <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
-                                        <span v-else style="color: red;" class="fa fa-remove"></span>
+                            <tr>
+                                <td style="width: 35%;">Application ID</td>
+                                <td class="text-bold text-green">
+                                    @{{ student.application_id }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 35%;">Visa Interview Status</td>
+                                <td class="text-bold">
+                                    @{{ student.visa_interview_status }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <label class="control-label">Personal Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%;">First name</td>
+                                    <td v-if="!setting.firstNameIsEdit">
+                                        <label class="text-bold"> @{{ student.first_name }}</label>
+                                        <a @click="hideField('firstName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Middle name</td>
+                                    <td v-if="!setting.middleNameIsEdit">
+                                        <label class="text-bold">@{{ student.middle_name }}</label>
+                                        <a @click="hideField('middleName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Last name</td>
+                                    <td v-if="!setting.lastNameIsEdit">
+                                        <label class="text-bold">@{{ student.last_name }}</label>
+                                        <a @click="hideField('lastName');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Birthdate</td>
+                                    <td v-if="!setting.birthDateIsEdit">
+                                        <label class="text-bold">@{{ student.birthdate }}</label>
+                                        <a @click="hideField('birthdate');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td v-if="!setting.genderIsEdit">
+                                        <label class="text-bold">@{{ student.gender }}</label>
+                                        <a @click="hideField('gender');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <select v-model="field" class="form-control input-sm">
+                                                <option value="">Select gender</option>
+                                                <option value="MALE">Male</option>
+                                                <option value="FEMALE">Female</option>
+                                            </select>
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">Address</td>
+                                    <td v-if="!setting.addressIsEdit">
+                                        <label class="text-bold">@{{ student.address }}</label>
+                                        <a @click="hideField('address');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Home number</td>
+                                    <td v-if="!setting.homeNumberIsEdit">
+                                        <label class="text-bold">@{{ student.home_number }}</label>
+                                        <a @click="hideField('homeNumber');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="number" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile number</td>
+                                    <td v-if="!setting.mobileNumberIsEdit">
+                                        <label class=" text-bold">@{{ student.mobile_number }}</label>
+                                        <a @click="hideField('mobileNumber');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="number" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                    <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Skype ID</td>
+                                    <td v-if="!setting.skypeIdIsEdit">
+                                        <label class="text-bold">@{{ student.skype_id }}</label>
+                                        <a @click="hideField('skypeId');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Facebook Email</td>
+                                    <td class="text-bold">
+                                        @{{ student.fb_email }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="clearfix">
-                            <button v-if="basicRequirements.links.prev" @click="pagination(basicRequirements.links.prev, 'basic')" class="btn btn-default btn-xs btn-flat pull-left">
-                                <span class="fa fa-arrow-left"></span>
-                            </button>
-                            <button v-if="basicRequirements.links.next" @click="pagination(basicRequirements.links.next, 'basic')" class="btn btn-default btn-xs btn-flat pull-right">
-                                <span class="fa fa-arrow-right"></span>
-                            </button>
-                        </div>
+                        <label class="control-label">School Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%;">College</td>
+                                    <td class="text-bold">
+                                        @{{ student.school }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Course</td>
+                                    <td class="text-bold">
+                                        @{{ student.course }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Year Level</td>
+                                    <td class="text-bold">
+                                        @{{ student.year }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="control-label">Host Company Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%;">Host Company</td>
+                                    <td class="text-bold">
+                                        @{{ student.company }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td class="text-bold">
+                                        @{{ student.position }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td class="text-bold">
+                                        @{{ student.program_start_date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>End Date</td>
+                                    <td class="text-bold">
+                                        @{{ student.program_end_date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Stipend</td>
+                                    <td class="text-bold">
+                                        @{{ student.stipend }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Visa Sponsor</td>
+                                    <td class="text-bold">
+                                        @{{ student.sponsor }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label for="" class="control-label">Visa Interview Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%;">Program ID Number</td>
+                                    <td class="text-bold">
+                                        @{{ student.program_id_no }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SEVIS ID</td>
+                                    <td class="text-bold">
+                                        @{{ student.sevis_id }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Interview Schedule</td>
+                                    <td class="text-bold">
+                                        @{{ student.visa_interview_schedule }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label for="" class="control-label">Flight Details</label>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%;">Departure Date</td>
+                                    <td class="text-bold">
+                                        @{{ student.date_of_departure }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Arrival Date</td>
+                                    <td class="text-bold">
+                                        @{{ student.date_of_arrival }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="tab-pane" id="timeline">
+                    <div class="tab-pane" id="basic">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                            <th style="width: 75%;">Requirements</th>
+                            <th class="text-center">Status</th>
+                            </thead>
+                            <tbody>
+                            <tr v-for="requirement in basicRequirements.data">
+                                <td>@{{ requirement.name }}</td>
+                                <td class="text-center">
+                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
+                                    <span v-else style="color: red;" class="fa fa-remove"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane" id="payment">
                         <table class="table table-striped table-bordered table-condensed">
                             <thead>
                             <th style="width: 75%;">Requirements</th>
@@ -197,16 +436,9 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="clearfix">
-                            <button v-if="paymentRequirements.links.prev" @click="pagination(paymentRequirements.links.prev, 'payment')" class="btn btn-default btn-xs btn-flat pull-left">
-                                <span class="fa fa-arrow-left"></span>
-                            </button>
-                            <button v-if="paymentRequirements.links.next" @click="pagination(paymentRequirements.links.next, 'payment')" class="btn btn-default btn-xs btn-flat pull-right">
-                                <span class="fa fa-arrow-right"></span>
-                            </button>
-                        </div>
+
                     </div>
-                    <div class="tab-pane" id="settings">
+                    <div class="tab-pane" id="visa">
                         <table class="table table-striped table-bordered table-condensed">
                             <thead>
                             <th style="width: 75%;">Requirements</th>
@@ -222,14 +454,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="clearfix">
-                            <button v-if="visaRequirements.links.prev" @click="pagination(visaRequirements.links.prev, 'visa')" class="btn btn-default btn-xs btn-flat pull-left">
-                                <span class="fa fa-arrow-left"></span>
-                            </button>
-                            <button v-if="visaRequirements.links.next" @click="pagination(visaRequirements.links.next, 'visa')" class="btn btn-default btn-xs btn-flat pull-right">
-                                <span class="fa fa-arrow-right"></span>
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
