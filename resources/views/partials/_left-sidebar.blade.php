@@ -58,12 +58,12 @@
                         <i class="fa fa-calendar"></i> <span class="text-sm">Event Management</span>
                     </a>
                 </li>
-                <li class="{{ Route::currentRouteNamed('sa.cms') ? 'active' : '' }}">
+                <!--<li class="{{ Route::currentRouteNamed('sa.cms') ? 'active' : '' }}">
                     <a href="{{ route('sa.cms') }}">
                         <i class="fa fa-desktop"></i>
                         <span class="text-sm">Website Content Management</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="header">Settings</li>
                 <li class="treeview {{ Route::currentRouteNamed('s.school') ? 'active' : '' }}{{ Route::currentRouteNamed('s.host') ? 'active' : '' }}{{ Route::currentRouteNamed('s.programs') ? 'active' : '' }}{{ Route::currentRouteNamed('s.sponsors') ? 'active' : '' }}">
                     <a href="#">
