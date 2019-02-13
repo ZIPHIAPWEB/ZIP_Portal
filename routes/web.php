@@ -46,13 +46,17 @@ Route::prefix('portal')->group(function() {
 
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
-    Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
+
+    Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
+    Route::view('/s/program-status', 'pages.student-content.program-status')->name('student.program-status');
+    Route::view('/s/post-program-evaluation', 'pages.student-content.post-program-evaluation')->name('student.post-program-evaluation');
 
     Route::view('/s/register-form', 'pages.requirement.register-form')->name('register.form');
     Route::view('/s/requirement/basic', 'pages.requirement.basic')->name('req.basic');
     Route::view('/s/requirement/payment', 'pages.requirement.payment')->name('req.payment');
     Route::view('/s/requirement/visa', 'pages.requirement.sponsor')->name('req.visa');
+    Route::view('/s/requirement/additional', 'pages.requirement.additional')->name('req.additional');
 
     Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
     Route::get('/c/program-admin/{id}', 'CoordinatorController@adminProgram')->name('admin.program');
@@ -76,7 +80,7 @@ Route::prefix('coor')->group(function() {
 
 Route::prefix('stud')->group(function() {
     Route::get('/show', 'StudentController@showStudent')->name('stud.show');
-    Route::get('/view/{id}', 'StudentController@viewStudent')->name('stud.view');
+    Route::get('/view', 'StudentController@viewStudent')->name('stud.view');
 
     Route::get('/requirement/basic/{programId}', 'StudentController@loadBasicRequirements')->name('stud.requirement.basic');
     Route::post('/requirement/basic/upload/{id}', 'StudentController@uploadBasicRequirement')->name('stud.requirement.basic.upload');
@@ -134,7 +138,7 @@ Route::prefix('program')->group(function() {
     Route::post('/{id}/update', 'ProgramController@updateProgram')->name('program.update');
     Route::get('/delete/{id}', 'ProgramController@deleteProgram')->name('program.delete');
 
-    Route::get('/{id}/requirements/view', 'ProgramRequirementController@viewRequirements')->name('program.requirements.view');
+    Route::get('/requirements/view', 'ProgramRequirementController@viewRequirements')->name('program.requirements.view');
     Route::post('/requirement/store', 'ProgramRequirementController@storeRequirement')->name('program.requirements.store');
     Route::get('/requirement/{id}/edit', 'ProgramRequirementController@editRequirement')->name('program.requirements.edit');
     Route::post('/requirement/{id}/update', 'ProgramRequirementController@updateRequirement')->name('program.requirement.update');
@@ -145,6 +149,66 @@ Route::prefix('program')->group(function() {
     Route::get('/payment/{id}/edit', 'ProgramPaymentController@editPayment')->name('program.payment.edit');
     Route::post('/payment/{id}/update', 'ProgramPaymentController@updatePayment')->name('program.payment.update');
     Route::get('/payment/{id}/delete', 'ProgramPaymentController@deletePayment')->name('program.payment.delete');
+});
+
+Route::prefix('preliminary')->group(function (){
+    Route::get('/viewUserRequirement', 'PreliminaryRequirementController@viewUserRequirement');
+    Route::get('/view', 'PreliminaryRequirementController@view')->name('preliminary.view');
+    Route::get('/edit', 'PreliminaryRequirementController@edit')->name('preliminary.edit');
+    Route::post('/store', 'PreliminaryRequirementController@store')->name('preliminary.store');
+    Route::post('/update', 'PreliminaryRequirementController@update')->name('preliminary.update');
+    Route::post('/delete', 'PreliminaryRequirementController@delete')->name('preliminary.delete');
+});
+
+Route::prefix('studPreliminary')->group(function () {
+   Route::post('/store', 'StudentPreliminaryController@store');
+   Route::post('/remove', 'StudentPreliminaryController@remove');
+   Route::get('/download', 'StudentPreliminaryController@download');
+});
+
+Route::prefix('additional')->group(function () {
+    Route::get('/viewUserRequirement', 'AdditionalRequirementController@viewUserRequirement');
+    Route::get('/view', 'AdditionalRequirementController@view')->name('additional.view');
+    Route::get('/edit', 'AdditionalRequirementController@edit')->name('additional.edit');
+    Route::post('/store', 'AdditionalRequirementController@store')->name('additional.store');
+    Route::post('/update', 'AdditionalRequirementController@update')->name('additional.update');
+    Route::post('/delete', 'AdditionalRequirementController@delete')->name('additional.delete');
+});
+
+Route::prefix('/studAdditional')->group(function () {
+    Route::post('/store', 'StudentAdditionalController@store');
+    Route::post('/remove', 'StudentAdditionalController@remove');
+    Route::get('/download', 'StudentAdditionalController@download');
+});
+
+Route::prefix('payment')->group(function () {
+    Route::get('/viewUserRequirement', 'PaymentRequirementController@viewUserRequirement');
+    Route::get('/view', 'PaymentRequirementController@view')->name('payment.view');
+    Route::get('/edit', 'PaymentRequirementController@edit')->name('payment.edit');
+    Route::post('/store', 'PaymentRequirementController@store')->name('payment.store');
+    Route::post('/update', 'PaymentRequirementController@update')->name('payment.update');
+    Route::post('/delete', 'PaymentRequirementController@delete')->name('payment.delete');
+});
+
+Route::prefix('studPayment')->group(function () {
+   Route::post('/store', 'StudentPaymentController@store');
+   Route::post('/remove', 'StudentPaymentController@remove');
+   Route::get('/download', 'StudentPaymentController@download');
+});
+
+Route::prefix('visa')->group(function () {
+    Route::get('/viewUserRequirement', 'SponsorRequirementController@viewUserRequirement');
+    Route::get('/view', 'SponsorRequirementController@view')->name('sponsor.requirement.view');
+    Route::post('/store', 'SponsorRequirementController@store')->name('sponsor.requirement.store');
+    Route::get('/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
+    Route::post('/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
+    Route::get('/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
+});
+
+Route::prefix('studVisa')->group(function () {
+    Route::post('/store', 'StudentSponsorController@store');
+    Route::post('/remove', 'StudentSponsorController@remove');
+    Route::get('/download', 'StudentSponsorController@download');
 });
 
 Route::prefix('host')->group(function() {
@@ -161,12 +225,6 @@ Route::prefix('sponsor')->group(function() {
     Route::get('/{id}/edit', 'SponsorController@edit')->name('sponsor.edit');
     Route::post('/{id}/update', 'SponsorController@update')->name('sponsor.update');
     Route::get('/{id}/delete', 'SponsorController@delete')->name('sponsor.delete');
-
-    Route::get('/{id}/requirements/view', 'SponsorRequirementController@view')->name('sponsor.requirement.view');
-    Route::post('/requirement/store', 'SponsorRequirementController@store')->name('sponsor.requirement.store');
-    Route::get('/requirement/{id}/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
-    Route::post('/requirement/{id}/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
-    Route::get('/requirement/{id}/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
 });
 
 Route::prefix('school')->group(function() {
@@ -227,8 +285,9 @@ Route::prefix('chat')->group(function () {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
-Route::get('/test', function() {
-    $test = \Carbon\Carbon::now()->addYear(1)->format('Y');
+Route::get('/test/{id}', function($id) {
 
-    return $test;
+    $requirement = App\PreliminaryRequirement::with(['studentPreliminary'])->get();
+
+    return $requirement;
 });

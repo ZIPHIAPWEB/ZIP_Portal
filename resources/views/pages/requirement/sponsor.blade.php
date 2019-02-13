@@ -34,19 +34,73 @@
 
 @section('content')
     <div id="app">
-        <div class="col-xs-12">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <a href="javascript:void(0)" @click="selectPhoto()">
+                        <img class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
+                    </a>
+                    <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
+                    <p class="text-muted text-center">@{{ student.program }}</p>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Application Status</b>
+                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
+                        </li>
+                        <li class="list-group-item" v-if="student.coordinator">
+                            <b>Program Coordinator</b>
+                            <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title text-center">Visa Sponsor Requirement</h3>
+                    <i class="fa fa-calendar"></i>
+                    <label for="" class="control-label">Schedule of Events</label>
                 </div>
                 <div class="box-body">
-                    <table class="table table-bordered table-striped table-condensed">
-                        <thead>
+                    <ul class="products-list product-list-in-box">
+                        <li class="item" v-if="events == 0">
+                            No Upcoming Event
+                        </li>
+                        <li v-else class="item" v-for="event in events">
+                            <div class="product-img">
+                                <img src="http://via.placeholder.com/50x50" alt="">
+                            </div>
+                            <div class="product-info">
+                                <a href="javascript:void(0)" class="product-title" @click="viewEvent(event.id)">
+                                    @{{ event.name }}
+                                    <span class="label label-primary pull-right">@{{ event.date }}</span>
+                                </a>
+                                <span class="product-description">
+                                    @{{ event.description }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#sponsor" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-user"></span>
+                            <label for="" class="control-label">Visa Sponsor Requirements</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="sponsor" class="tab-pane active">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
                             <th>Requirements</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
-                        </thead>
-                        <tbody v-if="hasRecords">
+                            </thead>
+                            <tbody v-if="hasRecords">
                             <tr v-if="loading.table">
                                 <td valign="top" colspan="15" class="text-center">
                                     <span class="fa fa-circle-o-notch fa-spin"></span>
@@ -55,24 +109,25 @@
                             <tr v-else v-for="requirement in requirements">
                                 <td>@{{ requirement.name }}</td>
                                 <td class="text-center">
-                                    <span v-if="requirement.status" class="fa fa-check" style="color: green;"></span>
+                                    <span v-if="requirement.student_visa.status" class="fa fa-check" style="color: green;"></span>
                                     <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td>
-                                    <button v-if="!requirement.status" @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button v-if="requirement.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span> Download File</button>
-                                    <button v-if="requirement.status" @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
+                                    <button v-if="!requirement.student_visa.status" @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
+                                    <button v-if="requirement.student_visa.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span> Download File</button>
+                                    <button v-if="requirement.student_visa.status" @click="removeFile(requirement)" class="btn btn-danger btn-xs btn-flat"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
-                        </tbody>
-                        <tbody v-else>
+                            </tbody>
+                            <tbody v-else>
                             <tr>
                                 <td valign="top" colspan="15" class="text-center">
                                     No Records
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,11 +162,13 @@
         const app = new Vue({
             el: '#app',
             data: {
+                student: [],
                 requirements: [],
                 modalTitle: '',
                 pReqId: '',
                 bReqId: '',
                 file: '',
+                user_id: '{{ Auth::user()->id }}',
                 sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}",
                 loading: {
                     uploading: false,
@@ -120,12 +177,40 @@
                 hasRecords: true
             },
             mounted: function() {
+                this.loadStudentDetails();
+                this.loadEvents();
                 this.loadRequirements(this.sponsor_id);
             },
+            filters: {
+                avatar: function (value) {
+                    if (!value) {
+                        return 'https://placeimg.com/150/150/any'
+                    } else {
+                        return `/storage/${value}`
+                    }
+                }
+            },
             methods: {
+                loadEvents() {
+                    axios.get('/event/view')
+                        .then((response) => {
+                            this.events = response.data.data;
+                        }).catch((error) => {
+                        console.log(error);
+                    })
+                },
+                loadStudentDetails() {
+                    axios.get(`/stud/view?id=${this.user_id}`)
+                        .then((response) => {
+                            this.student = response.data.data;
+                            this.program_id = response.data.data.program_id;
+                        }).catch((error) => {
+                        console.log(error);
+                    })
+                },
                 loadRequirements(sponsorId) {
                     this.loading.table = true;
-                    axios.get(`/stud/requirement/visa/${sponsorId}`)
+                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}&id=${this.user_id}`)
                         .then((response) => {
                             this.loading.table = false;
                             if (response.data.data.length > 0) {
@@ -135,11 +220,12 @@
                                 this.hasRecords = false;
                             }
                         }).catch((error) => {
+                            this.hasRecords = false;
                             console.log(error);
                     });
                 },
                 selectFile(requirement) {
-                    this.pReqId = requirement.pReqId;
+                    this.pReqId = requirement.id;
                     this.modalTitle = requirement.name;
                     $('#file-upload').modal('show');
                 },
@@ -152,7 +238,7 @@
 
                     formData.append('file', this.file);
 
-                    axios.post(`/stud/requirement/visa/upload/${this.pReqId}`, formData, {
+                    axios.post(`/studVisa/store?requirement_id=${this.pReqId}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -185,7 +271,7 @@
                        confirmButtonColor: 'red',
                        showLoaderOnConfirm: true,
                        preConfirm: () => {
-                           return axios.post(`/stud/requirement/visa/remove/${requirement.bReqId}`)
+                           return axios.post(`/studVisa/remove?requirement_id=${requirement.student_visa.id}`)
                                .then((response) => {
                                    return response;
                                }).catch((error) => {
@@ -208,7 +294,7 @@
                    })
                 },
                 downloadFile(requirement) {
-                    axios.get(`/download/sponsor/form/${requirement.pReqId}`)
+                    axios.get(`/studVisa/download?requirement_id=${requirement.student_visa.id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;

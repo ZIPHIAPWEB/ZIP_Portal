@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ProgramRequirementController extends Controller
 {
-    public function viewRequirements($programId)
+    public function viewRequirements(Request $request)
     {
-        $requirements = ProgramRequirement::where('program_id', $programId)->orderBy('created_at', 'desc')->paginate(4);
+        $requirements = ProgramRequirement::where('program_id', $request->input('program_id'))
+                                          ->where('part', $request->input('part'))
+                                          ->orderBy('created_at', 'desc')
+                                          ->get();
 
         return SuperAdminResource::collection($requirements);
     }
@@ -29,6 +32,7 @@ class ProgramRequirementController extends Controller
 
             ProgramRequirement::create([
                 'program_id'    =>  $request->input('program_id'),
+                'part'          =>  $request->input('part'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path
@@ -36,6 +40,7 @@ class ProgramRequirementController extends Controller
         } else {
             ProgramRequirement::create([
                 'program_id'    =>  $request->input('program_id'),
+                'part'          =>  $request->input('part'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  ''

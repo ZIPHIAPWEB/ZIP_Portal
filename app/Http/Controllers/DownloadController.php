@@ -26,11 +26,6 @@ class DownloadController extends Controller
         return Storage::url(SponsorRequirement::find($id)->path);
     }
 
-    public function downloadBasicRequirement($id)
-    {
-        return Storage::disk('uploaded_files')->url(BasicRequirement::find($id)->path);
-    }
-
     public function downloadPaymentRequirement($id)
     {
         return Storage::disk('uploaded_files')->url(PaymentRequirement::find($id)->path);

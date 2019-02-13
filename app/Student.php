@@ -40,4 +40,149 @@ class Student extends Model
         'application_status',
         'coordinator_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function company()
+    {
+        return $this->hasOne('App\HostCompany', 'id', 'host_company_id')
+                    ->withDefault([
+                        'name'  =>  '',
+                        'states'=>  ''
+                    ]);
+    }
+
+    public function school()
+    {
+        return $this->hasOne('App\School', 'id', 'school');
+    }
+
+    public function program()
+    {
+        return $this->hasOne('App\Program', 'id', 'program_id');
+    }
+
+    public function coordinator()
+    {
+        return $this->hasOne('App\Coordinator', 'user_id', 'coordinator_id');
+    }
+
+    public function father()
+    {
+        return $this->hasOne('App\Father', 'user_id', 'user_id')
+                    ->withDefault([
+                        'user_id'       =>  '',
+                        'first_name'    =>  '',
+                        'middle_name'   =>  '',
+                        'last_name'     =>  '',
+                        'occupation'    =>  '',
+                        'contact_no'    =>  ''
+                    ]);
+    }
+
+    public function mother()
+    {
+        return $this->hasOne('App\Mother', 'user_id', 'user_id')
+                    ->withDefault([
+                        'user_id'       =>  '',
+                        'first_name'    =>  '',
+                        'middle_name'   =>  '',
+                        'last_name'     =>  '',
+                        'occupation'    =>  '',
+                        'contact_no'    =>  ''
+                    ]);
+    }
+
+    public function primary()
+    {
+        return $this->hasOne('App\Primary', 'user_id', 'user_id')
+                    ->withDefault([
+                        'school_name'   =>  '',
+                        'address'       =>  '',
+                        'date_graduated'=>  ''
+                    ]);
+    }
+
+    public function secondary()
+    {
+        return $this->hasOne('App\Secondary', 'user_id', 'user_id')
+                    ->withDefault([
+                        'school_name'   =>  '',
+                        'address'       =>  '',
+                        'date_graduated'=>  ''
+                    ]);
+    }
+
+    public function tertiary()
+    {
+        return $this->hasOne('App\Tertiary', 'user_id', 'user_id')
+                    ->withDefault([
+                        'school_name'   =>  '',
+                        'address'       =>  '',
+                        'degree'        =>  '',
+                        'date_graduated'=>  ''
+                    ]);
+    }
+
+    public function experience()
+    {
+        return $this->hasMany('App\Experience', 'user_id', 'user_id');
+    }
+
+    public function sponsor()
+    {
+        return $this->hasOne('App\Sponsor', 'id', 'visa_sponsor_id')
+                    ->withDefault([
+                        'name'          =>  '',
+                        'display_name'  =>  '',
+                        'description'   =>  ''
+                    ]);
+    }
+
+    public function payment()
+    {
+        return $this->hasMany('App\ProgramPayment', 'program_id', 'program_id');
+    }
+
+    public function basicRequirement()
+    {
+        return $this->hasMany('App\BasicRequirement', 'user_id', 'user_id');
+    }
+
+    public function getByProgramId($id)
+    {
+        $user = User:: whereRoleIs('student')
+                    ->with('student')
+                    ->get();
+
+        return $user;
+    }
+
+    public function getByUserId($userId)
+    {
+        $user = $this->where('user_id', $userId)->first();
+
+        return $user;
+    }
+
+    public function viewStudentInfo($id)
+    {
+        return $this->where('user_id', $id)
+                    ->with([
+                        'company',
+                        'sponsor',
+                        'school',
+                        'coordinator',
+                        'father',
+                        'mother',
+                        'primary',
+                        'secondary',
+                        'tertiary',
+                        'experience',
+                    ])
+                    ->first();
+    }
 }

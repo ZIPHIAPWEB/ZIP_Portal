@@ -116,22 +116,39 @@
                 </li>
             @endif
             @if(Auth::user()->hasRole('student'))
-                <li class="header">General</li>
-                <li class="active">
+                <li class="header">Personal Information</li>
+                <li class="{{ Route::currentRouteNamed('dash.student') ? 'active' : '' }}">
                     <a href="{{ route('dash.student') }}">
-                        <i class="fa fa-user"></i> <span><small>My Profile</small></span>
-                    </a>
-                </li>
-                <li class="header">My Requirements</li>
-                <li>
-                    <a href="{{ route('req.basic') }}">
-                        <i class="fa fa-book"></i>
+                        <i class="fa fa-user"></i>
                         <span>
-                            <small>Basic Requirements</small>
+                            <small>My Profile</small>
                         </span>
                     </a>
                 </li>
-                <li>
+                <li class="header">Program</li>
+                <li class="treeview {{ Route::currentRouteNamed('req.basic') ? 'active' : '' }}{{ Route::currentRouteNamed('req.visa') ? 'active' : '' }}{{ Route::currentRouteNamed('req.additional') ? 'active' : '' }}">
+                    <a href="#">
+                        <i class="fa fa-gear"></i> <span><small>Program Requirement</small></span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Route::currentRouteNamed('req.basic') ? 'active' : '' }}"><a href="{{ route('req.basic') }}"><i class="fa fa-circle-o"></i><small>Part 1: Preliminary Documents</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('req.visa') ? 'active' : '' }}"><a href="{{ route('req.visa') }}"><i class="fa fa-circle-o"></i><small>Part 2: Visa Sponsor Forms</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('req.additional') ? 'active' : '' }}"><a href="{{ route('req.additional') }}"><i class="fa fa-circle-o"></i><small>Part 3: Additional Requirements</small></a></li>
+                    </ul>
+                </li>
+                <li class="{{ Route::currentRouteNamed('student.program-status') ? 'active' : '' }}">
+                    <a href="{{ route('student.program-status') }}">
+                        <i class="fa fa-user"></i>
+                        <span>
+                            <small>Program Information</small>
+                        </span>
+                    </a>
+                </li>
+                <li class="header">Payments</li>
+                <li class="{{ Route::currentRouteNamed('req.payment') ? 'active' : '' }}">
                     <a href="{{ route('req.payment') }}">
                         <i class="fa fa-dollar"></i>
                         <span>
@@ -139,16 +156,8 @@
                         </span>
                     </a>
                 </li>
-                @if (\App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id)
-                    <li>
-                        <a href="{{ route('req.visa') }}">
-                            <i class="fa fa-plane"></i>
-                            <span><small>Visa Requirements</small></span>
-                        </a>
-                    </li>
-                @endif
-                <li class="header">Communication</li>
-                <li>
+                <li class="header">Message Us</li>
+                <li class="{{ Route::currentRouteNamed('portal.chat-student') ? 'active' : '' }}">
                     <a href="{{ route('portal.chat-student') }}">
                        <i class="fa fa-envelope"></i>
                         <span><small>Chat</small></span>

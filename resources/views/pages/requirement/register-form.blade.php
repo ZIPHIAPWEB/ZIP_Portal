@@ -15,32 +15,32 @@
                         <div class="box-body">
                             <p class="login-box-msg">Fill-Up all the required fields</p>
 
-                            <form @submit.prevent="validate()">
+                            <form>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name: <i class="text-red">*</i></label>
-                                        <input v-model="student.firstName" type="text" class="form-control">
+                                        <input v-model="student.firstName" type="text" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.first_name">@{{ errors.first_name[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Middle Name: </label>
-                                        <input v-model="student.middleName" type="text" class="form-control">
+                                        <input v-model="student.middleName" type="text" class="form-control input-sm">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name: <i class="text-red">*</i></label>
-                                        <input v-model="student.lastName" type="text" class="form-control">
+                                        <input v-model="student.lastName" type="text" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.last_name">@{{ errors.last_name[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Date of Birth: <i class="text-red">*</i></label>
-                                        <input v-model="student.birthDate" type="date" class="form-control">
+                                        <input v-model="student.birthDate" type="date" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.birthdate">@{{ errors.birthdate[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Gender: <i class="text-red">*</i></label>
-                                        <select v-model="student.gender" class="form-control ">
+                                        <select v-model="student.gender" class="form-control input-sm">
                                             <option value="">Select Gender</option>
                                             <option value="MALE">Male</option>
                                             <option value="FEMALE">Female</option>
@@ -51,37 +51,37 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
-                                        <input v-model="student.homeNumber" type="number" class="form-control" maxlength="11">
+                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
-                                        <input v-model="student.mobileNumber" type="number" class="form-control" maxlength="11">
+                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11">
                                         <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
                                         <label for="">Address: <i class="text-red">*</i></label>
-                                        <textarea v-model="student.address" class="form-control"></textarea>
+                                        <textarea v-model="student.address" class="form-control input-sm"></textarea>
                                         <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Facebook Email <i class="text-red">*</i></label>
-                                        <input v-model="student.fb_email" type="email" class="form-control">
+                                        <input v-model="student.fb_email" type="email" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Skype ID <i class="text-red">*</i></label>
-                                        <input v-model="student.skype_id" type="text" class="form-control">
+                                        <input v-model="student.skype_id" type="text" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.skype_id">@{{ errors.skype_id[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">School: <i class="text-red">*</i></label>
-                                        <select v-model="student.school" class="form-control">
+                                        <select v-model="student.school" class="form-control input-sm">
                                             <option value="" active>Select School</option>
                                             <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
                                         </select>
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Year Level: <i class="text-red">*</i></label>
-                                        <select v-model="student.year" class="form-control">
+                                        <select v-model="student.year" class="form-control input-sm">
                                             <option value="" selected>Select year level</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
@@ -103,26 +103,213 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12">
                                         <label for="">Course: <i class="text-red">*</i></label>
-                                        <input v-model="student.course" type="text" class="form-control">
+                                        <input v-model="student.course" type="text" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.course">@{{ errors.course[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
                                         <label for="">Program: <i class="text-red">*</i></label>
-                                        <select v-model="student.program_id" class="form-control">
+                                        <select v-model="student.program_id" class="form-control input-sm">
                                             <option value="" active>Select your program</option>
                                             <option v-for="program in programs" :value="{ id: program.id, name: program.display_name }">@{{ program.display_name }}</option>
                                         </select>
                                         <span class="help-block text-red" v-if="errors.program_id">@{{ errors.program_id[0] }}</span>
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="login-box-msg">Father's Information</p>
+
+                            <form>
                                 <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <button type="submit" class="btn btn-primary btn-flat btn-block">Validate</button>
+                                    <div class="form-group col-xs-4">
+                                        <label for="">First Name</label>
+                                        <input v-model="father.first_name" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Middle Name</label>
+                                        <input v-model="father.middle_name" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Last Name</label>
+                                        <input v-model="father.last_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Occupation</label>
+                                        <input v-model="father.occupation" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Contact No.</label>
+                                        <input v-model="father.contact_no" type="text" class="form-control input-sm">
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="login-box-msg">Mother's Information</p>
+
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-xs-4">
+                                        <label for="">First Name</label>
+                                        <input v-model="mother.first_name" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Middle Name</label>
+                                        <input v-model="mother.middle_name" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Last Name</label>
+                                        <input v-model="mother.last_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Occupation</label>
+                                        <input v-model="mother.occupation" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Contact No.</label>
+                                        <input v-model="mother.contact_no" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="login-box-msg">Primary Education</p>
+
+                            <form @submit.prevent="validate()">
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">School Name</label>
+                                        <input v-model="primary.school" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address</label>
+                                        <input v-model="primary.address" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated</label>
+                                        <input v-model="primary.date_graduated" type="date" class="form-control input-sm">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="login-box-msg">Secondary Education</p>
+
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">School Name</label>
+                                        <input v-model="secondary.school" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address</label>
+                                        <input v-model="secondary.address" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated</label>
+                                        <input v-model="secondary.date_graduated" type="date" class="form-control input-sm">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <p class="login-box-msg">Tertiary Education</p>
+
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">School Name</label>
+                                        <input v-model="tertiary.school" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Degree</label>
+                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address</label>
+                                        <input v-model="tertiary.address" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated</label>
+                                        <input v-model="tertiary.date_graduated" type="date" class="form-control input-sm">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">-</button>
+                            <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">+</button>
+                            <p class="login-box-msg">Work Experience/On-the-Job Training</p>
+
+                            <form v-for="item in experiences">
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Company Name</label>
+                                        <input v-model="item.company" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Address</label>
+                                        <input v-model="item.address" type="text" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Job Description</label>
+                                        <textarea v-model="item.description"
+                                                  class="form-control input-sm"></textarea>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Start Date</label>
+                                        <input v-model="item.start_date" type="date" class="form-control input-sm">
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">End Date</label>
+                                        <input v-model="item.end_date" type="date" class="form-control input-sm">
+                                    </div>
+                                </div>
+                            </form>
+                            <button @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
                         </div>
                     </div>
                 </div>
@@ -254,6 +441,45 @@
                     skype_id: '',
                     fb_email: ''
                 },
+                father: {
+                    first_name: '',
+                    middle_name: '',
+                    last_name: '',
+                    occupation: '',
+                    contact_no: ''
+                },
+                mother: {
+                    first_name: '',
+                    middle_name: '',
+                    last_name: '',
+                    occupation: '',
+                    contact_no: ''
+                },
+                primary: {
+                    school: '',
+                    address: '',
+                    date_graduated: ''
+                },
+                secondary: {
+                    school: '',
+                    address: '',
+                    date_graduated: ''
+                },
+                tertiary: {
+                    school: '',
+                    degree: '',
+                    address: '',
+                    date_graduated: ''
+                },
+                experiences: [
+                    {
+                        company: '',
+                        address: '',
+                        description: '',
+                        start_date: '',
+                        end_date: ''
+                    }
+                ],
                 errors: [],
                 loading: false
             },
@@ -263,6 +489,18 @@
                 this.loadPrograms();
             },
             methods: {
+                addElement() {
+                    this.experiences.push({
+                        company : '',
+                        address: '',
+                        description: '',
+                        start_date: '',
+                        end_date: ''
+                    });
+                },
+                deleteElement() {
+                    this.experiences.pop();
+                },
                 agree() {
                     $('#agreement-modal').modal('hide');
                 },
@@ -282,10 +520,30 @@
                     formData.append('year', this.student.year);
                     formData.append('course', this.student.course);
                     formData.append('program_id', this.student.program_id.id);
+                    formData.append('f_first_name', this.father.first_name);
+                    formData.append('f_middle_name', this.father.middle_name);
+                    formData.append('f_last_name', this.father.last_name);
+                    formData.append('f_occupation', this.father.occupation);
+                    formData.append('f_contact', this.father.contact_no);
+                    formData.append('m_first_name', this.mother.first_name);
+                    formData.append('m_middle_name', this.mother.middle_name);
+                    formData.append('m_last_name', this.mother.last_name);
+                    formData.append('m_occupation', this.mother.occupation);
+                    formData.append('m_contact', this.mother.contact_no);
+                    formData.append('p_school', this.primary.school);
+                    formData.append('p_address', this.primary.address);
+                    formData.append('p_date_graduated', this.primary.date_graduated);
+                    formData.append('s_school', this.secondary.school);
+                    formData.append('s_address', this.secondary.address);
+                    formData.append('s_date_graduated', this.secondary.date_graduated);
+                    formData.append('t_school', this.tertiary.school);
+                    formData.append('t_degree', this.tertiary.degree);
+                    formData.append('t_address', this.tertiary.address);
+                    formData.append('t_date_graduated', this.tertiary.date_graduated);
+                    formData.append('experience', JSON.stringify(this.experiences));
                     this.loading = true;
                     axios.post(`/stud/details/store`, formData)
                         .then((response) => {
-
                             location.href = '{{ route('dash.student') }}'
                         }).catch((error) => {
                             console.log(error);
@@ -307,6 +565,27 @@
                     formData.append('year', this.student.year);
                     formData.append('course', this.student.course);
                     formData.append('program_id', this.student.program_id.id);
+                    formData.append('f_first_name', this.father.first_name);
+                    formData.append('f_middle_name', this.father.middle_name);
+                    formData.append('f_last_name', this.father.last_name);
+                    formData.append('f_occupation', this.father.occupation);
+                    formData.append('f_contact', this.father.contact_no);
+                    formData.append('m_first_name', this.mother.first_name);
+                    formData.append('m_middle_name', this.mother.middle_name);
+                    formData.append('m_last_name', this.mother.last_name);
+                    formData.append('m_occupation', this.mother.occupation);
+                    formData.append('m_contact', this.mother.contact_no);
+                    formData.append('p_school', this.primary.school);
+                    formData.append('p_address', this.primary.address);
+                    formData.append('p_date_graduated', this.primary.date_graduated);
+                    formData.append('s_school', this.secondary.school);
+                    formData.append('s_address', this.secondary.address);
+                    formData.append('s_date_graduated', this.secondary.date_graduated);
+                    formData.append('t_school', this.tertiary.school);
+                    formData.append('t_degree', this.tertiary.degree);
+                    formData.append('t_address', this.tertiary.address);
+                    formData.append('t_date_graduated', this.tertiary.date_graduated);
+                    formData.append('experience', JSON.stringify(this.experiences));
 
                     axios.post(`/stud/validateDetails`, formData)
                         .then((response) => {
