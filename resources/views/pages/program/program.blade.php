@@ -157,13 +157,16 @@
                                     <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Basic Requirements</a>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -373,15 +376,167 @@
                                             </tbody>
                                         </table>
                                     </section>
+                                    <section id="family-details">
+                                        <label class="control-label">Family Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">Father</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 200px">First Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.first_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Middle Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.middle_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.last_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Occupation/Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact No.</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.contact_no }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">Mother</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 200px">First Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.first_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Middle Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.middle_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.last_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Occupation/Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact No.</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.contact_no }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
                                     <section id="school-details">
-                                        <label class="control-label">School Details</label>
+                                        <label class="control-label">Educational Background</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2" class="text-bold">
+                                                    Primary
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px">
-                                                    College
+                                                    School
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.school }}
+                                                    @{{ student.primary.school_name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Address
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.primary.address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Date Graduated
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.primary.date_graduated }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td colspan="2" class="text-bold">
+                                                    Secondary
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px">
+                                                    School
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.secondary.school_name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Address
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.secondary.address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Date Graduated
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.secondary.date_graduated }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td colspan="2" class="text-bold">
+                                                    Tertiary
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px">
+                                                    School
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.tertiary.school_name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Degree
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.tertiary.degree }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -394,10 +549,55 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Year Level
+                                                    Date Graduated (expected)
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.year }}
+                                                    @{{ student.tertiary.date_graduated }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section id="experience-details">
+                                        <label class="control-label">Work Experience/On-the-Job Training</label>
+                                        <table v-for="exp in student.experience" class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px;">
+                                                    Company
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ exp.company }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Address
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ exp.address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Description
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ exp.description }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Start Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ exp.start_date }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    End Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ exp.end_date }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -410,7 +610,7 @@
                                                     Visa Sponsor
                                                 </td>
                                                 <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.sponsor }}</label>
+                                                    <label class="text-sm">@{{ student.sponsor.name }}</label>
                                                     <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -433,7 +633,7 @@
                                                     Host Company
                                                 </td>
                                                 <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.company }}</label>
+                                                    <label class="text-sm">@{{ student.company.name }}</label>
                                                     <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -697,12 +897,12 @@
                                         <tr v-for="requirement in basicRequirements">
                                             <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-if="requirement.student_preliminary.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button @click="openInNewTab(requirement.bReqId)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
-                                                <button @click="downloadBasicRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="openInNewTab(requirement.student_preliminary.id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
+                                                <button @click="downloadBasicRequirement(requirement.student_preliminary.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -725,11 +925,11 @@
                                         <tr v-for="requirement in paymentRequirements">
                                             <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button @click="downloadPaymentRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="downloadPaymentRequirement(requirement.student_payment.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -752,13 +952,40 @@
                                         <tr v-for="requirement in visaRequirements">
                                             <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
-                                                <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                <span v-if="requirement.student_visa.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
                                                 <button @click="downloadVisaRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="tab-additional-req">
+                                    <table class="table table-condensed table-striped table-bordered">
+                                        <thead>
+                                            <th>
+                                                Requirement
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="requirement in additionalRequirements">
+                                                <td class="text-sm">@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.student_additional.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-times text-red"></span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button @click="downloadAdditionalRequirement(requirement.student_additional.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -819,10 +1046,17 @@
                 hosts: [],
                 sponsors: [],
                 students: [],
-                student: [],
+                student: {
+                    father: [],
+                    mother: [],
+                    primary: [],
+                    secondary: [],
+                    tertiary: []
+                },
                 basicRequirements: [],
                 paymentRequirements: [],
                 visaRequirements: [],
+                additionalRequirements: [],
                 links: [],
                 current_page: '',
                 last_page: '',
@@ -1001,12 +1235,14 @@
                         })
                 },
                 viewStudent (studentId) {
-                    axios.get(`/stud/view/${studentId}`)
+                    axios.get(`/stud/view?id=${studentId}`)
                         .then((response) => {
                             this.student = response.data.data;
                             this.loadBasicRequirements(programId, response.data.data.user_id);
                             this.loadPaymentRequirements(programId, response.data.data.user_id);
                             this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
+                            this.loadAdditionalRequirement(programId, response.data.data.user_id);
+                            console.log(response.data.data.user_id);
                             $('#student-modal').modal('show');
                         })
                 },
@@ -1018,13 +1254,13 @@
                         })
                 },
                 loadBasicRequirements (programId, userId) {
-                    axios.get(`/coor/requirement/basic/${programId}/${userId}`)
+                    axios.get(`/preliminary/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.basicRequirements = response.data.data;
                         })
                 },
                 downloadBasicRequirement (id) {
-                    axios.get(`/download/basic/requirement/${id}`)
+                    axios.get(`/studPreliminary/download?requirement_id=${id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -1034,13 +1270,29 @@
                         })
                 },
                 loadPaymentRequirements (programId, userId) {
-                    axios.get(`/coor/requirement/payment/${programId}/${userId}`)
+                    axios.get(`/payment/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.paymentRequirements = response.data.data;
                         })
                 },
                 downloadPaymentRequirement (id) {
-                    axios.get(`/download/payment/requirement/${id}`)
+                    axios.get(`/studPayment/download?requirement_id=${id}`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        })
+                },
+                loadAdditionalRequirement (programId, userId) {
+                    axios.get(`/additional/viewUserRequirement?program_id=${programId}&id=${userId}`)
+                        .then((response) => {
+                            this.additionalRequirements = response.data.data;
+                        })
+                },
+                downloadAdditionalRequirement (id) {
+                    axios.get(`/studAdditional/download?requirement_id=${id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -1050,7 +1302,7 @@
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {
-                    axios.get(`/coor/requirement/visa/${sponsorId}/${userId}`)
+                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}id=${userId}`)
                         .then((response) => {
                             this.visaRequirements = response.data.data;
                         })

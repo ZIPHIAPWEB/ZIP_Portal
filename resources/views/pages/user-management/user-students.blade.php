@@ -158,13 +158,16 @@
                                     <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Basic Requirements</a>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Basic</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
+                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
                                 </li>
                                 <li>
                                     <a href="#tab-coordinator-actions" data-toggle="tab" aria-expanded="true">Coordinator's Actions</a>
@@ -332,7 +335,7 @@
                                             <tr v-for="requirement in requirements.basic">
                                                 <td class="text-sm">@{{ requirement.name }}</td>
                                                 <td class="text-center">
-                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-if="requirement.student_preliminary.status" class="fa fa-check text-green"></span>
                                                     <span v-else class="fa fa-remove text-red"></span>
                                                 </td>
                                             </tr>
@@ -349,7 +352,7 @@
                                             <tr v-for="requirement in requirements.payment">
                                                 <td class="text-sm">@{{ requirement.name }}</td>
                                                 <td class="text-center">
-                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
                                                     <span v-else class="fa fa-remove text-red"></span>
                                                 </td>
                                             </tr>
@@ -366,10 +369,27 @@
                                             <tr v-for="requirement in requirements.visa">
                                                 <td class="text-sm">@{{ requirement.name }}</td>
                                                 <td class="text-center">
-                                                    <span v-if="requirement.status" class="fa fa-check text-green"></span>
+                                                    <span v-if="requirement.student_visa.status" class="fa fa-check text-green"></span>
                                                     <span v-else class="fa fa-remove text-red"></span>
                                                 </td>
                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane m-t-10" id="tab-additional-req">
+                                    <table class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                        <th style="width: 50%;">Requirements</th>
+                                        <th class="text-center">Status</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="requirement in requirements.additional">
+                                            <td class="text-sm">@{{ requirement.name }}</td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.student_additional.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-remove text-red"></span>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -434,7 +454,8 @@
                 requirements: {
                     basic: [],
                     payment: [],
-                    visa: []
+                    visa: [],
+                    additional: []
                 },
                 actions: [],
                 logs: [],
@@ -521,21 +542,28 @@
                     this.student = student;
                     this.ViewBasicRequirements(student.program_id, student.user_id);
                     this.ViewPaymentRequirements(student.program_id, student.user_id);
+                    this.ViewAdditionalRequirements(student.program_id, student.user_id);
                     this.ViewVisaRequirements(student.visa_sponsor_id, student.user_id);
                     this.ViewCoordinatorActions(student.user_id);
                     this.ViewActivityLogs(student.user_id);
                     $('#student-modal').modal('show');
                 },
                 ViewBasicRequirements: function (programId, userId) {
-                    axios.get(`/coor/requirement/basic/${programId}/${userId}`)
+                    axios.get(`/preliminary/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.requirements.basic = response.data.data;
                         })
                 },
                 ViewPaymentRequirements: function (programId, userId) {
-                    axios.get(`/coor/requirement/payment/${programId}/${userId}`)
+                    axios.get(`/payment/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.requirements.payment = response.data.data;
+                        })
+                },
+                ViewAdditionalRequirements: function (programId, userId) {
+                    axios.get(`/additional/viewUserRequirement?program_id=${programId}&id=${userId}`)
+                        .then((response) => {
+                            this.requirements.additional = response.data.data;
                         })
                 },
                 ViewVisaRequirements: function (sponsorId, userId) {

@@ -10,11 +10,30 @@ use Illuminate\Support\Facades\Validator;
 
 class SponsorRequirementController extends Controller
 {
-    public function view($id)
+    private $sponsor;
+
+    public function __construct()
     {
-        $requirements = SponsorRequirement::where('sponsor_id', $id)->orderBy('created_at', 'desc')->paginate(4);
+        $this->sponsor = new SponsorRequirement();
+    }
+
+    public function view(Request $request)
+    {
+        $requirements = $this->sponsor->getBySponsor($request->input('sponsor_id'));
 
         return SuperAdminResource::collection($requirements);
+    }
+
+    public function viewUserRequirement(Request $request)
+    {
+        $sponsor_id = $request->input('sponsor_id');
+        $user_id = $request->input('id');
+
+        $sponsor = $this->sponsor->where('sponsor_id', $sponsor_id)->with(['studentVisa' => function ($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+        }])->get();
+
+        return SuperAdminResource::collection($sponsor);
     }
 
     public function store(Request $request)
@@ -27,14 +46,14 @@ class SponsorRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
-            SponsorRequirement::create([
+            $this->sponsor->create([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path,
             ]);
         } else {
-            SponsorRequirement::create([
+            $this->sponsor->create([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -45,15 +64,17 @@ class SponsorRequirementController extends Controller
         return response()->json(['message'  =>  'Requirement Added']);
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $requirement = SponsorRequirement::find($id);
+        $requirement = $this->sponsor->getById($request->input('id'));
 
         return new SuperAdminResource($requirement);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->input('id');
+
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
             'description'   =>  'required'
@@ -62,20 +83,20 @@ class SponsorRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
-            Storage::delete(SponsorRequirement::find($id)->path);
+            Storage::delete($this->sponsor->getById($id)->path);
 
-            SponsorRequirement::find($id)->update([
+            $this->sponsor->find($id)->update([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path
             ]);
         } else {
-            if (SponsorRequirement::find($id)->path) {
-                Storage::delete(SponsorRequirement::find($id)->path);
+            if ($this->sponsor->getById($id)->path) {
+                Storage::delete($this->sponsor->getById($id)->path);
             }
 
-            SponsorRequirement::find($id)->update([
+            $this->sponsor->find($id)->update([
                 'program_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -88,8 +109,8 @@ class SponsorRequirementController extends Controller
 
     public function delete($id)
     {
-        Storage::delete(SponsorRequirement::find($id)->path);
-        SponsorRequirement::find($id)->delete();
+        Storage::delete($this->sponsor->getById($id)->path);
+        $this->sponsor->find($id)->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }

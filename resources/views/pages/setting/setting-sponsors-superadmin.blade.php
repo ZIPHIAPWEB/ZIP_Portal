@@ -375,7 +375,7 @@
                             this.sponsor.display_name = response.data.data.display_name;
                             this.sponsor.description = response.data.data.description;
 
-                            this.req_url = '/sponsor/requirement/store';
+                            this.req_url = '/visa/store';
                             this.req_button = 'Add';
                             this.requirement.name = '';
                             this.requirement.description = '';
@@ -387,7 +387,11 @@
                     });
                 },
                 viewRequirements(id) {
-                    axios.get(`/sponsor/${id}/requirements/view`)
+                    axios.get(`/visa/view`, {
+                        params: {
+                            sponsor_id: id
+                        }
+                    })
                         .then((response) => {
                             this.requirements = response.data.data;
                             this.req_links = response.data.links;
@@ -399,9 +403,13 @@
                     });
                 },
                 editRequirement(id) {
-                    axios.get(`/sponsor/requirement/${id}/edit`)
+                    axios.get(`/visa/edit`, {
+                        params: {
+                            id: id
+                        }
+                    })
                         .then((response) => {
-                            this.req_url = `/sponsor/requirement/${id}/update`;
+                            this.req_url = `/visa/update?id=${id}`;
                             this.req_button = 'Update';
 
                             this.requirement.name = response.data.data.name;
@@ -432,7 +440,9 @@
                     });
                 },
                 deleteRequirement(id) {
-                    axios.get(`/sponsor/requirement/${id}/delete`)
+                    axios.post(`/sponsor/delete`, {
+                        id: id
+                    })
                         .then((response) => {
                             console.log(response);
                             this.viewRequirements(this.requirement.sponsor_id);

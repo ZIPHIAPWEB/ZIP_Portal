@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\BasicRequirement;
+use App\Experience;
+use App\Father;
 use App\Http\Resources\SuperAdminResource;
 use App\Log;
+use App\Mother;
 use App\Notifications\StudentUploadedFile;
 use App\PaymentRequirement;
+use App\Primary;
 use App\ProgramPayment;
 use App\ProgramRequirement;
+use App\Secondary;
 use App\SponsorRequirement;
 use App\Student;
+use App\Tertiary;
 use App\User;
 use App\VisaRequirement;
 use Illuminate\Http\Request;
@@ -21,6 +27,13 @@ use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
+    private $student;
+
+    public function __construct()
+    {
+        $this->student = new Student();
+    }
+
     public function validatePersonalDetails(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -35,12 +48,34 @@ class StudentController extends Controller
             'course'            =>  'required',
             'program_id'        =>  'required',
             'fb_email'          =>  'required',
-            'skype_id'          =>  'required'
+            'skype_id'          =>  'required',
+            'f_first_name'      =>  'required',
+            'f_middle_name'     =>  'required',
+            'f_last_name'       =>  'required',
+            'f_occupation'      =>  'required',
+            'f_contact'         =>  'required',
+            'm_first_name'      =>  'required',
+            'm_middle_name'     =>  'required',
+            'm_last_name'       =>  'required',
+            'm_occupation'      =>  'required',
+            'm_contact'         =>  'required',
+            'p_school'          =>  'required',
+            'p_address'         =>  'required',
+            'p_date_graduated'  =>  'required',
+            's_school'          =>  'required',
+            's_address'         =>  'required',
+            's_date_graduated'  =>  'required',
+            't_school'          =>  'required',
+            't_degree'          =>  'required',
+            't_address'         =>  'required',
+            't_date_graduated'  =>  'required',
+            'experience'        =>  'required'
         ])->validate();
     }
 
     public function storePersonalDetails(Request $request)
     {
+
         User::find(Auth::user()->id)->update([
             'isFilled'  =>  true
         ]);
@@ -80,7 +115,60 @@ class StudentController extends Controller
             'coordinator_id'            =>  0
         ]);
 
+        Father::create([
+            'user_id'       =>  Auth::user()->id,
+            'first_name'    =>  $request->input('f_first_name'),
+            'middle_name'   =>  $request->input('f_middle_name'),
+            'last_name'     =>  $request->input('f_last_name'),
+            'occupation'    =>  $request->input('f_occupation'),
+            'contact_no'    =>  $request->input('f_contact')
+        ]);
+
+        Mother::create([
+            'user_id'       =>  Auth::user()->id,
+            'first_name'    =>  $request->input('m_first_name'),
+            'middle_name'   =>  $request->input('m_middle_name'),
+            'last_name'     =>  $request->input('m_last_name'),
+            'occupation'    =>  $request->input('m_occupation'),
+            'contact_no'    =>  $request->input('m_contact')
+        ]);
+
+        Primary::create([
+            'user_id'           =>  Auth::user()->id,
+            'school_name'       =>  $request->input('p_school'),
+            'address'           =>  $request->input('p_address'),
+            'date_graduated'    =>  $request->input('p_date_graduated')
+        ]);
+
+        Secondary::create([
+            'user_id'           =>  Auth::user()->id,
+            'school_name'       =>  $request->input('s_school'),
+            'address'           =>  $request->input('s_address'),
+            'date_graduated'    =>  $request->input('s_date_graduated')
+        ]);
+
+        Tertiary::create([
+            'user_id'           =>  Auth::user()->id,
+            'school_name'       =>  $request->input('t_school'),
+            'degree'            =>  $request->input('t_degree'),
+            'address'           =>  $request->input('t_address'),
+            'date_graduated'    =>  $request->input('t_date_graduated')
+        ]);
+
+        $experience = collect(json_decode($request->input('experience')));
+        foreach ($experience as $item) {
+            Experience::create([
+                'user_id'       =>  Auth::user()->id,
+                'company'       =>  $item->company,
+                'address'       =>  $item->address,
+                'description'   =>  $item->description,
+                'start_date'    =>  $item->start_date,
+                'end_date'      =>  $item->end_date
+            ]);
+        }
+
         return response()->json(['message' => 'Personal Details Updated']);
+
     }
 
     public function showStudent(Request $request)
@@ -99,17 +187,9 @@ class StudentController extends Controller
         return SuperAdminResource::collection($students);
     }
 
-    public function viewStudent($id)
+    public function viewStudent(Request $request)
     {
-        $student = User::join('students', 'users.id', '=', 'students.user_id')
-                       ->leftjoin('programs', 'students.program_id', '=', 'programs.id')
-                       ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
-                       ->leftjoin('schools', 'students.school', '=', 'schools.id')
-                       ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
-                       ->leftjoin('coordinators', 'students.coordinator_id', '=', 'coordinators.user_id')
-                       ->select(['users.profile_picture','students.*', 'coordinators.firstName as coor_first', 'coordinators.lastName as coor_last', 'programs.name as program', 'sponsors.name as sponsor', 'schools.name as school', 'host_companies.name as company'])
-                       ->where('students.user_id', $id)
-                       ->first();
+        $student = $this->student->viewStudentInfo($request->input('id'));
 
         return new SuperAdminResource($student);
     }

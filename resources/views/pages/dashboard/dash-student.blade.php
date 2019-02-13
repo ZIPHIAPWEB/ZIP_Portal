@@ -17,14 +17,11 @@
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
-                        <!--
-                        <li class="list-group-item" v-if="student.application_status !== 'New Applicant'">
+                        <li class="list-group-item" v-if="student.coordinator">
                             <b>Program Coordinator</b>
-                            <a class="pull-right text-green text-sm">@{{ student.coor_first }} @{{ student.coor_last }}</a>
+                            <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
                         </li>
-                        -->
                     </ul>
-                    <button class="btn btn-primary btn-block btn-flat" @click="viewProfile()">View Profile</button>
                 </div>
             </div>
             <div class="box box-primary">
@@ -61,48 +58,12 @@
                     <li class="active">
                         <a href="#profile" data-toggle="tab" aria-expanded="true">
                             <span class="fa fa-user"></span>
-                            <label for="" class="control-label">Profile</label>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#basic" data-toggle="tab" aria-expanded="false">
-                            <span class="fa fa-file"></span>
-                            <label for="" class="control-label">Basic Requirements</label>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#payment" data-toggle="tab" aria-expanded="false">
-                            <span class="fa fa-file"></span>
-                            <label for="" class="control-label">Payment Requirements</label>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#visa" data-toggle="tab" aria-expanded="false">
-                            <span class="fa fa-plane"></span>
-                            <label for="" class="control-label">Visa Requirements</label>
+                            <label for="" class="control-label">Personal Details</label>
                         </a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
-                        <label class="control-label">Application Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                            <tr>
-                                <td style="width: 35%;">Application ID</td>
-                                <td class="text-bold text-green">
-                                    @{{ student.application_id }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 35%;">Visa Interview Status</td>
-                                <td class="text-bold">
-                                    @{{ student.visa_interview_status }}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <label class="control-label">Personal Details</label>
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
@@ -297,164 +258,221 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <label class="control-label">School Details</label>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#family" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-users"></span>
+                            <label for="" class="control-label">Family Details</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="family" class="tab-pane active">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td style="width: 35%" colspan="2"><label for="" class="control-label">Father</label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="">First Name</td>
+                                <td class="text-bold">
+                                    @{{ student.father.first_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td class="text-bold">
+                                    @{{ student.father.middle_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td class="text-bold">
+                                    @{{ student.father.last_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Occupation/Company</td>
+                                <td class="text-bold">
+                                    @{{ student.father.occupation }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Contact No.</td>
+                                <td class="text-bold">
+                                    @{{ student.father.contact_no }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label for="" class="control-label">Mother</label></td>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td class="text-bold">
+                                    @{{ student.mother.first_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td class="text-bold">
+                                    @{{ student.mother.middle_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td class="text-bold">
+                                    @{{ student.mother.last_name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Occupation/Company</td>
+                                <td class="text-bold">
+                                    @{{ student.mother.occupation }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Contact No.</td>
+                                <td class="text-bold">
+                                    @{{ student.mother.contact_no }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#educational" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-users"></span>
+                            <label for="" class="control-label">Educational Background</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="education" class="tab-pane active">
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td style="width: 35%;">College</td>
+                                    <td colspan="2" style="width: 35%;"><label for="" class="control-label">Primary Level</label></td>
+                                </tr>
+                                <tr>
+                                    <td>School</td>
                                     <td class="text-bold">
-                                        @{{ student.school }}
+                                        @{{ student.primary.school_name }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Course</td>
                                     <td class="text-bold">
-                                        @{{ student.course }}
+                                        @{{ student.primary.address }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Year Level</td>
                                     <td class="text-bold">
-                                        @{{ student.year }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label class="control-label">Host Company Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 35%;">Host Company</td>
-                                    <td class="text-bold">
-                                        @{{ student.company }}
+                                        @{{ student.primary.date_graduated }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Position</td>
+                                    <td colspan="2"><label class="control-label">Secondary Level</label></td>
+                                </tr>
+                                <tr>
+                                    <td>School</td>
                                     <td class="text-bold">
-                                        @{{ student.position }}
+                                        @{{ student.secondary.school_name }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Start Date</td>
+                                    <td>Address</td>
                                     <td class="text-bold">
-                                        @{{ student.program_start_date }}
+                                        @{{ student.secondary.address }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>End Date</td>
+                                    <td>Date Graduated</td>
                                     <td class="text-bold">
-                                        @{{ student.program_end_date }}
+                                        @{{ student.secondary.date_graduated }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Stipend</td>
+                                    <td colspan="2"><label class="control-label">Tertiary Level</label></td>
+                                </tr>
+                                <tr>
+                                    <td>School</td>
                                     <td class="text-bold">
-                                        @{{ student.stipend }}
+                                        @{{ student.tertiary.school_name }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Visa Sponsor</td>
+                                    <td>Address</td>
                                     <td class="text-bold">
-                                        @{{ student.sponsor }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label for="" class="control-label">Visa Interview Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 35%;">Program ID Number</td>
-                                    <td class="text-bold">
-                                        @{{ student.program_id_no }}
+                                        @{{ student.tertiary.address }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>SEVIS ID</td>
+                                    <td>Degree</td>
                                     <td class="text-bold">
-                                        @{{ student.sevis_id }}
+                                        @{{ student.tertiary.degree }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Interview Schedule</td>
+                                    <td>Date Graduated (<i>expected</i>)</td>
                                     <td class="text-bold">
-                                        @{{ student.visa_interview_schedule }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label for="" class="control-label">Flight Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 35%;">Departure Date</td>
-                                    <td class="text-bold">
-                                        @{{ student.date_of_departure }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arrival Date</td>
-                                    <td class="text-bold">
-                                        @{{ student.date_of_arrival }}
+                                        @{{ student.tertiary.date_graduated }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="basic">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                            <th style="width: 75%;">Requirements</th>
-                            <th class="text-center">Status</th>
-                            </thead>
+                </div>
+            </div>
+
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#work-experience" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-users"></span>
+                            <label for="" class="control-label">Work Experiences/On-the-Job Training</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="work-experience" class="tab-pane active">
+                        <table v-for="exp in student.experience" class="table table-striped table-bordered table-condensed">
                             <tbody>
-                            <tr v-for="requirement in basicRequirements.data">
-                                <td>@{{ requirement.name }}</td>
-                                <td class="text-center">
-                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
-                                    <span v-else style="color: red;" class="fa fa-remove"></span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td style="width: 35%;">Company Name</td>
+                                    <td class="text-bold">
+                                        @{{ exp.company }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Company Address</td>
+                                    <td class="text-bold">
+                                        @{{ exp.address }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Period</td>
+                                    <td class="text-bold">
+                                        @{{ exp.start_date }} > @{{ exp.end_date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Job Description</td>
+                                    <td class="text-bold">
+                                        @{{ exp.description }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-
-                    </div>
-                    <div class="tab-pane" id="payment">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                            <th style="width: 75%;">Requirements</th>
-                            <th class="text-center">Status</th>
-                            </thead>
-                            <tbody>
-                            <tr v-for="requirement in paymentRequirements.data">
-                                <td>@{{ requirement.name }}</td>
-                                <td class="text-center">
-                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
-                                    <span v-else style="color: red;" class="fa fa-remove"></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="tab-pane" id="visa">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <thead>
-                            <th style="width: 75%;">Requirements</th>
-                            <th class="text-center">Status</th>
-                            </thead>
-                            <tbody>
-                            <tr v-for="requirement in visaRequirements.data">
-                                <td>@{{ requirement.name }}</td>
-                                <td class="text-center">
-                                    <span v-if="requirement.status" style="color: green;" class="fa fa-check"></span>
-                                    <span v-else style="color: red;" class="fa fa-remove"></span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
                     </div>
                 </div>
             </div>
@@ -834,7 +852,7 @@
                     this.file = this.$refs.file.files[0];
                 },
                 loadStudentDetails() {
-                    axios.get(`/stud/view/${this.user_id}`)
+                    axios.get(`/stud/view?id=${this.user_id}`)
                         .then((response) => {
                             this.student = response.data.data;
                             this.program_id = response.data.data.program_id;
@@ -843,7 +861,7 @@
                     })
                 },
                 loadBasicRequirements(programId) {
-                    axios.get(`/stud/requirement/basic/${programId}`)
+                    axios.get(`/preliminary/view?program_id=${programId}`)
                         .then((response) => {
                             this.basicRequirements = response.data;
                         }).catch((error) => {
@@ -851,7 +869,7 @@
                     });
                 },
                 loadPaymentRequirements(programId) {
-                    axios.get(`/stud/requirement/payment/${programId}`)
+                    axios.get(`/payment/view?program_id=${programId}`)
                         .then((response) => {
                             this.paymentRequirements = response.data;
                         }).catch((error) => {
@@ -859,7 +877,7 @@
                     });
                 },
                 loadVisaRequirements(sponsorId) {
-                    axios.get(`/stud/requirement/visa/${sponsorId}`)
+                    axios.get(`/visa/view?sponsor_id=${sponsorId}`)
                         .then((response) => {
                             this.visaRequirements = response.data;
                         }).catch((error) => {

@@ -86,7 +86,7 @@
                                 <td v-cloak>@{{ program.display_name }}</td>
                                 <td v-cloak>@{{ program.description }}</td>
                                 <td v-cloak>
-                                    <button @click="viewAllRequirement(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
+                                    <button @click="viewRequirements(program.id)" class="btn btn-primary btn-flat btn-xs" data="add"><span class="glyphicon glyphicon-plus"></span></button>&nbsp;
                                     <button @click="editProgram(program.id)" class="btn btn-success btn-flat btn-xs" data="edit"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
                                     <button @click="deleteProgram(program.id)" class="btn btn-danger btn-flat btn-xs" data="delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
@@ -134,24 +134,71 @@
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#tab_1" data-toggle="tab" aria-expanded="true">Basic</a>
+                                    <a href="#tab_1" data-toggle="tab" aria-expanded="true">Preliminary</a>
                                 </li>
                                 <li class="">
-                                    <a href="#tab_2" data-toggle="tab" aria-expanded="false">Payment</a>
+                                    <a href="#tab_2" data-toggle="tab" aria-expanded="false">Additional</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_3" data-toggle="tab" aria-expanded="false">Payment</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane clearfix active" id="tab_1">
                                     <div class="box box-primary">
                                         <div class="box-body">
-                                            <form enctype="multipart/form-data" @submit.prevent="storeRequirement()">
+                                            <form enctype="multipart/form-data" @submit.prevent="storePreliminaryRequirement()">
                                                 <div class="form-group">
                                                     <label for="">Name</label>
-                                                    <input @keyup.enter="storeRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                                    <input @keyup.enter="storePreliminaryRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Description</label>
-                                                    <input @keyup.enter="storeRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                                    <input @keyup.enter="storePreliminaryRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">File (optional)</label>
+                                                    <input type="file" ref="file" @change="handleFileUpload">
+                                                </div>
+                                                <button class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <table id="program-single-table" class="table table-striped table-bordered table-condensed">
+                                        <thead>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Path</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-if="preliminary.length === 0">
+                                                <td valign="top" colspan="15" class="text-center">No Records</td>
+                                            </tr>
+                                            <tr v-else v-for="requirement in preliminary.data">
+                                                <td v-cloak>@{{ requirement.name }}</td>
+                                                <td v-cloak>@{{ requirement.description }}</td>
+                                                <td v-cloak>@{{ requirement.path }}</td>
+                                                <td v-cloak>
+                                                    <button @click="editPreliminaryRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                                    <button @click="deletePreliminaryRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane clearfix" id="tab_2">
+                                    <div class="box box-primary">
+                                        <div class="box-body">
+                                            <form enctype="multipart/form-data" @submit.prevent="storeAdditionalRequirement()">
+                                                <div class="form-group">
+                                                    <label for="">Name</label>
+                                                    <input @keyup.enter="storeAdditionalRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Description</label>
+                                                    <input @keyup.enter="storeAdditionalRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">File (optional)</label>
@@ -169,10 +216,10 @@
                                         <th>Action</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-if="requirements.length === 0">
+                                        <tr v-if="additional.length === 0">
                                             <td valign="top" colspan="15" class="text-center">No Records</td>
                                         </tr>
-                                        <tr v-else v-for="requirement in requirements">
+                                        <tr v-else v-for="requirement in additional.data">
                                             <td v-cloak>@{{ requirement.name }}</td>
                                             <td v-cloak>@{{ requirement.description }}</td>
                                             <td v-cloak>@{{ requirement.path }}</td>
@@ -183,77 +230,50 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li>
-                                            <a @click="prevRequirement()">«</a>
-                                        </li>
-                                        <li>
-                                            <a v-cloak>@{{ req_current_page }}</a>
-                                        </li>
-                                        <li>
-                                            <a>of</a>
-                                        </li>
-                                        <li>
-                                            <a v-cloak>@{{ req_last_page }}</a>
-                                        </li>
-                                        <li>
-                                            <a @click="nextRequirement()">»</a>
-                                        </li>
-                                    </ul>
                                 </div>
 
-                                <div class="tab-pane clearfix" id="tab_2">
-                                    <div class="box box-success">
+                                <div class="tab-pane clearfix" id="tab_3">
+                                    <div class="box box-primary">
                                         <div class="box-body">
-                                            <div class="form-group">
-                                                <label for="">Name</label>
-                                                <input @keyup.enter="storePayment()" v-model="payment.name" type="text" class="form-control" placeholder="Enter Name"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Description</label>
-                                                <input @keyup.enter="storePayment()" v-model="payment.description" type="text" class="form-control" placeholder="Enter Description"/>
-                                            </div>
-
-                                            <button @click="storePayment()" class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ payment_button }}</button>
+                                            <form enctype="multipart/form-data" @submit.prevent="storePaymentRequirement()">
+                                                <div class="form-group">
+                                                    <label for="">Name</label>
+                                                    <input @keyup.enter="storePaymentRequirement()" v-model="requirement.name" type="text" class="form-control" placeholder="Enter Name"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Description</label>
+                                                    <input @keyup.enter="storePaymentRequirement" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">File (optional)</label>
+                                                    <input type="file" ref="file" @change="handleFileUpload">
+                                                </div>
+                                                <button class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <table id="program-single-table" class="table table-striped table-bordered table-condensed">
                                         <thead>
                                         <th>Name</th>
                                         <th>Description</th>
+                                        <th>Path</th>
                                         <th>Action</th>
                                         </thead>
                                         <tbody>
-                                        <tr v-if="payments.length === 0">
+                                        <tr v-if="additional.length === 0">
                                             <td valign="top" colspan="15" class="text-center">No Records</td>
                                         </tr>
-                                        <tr v-else v-for="payment in payments">
-                                            <td v-cloak>@{{ payment.name }}</td>
-                                            <td v-cloak>@{{ payment.description }}</td>
+                                        <tr v-else v-for="requirement in payments.data">
+                                            <td v-cloak>@{{ requirement.name }}</td>
+                                            <td v-cloak>@{{ requirement.description }}</td>
+                                            <td v-cloak>@{{ requirement.path }}</td>
                                             <td v-cloak>
-                                                <button @click="editPayment(payment.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
-                                                <button @click="deletePayment(payment.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                <button @click="editPaymentRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                                <button @click="deletePaymentRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li>
-                                            <a @click="prevPayment()">«</a>
-                                        </li>
-                                        <li>
-                                            <a v-cloak>@{{ payment_current_page }}</a>
-                                        </li>
-                                        <li>
-                                            <a>of</a>
-                                        </li>
-                                        <li>
-                                            <a v-cloak>@{{ payment_last_page }}</a>
-                                        </li>
-                                        <li>
-                                            <a @click="nextPayment()">»</a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -310,17 +330,18 @@
                 url: '',
                 button: '',
 
-                requirements: [],
+                preliminary: [],
+                visa: [],
+                additional: [],
                 requirement: {
                     program_id: '',
                     name: '',
                     description: '',
                     file: ''
                 },
-                req_links: [],
-                req_current_page: '',
-                req_last_page: '',
-                req_url: '',
+                prelim_url: '/preliminary/store',
+                add_url: '/additional/store',
+                pay_url: '/payment/store',
                 req_button: '',
 
                 payments: [],
@@ -346,8 +367,9 @@
             },
             methods: {
                 viewAllRequirement(programId) {
-                    this.viewRequirements(programId);
-                    this.viewPayments(programId);
+                    this.loadPreliminaryRequirement(programId);
+                    this.loadAdditionalRequirement(programId);
+                    this.loadPaymentRequirement(programId);
                 },
                 // Program CRUD
                 previous() {
@@ -447,100 +469,161 @@
                     })
                 },
                 //Requirements CRUD
-                loadRequirements(id) {
-                    axios.get(`/program/${id}/requirements/view`)
+                loadPreliminaryRequirement(program_id) {
+                    axios.get('/preliminary/view', {
+                        params: {
+                            program_id: program_id
+                        }
+                    })
                         .then((response) => {
-                            this.requirements = response.data.data;
-                            this.req_links = response.data.links;
-                            this.req_current_page = response.data.meta.current_page;
-                            this.req_last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                            console.log(error);
-                    });
+                            this.preliminary = response.data;
+                        })
                 },
-                nextRequirement() {
-                    axios.get(this.req_links.next)
+                editPreliminaryRequirement(id) {
+                    axios.get('/preliminary/edit', {
+                        params: {
+                            id: id
+                        }
+                    })
                         .then((response) => {
-                            this.requirements = response.data.data;
-                            this.req_links = response.data.links;
-                            this.req_current_page = response.data.meta.current_page;
-                            this.req_last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                        console.log(error);
-                    });
+                            this.prelim_url = `/preliminary/update?id=${id}`;
+                            this.req_button = 'Update';
+                            this.requirement.name = response.data.data.name;
+                            this.requirement.description = response.data.data.description;
+                        })
                 },
-                prevRequirement() {
-                    axios.get(this.req_links.prev)
+                storePreliminaryRequirement() {
+                    let formData = new FormData();
+                    formData.append('program_id', this.requirement.program_id);
+                    formData.append('name', this.requirement.name);
+                    formData.append('description', this.requirement.description);
+                    formData.append('file', this.requirement.file);
+                    axios.post(this.prelim_url, formData)
                         .then((response) => {
-                            this.requirements = response.data.data;
-                            this.req_links = response.data.links;
-                            this.req_current_page = response.data.meta.current_page;
-                            this.req_last_page = response.data.meta.last_page;
-                        }).catch((error) => {
-                        console.log(error);
-                    });
+                            alert(response.data.message);
+                            this.requirement.name = '';
+                            this.requirement.description = '';
+                            this.prelim_url = '/preliminary/store';
+                            this.req_button = 'Add';
+                            this.loadPreliminaryRequirement(this.requirement.program_id);
+                        });
+                },
+                deletePreliminaryRequirement(id) {
+                    axios.post('/preliminary/delete', {
+                        id: id
+                    })
+                        .then((response) => {
+                            alert(response.data.message);
+                            this.loadPreliminaryRequirement(this.requirement.program_id);
+                        })
+                },
+                loadAdditionalRequirement(program_id) {
+                    axios.get('/additional/view', {
+                        params: {
+                            program_id
+                        }
+                    })
+                        .then((response) => {
+                            this.additional = response.data;
+                        })
+                },
+                editAdditionalRequirement(id) {
+                    axios.get('/additional/edit', {
+                        params: {
+                            id: id
+                        }
+                    })
+                        .then((response) => {
+                            this.add_url = `/additional/update?id=${id}`;
+                            this.req_button = 'Update';
+                            this.requirement.name = response.data.data.name;
+                            this.requirement.description = response.data.data.description;
+                        });
+                },
+                storeAdditionalRequirement() {
+                    let formData = new FormData();
+                    formData.append('program_id', this.requirement.program_id);
+                    formData.append('name', this.requirement.name);
+                    formData.append('description', this.requirement.description);
+                    formData.append('file', this.requirement.file);
+                    axios.post(this.add_url, formData)
+                        .then((response) => {
+                            alert(response.data.message);
+                            this.requirement.name = '';
+                            this.requirement.description = '';
+                            this.add_url = '/additional/store';
+                            this.req_button = 'Add';
+                            this.loadAdditionalRequirement(this.requirement.program_id);
+                        })
+                },
+                deleteAdditionalRequirement(id) {
+                    axios.post('/additional/delete', {
+                        id:id
+                    })
+                        .then((response) => {
+                            alert(response.data.message);
+                            this.loadAdditionalRequirement(this.requirement.program_id);
+                        })
+                },
+                loadPaymentRequirement(program_id) {
+                    axios.get('/payment/view', {
+                        params: {
+                            program_id
+                        }
+                    })
+                        .then((response) => {
+                            this.payments = response.data;
+                        })
+                },
+                editPaymentRequirement(id) {
+                    axios.get('/payment/edit', {
+                        params: {
+                            id: id
+                        }
+                    })
+                        .then((response) => {
+                            this.pay_url = `/payment/update?id=${id}`;
+                            this.req_button = 'Update';
+                            this.requirement.name = response.data.data.name;
+                            this.requirement.description = response.data.data.description;
+                        })
+                },
+                storePaymentRequirement() {
+                    let formData = new FormData();
+                    formData.append('program_id', this.requirement.program_id);
+                    formData.append('name', this.requirement.name);
+                    formData.append('description', this.requirement.description);
+                    axios.post(this.pay_url, formData)
+                        .then((response) => {
+                            alert(response.data.message);
+                            this.requirement.name = '';
+                            this.requirement.description = '';
+                            this.pay_url = '/payment/store';
+                            this.req_button = 'Add';
+                            this.loadPaymentRequirement(this.requirement.program_id);
+                        })
+                },
+                deletePaymentRequirement() {
+                    axios.post('/payment/delete', {
+                        id: id
+                    })
+                        .then((response) => {
+                            alert(response.data.message);
+                            this.loadPaymentRequirement(this.requirement.program_id);
+                        })
                 },
                 viewRequirements(id) {
                     axios.get(`/program/edit/${id}`)
                         .then((response) => {
-                            this.loadRequirements(id);
+                            this.viewAllRequirement(id);
                             this.program.name = response.data.data.name;
                             this.program.display_name = response.data.data.display_name;
                             this.program.description = response.data.data.description;
-
-                            this.req_url = '/program/requirement/store';
                             this.req_button = 'Add';
                             this.requirement.program_id = id;
                             $('#program-modal').modal('show');
                         }).catch((error) => {
                         console.log(error);
-                    });
-                },
-                editRequirement(id) {
-                    axios.get(`/program/requirement/${id}/edit`)
-                        .then((response) => {
-                            this.req_url = `/program/requirement/${id}/update`;
-                            this.req_button = 'Update';
-                            this.requirement.name = response.data.data.name;
-                            this.requirement.description = response.data.data.description;
-                        }).catch((error) => {
-                            console.log(error);
-                    });
-                },
-                storeRequirement() {
-                    let formData = new FormData();
-                        formData.append('program_id', this.requirement.program_id);
-                        formData.append('name', this.requirement.name);
-                        formData.append('description', this.requirement.description);
-                        formData.append('file', this.requirement.file);
-                    axios.post(this.req_url, formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                        .then((response) => {
-                            if (this.req_button === 'Update') {
-                                alert('Requirement Updated');
-                                this.req_button = 'Add';
-                                this.requirement.name = '';
-                                this.requirement.description = '';
-                            } else {
-                                this.requirement.name = '';
-                                this.requirement.description = '';
-                                alert('Requirement Added');
-                            }
-
-                            this.loadRequirements(this.requirement.program_id);
-                        }).catch((error) => {
-                            console.log(error);
-                    });
-                },
-                deleteRequirement(id) {
-                    axios.get(`/program/requirement/${id}/delete`)
-                        .then((response) => {
-                            this.loadRequirements(this.requirement.program_id);
-                        }).catch((error) => {
-                            console.log(error);
                     });
                 },
                 handleFileUpload() {
