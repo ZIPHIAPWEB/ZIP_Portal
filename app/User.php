@@ -33,4 +33,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Student','user_id', 'id');
     }
+
+    public function coordinator()
+    {
+        return $this->hasOne('App\Coordinator', 'user_id', 'id');
+    }
 }

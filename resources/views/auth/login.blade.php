@@ -34,7 +34,7 @@
             <form action="{{ route('post.login') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback">
-                    <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
+                    <input type="text" name="name" class="form-control" placeholder="Username" value="{{ old('name') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
