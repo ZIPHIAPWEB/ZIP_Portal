@@ -53,12 +53,6 @@
                 </div>
             </form>
 
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
-                    Google+</a>
-            </div>
-
             <a href="{{ route('login') }}" class="text-center">I already have a membership</a><br>
         </div>
         <!-- /.form-box -->
