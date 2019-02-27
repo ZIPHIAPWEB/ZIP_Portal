@@ -24,26 +24,41 @@ class CreateStudentsTable extends Migration
             $table->text('address');
             $table->string('home_number');
             $table->string('mobile_number');
-            $table->text('school');
             $table->string('year');
-            $table->string('course');
             $table->string('skype_id');
-            $table->string('program_id_no');
-            $table->string('sevis_id');
-            $table->string('host_company_id');
-            $table->string('position');
-            $table->string('location');
-            $table->string('stipend');
+            $table->string('program_id_no')->nullable();
+            $table->string('sevis_id')->nullable();
+            $table->string('host_company_id')->nullable();
+            $table->string('position')->nullable();
+            $table->string('location')->nullable();
+            $table->string('stipend')->nullable();
             $table->string('fb_email');
-            $table->string('visa_interview_status');
-            $table->string('program_start_date');
-            $table->string('program_end_date');
-            $table->string('visa_sponsor_id');
-            $table->string('date_of_departure');
-            $table->string('date_of_arrival');
-            $table->string('application_id');
+            $table->string('visa_interview_status')->nullable();
+            $table->date('program_start_date')->nullable();
+            $table->date('program_end_date')->nullable();
+            $table->string('visa_sponsor_id')->nullable();
+
+            $table->date('us_departure_date')->nullable();
+            $table->time('us_departure_time')->nullable();
+            $table->string('us_departure_flight_no')->nullable();
+            $table->string('us_departure_airline')->nullable();
+            $table->date('us_arrival_date')->nullable();
+            $table->time('us_arrival_time')->nullable();
+            $table->string('us_arrival_flight_no')->nullable();
+            $table->string('us_arrival_airline')->nullable();
+
+            $table->date('mnl_departure_date')->nullable();
+            $table->time('mnl_departure_time')->nullable();
+            $table->string('mnl_departure_flight_no')->nullable();
+            $table->string('mnl_departure_airline')->nullable();
+            $table->date('mnl_arrival_date')->nullable();
+            $table->time('mnl_arrival_time')->nullable();
+            $table->string('mnl_arrival_flight_no')->nullable();
+            $table->string('mnl_arrival_airline')->nullable();
+
+            $table->string('application_id')->nullable();
             $table->string('program_id');
-            $table->string('application_status');
+            $table->string('application_status')->nullable();
             $table->timestamps();
         });
     }

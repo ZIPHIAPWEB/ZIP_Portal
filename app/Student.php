@@ -174,7 +174,6 @@ class Student extends Model
                     ->with([
                         'company',
                         'sponsor',
-                        'school',
                         'coordinator',
                         'father',
                         'mother',

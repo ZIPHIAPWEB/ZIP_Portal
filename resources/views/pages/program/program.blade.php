@@ -58,6 +58,7 @@
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
                                 <option value="For Visa Interview">For Visa Interview</option>
+                                <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -80,9 +81,9 @@
                             <th class="text-center" style="width: 10%">Date of Application</th>
                             <th class="text-center" style="width: 10%">Status</th>
                             <th class="text-center" style="width: 10%">Application ID</th>
-                            <th class="text-center" style="width: 10%">Full Name</th>
-                            <th class="text-center" style="width: 10%">Program</th>
-                            <th class="text-center" style="width: 10%">Course</th>
+                            <th class="text-center" style="width: 10%">First Name</th>
+                            <th class="text-center" style="width: 10%">Middle Name</th>
+                            <th class="text-center" style="width: 10%">Last Name</th>
                             <th class="text-center" style="width: 10%">Contact</th>
                             <th class="text-center" style="width: 10%">School</th>
                             <th class="text-center" style="width: 10%">Recent Activity</th>
@@ -98,11 +99,11 @@
                                 <td class="text-sm text-center">@{{ student.created_at }}</td>
                                 <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
                                 <td class="text-sm text-center">@{{ student.application_id }}</td>
-                                <td class="text-sm text-center">@{{ student.first_name }}&nbsp;@{{ student.middle_name[0] }}.&nbsp; @{{ student.last_name }}</td>
+                                <td class="text-sm text-center">@{{ student.first_name }}</td>
+                                <td class="text-sm text-center">@{{ student.middle_name }}</td>
+                                <td class="text-sm text-center">@{{ student.last_name }}</td>
                                 <td class="text-sm text-center">@{{ student.program }}</td>
-                                <td class="text-sm text-center">@{{ student.course }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td class="text-sm text-center">@{{ student.school }}</td>
                                 <td class="text-sm text-center"></td>
                                 <td class="text-center">
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
@@ -838,42 +839,367 @@
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm" style="width: 200px">
-                                                    Departure Date
+                                                <td class="text-sm text-bold" colspan="2">
+                                                    Departure from MANILA
                                                 </td>
-                                                <td v-if="!setting.flight.departureIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.date_of_departure }}</label>
-                                                    <a @click="hideField('departure')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px">
+                                                    Date
+                                                </td>
+                                                <td v-if="!setting.flightUS.departureIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
+                                                    <a @click="hideField('us_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
                                                         <span class="input-group-btn">
-                                                <button @click="updateField('date_of_departure', field); setting.flight.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
+                                                            <button @click="updateField('us_departure_date', field); setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
                                                         <span class="input-group-btn">
-                                                <button @click="setting.flight.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                            <button @click="setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Arrival Date
+                                                    Time
                                                 </td>
-                                                <td v-if="!setting.flight.arrivalIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.date_of_arrival }}</label>
-                                                    <a @click="hideField('arrival')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!setting.flightUS.departureTimeIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_time }}</label>
+                                                    <a @click="hideField('us_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="time" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_departure_time', field); setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Flight No.
+                                                </td>
+                                                <td v-if="!setting.flightUS.departureFlightIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_flight_no }}</label>
+                                                    <a @click="hideField('us_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
                                                         <input v-model="field" type="text" class="form-control input-sm">
                                                         <span class="input-group-btn">
-                                                <button @click="updateField('date_of_arrival', field); setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
+                                                            <button @click="updateField('us_departure_flight_no', field); setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
                                                         <span class="input-group-btn">
-                                                <button @click="setting.flight.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                            <button @click="setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Airlines
+                                                </td>
+                                                <td v-if="!setting.flightUS.departureAirlineIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_airline }}</label>
+                                                    <a @click="hideField('us_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                            <option value="">Select Airlines</option>
+                                                            <option value="PAL">Philippine Airlines</option>
+                                                            <option value="AirAsia">Air Asia</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_departure_airline', field); setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm text-bold" colspan="2">
+                                                    Arrival to US
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px;">
+                                                    Date
+                                                </td>
+                                                <td v-if="!setting.flightUS.arrivalIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.us_arrival_date }}</label>
+                                                    <a @click="hideField('us_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_arrival_date', field); setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Time
+                                                </td>
+                                                <td v-if="!setting.flightUS.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_arrival_time }}</label>
+                                                    <a @click="hideField('us_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="time" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_arrival_time', field); setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Flight No.
+                                                </td>
+                                                <td v-if="!setting.flightUS.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_arrival_flight_no }}</label>
+                                                    <a @click="hideField('us_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_arrival_flight_no', field); setting.flightUs.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Airlines
+                                                </td>
+                                                <td v-if="!setting.flightUS.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_arrival_airline }}</label>
+                                                    <a @click="hideField('us_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                            <option value="">Select Airlines</option>
+                                                            <option value="PAL">Philippine Airlines</option>
+                                                            <option value="AirAsia">Air Asia</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('us_arrival_airline', field); setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm text-bold" colspan="2">
+                                                    Departure from US
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px">
+                                                    Date
+                                                </td>
+                                                <td v-if="!setting.flightMNL.departureIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
+                                                    <a @click="hideField('mnl_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_departure_date', field); setting.flightMNL.departureIsEdit = false; field= '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Time
+                                                </td>
+                                                <td v-if="!setting.flightMNL.departureTimeIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_time }}</label>
+                                                    <a @click="hideField('mnl_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="time" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_departure_time', field); setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Flight No.
+                                                </td>
+                                                <td v-if="!setting.flightMNL.departureFlightIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_flight_no }}</label>
+                                                    <a @click="hideField('mnl_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_departure_flight_no', field); setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Airlines
+                                                </td>
+                                                <td v-if="!setting.flightMNL.departureAirlineIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_airline }}</label>
+                                                    <a @click="hideField('mnl_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                            <option value="">Select Airlines</option>
+                                                            <option value="PAL">Philippine Airlines</option>
+                                                            <option value="AirAsia">Air Asia</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_departure_airline', field); setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm text-bold" colspan="2">
+                                                    Arrival to MANILA
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px;">
+                                                    Date
+                                                </td>
+                                                <td v-if="!setting.flightMNL.arrivalIsEdit" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.mnl_arrival_date }}</label>
+                                                    <a @click="hideField('mnl_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_arrival_date', field); setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Time
+                                                </td>
+                                                <td v-if="!setting.flightMNL.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_arrival_time }}</label>
+                                                    <a @click="hideField('mnl_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="time" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_arrival_time', field); setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Flight No.
+                                                </td>
+                                                <td v-if="!setting.flightMNL.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_arrival_flight_no }}</label>
+                                                    <a @click="hideField('mnl_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_arrival_flight_no', field); setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Airlines
+                                                </td>
+                                                <td v-if="!setting.flightMNL.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_arrival_airline }}</label>
+                                                    <a @click="hideField('mnl_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                            <option value="">Select Airlines</option>
+                                                            <option value="PAL">Philippine Airlines</option>
+                                                            <option value="AirAsia">Air Asia</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('mnl_arrival_airline', field); setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1125,9 +1451,25 @@
                         sevisIsEdit: false,
                         scheduleIsEdit: false
                     },
-                    flight: {
+                    flightUS: {
                         departureIsEdit: false,
-                        arrivalIsEdit: false
+                        departureTimeIsEdit : false,
+                        departureFlightIsEdit: false,
+                        departureAirlineIsEdit: false,
+                        arrivalIsEdit: false,
+                        arrivalTimeIsEdit: false,
+                        arrivalFlightIsEdit: false,
+                        arrivalAirlineIsEdit: false
+                    },
+                    flightMNL: {
+                        departureIsEdit: false,
+                        departureTimeIsEdit : false,
+                        departureFlightIsEdit: false,
+                        departureAirlineIsEdit: false,
+                        arrivalIsEdit: false,
+                        arrivalTimeIsEdit: false,
+                        arrivalFlightIsEdit: false,
+                        arrivalAirlineIsEdit: false
                     }
                 },
             },
@@ -1501,8 +1843,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'position' :
                             this.setting.host.nameIsEdit = false;
@@ -1518,8 +1875,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'location' :
                             this.setting.host.nameIsEdit = false;
@@ -1535,8 +1907,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'housing' :
                             this.setting.host.nameIsEdit = false;
@@ -1552,8 +1939,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'start' :
                             this.setting.host.nameIsEdit = false;
@@ -1569,8 +1971,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'end' :
                             this.setting.host.nameIsEdit = false;
@@ -1586,8 +2003,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'stipend' :
                             this.setting.host.nameIsEdit = false;
@@ -1603,8 +2035,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'sponsor' :
                             this.setting.host.nameIsEdit = false;
@@ -1620,8 +2067,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'sevis' :
                             this.setting.host.nameIsEdit = false;
@@ -1637,8 +2099,23 @@
                             this.setting.visa.sevisIsEdit = true;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'program' :
                             this.setting.host.nameIsEdit = false;
@@ -1654,8 +2131,23 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.schedule = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
                         case 'schedule' :
                             this.setting.host.nameIsEdit = false;
@@ -1671,10 +2163,25 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.scheduleIsEdit = true;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
-                        case 'departure' :
+                        case 'us_departure_date' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
@@ -1688,10 +2195,25 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.scheduleIsEdit = false;
 
-                            this.setting.flight.departureIsEdit = true;
-                            this.setting.flight.arrivalIsEdit = false;
+                            this.setting.flightUS.departureIsEdit = true;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
                             break;
-                        case 'arrival' :
+                        case 'us_departure_time' :
                             this.setting.host.nameIsEdit = false;
                             this.setting.host.positionIsEdit = false;
                             this.setting.host.locationIsEdit = false;
@@ -1705,8 +2227,471 @@
                             this.setting.visa.sevisIsEdit = false;
                             this.setting.visa.scheduleIsEdit = false;
 
-                            this.setting.flight.departureIsEdit = false;
-                            this.setting.flight.arrivalIsEdit = true;
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = true;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_departure_flight' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = true;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_departure_airline' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = true;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_arrival_date' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = true;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_arrival_time' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = true;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_arrival_flight' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = true;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'us_arrival_airline' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_departure_date' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = true;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_departure_time' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = true;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_departure_flight' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = true;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_departure_airline' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = true;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_arrival_date' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = true;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_arrival_time' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = true;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_arrival_flight' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = true;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
+                            break;
+                        case 'mnl_arrival_airline' :
+                            this.setting.host.nameIsEdit = false;
+                            this.setting.host.positionIsEdit = false;
+                            this.setting.host.locationIsEdit = false;
+                            this.setting.host.housingIsEdit = false;
+                            this.setting.host.startIsEdit = false;
+                            this.setting.host.endIsEdit = false;
+                            this.setting.host.stipendIsEdit = false;
+                            this.setting.host.sponsorIsEdit = false;
+
+                            this.setting.visa.programIsEdit = false;
+                            this.setting.visa.sevisIsEdit = false;
+                            this.setting.visa.scheduleIsEdit = false;
+
+                            this.setting.flightUS.departureIsEdit = false;
+                            this.setting.flightUS.departureTimeIsEdit = false;
+                            this.setting.flightUS.departureFlightIsEdit = false;
+                            this.setting.flightUS.departureAirlineIsEdit = false;
+                            this.setting.flightUS.arrivalIsEdit = false;
+                            this.setting.flightUS.arrivalTimeIsEdit = false;
+                            this.setting.flightUS.arrivalFlightIsEdit = false;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
+
+                            this.setting.flightMNL.departureIsEdit = false;
+                            this.setting.flightMNL.departureTimeIsEdit = false;
+                            this.setting.flightMNL.departureFlightIsEdit = false;
+                            this.setting.flightMNL.departureAirlineIsEdit = false;
+                            this.setting.flightMNL.arrivalIsEdit = false;
+                            this.setting.flightMNL.arrivalTimeIsEdit = false;
+                            this.setting.flightMNL.arrivalFlightIsEdit = false;
+                            this.setting.flightMNL.arrivalAirlineIsEdit = true;
                             break;
                     }
                 }

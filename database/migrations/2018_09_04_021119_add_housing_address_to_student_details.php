@@ -14,7 +14,7 @@ class AddHousingAddressToStudentDetails extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->string('housing_details')->after('location');
+            $table->string('housing_details')->after('location')->nullable();
         });
     }
 

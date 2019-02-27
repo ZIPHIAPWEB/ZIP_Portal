@@ -5,7 +5,7 @@
 @section('content')
     <div class="register-box">
         <div class="register-logo">
-            <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Portal</a>
+            <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Philippines</a>
         </div>
 
         @if($errors->any())

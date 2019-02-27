@@ -14,12 +14,16 @@
                     <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Application Status</b>
-                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
+                            <b>Program ID</b>
+                            <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
                         </li>
-                        <li class="list-group-item" v-if="student.coordinator">
+                        <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
                             <b>Program Coordinator</b>
                             <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Application Status</b>
+                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
                     </ul>
                 </div>
@@ -76,10 +80,10 @@
                                     <td>Host Company</td>
                                     <td class="text-bold">
                                         @{{ student.company.name }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Housing Address</td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Housing Address</td>
                                     <td class="text-bold">
                                         @{{ student.housing_details }}
                                     </td>
@@ -163,15 +167,123 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
-                                <td style="width: 35%;">Departure Date</td>
+                                <td class="text-bold" colspan="2">Departure From MANILA</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 35%;">Date</td>
                                 <td class="text-bold">
-                                    @{{ student.date_of_departure }}
+                                    @{{ student.us_departure_date }}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Arrival Date</td>
+                                <td>Time</td>
                                 <td class="text-bold">
-                                    @{{ student.date_of_arrival }}
+                                    @{{ student.us_departure_time }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flight No.</td>
+                                <td class="text-bold">
+                                    @{{ student.us_departure_flight_no }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Airline</td>
+                                <td class="text-bold">
+                                    @{{ student.us_departure_airline }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td class="text-bold" colspan="2">Arrival To US</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 35%;">Date</td>
+                                    <td class="text-bold">
+                                        @{{ student.us_arrival_date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Time</td>
+                                    <td class="text-bold">
+                                        @{{ student.us_arrival_time }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Flight No.</td>
+                                    <td class="text-bold">
+                                        @{{ student.us_arrival_flight_no }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Airline</td>
+                                    <td class="text-bold">
+                                        @{{ student.us_arrival_airline }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td class="text-bold" colspan="2">Departure From US</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 35%;">Date</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_departure_date }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_departure_time }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flight No.</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_departure_flight_no }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Airline</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_departure_airline }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td class="text-bold" colspan="2">Arrival To MANILA</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 35%;">Date</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_arrival_date }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Time</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_arrival_time }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flight No.</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_arrival_flight_no }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Airline</td>
+                                <td class="text-bold">
+                                    @{{ student.mnl_arrival_airline }}
                                 </td>
                             </tr>
                             </tbody>

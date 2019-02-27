@@ -5,7 +5,7 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Portal</a>
+            <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Philippines</a>
         </div>
 
         @if(Session::has('Info'))

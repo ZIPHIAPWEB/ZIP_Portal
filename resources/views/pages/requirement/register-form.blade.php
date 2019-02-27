@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 m-t-50">
                     <div class="register-logo">
-                        <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Portal</a>
+                        <a href="{{ route('logout') }}"><b>ZIP TRAVEL </b>Philippines</a>
                     </div>
 
                     <div class="box box-default">
@@ -19,16 +19,16 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name: <i class="text-red">*</i></label>
-                                        <input v-model="student.firstName" type="text" class="form-control input-sm">
+                                        <input v-model="student.firstName" type="text" class="form-control input-sm" placeholder="First Name">
                                         <span class="help-block text-red" v-if="errors.first_name">@{{ errors.first_name[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Middle Name: </label>
-                                        <input v-model="student.middleName" type="text" class="form-control input-sm">
+                                        <input v-model="student.middleName" type="text" class="form-control input-sm" placeholder="Middle Name">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name: <i class="text-red">*</i></label>
-                                        <input v-model="student.lastName" type="text" class="form-control input-sm">
+                                        <input v-model="student.lastName" type="text" class="form-control input-sm" placeholder="Last Name">
                                         <span class="help-block text-red" v-if="errors.last_name">@{{ errors.last_name[0] }}</span>
                                     </div>
                                 </div>
@@ -51,64 +51,57 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
-                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11">
+                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
-                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11">
+                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
                                         <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">Address: <i class="text-red">*</i></label>
-                                        <textarea v-model="student.address" class="form-control input-sm"></textarea>
+                                        <label for="">Permanent Address: <i class="text-red">*</i></label>
+                                        <textarea v-model="student.permanent_address" class="form-control input-sm" placeholder="Permanent Address"></textarea>
                                         <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Provincial Address: <i class="text-red">*</i></label>
+                                        <div class="pull-right">
+                                            <label for="" class="text-sm p-r-5">Same as Above</label>
+                                            <input v-model="sameAsAbove" type="checkbox" class="pull-right">
+                                        </div>
+                                        <textarea v-model="student.provincial_address" class="form-control input-sm" placeholder="Provincial Address"></textarea>
+                                        <span class="help-block text-red"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Facebook Email <i class="text-red">*</i></label>
-                                        <input v-model="student.fb_email" type="email" class="form-control input-sm">
+                                        <input v-model="student.fb_email" type="email" class="form-control input-sm" placeholder="sample@gmail.com">
                                         <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Skype ID <i class="text-red">*</i></label>
-                                        <input v-model="student.skype_id" type="text" class="form-control input-sm">
+                                        <input v-model="student.skype_id" type="text" class="form-control input-sm" placeholder="live:sample_1">
                                         <span class="help-block text-red" v-if="errors.skype_id">@{{ errors.skype_id[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">School: <i class="text-red">*</i></label>
-                                        <select v-model="student.school" class="form-control input-sm">
-                                            <option value="" active>Select School</option>
-                                            <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
-                                        </select>
-                                        <span class="help-block text-red" v-if="errors.school">@{{ errors.school[0] }}</span>
-                                    </div>
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group col-xs-6">
                                         <label for="">Year Level: <i class="text-red">*</i></label>
                                         <select v-model="student.year" class="form-control input-sm">
-                                            <option value="" selected>Select year level</option>
+                                            <option value="">Year Level</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
                                             <option value="Third Year">Third Year</option>
                                             <option value="Fourth Year">Fourth Year</option>
-                                            <option value="Graduated">Graduated</option>
+                                            <option value="Graduate">Graduate</option>
                                         </select>
-                                        <span class="help-block text-red" v-if="errors.year">@{{ errors.year[0] }}</span>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Course: <i class="text-red">*</i></label>
-                                        <input v-model="student.course" type="text" class="form-control input-sm">
-                                        <span class="help-block text-red" v-if="errors.course">@{{ errors.course[0] }}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
+                                    <div class="form-group col-xs-6">
                                         <label for="">Program: <i class="text-red">*</i></label>
                                         <select v-model="student.program_id" class="form-control input-sm">
                                             <option value="" active>Select your program</option>
@@ -131,26 +124,31 @@
                             <form>
                                 <div class="row">
                                     <div class="form-group col-xs-4">
-                                        <label for="">First Name</label>
-                                        <input v-model="father.first_name" type="text" class="form-control input-sm">
+                                        <label for="">First Name <i class="text-red">*</i></label>
+                                        <input v-model="father.first_name" type="text" class="form-control input-sm" placeholder="Father's First Name">
+                                        <span class="help-block text-red" v-if="errors.f_first_name">required</span>
                                     </div>
                                     <div class="form-group col-xs-4">
-                                        <label for="">Middle Name</label>
-                                        <input v-model="father.middle_name" type="text" class="form-control input-sm">
+                                        <label for="">Middle Name <i class="text-red">*</i></label>
+                                        <input v-model="father.middle_name" type="text" class="form-control input-sm" placeholder="Father's Middle Name">
+                                        <span class="help-block text-red" v-if="errors.f_middle_name">required</span>
                                     </div>
                                     <div class="form-group col-xs-4">
-                                        <label for="">Last Name</label>
-                                        <input v-model="father.last_name" type="text" class="form-control input-sm">
+                                        <label for="">Last Name <i class="text-red">*</i></label>
+                                        <input v-model="father.last_name" type="text" class="form-control input-sm" placeholder="Father's Last Name">
+                                        <span class="help-block text-red" v-if="errors.f_last_name">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-6">
-                                        <label for="">Occupation</label>
-                                        <input v-model="father.occupation" type="text" class="form-control input-sm">
+                                        <label for="">Occupation <i class="text-red">*</i></label>
+                                        <input v-model="father.occupation" type="text" class="form-control input-sm" placeholder="Father's Occupation">
+                                        <span class="help-block text-red" v-if="errors.f_occupation">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Contact No.</label>
-                                        <input v-model="father.contact_no" type="text" class="form-control input-sm">
+                                        <label for="">Contact No. <i class="text-red">*</i></label>
+                                        <input v-model="father.contact_no" type="text" class="form-control input-sm" placeholder="Father's Contact No.">
+                                        <span class="help-block text-red" v-if="errors.f_contact">required</span>
                                     </div>
                                 </div>
                             </form>
@@ -167,26 +165,31 @@
                             <form>
                                 <div class="row">
                                     <div class="form-group col-xs-4">
-                                        <label for="">First Name</label>
-                                        <input v-model="mother.first_name" type="text" class="form-control input-sm">
+                                        <label for="">First Name <i class="text-red">*</i></label>
+                                        <input v-model="mother.first_name" type="text" class="form-control input-sm" placeholder="Mother's First Name">
+                                        <span class="help-block text-red" v-if="errors.m_first_name">required</span>
                                     </div>
                                     <div class="form-group col-xs-4">
-                                        <label for="">Middle Name</label>
-                                        <input v-model="mother.middle_name" type="text" class="form-control input-sm">
+                                        <label for="">Middle Name <i class="text-red">*</i></label>
+                                        <input v-model="mother.middle_name" type="text" class="form-control input-sm" placeholder="Mother's Middle Name">
+                                        <span class="help-block text-red" v-if="errors.m_middle_name">required</span>
                                     </div>
                                     <div class="form-group col-xs-4">
-                                        <label for="">Last Name</label>
-                                        <input v-model="mother.last_name" type="text" class="form-control input-sm">
+                                        <label for="">Last Name <i class="text-red">*</i></label>
+                                        <input v-model="mother.last_name" type="text" class="form-control input-sm" placeholder="Mother's Last Name">                                        <span class="help-block text-red" v-if="errors.m_middle_name">required</span>
+                                        <span class="help-block text-red" v-if="errors.m_last_name">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-6">
-                                        <label for="">Occupation</label>
-                                        <input v-model="mother.occupation" type="text" class="form-control input-sm">
+                                        <label for="">Occupation <i class="text-red">*</i></label>
+                                        <input v-model="mother.occupation" type="text" class="form-control input-sm" placeholder="Mother's Occupation">
+                                        <span class="help-block text-red" v-if="errors.m_occupation">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Contact No.</label>
-                                        <input v-model="mother.contact_no" type="text" class="form-control input-sm">
+                                        <label for="">Contact No. <i class="text-red">*</i></label>
+                                        <input v-model="mother.contact_no" type="text" class="form-control input-sm" placeholder="Mother's Contact No.">
+                                        <span class="help-block text-red" v-if="errors.m_contact">required</span>
                                     </div>
                                 </div>
                             </form>
@@ -203,16 +206,19 @@
                             <form @submit.prevent="validate()">
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">School Name</label>
-                                        <input v-model="primary.school" type="text" class="form-control input-sm">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <input v-model="primary.school" type="text" class="form-control input-sm" placeholder="Primary School Name">
+                                        <span class="help-block text-red" v-if="errors.p_school">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Address</label>
-                                        <input v-model="primary.address" type="text" class="form-control input-sm">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="primary.address" type="text" class="form-control input-sm" placeholder="Primary School Address">
+                                        <span class="help-block text-red" v-if="errors.p_address">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated</label>
+                                        <label for="">Date Graduated <i class="text-red">*</i></label>
                                         <input v-model="primary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.p_date_graduated">required</span>
                                     </div>
                                 </div>
                             </form>
@@ -229,16 +235,19 @@
                             <form>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">School Name</label>
-                                        <input v-model="secondary.school" type="text" class="form-control input-sm">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <input v-model="secondary.school" type="text" class="form-control input-sm" placeholder="Secondary School Name">
+                                        <span class="help-block text-red" v-if="errors.s_school">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Address</label>
-                                        <input v-model="secondary.address" type="text" class="form-control input-sm">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="secondary.address" type="text" class="form-control input-sm" placeholder="Secondary School Address">
+                                        <span class="help-block text-red" v-if="errors.s_address">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated</label>
+                                        <label for="">Date Graduated <i class="text-red">*</i></label>
                                         <input v-model="secondary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.s_date_graduated">required</span>
                                     </div>
                                 </div>
                             </form>
@@ -254,21 +263,28 @@
 
                             <form>
                                 <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">School Name</label>
-                                        <input v-model="tertiary.school" type="text" class="form-control input-sm">
+                                    <div class="form-group col-xs-12 col-sm-12">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <select v-model="tertiary.school" class="form-control input-sm">
+                                            <option value="" active>Select School</option>
+                                            <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
+                                        </select>
+                                        <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12">
-                                        <label for="">Degree</label>
-                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm">
+                                        <label for="">Degree <i class="text-red">*</i></label>
+                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm" placeholder="Tertiary Degree">
+                                        <span class="help-block text-red" v-if="errors.t_degree">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Address</label>
-                                        <input v-model="tertiary.address" type="text" class="form-control input-sm">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="tertiary.address" type="text" class="form-control input-sm" placeholder="Tertiary School Address">
+                                        <span class="help-block text-red" v-if="errors.t_address">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated</label>
+                                        <label for="">Date Graduated (Expected date of graduation)<i class="text-red">*</i></label>
                                         <input v-model="tertiary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.t_date_graduated">required</span>
                                     </div>
                                 </div>
                             </form>
@@ -287,24 +303,24 @@
                             <form v-for="item in experiences">
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="">Company Name</label>
-                                        <input v-model="item.company" type="text" class="form-control input-sm">
+                                        <label for="">Company Name <i class="text-red">*</i></label>
+                                        <input v-model="item.company" type="text" class="form-control input-sm" placeholder="Company Name">
                                     </div>
                                     <div class="form-group col-xs-12">
-                                        <label for="">Address</label>
-                                        <input v-model="item.address" type="text" class="form-control input-sm">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="item.address" type="text" class="form-control input-sm" placeholder="Company Address">
                                     </div>
                                     <div class="form-group col-xs-12">
-                                        <label for="">Job Description</label>
+                                        <label for="">Job Description <i class="text-red">*</i></label>
                                         <textarea v-model="item.description"
-                                                  class="form-control input-sm"></textarea>
+                                                  class="form-control input-sm" placeholder="Your Job Description"></textarea>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">Start Date</label>
+                                        <label for="">Start Date <i class="text-red">*</i></label>
                                         <input v-model="item.start_date" type="date" class="form-control input-sm">
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label for="">End Date</label>
+                                        <label for="">End Date <i class="text-red">*</i></label>
                                         <input v-model="item.end_date" type="date" class="form-control input-sm">
                                     </div>
                                 </div>
@@ -433,7 +449,8 @@
                     gender: '',
                     homeNumber: '',
                     mobileNumber: '',
-                    address: '',
+                    provincial_address: '',
+                    permanent_address: '',
                     school: '',
                     year: '',
                     course: '',
@@ -481,12 +498,22 @@
                     }
                 ],
                 errors: [],
-                loading: false
+                loading: false,
+                sameAsAbove: false,
             },
             mounted: function () {
                 $('#agreement-modal').modal('show');
                 this.loadSchools();
                 this.loadPrograms();
+            },
+            watch: {
+                sameAsAbove: function (value) {
+                    if (value) {
+                        this.student.provincial_address = this.student.permanent_address;
+                    } else {
+                        this.student.provincial_address = '';
+                    }
+                }
             },
             methods: {
                 addElement() {
@@ -516,9 +543,7 @@
                     formData.append('address', this.student.address);
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
-                    formData.append('school', this.student.school.id);
                     formData.append('year', this.student.year);
-                    formData.append('course', this.student.course);
                     formData.append('program_id', this.student.program_id.id);
                     formData.append('f_first_name', this.father.first_name);
                     formData.append('f_middle_name', this.father.middle_name);
@@ -536,7 +561,7 @@
                     formData.append('s_school', this.secondary.school);
                     formData.append('s_address', this.secondary.address);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
-                    formData.append('t_school', this.tertiary.school);
+                    formData.append('t_school', this.tertiary.school.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
@@ -558,12 +583,11 @@
                     formData.append('gender', this.student.gender);
                     formData.append('home_number', this.student.homeNumber);
                     formData.append('mobile_number', this.student.mobileNumber);
-                    formData.append('address', this.student.address);
+                    formData.append('provincial_address', this.student.provincial_address);
+                    formData.append('permanent_address', this.student.permanent_address);
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
-                    formData.append('school', this.student.school.id);
                     formData.append('year', this.student.year);
-                    formData.append('course', this.student.course);
                     formData.append('program_id', this.student.program_id.id);
                     formData.append('f_first_name', this.father.first_name);
                     formData.append('f_middle_name', this.father.middle_name);
@@ -581,7 +605,7 @@
                     formData.append('s_school', this.secondary.school);
                     formData.append('s_address', this.secondary.address);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
-                    formData.append('t_school', this.tertiary.school);
+                    formData.append('t_school', this.tertiary.school.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
