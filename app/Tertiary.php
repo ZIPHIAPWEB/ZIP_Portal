@@ -13,4 +13,9 @@ class Tertiary extends Model
         'degree',
         'date_graduated'
     ];
+
+    public function school()
+    {
+        return $this->hasOne('App\School', 'id', 'school_name');
+    }
 }

@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-xs-3">
                                 <div class="progress-group">
                                     <span class="progress-text">For Visa Interview</span>
                                     <span class="progress-number">@{{ summary.forVisaInterview }}/@{{ totalStudents }}</span>
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-3">
                                 <div class="progress-group">
                                     <span class="progress-text">Visa Approved</span>
                                     <span class="progress-number">@{{ summary.visaApproved }}/@{{ totalStudents }}</span>
@@ -73,12 +73,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-3">
                                 <div class="progress-group">
                                     <span class="progress-text">Visa Denied</span>
                                     <span class="progress-number">@{{ summary.visaDenied }}/@{{ totalStudents }}</span>
                                     <div class="progress active">
                                         <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width: summary.visaDenied / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="progress-group">
+                                    <span class="progress-text">Cancelled</span>
+                                    <span class="progress-number">@{{ summary.cancelled }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-danger progress-bar-striped" :style="{ width: summary.cancelled / totalStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +134,8 @@
                     hired: 0,
                     forVisaInterview: 0,
                     visaApproved: 0,
-                    visaDenied: 0
+                    visaDenied: 0,
+                    cancelled: 0
                 },
                 summaryFilter: ''
             },
@@ -139,6 +149,7 @@
                     this.CountApplicants('For Visa Interview', value);
                     this.CountApplicants('Approved', value);
                     this.CountApplicants('Denied', value);
+                    this.CountApplicants('Cancelled', value);
                 }
             },
             mounted () {
@@ -175,6 +186,9 @@
                                     break;
                                 case 'Denied':
                                     this.summary.visaDenied = response.data;
+                                    break;
+                                case 'Cancelled':
+                                    this.summary.cancelled = response.data;
                                     break;
                             }
                         })

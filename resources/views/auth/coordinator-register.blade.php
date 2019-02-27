@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 m-t-100 m-t-150">
                 <div class="register-logo">
-                    <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Portal</a>
+                    <a href="{{ route('welcome') }}"><b>ZIP TRAVEL </b>Philippines</a>
                 </div>
 
                 @if($errors->any())

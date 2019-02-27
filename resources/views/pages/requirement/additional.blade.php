@@ -44,12 +44,16 @@
                     <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Application Status</b>
-                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
+                            <b>Program ID</b>
+                            <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
                         </li>
-                        <li class="list-group-item" v-if="student.coordinator">
+                        <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
                             <b>Program Coordinator</b>
                             <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Application Status</b>
+                            <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
                     </ul>
                 </div>

@@ -37,39 +37,38 @@ class StudentController extends Controller
     public function validatePersonalDetails(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name'        =>  'required',
-            'last_name'         =>  'required',
-            'birthdate'         =>  'required',
-            'gender'            =>  'required',
-            'mobile_number'     =>  'required',
-            'address'           =>  'required',
-            'school'            =>  'required',
-            'year'              =>  'required',
-            'course'            =>  'required',
-            'program_id'        =>  'required',
-            'fb_email'          =>  'required',
-            'skype_id'          =>  'required',
-            'f_first_name'      =>  'required',
-            'f_middle_name'     =>  'required',
-            'f_last_name'       =>  'required',
-            'f_occupation'      =>  'required',
-            'f_contact'         =>  'required',
-            'm_first_name'      =>  'required',
-            'm_middle_name'     =>  'required',
-            'm_last_name'       =>  'required',
-            'm_occupation'      =>  'required',
-            'm_contact'         =>  'required',
-            'p_school'          =>  'required',
-            'p_address'         =>  'required',
-            'p_date_graduated'  =>  'required',
-            's_school'          =>  'required',
-            's_address'         =>  'required',
-            's_date_graduated'  =>  'required',
-            't_school'          =>  'required',
-            't_degree'          =>  'required',
-            't_address'         =>  'required',
-            't_date_graduated'  =>  'required',
-            'experience'        =>  'required'
+            'first_name'            =>  'required',
+            'last_name'             =>  'required',
+            'birthdate'             =>  'required',
+            'gender'                =>  'required',
+            'mobile_number'         =>  'required',
+            'provincial_address'    =>  'required',
+            'permanent_address'     =>  'required',
+            'year'                  =>  'required',
+            'program_id'            =>  'required',
+            'fb_email'              =>  'required',
+            'skype_id'              =>  'required',
+            'f_first_name'          =>  'required',
+            'f_middle_name'         =>  'required',
+            'f_last_name'           =>  'required',
+            'f_occupation'          =>  'required',
+            'f_contact'             =>  'required',
+            'm_first_name'          =>  'required',
+            'm_middle_name'         =>  'required',
+            'm_last_name'           =>  'required',
+            'm_occupation'          =>  'required',
+            'm_contact'             =>  'required',
+            'p_school'              =>  'required',
+            'p_address'             =>  'required',
+            'p_date_graduated'      =>  'required',
+            's_school'              =>  'required',
+            's_address'             =>  'required',
+            's_date_graduated'      =>  'required',
+            't_school'              =>  'required',
+            't_degree'              =>  'required',
+            't_address'             =>  'required',
+            't_date_graduated'      =>  'required',
+            'experience'            =>  'required'
         ])->validate();
     }
 
@@ -90,27 +89,11 @@ class StudentController extends Controller
             'home_number'               =>  $request->input('home_number'),
             'mobile_number'             =>  $request->input('mobile_number'),
             'address'                   =>  $request->input('address'),
-            'school'                    =>  $request->input('school'),
             'year'                      =>  $request->input('year'),
-            'course'                    =>  $request->input('course'),
             'program_id'                =>  $request->input('program_id'),
             'fb_email'                  =>  $request->input('fb_email'),
             'skype_id'                  =>  $request->input('skype_id'),
-            'program_id_no'             =>  '',
-            'sevis_id'                  =>  '',
-            'host_company_id'           =>  '',
-            'position'                  =>  '',
-            'location'                  =>  '',
-            'housing_details'           =>  '',
-            'stipend'                   =>  '',
             'visa_interview_status'     =>  'Pending',
-            'visa_interview_schedule'   =>  '',
-            'program_start_date'        =>  '',
-            'program_end_date'          =>  '',
-            'visa_sponsor_id'           =>  '',
-            'date_of_departure'         =>  '',
-            'date_of_arrival'           =>  '',
-            'application_id'            =>  '',
             'application_status'        =>  'New Applicant',
             'coordinator_id'            =>  0
         ]);
@@ -175,10 +158,9 @@ class StudentController extends Controller
     {
         $students = User::join('students', 'users.id', '=', 'students.user_id')
                         ->leftjoin('programs', 'students.program_id', '=', 'programs.id')
-                        ->leftjoin('schools', 'students.school', '=', 'schools.id')
                         ->leftjoin('host_companies', 'students.host_company_id', '=', 'host_companies.id')
                         ->leftjoin('sponsors', 'students.visa_sponsor_id', '=', 'sponsors.id')
-                        ->select(['users.name', 'users.email', 'users.verified', 'students.*', 'programs.display_name as program', 'schools.display_name as college', 'host_companies.name as company', 'sponsors.name as sponsor'])
+                        ->select(['users.name', 'users.email', 'users.verified', 'students.*', 'programs.display_name as program', 'host_companies.name as company', 'sponsors.name as sponsor'])
                         ->where('students.program_id', 'like', '%'. $request->input('program_id') .'%')
                         ->whereRoleIs('student')
                         ->orderBy('created_at', 'desc')
