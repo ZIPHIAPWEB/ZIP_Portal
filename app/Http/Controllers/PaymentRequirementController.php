@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
 use App\PaymentRequirement;
+use App\Repositories\PaymentRequirement\PaymentRequirementRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -11,34 +12,30 @@ use Illuminate\Support\Facades\Validator;
 class PaymentRequirementController extends Controller
 {
     private $payment;
-
-    public function __construct()
+    private $paymentRequirementRepository;
+    public function __construct(PaymentRequirementRepository $paymentRequirementRepository)
     {
         $this->payment = new PaymentRequirement();
+        $this->paymentRequirementRepository = $paymentRequirementRepository;
     }
 
     public function view(Request $request)
     {
-        $payments = $this->payment->getByProgram($request->input('program_id'));
+        $payments = $this->paymentRequirementRepository->getByProgram($request->input('program_id'));
 
         return SuperAdminResource::collection($payments);
     }
 
     public function viewUserRequirement(Request $request)
     {
-        $program_id = $request->input('program_id');
-        $user_id = $request->input('id');
-
-        $payment = $this->payment->where('program_id', $program_id)->with(['studentPayment' => function ($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        }])->get();
+        $payment = $this->paymentRequirementRepository->getByProgramIdAndUserId($request->input('program_id'), $request->input('id'));
 
         return SuperAdminResource::collection($payment);
     }
 
     public function edit(Request $request)
     {
-        $payment = $this->payment->getById($request->input('id'));
+        $payment = $this->paymentRequirementRepository->getById($request->input('id'));
 
         return new SuperAdminResource($payment);
     }
@@ -50,7 +47,7 @@ class PaymentRequirementController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        $this->payment->create([
+        $this->paymentRequirementRepository->savePaymentRequirement([
             'program_id'    =>  $request->input('program_id'),
             'name'          =>  $request->input('name'),
             'description'   =>  $request->input('description')
@@ -66,7 +63,7 @@ class PaymentRequirementController extends Controller
             'description'   =>  'required',
         ])->validate();
 
-        $this->payment->create([
+        $this->paymentRequirementRepository->updatePaymentRequirement($request->input('id'), [
             'program_id'    =>  $request->input('program_id'),
             'name'          =>  $request->input('name'),
             'description'   =>  $request->input('description')
@@ -79,10 +76,9 @@ class PaymentRequirementController extends Controller
     {
         $id = $request->input('id');
 
-        $payment = $this->payment->find($id);
+        $payment = $this->paymentRequirementRepository->deletePaymentRequirement($id);
 
         Storage::delete($payment->path);
-        $payment->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }

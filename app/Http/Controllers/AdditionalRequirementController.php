@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdditionalRequirement;
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\AdditionalRequirement\AdditionalRequirementRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -12,34 +13,31 @@ use Illuminate\Support\Facades\Validator;
 class AdditionalRequirementController extends Controller
 {
     private $additional;
+    private $additionalRequirementRepository;
 
-    public function __construct()
+    public function __construct(AdditionalRequirementRepository $additionalRequirementRepository)
     {
         $this->additional = new AdditionalRequirement();
+        $this->additionalRequirementRepository = $additionalRequirementRepository;
     }
 
     public function view(Request $request)
     {
-        $additional = $this->additional->getByProgram($request->input('program_id'));
+        $additional = $this->additionalRequirementRepository->getByProgram($request->input('program_id'));
 
         return SuperAdminResource::collection($additional);
     }
 
     public function viewUserRequirement(Request $request)
     {
-        $program_id = $request->input('program_id');
-        $user_id = $request->input('id');
-
-        $additional = $this->additional->where('program_id', $program_id)->with(['studentAdditional' => function ($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        }])->get();
+        $additional = $this->additionalRequirementRepository->getByProgramIdAndUserId($request->input('program_id'), $request->input('id'));
 
         return SuperAdminResource::collection($additional);
     }
 
     public function edit(Request $request)
     {
-        $additional = $this->additional->getById($request->input('id'));
+        $additional = $this->additionalRequirementRepository->getById($request->input('id'));
 
         return new SuperAdminResource($additional);
     }
@@ -54,14 +52,14 @@ class AdditionalRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
 
-            $this->additional->create([
+            $this->additionalRequirementRepository->saveAdditionalRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path
             ]);
         } else {
-            $this->additional->create([
+            $this->additionalRequirementRepository->saveAdditionalRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -84,14 +82,14 @@ class AdditionalRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
 
-            $this->additional->find($id)->update([
+            $this->additionalRequirementRepository->updateAdditionalRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path
             ]);
         } else {
-            $this->additional->find($id)->update([
+            $this->additionalRequirementRepository->updateAdditionalRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -104,12 +102,8 @@ class AdditionalRequirementController extends Controller
 
     public function delete(Request $request)
     {
-        $id = $request->input('id');
-
-        $additional = $this->additional->find($id);
-
+        $additional = $this->additionalRequirementRepository->delete($request->input('id'));
         Storage::delete($additional->path);
-        $additional->delete();
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }

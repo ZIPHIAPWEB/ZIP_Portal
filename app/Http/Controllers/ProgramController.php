@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SuperAdminResource;
 use App\Program;
 use App\ProgramRequirement;
+use App\Repositories\Program\ProgramRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ProgramController extends Controller
 {
+    private $programRepository;
+    public function __construct(ProgramRepository $programRepository)
+    {
+        $this->programRepository = $programRepository;
+    }
+
     public function viewProgram()
     {
-        $programs = Program::orderBy('created_at', 'desc')->paginate(10);
+        $programs = $this->programRepository->getAllProgram();
 
         return SuperAdminResource::collection($programs);
     }
@@ -25,7 +32,7 @@ class ProgramController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        Program::create([
+        $this->programRepository->saveProgram([
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
             'description'   =>  $request->input('description')
@@ -36,7 +43,7 @@ class ProgramController extends Controller
 
     public function editProgram($id)
     {
-        $program = Program::find($id);
+        $program = $this->programRepository->getProgramById($id);
 
         return new SuperAdminResource($program);
     }
@@ -49,7 +56,7 @@ class ProgramController extends Controller
             'description'   =>  'required'
         ])->validate();
         
-        Program::find($id)->update([
+        $this->programRepository->updateProgram($id, [
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
             'description'   =>  $request->input('description')
@@ -60,9 +67,7 @@ class ProgramController extends Controller
 
     public function deleteProgram($id)
     {
-        Program::find($id)->delete();
-
-        ProgramRequirement::where('program_id', $id)->delete();
+        $this->programRepository->delete($id);
 
         return response()->json(['message'  =>  'Program Deleted']);
     }

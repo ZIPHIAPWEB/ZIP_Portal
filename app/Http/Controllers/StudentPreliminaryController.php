@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\PreliminaryRequirement;
+use App\Repositories\Log\LogRepository;
+use App\Repositories\PreliminaryRequirement\PreliminaryRequirementRepository;
+use App\Repositories\Student\StudentRepository;
+use App\Repositories\StudPreliminary\StudPreliminaryRepository;
 use App\Student;
 use App\StudentPreliminary;
 use Illuminate\Http\Request;
@@ -13,15 +17,19 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentPreliminaryController extends Controller
 {
-    private $studPreliminary;
-    private $student;
-    private $preliminary;
-
-    public function __construct()
+    private $studentRepository;
+    private $preliminaryRepository;
+    private $studPreliminaryRepository;
+    private $logRepository;
+    public function __construct(StudPreliminaryRepository $studPreliminaryRepository,
+                                StudentRepository $studentRepository,
+                                PreliminaryRequirementRepository $preliminaryRequirementRepository,
+                                LogRepository $logRepository)
     {
-        $this->student = new Student();
-        $this->studPreliminary = new StudentPreliminary();
-        $this->preliminary = new PreliminaryRequirement();
+        $this->studentRepository = $studentRepository;
+        $this->studPreliminaryRepository = $studPreliminaryRepository;
+        $this->preliminaryRepository = $preliminaryRequirementRepository;
+        $this->logRepository = $logRepository;
     }
 
     public function store(Request $request)
@@ -33,17 +41,17 @@ class StudentPreliminaryController extends Controller
             $path = $request->file('file')
                 ->storeAs($request->user()->email . '/basic', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
-            $this->studPreliminary->create([
+            $this->studPreliminaryRepository->saveStudPreliminary([
                 'user_id'        => $request->user()->id,
                 'requirement_id' => $requirement_id,
                 'status'         => true,
                 'path'           => $path
             ]);
 
-            $student = $this->student->getByUserId($request->user()->id);
-            $requirement = $this->preliminary->getById($requirement_id);
+            $student = $this->studentRepository->getStudentById($request->user()->id);
+            $requirement = $this->preliminaryRepository->getById($requirement_id);
 
-            Log::create([
+            $this->logRepository->saveLog([
                 'user_id' => $request->user()->id,
                 'activity' => 'Uploaded a ' . $requirement->name
             ]);
@@ -62,7 +70,7 @@ class StudentPreliminaryController extends Controller
     public function remove(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $preliminary = $this->studPreliminary->getById($requirement_id);
+        $preliminary = $this->studPreliminaryRepository->getById($requirement_id);
 
         $path = $request->input('path');
 
@@ -70,9 +78,9 @@ class StudentPreliminaryController extends Controller
 
         $preliminary->delete();
 
-        $requirement = $this->preliminary->getById($requirement_id);
+        $requirement = $this->preliminaryRepository->getById($requirement_id);
 
-        Log::create([
+        $this->logRepository->saveLog([
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
@@ -83,7 +91,7 @@ class StudentPreliminaryController extends Controller
     public function download(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $preliminary = $this->studPreliminary->getById($requirement_id);
+        $preliminary = $this->studPreliminaryRepository->getById($requirement_id);
 
         return Storage::disk('uploaded_files')->url($preliminary->path);
     }

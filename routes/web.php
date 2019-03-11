@@ -79,9 +79,10 @@ Route::prefix('coor')->group(function() {
 });
 
 Route::prefix('stud')->group(function() {
-    Route::get('/show', 'StudentController@showStudent')->name('stud.show');
+    Route::get('/show', 'StudentController@viewAllStudents')->name('stud.show');
     Route::get('/view', 'StudentController@viewStudent')->name('stud.view');
-
+    Route::get('/viewWithProgramInfo', 'StudentController@viewStudentWithProgramInfo')->name('stud.viewWithProgramInfo');
+    Route::get('/viewWithFullDetails', 'StudentController@viewStudentWithFullDetails')->name('stud.viewWithFullDetails');
     Route::get('/requirement/basic/{programId}', 'StudentController@loadBasicRequirements')->name('stud.requirement.basic');
     Route::post('/requirement/basic/upload/{id}', 'StudentController@uploadBasicRequirement')->name('stud.requirement.basic.upload');
     Route::post('/requirement/basic/remove/{id}', 'StudentController@removeBasicRequirement')->name('stud.requirement.basic.remove');
@@ -235,6 +236,36 @@ Route::prefix('school')->group(function() {
     Route::post('{id}/delete', 'SchoolController@delete')->name('school.delete');
 });
 
+Route::prefix('father')->group(function() {
+    Route::post('/{id}/{field}/update', 'FatherController@update')->name('father.update');
+    Route::post('/{id}/delete', 'FatherController@delete')->name('father.delete');
+});
+
+Route::prefix('mother')->group(function() {
+    Route::post('/{id}/{field}/update', 'MotherController@update')->name('mother.update');
+    Route::post('/{id}/delete', 'MotherController@delete')->name('mother.delete');
+});
+
+Route::prefix('experience')->group(function() {
+    Route::post('/{id}/update', 'ExperienceController@update')->name('experience.update');
+    Route::post('/{id}/delete', 'ExperienceController@delete')->name('experience.delete');
+});
+
+Route::prefix('primary')->group(function() {
+    Route::post('/{id}/{field}/update', 'PrimaryController@update')->name('primary.update');
+    Route::post('/{id}/delete', 'PrimaryController@delete')->name('primary.delete');
+});
+
+Route::prefix('secondary')->group(function() {
+    Route::post('/{id}/{field}/update', 'SecondaryController@update')->name('secondary.update');
+    Route::post('/{id}/delete', 'SecondaryController@delete')->name('secondary.delete');
+});
+
+Route::prefix('tertiary')->group(function() {
+    Route::post('/{id}/{field}/update', 'TertiaryController@update')->name('tertiary.update');
+    Route::post('/{id}/delete', 'TertiaryController@delete')->name('tertiary.delete');
+});
+
 Route::prefix('event')->group(function() {
     Route::get('/view', 'EventController@view')->name('event.view');
     Route::post('/store', 'EventController@store')->name('event.store');
@@ -270,7 +301,7 @@ Route::prefix('download')->group(function() {
 });
 
 Route::prefix('filter')->group(function() {
-    Route::get('/student/{programId}/{name?}', 'FilterController@filterStudentBy')->name('filter.student');
+    Route::get('/student', 'FilterController@filterStudentBy')->name('filter.student');
     Route::post('/status', 'FilterController@filterStatus')->name('filter.status');
 
     Route::get('/sa/student/{lastname}', 'FilterController@filterSuperAdminStudent')->name('filter.sa.student');

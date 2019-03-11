@@ -321,7 +321,11 @@
                                     </div>
                                     <div class="form-group col-xs-6">
                                         <label for="">End Date <i class="text-red">*</i></label>
-                                        <input v-model="item.end_date" type="date" class="form-control input-sm">
+                                        <div class="pull-right">
+                                            <label for="" class="text-sm p-r-5">Present</label>
+                                            <input type="checkbox" v-model="item.presentDate">
+                                        </div>
+                                        <input v-model="item.end_date" type="date" class="form-control input-sm" :disabled="item.presentDate">
                                     </div>
                                 </div>
                             </form>
@@ -365,6 +369,9 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
+                                    <td colspan="2" class="text-bold">Personal Details</td>
+                                </tr>
+                                <tr>
                                     <td>First Name</td>
                                     <td class="text-bold">@{{ student.firstName }}</td>
                                 </tr>
@@ -393,8 +400,12 @@
                                     <td class="text-bold">@{{ student.mobileNumber }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Address</td>
-                                    <td class="text-bold">@{{ student.address }}</td>
+                                    <td>Permanent Address</td>
+                                    <td class="text-bold">@{{ student.permanent_address }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Provincial Address</td>
+                                    <td class="text-bold">@{{ student.provincial_address }}</td>
                                 </tr>
                                 <tr>
                                     <td>Facebook Email</td>
@@ -403,10 +414,6 @@
                                 <tr>
                                     <td>Skype ID</td>
                                     <td class="text-bold">@{{ student.skype_id }}</td>
-                                </tr>
-                                <tr>
-                                    <td>School</td>
-                                    <td class="text-bold">@{{ student.school.name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Year Level</td>
@@ -419,6 +426,156 @@
                                 <tr>
                                     <td>Program</td>
                                     <td class="text-bold">@{{ student.program_id.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="text-bold">Father Details</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td class="text-bold">@{{ father.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Middle Name</td>
+                                    <td class="text-bold">@{{ father.middle_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td class="text-bold">@{{ father.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Occupation</td>
+                                    <td class="text-bold">@{{ father.occupation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No.</td>
+                                    <td class="text-bold">@{{ father.contact_no }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="text-bold">Mother Details</td>
+                                </tr>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td class="text-bold">@{{ mother.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Middle Name</td>
+                                    <td class="text-bold">@{{ mother.middle_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td class="text-bold">@{{ mother.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Occupation</td>
+                                    <td class="text-bold">@{{ mother.occupation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No.</td>
+                                    <td class="text-bold">@{{ mother.contact_no }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="text-bold">Primary Education</td>
+                                </tr>
+                                <tr>
+                                    <td>School</td>
+                                    <td class="text-bold">@{{ primary.school }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td class="text-bold">@{{ primary.address }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date Graduated</td>
+                                    <td class="text-bold">@{{ primary.date_graduated }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="text-bold">Secondary Education</td>
+                                </tr>
+                                <tr>
+                                    <td>School</td>
+                                    <td class="text-bold">@{{ secondary.school }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td class="text-bold">@{{ secondary.address }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date Graduated</td>
+                                    <td class="text-bold">@{{ secondary.date_graduated }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td colspan="2" class="text-bold">Tertiary Education</td>
+                            </tr>
+                            <tr>
+                                <td>School</td>
+                                <td class="text-bold">@{{ tertiary.school.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td class="text-bold">@{{ tertiary.address }}</td>
+                            </tr>
+                            <tr>
+                                <td>Degree</td>
+                                <td class="text-bold">@{{ tertiary.degree }}</td>
+                            </tr>
+                            <tr>
+                                <td>Date Graduated</td>
+                                <td class="text-bold">@{{ tertiary.date_graduated }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="text-bold">Experience Details</td>
+                                </tr>
+                                <tr v-for="experience in experiences">
+                                    <td>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Company</td>
+                                                    <td class="text-bold">@{{ experience.company }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td class="text-bold">@{{ experience.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td class="text-bold">@{{ experience.description }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Start Date</td>
+                                                    <td class="text-bold">@{{ experience.start_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Date</td>
+                                                    <td class="text-bold">@{{ experience.end_date }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -494,7 +651,8 @@
                         address: '',
                         description: '',
                         start_date: '',
-                        end_date: ''
+                        end_date: '',
+                        presentDate: false
                     }
                 ],
                 errors: [],
@@ -512,6 +670,13 @@
                         this.student.provincial_address = this.student.permanent_address;
                     } else {
                         this.student.provincial_address = '';
+                    }
+                },
+                presentDate: function (value) {
+                    if (!value) {
+                        return true;
+                    } else {
+                        return false;
                     }
                 }
             },
@@ -540,7 +705,8 @@
                     formData.append('gender', this.student.gender);
                     formData.append('home_number', this.student.homeNumber);
                     formData.append('mobile_number', this.student.mobileNumber);
-                    formData.append('address', this.student.address);
+                    formData.append('permanent_address', this.student.permanent_address);
+                    formData.append('provincial_address', this.student.provincial_address);
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
                     formData.append('year', this.student.year);

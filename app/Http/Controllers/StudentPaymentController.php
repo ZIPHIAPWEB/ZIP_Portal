@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\PaymentRequirement;
+use App\Repositories\Log\LogRepository;
+use App\Repositories\PaymentRequirement\PaymentRequirementRepository;
+use App\Repositories\Student\StudentRepository;
+use App\Repositories\StudPayment\StudPaymentRepository;
 use App\Student;
 use App\StudentPayment;
 use Illuminate\Http\Request;
@@ -16,12 +20,22 @@ class StudentPaymentController extends Controller
     private $studPayment;
     private $student;
     private $payment;
-
-    public function __construct()
+    private $studPaymentRepository;
+    private $studentRepository;
+    private $paymentRepository;
+    private $logRepository;
+    public function __construct(StudentRepository $studentRepository,
+                                PaymentRequirementRepository $paymentRequirementRepository,
+                                StudPaymentRepository $studPaymentRepository,
+                                LogRepository $logRepository)
     {
         $this->studPayment = new StudentPayment();
         $this->student = new Student();
         $this->payment = new PaymentRequirement();
+        $this->studentRepository = $studentRepository;
+        $this->paymentRepository = $paymentRequirementRepository;
+        $this->studPaymentRepository = $studPaymentRepository;
+        $this->logRepository = $logRepository;
     }
 
     public function store(Request $request)
@@ -33,17 +47,17 @@ class StudentPaymentController extends Controller
             $path = $request->file('file')
                 ->storeAs($request->user()->email . '/payment', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
-            $this->studPayment->create([
+            $this->studPaymentRepository->saveStudPayment([
                 'user_id'        => $request->user()->id,
                 'requirement_id' => $requirement_id,
                 'status'         => true,
                 'path'           => $path
             ]);
 
-            $student = $this->student->getByUserId($request->user()->id);
-            $requirement = $this->payment->getById($requirement_id);
+            $student = $this->studentRepository->getStudentById($request->user()->id);
+            $requirement = $this->paymentRepository->getById($requirement_id);
 
-            Log::create([
+            $this->logRepository->saveLog([
                 'user_id' => $request->user()->id,
                 'activity' => 'Uploaded a ' . $requirement->name
             ]);
@@ -62,7 +76,7 @@ class StudentPaymentController extends Controller
     public function remove(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $payment = $this->studPayment->getById($requirement_id);
+        $payment = $this->studPaymentRepository->getById($requirement_id);
 
         Storage::disk('uploaded_files')->delete($payment->path);
 
@@ -70,7 +84,7 @@ class StudentPaymentController extends Controller
 
         $requirement = $this->payment->getById($requirement_id);
 
-        Log::create([
+        $this->logRepository->saveLog([
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
@@ -81,7 +95,7 @@ class StudentPaymentController extends Controller
     public function download(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $payment = $this->studPayment->getById($requirement_id);
+        $payment = $this->studPaymentRepository->getById($requirement_id);
 
         return Storage::disk('uploaded_files')->url($payment->path);
     }

@@ -17,10 +17,7 @@ class AdditionalRequirement extends Model
     {
         return $this->belongsTo('App\StudentAdditional', 'id', 'requirement_id')
                     ->withDefault([
-                        'program_id' => false,
-                        'name'       => false,
-                        'description'=> false,
-                        'path'       => false
+                        'status'    =>  false
                     ]);
     }
 

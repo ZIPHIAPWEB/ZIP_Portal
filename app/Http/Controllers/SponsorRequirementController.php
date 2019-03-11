@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\SponsorRequirement\SponsorRequirementRepository;
 use App\SponsorRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,28 +11,23 @@ use Illuminate\Support\Facades\Validator;
 
 class SponsorRequirementController extends Controller
 {
-    private $sponsor;
+    private $sponsorRequirementRepository;
 
-    public function __construct()
+    public function __construct(SponsorRequirementRepository $sponsorRequirementRepository)
     {
-        $this->sponsor = new SponsorRequirement();
+        $this->sponsorRequirementRepository = $sponsorRequirementRepository;
     }
 
     public function view(Request $request)
     {
-        $requirements = $this->sponsor->getBySponsor($request->input('sponsor_id'));
+        $requirements = $this->sponsorRequirementRepository->getBySponsor($request->input('sponsor_id'));
 
         return SuperAdminResource::collection($requirements);
     }
 
     public function viewUserRequirement(Request $request)
     {
-        $sponsor_id = $request->input('sponsor_id');
-        $user_id = $request->input('id');
-
-        $sponsor = $this->sponsor->where('sponsor_id', $sponsor_id)->with(['studentVisa' => function ($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-        }])->get();
+        $sponsor = $this->sponsorRequirementRepository->getBySponsorIdAndUserId($request->input('sponsor_id'), $request->input('id'));
 
         return SuperAdminResource::collection($sponsor);
     }
@@ -46,14 +42,14 @@ class SponsorRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
-            $this->sponsor->create([
+            $this->sponsorRequirementRepository->saveSponsorRequirement([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
                 'path'          =>  $path,
             ]);
         } else {
-            $this->sponsor->create([
+            $this->sponsorRequirementRepository->saveSponsorRequirement([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -66,7 +62,7 @@ class SponsorRequirementController extends Controller
 
     public function edit(Request $request)
     {
-        $requirement = $this->sponsor->getById($request->input('id'));
+        $requirement = $this->sponsorRequirementRepository->getById($request->input('id'));
 
         return new SuperAdminResource($requirement);
     }
@@ -83,9 +79,9 @@ class SponsorRequirementController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
 
-            Storage::delete($this->sponsor->getById($id)->path);
+            Storage::delete($this->sponsorRequirementRepository->getById($id)->path);
 
-            $this->sponsor->find($id)->update([
+            $this->sponsorRequirementRepository->updateSponsorRequirement($id, [
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -93,10 +89,10 @@ class SponsorRequirementController extends Controller
             ]);
         } else {
             if ($this->sponsor->getById($id)->path) {
-                Storage::delete($this->sponsor->getById($id)->path);
+                Storage::delete($this->sponsorRequirementRepository->getById($id)->path);
             }
 
-            $this->sponsor->find($id)->update([
+            $this->sponsorRequirementRepository->updateSponsorRequirement($id, [
                 'program_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
                 'description'   =>  $request->input('description'),
@@ -109,8 +105,7 @@ class SponsorRequirementController extends Controller
 
     public function delete($id)
     {
-        Storage::delete($this->sponsor->getById($id)->path);
-        $this->sponsor->find($id)->delete();
+        Storage::delete($this->sponsorRequirementRepository->delete($id)->path);
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }

@@ -43,14 +43,16 @@
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Program ID</b>
-                            <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
-                        </li>
-                        <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
-                            <b>Program Coordinator</b>
-                            <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
-                        </li>
+                        @if(!DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'New Applicant' || DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'Assessed')
+                            <li class="list-group-item">
+                                <b>Program ID</b>
+                                <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
+                            </li>
+                            <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
+                                <b>Program Coordinator</b>
+                                <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
+                            </li>
+                        @endif()
                         <li class="list-group-item">
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
@@ -116,7 +118,7 @@
                                         <span v-if="requirement.student_payment.status" class="fa fa-check" style="color: green;"></span>
                                         <span v-else class="fa fa-remove" style="color: red"></span>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-cloak>
                                         <button v-if="requirement.student_payment.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</button>
                                         <button v-if="!requirement.student_payment.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                         <button v-else @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>

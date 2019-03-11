@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\Event\EventRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
+    private $eventRepository;
+    public function __construct(EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
+
     public function view()
     {
-        $events = Event::all();
+        $events = $this->eventRepository->getAllEvent();
 
         return SuperAdminResource::collection($events);
     }
@@ -24,7 +31,7 @@ class EventController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        $event = Event::create([
+        $event = $this->eventRepository->saveEvent([
             'date'          =>  $request->input('date'),
             'name'          =>  $request->input('name'),
             'description'   =>  $request->input('description')
@@ -35,7 +42,7 @@ class EventController extends Controller
 
     public function edit($id)
     {
-        $event = Event::find($id);
+        $event = $this->eventRepository->getEventById($id);
 
         return new SuperAdminResource($event);
     }
@@ -48,9 +55,7 @@ class EventController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        $event = Event::find($id);
-
-        $event->update([
+        $event = $this->eventRepository->updateEvent($id, [
             'date'          =>  $request->input('date'),
             'name'          =>  $request->input('name'),
             'description'   =>  $request->input('description')
@@ -61,9 +66,7 @@ class EventController extends Controller
 
     public function delete($id)
     {
-        $event = Event::find($id);
-
-        $event->delete();
+        $event = $this->eventRepository->deleteEvent($id);
 
         return new SuperAdminResource($event);
     }

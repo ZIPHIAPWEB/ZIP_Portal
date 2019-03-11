@@ -63,18 +63,18 @@
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                            <download-excel
+                                <download-excel
                                     class="btn btn-success btn-flat btn-sm"
                                     :data="students"
                                     :fields="testField"
-                                    name="{{ date('Ymd') }}.xls"
+                                    name="generated-report-as-of-{{ date('Ymd') }}.xls"
                                     title="ZIP Generated Report">
                                 <span class="glyphicon glyphicon-export"></span> Export
                             </download-excel>
                         </div>
                     </form>
                     <div class="form-group-sm pull-right">
-                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By First Name, Middle Name, or Last Name">
+                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By Last Name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
@@ -86,7 +86,8 @@
                             <th class="text-center" style="width: 10%">Last Name</th>
                             <th class="text-center" style="width: 10%">Contact</th>
                             <th class="text-center" style="width: 10%">School</th>
-                            <th class="text-center" style="width: 10%">Recent Activity</th>
+                            <th class="text-center" style="width: 10%">Program</th>
+                            <th class="text-center" style="width: 10%">Recent Action</th>
                             <th class="text-center" style="width: 10%">Action</th>
                         </thead>
                         <tbody v-if="hasRecords">
@@ -102,9 +103,17 @@
                                 <td class="text-sm text-center">@{{ student.first_name }}</td>
                                 <td class="text-sm text-center">@{{ student.middle_name }}</td>
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
-                                <td class="text-sm text-center">@{{ student.program }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td class="text-sm text-center"></td>
+                                <td class="text-sm text-center">@{{ student.tertiary.school_name }}</td>
+                                <td class="text-sm text-center">@{{ student.program.display_name }}</td>
+                                <td class="text-sm text-center">
+                                    <div v-if="!student.log">
+                                        @{{ student.log[0].activity }}
+                                    </div>
+                                    <div v-else>
+                                        No Recent Actions
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
                                 </td>
@@ -534,18 +543,18 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Degree
+                                                    Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.degree }}
+                                                    @{{ student.tertiary.address }}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Course
+                                                    Degree
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.course }}
+                                                    @{{ student.tertiary.degree }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1282,7 +1291,7 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button @click="downloadVisaRequirement(requirement.bReqId)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="downloadVisaRequirement(requirement.student_visa.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1396,21 +1405,43 @@
                 visaStatus: '',
                 testData: [],
                 testField: {
-                    "Date of Application"            : "created_at",
                     "Application ID"                 : "application_id",
-                    "Fullname"                       : "first_name",
-                    "Program"                        : "program",
-                    "School"                         : "school",
-                    "Course"                         : "course",
-                    "Contact"                        : "home_number",
-                    "E-mail Address"                 : "fb_email",
+                    "Date of Application"            : "created_at",
+                    "First Name"                     : "first_name",
+                    "Middle Name"                    : "middle_name",
+                    "Last Name"                      : "last_name",
+                    "Gender"                         : "gender",
+                    "Birthday"                       : "birthdate",
                     "Status"                         : "application_status",
-                    "Host Company Assignment"        : "company",
+                    "School"                         : "tertiary.school_name",
+                    "Course"                         : "tertiary.degree",
+                    "Contact"                        : "home_number",
+                    "Program"                        : "program.display_name",
+                    "E-mail Address"                 : "fb_email",
+                    "Permanent Address"              : "permanent_address",
+                    "Provincial Address"             : "provincial_address",
+                    "Skype ID"                       : "skype_id",
+                    "Passport Number"                : "",
+                    "Host Company Assignment"        : "company.name",
                     "Place of Assignment"            : "location",
                     "Stipend"                        : "stipend",
                     "VISA Appoinment"                : "visa_interview_schedule",
-                    "Departure Date"                 : "date_of_departure",
-                    "Arrival Date"                   : "date_of_arrival",
+                    "Departure Date (MNL-US)"        : "us_departure_date",
+                    "Departure Time (MNL-US)"        : "us_departure_time",
+                    "Departure Flight No. (MNL-US)"  : "us_departure_flight_no",
+                    "Departure Airline (MNL-US)"     : "us_departure_airline",
+                    "Arrival Date (MNL-US)"          : "us_arrival_date",
+                    "Arrival Time (MNL-US)"          : "us_arrival_time",
+                    "Arrival Flight No. (MNL-US)"    : "us_arrival_flight_no",
+                    "Arrival Airline (MNL-US)"       : "us_arrival_airline",
+                    "Departure Date (US-MNL)"        : "mnl_departure_date",
+                    "Departure Time (US-MNL)"        : "mnl_departure_time",
+                    "Departure Flight No. (US-MNL)"  : "mnl_departure_flight_no",
+                    "Departure Airline (US-MNL)"     : "mnl_departure_airline",
+                    "Arrival Date (US-MNL)"          : "mnl_arrival_date",
+                    "Arrival Time (US-MNL)"          : "mnl_arrival_time",
+                    "Arrival Flight No. (US-MNL)"    : "mnl_arrival_flight_no",
+                    "Arrival Airline (US-MNL)"       : "mnl_arrival_airline",
                     "Program Start Date"             : "program_start_date",
                     "Program End Date"               : "program_end_date"
                 },
@@ -1482,7 +1513,12 @@
                 filterName: function() {
                     if (this.filterName) {
                         this.loading.table = true;
-                        axios.get(`/filter/student/${programId}/${this.filterName}`)
+                        axios.get(`/filter/student`, {
+                            params: {
+                                program_id : programId,
+                                last_name: this.filterName
+                            }
+                        })
                             .then((response) => {
                                 this.loading.table = false;
                                 if (response.data.data.length > 0) {
@@ -1577,7 +1613,7 @@
                         })
                 },
                 viewStudent (studentId) {
-                    axios.get(`/stud/view?id=${studentId}`)
+                    axios.get(`/stud/viewWithFullDetails?id=${studentId}`)
                         .then((response) => {
                             this.student = response.data.data;
                             this.loadBasicRequirements(programId, response.data.data.user_id);

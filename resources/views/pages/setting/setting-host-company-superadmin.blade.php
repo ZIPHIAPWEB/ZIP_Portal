@@ -100,25 +100,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li>
-                            <a @click="previous()">«</a>
-                        </li>
-                        <li>
-                            <a v-cloak>@{{ current_page }}</a>
-                        </li>
-                        <li>
-                            <a>of</a>
-                        </li>
-                        <li>
-                            <a v-cloak>@{{ last_page }}</a>
-                        </li>
-                        <li>
-                            <a @click="next()">»</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
 

@@ -99,13 +99,13 @@
                                 <td class="text-sm">@{{ student.created_at }}</td>
                                 <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }}</label></td>
                                 <td class="text-center text-sm">@{{ student.application_id }}</td>
-                                <td class="text-center text-sm">@{{ student.first_name }} @{{ student.middle_name[0] }}. @{{ student.last_name }}</td>
-                                <td class="text-center text-sm">@{{ student.program }}</td>
-                                <td class="text-center text-sm">@{{ student.course }}</td>
+                                <td class="text-center text-sm">@{{ student.first_name }} @{{ student.last_name }}</td>
+                                <td class="text-center text-sm">@{{ student.program.display_name }}</td>
+                                <td class="text-center text-sm">@{{ student.tertiary.degree }}</td>
                                 <td class="text-center text-sm">@{{ student.home_number }}/@{{ student.mobile_number }}</td>
-                                <td class="text-center text-sm">@{{ student.college }}</td>
+                                <td class="text-center text-sm">@{{ student.tertiary.school_name }}</td>
                                 <td class="text-center">
-                                    <span v-if="student.verified === 1" class="fa fa-check text-success"></span>
+                                    <span v-if="student.user.verified === 1" class="fa fa-check text-success"></span>
                                     <span v-else class="fa fa-remove text-danger"></span>
                                 </td>
                                 <td>
@@ -124,25 +124,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer clearfix">
-                    <ul class="pagination pagination-sm no-margin pull-right">
-                        <li>
-                            <a @click="PreviousPage()" href="#">«</a>
-                        </li>
-                        <li>
-                            <a>@{{ meta.current_page }}</a>
-                        </li>
-                        <li>
-                            <a>to</a>
-                        </li>
-                        <li>
-                            <a>@{{ meta.last_page }}</a>
-                        </li>
-                        <li>
-                            <a @click="NextPage()" href="#">»</a>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog">

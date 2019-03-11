@@ -20,7 +20,8 @@ class PreliminaryRequirement extends Model
                         'program_id' =>  false,
                         'name'       =>  false,
                         'description'=>  false,
-                        'path'       =>  false
+                        'path'       =>  false,
+                        'status'     =>  false
                     ]);
     }
 

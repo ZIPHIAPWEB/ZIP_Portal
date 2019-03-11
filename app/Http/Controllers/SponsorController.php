@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\Sponsor\SponsorRepository;
 use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SponsorController extends Controller
 {
+    private $sponsorRepository;
+    public function __construct(SponsorRepository $sponsorRepository)
+    {
+        $this->sponsorRepository = $sponsorRepository;
+    }
+
     public function view()
     {
-        $sponsors = Sponsor::orderBy('created_at', 'desc')->paginate(10);
+        $sponsors = $this->sponsorRepository->getAllSponsor();
 
         return SuperAdminResource::collection($sponsors);
     }
@@ -24,7 +31,7 @@ class SponsorController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        Sponsor::create([
+        $this->sponsorRepository->saveSponsor([
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
             'description'   =>  $request->input('description')
@@ -35,7 +42,7 @@ class SponsorController extends Controller
 
     public function edit($id)
     {
-        $sponsor = Sponsor::find($id);
+        $sponsor = $this->sponsorRepository->getSponsorById($id);
 
         return new SuperAdminResource($sponsor);
     }
@@ -48,7 +55,7 @@ class SponsorController extends Controller
             'description'   =>  'required'
         ])->validate();
 
-        Sponsor::find($id)->update([
+        $this->sponsorRepository->update($id, [
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),
             'description'   =>  $request->input('description')
@@ -59,7 +66,7 @@ class SponsorController extends Controller
 
     public function delete($id)
     {
-        Sponsor::find($id)->delete();
+        $this->sponsorRepository->deleteSponsor($id);
 
         return response()->json(['message'  =>  'Sponsor Deleted']);
     }

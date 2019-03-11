@@ -21,7 +21,8 @@ class CreateStudentsTable extends Migration
             $table->string('last_name');
             $table->string('birthdate');
             $table->string('gender');
-            $table->text('address');
+            $table->text('permanent_address');
+            $table->text('provincial_address');
             $table->string('home_number');
             $table->string('mobile_number');
             $table->string('year');

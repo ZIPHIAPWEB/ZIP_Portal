@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\School\SchoolRepository;
 use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SchoolController extends Controller
 {
+    private $schoolRepository;
+
+    public function __construct(SchoolRepository $schoolRepository)
+    {
+        $this->schoolRepository = $schoolRepository;
+    }
+
     public function view()
     {
-        $schools = School::orderBy('created_at', 'desc')->paginate(10);
+        $schools = $this->schoolRepository->getAllSchool();
 
         return SuperAdminResource::collection($schools);
     }
@@ -24,7 +32,7 @@ class SchoolController extends Controller
             'description'   => 'required'
         ])->validate();
 
-        $school = School::create([
+        $school = $this->schoolRepository->saveSchool([
             'name'          => $request->input('name'),
             'display_name'  => $request->input('display_name'),
             'description'   => $request->input('description')
@@ -35,7 +43,7 @@ class SchoolController extends Controller
 
     public function edit($id)
     {
-        $school = School::find($id);
+        $school = $this->schoolRepository->getSchoolById($id);
 
         return new SuperAdminResource($school);
     }
@@ -48,7 +56,7 @@ class SchoolController extends Controller
             'description'   => 'required'
         ])->validate();
 
-        $school = School::find($id)->update([
+        $school = $this->schoolRepository->updateSchool($id, [
             'name'          => $request->input('name'),
             'display_name'  => $request->input('display_name'),
             'description'   => $request->input('description')
@@ -59,7 +67,7 @@ class SchoolController extends Controller
 
     public function delete($id)
     {
-        $school = School::find($id)->delete();
+        $this->schoolRepository->deleteSchool($id);
 
         return response()->json(['message' => 'School Delete Successfully']);
     }

@@ -13,7 +13,8 @@ class Student extends Model
         'last_name',
         'birthdate',
         'gender',
-        'address',
+        'permanent_address',
+        'provincial_address',
         'home_number',
         'mobile_number',
         'course',
@@ -40,6 +41,12 @@ class Student extends Model
         'application_status',
         'coordinator_id'
     ];
+
+    public function log()
+    {
+        return $this->hasMany('App\Log', 'user_id', 'user_id');
+
+    }
 
     public function user()
     {
@@ -147,11 +154,6 @@ class Student extends Model
         return $this->hasMany('App\ProgramPayment', 'program_id', 'program_id');
     }
 
-    public function basicRequirement()
-    {
-        return $this->hasMany('App\BasicRequirement', 'user_id', 'user_id');
-    }
-
     public function getByProgramId($id)
     {
         $user = User:: whereRoleIs('student')
@@ -166,22 +168,5 @@ class Student extends Model
         $user = $this->where('user_id', $userId)->first();
 
         return $user;
-    }
-
-    public function viewStudentInfo($id)
-    {
-        return $this->where('user_id', $id)
-                    ->with([
-                        'company',
-                        'sponsor',
-                        'coordinator',
-                        'father',
-                        'mother',
-                        'primary',
-                        'secondary',
-                        'tertiary',
-                        'experience',
-                    ])
-                    ->first();
     }
 }

@@ -17,10 +17,7 @@ class PaymentRequirement extends Model
     {
         return $this->belongsTo('App\StudentPayment', 'id', 'requirement_id')
                     ->withDefault([
-                        'program_id' => false,
-                        'name'       => false,
-                        'description'=> false,
-                        'path'       => false
+                        'status'    =>  false
                     ]);
     }
 

@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\HostCompany;
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\HostCompany\HostCompanyRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class HostCompanyController extends Controller
 {
+    private $hostCompanyRepository;
+    public function __construct(HostCompanyRepository $hostCompanyRepository)
+    {
+        $this->hostCompanyRepository = $hostCompanyRepository;
+    }
+
     public function viewHost()
     {
-        $hosts = HostCompany::orderBy('created_at', 'desc')->paginate(10);
+        $hosts = $this->hostCompanyRepository->getAllHostCompany();
 
         return SuperAdminResource::collection($hosts);
     }
@@ -23,7 +30,7 @@ class HostCompanyController extends Controller
             'state' =>  'required'
         ])->validate();
 
-        HostCompany::create([
+        $this->hostCompanyRepository->saveHostCompany([
             'name'  =>  $request->input('name'),
             'states' =>  $request->input('state')
         ]);
@@ -33,7 +40,7 @@ class HostCompanyController extends Controller
 
     public function editHost($id)
     {
-        $host = HostCompany::find($id);
+        $host = $this->hostCompanyRepository->getHostCompanyById($id);
 
         return new SuperAdminResource($host);
     }
@@ -45,7 +52,7 @@ class HostCompanyController extends Controller
             'state' =>  'required'
         ])->validate();
 
-        HostCompany::find($id)->update([
+        $this->hostCompanyRepository->updateHostCompany($id, [
             'name'  =>  $request->input('name'),
             'states' =>  $request->input('state')
         ]);
@@ -55,7 +62,7 @@ class HostCompanyController extends Controller
 
     public function deleteHost($id)
     {
-        HostCompany::find($id)->delete();
+        $this->hostCompanyRepository->deleteHostCompany($id);
 
         return response()->json(['message'  =>  'Deleted!']);
     }

@@ -43,14 +43,16 @@
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Program ID</b>
-                            <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
-                        </li>
-                        <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
-                            <b>Program Coordinator</b>
-                            <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
-                        </li>
+                        @if(!DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'New Applicant' || DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'Assessed')
+                            <li class="list-group-item">
+                                <b>Program ID</b>
+                                <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
+                            </li>
+                            <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
+                                <b>Program Coordinator</b>
+                                <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
+                            </li>
+                        @endif()
                         <li class="list-group-item">
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
@@ -118,6 +120,7 @@
                                 </td>
                                 <td class="text-center">
                                     <button v-if="requirement.student_additional.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View File</button>
+                                    <button v-if="requirement.student_additional.status" @click="downloadFile(requirement)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span> Download</button>
                                     <button v-if="!requirement.student_additional.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                     <button v-else @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
@@ -299,6 +302,18 @@
                                 confirmButtonText: 'Continue'
                             })
                         }
+                    })
+                },
+                downloadFile(requirement) {
+                    axios.get(`/studAdditional/download?requirement_id=${requirement.student_additional.id}`)
+                        .then((response) => {
+                            const link = document.createElement('a');
+                            link.href = response.data;
+                            link.setAttribute('download', '');
+                            document.body.appendChild(link);
+                            link.click();
+                        }).catch((error) => {
+                        console.log(error);
                     })
                 },
                 openInNewTab(requirement) {

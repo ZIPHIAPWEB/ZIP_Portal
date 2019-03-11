@@ -3,43 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
+use App\Repositories\Student\StudentRepository;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
-    public function filterStudentBy($programId, $name = null)
+    private $studentRepository;
+    public function __construct(StudentRepository $studentRepository)
     {
-        $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-            ->leftjoin('schools', 'students.school', '=', 'schools.id')
-            ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
-            ->where('program_id', $programId)
-            ->Where('last_name', 'like', '%' . $name . '%')
-            ->orWhere('first_name', 'like', '%' . $name . '%')
-            ->orWhere('middle_name', 'like', '%' . $name . '%')
-            ->paginate(20);
+        $this->studentRepository = $studentRepository;
+    }
+
+    public function filterStudentBy(Request $request)
+    {
+        $students = Student::where('program_id', $request->input('program_id'))
+            ->Where('last_name', 'like', '%' . $request->input('last_name') . '%')
+            ->with(['user', 'tertiary', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+            ->get();
 
         return SuperAdminResource::collection($students);
     }
 
     public function filterStatus(Request $request)
     {
+        $query = Student::query();
+
+        $query->when($request->input('program_id'), function($query, $programId){
+            return $query->where('program_id', $programId);
+        });
+
+        $query->when([$request->input('from'), $request->input('to')], function($query, $date){
+            return $query->whereBetween('created_at', $date);
+        });
+
+        $query->when($request->input('status'), function($query, $status){
+            return $query->where('application_status', $status);
+        });
+
         if  ($request->input('from') == null) {
-            $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-                ->leftjoin('schools', 'students.school', '=', 'schools.id')
-                ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
-                ->where('program_id', $request->input('program_id'))
-                ->where('application_status', 'like', '%' . $request->input('status') . '%')
-                ->paginate(20);
+            $students = Student::where('program_id', $request->input('program_id'))
+                ->Where('application_status', 'like', '%' . $request->input('status') . '%')
+                ->with(['user', 'tertiary', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+                ->get();
         } else {
-            $students = Student::leftjoin('programs', 'students.program_id', '=', 'programs.id')
-                ->leftjoin('schools', 'students.school', '=', 'schools.id')
-                ->select(['students.*', 'programs.display_name as program', 'schools.display_name as school'])
-                ->where('program_id', $request->input('program_id'))
-                ->whereBetween('students.created_at', [$request->input('from'), $request->input('to')])
+            $students = Student::where('program_id', $request->input('program_id'))
                 ->where('application_status', 'like', '%' . $request->input('status') . '%')
-                ->paginate(20);
+                ->whereBetween('created_at', [$request->input('from'), $request->input('to')])
+                ->with(['user', 'tertiary', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+                ->get();;
         }
 
         return SuperAdminResource::collection($students);
