@@ -31,7 +31,7 @@ class PreliminaryRequirementRepository extends BaseRepository implements IPrelim
 
     public function getById($id)
     {
-        return $this->findBy(['id' => $id]);
+        return $this->findOneBy(['id' => $id]);
     }
 
     public function getByProgramIdAndUserId($programId, $userId)

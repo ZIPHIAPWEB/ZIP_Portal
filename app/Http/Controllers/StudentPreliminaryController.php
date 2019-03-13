@@ -63,7 +63,9 @@ class StudentPreliminaryController extends Controller
 
             Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
 
-            return response()->json(['message' => 'File Uploaded!'], 200);
+            return response()->json([
+                'message'   =>  'File Uploaded'
+            ], 200);
         }
     }
 
@@ -76,7 +78,7 @@ class StudentPreliminaryController extends Controller
 
         Storage::disk('uploaded_files')->delete($preliminary->path);
 
-        $preliminary->delete();
+        $this->studPreliminaryRepository->delete($requirement_id);
 
         $requirement = $this->preliminaryRepository->getById($requirement_id);
 
