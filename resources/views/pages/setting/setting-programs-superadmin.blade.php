@@ -224,8 +224,8 @@
                                             <td v-cloak>@{{ requirement.description }}</td>
                                             <td v-cloak>@{{ requirement.path }}</td>
                                             <td v-cloak>
-                                                <button @click="editRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
-                                                <button @click="deleteRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                                                <button @click="editAdditionalRequirement(requirement.id)" class="btn btn-success btn-flat btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;
+                                                <button @click="deleteAdditionalRequirement(requirement.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -242,7 +242,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Description</label>
-                                                    <input @keyup.enter="storePaymentRequirement" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
+                                                    <input @keyup.enter="storePaymentRequirement()" v-model="requirement.description" type="text" class="form-control" placeholder="Enter Description"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">File (optional)</label>
@@ -353,7 +353,7 @@
                 payment_links: [],
                 payment_current_page: '',
                 payment_last_page: '',
-                payment_url: '',
+                payment_url: '/payment/store',
                 payment_button: '',
                 loading: {
                     table: false
@@ -582,7 +582,7 @@
                         }
                     })
                         .then((response) => {
-                            this.pay_url = `/payment/update?id=${id}`;
+                            this.payment_url = `/payment/update?id=${id}`;
                             this.req_button = 'Update';
                             this.requirement.name = response.data.data.name;
                             this.requirement.description = response.data.data.description;
@@ -593,12 +593,12 @@
                     formData.append('program_id', this.requirement.program_id);
                     formData.append('name', this.requirement.name);
                     formData.append('description', this.requirement.description);
-                    axios.post(this.pay_url, formData)
+                    axios.post(this.payment_url, formData)
                         .then((response) => {
                             alert(response.data.message);
                             this.requirement.name = '';
                             this.requirement.description = '';
-                            this.pay_url = '/payment/store';
+                            this.payment_url = '/payment/store';
                             this.req_button = 'Add';
                             this.loadPaymentRequirement(this.requirement.program_id);
                         })
@@ -631,7 +631,7 @@
                 },
                 //Payment CRUD
                 loadPayments(id) {
-                    axios.get(`/program/${id}/payments/view`)
+                    axios.get(`/payment/view?program_id=${id}`)
                         .then((response) => {
                             this.payments = response.data.data;
                             this.payment_links = response.data.links;
@@ -664,7 +664,7 @@
                     });
                 },
                 viewPayments(id) {
-                    axios.get(`/program/edit/${id}`)
+                    axios.get(`/payment/edit?id=${id}`)
                         .then((response) => {
                             this.loadPayments(id);
                             this.program.name = response.data.data.name;
@@ -680,9 +680,9 @@
                     });
                 },
                 editPayment(id) {
-                    axios.get(`/program/payment/${id}/edit`)
+                    axios.get(`/payment/edit?id=${id}`)
                         .then((response) => {
-                            this.payment_url = `/program/payment/${id}/update`;
+                            this.payment_url = `/payment/update?id=${id}`;
                             this.payment_button = 'Update';
                             this.payment.name = response.data.data.name;
                             this.payment.description = response.data.data.description;
@@ -709,7 +709,7 @@
                         console.log(error);
                     });
                 },
-                deletePayment(id) {
+                deletePaymentRequirement(id) {
                     axios.get(`/program/payment/${id}/delete`)
                         .then((response) => {
                             this.loadPayments(this.payment.program_id);

@@ -43,7 +43,7 @@ class PaymentRequirementRepository extends BaseRepository implements IPaymentReq
 
     public function getById($id)
     {
-        return $this->findBy(['id' => $id]);
+        return $this->findOneBy(['id' => $id]);
     }
 
     public function getByProgram($programId)

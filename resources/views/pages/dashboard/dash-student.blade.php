@@ -13,16 +13,10 @@
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.program }}</p>
                     <ul class="list-group list-group-unbordered">
-                        @if(!DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'New Applicant' || DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'Assessed')
-                        <li class="list-group-item">
+                        <li class="list-group-item" v-if="student.application_id">
                             <b>Program ID</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
                         </li>
-                        <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
-                            <b>Program Coordinator</b>
-                            <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
-                        </li>
-                        @endif()
                         <li class="list-group-item">
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
@@ -301,7 +295,7 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
-                                <td style="width: 35%" colspan="2"><label for="" class="control-label">Father</label></td>
+                                    <td style="width: 35%" colspan="2"><label for="" class="control-label">Father</label></td>
                             </tr>
                             <tr>
                                 <td colspan="">First Name</td>
@@ -364,7 +358,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Occupation/Company</td>
+                                <td>Occupation</td>
                                 <td v-if="!father.occupationIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.occupation }}</label>
                                     <a @click="hideField('fatherOccupation');" class="pull-right">
@@ -381,6 +375,12 @@
                                             <button @click="father.occupationIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                         </span>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td>
+                                    @{{ student.father.company }}
                                 </td>
                             </tr>
                             <tr>
@@ -467,7 +467,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Occupation/Company</td>
+                                <td>Occupation</td>
                                 <td v-if="!mother.occupationIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.occupation }}</label>
                                     <a @click="hideField('motherOccupation');" class="pull-right">
@@ -484,6 +484,12 @@
                                             <button @click="mother.occupationIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                         </span>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td>
+                                    @{{ student.mother.company }}
                                 </td>
                             </tr>
                             <tr>

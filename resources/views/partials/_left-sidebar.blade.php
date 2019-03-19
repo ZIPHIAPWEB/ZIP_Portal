@@ -116,7 +116,6 @@
                 </li>
             @endif
             @if(Auth::user()->hasRole('student'))
-                <li class="header">Personal Information</li>
                 <li class="{{ Route::currentRouteNamed('dash.student') ? 'active' : '' }}">
                     <a href="{{ route('dash.student') }}">
                         <i class="fa fa-user"></i>
@@ -125,7 +124,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="header">Program</li>
+                <li class="header">My Program</li>
                 <li class="treeview {{ Route::currentRouteNamed('req.basic') ? 'active' : '' }}{{ Route::currentRouteNamed('req.visa') ? 'active' : '' }}{{ Route::currentRouteNamed('req.additional') ? 'active' : '' }}">
                     <a href="#">
                         <i class="fa fa-gear"></i> <span><small>Program Requirement</small></span>
@@ -147,7 +146,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="header">Payments</li>
+                <li class="header">My Payments</li>
                 <li class="{{ Route::currentRouteNamed('req.payment') ? 'active' : '' }}">
                     <a href="{{ route('req.payment') }}">
                         <i class="fa fa-dollar"></i>

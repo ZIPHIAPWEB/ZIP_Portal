@@ -26,7 +26,7 @@ class SponsorRepository extends BaseRepository implements ISponsorRepository
 
     public function getSponsorById($id)
     {
-        return parent::findBy(['id' => $id]);
+        return parent::findOneBy(['id' => $id]);
     }
 
     public function saveSponsor(array $attributes)

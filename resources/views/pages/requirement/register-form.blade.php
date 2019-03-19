@@ -620,6 +620,7 @@
                     middle_name: '',
                     last_name: '',
                     occupation: '',
+                    company: '',
                     contact_no: ''
                 },
                 mother: {
@@ -627,7 +628,8 @@
                     middle_name: '',
                     last_name: '',
                     occupation: '',
-                    contact_no: ''
+                    company: '',
+                    contact_no: '',
                 },
                 primary: {
                     school: '',
@@ -715,11 +717,13 @@
                     formData.append('f_middle_name', this.father.middle_name);
                     formData.append('f_last_name', this.father.last_name);
                     formData.append('f_occupation', this.father.occupation);
+                    formData.append('f_company', this.father.company);
                     formData.append('f_contact', this.father.contact_no);
                     formData.append('m_first_name', this.mother.first_name);
                     formData.append('m_middle_name', this.mother.middle_name);
                     formData.append('m_last_name', this.mother.last_name);
                     formData.append('m_occupation', this.mother.occupation);
+                    formData.append('m_company', this.mother.company);
                     formData.append('m_contact', this.mother.contact_no);
                     formData.append('p_school', this.primary.school);
                     formData.append('p_address', this.primary.address);
@@ -759,11 +763,13 @@
                     formData.append('f_middle_name', this.father.middle_name);
                     formData.append('f_last_name', this.father.last_name);
                     formData.append('f_occupation', this.father.occupation);
+                    formData.append('f_company', this.father.company);
                     formData.append('f_contact', this.father.contact_no);
                     formData.append('m_first_name', this.mother.first_name);
                     formData.append('m_middle_name', this.mother.middle_name);
                     formData.append('m_last_name', this.mother.last_name);
                     formData.append('m_occupation', this.mother.occupation);
+                    formdata.append('m_company', this.mother.company);
                     formData.append('m_contact', this.mother.contact_no);
                     formData.append('p_school', this.primary.school);
                     formData.append('p_address', this.primary.address);

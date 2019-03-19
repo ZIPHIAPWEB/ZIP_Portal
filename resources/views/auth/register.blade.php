@@ -24,7 +24,7 @@
         @endif
 
         <div class="register-box-body">
-            <p class="login-box-msg">Register a new membership</p>
+            <p class="login-box-msg">New Participant's Registration</p>
 
             <form action="{{ route('post.register') }}" method="post">
                 {{ csrf_field() }}

@@ -117,6 +117,7 @@ class StudentController extends Controller
             'middle_name'   =>  $request->input('f_middle_name'),
             'last_name'     =>  $request->input('f_last_name'),
             'occupation'    =>  $request->input('f_occupation'),
+            'company'       =>  $request->input('f_company'),
             'contact_no'    =>  $request->input('f_contact')
         ]);
 
@@ -126,6 +127,7 @@ class StudentController extends Controller
             'middle_name'   =>  $request->input('m_middle_name'),
             'last_name'     =>  $request->input('m_last_name'),
             'occupation'    =>  $request->input('m_occupation'),
+            'company'       =>  $request->input('m_company'),
             'contact_no'    =>  $request->input('m_contact')
         ]);
 
@@ -203,7 +205,7 @@ class StudentController extends Controller
 
             Storage::disk('public')->delete($request->user()->profile_picture);
 
-            User::find($request->user()->id)->update([
+            $this->studentRepository->updateStudentBy(['user_id' =>  $request->user()->id], [
                 'profile_picture'   =>  $path
             ]);
 

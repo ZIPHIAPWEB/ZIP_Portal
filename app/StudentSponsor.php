@@ -17,9 +17,4 @@ class StudentSponsor extends Model
     {
         return $this->hasOne('App\SponsorRequirement', 'requirement_id', 'id');
     }
-
-    public function getById($id)
-    {
-        return $this->find($id);
-    }
 }

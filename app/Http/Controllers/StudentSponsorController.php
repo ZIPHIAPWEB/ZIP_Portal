@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Log;
 use App\Notifications\StudentUploadedFile;
+use App\Repositories\Log\LogRepository;
+use App\Repositories\Sponsor\SponsorRepository;
+use App\Repositories\Student\StudentRepository;
+use App\Repositories\StudSponsor\StudSponsorRepository;
 use App\SponsorRequirement;
 use App\Student;
 use App\StudentSponsor;
@@ -13,15 +17,19 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentSponsorController extends Controller
 {
-    private $studSponsor;
-    private $sponsor;
-    private $student;
-
-    public function __construct()
+    private $studSponsorRepository;
+    private $sponsorRepository;
+    private $studentRepository;
+    private $logRepository;
+    public function __construct(StudentRepository $studentRepository,
+                                StudSponsorRepository $studSponsorRepository,
+                                SponsorRepository $sponsorRepository,
+                                LogRepository $logRepository)
     {
-        $this->student = new Student();
-        $this->studSponsor = new StudentSponsor();
-        $this->sponsor = new SponsorRequirement();
+        $this->studentRepository = $studentRepository;
+        $this->studSponsorRepository = $studSponsorRepository;
+        $this->sponsorRepository = $sponsorRepository;
+        $this->logRepository = $logRepository;
     }
 
     public function store(Request $request)
@@ -33,17 +41,17 @@ class StudentSponsorController extends Controller
             $path = $request->file('file')
                 ->storeAs($request->user()->email . '/visa', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
-            $this->studSponsor->create([
+            $this->studSponsorRepository->saveStudSponsor([
                 'user_id' => $request->user()->id,
                 'requirement_id' => $requirement_id,
                 'status' => true,
                 'path' => $path
             ]);
 
-            $student = $this->student->getByUserId($request->user()->id);
-            $requirement = $this->sponsor->getById($requirement_id);
+            $student = $this->studentRepository->getStudentById($request->user()->id);
+            $requirement = $this->sponsorRepository->getSponsorById($requirement_id);
 
-            Log::create([
+            $this->logRepository->saveLog([
                 'user_id' => $request->user()->id,
                 'activity' => 'Uploaded a ' . $requirement->name
             ]);
@@ -62,14 +70,14 @@ class StudentSponsorController extends Controller
     public function remove(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $sponsor = $this->studSponsor->getById($requirement_id);
+        $sponsor = $this->studSponsorRepository->getStudentSponsorById($requirement_id);
 
         Storage::disk('uploaded_files')->delete($sponsor->path);
-        $sponsor->delete();
+        $this->studSponsorRepository->deleteStudSponsor($requirement_id);
 
-        $requirement = $this->sponsor->getById($requirement_id);
+        $requirement = $this->sponsorRepository->getSponsorById($requirement_id);
 
-        Log::create([
+        $this->logRepository->save([
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
@@ -80,7 +88,7 @@ class StudentSponsorController extends Controller
     public function download(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $sponsor = $this->studSponsor->getById($requirement_id);
+        $sponsor = $this->studSponsorRepository->getStudentSponsorById($requirement_id);
 
         return Storage::disk('uploaded_files')->url($sponsor->path);
     }

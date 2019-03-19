@@ -25,11 +25,6 @@ class SponsorRequirement extends Model
                     ]);
     }
 
-    public function getById($id)
-    {
-        return $this->find($id);
-    }
-
     public function getBySponsor($sponsorId)
     {
         return $this->where('sponsor_id', $sponsorId)->orderBy('created_at', 'desc')->get();

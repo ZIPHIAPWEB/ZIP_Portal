@@ -53,6 +53,6 @@ class AdditionalRequirementRepository extends BaseRepository implements IAdditio
 
     public function getById($id)
     {
-        return $this->findBy(['id' => $id]);
+        return $this->findOneBy(['id' => $id]);
     }
 }

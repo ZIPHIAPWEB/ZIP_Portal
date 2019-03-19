@@ -60,6 +60,7 @@ class CreateStudentsTable extends Migration
             $table->string('application_id')->nullable();
             $table->string('program_id');
             $table->string('application_status')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }

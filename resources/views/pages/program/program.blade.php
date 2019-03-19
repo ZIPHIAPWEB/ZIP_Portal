@@ -107,11 +107,11 @@
                                 <td class="text-sm text-center">@{{ student.tertiary.school_name }}</td>
                                 <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                                 <td class="text-sm text-center">
-                                    <div v-if="!student.log">
-                                        @{{ student.log[0].activity }}
+                                    <div v-if="!student.log[0]">
+                                        No Recent Actions
                                     </div>
                                     <div v-else>
-                                        No Recent Actions
+                                        @{{ student.log[0].activity }}
                                     </div>
                                 </td>
                                 <td class="text-center">
@@ -345,10 +345,18 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Address
+                                                    Permanent Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.address }}
+                                                    @{{ student.permanent_address }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Provincial Address
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.provincial_address }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1624,7 +1632,7 @@
                             $('#student-modal').modal('show');
                         })
                 },
-                openInNewTab ($id) {
+                openInNewTab (id) {
                     axios.get(`/download/basic/requirement/${id}`)
                         .then((response) => {
                             let win = window.open(response.data);

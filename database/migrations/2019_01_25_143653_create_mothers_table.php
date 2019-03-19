@@ -20,6 +20,7 @@ class CreateMothersTable extends Migration
             $table->string('middle_name');
             $table->string('last_name');
             $table->string('occupation');
+            $table->string('company')->default('None');
             $table->string('contact_no');
             $table->timestamps();
         });

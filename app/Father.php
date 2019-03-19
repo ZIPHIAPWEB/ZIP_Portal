@@ -12,6 +12,7 @@ class Father extends Model
         'middle_name',
         'last_name',
         'occupation',
+        'company',
         'contact_no'
     ];
 
