@@ -140,12 +140,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-4">
                                         <label for="">Occupation <i class="text-red">*</i></label>
                                         <input v-model="father.occupation" type="text" class="form-control input-sm" placeholder="Father's Occupation">
                                         <span class="help-block text-red" v-if="errors.f_occupation">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Company <i class="text-red">*</i></label>
+                                        <input v-model="father.company" type="text" class="form-control input-sm" placeholder="Father's Company">
+                                        <span class="help-block text-red" v-if="errors.f_company">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
                                         <input v-model="father.contact_no" type="text" class="form-control input-sm" placeholder="Father's Contact No.">
                                         <span class="help-block text-red" v-if="errors.f_contact">required</span>
@@ -181,12 +186,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-4">
                                         <label for="">Occupation <i class="text-red">*</i></label>
                                         <input v-model="mother.occupation" type="text" class="form-control input-sm" placeholder="Mother's Occupation">
                                         <span class="help-block text-red" v-if="errors.m_occupation">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-4">
+                                        <label for="">Company <i class="text-red">*</i></label>
+                                        <input v-model="mother.company" type="text" class="form-control input-sm" placeholder="Mother's Company">
+                                        <span class="help-block text-red" v-if="errors.m_company">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
                                         <input v-model="mother.contact_no" type="text" class="form-control input-sm" placeholder="Mother's Contact No.">
                                         <span class="help-block text-red" v-if="errors.m_contact">required</span>
@@ -451,6 +461,10 @@
                                     <td class="text-bold">@{{ father.occupation }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Company</td>
+                                    <td class="text-bold">@{{ father.company }}</td>
+                                </tr>
+                                <tr>
                                     <td>Contact No.</td>
                                     <td class="text-bold">@{{ father.contact_no }}</td>
                                 </tr>
@@ -476,6 +490,10 @@
                                 <tr>
                                     <td>Occupation</td>
                                     <td class="text-bold">@{{ mother.occupation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Company</td>
+                                    <td class="text-bold">@{{ mother.company }}</td>
                                 </tr>
                                 <tr>
                                     <td>Contact No.</td>
@@ -769,7 +787,7 @@
                     formData.append('m_middle_name', this.mother.middle_name);
                     formData.append('m_last_name', this.mother.last_name);
                     formData.append('m_occupation', this.mother.occupation);
-                    formdata.append('m_company', this.mother.company);
+                    formData.append('m_company', this.mother.company);
                     formData.append('m_contact', this.mother.contact_no);
                     formData.append('p_school', this.primary.school);
                     formData.append('p_address', this.primary.address);

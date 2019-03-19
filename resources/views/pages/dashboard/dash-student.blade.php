@@ -379,8 +379,22 @@
                             </tr>
                             <tr>
                                 <td>Company</td>
-                                <td>
-                                    @{{ student.father.company }}
+                                <td v-if="!father.companyIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.company }}</label>
+                                    <a @click="hideField('fatherCompany');" class="pull-right">
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group">
+                                        <input v-model="field" type="text" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateFather('company', field); father.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <button @click="father.companyIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                        </span>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -488,8 +502,22 @@
                             </tr>
                             <tr>
                                 <td>Company</td>
-                                <td>
-                                    @{{ student.mother.company }}
+                                <td v-if="!mother.companyIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.company }}</label>
+                                    <a @click="hideField('motherCompany');" class="pull-right">
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group">
+                                        <input v-model="field" type="text" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateMother('company', field); mother.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <button @click="mother.companyIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                        </span>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -1142,6 +1170,7 @@
                     middleNameIsEdit: false,
                     lastNameIsEdit: false,
                     occupationIsEdit: false,
+                    companyIsEdit: false,
                     contactNumberIsEdit: false
                 },
                 mother: {
@@ -1149,6 +1178,7 @@
                     middleNameIsEdit: false,
                     lastNameIsEdit: false,
                     occupationIsEdit: false,
+                    companyIsEdit: false,
                     contactNumberIsEdit: false
                 },
                 primary: {
@@ -1538,6 +1568,7 @@
                             this.father.middleNameIsEdit = false;
                             this.father.lastNameIsEdit = false;
                             this.father.occupationIsEdit = false;
+                            this.father.companyIsEdit = false;
                             this.father.contactNumberIsEdit = false;
                             break;
                         case 'fatherMiddleName':
@@ -1545,6 +1576,7 @@
                             this.father.middleNameIsEdit = true;
                             this.father.lastNameIsEdit = false;
                             this.father.occupationIsEdit = false;
+                            this.father.companyIsEdit = false;
                             this.father.contactNumberIsEdit = false;
                             break;
                         case 'fatherLastName':
@@ -1552,6 +1584,7 @@
                             this.father.middleNameIsEdit = false;
                             this.father.lastNameIsEdit = true;
                             this.father.occupationIsEdit = false;
+                            this.father.companyIsEdit = false;
                             this.father.contactNumberIsEdit = false;
                             break;
                         case 'fatherOccupation':
@@ -1559,6 +1592,15 @@
                             this.father.middleNameIsEdit = false;
                             this.father.lastNameIsEdit = false;
                             this.father.occupationIsEdit = true;
+                            this.father.companyIsEdit = false;
+                            this.father.contactNumberIsEdit = false;
+                            break;
+                        case 'fatherCompany':
+                            this.father.firstNameIsEdit = false;
+                            this.father.middleNameIsEdit = false;
+                            this.father.lastNameIsEdit = false;
+                            this.father.occupationIsEdit = false;
+                            this.father.companyIsEdit = true;
                             this.father.contactNumberIsEdit = false;
                             break;
                         case 'fatherContactNumber':
@@ -1566,6 +1608,7 @@
                             this.father.middleNameIsEdit = false;
                             this.father.lastNameIsEdit = false;
                             this.father.occupationIsEdit = false;
+                            this.father.companyIsEdit = false;
                             this.father.contactNumberIsEdit = true;
                             break;
                         case 'motherFirstName':
@@ -1573,6 +1616,7 @@
                             this.mother.middleNameIsEdit = false;
                             this.mother.lastNameIsEdit = false;
                             this.mother.occupationIsEdit = false;
+                            this.mother.companyIsEdit = false;
                             this.mother.graduatedIsEdit = false;
                             break;
                         case 'motherMiddleName':
@@ -1580,6 +1624,7 @@
                             this.mother.middleNameIsEdit = true;
                             this.mother.lastNameIsEdit = false;
                             this.mother.occupationIsEdit = false;
+                            this.mother.companyIsEdit = false;
                             this.mother.graduatedIsEdit = false;
                             break;
                         case 'motherLastName':
@@ -1587,6 +1632,7 @@
                             this.mother.middleNameIsEdit = false;
                             this.mother.lastNameIsEdit = true;
                             this.mother.occupationIsEdit = false;
+                            this.mother.companyIsEdit = false;
                             this.mother.graduatedIsEdit = false;
                             break;
                         case 'motherOccupation':
@@ -1594,13 +1640,23 @@
                             this.mother.middleNameIsEdit = false;
                             this.mother.lastNameIsEdit = false;
                             this.mother.occupationIsEdit = true;
+                            this.mother.companyIsEdit = false;
                             this.mother.contactNumberIsEdit = false;
+                            break;
+                        case 'motherCompany':
+                            this.mother.firstNameIsEdit = false;
+                            this.mother.middleNameIsEdit = false;
+                            this.mother.lastNameIsEdit = false;
+                            this.mother.occupationIsEdit = false;
+                            this.mother.companyIsEdit = true;
+                            this.mother.graduatedIsEdit = false;
                             break;
                         case 'motherContactNumber':
                             this.mother.firstNameIsEdit = false;
                             this.mother.middleNameIsEdit = false;
                             this.mother.lastNameIsEdit = false;
                             this.mother.occupationIsEdit = false;
+                            this.mother.companyIsEdit = false;
                             this.mother.contactNumberIsEdit = true;
                             break;
                         case 'primarySchoolName':
