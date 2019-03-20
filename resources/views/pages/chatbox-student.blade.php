@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Chatbox features')
 
 @section('page-title', 'Chatbox')
 
 @section('content')
-    <div id="chatbox">
+    <div id="chatbox" class="m-t-10" v-cloak>
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-header with-border">

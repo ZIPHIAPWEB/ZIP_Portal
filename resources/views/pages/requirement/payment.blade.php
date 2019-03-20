@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Payment Requirement')
 
@@ -33,7 +33,7 @@
 @endsection
 
 @section('content')
-    <div id="app">
+    <div id="app" class="m-t-10" v-cloak>
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
@@ -41,50 +41,78 @@
                         <img class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
                     </a>
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
-                    <p class="text-muted text-center">@{{ student.program }}</p>
+                    <p class="text-muted text-center">@{{ student.program.name }}</p>
                     <ul class="list-group list-group-unbordered">
-                        @if(!DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'New Applicant' || DB::table('students')->where('user_id', Auth::user()->id)->first()->application_status == 'Assessed')
-                            <li class="list-group-item">
-                                <b>Program ID</b>
-                                <a class="pull-right text-green text-sm">@{{ student.application_id }}</a>
-                            </li>
-                            <li class="list-group-item" v-if="student.application_status != 'New Applicant' || student.application_status != 'Assessed'">
-                                <b>Program Coordinator</b>
-                                <a class="pull-right text-green text-sm">@{{ student.coordinator.firstName }} @{{ student.coordinator.lastName }}</a>
-                            </li>
-                        @endif()
+                        <li class="list-group-item">
+                            <b>Program ID</b>
+                            <a v-if="!student.application_id" class="pull-right text-green text-sm">No Program ID Assign</a>
+                            <a v-else class="pull-right text-green text-sm">@{{ student.application_id }}</a>
+                        </li>
                         <li class="list-group-item">
                             <b>Application Status</b>
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
                     </ul>
+                    <a href="{{ route('dash.student') }}" class="btn btn-primary btn-block">
+                        <b>Profile</b>
+                    </a>
                 </div>
             </div>
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <i class="fa fa-calendar"></i>
-                    <label for="" class="control-label">Schedule of Events</label>
-                </div>
-                <div class="box-body">
-                    <ul class="products-list product-list-in-box">
-                        <li class="item" v-if="events == 0">
-                            No Upcoming Event
-                        </li>
-                        <li v-else class="item" v-for="event in events">
-                            <div class="product-img">
-                                <img src="http://via.placeholder.com/50x50" alt="">
-                            </div>
-                            <div class="product-info">
-                                <a href="javascript:void(0)" class="product-title" @click="viewEvent(event.id)">
-                                    @{{ event.name }}
-                                    <span class="label label-primary pull-right">@{{ event.date }}</span>
+            <div class="panel-group m-b-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Program Requirements</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Part 1: Preliminary Documents
+                                <a href="{{ route('req.basic') }}">
+                                    <i class="fa fa-arrow-right pull-right"></i>
                                 </a>
-                                <span class="product-description">
-                                    @{{ event.description }}
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                            <li class="list-group-item">
+                                Part 2: Visa Sponsor Forms
+                                <a href="{{ route('req.visa') }}">
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a></li>
+                            <li class="list-group-item">
+                                Part 3: Additional Requirements
+                                <a href="{{ route('req.additional') }}">
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group m-b-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="{{ route('student.program-status') }}">Program Information</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group m-b-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="{{ route('req.payment') }}">Payment Requirements</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group m-b-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="{{ route('portal.chat-student') }}">Chat your Coordinator</a>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
