@@ -34,7 +34,7 @@
 
 @section('content')
     <div id="app">
-        <div class="col-md-3">
+        <div class="col-md-3 m-t-10" v-cloak>
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <a href="javascript:void(0)" @click="selectPhoto()">
