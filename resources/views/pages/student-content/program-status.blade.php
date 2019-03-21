@@ -322,6 +322,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="photo-upload" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" ref="file" @change="handleFileUpload()">
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <button @click="uploadPhoto()" class="btn btn-primary btn-flat btn-block">Upload File</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
 @endsection
 
@@ -365,8 +382,30 @@
                 }
             },
             methods: {
+                uploadPhoto () {
+                    let formData = new FormData();
+                    formData.append('file', this.file);
+
+                    axios.post(`/stud/photo/upload`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                        .then((response) => {
+                            this.loadStudentDetails();
+                            $('#photo-upload').modal('hide');
+                            swal({
+                                title: 'Success',
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        });
+                },
                 handleFileUpload () {
                     this.file = this.$refs.file.files[0];
+                },
+                selectPhoto () {
+                    $('#photo-upload').modal('show');
                 },
                 loadStudentDetails() {
                     axios.get(`/stud/viewWithProgramInfo?id=${this.user_id}`)
