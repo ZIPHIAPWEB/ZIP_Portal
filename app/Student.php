@@ -143,6 +143,7 @@ class Student extends Model
     {
         return $this->hasOne('App\Sponsor', 'id', 'visa_sponsor_id')
                     ->withDefault([
+                        'id'            =>  '',
                         'name'          =>  '',
                         'display_name'  =>  '',
                         'description'   =>  ''

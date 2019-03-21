@@ -27,7 +27,7 @@ class StudentRepository extends BaseRepository implements IStudentRepository
 
     public function getByIdAndPersonalProfile($id)
     {
-        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary', 'experience', 'coordinator', 'program']);
+        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary', 'experience', 'program']);
     }
 
     public function getByIdAndProgramInfo($id)
@@ -37,7 +37,7 @@ class StudentRepository extends BaseRepository implements IStudentRepository
 
     public function getByIdAndFullDetails($id)
     {
-        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary', 'experience', 'coordinator', 'company', 'sponsor']);
+        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary', 'experience', 'company', 'sponsor']);
     }
 
     public function getByProgramId($programId)

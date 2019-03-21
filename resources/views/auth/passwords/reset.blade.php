@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 m-t-100 m-t-150">
                 <div class="register-logo">
-                    <a href="../../index2.html"><b>ZIP</b>Portal</a>
+                    <a href="{{ route('welcome') }}"><b>ZIP Travel </b>Philippines</a>
                 </div>
 
                 @if(Session::has('status'))

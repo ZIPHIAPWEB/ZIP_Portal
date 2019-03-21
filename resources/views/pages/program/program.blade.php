@@ -420,9 +420,15 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Occupation/Company</td>
+                                                    <td>Occupation</td>
                                                     <td v-cloak class="text-sm text-bold">
                                                         @{{ student.father.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.company }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -460,6 +466,12 @@
                                                     <td>Occupation/Company</td>
                                                     <td v-cloak class="text-sm text-bold">
                                                         @{{ student.mother.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.company }}
                                                     </td>
                                                 </tr>
                                                 <tr>

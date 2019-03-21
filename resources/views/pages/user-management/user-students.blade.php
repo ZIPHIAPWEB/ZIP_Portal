@@ -200,8 +200,12 @@
                                                     <td class="text-bold text-sm">@{{ student.gender }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-sm">Address</td>
-                                                    <td class="text-bold text-sm">@{{ student.address }}</td>
+                                                    <td class="text-sm">Permanent Address</td>
+                                                    <td class="text-bold text-sm">@{{ student.permanent_address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Provincial Address</td>
+                                                    <td class="text-bold text-sm">@{{ student.provincial_address }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm">Home Number</td>
@@ -222,21 +226,158 @@
                                             </tbody>
                                         </table>
                                     </section>
-                                    <section id="school-details">
-                                        <label class="control-label">School Details</label>
+                                    <section id="family-details">
+                                        <label for="" class="control-label">Family Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-sm" style="width: 35%">College</td>
-                                                    <td class="text-bold text-sm">@{{ student.college }}</td>
+                                                    <td class="text-bold text-sm" colspan="2">Father</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-sm">Course</td>
-                                                    <td class="text-bold text-sm">@{{ student.course }}</td>
+                                                    <td class="text-sm" style="width: 35%;">First Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.first_name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-sm">Year Level</td>
-                                                    <td class="text-bold text-sm">@{{ student.year }}</td>
+                                                    <td class="text-sm">Middle Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.middle_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Last Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.last_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Occupation</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.occupation }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Company</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.company }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Contact No.</td>
+                                                    <td class="text-bold text-sm">@{{ student.father.contact_no }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold text-sm" colspan="2">Mother</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">First Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.first_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Middle Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.middle_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Last Name</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.last_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Occupation</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.occupation }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Company</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.company }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Contact No.</td>
+                                                    <td class="text-bold text-sm">@{{ student.mother.contact_no }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="school-details">
+                                        <label class="control-label">Education Background</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold text-sm" colspan="2">Primary</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">School</td>
+                                                    <td class="text-bold text-sm">@{{ student.primary.school_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Address</td>
+                                                    <td class="text-bold text-sm">@{{ student.primary.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Date Graduated</td>
+                                                    <td class="text-bold text-sm">@{{ student.primary.date_graduated }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold text-sm" colspan="2">Secondary</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">School</td>
+                                                    <td class="text-bold text-sm">@{{ student.secondary.school_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Address</td>
+                                                    <td class="text-bold text-sm">@{{ student.secondary.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Date Graduated</td>
+                                                    <td class="text-bold text-sm">@{{ student.secondary.date_graduated }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold text-sm" colspan="2">Tertiary</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">School</td>
+                                                    <td class="text-bold text-sm">@{{ student.tertiary.school_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Degree</td>
+                                                    <td class="text-bold text-sm">@{{ student.tertiary.degree }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Address</td>
+                                                    <td class="text-bold text-sm">@{{ student.tertiary.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Date Graduated</td>
+                                                    <td class="text-bold text-sm">@{{ student.secondary.date_graduated }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <section id="work-experience">
+                                        <label for="" class="control-label">Work Experience/On-the-Job Training</label>
+                                        <table v-for="experience in student.experience" class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">Company</td>
+                                                    <td class="text-bold text-sm">@{{ experience.company }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Address</td>
+                                                    <td class="text-bold text-sm">@{{ experience.address }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Description</td>
+                                                    <td class="text-bold text-sm">@{{ experience.description }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Start Date</td>
+                                                    <td class="text-bold text-sm">@{{ experience.start_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">End Date</td>
+                                                    <td class="text-bold text-sm">@{{ experience.end_date }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -247,7 +388,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-sm" style="width: 35%">Host Company</td>
-                                                    <td class="text-bold text-sm">@{{ student.company }}</td>
+                                                    <td class="text-bold text-sm">@{{ student.company.name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm">Position</td>
@@ -267,7 +408,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm">Visa Sponsor</td>
-                                                    <td class="text-bold text-sm">@{{ student.sponsor }}</td>
+                                                    <td class="text-bold text-sm">@{{ student.sponsor.display_name }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -296,13 +437,85 @@
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-sm" style="width: 35%;">Departure Date</td>
-                                                    <td class="text-bold text-sm">@{{ student.date_of_departure }}</td>
+                                                    <td class="text-bold text-sm" colspan="2">Manila to US - Departure</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-sm">Arrival Date</td>
-                                                    <td class="text-bold text-sm">@{{ student.date_of_arrival }}</td>
+                                                    <td class="text-sm" style="width: 35%;">Departure Date</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_departure_date }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="text-sm">Departure Time</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_departure_time }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Departure Airline</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_departure_airline }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Departure Flight No.</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_departure_flight_no }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold text-sm" colspan="2">Manila to US - Arrival</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%;">Arrival Date</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_arrival_date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Arrival Time</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_arrival_time }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Arrival Airline</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_arrival_airline }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">Arrival Flight No.</td>
+                                                    <td class="text-bold text-sm">@{{ student.us_arrival_flight_no }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-bold text-sm" colspan="2">US to Manila - Departure</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 35%;">Departure Date</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_departure_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Departure Time</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_departure_time }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Departure Airline</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_departure_airline }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Departure Flight No.</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_departure_flight_no }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-bold text-sm" colspan="2">US to Manila - Arrival</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm" style="width: 35%;">Arrival Date</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_arrival_date }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Arrival Time</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_arrival_time }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Arrival Airline</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_arrival_airline }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">Arrival Flight No.</td>
+                                                <td class="text-bold text-sm">@{{ student.mnl_arrival_flight_no }}</td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </section>
@@ -430,7 +643,17 @@
             el: '#app',
             data: {
                 students: [],
-                student: {},
+                student: {
+                    father: [],
+                    mother: [],
+                    primary: [],
+                    secondary: [],
+                    tertiary: [],
+                    sponsor: {
+                        id: '',
+                    },
+                    company: []
+                },
                 links: [],
                 meta: [],
                 requirements: {
@@ -521,14 +744,17 @@
                         })
                 },
                 ViewStudent: function (student) {
-                    this.student = student;
-                    this.ViewBasicRequirements(student.program_id, student.user_id);
-                    this.ViewPaymentRequirements(student.program_id, student.user_id);
-                    this.ViewAdditionalRequirements(student.program_id, student.user_id);
-                    this.ViewVisaRequirements(student.visa_sponsor_id, student.user_id);
-                    this.ViewCoordinatorActions(student.user_id);
-                    this.ViewActivityLogs(student.user_id);
-                    $('#student-modal').modal('show');
+                    axios.get(`/stud/viewWithFullDetails?id=${student.user_id}`)
+                        .then((response) => {
+                            this.student = response.data.data;
+                            this.ViewBasicRequirements(student.program.id, student.user_id);
+                            this.ViewPaymentRequirements(student.program.id, student.user_id);
+                            this.ViewAdditionalRequirements(student.program.id, student.user_id);
+                            this.ViewVisaRequirements(student.sponsor, student.user_id);
+                            this.ViewCoordinatorActions(student.user_id);
+                            this.ViewActivityLogs(student.user_id);
+                            $('#student-modal').modal('show');
+                        });
                 },
                 ViewBasicRequirements: function (programId, userId) {
                     axios.get(`/preliminary/viewUserRequirement?program_id=${programId}&id=${userId}`)

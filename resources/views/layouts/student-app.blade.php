@@ -19,7 +19,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container" style="width: 1550px;">
                 <div class="navbar-header">
-                    <a href="../../index2.html" class="navbar-brand"><b>ZIP Travel</b> Portal</a>
+                    <a href="{{ route('welcome') }}" class="navbar-brand"><b>ZIP Travel</b> Portal</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
