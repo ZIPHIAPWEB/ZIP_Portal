@@ -331,10 +331,10 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
-                                    <td style="width: 35%" colspan="2"><label for="" class="control-label">Father</label></td>
+                                <td colspan="2"><label for="" class="control-label">Father</label></td>
                             </tr>
                             <tr>
-                                <td colspan="">First Name</td>
+                                <td style="width: 35%" >First Name</td>
                                 <td v-if="!father.firstNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.first_name }}</label>
                                     <a @click="hideField('fatherFirstName');" class="pull-right">
@@ -596,10 +596,10 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td colspan="2" style="width: 35%;"><label for="" class="control-label">Primary Level</label></td>
+                                    <td colspan="2" ><label for="" class="control-label">Primary Level</label></td>
                                 </tr>
                                 <tr>
-                                    <td>School</td>
+                                    <td style="width: 35%;">School</td>
                                     <td v-if="!primary.schoolNameIsEdit">
                                         <label for="" class="text-bold">@{{ student.primary.school_name }}</label>
                                         <a @click="hideField('primarySchoolName');" class="pull-right">
