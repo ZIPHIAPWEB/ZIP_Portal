@@ -199,11 +199,9 @@ class StudentController extends Controller
     public function uploadProfilePicture(Request $request)
     {
         if ($request->hasFile('file')) {
-
+            $extension = $request->file('file')->getClientOriginalExtension();
             $path = $request->file('file')
-                            ->store('avatar', 'public');
-
-            Storage::disk('public')->delete($request->user()->profile_picture);
+                ->storeAs('/avatars', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_avatars');
 
             $this->studentRepository->updateStudentBy(['user_id' =>  $request->user()->id], [
                 'profile_picture'   =>  $path

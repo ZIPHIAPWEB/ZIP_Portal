@@ -233,7 +233,7 @@
                     if (!value) {
                         return 'https://placeimg.com/150/150/any'
                     } else {
-                        return `/storage/${value}`
+                        return `/uploaded/${value}`
                     }
                 }
             },
