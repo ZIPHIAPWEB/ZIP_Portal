@@ -53,7 +53,7 @@
                 </div>
             </form>
 
-            <a href="{{ route('login') }}" class="text-center">I already have a membership</a><br>
+            <a href="{{ route('login') }}" class="text-center">I'm already a participant</a><br>
         </div>
         <!-- /.form-box -->
     </div>

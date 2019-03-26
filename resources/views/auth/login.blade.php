@@ -29,7 +29,7 @@
         @endif
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Sign in to start</p>
 
             <form action="{{ route('post.login') }}" method="post">
                 {{ csrf_field() }}
@@ -67,7 +67,7 @@
             <!-- /.social-auth-links -->
 
             <a href="{{ route('forgot.password') }}">I forgot my password</a><br>
-            <a href="{{ route('register') }}" class="text-center">Register a new membership</a><br>
+            <a href="{{ route('register') }}" class="text-center">Register as a participant</a><br>
             <a href="{{ route('coor.register') }}" class="text-center">Register as a coordinator</a>
         </div>
         <!-- /.login-box-body -->
