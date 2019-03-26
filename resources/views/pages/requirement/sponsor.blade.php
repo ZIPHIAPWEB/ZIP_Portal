@@ -53,6 +53,9 @@
                             <a class="pull-right text-green text-sm">@{{ student.application_status }}</a>
                         </li>
                     </ul>
+                    <a href="{{ route('dash.student') }}" class="btn btn-primary btn-block">
+                        <b>Profile</b>
+                    </a>
                 </div>
             </div>
             <div class="panel-group m-b-5">
