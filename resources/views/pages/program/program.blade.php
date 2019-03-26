@@ -20,7 +20,7 @@
         </a>
         <ul class="treeview-menu" >
             <li v-for="program in programs">
-                <a v-if="auth === program.id" :href="url + program.id">
+                <a :href="url + program.id">
                     <i class="fa fa-circle-o"></i>
                     <small>@{{ program.name }}</small>
                 </a>

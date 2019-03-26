@@ -1644,7 +1644,11 @@
                         })
                 },
                 openInNewTab ($id) {
-                    axios.get(`/download/basic/requirement/${id}`)
+                    axios.get(`/studPreliminary/download`, {
+                        params: {
+                            requirement_id: $id
+                        }
+                    })
                         .then((response) => {
                             let win = window.open(response.data);
                             win.focus();
