@@ -193,7 +193,7 @@
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-                        <input type="file" ref="file" @change="handleFileUpload()">
+                        <input type="file" ref="photo" @change="handlePhotoUpload()">
                     </div>
                     <div class="modal-footer clearfix">
                         <button @click="uploadPhoto()" class="btn btn-primary btn-flat btn-block">Upload File</button>
@@ -215,6 +215,7 @@
                 pReqId: '',
                 bReqId: '',
                 file: '',
+                photo: '',
                 user_id: '{{ Auth::user()->id }}',
                 sponsor_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id }}",
                 loading: {
@@ -257,8 +258,8 @@
                             })
                         });
                 },
-                handleFileUpload () {
-                    this.file = this.$refs.file.files[0];
+                handlePhotoUpload () {
+                    this.photo = this.$refs.photo.files[0];
                 },
                 selectPhoto () {
                     $('#photo-upload').modal('show');
