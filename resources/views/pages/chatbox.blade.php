@@ -9,7 +9,9 @@
         <div class="col-md-3">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Students</h3>
+                    <div class="box-title">
+                        sdlfjsdkfj
+                    </div>
 
                     <div class="box-tools pull-right">
                         <div class="has-feedback">
@@ -138,6 +140,7 @@
             el: '#chatbox',
             data: {
                 auth: program_id,
+                program: {{ request()->input('program') }},
                 user: {!! Auth::user()->toJson() !!},
                 students: [],
                 messages: [],
@@ -149,7 +152,11 @@
                 message_load: false
             },
             mounted: function () {
-                this.GET_STUDENTS();
+                if (!this.program) {
+                    this.GET_STUDENTS(this.auth);
+                } else {
+                    this.GET_STUDENTS(this.program);
+                }
                 this.LISTEN();
             },
             watch: {
@@ -158,7 +165,11 @@
                 },
                 search_text: function (value) {
                     this.search_text = value;
-                    this.GET_STUDENTS();
+                    if (!this.program) {
+                        this.GET_STUDENTS(this.auth);
+                    } else {
+                        this.GET_STUDENTS(this.program);
+                    }
                 }
             },
             computed: {
@@ -179,10 +190,10 @@
                             this.handleIncoming(e);
                         })
                 },
-                GET_STUDENTS: function () {
+                GET_STUDENTS: function (program) {
                     axios.get('/chat/getContacts', {
                         params: {
-                            program_id : this.auth,
+                            program_id : program,
                             search : this.search_text
                         }
                     })

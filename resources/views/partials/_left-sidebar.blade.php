@@ -109,10 +109,21 @@
                     </ul>
                 </li>
                 <li class="header">Communication</li>
-                <li>
-                    <a href="{{ route('portal.chat') }}">
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-envelope"></i> <span><small>Chat</small></span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li v-for="program in programs">
+                            <a :href="'{{ route('portal.chat') . '?program='}}' + program.id">
+                                <i class="fa fa-circle-o"></i>
+                                <small>@{{ program.name }}</small>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endif
             @if(Auth::user()->hasRole('student'))
