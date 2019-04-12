@@ -202,7 +202,7 @@
                             <tr>
                                 <td style="width: 35%;">Date</td>
                                 <td class="text-bold">
-                                    @{{ student.us_departure_date }}
+                                    @{{ student.us_departure_date | toFormattedDateString}}
                                 </td>
                             </tr>
                             <tr>
@@ -233,7 +233,7 @@
                                 <tr>
                                     <td style="width: 35%;">Date</td>
                                     <td class="text-bold">
-                                        @{{ student.us_arrival_date }}
+                                        @{{ student.us_arrival_date | toFormattedDateString }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -264,7 +264,7 @@
                             <tr>
                                 <td style="width: 35%;">Date</td>
                                 <td class="text-bold">
-                                    @{{ student.mnl_departure_date }}
+                                    @{{ student.mnl_departure_date | toFormattedDateString }}
                                 </td>
                             </tr>
                             <tr>
@@ -295,7 +295,7 @@
                             <tr>
                                 <td style="width: 35%;">Date</td>
                                 <td class="text-bold">
-                                    @{{ student.mnl_arrival_date }}
+                                    @{{ student.mnl_arrival_date | toFormattedDateString }}
                                 </td>
                             </tr>
                             <tr>
@@ -378,6 +378,16 @@
                         return 'https://placeimg.com/150/150/any'
                     } else {
                         return `/uploaded/${value}`
+                    }
+                },
+                toFormattedDateString: function (value) {
+                    let d = new Date(value);
+                    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                    if (!value) {
+                        return '';
+                    } else {
+                        return `${months[d.getMonth()]} ${d.getDay()}, ${d.getFullYear()}`;
                     }
                 }
             },

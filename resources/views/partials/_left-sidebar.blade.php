@@ -77,6 +77,8 @@
                         <li class="{{ Route::currentRouteNamed('s.sponsors') ? 'active' : '' }}"><a href="{{ route('s.sponsors') }}"><i class="fa fa-circle-o"></i> <small>Visa Sponsor</small></a></li>
                         <li class="{{ Route::currentRouteNamed('s.host') ? 'active' : '' }}"><a href="{{ route('s.host') }}"><i class="fa fa-circle-o"></i> <small>Host Company</small></a></li>
                         <li class="{{ Route::currentRouteNamed('s.school') ? 'active' : '' }}"><a href="{{ route('s.school') }}"><i class="fa fa-circle-o"></i> <small>School</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('s.position') ? 'active' : '' }}"><a href="{{ route('s.position') }}"><i class="fa fa-circle-o"></i> <small>Position</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('s.place') ? 'active' : '' }}"><a href="{{ route('s.place') }}"><i class="fa fa-circle-o"></i> <small>Place of Assignment</small></a></li>
                     </ul>
                 </li>
             @endif

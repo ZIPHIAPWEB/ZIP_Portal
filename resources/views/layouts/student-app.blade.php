@@ -11,13 +11,17 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<style>
+    .container {
+        width: 1550px;
+    }
+</style>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
     <header class="main-header">
         <nav class="navbar navbar-static-top">
-            <div class="container" style="width: 1550px;">
+            <div class="container">
                 <div class="navbar-header">
                     <a href="{{ route('welcome') }}" class="navbar-brand"><b>ZIP Travel</b> Portal</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -46,7 +50,7 @@
     </header>
     <!-- Full Width Column -->
     <div class="content-wrapper">
-        <div class="container" style="width: 1600px;">
+        <div class="container">
             @yield('content')
         </div>
         <!-- /.container -->

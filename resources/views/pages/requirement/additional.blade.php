@@ -150,7 +150,6 @@
                                     <button v-if="requirement.student_additional.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View File</button>
                                     <button v-if="requirement.student_additional.status" @click="downloadFile(requirement)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span> Download</button>
                                     <button v-if="!requirement.student_additional.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button v-else @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                 </td>
                             </tr>
                             </tbody>

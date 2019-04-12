@@ -10,11 +10,11 @@ namespace App\Repositories\StudAdditional;
 
 
 use App\Repositories\Base\BaseRepository;
-use App\StudentPreliminary;
+use App\StudentAdditional;
 
 class StudAdditionalRepository extends BaseRepository implements IStudAdditionalRepository
 {
-    public function __construct(StudentPreliminary $model)
+    public function __construct(StudentAdditional $model)
     {
         parent::__construct($model);
     }
@@ -32,5 +32,10 @@ class StudAdditionalRepository extends BaseRepository implements IStudAdditional
     public function deleteStudAdditional($id)
     {
         return parent::delete($id);
+    }
+
+    public function getById($id)
+    {
+        return parent::findOneBy(['id' => $id]);
     }
 }

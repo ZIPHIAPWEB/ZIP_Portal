@@ -31,7 +31,7 @@ class SponsorRequirementRepository extends BaseRepository implements ISponsorReq
 
     public function getById($id)
     {
-        return parent::findBy(['id' => $id]);
+        return parent::findOneBy(['id' => $id]);
     }
 
     public function getBySponsorIdAndUserId($sponsorId, $userId)

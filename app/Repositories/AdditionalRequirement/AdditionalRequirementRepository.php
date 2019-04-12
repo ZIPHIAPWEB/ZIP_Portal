@@ -23,7 +23,7 @@ class AdditionalRequirementRepository extends BaseRepository implements IAdditio
     {
         return $this->findAll();
     }
-
+    
     public function getByProgramIdAndUserId($programId, $userId)
     {
         return $this->findByWhereWith(['program_id' => $programId], ['studentAdditional' => function ($query) use ($userId) {

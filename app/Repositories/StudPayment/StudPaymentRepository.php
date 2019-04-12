@@ -21,7 +21,7 @@ class StudPaymentRepository extends BaseRepository implements IStudPaymentReposi
 
     public function getById($id)
     {
-        return parent::findBy(['id' => $id]);
+        return parent::findOneBy(['id' => $id]);
     }
 
     public function saveStudPayment(array $attributes)

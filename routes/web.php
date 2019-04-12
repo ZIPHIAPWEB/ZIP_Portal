@@ -40,6 +40,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/sponsors', 'pages.setting.setting-sponsors-superadmin')->name('s.sponsors');
     Route::view('/sa/s/host', 'pages.setting.setting-host-company-superadmin')->name('s.host');
     Route::view('/sa/s/school', 'pages.setting.setting-school-superadmin')->name('s.school');
+    Route::view('/sa/s/position', 'pages.setting.setting-student-position-superadmin')->name('s.position');
+    Route::view('/sa/s/place-of-assignment', 'pages.setting.setting-place-of-assignment-superadmin')->name('s.place');
 
     Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
     Route::view('/sa/cms', 'pages.cms.content-management')->name('sa.cms');
@@ -307,6 +309,20 @@ Route::prefix('filter')->group(function() {
     Route::get('/sa/student/{lastname}', 'FilterController@filterSuperAdminStudent')->name('filter.sa.student');
 });
 
+Route::prefix('position')->group(function () {
+    Route::get('/getAll', 'PositionController@getAll')->name('position.all');
+    Route::post('/store', 'PositionController@store')->name('position.store');
+    Route::post('/update/{id}', 'PositionController@update')->name('position.update');
+    Route::post('/delete/{id}', 'PositionController@delete')->name('position.delete');
+});
+
+Route::prefix('state')->group(function () {
+    Route::get('/getAll', 'StateController@getAll')->name('state.all');
+    Route::post('/store', 'StateController@store')->name('state.store');
+    Route::post('/update/{id}', 'StateController@update')->name('state.update');
+    Route::post('/delete/{id}', 'StateController@delete')->name('state.delete');
+});
+
 Route::prefix('chat')->group(function () {
     Route::get('/getContacts', 'ChatController@get_contacts')->name('chat.get.contacts');
     Route::get('/getMessages', 'ChatController@get_messages')->name('chat.get.messages');
@@ -316,9 +332,7 @@ Route::prefix('chat')->group(function () {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
-Route::get('/test/{id}', function($id) {
+Route::get('/test', function() {
 
-    $requirement = App\PreliminaryRequirement::with(['studentPreliminary'])->get();
-
-    return $requirement;
+    return \App\Student::with('payment')->get();
 });

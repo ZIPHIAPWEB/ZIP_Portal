@@ -149,7 +149,6 @@
                                     <td class="text-center" v-cloak>
                                         <button v-if="requirement.student_payment.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</button>
                                         <button v-if="!requirement.student_payment.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                        <button v-else @click="removeFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-trash"></span> Remove File</button>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -232,6 +232,34 @@
                                         </table>
                                     </section>
                                     <transition name="slide-fade">
+                                        <section v-if="show.assessed">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.assessed = false" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-12">
+                                                        <label for="" class="control-label">Assessment Status</label>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select status</option>
+                                                            <option value="Passed">Passed</option>
+                                                            <option value="Failed">Failed</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <label for="" class="control-label">Assessment Message</label>
+                                                        <textarea cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <button @click="submitAssessed()" class="btn btn-primary btn-block btn-flat btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
                                         <section v-if="show.hired">
                                             <div class="box box-primary">
                                                 <div class="box-header">
@@ -255,7 +283,10 @@
                                                     </div>
                                                     <div class="form-group col-xs-6">
                                                         <label class="control-label">Place of Assignment</label>
-                                                        <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
+                                                        <select v-model="host.place" class="form-control input-sm">
+                                                            <option value="">Select Place of Assignment</option>
+                                                            <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group col-xs-6">
                                                         <label class="control-label">Housing Address</label>
@@ -332,7 +363,7 @@
                                                     Birth Date
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.birthdate }}
+                                                    @{{ student.birthdate | toFormattedDateString}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -345,7 +376,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Permanent Address
+                                                    Present Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.permanent_address }}
@@ -353,7 +384,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Provincial Address
+                                                    Permanent Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.provincial_address }}
@@ -543,7 +574,7 @@
                                                     Date Graduated
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.secondary.date_graduated }}
+                                                    @{{ student.secondary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -582,7 +613,7 @@
                                                     Date Graduated (expected)
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.date_graduated }}
+                                                    @{{ student.tertiary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -619,7 +650,7 @@
                                                     Start Date
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ exp.start_date }}
+                                                    @{{ exp.start_date | toFormattedDateString}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -691,7 +722,10 @@
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select Location</option>
+                                                            <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
+                                                        </select>
                                                         <span class="input-group-btn">
                                                             <button @click="updateField('location', field); setting.host.locationIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
@@ -731,7 +765,10 @@
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter position title">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select Position</option>
+                                                            <option v-for="position in positions" :value="position.display_name">@{{ position.name }}</option>
+                                                        </select>
                                                         <span class="input-group-btn">
                                                     <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
@@ -764,7 +801,7 @@
                                             <tr>
                                                 <td class="text-sm">Start Date</td>
                                                 <td v-if="!setting.host.startIsEdit">
-                                                    <label class="text-sm">@{{ student.program_start_date }}</label>
+                                                    <label class="text-sm">@{{ student.program_start_date | toFormattedDateString }}</label>
                                                     <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -782,14 +819,14 @@
                                             <tr>
                                                 <td class="text-sm">End Date</td>
                                                 <td v-if="!setting.host.endIsEdit">
-                                                    <label class="text-sm">@{{ student.program_end_date }}</label>
+                                                    <label class="text-sm">@{{ student.program_end_date | toFormattedDateString }}</label>
                                                     <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
                                                         <input v-model="field" type="date" class="form-control input-sm">
                                                         <span class="input-group-btn">
-                                                    <button @click="updateField('program_start_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    <button @click="updateField('program_end_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
                                                         <span class="input-group-btn">
                                                     <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
@@ -1258,6 +1295,7 @@
                                             <td class="text-center">
                                                 <button @click="openInNewTab(requirement.student_preliminary.id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
                                                 <button @click="downloadBasicRequirement(requirement.student_preliminary.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removePrelimFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1285,6 +1323,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <button @click="downloadPaymentRequirement(requirement.student_payment.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removePaymentFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1312,6 +1351,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <button @click="downloadVisaRequirement(requirement.student_visa.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removeVisaFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1339,6 +1379,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button @click="downloadAdditionalRequirement(requirement.student_additional.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                    <button @click="removeAdditionalFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1399,6 +1440,8 @@
                 },
                 hasRecords: true,
                 hosts: [],
+                states: [],
+                positions: [],
                 sponsors: [],
                 students: [],
                 student: {
@@ -1465,13 +1508,16 @@
                     "Program Start Date"             : "program_start_date",
                     "Program End Date"               : "program_end_date"
                 },
+                assessed: {
+                    status: '',
+                    message: ''
+                },
                 show: {
+                    assessed: false,
                     hired: false,
                     visa: false
                 },
-
                 field: '',
-
                 host: {
                     name: '',
                     position: '',
@@ -1528,6 +1574,8 @@
                 this.loadStudents();
                 this.loadHostCompany();
                 this.loadVisaSponsor();
+                this.loadStates();
+                this.loadPositions();
             },
             watch: {
                 filterName: function() {
@@ -1557,6 +1605,13 @@
                     } else {
                         this.loadStudents(programId)
                     }
+                }
+            },
+            filters: {
+                toFormattedDateString: function (value) {
+                    let d = new Date(value);
+                    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
                 }
             },
             methods: {
@@ -1640,7 +1695,7 @@
                             this.loadPaymentRequirements(programId, response.data.data.user_id);
                             this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
                             this.loadAdditionalRequirement(programId, response.data.data.user_id);
-                            console.log(response.data.data.user_id);
+                            console.log(response.data.data);
                             $('#student-modal').modal('show');
                         })
                 },
@@ -1700,9 +1755,15 @@
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {
-                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}id=${userId}`)
+                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}&id=${userId}`)
                         .then((response) => {
                             this.visaRequirements = response.data.data;
+                        })
+                },
+                loadStates() {
+                    axios.get('/state/getAll')
+                        .then((response) => {
+                            this.states = response.data;
                         })
                 },
                 loadHostCompany() {
@@ -1717,8 +1778,14 @@
                             this.sponsors = response.data.data;
                         })
                 },
+                loadPositions() {
+                    axios.get('/position/getAll')
+                        .then((response) => {
+                            this.positions = response.data;
+                        })
+                },
                 downloadVisaRequirement(id) {
-                    axios.get(`/download/visa/requirement/${id}`)
+                    axios.get(`/studVisa/download?requirement_id=${id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -1731,24 +1798,9 @@
                     this.appStatus = '';
                     switch (status) {
                         case 'Assessed':
-                            this.loading.modal = true;
-                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
-                                .then((response) => {
-                                    this.loadStudents(programId);
-                                    this.viewStudent(this.student.user_id);
-                                    this.loading.modal = false;
-                                    swal({
-                                        title: response.data,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    })
-                                }).catch((error) => {
-                                    swal({
-                                        title: 'Something went wrong!',
-                                        type: 'error',
-                                        confirmButtonText: 'Go Back!'
-                                    })
-                            });
+                            this.show.assessed = true;
+                            this.show.hired = false;
+                            this.show.visa = false;
                             break;
                         case 'Confirmed':
                             this.loading.modal = true;
@@ -1772,10 +1824,12 @@
                             });
                             break;
                         case 'Hired':
+                            this.show.assessed = false;
                             this.show.hired = true;
                             this.show.visa = false;
                             break;
                         case 'For Visa Interview':
+                            this.show.assessed = false;
                             this.show.visa = true;
                             this.show.hired = false;
                             break;
@@ -1804,6 +1858,30 @@
                                 });
                             break;
                     }
+                },
+                submitAssessed() {
+                    this.loading.modal = true;
+                    let formData = new FormData();
+                        formData.append('status', this.assessed.status);
+                        formData.append('message', this.assessed.message);
+                    axios.post(`/coor/${this.student.user_id}/application/Assessed`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.assessed = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                        swal({
+                            title: 'Something went wrong!',
+                            type: 'error',
+                            confirmButtonText: 'Go Back!'
+                        })
+                    });
                 },
                 submitHostCompany() {
                     this.loading.modal = true;
@@ -1858,6 +1936,136 @@
                                 type: 'error',
                                 confirmButtonText: 'Go Back!'
                             })
+                    })
+                },
+                removePrelimFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studPreliminary/remove?requirement_id=${requirement.student_preliminary.id}`)
+                                .then((response) => {
+                                    this.loadBasicRequirements(programId, requirement.student_preliminary.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removePaymentFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studPayment/remove?requirement_id=${requirement.student_payment.id}`)
+                                .then((response) => {
+                                    this.loadPaymentRequirements(programId, requirement.student_payment.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removeAdditionalFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studAdditional/remove?requirement_id=${requirement.student_additional.id}`)
+                                .then((response) => {
+                                    this.loadAdditionalRequirement(programId, requirement.student_additional.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.loadRequirements(this.program_id);
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removeVisaFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return axios.post(`/studVisa/remove?requirement_id=${requirement.student_visa.id}`)
+                                .then((response) => {
+                                    this.loadVisaRequirements(requirement.sponsor_id, requirement.student_visa.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.loadRequirements(this.sponsor_id);
+                            swal({
+                                title: 'Success',
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
                     })
                 },
                 updateField(field, input) {

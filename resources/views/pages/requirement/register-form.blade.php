@@ -10,12 +10,15 @@
                     <div class="register-logo">
                         <a href="{{ route('logout') }}"><b>ZIP TRAVEL </b>Philippines</a>
                     </div>
-
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width:' + level / 5 * 100 + '%'">
+                            @{{ level / 5 * 100 + '% of 100%' }}
+                        </div>
+                    </div>
                     <div class="box box-default">
                         <div class="box-body">
-                            <p class="login-box-msg">Fill-Up all the required fields</p>
-
-                            <form>
+                            <section id="level-one" v-if="level === 1">
+                                <p class="login-box-msg">Personal Details</p>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name: <i class="text-red">*</i></label>
@@ -46,35 +49,6 @@
                                             <option value="FEMALE">Female</option>
                                         </select>
                                         <span class="help-block text-red" v-if="errors.gender">@{{ errors.gender[0] }}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Home Number:</label>
-                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
-                                    </div>
-                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Mobile Number: <i class="text-red">*</i></label>
-                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
-                                        <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Permanent Address: <i class="text-red">*</i></label>
-                                        <textarea v-model="student.permanent_address" class="form-control input-sm" placeholder="Permanent Address"></textarea>
-                                        <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Provincial Address: <i class="text-red">*</i></label>
-                                        <div class="pull-right">
-                                            <label for="" class="text-sm p-r-5">Same as Above</label>
-                                            <input v-model="sameAsAbove" type="checkbox" class="pull-right">
-                                        </div>
-                                        <textarea v-model="student.provincial_address" class="form-control input-sm" placeholder="Provincial Address"></textarea>
-                                        <span class="help-block text-red"></span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -110,19 +84,118 @@
                                         <span class="help-block text-red" v-if="errors.program_id">@{{ errors.program_id[0] }}</span>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <p class="login-box-msg">Father's Information</p>
-
-                            <form>
+                            </section>
+                            <section action="" id="level-four" v-if="level === 2">
+                                <p class="login-box-msg">Educational Background</p>
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="" class="control-label">Tertiary</label>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-12">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <select v-model="tertiary.school" class="form-control input-sm">
+                                            <option value="" active>Select School</option>
+                                            <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
+                                        </select>
+                                        <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Degree <i class="text-red">*</i></label>
+                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm" placeholder="Tertiary Degree">
+                                        <span class="help-block text-red" v-if="errors.t_degree">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="tertiary.address" type="text" class="form-control input-sm" placeholder="Tertiary School Address">
+                                        <span class="help-block text-red" v-if="errors.t_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated (<small>date indicated in diploma</small>)<i class="text-red">*</i></label>
+                                        <input v-model="tertiary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.t_date_graduated">required</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="" class="control-label">Secondary</label>
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <input v-model="secondary.school" type="text" class="form-control input-sm" placeholder="Secondary School Name">
+                                        <span class="help-block text-red" v-if="errors.s_school">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="secondary.address" type="text" class="form-control input-sm" placeholder="Secondary School Address">
+                                        <span class="help-block text-red" v-if="errors.s_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated <i class="text-red">*</i></label>
+                                        <input v-model="secondary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.s_date_graduated">required</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="" class="control-label">Primary</label>
+                                    </div>
+                                    <div class="form-group col-xs-12">
+                                        <label for="">School Name <i class="text-red">*</i></label>
+                                        <input v-model="primary.school" type="text" class="form-control input-sm" placeholder="Primary School Name">
+                                        <span class="help-block text-red" v-if="errors.p_school">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Address <i class="text-red">*</i></label>
+                                        <input v-model="primary.address" type="text" class="form-control input-sm" placeholder="Primary School Address">
+                                        <span class="help-block text-red" v-if="errors.p_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Date Graduated <i class="text-red">*</i></label>
+                                        <input v-model="primary.date_graduated" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.p_date_graduated">required</span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="level-two" v-if="level === 3">
+                                <p class="login-box-msg">Contact Details</p>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                        <label for="">Home Number:</label>
+                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                        <label for="">Mobile Number: <i class="text-red">*</i></label>
+                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
+                                        <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Present Address: <i class="text-red">*</i></label>
+                                        <textarea v-model="student.permanent_address" class="form-control input-sm" placeholder="Permanent Address"></textarea>
+                                        <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Permanent Address: <i class="text-red">*</i></label>
+                                        <div class="pull-right">
+                                            <label for="" class="text-sm p-r-5">Same as Above</label>
+                                            <input v-model="sameAsAbove" type="checkbox" class="pull-right">
+                                        </div>
+                                        <textarea v-model="student.provincial_address" class="form-control input-sm" placeholder="Provincial Address"></textarea>
+                                        <span class="help-block text-red"></span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="level-three" v-if="level === 4">
+                                <p class="login-box-msg">Parent's Details</p>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="" class="control-label">Father's Details</label>
+                                    </div>
                                     <div class="form-group col-xs-4">
                                         <label for="">First Name <i class="text-red">*</i></label>
                                         <input v-model="father.first_name" type="text" class="form-control input-sm" placeholder="Father's First Name">
@@ -156,19 +229,11 @@
                                         <span class="help-block text-red" v-if="errors.f_contact">required</span>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <p class="login-box-msg">Mother's Information</p>
-
-                            <form>
+                                <hr>
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <label for="" class="control-label">Mother's Details</label>
+                                    </div>
                                     <div class="form-group col-xs-4">
                                         <label for="">First Name <i class="text-red">*</i></label>
                                         <input v-model="mother.first_name" type="text" class="form-control input-sm" placeholder="Mother's First Name">
@@ -202,144 +267,48 @@
                                         <span class="help-block text-red" v-if="errors.m_contact">required</span>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <p class="login-box-msg">Primary Education</p>
+                            </section>
 
-                            <form @submit.prevent="validate()">
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">School Name <i class="text-red">*</i></label>
-                                        <input v-model="primary.school" type="text" class="form-control input-sm" placeholder="Primary School Name">
-                                        <span class="help-block text-red" v-if="errors.p_school">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Address <i class="text-red">*</i></label>
-                                        <input v-model="primary.address" type="text" class="form-control input-sm" placeholder="Primary School Address">
-                                        <span class="help-block text-red" v-if="errors.p_address">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated <i class="text-red">*</i></label>
-                                        <input v-model="primary.date_graduated" type="date" class="form-control input-sm">
-                                        <span class="help-block text-red" v-if="errors.p_date_graduated">required</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <p class="login-box-msg">Secondary Education</p>
+                            <section id="level-five" v-if="level === 5">
+                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">-</button>
+                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">+</button>
+                                <p class="login-box-msg">Work Experience/On-the-Job Training</p>
 
-                            <form>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">School Name <i class="text-red">*</i></label>
-                                        <input v-model="secondary.school" type="text" class="form-control input-sm" placeholder="Secondary School Name">
-                                        <span class="help-block text-red" v-if="errors.s_school">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Address <i class="text-red">*</i></label>
-                                        <input v-model="secondary.address" type="text" class="form-control input-sm" placeholder="Secondary School Address">
-                                        <span class="help-block text-red" v-if="errors.s_address">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated <i class="text-red">*</i></label>
-                                        <input v-model="secondary.date_graduated" type="date" class="form-control input-sm">
-                                        <span class="help-block text-red" v-if="errors.s_date_graduated">required</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <p class="login-box-msg">Tertiary Education</p>
-
-                            <form>
-                                <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-12">
-                                        <label for="">School Name <i class="text-red">*</i></label>
-                                        <select v-model="tertiary.school" class="form-control input-sm">
-                                            <option value="" active>Select School</option>
-                                            <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
-                                        </select>
-                                        <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Degree <i class="text-red">*</i></label>
-                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm" placeholder="Tertiary Degree">
-                                        <span class="help-block text-red" v-if="errors.t_degree">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Address <i class="text-red">*</i></label>
-                                        <input v-model="tertiary.address" type="text" class="form-control input-sm" placeholder="Tertiary School Address">
-                                        <span class="help-block text-red" v-if="errors.t_address">required</span>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Date Graduated (<small>date indicated in diploma</small>)<i class="text-red">*</i></label>
-                                        <input v-model="tertiary.date_graduated" type="date" class="form-control input-sm">
-                                        <span class="help-block text-red" v-if="errors.t_date_graduated">required</span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-body">
-                            <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">-</button>
-                            <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">+</button>
-                            <p class="login-box-msg">Work Experience/On-the-Job Training</p>
-
-                            <form v-for="item in experiences">
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Company Name <i class="text-red">*</i></label>
-                                        <input v-model="item.company" type="text" class="form-control input-sm" placeholder="Company Name">
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Address <i class="text-red">*</i></label>
-                                        <input v-model="item.address" type="text" class="form-control input-sm" placeholder="Company Address">
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label for="">Job Description <i class="text-red">*</i></label>
-                                        <textarea v-model="item.description"
-                                                  class="form-control input-sm" placeholder="Your Job Description"></textarea>
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">Start Date <i class="text-red">*</i></label>
-                                        <input v-model="item.start_date" type="date" class="form-control input-sm">
-                                    </div>
-                                    <div class="form-group col-xs-6">
-                                        <label for="">End Date <i class="text-red">*</i></label>
-                                        <div class="pull-right">
-                                            <label for="" class="text-sm p-r-5">Present</label>
-                                            <input type="checkbox" v-model="item.presentDate">
+                                <form v-for="item in experiences">
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="">Company Name <i class="text-red">*</i></label>
+                                            <input v-model="item.company" type="text" class="form-control input-sm" placeholder="Company Name">
                                         </div>
-                                        <input v-model="item.end_date" type="date" class="form-control input-sm" :disabled="item.presentDate">
+                                        <div class="form-group col-xs-12">
+                                            <label for="">Address <i class="text-red">*</i></label>
+                                            <input v-model="item.address" type="text" class="form-control input-sm" placeholder="Company Address">
+                                        </div>
+                                        <div class="form-group col-xs-12">
+                                            <label for="">Job Description <i class="text-red">*</i></label>
+                                            <textarea v-model="item.description"
+                                                      class="form-control input-sm" placeholder="Your Job Description"></textarea>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="">Start Date <i class="text-red">*</i></label>
+                                            <input v-model="item.start_date" type="date" class="form-control input-sm">
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="">End Date <i class="text-red">*</i></label>
+                                            <div class="pull-right">
+                                                <label for="" class="text-sm p-r-5">Present</label>
+                                                <input type="checkbox" v-model="item.presentDate">
+                                            </div>
+                                            <input v-model="item.end_date" type="date" class="form-control input-sm" :disabled="item.presentDate">
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                            <button @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
+                                </form>
+                            </section>
+                            <div class="form-group">
+                                <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat">Next</button>
+                                <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat">Previous</button>
+                                <button v-if="level === 5" @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -612,6 +581,7 @@
         const app = new Vue({
             el: '#app',
             data: {
+                level: 1,
                 schools: [],
                 school: [],
                 programs: [],
@@ -701,6 +671,12 @@
                 }
             },
             methods: {
+                nextForm() {
+                    this.level++;
+                },
+                prevForm() {
+                    this.level--;
+                },
                 addElement() {
                     this.experiences.push({
                         company : '',

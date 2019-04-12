@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\AdditionalRequirement;
 use App\Log;
 use App\Notifications\StudentUploadedFile;
+use App\Repositories\AdditionalRequirement\AdditionalRequirementRepository;
+use App\Repositories\Log\LogRepository;
+use App\Repositories\StudAdditional\StudAdditionalRepository;
+use App\Repositories\Student\StudentRepository;
 use App\Student;
 use App\StudentAdditional;
 use Illuminate\Http\Request;
@@ -13,15 +17,18 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentAdditionalController extends Controller
 {
-    private $student;
-    private $additional;
-    private $studAdditional;
+    private $studentRepository;
+    private $additionalRepository;
+    private $studAdditionalRepository;
 
-    public function __construct()
+    public function __construct(StudAdditionalRepository $studAdditionalRepository,
+                                StudentRepository $studentRepository,
+                                AdditionalRequirementRepository $additionalRequirementRepository,
+                                LogRepository $logRepository)
     {
-        $this->student = new Student();
-        $this->additional = new AdditionalRequirement();
-        $this->studAdditional = new StudentAdditional();
+        $this->studentRepository = $studentRepository;
+        $this->additionalRepository = $additionalRequirementRepository;
+        $this->studAdditionalRepository = $studAdditionalRepository;
     }
 
     public function store(Request $request)
@@ -33,15 +40,15 @@ class StudentAdditionalController extends Controller
             $path = $request->file('file')
                 ->storeAs($request->user()->email . '/additional', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
-            $this->studAdditional->create([
+            $this->studAdditionalRepository->saveStudAdditional([
                 'user_id'        => $request->user()->id,
                 'requirement_id' => $requirement_id,
                 'status'         => true,
                 'path'           => $path
             ]);
 
-            $student = $this->student->getByUserId($request->user()->id);
-            $requirement = $this->additional->getById($requirement_id);
+            $student = $this->studentRepository->getStudentById($request->user()->id);
+            $requirement = $this->additionalRepository->getById($requirement_id);
 
             Log::create([
                 'user_id' => $request->user()->id,
@@ -62,13 +69,13 @@ class StudentAdditionalController extends Controller
     public function remove(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $additional = $this->studAdditional->getById($requirement_id);
+        $additional = $this->studAdditionalRepository->getById($requirement_id);
 
         Storage::disk('uploaded_files')->delete($additional->path);
 
-        $additional->delete();
+        $this->studAdditionalRepository->delete($requirement_id);
 
-        $requirement = $this->additional->getById($requirement_id);
+        $requirement = $this->additionalRepository->getById($additional->requirement_id);
 
         Log::create([
             'user_id'   =>  $request->user()->id,
@@ -81,7 +88,7 @@ class StudentAdditionalController extends Controller
     public function download(Request $request)
     {
         $requirement_id = $request->input('requirement_id');
-        $additional = $this->studAdditional->getById($requirement_id);
+        $additional = $this->studAdditionalRepository->getById($requirement_id);
 
         return Storage::disk('uploaded_files')->url($additional->path);
     }

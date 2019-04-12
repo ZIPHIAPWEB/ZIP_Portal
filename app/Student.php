@@ -150,10 +150,10 @@ class Student extends Model
                     ]);
     }
 
-    public function payment()
-    {
-        return $this->hasMany('App\ProgramPayment', 'program_id', 'program_id');
-    }
+    //public function payment()
+    //{
+    //    return $this->hasMany('App\ProgramPayment', 'program_id', 'program_id');
+    //}
 
     public function getByProgramId($id)
     {
@@ -169,5 +169,10 @@ class Student extends Model
         $user = $this->where('user_id', $userId)->first();
 
         return $user;
+    }
+
+    public function payment()
+    {
+        return $this->hasMany('App\StudentPayment', 'user_id', 'user_id');
     }
 }

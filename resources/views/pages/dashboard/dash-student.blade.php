@@ -4,7 +4,7 @@
 
 @section('content')
     <div id="app" class="m-t-10" v-cloak>
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-12">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <a href="javascript:void(0)" @click="selectPhoto()">
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 col-xs-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -165,7 +165,7 @@
                                 <tr>
                                     <td>Birthdate</td>
                                     <td v-if="!setting.birthDateIsEdit">
-                                        <label class="text-bold">@{{ student.birthdate }}</label>
+                                        <label class="text-bold">@{{ student.birthdate | toFormattedDateString }}</label>
                                         <a @click="hideField('birthdate');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -207,7 +207,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%;">Permanent Address</td>
+                                    <td style="width: 20%;">Present Address</td>
                                     <td v-if="!setting.addressIsEdit">
                                         <label class="text-bold">@{{ student.permanent_address }}</label>
                                         <a @click="hideField('address');" href="#" class="pull-right">
@@ -227,7 +227,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%;">Provincial Address</td>
+                                    <td style="width: 20%;">Permanent Address</td>
                                     <td v-if="!setting.addressIsEdit">
                                         <label class="text-bold">@{{ student.provincial_address }}</label>
                                         <a @click="hideField('address');" href="#" class="pull-right">
@@ -641,7 +641,7 @@
                                 <tr>
                                     <td>Date Graduated</td>
                                     <td v-if="!primary.graduatedIsEdit">
-                                        <label for="" class="text-bold">@{{ student.primary.date_graduated }}</label>
+                                        <label for="" class="text-bold">@{{ student.primary.date_graduated | toFormattedDateString }}</label>
                                         <a @click="hideField('primaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -704,7 +704,7 @@
                                 <tr>
                                     <td>Date Graduated</td>
                                     <td v-if="!secondary.graduatedIsEdit">
-                                        <label for="" class="text-bold">@{{ student.secondary.date_graduated }}</label>
+                                        <label for="" class="text-bold">@{{ student.secondary.date_graduated | toFormattedDateString }}</label>
                                         <a @click="hideField('secondaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -787,7 +787,7 @@
                                 <tr>
                                     <td>Date Graduated (<i>expected</i>)</td>
                                     <td v-if="!tertiary.graduatedIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.date_graduated }}</label>
+                                        <label for="" class="text-bold">@{{ student.tertiary.date_graduated | toFormattedDateString }}</label>
                                         <a @click="hideField('tertiaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -838,7 +838,7 @@
                                 <tr>
                                     <td>Employment Period</td>
                                     <td class="text-bold">
-                                        @{{ exp.start_date }} > @{{ exp.end_date }}
+                                        @{{ exp.start_date | toFormattedDateString }} > @{{ exp.end_date }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -1248,6 +1248,11 @@
                     } else {
                         return `/uploaded/${value}`
                     }
+                },
+                toFormattedDateString: function (value) {
+                    let d = new Date(value);
+                    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
                 }
             },
             methods: {

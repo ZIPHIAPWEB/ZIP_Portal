@@ -6,6 +6,7 @@ use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\Repositories\Log\LogRepository;
 use App\Repositories\Sponsor\SponsorRepository;
+use App\Repositories\SponsorRequirement\SponsorRequirementRepository;
 use App\Repositories\Student\StudentRepository;
 use App\Repositories\StudSponsor\StudSponsorRepository;
 use App\SponsorRequirement;
@@ -23,7 +24,7 @@ class StudentSponsorController extends Controller
     private $logRepository;
     public function __construct(StudentRepository $studentRepository,
                                 StudSponsorRepository $studSponsorRepository,
-                                SponsorRepository $sponsorRepository,
+                                SponsorRequirementRepository $sponsorRepository,
                                 LogRepository $logRepository)
     {
         $this->studentRepository = $studentRepository;
@@ -49,7 +50,7 @@ class StudentSponsorController extends Controller
             ]);
 
             $student = $this->studentRepository->getStudentById($request->user()->id);
-            $requirement = $this->sponsorRepository->getSponsorById($requirement_id);
+            $requirement = $this->sponsorRepository->getById($requirement_id);
 
             $this->logRepository->saveLog([
                 'user_id' => $request->user()->id,
@@ -75,7 +76,7 @@ class StudentSponsorController extends Controller
         Storage::disk('uploaded_files')->delete($sponsor->path);
         $this->studSponsorRepository->deleteStudSponsor($requirement_id);
 
-        $requirement = $this->sponsorRepository->getSponsorById($requirement_id);
+        $requirement = $this->sponsorRepository->getById($sponsor->requirement_id);
 
         $this->logRepository->save([
             'user_id'   =>  $request->user()->id,

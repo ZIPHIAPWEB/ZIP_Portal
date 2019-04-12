@@ -80,14 +80,16 @@ class StudentPreliminaryController extends Controller
 
         $this->studPreliminaryRepository->delete($requirement_id);
 
-        $requirement = $this->preliminaryRepository->getById($requirement_id);
+        $requirement = $this->preliminaryRepository->getById($preliminary->requirement_id);
 
         $this->logRepository->saveLog([
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
 
-        return response()->json(['message' => 'File Removed']);
+        return response()->json([
+            'message'   =>  'File Removed'
+        ]);
     }
 
     public function download(Request $request)

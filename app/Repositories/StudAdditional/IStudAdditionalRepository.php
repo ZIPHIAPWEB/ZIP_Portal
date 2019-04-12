@@ -11,6 +11,7 @@ namespace App\Repositories\StudAdditional;
 
 interface IStudAdditionalRepository
 {
+    public function getById($id);
     public function saveStudAdditional(array $attributes);
     public function updateStudAdditional($id, array $attributes);
     public function deleteStudAdditional($id);

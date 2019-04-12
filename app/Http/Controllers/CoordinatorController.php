@@ -5,6 +5,7 @@ use App\Coordinator;
 use App\CoordinatorAction;
 use App\Http\Resources\SuperAdminResource;
 use App\Log;
+use App\Notifications\AssessmentResponse;
 use App\Notifications\CoordinatorResponse;
 use App\Program;
 use App\ProgramPayment;
@@ -90,11 +91,13 @@ class CoordinatorController extends Controller
                 ]);
 
                 $data = [
-                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        => 'Assessed'
+                    'coordinator'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        =>  'Assessed',
+                    'assessment'    =>  $request->input('status'),
+                    'message'       =>  $request->input('message')
                 ];
 
-                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
+                Notification::route('mail', $program->email)->notify(new AssessmentResponse($data));
 
                 return 'Student Assessed!';
                 break;
