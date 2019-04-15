@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-group m-b-5">
+            <!--<div class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -86,7 +86,7 @@
                         </h4>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="col-md-9 col-xs-12">
             <div class="nav-tabs-custom">

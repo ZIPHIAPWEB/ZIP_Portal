@@ -128,7 +128,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">
+                <!--<div class="box-footer">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li>
                             <a @click="next()" href="#">«</a>
@@ -146,7 +146,7 @@
                             <a @click="previous()" href="#">»</a>
                         </li>
                     </ul>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">

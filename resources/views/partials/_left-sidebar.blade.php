@@ -110,7 +110,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="header">Communication</li>
+                <!--li class="header">Communication</li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-envelope"></i> <span><small>Chat</small></span>
@@ -126,7 +126,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
             @endif
             @if(Auth::user()->hasRole('student'))
                 <li class="{{ Route::currentRouteNamed('dash.student') ? 'active' : '' }}">
@@ -168,13 +168,13 @@
                         </span>
                     </a>
                 </li>
-                <li class="header">Message Us</li>
+                <!--<li class="header">Message Us</li>
                 <li class="{{ Route::currentRouteNamed('portal.chat-student') ? 'active' : '' }}">
                     <a href="{{ route('portal.chat-student') }}">
                        <i class="fa fa-envelope"></i>
                         <span><small>Chat</small></span>
                     </a>
-                </li>
+                </li>-->
             @endif
         </ul>
     </section>
