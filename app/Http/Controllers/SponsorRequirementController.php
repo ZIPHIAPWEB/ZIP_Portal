@@ -40,7 +40,7 @@ class SponsorRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
+            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName(), 'uploaded_files');
 
             $this->sponsorRequirementRepository->saveSponsorRequirement([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
@@ -77,7 +77,7 @@ class SponsorRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName());
+            $path = $request->file('file')->storeAs('public/sponsorRequirements', $request->file('file')->getClientOriginalName(), 'uploaded_files');
 
             Storage::delete($this->sponsorRequirementRepository->getById($id)->path);
 
@@ -105,7 +105,7 @@ class SponsorRequirementController extends Controller
 
     public function delete($id)
     {
-        Storage::delete($this->sponsorRequirementRepository->delete($id)->path);
+        Storage::disk('uploaded_files')->delete($this->sponsorRequirementRepository->delete($id)->path);
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
@@ -115,6 +115,6 @@ class SponsorRequirementController extends Controller
         $requirement_id = $request->input('requirement_id');
         $sponsor = $this->sponsorRequirementRepository->getById($requirement_id);
 
-        return Storage::url($sponsor->path);
+        return Storage::disk('uploaded_files')->url($sponsor->path);
     }
 }

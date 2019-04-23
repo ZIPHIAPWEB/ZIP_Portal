@@ -1293,7 +1293,7 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button @click="openInNewTab(requirement.student_preliminary.id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
+                                                <button @click="openInNewTab(requirement.student_preliminary.id, 'preliminary')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadBasicRequirement(requirement.student_preliminary.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                                 <button @click="removePrelimFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
@@ -1322,6 +1322,7 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
+                                                <button @click="openInNewTab(requirement.student_payment.id, 'payment')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadPaymentRequirement(requirement.student_payment.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                                 <button @click="removePaymentFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
@@ -1350,6 +1351,7 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
+                                                <button @click="openInNewTab(requirement.student_visa.id, 'visa')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadVisaRequirement(requirement.student_visa.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                                 <button @click="removeVisaFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
@@ -1378,6 +1380,7 @@
                                                     <span v-else class="fa fa-times text-red"></span>
                                                 </td>
                                                 <td class="text-center">
+                                                    <button @click="openInNewTab(requirement.student_additional.id, 'additional')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                     <button @click="downloadAdditionalRequirement(requirement.student_additional.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
                                                     <button @click="removeAdditionalFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                                 </td>
@@ -1699,10 +1702,27 @@
                             $('#student-modal').modal('show');
                         })
                 },
-                openInNewTab (id) {
-                    axios.get(`/download/basic/requirement/${id}`)
+                openInNewTab (id, requirement) {
+                    let url = '';
+
+                    switch(requirement) {
+                        case 'preliminary':
+                            url = `/studPreliminary/download?requirement_id=${id}`;
+                            break;
+                        case 'additional':
+                            url = `/studAdditional/download?requirement_id=${id}`;
+                            break;
+                        case 'payment':
+                            url = `/studPayment/download?requirement_id=${id}`;
+                            break;
+                        case 'visa':
+                            url = `/studVisa/download?requirement_id=${id}`;
+                            break;
+                    }
+
+                    axios.get(url)
                         .then((response) => {
-                            let win = window.open(response.data);
+                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
                             win.focus();
                         })
                 },

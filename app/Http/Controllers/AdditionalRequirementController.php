@@ -50,7 +50,7 @@ class AdditionalRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
+            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName(), 'uploaded_files');
 
             $this->additionalRequirementRepository->saveAdditionalRequirement([
                 'program_id'    =>  $request->input('program_id'),
@@ -80,7 +80,7 @@ class AdditionalRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName());
+            $path = $request->file('file')->storeAs('public/programRequirements', $request->file('file')->getClientOriginalName(), 'uploaded_files');
 
             $this->additionalRequirementRepository->updateAdditionalRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
@@ -103,7 +103,7 @@ class AdditionalRequirementController extends Controller
     public function delete(Request $request)
     {
         $additional = $this->additionalRequirementRepository->delete($request->input('id'));
-        Storage::delete($additional->path);
+        Storage::disk('uploaded_files')->delete($additional->path);
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
@@ -113,6 +113,6 @@ class AdditionalRequirementController extends Controller
         $requirement_id = $request->input('requirement_id');
         $additional = $this->additionalRequirementRepository->getById($requirement_id);
 
-        return Storage::url($additional->path);
+        return Storage::disk('uploaded_files')->url($additional->path);
     }
 }
