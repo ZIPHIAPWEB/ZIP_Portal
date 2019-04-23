@@ -15,7 +15,7 @@
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Program ID</b>
-                            <a v-if="!student.application_id" class="pull-right text-green text-sm">No Program ID Assign</a>
+                            <a v-if="!student.application_id" class="pull-right text-green text-sm">No Assigned Program ID</a>
                             <a v-else class="pull-right text-green text-sm">@{{ student.application_id }}</a>
                         </li>
                         <li class="list-group-item">
@@ -734,7 +734,10 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <select v-model="field" class="form-control input-sm">
+                                                <option value="">Select School</option>
+                                                <option v-for="school in schools.data" :value="school.name">@{{ school.name }}</option>
+                                            </select>
                                             <span class="input-group-btn">
                                                 <button @click="updateTertiary('school_name', field); tertiary.schoolNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                             </span>
@@ -774,7 +777,10 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <select v-model="field" class="form-control input-sm">
+                                                <option value="">Select Degree</option>
+                                                <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
+                                            </select>
                                             <span class="input-group-btn">
                                                 <button @click="updateTertiary('degree', field); tertiary.degreeIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                             </span>
@@ -1167,6 +1173,8 @@
             el: '#app',
             data: {
                 student: [],
+                degrees: [],
+                schools: [],
                 basicRequirements: {
                     links: {
                         prev: '',
@@ -1240,6 +1248,8 @@
             mounted: function() {
                 this.loadStudentDetails();
                 this.loadEvents();
+                this.loadDegrees();
+                this.loadSchools();
             },
             filters: {
                 avatar: function (value) {
@@ -1258,6 +1268,20 @@
             methods: {
                 handleFileUpload () {
                     this.file = this.$refs.file.files[0];
+                },
+                loadSchools() {
+                    axios.get(`/school/view`)
+                        .then((response) => {
+                            this.schools = response.data;
+                        }).catch((error) => {
+                        console.log(error);
+                    });
+                },
+                loadDegrees() {
+                    axios.get('/degree/getAll')
+                        .then((response) => {
+                            this.degrees = response.data;
+                        });
                 },
                 loadStudentDetails() {
                     axios.get(`/stud/view?id=${this.user_id}`)

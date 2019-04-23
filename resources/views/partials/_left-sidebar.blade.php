@@ -79,6 +79,7 @@
                         <li class="{{ Route::currentRouteNamed('s.school') ? 'active' : '' }}"><a href="{{ route('s.school') }}"><i class="fa fa-circle-o"></i> <small>School</small></a></li>
                         <li class="{{ Route::currentRouteNamed('s.position') ? 'active' : '' }}"><a href="{{ route('s.position') }}"><i class="fa fa-circle-o"></i> <small>Position</small></a></li>
                         <li class="{{ Route::currentRouteNamed('s.place') ? 'active' : '' }}"><a href="{{ route('s.place') }}"><i class="fa fa-circle-o"></i> <small>Place of Assignment</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('s.degree') ? 'active' : '' }}"><a href="{{ route('s.degree') }}"><i class="fa fa-circle-o"></i> <small>Degree</small></a></li>
                     </ul>
                 </li>
             @endif

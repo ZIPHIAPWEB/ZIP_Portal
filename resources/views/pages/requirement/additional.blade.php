@@ -106,6 +106,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -115,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="col-xs-9">
             <div class="nav-tabs-custom">
@@ -147,8 +149,8 @@
                                     <span v-else class="fa fa-remove" style="color: red"></span>
                                 </td>
                                 <td class="text-center">
-                                    <button v-if="requirement.student_additional.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View File</button>
-                                    <button v-if="requirement.student_additional.status" @click="downloadFile(requirement)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span> Download</button>
+                                    <button v-if="requirement.student_additional.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View Uploaded File</button>
+                                    <button v-if="requirement.path" @click="downloadFile(requirement)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span> Download Program File</button>
                                     <button v-if="!requirement.student_additional.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                 </td>
                             </tr>
@@ -374,7 +376,7 @@
                     })
                 },
                 downloadFile(requirement) {
-                    axios.get(`/studAdditional/download?requirement_id=${requirement.student_additional.id}`)
+                    axios.get(`/additional/download?requirement_id=${requirement.id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -388,7 +390,7 @@
                 openInNewTab(requirement) {
                     axios.get(`/studAdditional/download?requirement_id=${requirement.student_additional.id}`)
                         .then((response) => {
-                            win = window.open(response.data, '_blank');
+                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
                             win.focus();
                         })
                 }

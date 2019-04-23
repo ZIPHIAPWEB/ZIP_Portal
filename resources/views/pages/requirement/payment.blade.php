@@ -2,36 +2,6 @@
 
 @section('title', 'Payment Requirement')
 
-@section('sidenav')
-    <li class="header">General</li>
-    <li>
-        <a href="{{ route('dash.student') }}">
-            <i class="fa fa-user"></i> <span><small>My Profile</small></span>
-        </a>
-    </li>
-    <li class="header">My Requirements</li>
-    <li>
-        <a href="{{ route('req.basic') }}">
-            <i class="fa fa-book"></i>
-            <span><small>Basic Requirements</small></span>
-        </a>
-    </li>
-    <li class="active">
-        <a href="{{ route('req.payment') }}">
-            <i class="fa fa-dollar"></i>
-            <span><small>Payment Requirements</small></span>
-        </a>
-    </li>
-    @if (\App\Student::where('user_id', Auth::user()->id)->first()->visa_sponsor_id)
-        <li class="active">
-            <a href="{{ route('req.visa') }}">
-                <i class="fa fa-plane"></i>
-                <span><small>Visa Requirements</small></span>
-            </a>
-        </li>
-    @endif
-@endsection
-
 @section('content')
     <div id="app" class="m-t-10" v-cloak>
         <div class="col-md-3">
@@ -106,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -115,6 +86,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="col-xs-9">
             <div class="nav-tabs-custom">
@@ -147,7 +119,7 @@
                                         <span v-else class="fa fa-remove" style="color: red"></span>
                                     </td>
                                     <td class="text-center" v-cloak>
-                                        <button v-if="requirement.student_payment.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                                        <button v-if="requirement.student_payment.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span> View Uploaded File</button>
                                         <button v-if="!requirement.student_payment.status" @click="selectFile(requirement)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
                                     </td>
                                 </tr>
@@ -375,7 +347,7 @@
                 openInNewTab(requirement) {
                     axios.get(`/studPayment/download?requirement_id=${requirement.student_payment.id}`)
                         .then((response) => {
-                            win = window.open(response.data, '_blank');
+                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
                             win.focus();
                         })
                 }

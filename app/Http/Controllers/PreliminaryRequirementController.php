@@ -110,4 +110,12 @@ class PreliminaryRequirementController extends Controller
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
+
+    public function download(Request $request)
+    {
+        $requirement_id = $request->input('requirement_id');
+        $preliminary = $this->preliminaryRepository->getById($requirement_id);
+
+        return Storage::url($preliminary->path);
+    }
 }

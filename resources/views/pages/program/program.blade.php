@@ -408,7 +408,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Skype
+                                                    Skype ID
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.skype_id }}
@@ -416,10 +416,10 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Facebook Email
+                                                    Facebook URL
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.fb_email }}
+                                                    <a :href="student.fb_email">@{{ student.fb_email }}</a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -1798,40 +1798,56 @@
                     this.appStatus = '';
                     switch (status) {
                         case 'Assessed':
-                            this.show.assessed = true;
-                            this.show.hired = false;
-                            this.show.visa = false;
+                            if (this.student.application_status == 'New Applicant') {
+                                this.show.assessed = true;
+                                this.show.hired = false;
+                                this.show.visa = false;
+                            } else {
+                                alert('Student needs to be New Applicant first!');
+                            }
                             break;
                         case 'Confirmed':
-                            this.loading.modal = true;
-                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
-                                .then((response) => {
+                            if (this.student.application_status == 'Assessed') {
+                                this.loading.modal = true;
+                                axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                    .then((response) => {
 
-                                    this.loadStudents(programId);
-                                    this.viewStudent(this.student.user_id);
-                                    this.loading.modal = false;
-                                    swal({
-                                        title: response.data,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    })
-                                }).catch((error) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: response.data,
+                                            type: 'success',
+                                            confirmButtonText: 'Continue'
+                                        })
+                                    }).catch((error) => {
                                     swal({
                                         title: 'Something went wrong!',
                                         type: 'error',
                                         confirmButtonText: 'Go Back!'
                                     })
-                            });
+                                });
+                            } else {
+                                alert('Student needs to be Assessed first! ' + status);
+                            }
                             break;
                         case 'Hired':
-                            this.show.assessed = false;
-                            this.show.hired = true;
-                            this.show.visa = false;
+                            if (this.student.application_status == 'Confirmed') {
+                                this.show.assessed = false;
+                                this.show.hired = true;
+                                this.show.visa = false;
+                            } else {
+                                alert('Student needs to be Confirmed first!' + status);
+                            }
                             break;
                         case 'For Visa Interview':
-                            this.show.assessed = false;
-                            this.show.visa = true;
-                            this.show.hired = false;
+                            if (this.student.application_status == 'Hired') {
+                                this.show.assessed = false;
+                                this.show.visa = true;
+                                this.show.hired = false;
+                            } else {
+                                alert('Student need to be Hired first!');
+                            }
                             break;
                         case 'Canceled':
                             alert(status);

@@ -109,4 +109,12 @@ class SponsorRequirementController extends Controller
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
+
+    public function download(Request $request)
+    {
+        $requirement_id = $request->input('requirement_id');
+        $sponsor = $this->sponsorRequirementRepository->getById($requirement_id);
+
+        return Storage::url($sponsor->path);
+    }
 }

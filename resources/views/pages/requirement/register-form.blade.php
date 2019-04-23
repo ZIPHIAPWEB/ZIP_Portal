@@ -53,8 +53,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                                        <label for="">Facebook Email <i class="text-red">*</i></label>
-                                        <input v-model="student.fb_email" type="email" class="form-control input-sm" placeholder="sample@gmail.com">
+                                        <label for="">Facebook URL <i class="text-red">*</i></label>
+                                        <input v-model="student.fb_email" type="email" class="form-control input-sm" placeholder="https://www.facebook.com/sample">
                                         <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -101,7 +101,10 @@
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label for="">Degree <i class="text-red">*</i></label>
-                                        <input v-model="tertiary.degree" type="text" class="form-control input-sm" placeholder="Tertiary Degree">
+                                        <select v-model="tertiary.degree" class="form-control input-sm">
+                                            <option value="">Select Degree</option>
+                                            <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
+                                        </select>
                                         <span class="help-block text-red" v-if="errors.t_degree">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
@@ -586,6 +589,7 @@
                 school: [],
                 programs: [],
                 program: [],
+                degrees: [],
                 student : {
                     firstName: '',
                     middleName: '',
@@ -653,6 +657,7 @@
                 $('#agreement-modal').modal('show');
                 this.loadSchools();
                 this.loadPrograms();
+                this.loadDegrees();
             },
             watch: {
                 sameAsAbove: function (value) {
@@ -786,7 +791,7 @@
                     });
                 },
                 loadSchools() {
-                    axios.get(`/helper/school/view`)
+                    axios.get(`/school/view`)
                         .then((response) => {
                             this.schools = response.data.data;
                         }).catch((error) => {
@@ -800,6 +805,15 @@
                         }).catch((error) => {
                             console.log(error);
                     });
+                },
+                loadDegrees() {
+                    axios.get('/degree/getAll')
+                        .then((response) => {
+                            this.degrees = response.data;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
                 }
             }
         });

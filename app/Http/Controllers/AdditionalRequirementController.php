@@ -107,4 +107,12 @@ class AdditionalRequirementController extends Controller
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
+
+    public function download(Request $request)
+    {
+        $requirement_id = $request->input('requirement_id');
+        $additional = $this->additionalRequirementRepository->getById($requirement_id);
+
+        return Storage::url($additional->path);
+    }
 }

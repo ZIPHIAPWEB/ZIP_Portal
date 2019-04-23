@@ -106,6 +106,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -115,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="col-xs-9">
             <div class="nav-tabs-custom">
@@ -148,7 +150,8 @@
                                 </td>
                                 <td class="text-center" v-cloak>
                                     <button v-if="!requirement.student_visa.status" @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                    <button v-if="requirement.student_visa.status" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span> Download File</button>
+                                    <button v-if="requirement.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span> Download Sponsor File</button>
+                                    <button v-if="requirement.student_visa.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-xs btn-flat"><span class="glyphicon glyphicon-eye-open"></span> View Uploaded File</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -369,7 +372,7 @@
                    })
                 },
                 downloadFile(requirement) {
-                    axios.get(`/studVisa/download?requirement_id=${requirement.id}`)
+                    axios.get(`/visa/download?requirement_id=${requirement.id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -379,6 +382,13 @@
                         }).catch((error) => {
                         console.log(error);
                     })
+                },
+                openInNewTab(requirement) {
+                    axios.get(`/studVisa/download?requirement_id=${requirement.student_visa.id}`)
+                        .then((response) => {
+                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
+                            win.focus();
+                        })
                 }
             }
         })

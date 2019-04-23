@@ -42,6 +42,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/school', 'pages.setting.setting-school-superadmin')->name('s.school');
     Route::view('/sa/s/position', 'pages.setting.setting-student-position-superadmin')->name('s.position');
     Route::view('/sa/s/place-of-assignment', 'pages.setting.setting-place-of-assignment-superadmin')->name('s.place');
+    Route::view('/sa/s/degree', 'pages.setting.setting-degree-superadmin')->name('s.degree');
 
     Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
     Route::view('/sa/cms', 'pages.cms.content-management')->name('sa.cms');
@@ -161,6 +162,7 @@ Route::prefix('preliminary')->group(function (){
     Route::post('/store', 'PreliminaryRequirementController@store')->name('preliminary.store');
     Route::post('/update', 'PreliminaryRequirementController@update')->name('preliminary.update');
     Route::post('/delete', 'PreliminaryRequirementController@delete')->name('preliminary.delete');
+    Route::get('/download', 'PreliminaryRequirementController@download')->name('preliminary.download');
 });
 
 Route::prefix('studPreliminary')->group(function () {
@@ -176,6 +178,7 @@ Route::prefix('additional')->group(function () {
     Route::post('/store', 'AdditionalRequirementController@store')->name('additional.store');
     Route::post('/update', 'AdditionalRequirementController@update')->name('additional.update');
     Route::post('/delete', 'AdditionalRequirementController@delete')->name('additional.delete');
+    Route::get('/download', 'AdditionalRequirementController@download')->name('additional.download');
 });
 
 Route::prefix('/studAdditional')->group(function () {
@@ -206,6 +209,7 @@ Route::prefix('visa')->group(function () {
     Route::get('/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
     Route::post('/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
     Route::get('/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
+    Route::get('/download', 'SponsorRequirementController@download')->name('sponsor.requirement.download');
 });
 
 Route::prefix('studVisa')->group(function () {
@@ -321,6 +325,13 @@ Route::prefix('state')->group(function () {
     Route::post('/store', 'StateController@store')->name('state.store');
     Route::post('/update/{id}', 'StateController@update')->name('state.update');
     Route::post('/delete/{id}', 'StateController@delete')->name('state.delete');
+});
+
+Route::prefix('degree')->group(function () {
+    Route::get('/getAll', 'DegreeController@getAll')->name('degree.all');
+    Route::post('/store', 'DegreeController@store')->name('degree.store');
+    Route::post('/update/{id}', 'DegreeController@update')->name('degree.update');
+    Route::post('/delete/{id}', 'DegreeController@delete')->name('degree.delete');
 });
 
 Route::prefix('chat')->group(function () {

@@ -158,7 +158,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">File (optional)</label>
-                                                    <input type="file" ref="file" @change="handleFileUpload">
+                                                    <input type="file" ref="filePreliminary" @change="handleFileUpload('preliminary')">
                                                 </div>
                                                 <button class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
                                             </form>
@@ -202,7 +202,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">File (optional)</label>
-                                                    <input type="file" ref="file" @change="handleFileUpload">
+                                                    <input type="file" ref="fileAdditional" @change="handleFileUpload('additional')">
                                                 </div>
                                                 <button class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
                                             </form>
@@ -246,7 +246,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">File (optional)</label>
-                                                    <input type="file" ref="file" @change="handleFileUpload">
+                                                    <input type="file" ref="filePayment" @change="handleFileUpload('payment')">
                                                 </div>
                                                 <button class="btn btn-primary btn-flat btn-block btn-sm pull-right m-b-10">@{{ req_button }}</button>
                                             </form>
@@ -626,8 +626,18 @@
                         console.log(error);
                     });
                 },
-                handleFileUpload() {
-                    this.requirement.file = this.$refs.file.files[0];
+                handleFileUpload(requirement) {
+                    switch(requirement) {
+                        case 'preliminary':
+                            this.requirement.file = this.$refs.filePreliminary.files[0];
+                            break;
+                        case 'additional':
+                            this.requirement.file = this.$refs.fileAdditional.files[0];
+                            break;
+                        case 'payment':
+                            this.requirement.file = this.$refs.filePayment.files[0];
+                            break;
+                    }
                 },
                 //Payment CRUD
                 loadPayments(id) {

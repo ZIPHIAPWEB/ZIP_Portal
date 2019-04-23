@@ -106,6 +106,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -115,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
         <div class="col-xs-9">
             <div class="nav-tabs-custom">
@@ -147,9 +149,9 @@
                                         <span v-else class="fa fa-remove" style="color: red"></span>
                                     </td>
                                     <td class="text-center" v-cloak>
-                                        <button v-if="requirement.student_preliminary.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-xs btn-flat"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                                        <button v-if="requirement.student_preliminary.status" @click="openInNewTab(requirement)" class="btn btn-warning btn-xs btn-flat"><span class="glyphicon glyphicon-eye-open"></span> View Uploaded File</button>
                                         <button v-if="!requirement.student_preliminary.status" @click="selectFile(requirement)" class="btn btn-default btn-xs btn-flat"><span class="glyphicon glyphicon-upload"></span> Upload File</button>
-                                        <button v-if="requirement.student_preliminary.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span>Download File</button>
+                                        <button v-if="requirement.path" @click="downloadFile(requirement)" class="btn btn-primary btn-xs btn-flat"><span class="glyphicon glyphicon-download"></span>Download Program File</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -372,7 +374,7 @@
                     })
                 },
                 downloadFile(requirement) {
-                    axios.get(`/studPreliminary/download?requirement_id=${requirement.student_preliminary.id}`)
+                    axios.get(`/preliminary/download?requirement_id=${requirement.id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -386,7 +388,7 @@
                 openInNewTab(requirement) {
                     axios.get(`/studPreliminary/download?requirement_id=${requirement.student_preliminary.id}`)
                         .then((response) => {
-                            win = window.open(response.data, '_blank');
+                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
                             win.focus();
                         })
                 }
