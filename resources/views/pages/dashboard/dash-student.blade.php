@@ -40,19 +40,19 @@
                     <div id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                Part 1: Preliminary Documents
                                 <a href="{{ route('req.basic') }}">
+                                    Part 1: Preliminary Documents
                                     <i class="fa fa-arrow-right pull-right"></i>
                                 </a>
                             </li>
                             <li class="list-group-item">
-                                Part 2: Visa Sponsor Forms
                                 <a href="{{ route('req.visa') }}">
+                                    Part 2: Visa Sponsor Forms
                                     <i class="fa fa-arrow-right pull-right"></i>
                                 </a></li>
                             <li class="list-group-item">
-                                Part 3: Additional Requirements
                                 <a href="{{ route('req.additional') }}">
+                                    Part 3: Additional Requirements
                                     <i class="fa fa-arrow-right pull-right"></i>
                                 </a>
                             </li>

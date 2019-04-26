@@ -417,10 +417,6 @@
                                     <td class="text-bold">@{{ student.year }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Course</td>
-                                    <td class="text-bold">@{{ student.course }}</td>
-                                </tr>
-                                <tr>
                                     <td>Program</td>
                                     <td class="text-bold">@{{ student.program_id.name }}</td>
                                 </tr>
