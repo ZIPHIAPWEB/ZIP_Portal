@@ -219,15 +219,15 @@ class CoordinatorController extends Controller
                 return 'For Visa Interview';
                 break;
 
-            case 'Canceled' :
+            case 'Cancelled' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_status'    =>  $status
+                    'application_status'    =>  $request->input('status')
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Canceled.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Cancelled.',
                 ]);
 
                 return 'Canceled';

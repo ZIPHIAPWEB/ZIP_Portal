@@ -18,6 +18,7 @@ class CreateSecondariesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('school_name');
             $table->longText('address');
+            $table->string('start_date');
             $table->string('date_graduated');
             $table->timestamps();
         });

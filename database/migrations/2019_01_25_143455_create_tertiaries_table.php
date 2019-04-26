@@ -19,6 +19,7 @@ class CreateTertiariesTable extends Migration
             $table->string('school_name');
             $table->longText('address');
             $table->longText('degree');
+            $table->string('start_date');
             $table->string('date_graduated');
             $table->timestamps();
         });

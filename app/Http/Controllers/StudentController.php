@@ -142,6 +142,7 @@ class StudentController extends Controller
             'user_id'           =>  Auth::user()->id,
             'school_name'       =>  $request->input('s_school'),
             'address'           =>  $request->input('s_address'),
+            'start_date'        =>  $request->input('s_start_date'),
             'date_graduated'    =>  $request->input('s_date_graduated')
         ]);
 
@@ -150,6 +151,7 @@ class StudentController extends Controller
             'school_name'       =>  $request->input('t_school'),
             'degree'            =>  $request->input('t_degree'),
             'address'           =>  $request->input('t_address'),
+            'start_date'        =>  $request->input('t_start_date'),
             'date_graduated'    =>  $request->input('t_date_graduated')
         ]);
 

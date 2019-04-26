@@ -128,10 +128,15 @@
                                         <input v-model="secondary.school" type="text" class="form-control input-sm" placeholder="Secondary School Name">
                                         <span class="help-block text-red" v-if="errors.s_school">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-12">
                                         <label for="">Address <i class="text-red">*</i></label>
                                         <input v-model="secondary.address" type="text" class="form-control input-sm" placeholder="Secondary School Address">
                                         <span class="help-block text-red" v-if="errors.s_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Start Date <i class="text-red">*</i></label>
+                                        <input v-model="secondary.start_date" type="date" class="form-control input-sm" placeholder="Secondary Start Date">
+                                        <span class="help-block text-red" v-if="errors.s_start_date">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
                                         <label for="">Date Graduated <i class="text-red">*</i></label>
@@ -149,10 +154,15 @@
                                         <input v-model="primary.school" type="text" class="form-control input-sm" placeholder="Primary School Name">
                                         <span class="help-block text-red" v-if="errors.p_school">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-12">
                                         <label for="">Address <i class="text-red">*</i></label>
                                         <input v-model="primary.address" type="text" class="form-control input-sm" placeholder="Primary School Address">
                                         <span class="help-block text-red" v-if="errors.p_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Start Date <i class="text-re">*</i></label>
+                                        <input v-model="tertiary.start_date" type="date" class="form-control input-sm" placeholder="Tertiary Start Date">
+                                        <span class="help-block text-red" v-if="errors.t_start_date">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
                                         <label for="">Date Graduated <i class="text-red">*</i></label>
@@ -506,6 +516,10 @@
                                     <td class="text-bold">@{{ secondary.address }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Start Date</td>
+                                    <td class="text-bold">@{{ secondary.start_date }}</td>
+                                </tr>
+                                <tr>
                                     <td>Date Graduated</td>
                                     <td class="text-bold">@{{ secondary.date_graduated }}</td>
                                 </tr>
@@ -527,6 +541,10 @@
                             <tr>
                                 <td>Degree</td>
                                 <td class="text-bold">@{{ tertiary.degree }}</td>
+                            </tr>
+                            <tr>
+                                <td>Start Date</td>
+                                <td class="text-bold">@{{ tertiary.start_date }}</td>
                             </tr>
                             <tr>
                                 <td>Date Graduated</td>
@@ -631,12 +649,14 @@
                 secondary: {
                     school: '',
                     address: '',
+                    start_date: '',
                     date_graduated: ''
                 },
                 tertiary: {
                     school: '',
                     degree: '',
                     address: '',
+                    start_date: '',
                     date_graduated: ''
                 },
                 experiences: [
@@ -729,10 +749,12 @@
                     formData.append('p_date_graduated', this.primary.date_graduated);
                     formData.append('s_school', this.secondary.school);
                     formData.append('s_address', this.secondary.address);
+                    formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
                     formData.append('t_school', this.tertiary.school.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
+                    formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
                     formData.append('experience', JSON.stringify(this.experiences));
                     this.loading = true;
@@ -775,10 +797,12 @@
                     formData.append('p_date_graduated', this.primary.date_graduated);
                     formData.append('s_school', this.secondary.school);
                     formData.append('s_address', this.secondary.address);
+                    formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
                     formData.append('t_school', this.tertiary.school.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
+                    formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
                     formData.append('experience', JSON.stringify(this.experiences));
 

@@ -170,13 +170,13 @@
                                     <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
                                 </li>
                                 <li>
                                     <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -341,6 +341,31 @@
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section v-if="show.cancel">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.cancel = false;" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-6">
+                                                        <label for="" class="control-label">Reason</label>
+                                                        <select v-model="cancel.status" class="form-control input-sm">
+                                                            <option value="">Select Reason Of Cancellation</option>
+                                                            <option value="Cancel: Unqualified">Unqualified</option>
+                                                            <option value="Cancel: Visa Denial">Visa Denial</option>
+                                                            <option value="Cancel: Program Cancellation">Program Cancellation</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group-sm col-xs-12">
+                                                        <button @click="setCancellationStatus" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -571,6 +596,14 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
+                                                    Start Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.secondary.start_date }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
                                                     Date Graduated
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
@@ -606,6 +639,14 @@
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.tertiary.degree }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Start Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.tertiary.start_date }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1518,7 +1559,8 @@
                 show: {
                     assessed: false,
                     hired: false,
-                    visa: false
+                    visa: false,
+                    cancel: false,
                 },
                 field: '',
                 host: {
@@ -1534,6 +1576,9 @@
                     sevis: '',
                     programId: '',
                     schedule: ''
+                },
+                cancel: {
+                    status: ''
                 },
                 setting: {
                     host: {
@@ -1848,7 +1893,7 @@
                                     })
                                 });
                             } else {
-                                alert('Student needs to be Assessed first! ' + status);
+                                alert('Student needs to be Assessed first! ');
                             }
                             break;
                         case 'Hired':
@@ -1857,7 +1902,7 @@
                                 this.show.hired = true;
                                 this.show.visa = false;
                             } else {
-                                alert('Student needs to be Confirmed first!' + status);
+                                alert('Student needs to be Confirmed first!');
                             }
                             break;
                         case 'For Visa Interview':
@@ -1870,7 +1915,7 @@
                             }
                             break;
                         case 'Canceled':
-                            alert(status);
+                            this.show.cancel = true;
                             break;
                     }
                 },
@@ -1894,6 +1939,20 @@
                                 });
                             break;
                     }
+                },
+                setCancellationStatus() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/Cancelled`, this.cancel)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.cancel = false;
+                            alert(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
                 },
                 submitAssessed() {
                     this.loading.modal = true;

@@ -11,6 +11,7 @@ class Tertiary extends Model
         'school_name',
         'address',
         'degree',
+        'start_date',
         'date_graduated'
     ];
 

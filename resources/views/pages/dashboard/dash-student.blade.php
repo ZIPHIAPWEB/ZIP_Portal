@@ -307,9 +307,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Facebook Email</td>
+                                    <td>Facebook URL</td>
                                     <td class="text-bold">
-                                        @{{ student.fb_email }}
+                                        <a :href="student.fb_email" target="_blank">@{{ student.fb_email }}</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -702,6 +702,26 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Start Date</td>
+                                    <td v-if="!secondary.startDateIsEdit">
+                                        <label for="" class="text-bold">@{{ student.secondary.start_date | toFormattedDateString }}</label>
+                                        <a @click="hideField('secondaryStartDate');" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateSecondary('start_date', field); secondary.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="secondary.startDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Date Graduated</td>
                                     <td v-if="!secondary.graduatedIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.date_graduated | toFormattedDateString }}</label>
@@ -786,6 +806,26 @@
                                             </span>
                                             <span class="input-group-btn">
                                                 <button @click="tertiary.degreeIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td v-if="!tertiary.startDateIsEdit">
+                                        <label for="" class="text-bold">@{{ student.tertiary.start_date | toFormattedDateString }}</label>
+                                        <a @click="hideField('tertiaryStartDate');" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateTertiary('start_date', field); tertiary.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="tertiary.startDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                             </span>
                                         </div>
                                     </td>
@@ -1233,12 +1273,14 @@
                 secondary: {
                     schoolNameIsEdit: false,
                     addressIsEdit: false,
+                    startDateIsEdit: false,
                     graduatedIsEdit: false
                 },
                 tertiary: {
                     schoolNameIsEdit: false,
                     addressIsEdit: false,
                     degreeIsEdit: false,
+                    startDateIsEdit: false,
                     graduatedIsEdit: false
                 },
                 field: '',
@@ -1742,22 +1784,32 @@
                         case 'secondarySchoolName':
                             this.secondary.schoolNameIsEdit = true;
                             this.secondary.addressIsEdit = false;
+                            this.secondary.startDateIsEdit = false;
                             this.secondary.graduatedIsEdit = false;
                             break;
                         case 'secondaryAddress':
                             this.secondary.schoolNameIsEdit = false;
                             this.secondary.addressIsEdit = true;
+                            this.secondary.startDateIsEdit = false;
+                            this.secondary.graduatedIsEdit = false;
+                            break;
+                        case 'secondaryStartDate':
+                            this.secondary.schoolNameIsEdit = false;
+                            this.secondary.addressIsEdit = false;
+                            this.secondary.startDateIsEdit = true;
                             this.secondary.graduatedIsEdit = false;
                             break;
                         case 'secondaryGraduated':
                             this.secondary.schoolNameIsEdit = false;
                             this.secondary.addressIsEdit = false;
+                            this.secondary.startDateIsEdit = false;
                             this.secondary.graduatedIsEdit = true;
                             break;
                         case 'tertiarySchoolName':
                             this.tertiary.schoolNameIsEdit = true;
                             this.tertiary.addressIsEdit = false;
                             this.tertiary.degreeIsEdit = false;
+                            this.tertiary.startDateIsEdit = false;
                             this.tertiary.graduatedIsEdit = false;
                             break;
                         case 'tertiaryAddress':
@@ -1770,12 +1822,21 @@
                             this.tertiary.schoolNameIsEdit = false;
                             this.tertiary.addressIsEdit = false;
                             this.tertiary.degreeIsEdit = true;
+                            this.tertiary.startDateIsEdit = false;
+                            this.tertiary.graduatedIsEdit = false;
+                            break;
+                        case 'tertiaryStartDate':
+                            this.tertiary.schoolNameIsEdit = false;
+                            this.tertiary.addressIsEdit = false;
+                            this.tertiary.degreeIsEdit = false;
+                            this.tertiary.startDateIsEdit = true;
                             this.tertiary.graduatedIsEdit = false;
                             break;
                         case 'tertiaryGraduated':
                             this.tertiary.schoolNameIsEdit = false;
                             this.tertiary.addressIsEdit = false;
                             this.tertiary.degreeIsEdit = false;
+                            this.tertiary.startDateIsEdit = false;
                             this.tertiary.graduatedIsEdit = true;
                             break;
                     }

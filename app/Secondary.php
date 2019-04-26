@@ -10,6 +10,7 @@ class Secondary extends Model
         'user_id',
         'school_name',
         'address',
+        'start_date',
         'date_graduated'
     ];
 }
