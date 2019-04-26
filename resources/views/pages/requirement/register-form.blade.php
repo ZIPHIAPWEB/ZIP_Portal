@@ -107,10 +107,15 @@
                                         </select>
                                         <span class="help-block text-red" v-if="errors.t_degree">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    <div class="form-group col-xs-12">
                                         <label for="">Address <i class="text-red">*</i></label>
                                         <input v-model="tertiary.address" type="text" class="form-control input-sm" placeholder="Tertiary School Address">
                                         <span class="help-block text-red" v-if="errors.t_address">required</span>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="">Start Date <i class="text-red">*</i></label>
+                                        <input v-model="tertiary.start_date" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.t_start_date">required</span>
                                     </div>
                                     <div class="form-group col-xs-6">
                                         <label for="">Date Graduated (<small>date indicated in diploma</small>)<i class="text-red">*</i></label>
