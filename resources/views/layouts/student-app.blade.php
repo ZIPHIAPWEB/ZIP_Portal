@@ -23,7 +23,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="{{ route('welcome') }}" class="navbar-brand"><b>ZIP Travel</b> Portal</a>
+                    <a href="{{ route('welcome') }}" class="navbar-brand"><b>ZIP Travel</b> Philippines</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
