@@ -58,6 +58,9 @@
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
                                 <option value="For Visa Interview">For Visa Interview</option>
+                                <option value="For PDOS">For PDOS</option>
+                                <option value="For CFO">For CFO</option>
+                                <option value="Program Proper">Program Proper</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
@@ -86,6 +89,7 @@
                             <th class="text-center" style="width: 10%">Last Name</th>
                             <th class="text-center" style="width: 10%">Contact</th>
                             <th class="text-center" style="width: 10%">School</th>
+                            <th class="text-center" style="width: 10%">Branch</th>
                             <th class="text-center" style="width: 10%">Program</th>
                             <th class="text-center" style="width: 10%">Recent Action</th>
                             <th class="text-center" style="width: 10%">Action</th>
@@ -105,6 +109,7 @@
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
                                 <td class="text-sm text-center">@{{ student.tertiary.school_name }}</td>
+                                <td class="text-sm text-center">@{{ student.branch }}</td>
                                 <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                                 <td class="text-sm text-center">
                                     <div v-if="!student.log[0]">
@@ -445,6 +450,14 @@
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     <a :href="student.fb_email">@{{ student.fb_email }}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Branch
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.branch }}
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -1345,21 +1358,28 @@
                                 <div class="tab-pane " id="tab-payment-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th>
+                                                Requirement
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Verified
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in paymentRequirements">
                                             <td class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span v-if="requirement.student_payment.acknowledgement" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">

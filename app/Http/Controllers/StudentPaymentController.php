@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Log;
+use App\Notifications\AccountingNotification;
 use App\Notifications\StudentUploadedFile;
+use App\Notifications\VerifiedDepositSlipNotification;
 use App\PaymentRequirement;
 use App\Repositories\Log\LogRepository;
 use App\Repositories\PaymentRequirement\PaymentRequirementRepository;
@@ -12,6 +14,7 @@ use App\Repositories\StudPayment\StudPaymentRepository;
 use App\Student;
 use App\StudentPayment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,9 +50,14 @@ class StudentPaymentController extends Controller
             $path = $request->file('file')
                 ->storeAs($request->user()->email . '/payment', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
-            $this->studPaymentRepository->saveStudPayment([
+            $savedPayment = $this->studPaymentRepository->saveStudPayment([
                 'user_id'        => $request->user()->id,
                 'requirement_id' => $requirement_id,
+                'bank_code'      => $request->input('bank_code'),
+                'reference_no'   => $request->input('ref_no'),
+                'date_deposit'   => $request->input('date'),
+                'bank_account_no'=> $request->input('bank_account'),
+                'amount'         => $request->input('amount'),
                 'status'         => true,
                 'path'           => $path
             ]);
@@ -63,14 +71,23 @@ class StudentPaymentController extends Controller
             ]);
 
             $data = [
-                'student' => $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name,
-                'requirement' => $requirement->name
+                'full_name' => $student->first_name . ' ' . $student->last_name,
+                'payment'   => $savedPayment
             ];
 
-            Notification::route('mail', 'system@ziptravel.com.ph')->notify(new StudentUploadedFile($data));
+            Notification::route('mail', 'rmergenio@ziptravel.com.ph')->notify(new AccountingNotification($data));
 
             return response()->json(['message' => 'File Uploaded!'], 200);
         }
+    }
+
+    public function verifyDepositSlip($id)
+    {
+        $this->studPaymentRepository->updateStudPayment($id, [
+            'acknowledgement'   =>  true
+        ]);
+
+        Notification::route('mail', Auth::user()->email)->notify(new VerifiedDepositSlipNotification($this->studPaymentRepository->findOneBy(['id' => $id])->user_id));
     }
 
     public function remove(Request $request)

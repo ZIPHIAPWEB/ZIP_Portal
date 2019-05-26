@@ -17,7 +17,13 @@ class CreateStudentPaymentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('requirement_id')->unsigned();
+            $table->string('bank_code');
+            $table->string('reference_no');
+            $table->string('date_deposit');
+            $table->string('bank_account_no');
+            $table->string('amount');
             $table->boolean('status');
+            $table->boolean('acknowledgement');
             $table->longText('path');
             $table->timestamps();
         });

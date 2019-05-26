@@ -9,7 +9,13 @@ class StudentPayment extends Model
     protected $fillable = [
         'user_id',
         'requirement_id',
+        'bank_code',
+        'reference_no',
+        'date_deposit',
+        'bank_account_no',
+        'amount',
         'status',
+        'acknowledgement',
         'path'
     ];
 

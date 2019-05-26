@@ -84,6 +84,20 @@
                                         <span class="help-block text-red" v-if="errors.program_id">@{{ errors.program_id[0] }}</span>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="">Nearest ZIP Travel Branch</label>
+                                        <select v-model="student.branch" class="form-control input-sm">
+                                            <option value="">Select Nearest Branch</option>
+                                            <option value="MANILA">Manila</option>
+                                            <option value="PAMPANGA">Pampanga</option>
+                                            <option value="CEBU">Cebu</option>
+                                            <option value="DAVAO">Davao</option>
+                                            <option value="BACOLOD">Bacolod</option>
+                                        </select>
+                                        <span class="help-block text-red" v-if="errors.branch">@{{ errors.branch[0] }}</span>
+                                    </div>
+                                </div>
                             </section>
                             <section action="" id="level-four" v-if="level === 2">
                                 <p class="login-box-msg">Educational Background</p>
@@ -264,7 +278,7 @@
                                     </div>
                                     <div class="form-group col-xs-4">
                                         <label for="">Last Name <i class="text-red">*</i></label>
-                                        <input v-model="mother.last_name" type="text" class="form-control input-sm" placeholder="Mother's Last Name">                                        <span class="help-block text-red" v-if="errors.m_middle_name">required</span>
+                                        <input v-model="mother.last_name" type="text" class="form-control input-sm" placeholder="Mother's Last Name">
                                         <span class="help-block text-red" v-if="errors.m_last_name">required</span>
                                     </div>
                                 </div>
@@ -349,7 +363,6 @@
                         </div>
                     </div>
                     <div class="modal-footer clearfix">
-                        <a href="{{ route('logout') }}" class="btn btn-danger btn-flat btn-sm pull-right">I Decline</a>
                         <button @click="agree" class="btn btn-success btn-flat btn-sm pull-right m-r-5">I Agree</button>
                     </div>
                 </div><!-- /.modal-content -->
@@ -419,6 +432,10 @@
                                 <tr>
                                     <td>Program</td>
                                     <td class="text-bold">@{{ student.program_id.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>ZIP Branch</td>
+                                    <td class="text-bold">@{{ student.branch }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -624,7 +641,8 @@
                     course: '',
                     program_id: '',
                     skype_id: '',
-                    fb_email: ''
+                    fb_email: '',
+                    branch: ''
                 },
                 father: {
                     first_name: '',
@@ -757,6 +775,7 @@
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
+                    formData.append('branch', this.student.branch);
                     formData.append('experience', JSON.stringify(this.experiences));
                     this.loading = true;
                     axios.post(`/stud/details/store`, formData)
@@ -805,6 +824,7 @@
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
+                    formData.append('branch', this.student.branch);
                     formData.append('experience', JSON.stringify(this.experiences));
 
                     axios.post(`/stud/validateDetails`, formData)

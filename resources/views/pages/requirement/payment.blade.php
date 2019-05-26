@@ -151,7 +151,52 @@
                             <h4 class="modal-title">Upload @{{ modalTitle }}</h4>
                         </div>
                         <div class="modal-body">
-                            <input type="file" ref="file" @change="handleFileUpload()">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="">Bank Code</label>
+                                        <input v-model="payment.bank_code" type="text" class="form-control input-sm" >
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="">Reference No.</label>
+                                        <input v-model="payment.ref_no" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="">Bank Account No.</label>
+                                        <input v-model="payment.bank_account" type="text" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="">Date Deposit</label>
+                                        <input v-model="payment.date" type="date" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Amount</label>
+                                        <input v-model="payment.amount" type="number" class="form-control input-sm">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label v-if="!payment.file.name" class="btn btn-warning btn-block btn-flat btn-sm">
+                                            <span class="glyphicon glyphicon-file"></span>
+                                            Deposit Slip
+                                            <input style="display: none;" type="file" ref="file" @change="handleFileUpload()">
+                                        </label>
+                                        <label v-else class="btn btn-warning btn-block btn-flat btn-sm">
+                                            <span class="glyphicon glyphicon-file"></span>
+                                            @{{ payment.file.name }}
+                                            <input style="display: none;" type="file" ref="file" @change="handleFileUpload()">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary btn-flat btn-block">Upload File</button>
@@ -189,7 +234,14 @@
                 modalTitle: '',
                 pReqId: '',
                 bReqId: '',
-                file: '',
+                payment: {
+                    bank_code: '',
+                    ref_no: '',
+                    date: '',
+                    bank_account: '',
+                    amount: '',
+                    file: ''
+                },
                 photo: '',
                 user_id: '{{ Auth::user()->id }}',
                 program_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->program_id }}",
@@ -280,14 +332,17 @@
                     $('#file-upload').modal('show');
                 },
                 handleFileUpload() {
-                    this.file = this.$refs.file.files[0];
-                    console.log(this.file);
+                    this.payment.file = this.$refs.file.files[0];
                 },
                 submitFile() {
                     this.loading.uploading = true;
                     let formData = new FormData();
-
-                    formData.append('file', this.file);
+                    formData.append('bank_code', this.payment.bank_code);
+                    formData.append('ref_no', this.payment.ref_no);
+                    formData.append('date', this.payment.date);
+                    formData.append('bank_account', this.payment.bank_account);
+                    formData.append('amount', this.payment.amount);
+                    formData.append('file', this.payment.file);
 
                     axios.post(`/studPayment/store?requirement_id=${this.pReqId}`, formData, {
                         headers : {

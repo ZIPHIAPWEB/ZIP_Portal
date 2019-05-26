@@ -102,51 +102,8 @@ class CoordinatorController extends Controller
                 return 'Student Assessed!';
                 break;
             case 'Confirmed' :
-                switch ($program) {
-                    case 'SWT-SM':
-                        $dt1 = Carbon::createFromDate(date('Y'), 3, 1);
-                        $dt2 = Carbon::createFromDate(date('Y'), 6, 31)->addYear(1);
-
-                        $count = Student::where('program_id', $program->program_id)
-                                ->whereIn('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
-                                ->whereBetween('created_at', [$dt1, $dt2])
-                                ->count() + 1;
-                        $cCount = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Canceled')
-                                ->whereBetween('created_at', [$dt1, $dt2])
-                                ->whereNotNull('application_id')
-                                ->count();
-                        break;
-                    case 'SWT-SP':
-                        $dt1 = Carbon::createFromDate(date('Y'), 5, 1);
-                        $dt2 = Carbon::createFromDate(date('Y') + 1, 8, 31)->addYear(1);
-
-                        $count = Student::where('program_id', $program->program_id)
-                                ->whereIn('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
-                                ->whereBetween('created_at', [$dt1, $dt2])
-                                ->count() + 1;
-                        $cCount = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Canceled')
-                                ->whereBetween('created_at', [$dt1, $dt2])
-                                ->whereNotNull('application_id')
-                                ->count();
-                        break;
-                    default:
-                        $count = Student::where('program_id', $program->program_id)
-                                ->where('application_status', ['Confirmed', 'Hired', 'For Visa Interview'])
-                                ->count() + 1;
-                        $cCount = Student::where('program_id', $program->program_id)
-                                ->where('application_status', 'Canceled')
-                                ->whereNotNull('application_id')
-                                ->count();
-                        break;
-                }
-
-                $total = $count + $cCount;
-                $total += 1;
-
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_id'        =>  Program::find($program->program_id)->description.'-'. Carbon::now()->addYear(1)->format('Y')  .'0'. $total,
+                    'application_id'        =>  Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999),
                     'application_status'    =>  $status
                 ]);
 
@@ -217,6 +174,41 @@ class CoordinatorController extends Controller
                 Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
 
                 return 'For Visa Interview';
+                break;
+            case 'For PDOS' :
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_status'    =>  $request->input('status')
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For PDOS',
+                ]);
+                break;
+
+            case 'For CFO' :
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_status'    =>  $request->input('status')
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For CFO'
+                ]);
+                break;
+
+            case 'Program Proper':
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_status'    =>  $request->input('status')
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Program Proper'
+                ]);
                 break;
 
             case 'Cancelled' :

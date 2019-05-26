@@ -80,7 +80,8 @@ class StudentController extends Controller
             't_degree'              =>  'required',
             't_address'             =>  'required',
             't_date_graduated'      =>  'required',
-            'experience'            =>  'required'
+            'experience'            =>  'required',
+            'branch'                =>  'required'
         ])->validate();
     }
 
@@ -106,6 +107,7 @@ class StudentController extends Controller
             'program_id'                =>  $request->input('program_id'),
             'fb_email'                  =>  $request->input('fb_email'),
             'skype_id'                  =>  $request->input('skype_id'),
+            'branch'                    =>  $request->input('branch'),
             'visa_interview_status'     =>  'Pending',
             'application_status'        =>  'New Applicant',
             'coordinator_id'            =>  0
