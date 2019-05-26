@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery\Exception;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -85,5 +86,32 @@ class LoginController extends Controller
 
             return redirect(url('/portal'));
         }
+    }
+
+    protected function authenticated(Request $request, User $user)
+    {
+        $user->update([
+            'isOnline'  =>  true
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $user = \App\User::find($request->user()->id);
+
+        $user->update([
+            'isOnline' => false
+        ]);
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('welcome');
+    }
+
+    public function username()
+    {
+        return 'name';
     }
 }

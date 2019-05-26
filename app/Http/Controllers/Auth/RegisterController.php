@@ -143,4 +143,50 @@ class RegisterController extends Controller
 
         return redirect()->route('login')->with('Info', '<b>Activated!</b>'.$email.' verified!');
     }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    public function showCoorRegistrationForm()
+    {
+        return view('auth.coordinator-register');
+    }
+
+    public function showSponsorRegistrationForm()
+    {
+        return view('auth.sponsor-register');
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please verify your email to activate your account!');
+
+        //$this->guard()->login($user);
+        //return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
+
+    public function coorRegister(Request $request)
+    {
+        $this->coorValidator($request->all())->validate();
+
+        $user = $this->coorCreate($request->all());
+
+        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please wait for the Superadmin to activate your account');
+    }
+
+    public function sponsorRegister(Request $request)
+    {
+        $this->sponsorValidator($request->all())->validate();
+
+        $user = $this->sponsorCreate($request->all());
+
+        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please verify your email to activate your account!');
+    }
+
 }
