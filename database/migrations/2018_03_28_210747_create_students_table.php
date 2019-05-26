@@ -38,6 +38,7 @@ class CreateStudentsTable extends Migration
             $table->date('program_start_date')->nullable();
             $table->date('program_end_date')->nullable();
             $table->string('visa_sponsor_id')->nullable();
+            $table->string('branch')->nullable();
 
             $table->date('us_departure_date')->nullable();
             $table->time('us_departure_time')->nullable();
