@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\RegisteredStudentNotification;
 
 class StudentController extends Controller
 {
@@ -92,7 +93,7 @@ class StudentController extends Controller
             'isFilled'  =>  true
         ]);
 
-        $this->studentRepository->saveStudent([
+        $student = $this->studentRepository->saveStudent([
             'user_id'                   =>  Auth::user()->id,
             'first_name'                =>  $request->input('first_name'),
             'middle_name'               =>  $request->input('middle_name'),
@@ -167,6 +168,26 @@ class StudentController extends Controller
                 'start_date'    =>  $item->start_date,
                 'end_date'      =>  $item->end_date
             ]);
+        }
+        
+        switch ($student->program_id) {
+            case 1:
+                //SWT-Spring
+                Notification::route('mail', 'swtspring@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
+                break;
+            case 2:
+                //Internship
+                Notification::route('mail', 'internship@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
+                break;
+            case 3:
+                //Career Traning
+                Notification::route('mail', 'careertraining@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
+                break;
+            case 4:
+                //SWT-Summer
+                Notification::route('mail', 'swtsummer@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
+                break;
+
         }
 
         return response()->json(['message' => 'Personal Details Updated']);
