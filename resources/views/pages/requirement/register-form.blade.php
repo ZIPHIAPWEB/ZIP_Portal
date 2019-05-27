@@ -350,16 +350,95 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">ZIP Travel Philippines</h4>
+                        <h4 class="modal-title">ZIP Travel Philippines - Privacy Policy</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="text-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis cumque esse et, expedita fugit inventore iure laborum mollitia nesciunt perspiciatis, provident saepe sequi velit voluptate? Modi pariatur soluta voluptatem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deserunt dicta earum enim est ex incidunt maiores maxime natus, officiis, saepe sunt ut, vero! Ad delectus fuga impedit magni natus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, consequatur ea error hic recusandae sapiente temporibus unde? Aliquid, amet cumque ipsam, itaque laborum magnam minima necessitatibus recusandae rerum sequi voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cupiditate eaque est iure laudantium quo repellat suscipit, totam! Cum cumque mollitia praesentium, quia quibusdam quo repudiandae sunt tenetur veniam voluptate.
-                            <br><br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
-                            <br><br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nostrum veniam voluptatem. Ab aliquam aliquid consequuntur, cum dicta ea eius, fugiat impedit iure nam provident quaerat recusandae sequi similique, totam! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aperiam deserunt dolor earum impedit laudantium numquam quaerat rem! At autem, cupiditate eos minima molestias natus placeat quam quidem saepe vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium adipisci at, dicta error ex fuga illo iure laborum laudantium minus nisi odit quasi quis, quos recusandae repudiandae saepe, veniam.
+                        <div style="height: 78vh; width: 100%; padding: 20px; overflow-y: scroll;">
+                                <b>I. PRIVACY POLICY STATEMENT</b>
+                                <p style="text-align: justify;">
+                                In accordance with the Data Privacy Act of 2019, and in recognition of our clients’ right to privacy and security of their information and documents, Zip Travel Philippines, through this privacy policy, outlines the guidelines of how the company collects, stores, shares, and processes information and documents that the applicants may provide/upload upon registering in the company portal. As such, it is understood that upon registration, the applicant authorizes Zip Travel Philippines, its affiliates, partner schools, visa sponsors, and the pertinent government entities, and organizations, to use any and all information and/or documents that he/she may provide/upload, for the processing of his/her pertinent program application. It is also understood that the applicant authorizes the company, the government of the Philippines, its agencies, and its political subdivisions, and the US government, its agencies, and its political subdivisions, to use such information and/or documents for the enforcement, and to ensure compliance with any pertinent Philippine and US law/s. Rest assured, any and all information and/or document, provided/uploaded in the website portal shall be kept confidential, and shall not be used for anything not related to the processing of the applicant’s program application, and the enforcement and/or compliance with any pertinent Philippine and US law, without the applicant’s consent.
+                                </p>               
+                                                
+                                <b>II.	INFORMATION COLLECTION AND STORAGE</b>
+                                <p style="text-align: justify;">
+                                Upon registration and in consonant with the needs and requirements of their program application, and pertinent Philippine and US law/s, program applicants may be asked to provide/upload information and/or documents which includes but is not limited to:
+                                </p>                                
+                                
+                                <b>PRELIMINIARY DOCUMENTS:</b>
+                                <ul>
+                                    <li>Update Resume</li>
+                                    <li>General Application/Registration Form</li>
+                                    <li>Application Letter/Letter of Introduction/Motivational Letter</li>
+                                    <li>2x2 Picture</li>
+                                    <li>Casual Photo (with friends or family)</li>
+                                    <li>Valid Passport</li>
+                                    <li>Copy of Grades/Transcript of Records</li>
+                                    <li>Proof of Student Status/Certificate of Graduation/Diploma</li>
+                                    <li>Two (2) Recommendation Letters</li>
+                                    <li>Certificate of Employment (Applicable to trainee only)</li>
+                                    <li>Previous or existing US Visa - if applicable</li>
+                                    <li>US Social Security Card - if applicable</li>
+                                </ul>
+                                
+                                <b>VISA SPONSORSHIP FORMS:</b>
+                                <ul>
+                                    <li>Sponsorship Form 1</li>
+                                    <li>Sponsorship Form 2</li>
+                                    <li>Sponsorship Form 4</li>
+                                    <li>Sponsorship Form 4</li>
+                                    <li>Sponsorship Form 5</li>
+                                    <li>Sponsorship Form 6</li>
+                                </ul>
+                                
+                                <b>ADDITIONAL DOCUMENTS:</b>
+                                <ul>
+                                    <li>Affidavit of Financial Support</li>
+                                    <li>NBI Clearance</li>
+                                    <li>Medical Certificate</li>
+                                    <li>Barangay Clearance – Student</li>
+                                    <li>Barangay Clearance – Parent</li>
+                                    <li>Parent’s Certificate of Employment</li>
+                                </ul>
+                                
+                                <b>PROOF OF PAYMENTS</b>
+                                <p style="text-align: justify;">
+                                Information and/or documents provided/uploaded by the program applicant in the portal are collected and stored in the server Zip Travel Philippines’ website. The company website and server are accessed, managed, and controlled by Zip Travel Philippines, and is hosted by Contabo, a third-party website hosting platform located in Germany. Be that as it may, Contabo, has no access to any information and document provided/uploaded, and stored in the company website and server.
+                                </p>
+                                <b>III. INFORMATION SHARING AND PROCESSING</b>
+                                <p style="text-align: justify;">
+                                Information and/or documents provided/uploaded in the company website and stored in the website server are used for the processing of the applicant’s program application, and the enforcement and compliance with any pertinent Philippine and US laws. In addition, such information and/or documents are forwarded and shared to the company’s affiliates, partner schools, visa sponsors, and the following government entities, and organizations, for the processing of their program application and to ensure compliance with any pertinent Philippine and US law/s
+                                </p>
+                                <b>Visa Sponsors (such as but not limited to):</b>
+                                <ul>
+                                    <li>Alliance Abroad Group</li>
+                                    <li>InterExchange</li>
+                                    <li>Cultural Homestay International</li>
+                                    <li>International Cultural Exchange Organization</li>
+                                </ul>
+                                    
+                                <b>IV.	RIGHTS OF THE APPLICANT</b>
+                                <p style="text-align: justify;">
+                                Upon registration and by providing/uploading information and/or documents needed for the processing of applicant’s program application, and for the enforcement and compliance with any pertinent Philippine and US law/s, Zip Travel Philippines recognizes the applicant’s rights to privacy and security of information and documents. As such, in consonant with Section 16 of the Data Privacy Act of 2012, and any other pertinent Philippine and US law/s, it is recognized that the applicant has the following rights:
+                                </p>
+                                <ol>
+                                    <li>Be informed of the collection, storage, and processing of the provided/uploaded information and/or documents, upon demand.</li>
+                                    <li>Be informed of the way the provided/uploaded information and/or documents are accessed, processed, and/or used, the corresponding reasons for such access, processing, and usage, and who or which entities have accessed, processed, and used such information and/or documents, upon demand.</li>
+                                    <li>Rectification/amendment of any information and/or documents provided/uploaded, upon demand, provided that there is due compliance with any corresponding processes, and/or pertinent Philippine and US law/s.</li>
+                                    <li>Suspension of the accessing, processing, and/or usage, of any information and/or documents provided/uploaded, upon demand, provided that there is due compliance with any corresponding processes, and/or pertinent Philippine and US law/s.</li>
+                                    <li>Withdraw, block, delete, or destroy any information and/or documents provided/uploaded, upon demand, provided that there is due compliance with any corresponding processes, and/or pertinent Philippine and US law/s.</li>
+                                    <li>Be indemnified for any damages sustained due to false, unlawfully obtained, unauthorized, or improper use of the information and/or documents by the company, provided that such damage is duly proved, and by virtue of a valid judgment by a court of competent jurisdiction rendered against the company.</li>
+                                </ol>
+                                <b>V. USE OF COOKIES</b>
+                                <p style="text-align: justify;">
+                                Usage of Zip Travel Philippines’ website entails the sending of cookies, a text file containing alphanumeric characters, to the user’s computer or device. Said cookies ensure that the user has a faster and smoother navigation and access to the company website. It also allows us to track how the user accesses and uses our website, which we could use to improve and provide a better service through our website. Cookies can be controlled or reset through the computer’s or device’s web browser. However, it is advised that the user allows the usage and sending of cookies, since restricting or prohibiting cookies, may disable some of the features and functionality of the website, and may affect the ease of use and navigation.
+                                </p>
+                                <b>VI.	CHANGES TO THE PRIVACY POLICY</b>
+                                <p style="text-align: justify;">
+                                Zip Travel Philippines has the right to change/modify/update its Privacy Policy as the needs of its information practices or business practices, and pertinent law/s may require. Any material changes/modifications/updates in the policy shall be posted in the company website. As such, it is encouraged that the applicant or user periodically review the Privacy Policy. Registration by the applicant, and the continued use and access of the website by any user, is deemed to be an implied acceptance to the current Privacy Policy, or to any changes to the policy that may take effect.
+                                </p>
+                                <p style="text-align: justify;">
+                                    For any inquiries or concern regarding Zip Travel Philippines’ Privacy Policy, you may contact us at (632) 5598214or email us at info@ziptravel.com.ph.  Thank you.
+                                </p>
                         </div>
                     </div>
                     <div class="modal-footer clearfix">
