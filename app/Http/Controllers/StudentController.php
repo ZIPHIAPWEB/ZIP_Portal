@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\RegisteredStudentNotification;
+use Illuminate\Support\Facades\Notification;
 
 class StudentController extends Controller
 {
