@@ -10,10 +10,8 @@
                     <div class="register-logo">
                         <a href="{{ route('logout') }}"><b>ZIP TRAVEL </b>Philippines</a>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width:' + level / 5 * 100 + '%'">
-                            @{{ level / 5 * 100 + '% of 100%' }}
-                        </div>
+                    <div class="progress sm">
+                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width:' + level / 5 * 100 + '%'"></div>
                     </div>
                     <div class="box box-default">
                         <div class="box-body">
@@ -343,6 +341,7 @@
                                 </form>
                             </section>
                             <div class="form-group">
+                                <i class="text-center">Put N/A if not applicable</i>
                                 <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat btn-sm">Next</button>
                                 <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat btn-sm">Previous</button>
                                 <button v-if="level === 5" @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
@@ -922,8 +921,8 @@
                         }).catch((error) => {
                             this.errors = error.response.data.errors;
                             swal({
-                                title: 'Please fill out the required fields!',
-                                type: 'danger',
+                                title: 'Please complete all required fields!',
+                                type: 'error',
                                 confirmButtonText: 'Go Back'
                             })
                     });
