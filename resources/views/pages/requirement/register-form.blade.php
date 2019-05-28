@@ -109,8 +109,8 @@
                                         <label for="">School Name <i class="text-red">*</i></label>
                                         <select v-model="tertiary.school" class="form-control input-sm">
                                             <option value="" active>Select School</option>
-                                            <option value="others">Other school...</option>
                                             <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
+                                            <option value="others">Other school...</option>
                                         </select>
                                         <input v-if="tertiary.school == 'others'" v-model="tertiary.other_school" type="text" class="form-control input-sm m-t-10" placeholder="Enter other school">
                                         <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
@@ -119,8 +119,8 @@
                                         <label for="">Degree <i class="text-red">*</i></label>
                                         <select v-model="tertiary.degree" class="form-control input-sm">
                                             <option value="">Select Degree</option>
-                                            <option value="others">Other degree...</option>
                                             <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
+                                            <option value="others">Other degree...</option>
                                         </select>
                                         <input v-if="tertiary.degree == 'others'" v-model="tertiary.other_degree" type="text" class="form-control input-sm m-t-10" placeholder="Enter other degree">
                                         <span class="help-block text-red" v-if="errors.t_degree">required</span>
