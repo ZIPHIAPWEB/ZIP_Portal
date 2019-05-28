@@ -1604,7 +1604,7 @@
                                 confirmButtonText: 'Go Back'
                             })
                         })
-                }
+                },
                 hideField(field) {
                     switch (field) {
                         case 'firstName':
