@@ -343,8 +343,8 @@
                                 </form>
                             </section>
                             <div class="form-group">
-                                <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat">Next</button>
-                                <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat">Previous</button>
+                                <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat btn-sm">Next</button>
+                                <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat btn-sm">Previous</button>
                                 <button v-if="level === 5" @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
                             </div>
                         </div>
@@ -443,7 +443,7 @@
                                 Zip Travel Philippines has the right to change/modify/update its Privacy Policy as the needs of its information practices or business practices, and pertinent law/s may require. Any material changes/modifications/updates in the policy shall be posted in the company website. As such, it is encouraged that the applicant or user periodically review the Privacy Policy. Registration by the applicant, and the continued use and access of the website by any user, is deemed to be an implied acceptance to the current Privacy Policy, or to any changes to the policy that may take effect.
                                 </p>
                                 <p style="text-align: justify;">
-                                    For any inquiries or concern regarding Zip Travel Philippines’ Privacy Policy, you may contact us at (632) 5598214or email us at info@ziptravel.com.ph.  Thank you.
+                                    For any inquiries or concern regarding Zip Travel Philippines’ Privacy Policy, you may contact us at (632) or <b>5598213</b> email us at <a href="mailto:info@ziptravel.com.ph">info@ziptravel.com.ph</a>.  Thank you.
                                 </p>
                         </div>
                     </div>
@@ -467,8 +467,8 @@
                                     <td colspan="2" class="text-bold">Personal Details</td>
                                 </tr>
                                 <tr>
-                                    <td>First Name</td>
-                                    <td style="width: 30%;"lass="text-bold">@{{ student.firstName }}</td>
+                                    <td style="width: 30%;">First Name</td>
+                                    <td class="text-bold">@{{ student.firstName }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -530,8 +530,8 @@
                                     <td colspan="2" class="text-bold">Father Details</td>
                                 </tr>
                                 <tr>
-                                    <td>First Name</td>
-                                    <td style="width: 30%" class="text-bold">@{{ father.first_name }}</td>
+                                    <td style="width: 30%">First Name</td>
+                                    <td class="text-bold">@{{ father.first_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -561,8 +561,8 @@
                                     <td colspan="2" class="text-bold">Mother Details</td>
                                 </tr>
                                 <tr>
-                                    <td>First Name</td>
-                                    <td style="width: 30%;" class="text-bold">@{{ mother.first_name }}</td>
+                                    <td style="width: 30%;">First Name</td>
+                                    <td class="text-bold">@{{ mother.first_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -592,8 +592,8 @@
                                     <td colspan="2" class="text-bold">Primary Education</td>
                                 </tr>
                                 <tr>
-                                    <td>School</td>
-                                    <td style="width: 30%;" class="text-bold">@{{ primary.school }}</td>
+                                    <td style="width: 30%;">School</td>
+                                    <td class="text-bold">@{{ primary.school }}</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
@@ -611,8 +611,8 @@
                                     <td colspan="2" class="text-bold">Secondary Education</td>
                                 </tr>
                                 <tr>
-                                    <td>School</td>
-                                    <td style="width: 30%;" class="text-bold">@{{ secondary.school }}</td>
+                                    <td style="width: 30%;">School</td>
+                                    <td class="text-bold">@{{ secondary.school }}</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
@@ -634,8 +634,8 @@
                                 <td colspan="2" class="text-bold">Tertiary Education</td>
                             </tr>
                             <tr>
-                                <td>School</td>
-                                <td style="width: 30%;" class="text-bold">@{{ tertiary.school.name }}</td>
+                                <td style="width: 30%;">School</td>
+                                <td class="text-bold">@{{ tertiary.school.name }}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
@@ -682,7 +682,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>End Date</td>
-                                                    <td class="text-bold">@{{ (experience.presentDate) ? 'Present' : experience.end_date }}</td>
+                                                    <td class="text-bold">@{{ (experience.presentDate == true) ? 'Present' : experience.end_date }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -919,7 +919,11 @@
                             $('#verify-modal').modal('show');
                         }).catch((error) => {
                             this.errors = error.response.data.errors;
-                            console.log(error.response.data);
+                            swal({
+                                title: 'Please fill out the required fields!',
+                                type: 'danger',
+                                confirmButtonText: 'Go Back'
+                            })
                     });
                 },
                 loadSchools() {

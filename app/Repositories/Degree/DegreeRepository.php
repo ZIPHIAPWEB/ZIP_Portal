@@ -21,7 +21,7 @@ class DegreeRepository extends BaseRepository implements IDegreeRepository
 
     public function getAllDegree()
     {
-        return parent::findAll();
+        return parent::findAll(['*'], 'name', 'asc');
     }
 
     public function getOneDegree(int $id)

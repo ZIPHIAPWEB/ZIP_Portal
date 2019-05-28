@@ -21,7 +21,7 @@ class SchoolRepository extends BaseRepository implements ISchoolRepository
 
     public function getAllSchool()
     {
-        return parent::findAll();
+        return parent::findAll(['*'], 'name', 'asc');
     }
 
     public function saveSchool(array $attributes)
