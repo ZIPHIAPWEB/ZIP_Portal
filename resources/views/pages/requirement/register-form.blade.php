@@ -16,7 +16,10 @@
                     <div class="box box-default">
                         <div class="box-body">
                             <section id="level-one" v-if="level === 1">
-                                <p class="login-box-msg">Personal Details</p>
+                                <h4>
+                                    <b>PERSONAL DETAILS</b>
+                                </h4>
+                                <br>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name: <i class="text-red">*</i></label>
@@ -98,7 +101,10 @@
                                 </div>
                             </section>
                             <section action="" id="level-four" v-if="level === 2">
-                                <p class="login-box-msg">Educational Background</p>
+                                <h4>
+                                    <b>EDUCATIONAL BACKGROUND</b>
+                                </h4>
+                                <br>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label for="" class="control-label">Tertiary</label>
@@ -195,7 +201,10 @@
                                 </div>
                             </section>
                             <section id="level-two" v-if="level === 3">
-                                <p class="login-box-msg">Contact Details</p>
+                                <h4>
+                                    <b>CONTACT DETAILS</b>
+                                </h4>
+                                <br>
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
@@ -227,7 +236,10 @@
                                 </div>
                             </section>
                             <section id="level-three" v-if="level === 4">
-                                <p class="login-box-msg">Parent's Details</p>
+                                <h4>
+                                    <b>PARENT'S DETAILS</b>
+                                </h4>
+                                <br>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label for="" class="control-label">Father's Details</label>
@@ -308,7 +320,10 @@
                             <section id="level-five" v-if="level === 5">
                                 <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">Remove</button>
                                 <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">Add</button>
-                                <p class="login-box-msg">Work Experience/On-the-Job Training</p>
+                                <h4>
+                                    <b>WORK EXPERIENCE/ON-THE-JOB TRAINING</b>
+                                </h4>
+                                <br>
 
                                 <form v-for="item in experiences">
                                     <div class="row">
