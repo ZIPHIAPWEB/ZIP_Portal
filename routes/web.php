@@ -253,7 +253,7 @@ Route::prefix('mother')->group(function() {
 });
 
 Route::prefix('experience')->group(function() {
-    Route::post('/{id}/update', 'ExperienceController@update')->name('experience.update');
+    Route::post('{id}/{field}/update', 'ExperienceController@update')->name('experience.update');
     Route::post('/{id}/delete', 'ExperienceController@delete')->name('experience.delete');
 });
 

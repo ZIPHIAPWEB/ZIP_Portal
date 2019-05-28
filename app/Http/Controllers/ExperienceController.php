@@ -13,9 +13,11 @@ class ExperienceController extends Controller
         $this->experienceRepository = $experienceRepository;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $field, $id)
     {
-        $this->experienceRepository->updateExperience($id, $request->all());
+        $this->experienceRepository->whereUpdate(['id' => $id], [
+            $field => $request->input('field')
+        ]);
 
         return response()->json(['message' => 'Experience Updated']);
     }

@@ -871,26 +871,77 @@
                             <tbody>
                                 <tr>
                                     <td style="width: 35%;">Company Name</td>
-                                    <td class="text-bold">
-                                        @{{ exp.company }}
+                                    <td v-if="!experience.companyIsEdit">
+                                        <label for="" class="text-bold">@{{ exp.company }}</label>
+                                        <a @click="hideField('experienceCompany')" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <input v-model="field" type="text" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateExperience('company', field, exp.id); experience.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Company Address</td>
-                                    <td class="text-bold">
-                                        @{{ exp.address }}
+                                    <td v-if="!experience.addressIsEdit">
+                                        <label for="" class="text-bold">@{{ exp.address }}</label>
+                                        <a @click="hideField('experienceAddress')" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <input v-model="field" type="text" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateExperience('address', field, exp.id); experience.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Employment Period</td>
-                                    <td class="text-bold">
-                                        @{{ exp.start_date | toFormattedDateString }} > @{{ exp.end_date }}
+                                    <td>Start Date</td>
+                                    <td v-if="!experience.startDateIsEdit">
+                                        <label for="" class="text-bold">@{{ exp.start_date | toFormattedDateString }}</label>
+                                        <a @click="hideField('experienceStart')" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <input v-model="field" type="date" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateExperience('start_date', field, exp.id); experience.startDateIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>End Date</td>
+                                    <td v-if="!experience.endDateIsEdit">
+                                        <label for="" class="text-bold">@{{ exp.end_date }}</label>
+                                        <a @click="hideField('experienceEnd')" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <input v-model="field" type="date" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateExperience('end_date', field, exp.id); experience.endDateIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Job Description</td>
-                                    <td class="text-bold">
-                                        @{{ exp.description }}
+                                    <td v-if="!experience.descriptionIsEdit">
+                                        <label for="" class="text-bold">@{{ exp.description }}</label>
+                                        <a @click="hideField('experienceDescription');" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <input v-model="field" type="text" class="form-control input-sm">
+                                        <span class="input-group-btn">
+                                            <button @click="updateExperience('description', field, exp.id); experience.descriptionIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1283,6 +1334,13 @@
                     startDateIsEdit: false,
                     graduatedIsEdit: false
                 },
+                experience: {
+                    companyIsEdit: false,
+                    addressIsEdit: false,
+                    startDateIsEdit: false,
+                    endDateIsEdit: false,
+                    descriptionIsEdit: false,
+                },
                 field: '',
                 loading: false,
                 file: ''
@@ -1525,6 +1583,28 @@
                         })
                     })
                 },
+                updateExperience(field, input, id) {
+                    this.loading = true;
+                    let formData = new FormData();
+                    formData.append('field', input);
+                    axios.post(`/experience/${field}/${id}/update`, formData)
+                        .then((response) => {
+                            this.loading = false;
+                            this.field = '';
+                            this.loadStudentDetails();
+                            swal({
+                                title: response.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            });
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong',
+                                type: 'error',
+                                confirmButtonText: 'Go Back'
+                            })
+                        })
+                }
                 hideField(field) {
                     switch (field) {
                         case 'firstName':
@@ -1838,6 +1918,41 @@
                             this.tertiary.degreeIsEdit = false;
                             this.tertiary.startDateIsEdit = false;
                             this.tertiary.graduatedIsEdit = true;
+                            break;
+                        case 'experienceCompany':
+                            this.experience.companyIsEdit = true;
+                            this.experience.addressIsEdit = false;
+                            this.experience.startDateIsEdit = false;
+                            this.experience.endDateIsEdit = false;
+                            this.experience.descriptionIsEdit = false;
+                            break;
+                        case 'experienceAddress':
+                            this.experience.companyIsEdit = false;
+                            this.experience.addressIsEdit = true;
+                            this.experience.startDateIsEdit = false;
+                            this.experience.endDateIsEdit = false;
+                            this.experience.descriptionIsEdit = false;
+                            break;
+                        case 'experienceStart':
+                            this.experience.companyIsEdit = false;
+                            this.experience.addressIsEdit = false;
+                            this.experience.startDateIsEdit = true;
+                            this.experience.endDateIsEdit = false;
+                            this.experience.descriptionIsEdit = false;
+                            break;
+                        case 'experienceEnd':
+                            this.experience.companyIsEdit = false;
+                            this.experience.addressIsEdit = false;
+                            this.experience.startDateIsEdit = false;
+                            this.experience.endDateIsEdit = true;
+                            this.experience.descriptionIsEdit = false;
+                            break;
+                        case 'experienceDescription':
+                            this.experience.companyIsEdit = false;
+                            this.experience.addressIsEdit = false;
+                            this.experience.startDateIsEdit = false;
+                            this.experience.endDateIsEdit = false;
+                            this.experience.descriptionIsEdit = true;
                             break;
                     }
                 }
