@@ -878,10 +878,15 @@
                                         </a>
                                     </td>
                                     <td v-else>
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateExperience('company', field, exp.id); experience.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateExperience('company', field, exp.id); experience.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="experience.companyIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -893,10 +898,15 @@
                                         </a>
                                     </td>
                                     <td v-else>
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateExperience('address', field, exp.id); experience.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateExperience('address', field, exp.id); experience.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                    <button @click="experience.companyIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -908,10 +918,15 @@
                                         </a>
                                     </td>
                                     <td v-else>
-                                        <input v-model="field" type="date" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateExperience('start_date', field, exp.id); experience.startDateIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
-                                        </span>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateExperience('start_date', field, exp.id); experience.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="experience.startDateIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -923,10 +938,15 @@
                                         </a>
                                     </td>
                                     <td v-else>
-                                        <input v-model="field" type="date" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateExperience('end_date', field, exp.id); experience.endDateIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
-                                        </span>
+                                        <div class="input-group">
+                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateExperience('end_date', field, exp.id); experience.endDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="experience.endDateIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -938,10 +958,15 @@
                                         </a>
                                     </td>
                                     <td v-else>
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateExperience('description', field, exp.id); experience.descriptionIsEdit = false;" class="btn btn-primary btn-flat">Update</button>
-                                        </span>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateExperience('description', field, exp.id); experience.descriptionIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group btn">
+                                                <button @click="experience.descriptionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
