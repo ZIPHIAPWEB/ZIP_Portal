@@ -904,7 +904,7 @@
                                                 <button @click="updateExperience('address', field, exp.id); experience.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                             </span>
                                             <span class="input-group-btn">
-                                                    <button @click="experience.companyIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                    <button @click="experience.addressIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                             </span>
                                         </div>
                                     </td>
