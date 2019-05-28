@@ -648,7 +648,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
+                                            <input v-model="field" type="month" class="form-control input-sm">
                                             <span class="input-group-btn">
                                                 <button @click="updatePrimary('date_graduated', field); primary.graduatedIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                             </span>

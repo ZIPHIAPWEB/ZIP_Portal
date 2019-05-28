@@ -41,9 +41,10 @@ class AssessmentResponse extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->from('system@ziptravel.com.ph', 'ZIP Travel PH')
-                                ->subject('E-mail Notification')
-                                ->markdown('mail.assessment', ['data' => $this->data]);
+        return (new MailMessage)
+                    ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
+                    ->subject('E-mail Notification')
+                    ->markdown('mail.assessment', ['data' => $this->data]);
     }
 
     /**

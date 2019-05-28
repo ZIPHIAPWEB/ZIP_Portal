@@ -607,6 +607,7 @@
                                                     @{{ student.secondary.address }}
                                                 </td>
                                             </tr>
+                                            <!--
                                             <tr>
                                                 <td class="text-sm">
                                                     Start Date
@@ -615,6 +616,7 @@
                                                     @{{ student.secondary.start_date }}
                                                 </td>
                                             </tr>
+                                            -->
                                             <tr>
                                                 <td class="text-sm">
                                                     Date Graduated
@@ -834,7 +836,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Stipend
+                                                    Stipend Per Hour
                                                 </td>
                                                 <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.stipend }}</label>

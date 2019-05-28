@@ -68,7 +68,7 @@
 
             <a href="{{ route('forgot.password') }}">I forgot my password</a><br>
             <a href="{{ route('register') }}" class="text-center">Register as a participant</a><br>
-            <a href="{{ route('coor.register') }}" class="text-center">Register as a coordinator</a>
+            <!--<a href="{{ route('coor.register') }}" class="text-center">Register as a coordinator</a>-->
         </div>
         <!-- /.login-box-body -->
     </div>

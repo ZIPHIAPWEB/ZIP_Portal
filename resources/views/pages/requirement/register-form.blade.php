@@ -109,16 +109,20 @@
                                         <label for="">School Name <i class="text-red">*</i></label>
                                         <select v-model="tertiary.school" class="form-control input-sm">
                                             <option value="" active>Select School</option>
+                                            <option value="others">Other school...</option>
                                             <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
                                         </select>
+                                        <input v-if="tertiary.school == 'others'" v-model="tertiary.other_school" type="text" class="form-control input-sm m-t-10" placeholder="Enter other school">
                                         <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label for="">Degree <i class="text-red">*</i></label>
                                         <select v-model="tertiary.degree" class="form-control input-sm">
                                             <option value="">Select Degree</option>
+                                            <option value="others">Other degree...</option>
                                             <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
                                         </select>
+                                        <input v-if="tertiary.degree == 'others'" v-model="tertiary.other_degree" type="text" class="form-control input-sm m-t-10" placeholder="Enter other degree">
                                         <span class="help-block text-red" v-if="errors.t_degree">required</span>
                                     </div>
                                     <div class="form-group col-xs-12">
@@ -178,14 +182,16 @@
                                         <input v-model="primary.address" type="text" class="form-control input-sm" placeholder="Primary School Address">
                                         <span class="help-block text-red" v-if="errors.p_address">required</span>
                                     </div>
+                                    <!--
                                     <div class="form-group col-xs-6">
                                         <label for="">Start Date <i class="text-re">*</i></label>
                                         <input v-model="tertiary.start_date" type="date" class="form-control input-sm" placeholder="Tertiary Start Date">
                                         <span class="help-block text-red" v-if="errors.t_start_date">required</span>
                                     </div>
-                                    <div class="form-group col-xs-6">
+                                    -->
+                                    <div class="form-group col-xs-12">
                                         <label for="">Date Graduated <i class="text-red">*</i></label>
-                                        <input v-model="primary.date_graduated" type="date" class="form-control input-sm">
+                                        <input v-model="primary.date_graduated" type="month" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.p_date_graduated">required</span>
                                     </div>
                                 </div>
@@ -195,7 +201,7 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
-                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
+                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="(02) 673-1234">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
@@ -302,8 +308,8 @@
                             </section>
 
                             <section id="level-five" v-if="level === 5">
-                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">-</button>
-                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">+</button>
+                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="deleteElement()">Remove</button>
+                                <button class="btn btn-primary btn-xs btn-flat pull-right" @click="addElement()">Add</button>
                                 <p class="login-box-msg">Work Experience/On-the-Job Training</p>
 
                                 <form v-for="item in experiences">
@@ -462,7 +468,7 @@
                                 </tr>
                                 <tr>
                                     <td>First Name</td>
-                                    <td class="text-bold">@{{ student.firstName }}</td>
+                                    <td style="width: 30%;"lass="text-bold">@{{ student.firstName }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -525,7 +531,7 @@
                                 </tr>
                                 <tr>
                                     <td>First Name</td>
-                                    <td class="text-bold">@{{ father.first_name }}</td>
+                                    <td style="width: 30%" class="text-bold">@{{ father.first_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -556,7 +562,7 @@
                                 </tr>
                                 <tr>
                                     <td>First Name</td>
-                                    <td class="text-bold">@{{ mother.first_name }}</td>
+                                    <td style="width: 30%;" class="text-bold">@{{ mother.first_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Middle Name</td>
@@ -587,7 +593,7 @@
                                 </tr>
                                 <tr>
                                     <td>School</td>
-                                    <td class="text-bold">@{{ primary.school }}</td>
+                                    <td style="width: 30%;" class="text-bold">@{{ primary.school }}</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
@@ -606,7 +612,7 @@
                                 </tr>
                                 <tr>
                                     <td>School</td>
-                                    <td class="text-bold">@{{ secondary.school }}</td>
+                                    <td style="width: 30%;" class="text-bold">@{{ secondary.school }}</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
@@ -629,7 +635,7 @@
                             </tr>
                             <tr>
                                 <td>School</td>
-                                <td class="text-bold">@{{ tertiary.school.name }}</td>
+                                <td style="width: 30%;" class="text-bold">@{{ tertiary.school.name }}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
@@ -660,7 +666,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Company</td>
-                                                    <td class="text-bold">@{{ experience.company }}</td>
+                                                    <td style="width: 30%;" class="text-bold">@{{ experience.company }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Address</td>
@@ -752,7 +758,9 @@
                 },
                 tertiary: {
                     school: '',
+                    other_school: '',
                     degree: '',
+                    other_degree: '',
                     address: '',
                     start_date: '',
                     date_graduated: ''
@@ -849,7 +857,7 @@
                     formData.append('s_address', this.secondary.address);
                     formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
-                    formData.append('t_school', this.tertiary.school.name);
+                    formData.append('t_school', (this.tertiary.school.name == 'others') ? this.tertiary.other_school : this.tertiary.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
