@@ -443,8 +443,10 @@
                                 Zip Travel Philippines has the right to change/modify/update its Privacy Policy as the needs of its information practices or business practices, and pertinent law/s may require. Any material changes/modifications/updates in the policy shall be posted in the company website. As such, it is encouraged that the applicant or user periodically review the Privacy Policy. Registration by the applicant, and the continued use and access of the website by any user, is deemed to be an implied acceptance to the current Privacy Policy, or to any changes to the policy that may take effect.
                                 </p>
                                 <p style="text-align: justify;">
-                                    For any inquiries or concern regarding Zip Travel Philippines’ Privacy Policy, you may contact us at (632) or <b>5598213</b> email us at <a href="mailto:info@ziptravel.com.ph">info@ziptravel.com.ph</a>.  Thank you.
+                                    For any inquiries or concern regarding Zip Travel Philippines’ Privacy Policy, you may contact us at (632) <b>5598213</b> or email us at <a href="mailto:info@ziptravel.com.ph">info@ziptravel.com.ph</a>.
                                 </p>
+                                <br>
+                                Thank you.
                         </div>
                     </div>
                     <div class="modal-footer clearfix">
