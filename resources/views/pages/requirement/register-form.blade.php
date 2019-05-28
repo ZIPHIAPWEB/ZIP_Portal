@@ -682,7 +682,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>End Date</td>
-                                                    <td class="text-bold">@{{ experience.end_date }}</td>
+                                                    <td class="text-bold">@{{ (experience.presentDate) ? 'Present' : experience.end_date }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
