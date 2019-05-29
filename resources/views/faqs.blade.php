@@ -23,7 +23,7 @@
                 class="collapse navbar-collapse flex-row-reverse" id="navcol-1">
             <ul class="nav navbar-nav">
                 <li class="nav-item" role="presentation"><a class="nav-link text-white" href="faqs.html" data-bs-hover-animate="pulse">FAQS</a></li>
-                <!--<li class="nav-item" role="presentation"><a class="nav-link text-white btn btn-primary" href="#">JOIN US</a></li>-->
+                <li class="nav-item" role="presentation"><a class="nav-link text-white btn btn-primary" href="#">JOIN US</a></li>
             </ul>
         </div>
     </div>
