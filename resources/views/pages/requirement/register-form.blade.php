@@ -273,7 +273,7 @@
                                     </div>
                                     <div class="form-group col-xs-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
-                                        <input v-model="father.contact_no" type="text" class="form-control input-sm" placeholder="Father's Contact No.">
+                                        <input v-model="father.contact_no" type="number" class="form-control input-sm" placeholder="Father's Contact No.">
                                         <span class="help-block text-red" v-if="errors.f_contact">required</span>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@
                                     </div>
                                     <div class="form-group col-xs-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
-                                        <input v-model="mother.contact_no" type="text" class="form-control input-sm" placeholder="Mother's Contact No.">
+                                        <input v-model="mother.contact_no" type="number" class="form-control input-sm" placeholder="Mother's Contact No.">
                                         <span class="help-block text-red" v-if="errors.m_contact">required</span>
                                     </div>
                                 </div>
@@ -874,7 +874,7 @@
                     formData.append('s_address', this.secondary.address);
                     formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
-                    formData.append('t_school', (this.tertiary.school.name == 'others') ? this.tertiary.other_school : this.tertiary.name);
+                    formData.append('t_school', (this.tertiary.school.name == 'others') ? this.tertiary.other_school : this.tertiary.school.name);
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
