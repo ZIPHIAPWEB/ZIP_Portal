@@ -345,5 +345,5 @@ Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.i
 
 Route::get('/test', function() {
 
-    return \App\Student::with('payment')->get();
+    return bcrypt('ziprocks5000!');
 });

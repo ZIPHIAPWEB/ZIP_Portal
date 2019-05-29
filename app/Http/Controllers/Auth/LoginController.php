@@ -55,7 +55,7 @@ class LoginController extends Controller
         
             if (!$socialProvider) {
                 $user = User::firstOrCreate([
-                    'name'      =>  $social_user->getName(),
+                    'name'      =>  str_replace(' ', '', $social_user->getName()),
                     'email'     =>  $social_user->getEmail(),
                     'password'  =>  '',
                     'verified'  =>  true,
