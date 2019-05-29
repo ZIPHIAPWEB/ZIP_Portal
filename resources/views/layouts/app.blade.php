@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ZIP Portal | @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
+    <link rel="shortcut icon" href="{{ asset('logo.png') }}" type="image/x-icon"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
