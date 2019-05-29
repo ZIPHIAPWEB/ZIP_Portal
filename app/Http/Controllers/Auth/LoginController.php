@@ -72,6 +72,8 @@ class LoginController extends Controller
                     'provider'      =>  'google'
                 ]);
 
+                auth()->login($user, false);
+                
                 return redirect('portal');
             } else {
                 $user = User::find($socialProvider->user_id);
