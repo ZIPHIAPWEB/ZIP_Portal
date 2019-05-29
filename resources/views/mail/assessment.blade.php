@@ -5,6 +5,6 @@
     Assessment Status : {{ $data['assessment'] }}
     Message: {{ $data['message'] }}
 
-    Thanks,<br>
+    Thanks,
     ZIP Travel PH
 @endcomponent

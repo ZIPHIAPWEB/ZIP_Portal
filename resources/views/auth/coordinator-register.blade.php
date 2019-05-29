@@ -70,13 +70,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <input name="contact-1" type="text" class="form-control" placeholder="Contact #1" maxlength="11">
-                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <input name="contact-2" type="text" class="form-control" placeholder="Contact #2" maxlength="11">
-                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                                     </div>
                                 </div>
                             </div>

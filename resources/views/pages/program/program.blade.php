@@ -249,7 +249,7 @@
                                                 <div class="box-body">
                                                     <div class="form-group col-xs-12">
                                                         <label for="" class="control-label">Assessment Status</label>
-                                                        <select class="form-control input-sm">
+                                                        <select v-model="assessed.status" class="form-control input-sm">
                                                             <option value="">Select status</option>
                                                             <option value="Passed">Passed</option>
                                                             <option value="Failed">Failed</option>
@@ -257,7 +257,7 @@
                                                     </div>
                                                     <div class="form-group col-xs-12">
                                                         <label for="" class="control-label">Assessment Message</label>
-                                                        <textarea cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
+                                                        <textarea v-model="assessed.message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
                                                     </div>
                                                     <div class="form-group col-xs-12">
                                                         <button @click="submitAssessed()" class="btn btn-primary btn-block btn-flat btn-sm">Submit</button>
