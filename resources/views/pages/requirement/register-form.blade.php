@@ -708,7 +708,7 @@
                         </table>
                     </div>
                     <div class="modal-footer clearfix">
-                        <button @click="submit" class="btn btn-success btn-flat btn-sm btn-block pull-right">Submit</button>
+                        <button :disabled="button_disabled" @click="submit" class="btn btn-success btn-flat btn-sm btn-block pull-right">Submit</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -721,6 +721,7 @@
         const app = new Vue({
             el: '#app',
             data: {
+                button_disabled: false,
                 level: 1,
                 schools: [],
                 school: [],
@@ -881,8 +882,10 @@
                     formData.append('branch', this.student.branch);
                     formData.append('experience', JSON.stringify(this.experiences));
                     this.loading = true;
+                    this.button_disabled = true;
                     axios.post(`/stud/details/store`, formData)
                         .then((response) => {
+                            this.button_disabled = false;
                             location.href = '{{ route('dash.student') }}'
                         }).catch((error) => {
                             console.log(error);
