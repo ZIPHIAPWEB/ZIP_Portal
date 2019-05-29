@@ -681,8 +681,8 @@
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
                                                 <tr>
-                                                    <td>Company</td>
-                                                    <td style="width: 30%;" class="text-bold">@{{ experience.company }}</td>
+                                                    <td style="width: 30%;">Company</td>
+                                                    <td class="text-bold">@{{ experience.company }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Address</td>
