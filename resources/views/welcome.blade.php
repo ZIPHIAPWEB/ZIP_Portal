@@ -27,7 +27,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#programs" data-bs-hover-animate="pulse">PROGRAMS</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#contact" data-bs-hover-animate="pulse">CONTACT</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link text-white" href="{{ route('faqs') }}" data-bs-hover-animate="pulse">FAQS</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
+                <!--<li class="nav-item" role="presentation"><a class="nav-link text-white active btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>-->
             </ul>
         </div>
     </div>
