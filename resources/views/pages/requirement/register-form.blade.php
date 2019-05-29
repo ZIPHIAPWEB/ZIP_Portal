@@ -888,6 +888,7 @@
                             this.button_disabled = false;
                             location.href = '{{ route('dash.student') }}'
                         }).catch((error) => {
+                            this.button_disabled = false;
                             console.log(error);
                     });
                 },
