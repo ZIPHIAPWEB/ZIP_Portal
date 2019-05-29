@@ -51,39 +51,40 @@ class LoginController extends Controller
     {
         try {
             $social_user = Socialite::driver('google')->stateless()->user();
+            $socialProvider = SocialProvider::where('provider_id', $social_user->getId())->first();
+        
+            if (!$socialProvider) {
+                $user = User::firstOrCreate([
+                    'name'      =>  $social_user->getName(),
+                    'email'     =>  $social_user->getEmail(),
+                    'password'  =>  '',
+                    'verified'  =>  true,
+                    'vToken'    =>  '',
+                    'isOnline'  =>  false,
+                    'isFilled'  =>  false
+                ]);
 
+                $user->attachRole('student');
+
+                SocialProvider::create([
+                    'user_id'       =>  $user->id,
+                    'provider_id'   =>  $social_user->getId(),
+                    'provider'      =>  'google'
+                ]);
+
+                return redirect('portal');
+            } else {
+                $user = User::find($socialProvider->user_id);
+
+                $user->update([
+                    'isOnline'  =>  true
+                ]);
+
+                auth()->login($user, false);
+
+                return redirect('portal');
+            }
         } catch (Exception $e) {
-            return redirect('portal');
-        }
-
-        $socialProvider = SocialProvider::where('provider_id', $social_user->getId())->first();
-        if (!$socialProvider) {
-            $user = User::firstOrCreate([
-                'name'      =>  $social_user->getName(),
-                'email'     =>  $social_user->getEmail(),
-                'password'  =>  '',
-                'verified'  =>  true,
-                'vToken'    =>  '',
-                'isOnline'  =>  false,
-                'isFilled'  =>  false
-            ]);
-
-            $user->attachRole('student');
-
-            SocialProvider::create([
-                'user_id'       =>  $user->id,
-                'provider_id'   =>  $social_user->getId(),
-                'provider'      =>  'google'
-            ]);
-        } else {
-            $user = User::find($socialProvider->user_id);
-
-            $user->update([
-                'isOnline'  =>  true
-            ]);
-
-            auth()->login($user, false);
-
             return redirect('portal');
         }
     }
