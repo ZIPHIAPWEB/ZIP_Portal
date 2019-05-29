@@ -53,7 +53,7 @@ class LoginController extends Controller
             $social_user = Socialite::driver('google')->stateless()->user();
 
         } catch (Exception $e) {
-            return redirect('/portal');
+            return redirect('portal');
         }
 
         $socialProvider = SocialProvider::where('provider_id', $social_user->getId())->first();
@@ -84,7 +84,7 @@ class LoginController extends Controller
 
             auth()->login($user, false);
 
-            return redirect(url('/portal'));
+            return redirect('portal');
         }
     }
 
