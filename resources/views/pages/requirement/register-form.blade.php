@@ -651,7 +651,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%;">School</td>
-                                <td class="text-bold">@{{ tertiary.school }}</td>
+                                <td class="text-bold">@{{ tertiary.school.name }}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
