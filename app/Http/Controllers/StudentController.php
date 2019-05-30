@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\RegisteredStudentNotification;
 use Illuminate\Support\Facades\Notification;
+use DB;
+use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
 {
@@ -89,82 +91,89 @@ class StudentController extends Controller
 
     public function storePersonalDetails(Request $request)
     {
-        $student = $this->studentRepository->saveStudent([
-            'user_id'                   =>  Auth::user()->id,
-            'first_name'                =>  $request->input('first_name'),
-            'middle_name'               =>  $request->input('middle_name'),
-            'last_name'                 =>  $request->input('last_name'),
-            'birthdate'                 =>  $request->input('birthdate'),
-            'gender'                    =>  $request->input('gender'),
-            'home_number'               =>  $request->input('home_number'),
-            'mobile_number'             =>  $request->input('mobile_number'),
-            'permanent_address'         =>  $request->input('permanent_address'),
-            'provincial_address'        =>  $request->input('provincial_address'),
-            'year'                      =>  $request->input('year'),
-            'program_id'                =>  $request->input('program_id'),
-            'fb_email'                  =>  $request->input('fb_email'),
-            'skype_id'                  =>  $request->input('skype_id'),
-            'branch'                    =>  $request->input('branch'),
-            'visa_interview_status'     =>  'Pending',
-            'application_status'        =>  'New Applicant',
-            'coordinator_id'            =>  0
-        ]);
-
-        $this->fatherRepository->saveFather([
-            'user_id'       =>  Auth::user()->id,
-            'first_name'    =>  $request->input('f_first_name'),
-            'middle_name'   =>  $request->input('f_middle_name'),
-            'last_name'     =>  $request->input('f_last_name'),
-            'occupation'    =>  $request->input('f_occupation'),
-            'company'       =>  $request->input('f_company'),
-            'contact_no'    =>  $request->input('f_contact')
-        ]);
-
-        $this->motherRepository->saveMother([
-            'user_id'       =>  Auth::user()->id,
-            'first_name'    =>  $request->input('m_first_name'),
-            'middle_name'   =>  $request->input('m_middle_name'),
-            'last_name'     =>  $request->input('m_last_name'),
-            'occupation'    =>  $request->input('m_occupation'),
-            'company'       =>  $request->input('m_company'),
-            'contact_no'    =>  $request->input('m_contact')
-        ]);
-
-        $this->primaryRepository->savePrimary([
-            'user_id'           =>  Auth::user()->id,
-            'school_name'       =>  $request->input('p_school'),
-            'address'           =>  $request->input('p_address'),
-            'date_graduated'    =>  $request->input('p_date_graduated')
-        ]);
-
-        $this->secondaryRepository->saveSecondary([
-            'user_id'           =>  Auth::user()->id,
-            'school_name'       =>  $request->input('s_school'),
-            'address'           =>  $request->input('s_address'),
-            'start_date'        =>  $request->input('s_start_date'),
-            'date_graduated'    =>  $request->input('s_date_graduated')
-        ]);
-
-        $this->tertiaryRepository->saveTertiary([
-            'user_id'           =>  Auth::user()->id,
-            'school_name'       =>  $request->input('t_school'),
-            'degree'            =>  $request->input('t_degree'),
-            'address'           =>  $request->input('t_address'),
-            'start_date'        =>  $request->input('t_start_date'),
-            'date_graduated'    =>  $request->input('t_date_graduated')
-        ]);
-
-        $experience = collect(json_decode($request->input('experience')));
-        foreach ($experience as $item) {
-            $this->experienceRepository->saveExperience([
-                'user_id'       =>  Auth::user()->id,
-                'company'       =>  $item->company,
-                'address'       =>  $item->address,
-                'description'   =>  $item->description,
-                'start_date'    =>  $item->start_date,
-                'end_date'      =>  $item->end_date
+        DB::beginTransaction();
+        try {
+            $student = $this->studentRepository->saveStudent([
+                'user_id'                   =>  Auth::user()->id,
+                'first_name'                =>  $request->input('first_name'),
+                'middle_name'               =>  $request->input('middle_name'),
+                'last_name'                 =>  $request->input('last_name'),
+                'birthdate'                 =>  $request->input('birthdate'),
+                'gender'                    =>  $request->input('gender'),
+                'home_number'               =>  $request->input('home_number'),
+                'mobile_number'             =>  $request->input('mobile_number'),
+                'permanent_address'         =>  $request->input('permanent_address'),
+                'provincial_address'        =>  $request->input('provincial_address'),
+                'year'                      =>  $request->input('year'),
+                'program_id'                =>  $request->input('program_id'),
+                'fb_email'                  =>  $request->input('fb_email'),
+                'skype_id'                  =>  $request->input('skype_id'),
+                'branch'                    =>  $request->input('branch'),
+                'visa_interview_status'     =>  'Pending',
+                'application_status'        =>  'New Applicant',
+                'coordinator_id'            =>  0
             ]);
+    
+            $this->fatherRepository->saveFather([
+                'user_id'       =>  Auth::user()->id,
+                'first_name'    =>  $request->input('f_first_name'),
+                'middle_name'   =>  $request->input('f_middle_name'),
+                'last_name'     =>  $request->input('f_last_name'),
+                'occupation'    =>  $request->input('f_occupation'),
+                'company'       =>  $request->input('f_company'),
+                'contact_no'    =>  $request->input('f_contact')
+            ]);
+    
+            $this->motherRepository->saveMother([
+                'user_id'       =>  Auth::user()->id,
+                'first_name'    =>  $request->input('m_first_name'),
+                'middle_name'   =>  $request->input('m_middle_name'),
+                'last_name'     =>  $request->input('m_last_name'),
+                'occupation'    =>  $request->input('m_occupation'),
+                'company'       =>  $request->input('m_company'),
+                'contact_no'    =>  $request->input('m_contact')
+            ]);
+    
+            $this->primaryRepository->savePrimary([
+                'user_id'           =>  Auth::user()->id,
+                'school_name'       =>  $request->input('p_school'),
+                'address'           =>  $request->input('p_address'),
+                'date_graduated'    =>  $request->input('p_date_graduated')
+            ]);
+    
+            $this->secondaryRepository->saveSecondary([
+                'user_id'           =>  Auth::user()->id,
+                'school_name'       =>  $request->input('s_school'),
+                'address'           =>  $request->input('s_address'),
+                'start_date'        =>  $request->input('s_start_date'),
+                'date_graduated'    =>  $request->input('s_date_graduated')
+            ]);
+    
+            $this->tertiaryRepository->saveTertiary([
+                'user_id'           =>  Auth::user()->id,
+                'school_name'       =>  $request->input('t_school'),
+                'degree'            =>  $request->input('t_degree'),
+                'address'           =>  $request->input('t_address'),
+                'start_date'        =>  $request->input('t_start_date'),
+                'date_graduated'    =>  $request->input('t_date_graduated')
+            ]);
+    
+            $experience = collect(json_decode($request->input('experience')));
+            foreach ($experience as $item) {
+                $this->experienceRepository->saveExperience([
+                    'user_id'       =>  Auth::user()->id,
+                    'company'       =>  $item->company,
+                    'address'       =>  $item->address,
+                    'description'   =>  $item->description,
+                    'start_date'    =>  $item->start_date,
+                    'end_date'      =>  $item->end_date
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
         }
+
+        DB::commit();
         
         switch ($student->program_id) {
             case 1:
