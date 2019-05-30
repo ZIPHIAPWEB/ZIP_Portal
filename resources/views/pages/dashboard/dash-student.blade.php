@@ -308,8 +308,22 @@
                                 </tr>
                                 <tr>
                                     <td>Facebook URL</td>
-                                    <td class="text-bold">
+                                    <td v-if="!setting.fbIsEdit" class="text-bold">
                                         <a :href="student.fb_email" target="_blank">@{{ student.fb_email }}</a>
+                                        <a @click="hideField('fb');" href="#" class="pull-right">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group">
+                                            <input v-model="field" type="text" class="form-control input-sm">
+                                            <span class="input-group-btn">
+                                                <button @click="updateField('fb_email', field); setting.fbIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <button @click="setting.fbIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1323,7 +1337,8 @@
                     mobileNumberIsEdit: false,
                     schoolIsEdit: false,
                     courseIsEdit: false,
-                    skypeIdIsEdit: false
+                    skypeIdIsEdit: false,
+                    fbIsEdit: false,
                 },
                 father: {
                     firstNameIsEdit: false,
@@ -1644,6 +1659,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'middleName':
                             this.setting.firstNameIsEdit = false;
@@ -1657,6 +1673,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'lastName':
                             this.setting.firstNameIsEdit = false;
@@ -1670,6 +1687,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'birthdate':
                             this.setting.firstNameIsEdit = false;
@@ -1683,6 +1701,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'gender':
                             this.setting.firstNameIsEdit = false;
@@ -1696,6 +1715,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;                            
                             break;
                         case 'address':
                             this.setting.firstNameIsEdit = false;
@@ -1709,6 +1729,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'homeNumber':
                             this.setting.firstNameIsEdit = false;
@@ -1722,6 +1743,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'mobileNumber':
                             this.setting.firstNameIsEdit = false;
@@ -1735,6 +1757,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'school':
                             this.setting.firstNameIsEdit = false;
@@ -1748,6 +1771,7 @@
                             this.setting.schoolIsEdit = true;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'course':
                             this.setting.firstNameIsEdit = false;
@@ -1761,6 +1785,7 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = true;
                             this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = false;
                             break;
                         case 'skypeId':
                             this.setting.firstNameIsEdit = false;
@@ -1774,6 +1799,21 @@
                             this.setting.schoolIsEdit = false;
                             this.setting.courseIsEdit = false;
                             this.setting.skypeIdIsEdit = true;
+                            this.setting.fbIsEdit = false;
+                            break;
+                        case 'fb':
+                        this.setting.firstNameIsEdit = false;
+                            this.setting.middleNameIsEdit = false;
+                            this.setting.lastNameIsEdit = false;
+                            this.setting.birthDateIsEdit = false;
+                            this.setting.genderIsEdit = false;
+                            this.setting.addressIsEdit = false;
+                            this.setting.homeNumberIsEdit = false;
+                            this.setting.mobileNumberIsEdit = false;
+                            this.setting.schoolIsEdit = false;
+                            this.setting.courseIsEdit = false;
+                            this.setting.skypeIdIsEdit = false;
+                            this.setting.fbIsEdit = true;
                             break;
                         case 'fatherFirstName':
                             this.father.firstNameIsEdit = true;
