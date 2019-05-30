@@ -28,7 +28,7 @@
                     </a>
                 </div>
             </div>
-            <div class="panel-group m-b-5">
+            <div class="panel-group m-b-5" v-if="application_status != 'New Applicant' || application_status != 'Assessed'">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-group m-b-5">
+            <div class="panel-group m-b-5" v-if="application_status != 'New Applicant' || application_status != 'Assessed'">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
