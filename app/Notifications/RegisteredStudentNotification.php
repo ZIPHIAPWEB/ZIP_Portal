@@ -43,13 +43,12 @@ class RegisteredStudentNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $program = Program::find($this->data['program_id'])->first();
         return (new MailMessage)
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                     ->subject('New Applicant')
                     ->greeting('A new applicant has registered in our portal.')
                     ->line('Name: ' . $this->data['first_name'] . ' ' . $this->data['last_name'])
-                    ->line('Program ' . $program->display_name)
+                    ->line('Program ' . Program::find($this->data['program_id'])->display_name)
                     ->line('Thank you for using our application!');
     }
 
