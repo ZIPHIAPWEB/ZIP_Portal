@@ -963,8 +963,8 @@
                                             <span class="input-group-btn">
                                                 <button @click="updateExperience('description', field, exp.id); experience.descriptionIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                             </span>
-                                            <span class="input-group btn">
-                                                <button @click="experience.descriptionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Cancel</button>
+                                            <span class="input-group-btn">
+                                                <button @click="experience.descriptionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
                                             </span>
                                         </div>
                                     </td>
