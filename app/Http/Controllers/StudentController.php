@@ -89,11 +89,6 @@ class StudentController extends Controller
 
     public function storePersonalDetails(Request $request)
     {
-
-        User::find(Auth::user()->id)->update([
-            'isFilled'  =>  true
-        ]);
-
         $student = $this->studentRepository->saveStudent([
             'user_id'                   =>  Auth::user()->id,
             'first_name'                =>  $request->input('first_name'),
@@ -191,6 +186,9 @@ class StudentController extends Controller
 
         }
 
+        User::find($request->user()->id)->update([
+            'isFilled'  =>  true
+        ]);
         return response()->json(['message' => 'Personal Details Updated']);
     }
 
