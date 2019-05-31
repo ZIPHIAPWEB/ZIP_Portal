@@ -22,7 +22,7 @@ class StudentRepository extends BaseRepository implements IStudentRepository
 
     public function getAllStudents()
     {
-        return parent::findWith(['user', 'program', 'tertiary']);
+        return parent::findWith(['user', 'program', 'tertiary.school']);
     }
 
     public function getByIdAndPersonalProfile($id)
@@ -37,12 +37,12 @@ class StudentRepository extends BaseRepository implements IStudentRepository
 
     public function getByIdAndFullDetails($id)
     {
-        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary', 'experience', 'company', 'sponsor']);
+        return $this->findOneByWhereWith(['user_id' => $id], ['mother', 'father', 'primary', 'secondary', 'tertiary.school', 'experience', 'company', 'sponsor']);
     }
 
     public function getByProgramId($programId)
     {
-        return $this->findByWhereWith(['program_id' => $programId], ['company', 'tertiary', 'program', 'log' => function ($query) {
+        return $this->findByWhereWith(['program_id' => $programId], ['company', 'tertiary.school', 'program', 'log' => function ($query) {
             $query->orderBy('created_at', 'desc')->first();
         }]);
     }
