@@ -761,7 +761,7 @@
                                 <tr>
                                     <td>School</td>
                                     <td v-if="!tertiary.schoolNameIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.school.name }}</label>
+                                        <label for="" class="text-bold" v-if="student.tertiary.school">@{{ student.tertiary.school.name }}</label>
                                         <a @click="hideField('tertiarySchoolName');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>

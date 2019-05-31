@@ -50,7 +50,7 @@
                             <input v-model="filter.to" type="date" class="form-control input-sm">
                         </div>&nbsp;
                         <div class="form-group">
-                            <label for="" class="control-label">Filter By</label>
+                            <label for="" class="control-label">Filter By Program</label>
                             <select v-model="filter.status" class="form-control input-sm">
                                 <option value="" selected>All</option>
                                 <option value="New Applicant">New Applicant</option>
@@ -62,6 +62,17 @@
                                 <option value="For CFO">For CFO</option>
                                 <option value="Program Proper">Program Proper</option>
                                 <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Filter By Branch</label>
+                            <select v-model="filter.branch" name="" id="" class="form-control input-sm">
+                                <option value="" selected>All</option>
+                                <option value="MANILA">Manila</option>
+                                <option value="PAMPANGA">Pampanga</option>
+                                <option value="CEBU">Cebu</option>
+                                <option value="BACOLOD">Bacolod</option>
+                                <option value="DAVAO">Davao</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -108,7 +119,7 @@
                                 <td class="text-sm text-center">@{{ student.middle_name }}</td>
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td class="text-sm text-center">@{{ student.tertiary.school.name }}</td>
+                                <td class="text-sm text-center"><div v-if="student.tertiary.school"> @{{ student.tertiary.school.name }}</div></td>
                                 <td class="text-sm text-center">@{{ student.branch }}</td>
                                 <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                                 <td class="text-sm text-center">
@@ -1528,7 +1539,8 @@
                 filter: {
                     from: '',
                     to: '',
-                    status: ''
+                    status: '',
+                    branch: ''
                 },
                 appStatus: '',
                 visaStatus: '',
@@ -1689,6 +1701,7 @@
                     let formData = new FormData();
                     formData.append('program_id', programId);
                     formData.append('status', this.filter.status);
+                    formData.append('branch', this.filter.branch);
                     formData.append('from', this.filter.from);
                     formData.append('to', this.filter.to);
                     this.loading.table = true;

@@ -42,16 +42,22 @@ class FilterController extends Controller
             return $query->where('application_status', $status);
         });
 
+        $query->when($request->input('branch'), function($query, $branch){
+            return $query->where('branch', $branch);
+        });
+
         if  ($request->input('from') == null) {
             $students = Student::where('program_id', $request->input('program_id'))
-                ->Where('application_status', 'like', '%' . $request->input('status') . '%')
-                ->with(['user', 'tertiary', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+                ->where('branch', 'like', '%' . $request->input('branch') . '%')
+                ->where('application_status', 'like', '%' . $request->input('status') . '%')
+                ->with(['user', 'tertiary.school', 'company', 'coordinator', 'sponsor', 'log', 'program'])
                 ->get();
         } else {
             $students = Student::where('program_id', $request->input('program_id'))
                 ->where('application_status', 'like', '%' . $request->input('status') . '%')
+                ->where('branch', 'like', '%' . $request->input('branch') . '%')
                 ->whereBetween('created_at', [$request->input('from'), $request->input('to')])
-                ->with(['user', 'tertiary', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+                ->with(['user', 'tertiary.school', 'company', 'coordinator', 'sponsor', 'log', 'program'])
                 ->get();;
         }
 
