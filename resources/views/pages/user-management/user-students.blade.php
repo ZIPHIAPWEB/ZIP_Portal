@@ -338,7 +338,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm" style="width: 35%;">School</td>
-                                                    <td class="text-bold text-sm">@{{ student.tertiary.school.name }}</td>
+                                                    <td v-if="student.tertiary.school" class="text-bold text-sm">@{{ student.tertiary.school.name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm">Degree</td>
