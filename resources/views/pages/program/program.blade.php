@@ -108,7 +108,7 @@
                                 <td class="text-sm text-center">@{{ student.middle_name }}</td>
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                                <td class="text-sm text-center">@{{ student.tertiary.school_name }}</td>
+                                <td class="text-sm text-center">@{{ student.tertiary.school.name }}</td>
                                 <td class="text-sm text-center">@{{ student.branch }}</td>
                                 <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                                 <td class="text-sm text-center">
@@ -636,8 +636,8 @@
                                                 <td class="text-sm" style="width: 200px">
                                                     School
                                                 </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.school_name }}
+                                                <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
+                                                    @{{ student.tertiary.school.name }}
                                                 </td>
                                             </tr>
                                             <tr>
