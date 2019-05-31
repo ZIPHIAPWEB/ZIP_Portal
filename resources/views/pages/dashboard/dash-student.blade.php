@@ -761,7 +761,7 @@
                                 <tr>
                                     <td>School</td>
                                     <td v-if="!tertiary.schoolNameIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.school_name }}</label>
+                                        <label for="" class="text-bold">@{{ student.tertiary.school.name }}</label>
                                         <a @click="hideField('tertiarySchoolName');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
@@ -770,7 +770,7 @@
                                         <div class="input-group">
                                             <select v-model="field" class="form-control input-sm">
                                                 <option value="">Select School</option>
-                                                <option v-for="school in schools.data" :value="school.name">@{{ school.name }}</option>
+                                                <option v-for="school in schools.data" :value="school.id">@{{ school.name }}</option>
                                             </select>
                                             <span class="input-group-btn">
                                                 <button @click="updateTertiary('school_name', field); tertiary.schoolNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>

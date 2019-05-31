@@ -114,7 +114,7 @@
                                         <select v-model="tertiary.school" class="form-control input-sm">
                                             <option value="" active>Select School</option>
                                             <option v-for="item in schools" :value="{ id: item.id, name: item.name }">@{{ item.name }}</option>
-                                            <option value="others">Other school...</option>
+                                            <!--<option value="others">Other school...</option>-->
                                         </select>
                                         <input v-if="tertiary.school == 'others'" v-model="tertiary.other_school" type="text" class="form-control input-sm m-t-10" placeholder="Enter other school">
                                         <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
@@ -651,7 +651,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%;">School</td>
-                                <td class="text-bold">@{{ (tertiary.school == 'others') ? tertiary.other_school : tertiary.school.name }}</td>
+                                <td class="text-bold">@{{ (tertiary.school == 'others') ? tertiary.other_school : tertiary.school.id }}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
