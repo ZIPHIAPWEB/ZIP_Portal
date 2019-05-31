@@ -103,7 +103,7 @@
                                 <td class="text-center text-sm">@{{ student.program.display_name }}</td>
                                 <td class="text-center text-sm">@{{ student.tertiary.degree }}</td>
                                 <td class="text-center text-sm">@{{ student.home_number }}/@{{ student.mobile_number }}</td>
-                                <td class="text-center text-sm">@{{ student.tertiary.school_name }}</td>
+                                <td class="text-center text-sm">@{{ student.tertiary.school.name }}</td>
                                 <td class="text-center">
                                     <span v-if="student.user.verified === 1" class="fa fa-check text-success"></span>
                                     <span v-else class="fa fa-remove text-danger"></span>
@@ -338,7 +338,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm" style="width: 35%;">School</td>
-                                                    <td class="text-bold text-sm">@{{ student.tertiary.school_name }}</td>
+                                                    <td class="text-bold text-sm">@{{ student.tertiary.school.name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-sm">Degree</td>
