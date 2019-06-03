@@ -432,6 +432,21 @@
                                             </tbody>
                                         </table>
                                     </section>
+                                    <section id="pdos">
+                                        <label class="control-label">PDOS & CFO Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 35%">PDOS Schedule</td>
+                                                    <td class="text-bold text-sm">@{{ student.pdos_schedule }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">CFO Schedule</td>
+                                                    <td class="text-bold text-sm">@{{ student.cfo_schedule }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
                                     <section id="flight-details">
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
