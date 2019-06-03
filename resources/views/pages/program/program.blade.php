@@ -182,16 +182,16 @@
                                     <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary</a>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary Requirements</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional</a>
+                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional Requirements</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
