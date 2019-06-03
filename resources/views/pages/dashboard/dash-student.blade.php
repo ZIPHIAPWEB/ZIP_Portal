@@ -28,7 +28,9 @@
                     </a>
                 </div>
             </div>
-            <div class="panel-group m-b-5" v-if="!student.application_status == 'New Applicant' || student.application_status == 'Assessed'">
+            <div v-if="student.application_status == 'New Applicant'"></div>
+            <div v-else-if="student.application_status == 'Assessed'"></div>
+            <div v-else class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -60,7 +62,9 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-group m-b-5" v-if="!student.application_status == 'New Applicant' || student.application_status == 'Assessed'">
+            <div v-if="student.application_status == 'New Applicant'"></div>
+            <div v-else-if="student.application_status == 'Assessed'"></div>
+            <div v-else class="panel-group m-b-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
