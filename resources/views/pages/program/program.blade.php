@@ -58,8 +58,7 @@
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
                                 <option value="For Visa Interview">For Visa Interview</option>
-                                <option value="For PDOS">For PDOS</option>
-                                <option value="For CFO">For CFO</option>
+                                <option value="For PDOS & CFO">For PDOS & CFO</option>
                                 <option value="Program Proper">Program Proper</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>
@@ -224,10 +223,9 @@
                                                             <option value="Assessed">Assessed</option>
                                                             <option value="Confirmed">Confirmed</option>
                                                             <option value="Hired">Hired</option>
-                                                            <option value="For Visa Interview">For Visa Interview</option>
-                                                            <option value="For PDOS">For PDOS</option>
-                                                            <option value="For CFO">For CFO</option>
-                                                            <option value="Program Proper">Program Proper</option>
+                                                            <option value="ForVisaInterview">For Visa Interview</option>
+                                                            <option value="ForPDOSCFO">For PDOS & CFO</option>
+                                                            <option value="ProgramProper">Program Proper</option>
                                                             <option value="Canceled">Cancel</option>
                                                         </select>
                                                     </div>
@@ -360,6 +358,30 @@
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section v-if="show.pdoscfo">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.pdoscfo = false;" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="label-control">PDOS Schedule</label>
+                                                        <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="label-control">CFO Schedule</label>
+                                                        <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group-sm col-xs-12">
+                                                        <button @click="submitForPDOSAndCFO()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -906,7 +928,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="visa-interview-details">
+                                    <section id="visa-interview-details">
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -971,7 +993,52 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="flight-details">
+                                    <section id="PDOS">
+                                        <label class="control-label">PDOS & CFO Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px;">
+                                                    PDOS Schedule
+                                                </td>
+                                                <td v-if="!setting.program.pdosIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
+                                                    <a @click="hideField('pdos');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('pdos_schedule', field); setting.program.pdosIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.program.pdosIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    CFO Schedule
+                                                </td>
+                                                <td v-if="!setting.program.cfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
+                                                    <a @click="hideField('cfo');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('cfo_schedule', field); setting.program.cfoIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.program.cfoIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section id="flight-details">
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -1597,6 +1664,8 @@
                     assessed: false,
                     hired: false,
                     visa: false,
+                    pdoscfo: false,
+                    programProper: false,
                     cancel: false,
                 },
                 field: '',
@@ -1613,6 +1682,10 @@
                     sevis: '',
                     programId: '',
                     schedule: ''
+                },
+                program: {
+                    pdos_schedule: '',
+                    cfo_schedule: ''
                 },
                 cancel: {
                     status: ''
@@ -1632,6 +1705,10 @@
                         programIsEdit: false,
                         sevisIsEdit: false,
                         scheduleIsEdit: false
+                    },
+                    program: {
+                        pdosIsEdit: false,
+                        cfoIsEdit: false
                     },
                     flightUS: {
                         departureIsEdit: false,
@@ -1943,7 +2020,7 @@
                                 alert('Student needs to be Confirmed first!');
                             }
                             break;
-                        case 'For Visa Interview':
+                        case 'ForVisaInterview':
                             if (this.student.application_status == 'Hired') {
                                 this.show.assessed = false;
                                 this.show.visa = true;
@@ -1951,6 +2028,32 @@
                             } else {
                                 alert('Student need to be Hired first!');
                             }
+                            break;
+                        case 'ForPDOSCFO': 
+                            this.show.assessed = false;
+                            this.show.visa = false;
+                            this.show.hired = false;
+                            this.show.pdoscfo = true;
+                            this.show.programProper = false;
+                            break;
+                        case 'ProgramProper':
+                            axios.post(`/coor/${this.student.user_id}/application/ProgramProper`)
+                                .then((response) => {
+                                    this.loadStudents(programId);
+                                    this.viewStudent(this.student.user_id);
+                                    this.loading.modal = false;
+                                    swal({
+                                        title: response.data,
+                                        type: 'success',
+                                        confirmButtonText: 'Continue'
+                                    }).catch((error) => {
+                                        swal({
+                                            title: 'Something went wrong!',
+                                            type: 'error',
+                                            confirmButonText: 'Go Back!'
+                                        })
+                                    })
+                                })
                             break;
                         case 'Canceled':
                             this.show.cancel = true;
@@ -2052,7 +2155,7 @@
                         formData.append('sevis', this.visa.sevis);
                         formData.append('program', this.visa.programId);
                         formData.append('schedule', this.visa.schedule);
-                    axios.post(`/coor/${this.student.user_id}/application/For Visa Interview`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, formData)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
@@ -2068,6 +2171,30 @@
                                 title: 'Something went wrong!',
                                 type: 'error',
                                 confirmButtonText: 'Go Back!'
+                            })
+                    })
+                },
+                submitForPDOSAndCFO() {
+                    this.loading.modal = true;
+                    let formData = new FormData();
+                        formData.append('pdos_schedule', this.program.pdos_schedule);
+                        formData.append('cfo_schedule', this.program.cfo_schedule);
+                    axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.pdoscfo = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
                             })
                     })
                 },
@@ -2375,7 +2502,7 @@
                             this.setting.flightUS.arrivalIsEdit = false;
                             this.setting.flightUS.arrivalTimeIsEdit = false;
                             this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
+                            this.setting.flightUS.arrivalAirlineIsEdit = false;
 
                             this.setting.flightMNL.departureIsEdit = false;
                             this.setting.flightMNL.departureTimeIsEdit = false;
@@ -3089,6 +3216,14 @@
                             this.setting.flightMNL.arrivalTimeIsEdit = false;
                             this.setting.flightMNL.arrivalFlightIsEdit = false;
                             this.setting.flightMNL.arrivalAirlineIsEdit = true;
+                            break;
+                        case 'pdos' :
+                            this.setting.program.pdosIsEdit = true;
+                            this.setting.program.cfoIsEdit = false;
+                            break;
+                        case 'cfo' :
+                            this.setting.program.pdosIsEdit = false;
+                            this.setting.program.cfoIsEdit = true;
                             break;
                     }
                 }

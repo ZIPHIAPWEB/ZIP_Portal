@@ -188,6 +188,36 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
+                        <a href="#pdos" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-building"></span>
+                            <label for="" class="control-label">PDOS & CFO Schedule</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="pdos" class="tab-pane active">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 35%">PDOS Schedule</td>
+                                    <td class="text-bold">
+                                        @{{ student.pdos_schedule }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CFO Schedule</td>
+                                    <td class="text-bold">
+                                        @{{ student.cfo_schedule }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
                         <a href="#flight" data-toggle="tab" aria-expanded="true">
                             <span class="fa fa-plane"></span>
                             <label for="" class="control-label">Flight Details</label>

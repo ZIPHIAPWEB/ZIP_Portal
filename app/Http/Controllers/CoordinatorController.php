@@ -80,7 +80,7 @@ class CoordinatorController extends Controller
             case 'Assessed' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_id'        =>  '',
-                    'application_status'    =>  $status,
+                    'application_status'    =>  'Assessed',
                     'coordinator_id'        =>  $request->user()->id
                 ]);
 
@@ -104,7 +104,7 @@ class CoordinatorController extends Controller
             case 'Confirmed' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_id'        =>  Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999),
-                    'application_status'    =>  $status
+                    'application_status'    =>  'Confirmed'
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
@@ -152,7 +152,7 @@ class CoordinatorController extends Controller
                 return 'Hired';
                 break;
 
-            case 'For Visa Interview' :
+            case 'ForVisaInterview' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_status'        =>  'For Visa Interview',
                     'sevis_id'                  =>  $request->input('sevis'),
@@ -175,33 +175,32 @@ class CoordinatorController extends Controller
 
                 return 'For Visa Interview';
                 break;
-            case 'For PDOS' :
+            case 'ForPDOSCFO' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_status'    =>  $request->input('status')
+                    'application_status'    =>  'For PDOS & CFO',
+                    'pdos_schedule'         =>  $request->input('pdos_schedule'),
+                    'cfo_schedule'          =>  $request->input('cfo_schedule')
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For PDOS',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For PDOS & CFO',
                 ]);
+
+                $data = [
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'For PDOS & CFO'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+
+                return 'For PDOS & CFO';
                 break;
 
-            case 'For CFO' :
+            case 'ProgramProper':
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_status'    =>  $request->input('status')
-                ]);
-
-                $this->coordinatorActionRepository->saveCoordinatorAction([
-                    'user_id'   =>  Auth::user()->id,
-                    'client_id' =>  $id,
-                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to For CFO'
-                ]);
-                break;
-
-            case 'Program Proper':
-                $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_status'    =>  $request->input('status')
+                    'application_status'    =>  'Program Proper'
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
@@ -209,6 +208,15 @@ class CoordinatorController extends Controller
                     'client_id' =>  $id,
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Program Proper'
                 ]);
+
+                $data = [
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'Program Proper'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+
+                return 'Program Proper';
                 break;
 
             case 'Cancelled' :

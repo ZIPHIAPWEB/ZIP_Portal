@@ -35,6 +35,8 @@ class CreateStudentsTable extends Migration
             $table->string('stipend')->nullable();
             $table->string('fb_email');
             $table->string('visa_interview_status')->nullable();
+            $table->date('pdos_schedule')->nullable();
+            $table->date('cfo_schedule')->nullable();
             $table->date('program_start_date')->nullable();
             $table->date('program_end_date')->nullable();
             $table->string('visa_sponsor_id')->nullable();
