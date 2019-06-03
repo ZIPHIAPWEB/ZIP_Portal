@@ -41,10 +41,10 @@ class checkIfEmailIsVerified
                     return redirect()->route('dash.admin');
                 }
                 if (Auth::user()->hasRole('student')) {
-                    if (!Auth::user()->isFilled) {
-                        return redirect()->route('register.form');
-                    } else {
+                    if (Auth::user()->isFilled) {
                         return redirect()->route('dash.student');
+                    } else {
+                        return redirect()->route('register.form');
                     }
                 }
                 if (Auth::user()->hasRole('coordinator')) {
@@ -57,7 +57,5 @@ class checkIfEmailIsVerified
         } else {
             return redirect()->route('login')->withErrors('Please Sign-in First!');
         }
-
-        return $next($request);
     }
 }

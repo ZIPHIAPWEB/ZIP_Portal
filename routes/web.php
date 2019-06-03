@@ -345,5 +345,4 @@ Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.i
 
 Route::get('/test', function() {
 
-    return bcrypt('ziprocks5000!');
 });

@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Notifications\RegisteredStudentNotification;
 use Illuminate\Support\Facades\Notification;
 use DB;
-use Illuminate\Validation\ValidationException;
 
 class StudentController extends Controller
 {
@@ -91,8 +90,6 @@ class StudentController extends Controller
 
     public function storePersonalDetails(Request $request)
     {
-        DB::beginTransaction();
-        try {
             $student = $this->studentRepository->saveStudent([
                 'user_id'                   =>  Auth::user()->id,
                 'first_name'                =>  $request->input('first_name'),
@@ -113,7 +110,8 @@ class StudentController extends Controller
                 'application_status'        =>  'New Applicant',
                 'coordinator_id'            =>  0
             ]);
-    
+            
+            if (isset($student)) {
             $this->fatherRepository->saveFather([
                 'user_id'       =>  Auth::user()->id,
                 'first_name'    =>  $request->input('f_first_name'),
@@ -169,12 +167,12 @@ class StudentController extends Controller
                     'end_date'      =>  $item->end_date
                 ]);
             }
-        } catch (ValidationException $e) {
-            DB::rollback();
-        }
 
-        DB::commit();
-        
+            User::find($request->user()->id)->update([
+                'isFilled'  =>  true
+            ]);
+
+              
         switch ($student->program_id) {
             case 1:
                 //SWT-Spring
@@ -192,13 +190,10 @@ class StudentController extends Controller
                 //SWT-Summer
                 Notification::route('mail', 'swtsummer@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
                 break;
-
         }
-
-        User::find($request->user()->id)->update([
-            'isFilled'  =>  true
-        ]);
-        return response()->json(['message' => 'Personal Details Updated']);
+        
+            return response()->json(['message' => 'Personal Details Updated']);
+        }
     }
 
     public function viewAllStudents()
