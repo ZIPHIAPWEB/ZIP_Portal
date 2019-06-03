@@ -110,7 +110,10 @@
                                     <td style="width: 35%;">First name</td>
                                     <td v-if="!setting.firstNameIsEdit">
                                         <label class="text-bold"> @{{ student.first_name }}</label>
-                                        <a @click="hideField('firstName');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('firstName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -130,7 +133,10 @@
                                     <td>Middle name</td>
                                     <td v-if="!setting.middleNameIsEdit">
                                         <label class="text-bold">@{{ student.middle_name }}</label>
-                                        <a @click="hideField('middleName');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('middleName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -150,7 +156,10 @@
                                     <td>Last name</td>
                                     <td v-if="!setting.lastNameIsEdit">
                                         <label class="text-bold">@{{ student.last_name }}</label>
-                                        <a @click="hideField('lastName');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('lastName');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -170,7 +179,10 @@
                                     <td>Birthdate</td>
                                     <td v-if="!setting.birthDateIsEdit">
                                         <label class="text-bold">@{{ student.birthdate | toFormattedDateString }}</label>
-                                        <a @click="hideField('birthdate');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('birthdate');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -190,7 +202,10 @@
                                     <td>Gender</td>
                                     <td v-if="!setting.genderIsEdit">
                                         <label class="text-bold">@{{ student.gender }}</label>
-                                        <a @click="hideField('gender');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('gender');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -214,7 +229,10 @@
                                     <td style="width: 20%;">Present Address</td>
                                     <td v-if="!setting.addressIsEdit">
                                         <label class="text-bold">@{{ student.permanent_address }}</label>
-                                        <a @click="hideField('address');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('address');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -234,7 +252,10 @@
                                     <td style="width: 20%;">Permanent Address</td>
                                     <td v-if="!setting.addressIsEdit">
                                         <label class="text-bold">@{{ student.provincial_address }}</label>
-                                        <a @click="hideField('address');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('address');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -254,7 +275,10 @@
                                     <td>Home number</td>
                                     <td v-if="!setting.homeNumberIsEdit">
                                         <label class="text-bold">@{{ student.home_number }}</label>
-                                        <a @click="hideField('homeNumber');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('homeNumber');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -274,7 +298,10 @@
                                     <td>Mobile number</td>
                                     <td v-if="!setting.mobileNumberIsEdit">
                                         <label class=" text-bold">@{{ student.mobile_number }}</label>
-                                        <a @click="hideField('mobileNumber');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('mobileNumber');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -294,7 +321,10 @@
                                     <td>Skype ID</td>
                                     <td v-if="!setting.skypeIdIsEdit">
                                         <label class="text-bold">@{{ student.skype_id }}</label>
-                                        <a @click="hideField('skypeId');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('skypeId');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -314,7 +344,10 @@
                                     <td>Facebook URL</td>
                                     <td v-if="!setting.fbIsEdit" class="text-bold">
                                         <a :href="student.fb_email" target="_blank">@{{ student.fb_email }}</a>
-                                        <a @click="hideField('fb');" href="#" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('fb');" href="#" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -355,7 +388,10 @@
                                 <td style="width: 35%" >First Name</td>
                                 <td v-if="!father.firstNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.first_name }}</label>
-                                    <a @click="hideField('fatherFirstName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherFirstName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -375,7 +411,10 @@
                                 <td>Middle Name</td>
                                 <td v-if="!father.middleNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.middle_name }}</label>
-                                    <a @click="hideField('fatherMiddleName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherMiddleName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -395,7 +434,10 @@
                                 <td>Last Name</td>
                                 <td v-if="!father.lastNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.last_name }}</label>
-                                    <a @click="hideField('fatherLastName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherLastName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -415,7 +457,10 @@
                                 <td>Occupation</td>
                                 <td v-if="!father.occupationIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.occupation }}</label>
-                                    <a @click="hideField('fatherOccupation');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherOccupation');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -435,7 +480,10 @@
                                 <td>Company</td>
                                 <td v-if="!father.companyIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.company }}</label>
-                                    <a @click="hideField('fatherCompany');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherCompany');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -455,7 +503,10 @@
                                 <td>Contact No.</td>
                                 <td v-if="!father.contactNumberIsEdit">
                                     <label for="" class="text-bold">@{{ student.father.contact_no }}</label>
-                                    <a @click="hideField('fatherContactNumber');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('fatherContactNumber');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -478,7 +529,10 @@
                                 <td>First Name</td>
                                 <td v-if="!mother.firstNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.first_name }}</label>
-                                    <a @click="hideField('motherFirstName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherFirstName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -498,7 +552,10 @@
                                 <td>Middle Name</td>
                                 <td v-if="!mother.middleNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.middle_name }}</label>
-                                    <a @click="hideField('motherMiddleName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherMiddleName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -518,7 +575,10 @@
                                 <td>Last Name</td>
                                 <td v-if="!mother.lastNameIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.last_name }}</label>
-                                    <a @click="hideField('motherLastName');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherLastName');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -538,7 +598,10 @@
                                 <td>Occupation</td>
                                 <td v-if="!mother.occupationIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.occupation }}</label>
-                                    <a @click="hideField('motherOccupation');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherOccupation');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -558,7 +621,10 @@
                                 <td>Company</td>
                                 <td v-if="!mother.companyIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.company }}</label>
-                                    <a @click="hideField('motherCompany');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherCompany');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -578,7 +644,10 @@
                                 <td>Contact No.</td>
                                 <td v-if="!mother.contactNumberIsEdit">
                                     <label for="" class="text-bold">@{{ student.mother.contact_no }}</label>
-                                    <a @click="hideField('motherContactNumber');" class="pull-right">
+                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                    <a v-else @click="hideField('motherContactNumber');" class="pull-right">
                                         <span class="fa fa-edit"></span>
                                     </a>
                                 </td>
@@ -620,7 +689,10 @@
                                     <td style="width: 35%;">School</td>
                                     <td v-if="!primary.schoolNameIsEdit">
                                         <label for="" class="text-bold">@{{ student.primary.school_name }}</label>
-                                        <a @click="hideField('primarySchoolName');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('primarySchoolName');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -640,7 +712,10 @@
                                     <td>Address</td>
                                     <td v-if="!primary.addressIsEdit">
                                         <label for="" class="text-bold">@{{ student.primary.address }}</label>
-                                        <a @click="hideField('primaryAddress');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('primaryAddress');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -660,7 +735,10 @@
                                     <td>Date Graduated</td>
                                     <td v-if="!primary.graduatedIsEdit">
                                         <label for="" class="text-bold">@{{ student.primary.date_graduated | toFormattedDateString }}</label>
-                                        <a @click="hideField('primaryGraduated');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('primaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -683,7 +761,10 @@
                                     <td>School</td>
                                     <td v-if="!secondary.schoolNameIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.school_name }}</label>
-                                        <a @click="hideField('secondarySchoolName');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('secondarySchoolName');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -703,7 +784,10 @@
                                     <td>Address</td>
                                     <td v-if="!secondary.addressIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.address }}</label>
-                                        <a @click="hideField('secondaryAddress');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('secondaryAddress');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -723,7 +807,10 @@
                                     <td>Start Date</td>
                                     <td v-if="!secondary.startDateIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.start_date | toFormattedDateString }}</label>
-                                        <a @click="hideField('secondaryStartDate');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('secondaryStartDate');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -743,7 +830,10 @@
                                     <td>Date Graduated</td>
                                     <td v-if="!secondary.graduatedIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.date_graduated | toFormattedDateString }}</label>
-                                        <a @click="hideField('secondaryGraduated');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('secondaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -766,7 +856,10 @@
                                     <td>School</td>
                                     <td v-if="!tertiary.schoolNameIsEdit">
                                         <label for="" class="text-bold" v-if="student.tertiary.school">@{{ student.tertiary.school.name }}</label>
-                                        <a @click="hideField('tertiarySchoolName');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('tertiarySchoolName');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -789,7 +882,10 @@
                                     <td>Address</td>
                                     <td v-if="!tertiary.addressIsEdit">
                                         <label for="" class="text-bold">@{{ student.tertiary.address }}</label>
-                                        <a @click="hideField('tertiaryAddress');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('tertiaryAddress');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -809,7 +905,10 @@
                                     <td>Degree</td>
                                     <td v-if="!tertiary.degreeIsEdit">
                                         <label for="" class="text-bold">@{{ student.tertiary.degree }}</label>
-                                        <a @click="hideField('tertiaryDegree');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('tertiaryDegree');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -832,7 +931,10 @@
                                     <td>Start Date</td>
                                     <td v-if="!tertiary.startDateIsEdit">
                                         <label for="" class="text-bold">@{{ student.tertiary.start_date | toFormattedDateString }}</label>
-                                        <a @click="hideField('tertiaryStartDate');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('tertiaryStartDate');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -852,7 +954,10 @@
                                     <td>Date Graduated (<i>expected</i>)</td>
                                     <td v-if="!tertiary.graduatedIsEdit">
                                         <label for="" class="text-bold">@{{ student.tertiary.date_graduated | toFormattedDateString }}</label>
-                                        <a @click="hideField('tertiaryGraduated');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('tertiaryGraduated');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -891,7 +996,10 @@
                                     <td style="width: 35%;">Company Name</td>
                                     <td v-if="!experience.companyIsEdit">
                                         <label for="" class="text-bold">@{{ exp.company }}</label>
-                                        <a @click="hideField('experienceCompany')" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('experienceCompany')" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -911,7 +1019,10 @@
                                     <td>Company Address</td>
                                     <td v-if="!experience.addressIsEdit">
                                         <label for="" class="text-bold">@{{ exp.address }}</label>
-                                        <a @click="hideField('experienceAddress')" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('experienceAddress')" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -931,7 +1042,10 @@
                                     <td>Start Date</td>
                                     <td v-if="!experience.startDateIsEdit">
                                         <label for="" class="text-bold">@{{ exp.start_date | toFormattedDateString }}</label>
-                                        <a @click="hideField('experienceStart')" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('experienceStart')" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -951,7 +1065,10 @@
                                     <td>End Date</td>
                                     <td v-if="!experience.endDateIsEdit">
                                         <label for="" class="text-bold">@{{ exp.end_date }}</label>
-                                        <a @click="hideField('experienceEnd')" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('experienceEnd')" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>
@@ -971,7 +1088,10 @@
                                     <td>Job Description</td>
                                     <td v-if="!experience.descriptionIsEdit">
                                         <label for="" class="text-bold">@{{ exp.description }}</label>
-                                        <a @click="hideField('experienceDescription');" class="pull-right">
+                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
+                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
+                                        <a v-else @click="hideField('experienceDescription');" class="pull-right">
                                             <span class="fa fa-edit"></span>
                                         </a>
                                     </td>

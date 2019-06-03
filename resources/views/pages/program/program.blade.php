@@ -225,6 +225,9 @@
                                                             <option value="Confirmed">Confirmed</option>
                                                             <option value="Hired">Hired</option>
                                                             <option value="For Visa Interview">For Visa Interview</option>
+                                                            <option value="For PDOS">For PDOS</option>
+                                                            <option value="For CFO">For CFO</option>
+                                                            <option value="Program Proper">Program Proper</option>
                                                             <option value="Canceled">Cancel</option>
                                                         </select>
                                                     </div>
