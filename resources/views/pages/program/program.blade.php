@@ -765,7 +765,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview'" id="host-company-details">
+                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="host-company-details">
                                         <label class="control-label">Host Company Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -938,7 +938,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section id="visa-interview-details">
+                                    <section v-if="student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="visa-interview-details">
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -1003,7 +1003,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section id="PDOS">
+                                    <section v-if="student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="PDOS">
                                         <label class="control-label">PDOS & CFO Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -1048,7 +1048,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section id="flight-details">
+                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="flight-details">
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
