@@ -617,7 +617,7 @@
                                 </tr>
                                 <tr>
                                     <td>Date Graduated</td>
-                                    <td class="text-bold">@{{ primary.date_graduated }}</td>
+                                    <td class="text-bold">@{{ primary.date_graduated | toFormattedDateString }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -636,11 +636,11 @@
                                 </tr>
                                 <tr>
                                     <td>Start Date</td>
-                                    <td class="text-bold">@{{ secondary.start_date }}</td>
+                                    <td class="text-bold">@{{ secondary.start_date | toFormattedDateString }}</td>
                                 </tr>
                                 <tr>
                                     <td>Date Graduated</td>
-                                    <td class="text-bold">@{{ secondary.date_graduated }}</td>
+                                    <td class="text-bold">@{{ secondary.date_graduated | toFormattedDateString }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -663,11 +663,11 @@
                             </tr>
                             <tr>
                                 <td>Start Date</td>
-                                <td class="text-bold">@{{ tertiary.start_date }}</td>
+                                <td class="text-bold">@{{ tertiary.start_date | toFormattedDateString }}</td>
                             </tr>
                             <tr>
                                 <td>Date Graduated</td>
-                                <td class="text-bold">@{{ tertiary.date_graduated }}</td>
+                                <td class="text-bold">@{{ tertiary.date_graduated | toFormattedDateString }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -694,7 +694,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Start Date</td>
-                                                    <td class="text-bold">@{{ experience.start_date }}</td>
+                                                    <td class="text-bold">@{{ experience.start_date | toFormattedDateString }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>End Date</td>
@@ -888,7 +888,7 @@
                             this.button_disabled = false;
                             location.href = '{{ route('dash.student') }}'
                         }).catch((error) => {
-                            $('#verify-modal').modal('hide');
+                            $('#verify-modal').modal('hide')
                             this.button_disabled = false;
                             console.log(error);
                     });
