@@ -105,7 +105,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
                         <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
+                            <tbody style="overflow-x: auto;">
                                 <tr>
                                     <td style="width: 35%;">First name</td>
                                     <td v-if="!setting.firstNameIsEdit">

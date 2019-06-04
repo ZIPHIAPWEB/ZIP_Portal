@@ -515,7 +515,7 @@
                                     <td class="text-bold">@{{ student.permanent_address }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Provincial Address</td>
+                                    <td>Present Address</td>
                                     <td class="text-bold">@{{ student.provincial_address }}</td>
                                 </tr>
                                 <tr>
