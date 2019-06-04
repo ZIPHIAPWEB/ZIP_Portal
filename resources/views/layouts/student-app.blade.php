@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <style>
-    
+    @media screen and (min-width : 1550px) {
+        .container {
+            width: 1550px;
+        }
+    }
 </style>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">

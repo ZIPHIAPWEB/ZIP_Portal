@@ -208,7 +208,7 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
-                                        <input v-model="student.homeNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="(02) 673-1234">
+                                        <input v-model="student.homeNumber" type="text" class="form-control input-sm" maxlength="11" placeholder="(02) 673-1234">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>

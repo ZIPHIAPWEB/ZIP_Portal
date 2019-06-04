@@ -10,7 +10,7 @@
                     <a href="javascript:void(0)" @click="selectPhoto()">
                         <img class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
                     </a>
-                    <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
+                    <h5 class="profile-username text-center" style="font-size: 17px; padding-bottom: 0px; margin-top: 12px;">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h5>
                     <p class="text-muted text-center">@{{ student.program.name }}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -105,7 +105,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
                         <table class="table table-striped table-bordered table-condensed">
-                            <tbody style="overflow-x: auto;">
+                            <tbody>
                                 <tr>
                                     <td style="width: 35%;">First name</td>
                                     <td v-if="!setting.firstNameIsEdit">
