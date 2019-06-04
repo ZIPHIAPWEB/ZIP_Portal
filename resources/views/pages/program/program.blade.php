@@ -94,6 +94,7 @@
                             <th class="text-center" style="width: 10%">Date of Application</th>
                             <th class="text-center" style="width: 10%">Status</th>
                             <th class="text-center" style="width: 10%">Application ID</th>
+                            <th class="text-center" style="width: 10%">Email</th>
                             <th class="text-center" style="width: 10%">First Name</th>
                             <th class="text-center" style="width: 10%">Middle Name</th>
                             <th class="text-center" style="width: 10%">Last Name</th>
@@ -114,6 +115,7 @@
                                 <td class="text-sm text-center">@{{ student.created_at }}</td>
                                 <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
                                 <td class="text-sm text-center">@{{ student.application_id }}</td>
+                                <td class="text-sm text-center">@{{ student.user.email }}</td>
                                 <td class="text-sm text-center">@{{ student.first_name }}</td>
                                 <td class="text-sm text-center">@{{ student.middle_name }}</td>
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
@@ -182,16 +184,16 @@
                                     <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary Requirements</a>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary Reqts</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Requirements</a>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Sponsor Reqts.</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional Requirements</a>
+                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional Reqts.</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Requirements</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Reqts.</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -470,6 +472,14 @@
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.mobile_number }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Email
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.user.email }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1592,6 +1602,7 @@
                 sponsors: [],
                 students: [],
                 student: {
+                    user: [],
                     father: [],
                     mother: [],
                     primary: [],
@@ -1628,7 +1639,7 @@
                     "Course"                         : "tertiary.degree",
                     "Contact"                        : "home_number",
                     "Program"                        : "program.display_name",
-                    "E-mail Address"                 : "fb_email",
+                    "E-mail Address"                 : "user.email",
                     "Permanent Address"              : "permanent_address",
                     "Provincial Address"             : "provincial_address",
                     "Skype ID"                       : "skype_id",
