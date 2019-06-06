@@ -1270,7 +1270,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group">
-                                            <input v-model="field" type="number" class="form-control input-sm">
+                                            <input v-model="field" type="text" class="form-control input-sm">
                                             <span class="input-group-btn">
                                                     <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>

@@ -195,7 +195,7 @@
                                     <div class="form-group">
                                         <label v-if="!payment.file.name" class="btn btn-warning btn-block btn-flat btn-sm">
                                             <span class="glyphicon glyphicon-file"></span>
-                                            Deposit Slip
+                                            Upload Deposit Slip
                                             <input style="display: none;" type="file" ref="file" @change="handleFileUpload()">
                                         </label>
                                         <label v-else class="btn btn-warning btn-block btn-flat btn-sm">
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary btn-flat btn-block">Upload File</button>
+                            <button class="btn btn-primary btn-flat btn-block">Submit</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

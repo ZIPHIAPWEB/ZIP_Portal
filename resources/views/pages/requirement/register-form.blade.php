@@ -13,7 +13,17 @@
                     <div class="progress sm">
                         <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width:' + level / 5 * 100 + '%'"></div>
                     </div>
-                    <div class="box box-default">
+                    <div class="text-center">
+                        <i style="font-size: 18px;">
+                            <b>IMPORTANT REMINDER: Please complete ALL information for <i style="color: red">successful</i> registration.</b>
+                        </i>
+                        <br>
+                        <i style="font-size: 15px; color: red;">
+                            <b>Fields with asterisks (*) are required. Put N/A if not applicable.</b>
+                        </i>
+                        <br>
+                    </div>
+                    <div class="box box-default m-t-20">
                         <div class="box-body">
                             <section id="level-one" v-if="level === 1">
                                 <h4>
@@ -356,7 +366,6 @@
                                 </form>
                             </section>
                             <div class="form-group">
-                                <i class="text-center">Put N/A if not applicable</i>
                                 <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat btn-sm">Next</button>
                                 <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat btn-sm">Previous</button>
                                 <button v-if="level === 5" @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>

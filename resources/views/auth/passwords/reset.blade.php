@@ -47,7 +47,7 @@
                                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-flat btn-success btn-block" value="Send Link">
+                                <input type="submit" class="btn btn-flat btn-success btn-block" value="Change Password">
                             </div>
                         </form>
                     </div>
