@@ -251,6 +251,7 @@
                     amount: '',
                     file: ''
                 },
+                errors: [],
                 photo: '',
                 user_id: '{{ Auth::user()->id }}',
                 program_id: "{{ \App\Student::where('user_id', Auth::user()->id)->first()->program_id }}",
@@ -369,6 +370,7 @@
                             })
                         }).catch((error) => {
                             this.loading = false;
+                            this.errors = error.response.data.errors;
                             swal({
                                 title: 'An Error has occur!',
                                 type: 'error',
