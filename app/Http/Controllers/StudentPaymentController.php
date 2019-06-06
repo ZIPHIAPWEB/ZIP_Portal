@@ -65,7 +65,7 @@ class StudentPaymentController extends Controller
                 'bank_code'         => $request->input('bank_code'),
                 'reference_no'      => $request->input('reference_no'),
                 'date_deposit'      => $request->input('date_deposit'),
-                'bank_account_no'   => $request->input('bank_account'),
+                'bank_account_no'   => $request->input('bank_account_no'),
                 'amount'            => $request->input('amount'),
                 'acknowledgement'   => false,
                 'status'            => true,
