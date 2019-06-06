@@ -44,7 +44,6 @@ class StudentPaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'requirement_id'    =>  'required',
             'bank_code'         =>  'required',
             'reference_no'      =>  'required',
             'date_deposit'      =>  'required',
@@ -64,8 +63,8 @@ class StudentPaymentController extends Controller
                 'user_id'           => $request->user()->id,
                 'requirement_id'    => $requirement_id,
                 'bank_code'         => $request->input('bank_code'),
-                'reference_no'      => $request->input('ref_no'),
-                'date_deposit'      => $request->input('date'),
+                'reference_no'      => $request->input('reference_no'),
+                'date_deposit'      => $request->input('date_deposit'),
                 'bank_account_no'   => $request->input('bank_account'),
                 'amount'            => $request->input('amount'),
                 'acknowledgement'   => false,
