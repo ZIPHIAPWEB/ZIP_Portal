@@ -198,7 +198,7 @@ Route::prefix('payment')->group(function () {
 
 Route::prefix('studPayment')->group(function () {
    Route::post('/store', 'StudentPaymentController@store');
-   Route::post('/verifySlip/{id}', 'StudentPaymentController@verifyDepositSlip')->name('verify.slip');
+   Route::get('/verifySlip/{id}', 'StudentPaymentController@verifyDepositSlip')->name('verify.slip');
    Route::post('/remove', 'StudentPaymentController@remove');
    Route::get('/download', 'StudentPaymentController@download');
 });
