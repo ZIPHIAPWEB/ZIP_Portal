@@ -84,7 +84,7 @@ class StudentPaymentController extends Controller
                 'payment'   => $savedPayment
             ];
 
-            Notification::route('mail', 'accounting@ziptravel.com.ph')->notify(new AccountingNotification($data));
+            Notification::route('mail', 'accounting@ziptravel.com.ph')->notify(new AccountingNotification($savedPayment));
 
             return response()->json(['message' => 'File Uploaded!'], 200);
         }
