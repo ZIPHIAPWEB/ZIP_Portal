@@ -95,8 +95,6 @@ class StudentPaymentController extends Controller
         $this->studPaymentRepository->updateStudPayment($id, [
             'acknowledgement'   =>  true
         ]);
-
-        Notification::route('mail', Auth::user()->email)->notify(new VerifiedDepositSlipNotification($this->studPaymentRepository->findOneBy(['id' => $id])->user_id));
     }
 
     public function remove(Request $request)
