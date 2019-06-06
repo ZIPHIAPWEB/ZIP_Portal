@@ -102,8 +102,9 @@ class CoordinatorController extends Controller
                 return 'Student Assessed!';
                 break;
             case 'Confirmed' :
+                $programId = Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
-                    'application_id'        =>  Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999),
+                    'application_id'        =>  (Student::where('application_id', $programId) ? Program::find($program->program_id)->description . '-' . (date('Y') + 1) . rand(0, 9999) : $programId),
                     'application_status'    =>  'Confirmed'
                 ]);
 

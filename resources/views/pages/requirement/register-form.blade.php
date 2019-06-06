@@ -941,7 +941,7 @@
                         }).catch((error) => {
                             this.errors = error.response.data.errors;
                             swal({
-                                title: 'Please complete all required fields!',
+                                title: `${this.errors.first_name}`,
                                 type: 'error',
                                 confirmButtonText: 'Go Back'
                             })
