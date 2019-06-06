@@ -95,6 +95,8 @@ class StudentPaymentController extends Controller
         $this->studPaymentRepository->updateStudPayment($id, [
             'acknowledgement'   =>  true
         ]);
+
+        return redirect()->route('message.verified.payment');
     }
 
     public function remove(Request $request)

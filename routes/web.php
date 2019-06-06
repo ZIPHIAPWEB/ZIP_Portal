@@ -341,6 +341,10 @@ Route::prefix('chat')->group(function () {
     Route::post('/sendMessage', 'ChatController@send_message')->name('chat.post.message');
 });
 
+Route::prefix('message')->group(function () {
+    Route::view('/verified-payment', 'message.verified-payment')->name('message.verified.payment');
+});
+
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
