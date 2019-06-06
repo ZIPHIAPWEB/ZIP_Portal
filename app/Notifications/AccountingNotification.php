@@ -52,7 +52,7 @@ class AccountingNotification extends Notification
                     ->line('Bank Account No.: ' . $this->data['payment']->bank_account_no)
                     ->line('Amount: ' . $this->data['payment']->amount)
                     ->action('View Deposit Slip', url('https://docs.google.com/gview?url='. Storage::disk('uploaded_files')->url($this->data['payment']->path) .'&embedded=true'))
-                    ->action('Verify', route('verify.slip', $this->data['payment']->user_id))
+                    ->action('Verify', route('verify.slip', $this->data['payment']->id))
                     ->line('Thank you for using our application!');
     }
 
