@@ -160,30 +160,35 @@
                                     <div class="form-group">
                                         <label for="">Bank Code</label>
                                         <input v-model="payment.bank_code" type="text" class="form-control input-sm" >
+                                        <span class="help-block text-red" v-if="errors.bank_code">Required</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="">Reference No.</label>
                                         <input v-model="payment.ref_no" type="text" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.referrence_no">Required</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="">Bank Account No.</label>
                                         <input v-model="payment.bank_account" type="text" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.bank_account_no">Required</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="">Date Deposit</label>
                                         <input v-model="payment.date" type="date" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.date_deposit">Required</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="form-group">
                                         <label for="">Amount</label>
                                         <input v-model="payment.amount" type="number" class="form-control input-sm">
+                                        <span class="help-block text-red" v-if="errors.amount">Required</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
