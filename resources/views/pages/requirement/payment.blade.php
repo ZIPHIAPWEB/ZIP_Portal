@@ -413,7 +413,7 @@
                 openInNewTab(requirement) {
                     axios.get(`/studPayment/download?requirement_id=${requirement.student_payment.id}`)
                         .then((response) => {
-                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
+                            win = window.open(`${response.data}`,'_blank');
                             win.focus();
                         })
                 }
