@@ -718,14 +718,6 @@
                         }).catch((error) => {
                         console.log(error);
                     });
-                },
-                deletePaymentRequirement(id) {
-                    axios.get(`/program/payment/${id}/delete`)
-                        .then((response) => {
-                            this.loadPayments(this.payment.program_id);
-                        }).catch((error) => {
-                        console.log(error);
-                    });
                 }
             }
         });
