@@ -603,7 +603,7 @@
                             this.loadPaymentRequirement(this.requirement.program_id);
                         })
                 },
-                deletePaymentRequirement() {
+                deletePaymentRequirement(id) {
                     axios.post('/payment/delete', {
                         id: id
                     })
