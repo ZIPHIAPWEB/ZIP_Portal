@@ -43,6 +43,16 @@ class StudentPaymentController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'requirement_id'    =>  'required',
+            'bank_code'         =>  'required',
+            'reference_no'      =>  'required',
+            'date_deposit'      =>  'required',
+            'bank_account_no'   =>  'required',
+            'amount'            =>  'required',
+            'acknowledgement'   =>  'required'
+        ]);
+
         $requirement_id = $request->input('requirement_id');
 
         if ($request->hasFile('file')) {
@@ -51,15 +61,16 @@ class StudentPaymentController extends Controller
                 ->storeAs($request->user()->email . '/payment', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
 
             $savedPayment = $this->studPaymentRepository->saveStudPayment([
-                'user_id'        => $request->user()->id,
-                'requirement_id' => $requirement_id,
-                'bank_code'      => $request->input('bank_code'),
-                'reference_no'   => $request->input('ref_no'),
-                'date_deposit'   => $request->input('date'),
-                'bank_account_no'=> $request->input('bank_account'),
-                'amount'         => $request->input('amount'),
-                'status'         => true,
-                'path'           => $path
+                'user_id'           => $request->user()->id,
+                'requirement_id'    => $requirement_id,
+                'bank_code'         => $request->input('bank_code'),
+                'reference_no'      => $request->input('ref_no'),
+                'date_deposit'      => $request->input('date'),
+                'bank_account_no'   => $request->input('bank_account'),
+                'amount'            => $request->input('amount'),
+                'acknowledgement'   => false,
+                'status'            => true,
+                'path'              => $path
             ]);
 
             $student = $this->studentRepository->getStudentById($request->user()->id);
