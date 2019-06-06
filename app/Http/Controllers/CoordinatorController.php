@@ -147,7 +147,7 @@ class CoordinatorController extends Controller
                     'status'        => 'Hired'
                 ];
 
-                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
+                Notification::route('mail', [$program->email, 'accounting@ziptravel.com.ph'])->notify(new CoordinatorResponse($data));
 
                 return 'Hired';
                 break;

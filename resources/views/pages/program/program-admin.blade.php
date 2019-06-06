@@ -50,7 +50,7 @@
                             <input v-model="filter.to" type="date" class="form-control input-sm">
                         </div>&nbsp;
                         <div class="form-group">
-                            <label for="" class="control-label">Filter By</label>
+                            <label for="" class="control-label">Filter By Program</label>
                             <select v-model="filter.status" class="form-control input-sm">
                                 <option value="" selected>All</option>
                                 <option value="New Applicant">New Applicant</option>
@@ -58,6 +58,20 @@
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
                                 <option value="For Visa Interview">For Visa Interview</option>
+                                <option value="For PDOS & CFO">For PDOS & CFO</option>
+                                <option value="Program Proper">Program Proper</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label">Filter By Branch</label>
+                            <select v-model="filter.branch" name="" id="" class="form-control input-sm">
+                                <option value="" selected>All</option>
+                                <option value="MANILA">Manila</option>
+                                <option value="PAMPANGA">Pampanga</option>
+                                <option value="CEBU">Cebu</option>
+                                <option value="BACOLOD">Bacolod</option>
+                                <option value="DAVAO">Davao</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -80,6 +94,7 @@
                         <th class="text-center" style="width: 10%">Date of Application</th>
                         <th class="text-center" style="width: 10%">Status</th>
                         <th class="text-center" style="width: 10%">Application ID</th>
+                        <th class="text-center" style="width: 10%">Email</th>
                         <th class="text-center" style="width: 10%">First Name</th>
                         <th class="text-center" style="width: 10%">Middle Name</th>
                         <th class="text-center" style="width: 10%">Last Name</th>
@@ -100,13 +115,14 @@
                             <td class="text-sm text-center">@{{ student.created_at }}</td>
                             <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
                             <td class="text-sm text-center">@{{ student.application_id }}</td>
+                            <th class="text-sm text-center">@{{ student.user.email }}</th>
                             <td class="text-sm text-center">@{{ student.first_name }}</td>
                             <td class="text-sm text-center">@{{ student.middle_name }}</td>
                             <td class="text-sm text-center">@{{ student.last_name }}</td>
                             <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                             <td class="text-sm text-center">@{{ student.tertiary.degree }}</td>
                             <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                            <td class="text-sm text-center">@{{ student.tertiary.school_name }}</td>
+                            <td class="text-sm text-center">@{{ student.tertiary.school.name }}</td>
                             <td class="text-sm text-center">
                                 <div v-if="!student.log">
                                     @{{ student.log[0].activity }}
@@ -167,16 +183,16 @@
                                     <a href="#tab-profile" data-toggle="tab" aria-expanded="true">Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary</a>
+                                    <a href="#tab-basic-req" data-toggle="tab" aria-expanded="true">Preliminary Reqts</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment</a>
+                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa Sponsor Reqts.</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional</a>
+                                    <a href="#tab-additional-req" data-toggle="tab" aria-expanded="true">Additional Reqts.</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-visa-req" data-toggle="tab" aria-expanded="true">Visa</a>
+                                    <a href="#tab-payment-req" data-toggle="tab" aria-expanded="true">Payment Reqts.</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -208,7 +224,9 @@
                                                             <option value="Assessed">Assessed</option>
                                                             <option value="Confirmed">Confirmed</option>
                                                             <option value="Hired">Hired</option>
-                                                            <option value="For Visa Interview">For Visa Interview</option>
+                                                            <option value="ForVisaInterview">For Visa Interview</option>
+                                                            <option value="ForPDOSCFO">For PDOS & CFO</option>
+                                                            <option value="ProgramProper">Program Proper</option>
                                                             <option value="Canceled">Cancel</option>
                                                         </select>
                                                     </div>
@@ -232,6 +250,34 @@
                                         </table>
                                     </section>
                                     <transition name="slide-fade">
+                                        <section v-if="show.assessed">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.assessed = false" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-12">
+                                                        <label for="" class="control-label">Assessment Status</label>
+                                                        <select v-model="assessed.status" class="form-control input-sm">
+                                                            <option value="">Select status</option>
+                                                            <option value="Passed">Passed</option>
+                                                            <option value="Failed">Failed</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <label for="" class="control-label">Assessment Message</label>
+                                                        <textarea v-model="assessed.message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
+                                                    </div>
+                                                    <div class="form-group col-xs-12">
+                                                        <button @click="submitAssessed()" class="btn btn-primary btn-block btn-flat btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
                                         <section v-if="show.hired">
                                             <div class="box box-primary">
                                                 <div class="box-header">
@@ -255,7 +301,10 @@
                                                     </div>
                                                     <div class="form-group col-xs-6">
                                                         <label class="control-label">Place of Assignment</label>
-                                                        <input v-model="host.place" type="text" class="form-control input-sm" placeholder="Place of Assignment">
+                                                        <select v-model="host.place" class="form-control input-sm">
+                                                            <option value="">Select Place of Assignment</option>
+                                                            <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group col-xs-6">
                                                         <label class="control-label">Housing Address</label>
@@ -314,6 +363,55 @@
                                                 </div>
                                             </div>
                                         </section>
+                                        <section v-if="show.pdoscfo">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.pdoscfo = false;" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="label-control">PDOS Schedule</label>
+                                                        <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
+                                                        <label class="label-control">CFO Schedule</label>
+                                                        <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group-sm col-xs-12">
+                                                        <button @click="submitForPDOSAndCFO()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section v-if="show.cancel">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <div class="box-tools pull-right">
+                                                        <button @click="show.cancel = false;" class="btn btn-box-tool">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group col-xs-6">
+                                                        <label for="" class="control-label">Reason</label>
+                                                        <select v-model="cancel.status" class="form-control input-sm">
+                                                            <option value="">Select Reason Of Cancellation</option>
+                                                            <option value="Cancel: Unqualified">Unqualified</option>
+                                                            <option value="Cancel: Visa Denial">Visa Denial</option>
+                                                            <option value="Cancel: Program Cancellation">Program Cancellation</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group-sm col-xs-12">
+                                                        <button @click="setCancellationStatus" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
                                     </transition>
                                     <section id="personal-details">
                                         <label class="control-label">Personal Details</label>
@@ -332,7 +430,7 @@
                                                     Birth Date
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.birthdate }}
+                                                    @{{ student.birthdate | toFormattedDateString}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -345,7 +443,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Permanent Address
+                                                    Present Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.permanent_address }}
@@ -353,7 +451,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Provincial Address
+                                                    Permanent Address
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.provincial_address }}
@@ -377,7 +475,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Skype
+                                                    Email
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.user.email }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Skype ID
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.skype_id }}
@@ -385,10 +491,18 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Facebook Email
+                                                    Facebook URL
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.fb_email }}
+                                                    <a :href="student.fb_email">@{{ student.fb_email }}</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Branch
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.branch }}
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -398,88 +512,88 @@
                                         <label class="control-label">Family Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
-                                            <tr>
-                                                <td colspan="2" class="text-bold">Father</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 200px">First Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.first_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Middle Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.middle_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Last Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.last_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Occupation</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.occupation }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Company</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.company }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Contact No.</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.father.contact_no }}
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">Father</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 200px">First Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.first_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Middle Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.middle_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.last_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Occupation</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.company }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact No.</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.father.contact_no }}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tbody>
-                                            <tr>
-                                                <td colspan="2" class="text-bold">Mother</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 200px">First Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.first_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Middle Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.middle_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Last Name</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.last_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Occupation/Company</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.occupation }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Company</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.company }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Contact No.</td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.mother.contact_no }}
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">Mother</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 200px">First Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.first_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Middle Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.middle_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Last Name</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.last_name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Occupation/Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.occupation }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Company</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.company }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact No.</td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.mother.contact_no }}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </section>
@@ -538,12 +652,22 @@
                                                     @{{ student.secondary.address }}
                                                 </td>
                                             </tr>
+                                            <!--
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Start Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.secondary.start_date }}
+                                                </td>
+                                            </tr>
+                                            -->
                                             <tr>
                                                 <td class="text-sm">
                                                     Date Graduated
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.secondary.date_graduated }}
+                                                    @{{ student.secondary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -557,8 +681,8 @@
                                                 <td class="text-sm" style="width: 200px">
                                                     School
                                                 </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.school_name }}
+                                                <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
+                                                    @{{ student.tertiary.school.name }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -579,10 +703,18 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
+                                                    Start Date
+                                                </td>
+                                                <td v-cloak class="text-sm text-bold">
+                                                    @{{ student.tertiary.start_date }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
                                                     Date Graduated (expected)
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.date_graduated }}
+                                                    @{{ student.tertiary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -619,7 +751,7 @@
                                                     Start Date
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
-                                                    @{{ exp.start_date }}
+                                                    @{{ exp.start_date | toFormattedDateString}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -632,7 +764,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview'" id="host-company-details">
+                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="host-company-details">
                                         <label class="control-label">Host Company Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -691,7 +823,10 @@
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select Location</option>
+                                                            <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
+                                                        </select>
                                                         <span class="input-group-btn">
                                                             <button @click="updateField('location', field); setting.host.locationIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                         </span>
@@ -731,7 +866,10 @@
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter position title">
+                                                        <select v-model="field" class="form-control input-sm">
+                                                            <option value="">Select Position</option>
+                                                            <option v-for="position in positions" :value="position.display_name">@{{ position.name }}</option>
+                                                        </select>
                                                         <span class="input-group-btn">
                                                     <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
@@ -743,7 +881,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Stipend
+                                                    Stipend Per Hour
                                                 </td>
                                                 <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.stipend }}</label>
@@ -764,7 +902,7 @@
                                             <tr>
                                                 <td class="text-sm">Start Date</td>
                                                 <td v-if="!setting.host.startIsEdit">
-                                                    <label class="text-sm">@{{ student.program_start_date }}</label>
+                                                    <label class="text-sm">@{{ student.program_start_date | toFormattedDateString }}</label>
                                                     <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
@@ -782,14 +920,14 @@
                                             <tr>
                                                 <td class="text-sm">End Date</td>
                                                 <td v-if="!setting.host.endIsEdit">
-                                                    <label class="text-sm">@{{ student.program_end_date }}</label>
+                                                    <label class="text-sm">@{{ student.program_end_date | toFormattedDateString }}</label>
                                                     <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group">
                                                         <input v-model="field" type="date" class="form-control input-sm">
                                                         <span class="input-group-btn">
-                                                    <button @click="updateField('program_start_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                    <button @click="updateField('program_end_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
                                                 </span>
                                                         <span class="input-group-btn">
                                                     <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
@@ -799,7 +937,7 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="visa-interview-details">
+                                    <section v-if="student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="visa-interview-details">
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -864,7 +1002,52 @@
                                             </tr>
                                         </table>
                                     </section>
-                                    <section v-if="student.application_status == 'For Visa Interview'" id="flight-details">
+                                    <section v-if="student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="PDOS">
+                                        <label class="control-label">PDOS & CFO Details</label>
+                                        <table class="table table-striped table-bordered table-condensed">
+                                            <tr>
+                                                <td class="text-sm" style="width: 200px;">
+                                                    PDOS Schedule
+                                                </td>
+                                                <td v-if="!setting.program.pdosIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
+                                                    <a @click="hideField('pdos');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('pdos_schedule', field); setting.program.pdosIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.program.pdosIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    CFO Schedule
+                                                </td>
+                                                <td v-if="!setting.program.cfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
+                                                    <a @click="hideField('cfo');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group">
+                                                        <input v-model="field" type="date" class="form-control input-sm">
+                                                        <span class="input-group-btn">
+                                                            <button @click="updateField('cfo_schedule', field); setting.program.cfoIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <button @click="setting.program.cfoIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="flight-details">
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
@@ -1256,8 +1439,9 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
-                                                <button @click="openInNewTab(requirement.student_preliminary.id)" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-download"></span> View</button>
+                                                <button @click="openInNewTab(requirement.student_preliminary.id, 'preliminary')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadBasicRequirement(requirement.student_preliminary.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removePrelimFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1266,15 +1450,18 @@
                                 <div class="tab-pane " id="tab-payment-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th>
+                                                Requirement
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Verified
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in paymentRequirements">
@@ -1284,7 +1471,13 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
+                                                <span v-if="requirement.student_payment.acknowledgement" class="fa fa-check text-green"></span>
+                                                <span v-else class="fa fa-times text-red"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button @click="openInNewTab(requirement.student_payment.id, 'payment')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadPaymentRequirement(requirement.student_payment.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removePaymentFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1311,7 +1504,9 @@
                                                 <span v-else class="fa fa-times text-red"></span>
                                             </td>
                                             <td class="text-center">
+                                                <button @click="openInNewTab(requirement.student_visa.id, 'visa')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
                                                 <button @click="downloadVisaRequirement(requirement.student_visa.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                <button @click="removeVisaFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -1320,27 +1515,29 @@
                                 <div class="tab-pane" id="tab-additional-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th>
+                                                Requirement
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
                                         </thead>
                                         <tbody>
-                                        <tr v-for="requirement in additionalRequirements">
-                                            <td class="text-sm">@{{ requirement.name }}</td>
-                                            <td class="text-center">
-                                                <span v-if="requirement.student_additional.status" class="fa fa-check text-green"></span>
-                                                <span v-else class="fa fa-times text-red"></span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button @click="downloadAdditionalRequirement(requirement.student_additional.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
-                                            </td>
-                                        </tr>
+                                            <tr v-for="requirement in additionalRequirements">
+                                                <td class="text-sm">@{{ requirement.name }}</td>
+                                                <td class="text-center">
+                                                    <span v-if="requirement.student_additional.status" class="fa fa-check text-green"></span>
+                                                    <span v-else class="fa fa-times text-red"></span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button @click="openInNewTab(requirement.student_additional.id, 'additional')" class="btn btn-warning btn-flat btn-xs"><span class="fa fa-eye"></span> View</button>
+                                                    <button @click="downloadAdditionalRequirement(requirement.student_additional.id)" class="btn btn-primary btn-flat btn-xs"><span class="fa fa-download"></span> Download</button>
+                                                    <button @click="removeAdditionalFile(requirement)" class="btn btn-danger btn-flat btn-xs"><span class="fa fa-trash"></span> Delete</button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1401,6 +1598,7 @@
                 sponsors: [],
                 students: [],
                 student: {
+                    user: [],
                     father: [],
                     mother: [],
                     primary: [],
@@ -1418,7 +1616,8 @@
                 filter: {
                     from: '',
                     to: '',
-                    status: ''
+                    status: '',
+                    branch: ''
                 },
                 appStatus: '',
                 visaStatus: '',
@@ -1436,7 +1635,7 @@
                     "Course"                         : "tertiary.degree",
                     "Contact"                        : "home_number",
                     "Program"                        : "program.display_name",
-                    "E-mail Address"                 : "fb_email",
+                    "E-mail Address"                 : "user.email",
                     "Permanent Address"              : "permanent_address",
                     "Provincial Address"             : "provincial_address",
                     "Skype ID"                       : "skype_id",
@@ -1558,6 +1757,13 @@
                     }
                 }
             },
+            filters: {
+                toFormattedDateString: function (value) {
+                    let d = new Date(value);
+                    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                }
+            },
             methods: {
                 filterStatus () {
                     let formData = new FormData();
@@ -1565,6 +1771,7 @@
                     formData.append('status', this.filter.status);
                     formData.append('from', this.filter.from);
                     formData.append('to', this.filter.to);
+                    formData.append('branch', this.filter.branch);
                     this.loading.table = true;
                     axios.post(`/filter/status`, formData)
                         .then((response) => {
