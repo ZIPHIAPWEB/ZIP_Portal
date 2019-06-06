@@ -21,7 +21,7 @@ class ProgramRepository extends BaseRepository implements IProgramRepository
 
     public function getAllProgram()
     {
-        return $this->findAll(['*'], 'name', 'asc');
+        return $this->findAll(['*'], 'name', 'desc');
     }
 
     public function getProgramById($id)
