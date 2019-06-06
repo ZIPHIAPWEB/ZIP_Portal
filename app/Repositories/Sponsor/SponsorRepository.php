@@ -21,7 +21,7 @@ class SponsorRepository extends BaseRepository implements ISponsorRepository
 
     public function getAllSponsor()
     {
-        return parent::findAll();
+        return parent::findAll(['*'], 'name', 'asc');
     }
 
     public function getSponsorById($id)
