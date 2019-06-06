@@ -651,7 +651,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%;">School</td>
-                                <td class="text-bold">@{{ (tertiary.school == 'others') ? tertiary.other_school : tertiary.school.id }}</td>
+                                <td class="text-bold">@{{ (tertiary.school == 'others') ? tertiary.other_school : tertiary.school.name }}</td>
                             </tr>
                             <tr>
                                 <td>Address</td>
@@ -941,7 +941,7 @@
                         }).catch((error) => {
                             this.errors = error.response.data.errors;
                             swal({
-                                title: `${this.errors.first_name}`,
+                                title: 'Please fill all the required fields.',
                                 type: 'error',
                                 confirmButtonText: 'Go Back'
                             })
