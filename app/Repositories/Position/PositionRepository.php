@@ -21,7 +21,7 @@ class PositionRepository extends BaseRepository implements IPositionRepository
 
     public function getAll()
     {
-        return parent::findAll();
+        return parent::findAll(['*'], 'name', 'desc');
     }
 
     public function savePosition(array $attributes)

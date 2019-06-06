@@ -22,7 +22,7 @@ class HelperController extends Controller
 
     public function programHelper()
     {
-        $programs = Program::orderBy('name', 'asc')->get();
+        $programs = Program::orderBy('name', 'desc')->get();
 
         return new SuperAdminResource($programs);
     }
@@ -36,7 +36,7 @@ class HelperController extends Controller
 
     public function sponsorHelper()
     {
-        $sponsors = Sponsor::orderBy('name', 'asc')->get();
+        $sponsors = Sponsor::orderBy('name', 'desc')->get();
 
         return new SuperAdminResource($sponsors);
     }

@@ -21,7 +21,7 @@ class HostCompanyRepository extends BaseRepository implements IHostCompanyReposi
 
     public function getAllHostCompany()
     {
-        return parent::findAll();
+        return parent::findAll(['*'], 'name', 'desc');
     }
 
     public function getHostCompanyById($id)
