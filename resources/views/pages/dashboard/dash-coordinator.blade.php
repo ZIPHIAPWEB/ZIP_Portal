@@ -92,6 +92,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">For PDOS & CFO</span>
+                                    <span class="progress-number">@{{ summary.forPDOS }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-warning" :style="{width: summary.forPDOS / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Program Proper</span>
+                                    <span class="progress-number">@{{ summary.programProper }}/@{{ totalStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar progress-bar-success" :style="{ width: summary.programProper / totalStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,6 +155,8 @@
                     forVisaInterview: 0,
                     visaApproved: 0,
                     visaDenied: 0,
+                    forPDOS: 0,
+                    programProper: 0,
                     cancelled: 0
                 },
                 summaryFilter: ''
@@ -150,6 +172,8 @@
                     this.CountApplicants('Approved', value);
                     this.CountApplicants('Denied', value);
                     this.CountApplicants('Cancelled', value);
+                    this.CountApplicants('PDOS', value);
+                    this.CountApplicants('Program Proper', value);
                 }
             },
             mounted () {
@@ -189,6 +213,12 @@
                                     break;
                                 case 'Cancelled':
                                     this.summary.cancelled = response.data;
+                                    break;
+                                case 'PDOS':
+                                    this.summary.forPDOS = response.data;
+                                    break;
+                                case 'Program Proper':
+                                    this.summary.programProper = response.data;
                                     break;
                             }
                         })
