@@ -49,7 +49,6 @@ class StudentPaymentController extends Controller
             'date_deposit'      =>  'required',
             'bank_account_no'   =>  'required',
             'amount'            =>  'required',
-            'acknowledgement'   =>  'required'
         ]);
 
         $requirement_id = $request->input('requirement_id');
