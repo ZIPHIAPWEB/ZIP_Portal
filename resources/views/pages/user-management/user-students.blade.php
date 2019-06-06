@@ -72,7 +72,7 @@
                         <button @click="LoadStudents" class="btn btn-default btn-xs push-right"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="overflow: auto;">
                     <div class="form-group pull-right">
                         <input v-model="search" type="text" class="form-control input-sm" placeholder="Search Name">
                     </div>
