@@ -349,7 +349,7 @@
                     let formData = new FormData();
                     formData.append('bank_code', this.payment.bank_code);
                     formData.append('reference_no', this.payment.ref_no);
-                    formData.append('date_deposity', this.payment.date);
+                    formData.append('date_deposit', this.payment.date);
                     formData.append('bank_account', this.payment.bank_account);
                     formData.append('amount', this.payment.amount);
                     formData.append('file', this.payment.file);
