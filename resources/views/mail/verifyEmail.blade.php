@@ -6,7 +6,7 @@
         @endcomponent
     @endslot
     {{-- Body --}}
-    Click <a href="{{ route('verified', ['email' => $user->email, 'vToken' => $user->vToken]) }}">here</a> to activate!
+    Click <a target="_blank" href="{{ route('verified', ['email' => $user->email, 'vToken' => $user->vToken]) }}">here</a> to activate!
     {{-- Subcopy --}}
     @isset($subcopy)
         @slot('subcopy')
