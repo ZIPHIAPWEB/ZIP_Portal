@@ -14,7 +14,7 @@
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center">
-                            <img src="{{ asset('logo.png') }}" style="width: 120px; height: 120px;" alt="" srcset="">
+                            <img src="{{ asset('logo2.png') }}" style="width: 120px; height: 120px;" alt="" srcset="">
                         </td>
                     </tr>
                 </table>
