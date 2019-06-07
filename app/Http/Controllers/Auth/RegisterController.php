@@ -97,9 +97,8 @@ class RegisterController extends Controller
         ]);
 
         $user->attachRole('student');
-
-        $thisUser = User::findOrFail($user->id);
-        $this->sendMail($thisUser);
+        
+        return $user;
     }
 
     protected function coorCreate(array $data)
@@ -166,10 +165,21 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
-        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please verify your email to activate your account!');
+        $this->sendMail($user);
+
+        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please verify your email to activate your account! <a href="'. route('resend', $user->id) .'">Resend.</a>');
 
         //$this->guard()->login($user);
         //return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
+
+    public function resend($id) 
+    {
+        $user = User::find($id);
+
+        $this->sendMail($user);
+
+        return redirect()->route('login')->with('Info', '<b>Registered Successfully!</b> Please verify your email to activate your account! <a href="'. route('resend', $user->id) .'">Resend.</a>');
     }
 
     public function coorRegister(Request $request)

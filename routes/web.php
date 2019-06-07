@@ -10,6 +10,7 @@ Route::prefix('auth')->group(function() {
 
     Route::post('/login', 'Auth\LoginController@login')->name('post.login');
     Route::post('/register', 'Auth\RegisterController@register')->name('post.register');
+    Route::get('/resend/{id}', 'Auth\RegisterController@resend')->name('resend');
 
     Route::post('/coor/register', 'Auth\RegisterController@coorRegister')->name('post.coor.register');
 
