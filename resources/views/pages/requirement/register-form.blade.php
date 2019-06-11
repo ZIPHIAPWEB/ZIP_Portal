@@ -220,6 +220,7 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Home Number:</label>
                                         <input v-model="student.homeNumber" type="text" class="form-control input-sm" maxlength="11" placeholder="(02) 673-1234">
+                                        <span class="help-block text-red" v-if="errors.home_number">required</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
@@ -336,7 +337,7 @@
                                 </h4>
                                 <br>
 
-                                <form>
+                                <s>
                                     <div class="row" v-for="item in experiences">
                                         <div class="form-group col-xs-12">
                                             <label for="">Company Name <i class="text-red">*</i></label>
@@ -368,10 +369,7 @@
                                             <input v-model="item.end_date" type="date" class="form-control input-sm" :disabled="item.presentDate">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-primary btn-flat btn-block">Validate</button>
-                                    </div>
-                                </form>
+                                </section>
                             </section>
                             <div class="form-group">
                                 <button @click="validate" class="btn btn-primary btn-block btn-flat btn-sm">@{{ (level == 5) ? 'Validate' : 'Next' }}</button>

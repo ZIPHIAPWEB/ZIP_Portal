@@ -113,6 +113,7 @@ class StudentController extends Controller
     {
         $request->validate([
             'mobile_number'         =>  'required',
+            'home_number'           =>  'required',
             'permanent_address'     =>  'required',
             'provincial_address'    =>  'required',
         ]);
