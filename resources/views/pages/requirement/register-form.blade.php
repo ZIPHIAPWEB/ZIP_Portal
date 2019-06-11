@@ -944,7 +944,7 @@
                     formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
                     formData.append('t_school', (this.tertiary.school) ? this.tertiary.school.name : '');
-                    formData.append('t_degree', this.tertiary.degree);
+                    formData.append('t_degree', (this.tertiary.degree == 'others') ? this.tertiary.other_degree : this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
