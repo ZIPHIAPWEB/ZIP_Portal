@@ -256,34 +256,34 @@
                                     <div class="col-xs-12">
                                         <label for="" class="control-label">Father's Details</label>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name <i class="text-red">*</i></label>
                                         <input v-model="father.first_name" type="text" class="form-control input-sm" placeholder="Father's First Name">
                                         <span class="help-block text-red" v-if="errors.f_first_name">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Middle Name <i class="text-red">*</i></label>
                                         <input v-model="father.middle_name" type="text" class="form-control input-sm" placeholder="Father's Middle Name">
                                         <span class="help-block text-red" v-if="errors.f_middle_name">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name <i class="text-red">*</i></label>
                                         <input v-model="father.last_name" type="text" class="form-control input-sm" placeholder="Father's Last Name">
                                         <span class="help-block text-red" v-if="errors.f_last_name">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Occupation <i class="text-red">*</i></label>
                                         <input v-model="father.occupation" type="text" class="form-control input-sm" placeholder="Father's Occupation">
                                         <span class="help-block text-red" v-if="errors.f_occupation">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Company <i class="text-red">*</i></label>
                                         <input v-model="father.company" type="text" class="form-control input-sm" placeholder="Father's Company">
                                         <span class="help-block text-red" v-if="errors.f_company">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
                                         <input v-model="father.contact_no" type="number" class="form-control input-sm" placeholder="Father's Contact No.">
                                         <span class="help-block text-red" v-if="errors.f_contact">required</span>
@@ -294,34 +294,34 @@
                                     <div class="col-xs-12">
                                         <label for="" class="control-label">Mother's Details</label>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">First Name <i class="text-red">*</i></label>
                                         <input v-model="mother.first_name" type="text" class="form-control input-sm" placeholder="Mother's First Name">
                                         <span class="help-block text-red" v-if="errors.m_first_name">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Middle Name <i class="text-red">*</i></label>
                                         <input v-model="mother.middle_name" type="text" class="form-control input-sm" placeholder="Mother's Middle Name">
                                         <span class="help-block text-red" v-if="errors.m_middle_name">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Last Name <i class="text-red">*</i></label>
                                         <input v-model="mother.last_name" type="text" class="form-control input-sm" placeholder="Mother's Last Name">
                                         <span class="help-block text-red" v-if="errors.m_last_name">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Occupation <i class="text-red">*</i></label>
                                         <input v-model="mother.occupation" type="text" class="form-control input-sm" placeholder="Mother's Occupation">
                                         <span class="help-block text-red" v-if="errors.m_occupation">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Company <i class="text-red">*</i></label>
                                         <input v-model="mother.company" type="text" class="form-control input-sm" placeholder="Mother's Company">
                                         <span class="help-block text-red" v-if="errors.m_company">required</span>
                                     </div>
-                                    <div class="form-group col-xs-4">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
                                         <input v-model="mother.contact_no" type="number" class="form-control input-sm" placeholder="Mother's Contact No.">
                                         <span class="help-block text-red" v-if="errors.m_contact">required</span>
