@@ -486,6 +486,11 @@
         <div class="modal fade" id="verify-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
+                    <div class="overlay-wrapper">
+                        <div class="overlay" :style="{ display: loading ? 'block' : 'none' }">
+                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                        </div>
+                    </div>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Please review the details provided to ensure accuracy then submit</h4>
@@ -808,7 +813,7 @@
                 ],
                 errors: [],
                 loading: false,
-                sameAsAbove: false,
+                sameAsAbove: false
             },
             mounted: function () {
                 $('#agreement-modal').modal('show');
