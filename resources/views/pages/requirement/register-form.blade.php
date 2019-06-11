@@ -65,7 +65,7 @@
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Facebook URL <i class="text-red">*</i></label>
-                                        <input v-model="student.fb_email" type="email" class="form-control input-sm" placeholder="https://www.facebook.com/sample">
+                                        <input v-model="student.fb_email" type="text" class="form-control input-sm" placeholder="https://www.facebook.com/sample">
                                         <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
@@ -85,6 +85,7 @@
                                             <option value="Fourth Year">Fourth Year</option>
                                             <option value="Graduate">Graduate</option>
                                         </select>
+                                        <span class="help-block text-red" v-if="errors.year">@{{ errors.year[0] }}</span>
                                     </div>
                                     <div class="form-group col-xs-6">
                                         <label for="">Program: <i class="text-red">*</i></label>
@@ -127,7 +128,7 @@
                                             <!--<option value="others">Other school...</option>-->
                                         </select>
                                         <input v-if="tertiary.school == 'others'" v-model="tertiary.other_school" type="text" class="form-control input-sm m-t-10" placeholder="Enter other school">
-                                        <span class="help-block text-red" v-if="errors.t_school">@{{ errors.school[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.t_school">required</span>
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label for="">Degree <i class="text-red">*</i></label>
@@ -223,14 +224,14 @@
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
                                         <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
-                                        <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.mobile_number">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xs-12">
                                         <label for="">Present Address: <i class="text-red">*</i></label>
                                         <textarea v-model="student.permanent_address" class="form-control input-sm" placeholder="Permanent Address"></textarea>
-                                        <span class="help-block text-red" v-if="errors.address">@{{ errors.address[0] }}</span>
+                                        <span class="help-block text-red" v-if="errors.provincial_address">required</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -241,7 +242,7 @@
                                             <input v-model="sameAsAbove" type="checkbox" class="pull-right">
                                         </div>
                                         <textarea v-model="student.provincial_address" class="form-control input-sm" placeholder="Provincial Address"></textarea>
-                                        <span class="help-block text-red"></span>
+                                        <span class="help-block text-red" v-if="errors.permanent_address">required</span>
                                     </div>
                                 </div>
                             </section>
@@ -335,24 +336,28 @@
                                 </h4>
                                 <br>
 
-                                <form v-for="item in experiences">
-                                    <div class="row">
+                                <form>
+                                    <div class="row" v-for="item in experiences">
                                         <div class="form-group col-xs-12">
                                             <label for="">Company Name <i class="text-red">*</i></label>
                                             <input v-model="item.company" type="text" class="form-control input-sm" placeholder="Company Name">
+                                            <span class="help-block text-red" v-if="errors.company">required</span>
                                         </div>
                                         <div class="form-group col-xs-12">
                                             <label for="">Address <i class="text-red">*</i></label>
                                             <input v-model="item.address" type="text" class="form-control input-sm" placeholder="Company Address">
+                                            <span class="help-block text-red" v-if="errors.address">required</span>
                                         </div>
                                         <div class="form-group col-xs-12">
                                             <label for="">Job Description <i class="text-red">*</i></label>
                                             <textarea v-model="item.description"
                                                       class="form-control input-sm" placeholder="Your Job Description"></textarea>
+                                                      <span class="help-block text-red" v-if="errors.description">required</span>
                                         </div>
                                         <div class="form-group col-xs-6">
                                             <label for="">Start Date <i class="text-red">*</i></label>
                                             <input v-model="item.start_date" type="date" class="form-control input-sm">
+                                            <span class="help-block text-red" v-if="errors.start_date">required</span>
                                         </div>
                                         <div class="form-group col-xs-6">
                                             <label for="">End Date <i class="text-red">*</i></label>
@@ -363,12 +368,14 @@
                                             <input v-model="item.end_date" type="date" class="form-control input-sm" :disabled="item.presentDate">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-primary btn-flat btn-block">Validate</button>
+                                    </div>
                                 </form>
                             </section>
                             <div class="form-group">
-                                <button v-if="level === 5 ? false : true" @click="nextForm()" class="btn btn-primary btn-block btn-flat btn-sm">Next</button>
-                                <button v-if="level === 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat btn-sm">Previous</button>
-                                <button v-if="level === 5" @click="validate()" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
+                                <button @click="validate" class="btn btn-primary btn-block btn-flat btn-sm">@{{ (level == 5) ? 'Validate' : 'Next' }}</button>
+                                <button v-if="level == 1 ? false : true" @click="prevForm()" class="btn btn-primary btn-block btn-flat btn-sm">Previous</button>
                             </div>
                         </div>
                     </div>
@@ -916,7 +923,7 @@
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
                     formData.append('year', this.student.year);
-                    formData.append('program_id', this.student.program_id.id);
+                    formData.append('program_id', (this.student.program_id) ? this.student.program_id.id : '');
                     formData.append('f_first_name', this.father.first_name);
                     formData.append('f_middle_name', this.father.middle_name);
                     formData.append('f_last_name', this.father.last_name);
@@ -936,17 +943,55 @@
                     formData.append('s_address', this.secondary.address);
                     formData.append('s_start_date', this.secondary.start_date);
                     formData.append('s_date_graduated', this.secondary.date_graduated);
-                    formData.append('t_school', this.tertiary.school.name);
+                    formData.append('t_school', (this.tertiary.school) ? this.tertiary.school.name : '');
                     formData.append('t_degree', this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
                     formData.append('branch', this.student.branch);
-                    formData.append('experience', JSON.stringify(this.experiences));
+                    formData.append('experience', this.experiences);
 
-                    axios.post(`/stud/validateDetails`, formData)
+                    axios.post(`/stud/validateDetails/${this.level}`, formData)
                         .then((response) => {
-                            $('#verify-modal').modal('show');
+                            if (this.level == 5) {
+                                this.experiences.forEach((item, index) => {
+                                    if(item.company == '') {
+                                        swal({
+                                            title: 'Please fill all the required fields.',
+                                            type: 'error',
+                                            confirmButtonText: 'Go Back'
+                                        })
+                                    }
+                                    else if(item.address == '') {
+                                        swal({
+                                            title: 'Please fill all the required fields.',
+                                            type: 'error',
+                                            confirmButtonText: 'Go Back'
+                                        })
+                                    }
+                                    else if(item.description == '') {
+                                        swal({
+                                            title: 'Please fill all the required fields.',
+                                            type: 'error',
+                                            confirmButtonText: 'Go Back'
+                                        })
+                                    }
+                                    else if(item.start_date == '') {
+                                        swal({
+                                            title: 'Please fill all the required fields.',
+                                            type: 'error',
+                                            confirmButtonText: 'Go Back'
+                                        })
+                                    }
+                                    else {
+                                        $('#verify-modal').modal('show');
+                                    }
+                                })
+                            } else {
+                                this.level += 1;
+                            }
+
+                            this.errors = '';
                         }).catch((error) => {
                             this.errors = error.response.data.errors;
                             swal({

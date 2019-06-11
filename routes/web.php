@@ -99,7 +99,7 @@ Route::prefix('stud')->group(function() {
     Route::post('/requirement/visa/upload/{id}', 'StudentController@uploadVisaRequirement')->name('stud.requirement.visa.upload');
     Route::post('/requirement/visa/remove/{id}', 'StudentController@removeVisaRequirement')->name('stud.requirement.visa.remove');
 
-    Route::post('/validateDetails', 'StudentController@validatePersonalDetails')->name('stud.validate.details');
+    Route::post('/validateDetails/{id}', 'StudentController@validateDetails')->name('stud.validate.details');
     Route::post('/details/store', 'StudentController@storePersonalDetails')->name('stud.store.details');
 
     Route::post('/photo/upload', 'StudentController@uploadProfilePicture')->name('stud.upload.profile');

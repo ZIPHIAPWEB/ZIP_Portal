@@ -49,43 +49,95 @@ class StudentController extends Controller
         $this->experienceRepository = $experienceRepository;
     }
 
-    public function validatePersonalDetails(Request $request)
+    public function validateDetails(Request $request, $step)
+    {
+        switch ($step) {
+            case 1:
+                $this->validatePersonalDetails($request);
+            break;
+
+            case 2:
+                $this->validateEducationDetails($request);
+            break;
+
+            case 3:
+                $this->validateContactDetails($request);
+            break;
+
+            case 4:
+                $this->validateParentDetails($request);
+            break;
+
+            case 5:
+                return $this->validateWorkExperience($request);
+            break;
+        }
+    }
+
+    private function validatePersonalDetails($request)
     {
         $validator = Validator::make($request->all(), [
             'first_name'            =>  'required',
             'last_name'             =>  'required',
             'birthdate'             =>  'required',
             'gender'                =>  'required',
-            'mobile_number'         =>  'required',
-            'provincial_address'    =>  'required',
-            'permanent_address'     =>  'required',
             'year'                  =>  'required',
             'program_id'            =>  'required',
             'fb_email'              =>  'required',
             'skype_id'              =>  'required',
+            'branch'                =>  'required'
+        ])->validate();
+    }
+
+    private function validateEducationDetails($request)
+    {
+        $request->validate([
+            't_school'              =>  'required',
+            't_degree'              =>  'required',
+            't_address'             =>  'required',
+            't_start_date'          =>  'required',
+            't_date_graduated'      =>  'required',
+            
+            's_school'              =>  'required',
+            's_address'             =>  'required',
+            's_start_date'          =>  'required',
+            's_date_graduated'      =>  'required',
+
+            'p_school'              =>  'required',
+            'p_address'             =>  'required',
+            'p_date_graduated'      =>  'required',
+        ]);
+    }
+
+    private function validateContactDetails($request)
+    {
+        $request->validate([
+            'mobile_number'         =>  'required',
+            'permanent_address'     =>  'required',
+            'provincial_address'    =>  'required',
+        ]);
+    }
+
+    private function validateParentDetails($request)
+    {
+        $request->validate([
             'f_first_name'          =>  'required',
             'f_middle_name'         =>  'required',
             'f_last_name'           =>  'required',
             'f_occupation'          =>  'required',
             'f_contact'             =>  'required',
+
             'm_first_name'          =>  'required',
             'm_middle_name'         =>  'required',
             'm_last_name'           =>  'required',
             'm_occupation'          =>  'required',
             'm_contact'             =>  'required',
-            'p_school'              =>  'required',
-            'p_address'             =>  'required',
-            'p_date_graduated'      =>  'required',
-            's_school'              =>  'required',
-            's_address'             =>  'required',
-            's_date_graduated'      =>  'required',
-            't_school'              =>  'required',
-            't_degree'              =>  'required',
-            't_address'             =>  'required',
-            't_date_graduated'      =>  'required',
-            'experience'            =>  'required',
-            'branch'                =>  'required'
-        ])->validate();
+        ]);
+    }
+
+    private function validateWorkExperience($request)
+    {
+        
     }
 
     public function storePersonalDetails(Request $request)
