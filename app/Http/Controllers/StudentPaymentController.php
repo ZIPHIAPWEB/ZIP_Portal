@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Whoops\Exception\ErrorException;
 
 class StudentPaymentController extends Controller
 {
@@ -84,7 +85,11 @@ class StudentPaymentController extends Controller
                 'payment'   => $savedPayment
             ];
 
-            Notification::route('mail', 'accounting@ziptravel.com.ph')->notify(new AccountingNotification($data));
+            try {
+                Notification::route('mail', 'rmergenio@ziptravel.com.ph')->notify(new AccountingNotification($data));
+            } catch (ErrorException $e) {
+                Notification::route('mail', 'rmergenio@ziptravel.com.ph')->notify(new AccountingNotification($data));
+            }
 
             return response()->json(['message' => 'File Uploaded!'], 200);
         }
@@ -106,15 +111,15 @@ class StudentPaymentController extends Controller
 
         Storage::disk('uploaded_files')->delete($payment->path);
 
-        $payment->delete();
-
-        $requirement = $this->payment->getById($requirement_id);
+        $requirement = $this->paymentRepository->getById($payment->requirement_id);
 
         $this->logRepository->saveLog([
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
-
+        
+        $payment->delete();
+        
         return response()->json(['message' => 'File Removed']);
     }
 
@@ -123,6 +128,6 @@ class StudentPaymentController extends Controller
         $requirement_id = $request->input('requirement_id');
         $payment = $this->studPaymentRepository->getById($requirement_id);
 
-        return Storage::disk('uploaded_files')->url($payment->path);
+        return Storage::disk('uploaded_payment')->url($payment->path);
     }
 }

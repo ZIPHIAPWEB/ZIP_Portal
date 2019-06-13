@@ -122,7 +122,7 @@
                             <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                             <td class="text-sm text-center">@{{ student.tertiary.degree }}</td>
                             <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                            <td class="text-sm text-center">@{{ student.tertiary.school.name }}</td>
+                            <td class="text-sm text-center">@{{ (student.tertiary.school) ? student.tertiary.school.name : '' }}</td>
                             <td class="text-sm text-center">
                                 <div v-if="!student.log">
                                     @{{ student.log[0].activity }}

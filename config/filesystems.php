@@ -62,6 +62,13 @@ return [
             'visibility' => 'public'
         ],
 
+        'uploaded_payment' => [
+            'driver' => 'local',
+            'root' => public_path('uploaded'),
+            'url' => '/uploaded',
+            'visibility' => 'public'
+        ],
+
         'uploaded_avatars' => [
             'driver' => 'local',
             'root' => public_path('uploaded'),

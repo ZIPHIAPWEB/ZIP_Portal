@@ -43,17 +43,8 @@ class AccountingNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Deposit Slip - ' . $this->data['full_name'])
-                    ->greeting('Deposit Slip Details')
-                    ->line('Name: ' . $this->data['full_name'])
-                    ->line('Bank Code: ' . $this->data['payment']->bank_code)
-                    ->line('Reference No.: ' . $this->data['payment']->reference_no)
-                    ->line('Date: ' . $this->data['payment']->date_deposit)
-                    ->line('Bank Account No.: ' . $this->data['payment']->bank_account_no)
-                    ->line('Amount: ' . $this->data['payment']->amount)
-                    ->action('View Deposit Slip', url('https://docs.google.com/gview?url='. Storage::disk('uploaded_files')->url($this->data['payment']->path) .'&embedded=true'))
-                    ->action('Verify', route('verify.slip', $this->data['payment']->id))
-                    ->line('Thank you for using our application!');
+            ->subject('Deposit Slip - ' . $this->data['full_name'])
+            ->markdown('mail.depositSlip', ['data' => $this->data]);
     }
 
     /**

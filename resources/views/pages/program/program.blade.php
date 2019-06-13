@@ -1893,8 +1893,13 @@
 
                     axios.get(url)
                         .then((response) => {
-                            win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
-                            win.focus();
+                            if(requirement == 'payment') {
+                                win = window.open(`${response.data}`, '_blank');
+                                win.focus();
+                            } else {
+                                win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
+                                win.focus();
+                            }
                         })
                 },
                 loadBasicRequirements (programId, userId) {
@@ -1929,7 +1934,7 @@
                             link.click();
                         })
                 },
-                loadAdditionalRequirement (programId, userId) {
+                loadAdditionalRequirement (programId, userId) { 
                     axios.get(`/additional/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.additionalRequirements = response.data.data;
@@ -2221,7 +2226,7 @@
                         preConfirm: (remove) => {
                             return axios.post(`/studPreliminary/remove?requirement_id=${requirement.student_preliminary.id}`)
                                 .then((response) => {
-                                    this.loadBasicRequirements(programId, requirement.student_preliminary.user_id);
+                                    this.loadBasicRequirements(programId, this.student.user_id);
                                     return response;
                                 }).catch((error) => {
                                     swal({
@@ -2285,7 +2290,7 @@
                         preConfirm: (remove) => {
                             return axios.post(`/studAdditional/remove?requirement_id=${requirement.student_additional.id}`)
                                 .then((response) => {
-                                    this.loadAdditionalRequirement(programId, requirement.student_additional.user_id);
+                                    this.loadAdditionalRequirement(programId, this.student.user_id);
                                     return response;
                                 }).catch((error) => {
                                     swal({
@@ -2318,7 +2323,7 @@
                         preConfirm: () => {
                             return axios.post(`/studVisa/remove?requirement_id=${requirement.student_visa.id}`)
                                 .then((response) => {
-                                    this.loadVisaRequirements(requirement.sponsor_id, requirement.student_visa.user_id);
+                                    this.loadVisaRequirements(requirement.sponsor_id, this.student.user_id);
                                     return response;
                                 }).catch((error) => {
                                     swal({
