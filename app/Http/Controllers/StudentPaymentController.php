@@ -45,6 +45,7 @@ class StudentPaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'file'              =>  'required|mimes:jpeg',
             'bank_code'         =>  'required',
             'reference_no'      =>  'required',
             'date_deposit'      =>  'required',

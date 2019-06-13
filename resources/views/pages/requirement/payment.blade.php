@@ -195,7 +195,7 @@
                                     <div class="form-group">
                                         <label v-if="!payment.file.name" class="btn btn-warning btn-block btn-flat btn-sm">
                                             <span class="glyphicon glyphicon-file"></span>
-                                            Upload Deposit Slip
+                                            Attach Deposit Slip
                                             <input style="display: none;" type="file" ref="file" @change="handleFileUpload()">
                                         </label>
                                         <label v-else class="btn btn-warning btn-block btn-flat btn-sm">
@@ -203,6 +203,7 @@
                                             @{{ payment.file.name }}
                                             <input style="display: none;" type="file" ref="file" @change="handleFileUpload()">
                                         </label>
+                                        <span class="help-block text-red" v-if="errors.file">Attach jpeg file</span>
                                     </div>
                                 </div>
                             </div>
