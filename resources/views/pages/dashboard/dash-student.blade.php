@@ -343,7 +343,7 @@
                                 <tr>
                                     <td>Facebook URL</td>
                                     <td v-if="!setting.fbIsEdit" class="text-bold">
-                                        <a :href="student.fb_email" target="_blank">@{{ student.fb_email }}</a>
+                                        <a :href="'/' + student.fb_email" target="_blank">@{{ student.fb_email }}</a>
                                         <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
                                         <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
                                         <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
