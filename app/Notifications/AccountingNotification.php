@@ -43,6 +43,7 @@ class AccountingNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
             ->subject('Deposit Slip - ' . $this->data['full_name'])
             ->markdown('mail.depositSlip', ['data' => $this->data]);
     }
