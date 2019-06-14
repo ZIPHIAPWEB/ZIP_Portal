@@ -51,7 +51,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
-
+    Route::view('/ac/dash', 'pages.dashboard.dash-accounting')->name('dash.accounting');
+    
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/s/program-status', 'pages.student-content.program-status')->name('student.program-status');
     Route::view('/s/post-program-evaluation', 'pages.student-content.post-program-evaluation')->name('student.post-program-evaluation');
