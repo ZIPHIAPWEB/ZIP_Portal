@@ -566,11 +566,11 @@
                                         <tbody>
                                             <tr v-for="requirement in requirements.payment">
                                                 <td class="text-sm">@{{ requirement.name }}</td>
-                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.bank_code : '' }}</td>
-                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.reference_no : '' }}</td>
-                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.date_deposit : '' }}</td>
-                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.bank_account_no : '' }}</td>
-                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.amount : '' }}</td>
+                                                <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_code : '' }}</td>
+                                                <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.reference_no : '' }}</td>
+                                                <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.date_deposit : '' }}</td>
+                                                <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_account_no : '' }}</td>
+                                                <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.amount : '' }}</td>
                                                 <td class="text-center">
                                                     <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
                                                     <span v-else class="fa fa-remove text-red"></span>
