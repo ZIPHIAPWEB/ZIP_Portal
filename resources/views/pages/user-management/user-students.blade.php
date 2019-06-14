@@ -555,12 +555,22 @@
                                 <div class="tab-pane m-t-10" id="tab-payment-req">
                                     <table class="table table-striped table-bordered table-condensed">
                                         <thead>
-                                        <th style="width: 50%;">Requirements</th>
-                                        <th class="text-center">Status</th>
+                                            <th style="width: 30%;">Requirements</th>
+                                            <th class="text-center">Bank Code</th>
+                                            <th class="text-center">Reference No</th>
+                                            <th class="text-center">Date Deposit</th>
+                                            <th class="text-center">Bank Account No</th>
+                                            <th class="text-center">Amount</th>
+                                            <th class="text-center">Status</th>
                                         </thead>
                                         <tbody>
                                             <tr v-for="requirement in requirements.payment">
                                                 <td class="text-sm">@{{ requirement.name }}</td>
+                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.bank_code : '' }}</td>
+                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.reference_no : '' }}</td>
+                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.date_deposit : '' }}</td>
+                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.bank_account_no : '' }}</td>
+                                                <td class="text-center">@{{ requirement.student_payment ? requirement.student_payment.amount : '' }}</td>
                                                 <td class="text-center">
                                                     <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
                                                     <span v-else class="fa fa-remove text-red"></span>
