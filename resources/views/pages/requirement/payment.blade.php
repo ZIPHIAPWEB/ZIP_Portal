@@ -107,6 +107,11 @@
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                                 <th>Requirements</th>
+                                <th class="text-center">Bank Code</th>
+                                <th class="text-center">Reference No</th>
+                                <th class="text-center">Date Deposit</th>
+                                <th class="text-center">Bank Account No</th>
+                                <th class="text-center">Amount</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </thead>
@@ -118,6 +123,11 @@
                                 </tr>
                                 <tr v-else v-for="requirement in requirements">
                                     <td>@{{ requirement.name }}</td>
+                                    <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_code : '' }}</td>
+                                    <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.reference_no : '' }}</td>
+                                    <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.date_deposit : '' }}</td>
+                                    <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_account_no : '' }}</td>
+                                    <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.amount : '' }}</td>
                                     <td class="text-center">
                                         <span v-if="requirement.student_payment.status" class="fa fa-check" style="color: green;"></span>
                                         <span v-else class="fa fa-remove" style="color: red"></span>

@@ -1421,15 +1421,9 @@
                                 <div class="tab-pane" id="tab-basic-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                        <th>
-                                            Requirement
-                                        </th>
-                                        <th class="text-center">
-                                            Status
-                                        </th>
-                                        <th class="text-center">
-                                            Action
-                                        </th>
+                                            <th>Requirement</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in basicRequirements">
@@ -1450,22 +1444,24 @@
                                 <div class="tab-pane " id="tab-payment-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                            <th>
-                                                Requirement
-                                            </th>
-                                            <th class="text-center">
-                                                Status
-                                            </th>
-                                            <th class="text-center">
-                                                Verified
-                                            </th>
-                                            <th class="text-center">
-                                                Action
-                                            </th>
+                                            <th>Requirement/th>
+                                            <th class="text-center">Bank Code</th>
+                                            <th class="text-center">Reference No</th>
+                                            <th class="text-center">Date Deposit</th>
+                                            <th class="text-center">Bank Account No</th>
+                                            <th class="text-center">Amount</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Verified</th>
+                                            <th class="text-center">Action</th>
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in paymentRequirements">
                                             <td class="text-sm">@{{ requirement.name }}</td>
+                                            <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_code : '' }}</td>
+                                            <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.reference_no : '' }}</td>
+                                            <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.date_deposit : '' }}</td>
+                                            <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.bank_account_no : '' }}</td>
+                                            <td class="text-center text-sm">@{{ requirement.student_payment ? requirement.student_payment.amount : '' }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.student_payment.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
