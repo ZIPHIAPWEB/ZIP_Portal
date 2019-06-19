@@ -174,6 +174,6 @@ class Student extends Model
 
     public function payment()
     {
-        return $this->hasMany('App\StudentPayment', 'user_id', 'user_id');
+        return $this->hasMany('App\PaymentRequirement', 'program_id', 'program_id');
     }
 }

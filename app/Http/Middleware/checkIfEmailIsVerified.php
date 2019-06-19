@@ -24,6 +24,9 @@ class checkIfEmailIsVerified
                 if (Auth::user()->hasRole('administrator')) {
                     return redirect()->route('dash.admin');
                 }
+                if (Auth::user()->hasRole('accounting')) {
+                    return redirect()->route('dash.accounting');
+                }
                 if (Auth::user()->hasRole('student')) {
                     return redirect()->route('verify');
                 }
@@ -39,6 +42,9 @@ class checkIfEmailIsVerified
                 }
                 if (Auth::user()->hasRole('admin')) {
                     return redirect()->route('dash.admin');
+                }
+                if (Auth::user()->hasRole('accounting')) {
+                    return redirect()->route('dash.accounting');
                 }
                 if (Auth::user()->hasRole('student')) {
                     if (Auth::user()->isFilled) {
