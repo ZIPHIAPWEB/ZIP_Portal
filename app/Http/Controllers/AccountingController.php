@@ -18,8 +18,8 @@ class AccountingController extends Controller
         return view('pages.program.program-accounting')->with('program', $id);
     }
 
-    public function viewAllStudents()
+    public function viewAllStudents($id)
     {
-        return $this->studentRepository->getAllStudentsWithPayment();
+        return $this->studentRepository->getAllStudentsWithPayment($id);
     }
 }

@@ -114,11 +114,28 @@
                                     <span v-else class="fa fa-remove text-red"></span>
                                 </td>
                                 <td class="text-sm text-center">
-                                    <button class="btn btn-primary btn-flat btn-xs">View</button>
+                                    <button @click="viewPayments(student.user_id)" class="btn btn-primary btn-flat btn-xs">View</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <th class="text-center" style="width: 10%">Requirement</th>
+                                <th class="text-center" style="width: 10%">Bank Code</th>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,6 +179,10 @@
                             this.students = response.data;
                             console.log(response.data);
                         })
+                },
+                viewPayments($userId) {
+                    alert($userId);
+                    $('#payment-modal').modal('show');
                 }
             }
         })
