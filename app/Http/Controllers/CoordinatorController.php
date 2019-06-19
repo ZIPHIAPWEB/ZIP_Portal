@@ -236,6 +236,15 @@ class CoordinatorController extends Controller
         }
     }
 
+    public function SetProgram($id, $program)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'program_id' => $program
+        ]);
+
+        return 'Program Changed!';
+    }
+
     public function SetVisaInterviewStatus($id, $status)
     {
         $this->studentRepository->whereUpdate(['user_id' => $id], [

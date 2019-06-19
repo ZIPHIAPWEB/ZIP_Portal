@@ -198,6 +198,23 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
+                                    <section id="program">
+                                        <table class="table table-condensed table-striped table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 25%">
+                                                        Program
+                                                    </td>
+                                                    <td class="text-bold">
+                                                        <select @change="setProgram(selProgram)" v-model="selProgram" class="form-control input-sm">
+                                                            <option value="">@{{ student.program ? student.program.name : '' }}</option>
+                                                            <option v-for="program in programs.data" :value="program.id">@{{ program.name }}</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
                                     <section id="application-id">
                                         <table v-if="student.application_id" class="table table-condensed table-striped table-bordered">
                                             <tbody>
@@ -1597,6 +1614,7 @@
                     modal: false,
                     table: false
                 },
+                programs: [],
                 hasRecords: true,
                 hosts: [],
                 states: [],
@@ -1627,6 +1645,7 @@
                 },
                 appStatus: '',
                 visaStatus: '',
+                selProgram: '',
                 testData: [],
                 testField: {
                     "Application ID"                 : "application_id",
@@ -1751,6 +1770,7 @@
                 this.loadVisaSponsor();
                 this.loadStates();
                 this.loadPositions();
+                this.loadPrograms();
             },
             watch: {
                 filterName: function() {
@@ -1844,6 +1864,12 @@
                             } else {
                                 this.hasRecords = false;
                             }
+                        })
+                },
+                loadPrograms() {
+                    axios.get('/helper/program/view')
+                        .then((response) => {
+                            this.programs = response.data;
                         })
                 },
                 loadStudents () {
@@ -2077,6 +2103,18 @@
                             this.show.cancel = true;
                             break;
                     }
+                },
+                setProgram(program) {
+                    axios.post(`/coor/${this.student.user_id}/program/${program}`)
+                        .then((response) => {
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            });
+                            this.loadStudents(programId);
+                            $('#student-modal').modal('hide');
+                        })
                 },
                 setInterviewStatus(status) {
                     this.visaStatus = '';
