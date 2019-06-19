@@ -285,7 +285,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
-                                        <input v-model="father.contact_no" type="number" class="form-control input-sm" placeholder="Father's Contact No.">
+                                        <input v-model="father.contact_no" type="text" class="form-control input-sm" placeholder="Father's Contact No.">
                                         <span class="help-block text-red" v-if="errors.f_contact">required</span>
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4">
                                         <label for="">Contact No. <i class="text-red">*</i></label>
-                                        <input v-model="mother.contact_no" type="number" class="form-control input-sm" placeholder="Mother's Contact No.">
+                                        <input v-model="mother.contact_no" type="text" class="form-control input-sm" placeholder="Mother's Contact No.">
                                         <span class="help-block text-red" v-if="errors.m_contact">required</span>
                                     </div>
                                 </div>
