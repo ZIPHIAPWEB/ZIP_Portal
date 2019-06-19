@@ -224,7 +224,7 @@
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                         <label for="">Mobile Number: <i class="text-red">*</i></label>
-                                        <input v-model="student.mobileNumber" type="number" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
+                                        <input v-model="student.mobileNumber" type="text" class="form-control input-sm" maxlength="11" placeholder="+63 912 3456 789">
                                         <span class="help-block text-red" v-if="errors.mobile_number">required</span>
                                     </div>
                                 </div>
