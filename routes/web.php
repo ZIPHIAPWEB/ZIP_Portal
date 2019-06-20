@@ -51,7 +51,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/a/dash', 'pages.dashboard.dash-admin')->name('dash.admin');
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
-
+    Route::view('/ac/dash', 'pages.dashboard.dash-accounting')->name('dash.accounting');
+    
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/s/program-status', 'pages.student-content.program-status')->name('student.program-status');
     Route::view('/s/post-program-evaluation', 'pages.student-content.post-program-evaluation')->name('student.post-program-evaluation');
@@ -64,6 +65,7 @@ Route::prefix('portal')->group(function() {
 
     Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
     Route::get('/c/program-admin/{id}', 'CoordinatorController@adminProgram')->name('admin.program');
+    Route::get('/ac/program-acc/{id}', 'AccountingController@accountingProgram')->name('acc.program');
 });
 
 Route::view('/chat', 'pages.chatbox')->name('portal.chat');
@@ -81,6 +83,11 @@ Route::prefix('coor')->group(function() {
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
     Route::post('{id}/program/{programId}', 'CoordinatorController@SetProgram')->name('coor.set.program');
     Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
+});
+
+Route::prefix('acc')->group(function () {
+    Route::get('/show', 'AccountingController@viewAllStudents')->name('acc.show');
+    Route::get('/program/{id}', 'AccountingController@viewAllStudents')->name('acc.getStudents');
 });
 
 Route::prefix('stud')->group(function() {
@@ -351,5 +358,5 @@ Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->nam
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
 Route::get('/test', function() {
-   
+
 });

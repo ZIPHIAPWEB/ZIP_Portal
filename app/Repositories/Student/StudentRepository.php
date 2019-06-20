@@ -47,6 +47,11 @@ class StudentRepository extends BaseRepository implements IStudentRepository
         }]);
     }
 
+    public function getAllStudentsWithPayment($programId)
+    {
+        return parent::findByWhereWith(['program_id' => $programId], ['program', 'tertiary.school', 'payment.studentPayment']);
+    }
+
     public function saveStudent(array $attributes)
     {
         $attributes['first_name'] = strtoupper($attributes['first_name']);
