@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -139,9 +140,13 @@ class RegisterController extends Controller
 
     public function verified($email, $token)
     {
-        $user = User::where(['email' => $email, 'vToken' => $token])->update(['verified' => 1, 'vToken' => '']);
+        $user = User::where(['email' => $email, 'vToken' => $token]);
+        
+        Auth::loginUsingId($user->first()->id);
 
-        return redirect()->route('login')->with('Info', '<b>Activated!</b>'.$email.' verified!');
+        $user->update(['verified' => 1, 'vToken' => '']);
+
+        return redirect('/portal');
     }
 
     public function showRegistrationForm()
