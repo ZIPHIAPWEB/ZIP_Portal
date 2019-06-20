@@ -217,30 +217,45 @@
 </section>
 <div class="carousel slide" data-ride="carousel" id="carousel-1" style="width:100%;height:auto;">
     <div class="carousel-inner" role="listbox" style="background-image:url({{ asset('assets/img/zipbg.jpg') }});width:100%;height:519px;min-height:519px;">
-        <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
-            <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle mr-3" width="150px" height="150px" style="margin:0;margin-right:0px;margin-bottom:10px;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:url({{ asset('assets/img/desk.jpg') }});">
-                <div
-                        class="media-body">
-                    <h5 class="text-center text-white"><strong>Jan Marc T. Cerezo</strong><br></h5>
-                    <h6 class="text-center text-white" style="font-size:12px;">University of Baguio<br></h6>
-                    <p class="text-center text-white">"This program helps every individual to get out of their shell. It would also help them show their talent. I highly recommend this program to everyone. It maybe difficult at first but trust me, you'll learn a lot and grow a lot
-                        and grow. Thanks ZIP Travel for the wonderful experience!"<br></p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item active" style="padding:100px 100px;margin-bottom:50px;">
-            <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle mr-3" width="150px" height="150px" style="margin:0;margin-bottom:10px;margin-right:0px;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:url({{ asset('assets/img/desk.jpg') }});">
-                <div
-                        class="media-body">
-                    <h5 class="text-center text-white"><strong>Rockney Ritz J. Roasa</strong><br></h5>
-                    <h6 class="text-center text-white" style="font-size:12px;">University of Santo Tomas<br></h6>
-                    <p class="text-center text-white">"To all aspiring and future Summer Work Travel participants, or maybe interns, I assure you that this program is really worth it. The application and the bills are just the beginning of the never ending fun and excitement when you
-                        get here in the United States. Most importantly, you shall never miss out the generosity of the United States of giving abundant life lessons. Take a huge leap of faith and reach your American dream!"<br></p>
-                </div>
+        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/30743876_1834799999874396_5398779036442820608_n.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
+            <div class="media-body">
+                <h5 class="text-center text-white"><strong>Jan Marc T. Cerezo</strong><br></h5>
+                <h6 class="text-center text-white" style="font-size:12px;">University of Baguio<br></h6>
+                <p class="text-center text-white">"This program helps every individual to get out of their shell. It would also help them show their talent. I highly recommend this program to everyone. It maybe difficult at first but trust me, you'll learn a lot and grow a lot
+                    and grow. Thanks ZIP Travel for the wonderful experience!"<br></p>
             </div>
         </div>
     </div>
-    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
+        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/29027763_2126204300737891_6969533389309214720_o.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
+            <div class="media-body">
+                <h5 class="text-center text-white"><strong>Rockney Ritz J. Roasa</strong><br></h5>
+                <h6 class="text-center text-white" style="font-size:12px;">University of Santo Tomas<br></h6>
+                <p class="text-center text-white">"To all aspiring and future Summer Work Travel participants, or maybe interns, I assure you that this program is really worth it. The application and the bills are just the beginning of the never ending fun and excitement when
+                    you get here in the United States. Most importantly, you shall never miss out the generosity of the United States of giving abundant life lessons. Take a huge leap of faith and reach your American dream!"<br></p>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
+        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/octavians.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
+            <div class="media-body">
+                <h5 class="text-center text-white"><strong>John Arrden Octaviano</strong><br></h5>
+                <h6 class="text-center text-white" style="font-size:12px;">PHINMA Araullo University<br></h6>
+                <p class="text-center text-white">"The experience was both fun and informative. Going to the country where you always dreamed of was definitely an achievement for me. I have gained new friends and made unforgettable memories."<br></p>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
+        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/garcias.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
+            <div class="media-body">
+                <h5 class="text-center text-white"><strong>Gemuel Anthony O. Garcia</strong><br></h5>
+                <h6 class="text-center text-white" style="font-size:12px;">International School for Culinary Arts and Hotel Management<br></h6>
+                <p class="text-center text-white">"The program is good I learned a lot of things specially their culture.This is a great opportunity for other students to build the foundation of their career."<br></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
 </div>
 <div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ziptravel+(ZIP%20Travel%20PH)&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div>
 <div
