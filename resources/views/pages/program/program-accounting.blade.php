@@ -157,8 +157,14 @@
                                     <td class="text-center text-sm">@{{ (payment.student_payment.status) ? payment.student_payment.date_deposit : '' }}</td>
                                     <td class="text-center text-sm">@{{ (payment.student_payment.status) ? payment.student_payment.bank_account_no : '' }}</td>
                                     <td class="text-center text-sm">@{{ (payment.student_payment.status) ? payment.student_payment.amount : '' }}</td>
-                                    <td class="text-center text-sm">@{{ (payment.student_payment.status) ? payment.student_payment.status : '' }}</td>
-                                    <td class="text-center text-sm">@{{ (payment.student_payment.status) ? payment.student_payment.acknowledgement : '' }}</td>
+                                    <td class="text-center text-sm">
+                                        <span v-if="payment.student_payment.status" class="fa fa-check" style="color: green;"></span>
+                                        <span v-else class="fa fa-remove" style="color: red;"></span>
+                                    </td>
+                                    <td class="text-center text-sm">
+                                        <span v-if="payment.student_payment.acknowledgement" class="fa fa-check" style="color: green;"></span>
+                                        <span v-else class="fa fa-remove" style="color: red;"></span>
+                                    </td>
                                     <td class="text-center">
                                         <button @click="viewDepositSlip(payment.student_payment)" type="button" class="btn btn-primary btn-flat btn-xs">View</button>
                                         <button @click="verifyDepositSlip(payment.student_payment)" type="button" class="btn btn-warning btn-flat btn-xs">Verify</button>
