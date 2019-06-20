@@ -291,7 +291,7 @@
                         })
                 },
                 verifyDepositSlip(payment) {
-                    axios.post(`studPayment/verifySlip/${payment.id}`)
+                    axios.get(`/studPayment/verifySlip/${payment.id}`)
                         .then((response) => {
                             this.loadStudents();
                             this.viewPayments(payment.user_id);
