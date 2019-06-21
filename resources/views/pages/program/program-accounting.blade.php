@@ -286,8 +286,8 @@
                     axios.get(`/payment/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.payments = response.data;
+                            $('#payment-modal').modal('show');
                         })
-                    $('#payment-modal').modal('show');
                 },
                 viewDepositSlip(payment) {
                     axios.get(`/studPayment/download?requirement_id=${payment.id}`)
@@ -304,7 +304,7 @@
                                 type: 'success',
                                 confirmButtonText: 'Continue'
                             });
-                            
+
                             this.loadStudents();
                             this.viewPayments(payment.user_id);
                         })
