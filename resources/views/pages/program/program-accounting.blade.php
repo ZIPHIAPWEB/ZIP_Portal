@@ -143,7 +143,7 @@
                                 <th class="text-center" style="width: 10%">Bank Code</th>
                                 <th class="text-center" style="width: 10%">Reference No</th>
                                 <th class="text-center" style="width: 10%">Date Deposit</th>
-                                <th class="text-center" style="width: 10%">Bank Account No</th>
+                                <th class="text-center" style="width: 10%">Bank Acct. No</th>
                                 <th class="text-center" style="width: 10%">Amount</th>
                                 <th class="text-center" style="width: 10%">Status</th>
                                 <th class="text-center" style="width: 10%">Verified</th>
