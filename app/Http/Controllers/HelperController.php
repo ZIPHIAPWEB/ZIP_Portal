@@ -10,6 +10,7 @@ use App\Sponsor;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
+use App\PaymentRequirement;
 
 class HelperController extends Controller
 {

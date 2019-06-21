@@ -299,6 +299,12 @@
                 verifyDepositSlip(payment) {
                     axios.get(`/studPayment/verifySlip/${payment.id}`)
                         .then((response) => {
+                            swal({
+                                title: 'Deposit Slip Verified!',
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            });
+                            
                             this.loadStudents();
                             this.viewPayments(payment.user_id);
                         })
