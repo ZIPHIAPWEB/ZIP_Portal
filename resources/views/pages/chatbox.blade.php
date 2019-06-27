@@ -140,7 +140,7 @@
             el: '#chatbox',
             data: {
                 auth: program_id,
-                program: {{ request()->input('program') }},
+                program: '{{ request()->input('program') }}',
                 user: {!! Auth::user()->toJson() !!},
                 students: [],
                 messages: [],
