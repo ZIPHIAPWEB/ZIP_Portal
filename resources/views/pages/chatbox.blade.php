@@ -10,7 +10,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="box-title">
-                        sdlfjsdkfj
+                        Students
                     </div>
 
                     <div class="box-tools pull-right">
