@@ -377,6 +377,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="alert alert-danger text-center" style="padding: 6px; color: white">
+                        <i>For the Best User Experience Please Use <b>Google Chrome.</b></i>
+                    </div>
                 </div>
             </div>
         </div>

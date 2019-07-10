@@ -56,6 +56,7 @@
             <a href="{{ route('login') }}" class="text-center">I'm already a participant</a><br>
         </div>
         <!-- /.form-box -->
+        <div class="alert alert-danger m-t-10 text-center" style="padding: 6px; color: white"><i>For the Best User Experience Please Use <b>Google Chrome.</b></i></div>
     </div>
     <!-- /.register-box -->
 @endsection()
