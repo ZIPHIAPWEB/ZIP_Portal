@@ -71,6 +71,7 @@
             <a href="{{ route('coor.register') }}" class="text-center">Register as a coordinator</a>
         </div>
         <!-- /.login-box-body -->
+        <div class="alert alert-danger m-t-10 text-center" style="padding: 6px; color: white"><i>For the Best User Experience Please Use <b>Google Chrome.</b></i></div>
     </div>
 @endsection()
 

@@ -88,7 +88,7 @@
                                     <span class="direct-chat-name pull-right">Me</span>
                                     <span class="direct-chat-timestamp pull-left">@{{ message.created_at }}</span>
                                 </div>
-                                <img class="direct-chat-img" src="https://via.placeholder.com/150/000000" alt="Message User Image"><!-- /.direct-chat-img -->
+                                <img class="direct-chat-img" src="https://via.placeholder.com/150/0000ff" alt="Message User Image"><!-- /.direct-chat-img -->
                                 <div class="direct-chat-text">
                                     @{{ message.message }}
                                 </div>
@@ -139,7 +139,7 @@
             el: '#chatbox',
             data: {
                 auth: program_id,
-                user: {!! Auth::user()->toJson() !!},
+                user: '{!! Auth::user()->toJson() !!}',
                 coordinators: [],
                 messages: [],
                 selectedCoordinator: '',
@@ -247,6 +247,6 @@
                     })
                 }
             }
-        })
+        });
     </script>
 @endsection
