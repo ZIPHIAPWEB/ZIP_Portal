@@ -2104,6 +2104,136 @@
                         })
                     })
                 },
+                removePrelimFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studPreliminary/remove?requirement_id=${requirement.student_preliminary.id}`)
+                                .then((response) => {
+                                    this.loadBasicRequirements(programId, this.student.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removePaymentFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studPayment/remove?requirement_id=${requirement.student_payment.id}`)
+                                .then((response) => {
+                                    this.loadPaymentRequirements(programId, requirement.student_payment.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removeAdditionalFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (remove) => {
+                            return axios.post(`/studAdditional/remove?requirement_id=${requirement.student_additional.id}`)
+                                .then((response) => {
+                                    this.loadAdditionalRequirement(programId, this.student.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.loadRequirements(this.program_id);
+                            swal({
+                                title: result.value.data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
+                removeVisaFile(requirement) {
+                    swal({
+                        title: 'Are you sure?',
+                        text: 'This action is irreversable',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonColor: 'red',
+                        showLoaderOnConfirm: true,
+                        preConfirm: () => {
+                            return axios.post(`/studVisa/remove?requirement_id=${requirement.student_visa.id}`)
+                                .then((response) => {
+                                    this.loadVisaRequirements(requirement.sponsor_id, this.student.user_id);
+                                    return response;
+                                }).catch((error) => {
+                                    swal({
+                                        title: 'An Error has occur',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                })
+                        }
+                    }).then((result) => {
+                        if (result.value) {
+                            this.loadRequirements(this.sponsor_id);
+                            swal({
+                                title: 'Success',
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }
+                    })
+                },
                 updateField(field, input) {
                     this.loading.modal = true;
                     let formData = new FormData();

@@ -119,7 +119,7 @@
                                                 <span class="contacts-list-name">
                                                     @{{ coor.firstName }} @{{ coor.lastName }}
                                                 </span>
-                                            <span class="contacts-list-msg">How have you been? I was...</span>
+                                            <span class="contacts-list-msg"></span>
                                             </div>
                                             <!-- /.contacts-list-info -->
                                         </a>
