@@ -31,6 +31,7 @@ class Student extends Model
         'fb_email',
         'visa_interview_status',
         'visa_interview_schedule',
+        'visa_interview_time',
         'program_start_date',
         'program_end_date',
         'visa_sponsor_id',

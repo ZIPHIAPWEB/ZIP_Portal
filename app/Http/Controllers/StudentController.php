@@ -73,11 +73,6 @@ class StudentController extends Controller
             't_address'             =>  'required',
             't_start_date'          =>  'required',
             't_date_graduated'      =>  'required',
-            
-            's_school'              =>  'required',
-            's_address'             =>  'required',
-            's_start_date'          =>  'required',
-            's_date_graduated'      =>  'required',
         ])->validate();
     }
 
@@ -134,10 +129,10 @@ class StudentController extends Controller
     
             $this->secondaryRepository->saveSecondary([
                 'user_id'           =>  Auth::user()->id,
-                'school_name'       =>  $request->input('s_school'),
-                'address'           =>  $request->input('s_address'),
-                'start_date'        =>  $request->input('s_start_date'),
-                'date_graduated'    =>  $request->input('s_date_graduated'),
+                'school_name'       =>  '',
+                'address'           =>  '',
+                'start_date'        =>  '',
+                'date_graduated'    =>  '',
             ]);
     
             $this->tertiaryRepository->saveTertiary([

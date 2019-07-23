@@ -148,32 +148,6 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">Secondary Level</label>
-                                </div>
-                                <div class="form-group col-xs-12">
-                                    <label for="">School Name <i class="text-red">*</i></label>
-                                    <input v-model="secondary.school" type="text" class="form-control input-sm" placeholder="Secondary School Name">
-                                    <span class="help-block text-red" v-if="errors.s_school">required</span>
-                                </div>
-                                <div class="form-group col-xs-12">
-                                    <label for="">Address <i class="text-red">*</i></label>
-                                    <input v-model="secondary.address" type="text" class="form-control input-sm" placeholder="Secondary School Address">
-                                    <span class="help-block text-red" v-if="errors.s_address">required</span>
-                                </div>
-                                <div class="form-group col-xs-6">
-                                    <label for="">Start Date <i class="text-red">*</i></label>
-                                    <input v-model="secondary.start_date" type="date" class="form-control input-sm" placeholder="Secondary Start Date">
-                                    <span class="help-block text-red" v-if="errors.s_start_date">required</span>
-                                </div>
-                                <div class="form-group col-xs-6">
-                                    <label for="">Date Graduated <i class="text-red">*</i></label>
-                                    <input v-model="secondary.date_graduated" type="date" class="form-control input-sm">
-                                    <span class="help-block text-red" v-if="errors.s_date_graduated">required</span>
-                                </div>
-                            </div>
-                            <hr>
                             <div class="form-group">
                                 <button @click="validate" class="btn btn-primary btn-block btn-flat btn-sm">Validate</button>
                             </div>
@@ -349,7 +323,7 @@
                             </tbody>
                         </table>
                         <table class="table table-striped table-bordered table-condensed">
-                                <tbody>
+                            <tbody>
                                 <tr>
                                     <td colspan="2" class="text-bold">Tertiary Education</td>
                                 </tr>
@@ -372,29 +346,6 @@
                                 <tr>
                                     <td>Date Graduated</td>
                                     <td class="text-bold">@{{ tertiary.date_graduated | toFormattedDateString }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td colspan="2" class="text-bold">Secondary Education</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 30%;">School</td>
-                                    <td class="text-bold">@{{ secondary.school }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td class="text-bold">@{{ secondary.address }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Start Date</td>
-                                    <td class="text-bold">@{{ secondary.start_date | toFormattedDateString }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Date Graduated</td>
-                                    <td class="text-bold">@{{ secondary.date_graduated | toFormattedDateString }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -552,10 +503,6 @@
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
-                    formData.append('s_school', this.secondary.school);
-                    formData.append('s_address', this.secondary.address);
-                    formData.append('s_start_date', this.secondary.start_date);
-                    formData.append('s_date_graduated', this.secondary.date_graduated);
                     formData.append('branch', this.student.branch);
                     this.loading = true;
                     this.button_disabled = true;
@@ -584,10 +531,6 @@
                     formData.append('skype_id', this.student.skype_id);
                     formData.append('year', this.student.year);
                     formData.append('program_id', (this.student.program_id) ? this.student.program_id.id : '');
-                    formData.append('s_school', this.secondary.school);
-                    formData.append('s_address', this.secondary.address);
-                    formData.append('s_start_date', this.secondary.start_date);
-                    formData.append('s_date_graduated', this.secondary.date_graduated);
                     formData.append('t_school', (this.tertiary.school) ? this.tertiary.school.name : '');
                     formData.append('t_degree', (this.tertiary.degree == 'others') ? this.tertiary.other_degree : this.tertiary.degree);
                     formData.append('t_address', this.tertiary.address);
