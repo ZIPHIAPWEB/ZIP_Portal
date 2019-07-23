@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Whoops\Exception\ErrorException;
+use App\Notifications\verifyProcessing;
+use App\Notifications\PaymentNotification;
 
 class StudentPaymentController extends Controller
 {
@@ -88,8 +90,10 @@ class StudentPaymentController extends Controller
 
             try {
                 Notification::route('mail', 'accounting@ziptravel.com.ph')->notify(new AccountingNotification($data));
+                Notification::route('mail', 'skissey@ziptravel.com.ph')->notify(new PaymentNotification($data));
             } catch (ErrorException $e) {
                 Notification::route('mail', 'accounting@ziptravel.com.ph')->notify(new AccountingNotification($data));
+                Notification::route('mail', 'skissey@ziptravel.com.ph')->notify(new PaymentNotification($data));
             }
 
             return response()->json(['message' => 'File Uploaded!'], 200);
@@ -101,6 +105,18 @@ class StudentPaymentController extends Controller
         $this->studPaymentRepository->updateStudPayment($id, [
             'acknowledgement'   =>  true
         ]);
+        
+        $payment = $this->studPaymentRepository->findOneBy(['id' => $id]);
+        $student = $this->studentRepository->findOneBy(['user_id' => $payment->user_id]);
+        $req = $this->paymentRepository->findOneBy(['id' => $payment->requirement_id]);
+        
+        $data = [
+            'first_name'    =>  $student->first_name,
+            'last_name'     =>  $student->last_name,
+            'requirement'   =>  $req->name
+        ];
+
+        Notification::route('mail', 'skissey@ziptravel.com.ph')->notify(new verifyProcessing($data));
 
         return redirect()->route('message.verified.payment');
     }

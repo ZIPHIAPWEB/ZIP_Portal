@@ -118,7 +118,7 @@
             </div>
             -->
         </div>
-        <div class="col-xs-9">
+        <div class="col-xs-12 col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -128,15 +128,15 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" style="overflow-x: auto">
                     <div id="additional" class="tab-pane active">
-                        <table class="table table-bordered table-striped table-condensed">
+                        <table class="table table-bordered table-striped table-condensed"> 
                             <thead>
                             <th>Requirements</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                             </thead>
-                            <tbody v-if="hasRecords">
+                            <tbody v-if="hasRecords" style="overflow-x: auto">
                             <tr v-if="loading.table">
                                 <td valign="top" colspan="15" class="text-center">
                                     <span class="fa fa-circle-o-notch fa-spin"></span>

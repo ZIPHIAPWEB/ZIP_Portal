@@ -14,49 +14,35 @@
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center">
-                            Deposit Slip Details
+                            <img src="{{ asset('logo2.png') }}" style="width: 120px; height: 120px;" alt="" srcset="">
                         </td>
                     </tr>
                 </table>
-                <table width="80%" cellpadding="0" cellspacing="0" border="0">
+                <table width="80%" cellpadding="0" cellspacing="0" border="0" style="padding-top: 20px;">
                     <tr>
-                        <td style="padding: 10px;">
-                            Name: {{ $data['full_name'] }}
+                        <td align="center" style="font-size: 30px;">
+                            APPLICATION STATUS
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Bank Code: {{ $data['payment']->bank_code }}
+                            Congratulations!
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Reference No.: {{ $data['payment']->reference_no }}
+                            Your Application Status is now set to:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 20px; padding-bottom: 20px; padding-left: 10px;">
+                            <a href="" style="background-color: #002561; color: white; padding: 10px; border-radius: 10px; text-decoration: none;">PROGRAM PROPER</a>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Date: {{ $data['payment']->date_deposit }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">
-                            Bank Account No.: {{ $data['payment']->bank_account_no }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">
-                            Amount: {{ $data['payment']->amount }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ url(Storage::disk('uploaded_payment')->url($data['payment']->path)) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">View Deposit Slip</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ route('verify.slip', $data['payment']->id) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">Verify Deposit Slip</a>
+                            Thank you for choosing ZIP TRAVEL PH as your program provider. We wish you good luck in your new journey. While you are in the U.S., <br>
+                            don't forget to communicate with your U.S. Host Company and U.S. Visa Sponsor if you have some concerns.
                         </td>
                     </tr>
                     <tr>

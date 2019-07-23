@@ -6,9 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Program;
 
-class RegisteredStudentNotification extends Notification
+class PaymentNotification extends Notification
 {
     use Queueable;
 
@@ -17,7 +16,6 @@ class RegisteredStudentNotification extends Notification
      *
      * @return void
      */
-
     private $data;
     public function __construct($data)
     {
@@ -45,8 +43,8 @@ class RegisteredStudentNotification extends Notification
     {
         return (new MailMessage)
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
-                    ->subject('New Applicant')
-                    ->markdown('mail.registered', ['data' => $this->data]);
+                    ->subject('Deposit Slip - ' . $this->data['full_name'])
+                    ->markdown('mail.depositSlip_no_verify', ['data' => $this->data]);
     }
 
     /**

@@ -39,7 +39,7 @@
                         <button @click="loadStudents()" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="overflow-x: auto">
                     <form @submit.prevent="filterStatus()" class="form-inline pull-left m-b-10">
                         <div class="form-group">
                             <label for="" class="control-label">From Date:</label>
@@ -198,7 +198,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
-                                    <section id="program">
+                                    <section id="program" v-if="student.application_status == 'New Applicant' || student.application_status == 'Assessed'">
                                         <table class="table table-condensed table-striped table-bordered">
                                             <tbody>
                                                 <tr>
@@ -268,34 +268,6 @@
                                         </table>
                                     </section>
                                     <transition name="slide-fade">
-                                        <section v-if="show.assessed">
-                                            <div class="box box-primary">
-                                                <div class="box-header">
-                                                    <div class="box-tools pull-right">
-                                                        <button @click="show.assessed = false" class="btn btn-box-tool">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="box-body">
-                                                    <div class="form-group col-xs-12">
-                                                        <label for="" class="control-label">Assessment Status</label>
-                                                        <select v-model="assessed.status" class="form-control input-sm">
-                                                            <option value="">Select status</option>
-                                                            <option value="Passed">Passed</option>
-                                                            <option value="Failed">Failed</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-xs-12">
-                                                        <label for="" class="control-label">Assessment Message</label>
-                                                        <textarea v-model="assessed.message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
-                                                    </div>
-                                                    <div class="form-group col-xs-12">
-                                                        <button @click="submitAssessed()" class="btn btn-primary btn-block btn-flat btn-sm">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
                                         <section v-if="show.hired">
                                             <div class="box box-primary">
                                                 <div class="box-header">
@@ -363,17 +335,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="box-body">
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">SEVIS ID</label>
                                                         <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
                                                     </div>
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="control-label">Program ID</label>
                                                         <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
                                                     </div>
-                                                    <div class="form-group col-xs-12">
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Trial Schedule</label>
+                                                        <input v-model="visa.trial_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Trial Time</label>
+                                                        <input v-model="visa.trial_time" type="text" class="form-control input-sm" placeholder="Enter trial time">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="control-label">Interview Schedule</label>
                                                         <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Interview Time</label>
+                                                        <input v-model="visa.time" type="text" class="form-control input-sm" placeholder="Enter interview time">
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
@@ -391,13 +375,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="box-body">
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">PDOS Schedule</label>
                                                         <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
                                                     </div>
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs12 col-md-6">
+                                                        <label class="label-control">PDOS Time</label>
+                                                        <input v-model="program.pdos_time" type="text" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">CFO Schedule</label>
                                                         <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="label-control">CFO Time</label>
+                                                        <input v-model="program.cfo_time" type="text" class="form-control input-sm">
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForPDOSAndCFO()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
@@ -618,40 +610,56 @@
                                     <section id="school-details">
                                         <label class="control-label">Educational Background</label>
                                         <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td colspan="2" class="text-bold">
-                                                    Primary
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm" style="width: 200px">
-                                                    School
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.school_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Date Graduated
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.date_graduated }}
-                                                </td>
-                                            </tr>
-                                        </table>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">
+                                                        Tertiary Level
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 200px">
+                                                        School
+                                                    </td>
+                                                    <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
+                                                        @{{ student.tertiary.school.name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Address
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.address }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Degree
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.degree }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Start Date
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.start_date }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Date Graduated (expected)
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.date_graduated | toFormattedDateString }}
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
                                                 <td colspan="2" class="text-bold">
-                                                    Secondary
+                                                    Secondary Level
                                                 </td>
                                             </tr>
                                             <tr>
@@ -686,53 +694,6 @@
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.secondary.date_graduated | toFormattedDateString }}
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td colspan="2" class="text-bold">
-                                                    Tertiary
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm" style="width: 200px">
-                                                    School
-                                                </td>
-                                                <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
-                                                    @{{ student.tertiary.school.name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Degree
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.degree }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Start Date
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.start_date }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Date Graduated (expected)
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -786,25 +747,27 @@
                                         <label class="control-label">Host Company Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2">
+                                                    <button v-if="!settings.hostCompanyIsEdit" @click="settings.hostCompanyIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.hostCompanyIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateHostCompanyDetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Visa Sponsor
                                                 </td>
-                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.sponsor.name }}</label>
-                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.sponsor" class="form-control input-sm">
                                                             <option value="">Select visa sponsor</option>
                                                             <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -812,22 +775,15 @@
                                                 <td class="text-sm">
                                                     Host Company
                                                 </td>
-                                                <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.company.name }}</label>
-                                                    <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.name" class="form-control input-sm">
                                                             <option value="">Select host company</option>
                                                             <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('host_company_id', field); setting.host.nameIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.nameIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -835,22 +791,15 @@
                                                 <td class="text-sm">
                                                     Location
                                                 </td>
-                                                <td v-if="!setting.host.locationIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.location }}</label>
-                                                    <a @click="hideField('location')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.place" class="form-control input-sm">
                                                             <option value="">Select Location</option>
                                                             <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('location', field); setting.host.locationIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.locationIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -858,19 +807,12 @@
                                                 <td class="text-sm">
                                                     Housing Address
                                                 </td>
-                                                <td v-if="!setting.host.housingIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.housing_details }}</label>
-                                                    <a @click="hideField('housing')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('housing_details', field); setting.host.housingIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.housingIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.housing" type="text" class="form-control input-sm" placeholder="Enter housing address">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -878,22 +820,15 @@
                                                 <td class="text-sm">
                                                     Position
                                                 </td>
-                                                <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.position }}</label>
-                                                    <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.position" class="form-control input-sm">
                                                             <option value="">Select Position</option>
                                                             <option v-for="position in positions" :value="position.display_name">@{{ position.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.positionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -901,55 +836,34 @@
                                                 <td class="text-sm">
                                                     Stipend Per Hour
                                                 </td>
-                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.stipend }}</label>
-                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">Start Date</td>
-                                                <td v-if="!setting.host.startIsEdit">
+                                                <td v-if="!settings.hostCompanyIsEdit">
                                                     <label class="text-sm">@{{ student.program_start_date | toFormattedDateString }}</label>
-                                                    <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('program_start_date', field); setting.host.startIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.startIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.start" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">End Date</td>
-                                                <td v-if="!setting.host.endIsEdit">
+                                                <td v-if="!settings.hostCompanyIsEdit">
                                                     <label class="text-sm">@{{ student.program_end_date | toFormattedDateString }}</label>
-                                                    <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('program_end_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.end" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -959,22 +873,24 @@
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2">
+                                                    <button v-if="!settings.visaInterviewIsEdit" @click="settings.visaInterviewIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.visaInterviewIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateVisaInterviewDetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px;"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Program ID Number
                                                 </td>
-                                                <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.visaInterviewIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.program_id_no }}</label>
-                                                    <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('program_id_no', field); setting.visa.programIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.programIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter Program ID Number...">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -982,39 +898,64 @@
                                                 <td class="text-sm">
                                                     SEVIS ID
                                                 </td>
-                                                <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.visaInterviewIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.sevis_id }}</label>
-                                                    <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('sevis_id', field); setting.visa.sevisIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.sevisIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter SEVIS ID...">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Interview Schedule
+                                                    Visa Interview Schedule
                                                 </td>
-                                                <td v-if="!setting.visa.scheduleIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
-                                                    <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('visa_interview_schedule', field); setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Visa Interview Time
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.time" type="text" class="form-control input-sm" placeholder="Enter visa interview time...">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Trial Interview Schedule
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                   <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.trial_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Trial Interview Time
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.trial_time" type="text" class="form-control input-sm" placeholder="Enter trial interview time...">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1024,22 +965,37 @@
                                         <label class="control-label">PDOS & CFO Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2"ass="text-sm">
+                                                    <button v-if="!settings.pdoscfoIsEdit" @click="settings.pdoscfoIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.pdoscfoIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updatePDOSCFODetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     PDOS Schedule
                                                 </td>
-                                                <td v-if="!setting.program.pdosIsEdit" class="text-bold">
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
                                                     <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
-                                                    <a @click="hideField('pdos');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('pdos_schedule', field); setting.program.pdosIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.program.pdosIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    PDOS Time
+                                                </td>
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.pdos_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.pdos_time" type="text" class="form-control" placeholder="Enter PDOS Schedule">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1047,19 +1003,25 @@
                                                 <td class="text-sm">
                                                     CFO Schedule
                                                 </td>
-                                                <td v-if="!setting.program.cfoIsEdit" class="text-bold">
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
                                                     <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
-                                                    <a @click="hideField('cfo');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('cfo_schedule', field); setting.program.cfoIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.program.cfoIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    CFO Time
+                                                </td>
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.cfo_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.cfo_time" type="text" class="form-control input-sm" placeholder="Enter CFO Schedule Time">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1069,27 +1031,27 @@
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Departure from MANILA
                                                 </td>
+                                                <td>
+                                                    <button v-if="!settings.departureFromManila" @click="settings.departureFromManila = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.departureFromManila = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateDepartureMNL" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
-                                                    <a @click="hideField('us_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_date', field); setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1097,19 +1059,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureTimeIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_time }}</label>
-                                                    <a @click="hideField('us_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_time }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_time', field); setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1117,19 +1072,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureFlightIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_flight_no }}</label>
-                                                    <a @click="hideField('us_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_flight_no }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_flight_no', field); setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1137,23 +1085,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureAirlineIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_airline }}</label>
-                                                    <a @click="hideField('us_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_airline }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="departure_mnl.mnl_departure_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_airline', field); setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1161,27 +1102,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Arrival to US
                                                 </td>
+                                                <td>
+                                                    <button v-if="!settings.arrivalToUs" @click="settings.arrivalToUs = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.arrivalToUs = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateArrivalUS" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.us_arrival_date }}</label>
-                                                    <a @click="hideField('us_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_date', field); setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1189,19 +1130,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_time }}</label>
-                                                    <a @click="hideField('us_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_time', field); setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1209,19 +1143,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_flight_no }}</label>
-                                                    <a @click="hideField('us_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_flight_no', field); setting.flightUs.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1229,23 +1156,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_airline }}</label>
-                                                    <a @click="hideField('us_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="arrival_us.us_arrival_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_airline', field); setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1253,27 +1173,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Departure from US
+                                                </td>
+                                                <td>
+                                                    <button v-if="!settings.departureFromUs" @click="settings.departureFromUs = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.departureFromUs = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateDepartureUS" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
-                                                    <a @click="hideField('mnl_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_date', field); setting.flightMNL.departureIsEdit = false; field= '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1281,19 +1201,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureTimeIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_time }}</label>
-                                                    <a @click="hideField('mnl_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_time }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_time', field); setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1301,19 +1214,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureFlightIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_flight_no }}</label>
-                                                    <a @click="hideField('mnl_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_flight_no }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_flight_no', field); setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1321,23 +1227,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureAirlineIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_airline }}</label>
-                                                    <a @click="hideField('mnl_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_airline }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="departure_us.us_departure_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_airline', field); setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1345,27 +1244,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Arrival to MANILA
+                                                </td>
+                                                <td>
+                                                    <button v-if="!settings.arrivalToManila" @click="settings.arrivalToManila = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.arrivalToManila = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateArrivalMNL" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.mnl_arrival_date }}</label>
-                                                    <a @click="hideField('mnl_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_date', field); setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1373,19 +1272,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_time }}</label>
-                                                    <a @click="hideField('mnl_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_time', field); setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1393,19 +1285,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_flight_no }}</label>
-                                                    <a @click="hideField('mnl_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_flight_no', field); setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1413,23 +1298,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_airline }}</label>
-                                                    <a @click="hideField('mnl_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="arrival_mnl.mnl_arrival_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_airline', field); setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1705,6 +1583,7 @@
                     name: '',
                     position: '',
                     place: '',
+                    housing: '',
                     stipend: '',
                     start: '',
                     end: '',
@@ -1713,14 +1592,52 @@
                 visa: {
                     sevis: '',
                     programId: '',
-                    schedule: ''
+                    schedule: '',
+                    time: '',
+                    trial_schedule: '',
+                    trial_time: ''
                 },
                 program: {
                     pdos_schedule: '',
-                    cfo_schedule: ''
+                    pdos_time: '',
+                    cfo_schedule: '',
+                    cfo_time: ''
+                },
+                departure_mnl: {
+                    mnl_departure_date: '',
+                    mnl_departure_time: '',
+                    mnl_departure_flight_no: '',
+                    mnl_departure_flight: ''
+                },
+                departure_us: {
+                    us_departure_date: '',
+                    us_departure_time: '',
+                    us_departure_flight_no: '',
+                    us_departure_flight: ''
+                },
+                arrival_mnl: {
+                    mnl_arrival_date: '',
+                    mnl_arrival_time: '',
+                    mnl_arrival_flight_no: '',
+                    mnl_arrival_flight: '',
+                },
+                arrival_us: {
+                    us_arrival_date: '',
+                    us_arrival_time: '',
+                    us_arrival_flight_no: '',
+                    us_arrival_flight: ''
                 },
                 cancel: {
                     status: ''
+                },
+                settings: {
+                    hostCompanyIsEdit: false,
+                    visaInterviewIsEdit: false,
+                    pdoscfoIsEdit: false,
+                    departureFromManila: false,
+                    arrivalToUs: false,
+                    departureFromUs: false,
+                    arrivalToManila: false,
                 },
                 setting: {
                     host: {
@@ -2023,11 +1940,26 @@
                     switch (status) {
                         case 'Assessed':
                             if (this.student.application_status == 'New Applicant') {
-                                this.show.assessed = true;
-                                this.show.hired = false;
-                                this.show.visa = false;
+                                this.loading.modal = true;
+                                axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                    .then(({data}) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: data,
+                                            type: 'success',
+                                            confirmButonText: 'Continue'
+                                        })
+                                    }).catch((error) => {
+                                        swal({
+                                            title: 'Something went wrong.',
+                                            type: 'error',
+                                            confirmButonText: 'Go Back!'
+                                        })
+                                    })
                             } else {
-                                alert('Student needs to be New Applicant first!');
+                                alert('You Cannot Revert Application Status.');
                             }
                             break;
                         case 'Confirmed':
@@ -2052,7 +1984,7 @@
                                     })
                                 });
                             } else {
-                                alert('Student needs to be Assessed first! ');
+                                alert('You Cannot Revert Application Status.');
                             }
                             break;
                         case 'Hired':
@@ -2061,7 +1993,7 @@
                                 this.show.hired = true;
                                 this.show.visa = false;
                             } else {
-                                alert('Student needs to be Confirmed first!');
+                                alert('You Cannot Revert Application Status.');
                             }
                             break;
                         case 'ForVisaInterview':
@@ -2070,34 +2002,43 @@
                                 this.show.visa = true;
                                 this.show.hired = false;
                             } else {
-                                alert('Student need to be Hired first!');
+                                alert('You Cannot Revert Application Status.');
                             }
                             break;
                         case 'ForPDOSCFO': 
-                            this.show.assessed = false;
-                            this.show.visa = false;
-                            this.show.hired = false;
-                            this.show.pdoscfo = true;
-                            this.show.programProper = false;
+                            if(this.student.application_status == 'For Visa Interview') {
+                                this.show.assessed = false;
+                                this.show.visa = false;
+                                this.show.hired = false;
+                                this.show.pdoscfo = true;
+                                this.show.programProper = false;
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
                             break;
                         case 'ProgramProper':
-                            axios.post(`/coor/${this.student.user_id}/application/ProgramProper`)
-                                .then((response) => {
-                                    this.loadStudents(programId);
-                                    this.viewStudent(this.student.user_id);
-                                    this.loading.modal = false;
-                                    swal({
-                                        title: response.data,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    }).catch((error) => {
+                            this.loading.modal = false;
+                            if(this.student.application_status == 'For PDOS & CFO') {
+                                axios.post(`/coor/${this.student.user_id}/application/ProgramProper`)
+                                    .then((response) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
                                         swal({
-                                            title: 'Something went wrong!',
-                                            type: 'error',
-                                            confirmButonText: 'Go Back!'
+                                            title: response.data,
+                                            type: 'success',
+                                            confirmButtonText: 'Continue'
+                                        }).catch((error) => {
+                                            swal({
+                                                title: 'Something went wrong!',
+                                                type: 'error',
+                                                confirmButonText: 'Go Back!'
+                                            })
                                         })
                                     })
-                                })
+                            } else {
+                                alert('You Cannot Revert Application Status');
+                            }
                             break;
                         case 'Canceled':
                             this.show.cancel = true;
@@ -2198,8 +2139,9 @@
                                 confirmButtonText: 'Continue'
                             })
                         }).catch((error) => {
+                            this.loading.modal = false;
                             swal({
-                                title: 'Something went wrong!',
+                                title: 'All Fields are Required!',
                                 type: 'error',
                                 confirmButtonText: 'Go Back!'
                             })
@@ -2207,11 +2149,7 @@
                 },
                 submitForVisaInterview() {
                     this.loading.modal = true;
-                    let formData = new FormData();
-                        formData.append('sevis', this.visa.sevis);
-                        formData.append('program', this.visa.programId);
-                        formData.append('schedule', this.visa.schedule);
-                    axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, this.visa)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
@@ -2232,10 +2170,7 @@
                 },
                 submitForPDOSAndCFO() {
                     this.loading.modal = true;
-                    let formData = new FormData();
-                        formData.append('pdos_schedule', this.program.pdos_schedule);
-                        formData.append('cfo_schedule', this.program.cfo_schedule);
-                    axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, this.program)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
@@ -2383,6 +2318,97 @@
                             })
                         }
                     })
+                },
+                updateHostCompanyDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateHostCompanyDetails/${this.student.user_id}`, this.host)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.hostCompanyIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        })
+                },
+                updateVisaInterviewDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateVisaInterviewDetails/${this.student.user_id}`, this.visa)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.visaInterviewIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updatePDOSCFODetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updatePDOSCFODetails/${this.student.user_id}`, this.program)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.pdoscfoIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureMNL/${this.student.user_id}`, this.departure_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalUS/${this.student.user_id}`, this.arrival_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureUS/${this.student.user_id}`, this.departure_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalMNL/${this.student.user_id}`, this.arrival_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
                 },
                 updateField(field, input) {
                     this.loading.modal = true;

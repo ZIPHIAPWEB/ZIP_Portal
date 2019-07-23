@@ -22,19 +22,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\Sponsor\SponsorRepository;
+use App\Notifications\ConfirmedApplicantNotification;
 
 class CoordinatorController extends Controller
 {
     private $coordinatorRepository;
     private $studentRepository;
     private $coordinatorActionRepository;
+    private $sponsorRepository;
     public function __construct(CoordinatorRepository $coordinatorRepository,
                                 StudentRepository $studentRepository,
-                                CoordinatorActionRepository $coordinatorActionRepository)
+                                CoordinatorActionRepository $coordinatorActionRepository,
+                                SponsorRepository $sponsorRepository)
     {
         $this->coordinatorRepository = $coordinatorRepository;
         $this->studentRepository = $studentRepository;
         $this->coordinatorActionRepository = $coordinatorActionRepository;
+        $this->sponsorRepository = $sponsorRepository;
     }
 
     public function coordinatorProgram($id)
@@ -90,16 +95,8 @@ class CoordinatorController extends Controller
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Assessed.',
                 ]);
 
-                $data = [
-                    'coordinator'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        =>  'Assessed',
-                    'assessment'    =>  $request->input('status'),
-                    'message'       =>  $request->input('message')
-                ];
-
-                Notification::route('mail', $program->email)->notify(new AssessmentResponse($data));
-
                 return 'Student Assessed!';
+
                 break;
             case 'Confirmed' :
                 $programId = Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
@@ -114,17 +111,48 @@ class CoordinatorController extends Controller
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name :$coordinator->firstName . ' set the application status to Confirmed.',
                 ]);
 
+                $student = $this->studentRepository->findOneBy(['user_id' => $id]);
                 $data = [
                     'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        => 'Confirmed'
+                    'status'        => 'Confirmed',
+                    'first_name'    => $student->first_name,
+                    'last_name'     => $student->last_name
                 ];
 
-                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
+                switch(Program::find($program->program_id)->description) {
+                    case 'SWT-SP':
+                        Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                        Notification::route('mail', 'swtspring@gmail.com')->notify(new ConfirmedApplicantNotification($data));
+                        break;
+                    case 'SWT-SM':
+                        Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                        Notification::route('mail', 'swtsummer@ziptravel.com.ph')->notify(new ConfirmedApplicantNotification($data));
+                        break;
+                    case 'INT':
+                        Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                        Notification::route('mail', 'internship@ziptravel.com.ph')->notify(new ConfirmedApplicantNotification($data));
+                        break;
+                    case 'CTP':
+                        Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+                        Notification::route('mail', 'careertraining@ziptravel.com.ph')->notify(new ConfirmedApplicantNotification($data));
+                        break;
+                }
 
                 return 'Student Confirmed';
                 break;
 
             case 'Hired' :
+                $request->validate([
+                    'name'          =>  'required',
+                    'position'      =>  'required',
+                    'place'         =>  'required',
+                    'housing'       =>  'required',
+                    'stipend'       =>  'required',
+                    'start'         =>  'required',
+                    'end'           =>  'required',
+                    'sponsor'       =>  'required'
+                ]);
+
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_status'    =>  'Hired',
                     'host_company_id'       =>  $request->input('name'),
@@ -144,11 +172,19 @@ class CoordinatorController extends Controller
                 ]);
 
                 $data = [
-                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        => 'Hired'
+                    'coordinator'       => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'            => 'Hired',
+                    'host_company'      => $request->input('name'),
+                    'position'          => $request->input('position'),
+                    'location'          => $request->input('place'),
+                    'housing_details'   => $request->input('housing'),
+                    'stipend'           => $request->input('stipend'),
+                    'program_start_date'=> $request->input('start'),
+                    'program_end_date'  => $request->input('end'),
+                    'visa_sponsor'      => $this->sponsorRepository->findOneBy(['id' => $request->input('sponsor')])->name
                 ];
 
-                Notification::route('mail', [$program->email, 'accounting@ziptravel.com.ph'])->notify(new CoordinatorResponse($data));
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
                 return 'Hired';
                 break;
@@ -158,7 +194,10 @@ class CoordinatorController extends Controller
                     'application_status'        =>  'For Visa Interview',
                     'sevis_id'                  =>  $request->input('sevis'),
                     'program_id_no'             =>  $request->input('program'),
-                    'visa_interview_schedule'   =>  $request->input('schedule')
+                    'visa_interview_schedule'   =>  $request->input('schedule'),
+                    'visa_interview_time'       =>  $request->input('time'),
+                    'trial_interview_schedule'  =>  $request->input('trial_schedule'),
+                    'trial_interview_time'      =>  $request->input('trial_time')
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
@@ -168,11 +207,15 @@ class CoordinatorController extends Controller
                 ]);
 
                 $data = [
-                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        => 'For Visa Interview'
+                    'coordinator'               => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'                    => 'For Visa Interview',
+                    'visa_interview_schedule'   =>  $request->input('schedule'),
+                    'visa_interview_time'       =>  $request->input('time'),
+                    'trial_interview_schedule'  =>  $request->input('trial_schedule'),
+                    'trial_interview_time'      =>  $request->input('trial_time')
                 ];
 
-                Notification::route('mail', $program->email)->notify((new CoordinatorResponse($data))->delay($when));
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
                 return 'For Visa Interview';
                 break;
@@ -180,7 +223,9 @@ class CoordinatorController extends Controller
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_status'    =>  'For PDOS & CFO',
                     'pdos_schedule'         =>  $request->input('pdos_schedule'),
-                    'cfo_schedule'          =>  $request->input('cfo_schedule')
+                    'pdos_time'             =>  $request->input('pdos_time'),
+                    'cfo_schedule'          =>  $request->input('cfo_schedule'),
+                    'cfo_time'              =>  $request->input('cfo_time')
                 ]);
 
                 $this->coordinatorActionRepository->saveCoordinatorAction([
@@ -191,7 +236,11 @@ class CoordinatorController extends Controller
 
                 $data = [
                     'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
-                    'status'        => 'For PDOS & CFO'
+                    'status'        => 'For PDOS & CFO',
+                    'pdos_schedule' =>  $request->input('pdos_schedule'),
+                    'pdos_time'     =>  $request->input('pdos_time'),
+                    'cfo_schedule'  =>  $request->input('cfo_schedule'),
+                    'cfo_time'      =>  $request->input('cfo_time')
                 ];
 
                 Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
@@ -261,5 +310,109 @@ class CoordinatorController extends Controller
         ]);
 
         return $field . ' Updated!';
+    }
+
+    public function updateHostCompanyDetails(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'visa_sponsor_id'   =>  $request->input('sponsor'),
+            'host_company_id'   =>  $request->input('name'),
+            'position'          =>  $request->input('position'),
+            'location'          =>  $request->input('place'),
+            'housing_details'   =>  $request->input('housing'),
+            'program_start_date'=>  $request->input('start'),
+            'program_end_date'  =>  $request->input('end'),
+            'stipend'           =>  $request->input('stipend')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Host Company Details Updated!'
+        ], 200);
+    }
+
+    public function updateVisaInterviewDetails(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'program_id_no'             =>  $request->input('programId'),
+            'sevis_id'                  =>  $request->input('sevis'),
+            'visa_interview_schedule'   =>  $request->input('schedule'),
+            'visa_interview_time'       =>  $request->input('time'),
+            'trial_interview_schedule'  =>  $request->input('trial_schedule'),
+            'trial_interview_time'      =>  $request->input('trial_time')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Visa Interview Details Updated!'
+        ], 200);
+    }
+
+    public function updatePDOSCFODetails(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'pdos_schedule'     =>  $request->input('pdos_schedule'),
+            'pdos_time'         =>  $request->input('pdos_time'),
+            'cfo_schedule'      =>  $request->input('cfo_schedule'),
+            'cfo_time'          =>  $request->input('cfo_time')
+        ]);
+
+        return response()->json([
+            'message'   =>  'PDOS/CFO Details Updated'
+        ], 200);
+    }
+
+    public function updateDepartureMNL(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'mnl_departure_date'        =>  $request->input('mnl_departure_date'),
+            'mnl_departure_time'        =>  $request->input('mnl_departure_time'),
+            'mnl_departure_flight_no'   =>  $request->input('mnl_departure_flight_no'),
+            'mnl_departure_airline'      =>  $request->input('mnl_departure_flight')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Manila Departure Updated'
+        ], 200);
+    }
+
+    public function updateArrivalUS(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'us_arrival_date'           =>  $request->input('us_arrival_date'),
+            'us_arrival_time'           =>  $request->input('us_arrival_time'),
+            'us_arrival_flight_no'      =>  $request->input('us_arrival_flight_no'),
+            'us_arrival_airline'         =>  $request->input('us_arrival_flight')       
+        ]);
+
+        return response()->json([
+            'message'   =>  'US Arrival Updated'
+        ], 200);
+    }
+
+    public function updateDepartureUS(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'us_departure_date'         =>  $request->input('us_departure_date'),
+            'us_departure_time'         =>  $request->input('us_departure_time'),
+            'us_departure_flight_no'    =>  $request->input('us_departure_flight_no'),
+            'us_departure_airline'       =>  $request->input('us_departure_flight')
+        ]);
+
+        return response()->json([
+            'message'   =>  'US Departure Updated'
+        ], 200);
+    }
+
+    public function updateArrivalMNL(Request $request, $id)
+    {
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'mnl_arrival_date'          =>  $request->input('mnl_arrival_date'),
+            'mnl_arrival_time'          =>  $request->input('mnl_arrival_time'),
+            'mnl_arrival_flight_no'     =>  $request->input('mnl_arrival_flight_no'),
+            'mnl_arrival_airline'        =>  $request->input('mnl_arrival_flight')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Manila Arrival Updated'
+        ], 200);
     }
 }

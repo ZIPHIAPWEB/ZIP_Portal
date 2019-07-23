@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Notifications\RegisteredStudentNotification;
 use Illuminate\Support\Facades\Notification;
 use DB;
+use App\Program;
 
 class StudentController extends Controller
 {
@@ -51,27 +52,7 @@ class StudentController extends Controller
 
     public function validateDetails(Request $request, $step)
     {
-        switch ($step) {
-            case 1:
-                $this->validatePersonalDetails($request);
-            break;
-
-            case 2:
-                $this->validateEducationDetails($request);
-            break;
-
-            case 3:
-                $this->validateContactDetails($request);
-            break;
-
-            case 4:
-                $this->validateParentDetails($request);
-            break;
-
-            case 5:
-                return $this->validateWorkExperience($request);
-            break;
-        }
+        $this->validatePersonalDetails($request);
     }
 
     private function validatePersonalDetails($request)
@@ -85,13 +66,8 @@ class StudentController extends Controller
             'program_id'            =>  'required',
             'fb_email'              =>  'required',
             'skype_id'              =>  'required',
-            'branch'                =>  'required'
-        ])->validate();
-    }
+            'branch'                =>  'required',
 
-    private function validateEducationDetails($request)
-    {
-        $request->validate([
             't_school'              =>  'required',
             't_degree'              =>  'required',
             't_address'             =>  'required',
@@ -102,94 +78,58 @@ class StudentController extends Controller
             's_address'             =>  'required',
             's_start_date'          =>  'required',
             's_date_graduated'      =>  'required',
-
-            'p_school'              =>  'required',
-            'p_address'             =>  'required',
-            'p_date_graduated'      =>  'required',
-        ]);
-    }
-
-    private function validateContactDetails($request)
-    {
-        $request->validate([
-            'mobile_number'         =>  'required',
-            'home_number'           =>  'required',
-            'permanent_address'     =>  'required',
-            'provincial_address'    =>  'required',
-        ]);
-    }
-
-    private function validateParentDetails($request)
-    {
-        $request->validate([
-            'f_first_name'          =>  'required',
-            'f_middle_name'         =>  'required',
-            'f_last_name'           =>  'required',
-            'f_occupation'          =>  'required',
-            'f_contact'             =>  'required',
-
-            'm_first_name'          =>  'required',
-            'm_middle_name'         =>  'required',
-            'm_last_name'           =>  'required',
-            'm_occupation'          =>  'required',
-            'm_contact'             =>  'required',
-        ]);
-    }
-
-    private function validateWorkExperience($request)
-    {
-        
+        ])->validate();
     }
 
     public function storePersonalDetails(Request $request)
     {
-            $student = $this->studentRepository->saveStudent([
-                'user_id'                   =>  Auth::user()->id,
-                'first_name'                =>  $request->input('first_name'),
-                'middle_name'               =>  $request->input('middle_name'),
-                'last_name'                 =>  $request->input('last_name'),
-                'birthdate'                 =>  $request->input('birthdate'),
-                'gender'                    =>  $request->input('gender'),
-                'home_number'               =>  $request->input('home_number'),
-                'mobile_number'             =>  $request->input('mobile_number'),
-                'permanent_address'         =>  $request->input('permanent_address'),
-                'provincial_address'        =>  $request->input('provincial_address'),
-                'year'                      =>  $request->input('year'),
-                'program_id'                =>  $request->input('program_id'),
-                'fb_email'                  =>  $request->input('fb_email'),
-                'skype_id'                  =>  $request->input('skype_id'),
-                'branch'                    =>  $request->input('branch'),
-                'visa_interview_status'     =>  'Pending',
-                'application_status'        =>  'New Applicant',
-                'coordinator_id'            =>  0
-            ]);
+        $student = $this->studentRepository->saveStudent([
+            'user_id'                   =>  Auth::user()->id,
+            'first_name'                =>  $request->input('first_name'),
+            'middle_name'               =>  $request->input('middle_name'),
+            'last_name'                 =>  $request->input('last_name'),
+            'birthdate'                 =>  $request->input('birthdate'),
+            'gender'                    =>  $request->input('gender'),
+            'home_number'               =>  '',
+            'mobile_number'             =>  '',
+            'permanent_address'         =>  '',
+            'provincial_address'        =>  '',
+            'year'                      =>  $request->input('year'),
+            'program_id'                =>  $request->input('program_id'),
+            'fb_email'                  =>  $request->input('fb_email'),
+            'skype_id'                  =>  $request->input('skype_id'),
+            'branch'                    =>  $request->input('branch'),
+            'visa_interview_status'     =>  'Pending',
+            'application_status'        =>  'New Applicant',
+            'coordinator_id'            =>  0
+        ]);
             
-            if (isset($student)) {
+        if (isset($student)) {
             $this->fatherRepository->saveFather([
                 'user_id'       =>  Auth::user()->id,
-                'first_name'    =>  $request->input('f_first_name'),
-                'middle_name'   =>  $request->input('f_middle_name'),
-                'last_name'     =>  $request->input('f_last_name'),
-                'occupation'    =>  $request->input('f_occupation'),
-                'company'       =>  $request->input('f_company'),
-                'contact_no'    =>  $request->input('f_contact')
+                'first_name'    =>  '',
+                'middle_name'   =>  '',
+                'last_name'     =>  '',
+                'occupation'    =>  '',
+                'company'       =>  '',
+                'contact_no'    =>  '',
             ]);
     
             $this->motherRepository->saveMother([
                 'user_id'       =>  Auth::user()->id,
-                'first_name'    =>  $request->input('m_first_name'),
-                'middle_name'   =>  $request->input('m_middle_name'),
-                'last_name'     =>  $request->input('m_last_name'),
-                'occupation'    =>  $request->input('m_occupation'),
-                'company'       =>  $request->input('m_company'),
-                'contact_no'    =>  $request->input('m_contact')
+                'first_name'    =>  '',
+                'middle_name'   =>  '',
+                'last_name'     =>  '',
+                'occupation'    =>  '',
+                'company'       =>  '',
+                'contact_no'    =>  '',
             ]);
     
             $this->primaryRepository->savePrimary([
                 'user_id'           =>  Auth::user()->id,
-                'school_name'       =>  $request->input('p_school'),
-                'address'           =>  $request->input('p_address'),
-                'date_graduated'    =>  $request->input('p_date_graduated')
+                'school_name'       =>  '',
+                'address'           =>  '',
+                'date_graduated'    =>  '',
             ]);
     
             $this->secondaryRepository->saveSecondary([
@@ -197,7 +137,7 @@ class StudentController extends Controller
                 'school_name'       =>  $request->input('s_school'),
                 'address'           =>  $request->input('s_address'),
                 'start_date'        =>  $request->input('s_start_date'),
-                'date_graduated'    =>  $request->input('s_date_graduated')
+                'date_graduated'    =>  $request->input('s_date_graduated'),
             ]);
     
             $this->tertiaryRepository->saveTertiary([
@@ -206,46 +146,29 @@ class StudentController extends Controller
                 'degree'            =>  $request->input('t_degree'),
                 'address'           =>  $request->input('t_address'),
                 'start_date'        =>  $request->input('t_start_date'),
-                'date_graduated'    =>  $request->input('t_date_graduated')
+                'date_graduated'    =>  $request->input('t_date_graduated'),
             ]);
     
-            $experience = collect(json_decode($request->input('experience')));
-            foreach ($experience as $item) {
-                $this->experienceRepository->saveExperience([
-                    'user_id'       =>  Auth::user()->id,
-                    'company'       =>  $item->company,
-                    'address'       =>  $item->address,
-                    'description'   =>  $item->description,
-                    'start_date'    =>  $item->start_date,
-                    'end_date'      =>  $item->end_date
-                ]);
-            }
+            $this->experienceRepository->save([
+                'user_id'       => Auth::user()->id,
+                'company'       =>  '',
+                'address'       =>  '',
+                'start_date'    =>  '',
+                'end_date'      =>  '',
+                'description'   =>  ''
+            ]);
 
             User::find($request->user()->id)->update([
                 'isFilled'  =>  true
             ]);
 
-              
-        switch ($student->program_id) {
-            case 1:
-                //SWT-Spring
-                Notification::route('mail', 'swtspring@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
-                break;
-            case 2:
-                //Internship
-                Notification::route('mail', 'internship@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
-                break;
-            case 3:
-                //Career Traning
-                Notification::route('mail', 'careertraining@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
-                break;
-            case 4:
-                //SWT-Summer
-                Notification::route('mail', 'swtsummer@ziptravel.com.ph')->notify(new RegisteredStudentNotification($student));
-                break;
-        }
-        
-            return response()->json(['message' => 'Personal Details Updated']);
+            $data = [
+                'first_name'    =>  $request->input('first_name'),
+                'last_name'     =>  $request->input('last_name'),
+                'program'       =>  Program::find($request->input('program_id'))->display_name
+            ];
+
+            Notification::route('mail', 'application@ziptravel.com.ph')->notify(new RegisteredStudentNotification($data));
         }
     }
 
@@ -290,5 +213,124 @@ class StudentController extends Controller
 
             return response()->json($request->user()->profile_picture);
         }
+    }
+
+    public function updatePersonalDetails(Request $request)
+    {
+        $this->studentRepository->updateStudentBy(['user_id' => Auth::user()->id], [
+            'first_name'    =>  $request->input('first_name'),
+            'middle_name'   =>  $request->input('middle_name'),
+            'last_name'     =>  $request->input('last_name'),
+            'birthdate'     =>  $request->input('birthdate'),
+            'gender'        =>  $request->input('gender'),
+            'skype_id'      =>  $request->input('skype_id'),
+            'fb_email'      =>  $request->input('fb_email')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Personal Details Updated'
+        ], 200);
+    }
+
+    public function updateContactDetails(Request $request)
+    {
+        $this->studentRepository->updateStudentBy(['user_id' => Auth::user()->id], [
+            'permanent_address'     =>  $request->input('permanent_address'),
+            'provincial_address'    =>  $request->input('provincial_address'),
+            'home_number'           =>  $request->input('home_number'),
+            'mobile_number'         =>  $request->input('mobile_number')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Contact Details Updated'
+        ], 200);
+    }
+
+    public function updateParentDetails(Request $request)
+    {
+        $this->fatherRepository->whereUpdate(['user_id' => Auth::user()->id], [
+            'first_name'            =>  $request->input('f_first_name'),
+            'middle_name'           =>  $request->input('f_middle_name'),
+            'last_name'             =>  $request->input('f_last_name'),
+            'occupation'            =>  $request->input('f_occupation'),
+            'company'               =>  $request->input('f_company'),
+            'contact_no'            =>  $request->input('f_contact_no')
+        ]);
+
+        $this->motherRepository->whereUpdate(['user_id' => Auth::user()->id], [
+            'first_name'            =>  $request->input('m_first_name'),
+            'middle_name'           =>  $request->input('m_middle_name'),
+            'last_name'             =>  $request->input('m_last_name'),
+            'occupation'            =>  $request->input('m_occupation'),
+            'company'               =>  $request->input('m_company'),
+            'contact_no'            =>  $request->input('m_contact_no')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Family Details Updated'
+        ], 200);
+    }
+
+    public function updateEducationalDetails(Request $request)
+    {
+        $this->tertiaryRepository->whereUpdate(['user_id' => Auth::user()->id], [
+            'school_name'           =>  $request->input('t_school_name'),
+            'address'               =>  $request->input('t_address'),
+            'degree'                =>  $request->input('t_degree'),
+            'start_date'            =>  $request->input('t_start_date'),
+            'date_graduated'        =>  $request->input('t_end_date')
+        ]);
+
+        $this->secondaryRepository->whereUpdate(['user_id' => Auth::user()->id], [
+            'school_name'           =>  $request->input('s_school_name'),
+            'address'               =>  $request->input('s_address'),
+            'start_date'            =>  $request->input('s_start_date'),
+            'date_graduated'        =>  $request->input('s_end_date')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Educational Details Updated'
+        ], 200);
+    }
+
+    public function updateExperienceDetails(Request $request, $id)
+    {
+        $this->experienceRepository->update($id, [
+            'user_id'               =>  Auth::user()->id,
+            'company'               =>  $request->input('company_name'),
+            'address'               =>  $request->input('company_address'),
+            'start_date'            =>  $request->input('start_date'),
+            'end_date'              =>  $request->input('end_date'),
+            'description'           =>  $request->input('job_description')
+        ]);
+
+        return response()->json([
+            'message'   =>  'Experience Details Updated'
+        ], 200);
+    }
+
+    public function addExperienceDetails()
+    {
+        $this->experienceRepository->save([
+            'user_id'       => Auth::user()->id,
+            'company'       =>  '',
+            'address'       =>  '',
+            'start_date'    =>  '',
+            'end_date'      =>  '',
+            'description'   =>  ''
+        ]);
+
+        return response()->json([
+            'message'   =>  'Experience Field Added'
+        ], 200);
+    }
+
+    public function deleteExperienceDetails($id)
+    {
+        $this->experienceRepository->delete($id);
+
+        return response()->json([
+            'message'   =>  'Experience Details Deleted!'
+        ], 200);
     }
 }

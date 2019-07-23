@@ -14,49 +14,29 @@
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center">
-                            Deposit Slip Details
+                            <img src="{{ asset('logo2.png') }}" style="width: 120px; height: 120px;" alt="" srcset="">
                         </td>
                     </tr>
                 </table>
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td style="padding: 10px;">
-                            Name: {{ $data['full_name'] }}
+                            Hello!
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Bank Code: {{ $data['payment']->bank_code }}
+                            A new applicant has registered in our portal.
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Reference No.: {{ $data['payment']->reference_no }}
+                            <b>Name: {{ $data['first_name'] }}  {{ $data['last_name'] }}</b>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Date: {{ $data['payment']->date_deposit }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">
-                            Bank Account No.: {{ $data['payment']->bank_account_no }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">
-                            Amount: {{ $data['payment']->amount }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ url(Storage::disk('uploaded_payment')->url($data['payment']->path)) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">View Deposit Slip</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ route('verify.slip', $data['payment']->id) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">Verify Deposit Slip</a>
+                            <b>Program: {{ $data['program'] }}</b>
                         </td>
                     </tr>
                     <tr>
@@ -73,7 +53,7 @@
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center" style="padding: 20px;">
-                            All Rights Reserved @ {{ date('Y') }}
+                            ZIP Travel Philippines @ {{ date('Y') }}
                         </td>
                     </tr>
                 </table>

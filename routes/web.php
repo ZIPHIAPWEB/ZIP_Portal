@@ -83,6 +83,15 @@ Route::prefix('coor')->group(function() {
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
     Route::post('{id}/program/{programId}', 'CoordinatorController@SetProgram')->name('coor.set.program');
     Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
+
+    Route::post('/updateHostCompanyDetails/{id}', 'CoordinatorController@updateHostCompanyDetails')->name('coor.update.hostCompanyDetails');
+    Route::post('/updateVisaInterviewDetails/{id}', 'CoordinatorController@updateVisaInterviewDetails')->name('coor.update.visaInterviewDetails');
+    Route::post('/updatePDOSCFODetails/{id}', 'CoordinatorController@updatePDOSCFODetails')->name('coor.update.pdoscfoDetails');
+    
+    Route::post('/updateDepartureMNL/{id}', 'CoordinatorController@updateDepartureMNL')->name('coor.update.departure.manila');
+    Route::post('/updateArrivalUS/{id}', 'CoordinatorController@updateArrivalUS')->name('coor.update.arrival.us');
+    Route::post('/updateDepartureUS/{id}', 'CoordinatorController@updateDepartureUS')->name('coor.update.departure.us');
+    Route::post('/updateArrivalMNL/{id}', 'CoordinatorController@updateArrivalMNL')->name('coor.update.arrival.manila');
 });
 
 Route::prefix('acc')->group(function () {
@@ -112,6 +121,13 @@ Route::prefix('stud')->group(function() {
 
     Route::post('/photo/upload', 'StudentController@uploadProfilePicture')->name('stud.upload.profile');
 
+    Route::post('/updatePersonalDetails', 'StudentController@updatePersonalDetails')->name('stud.update.personal');
+    Route::post('/updateContactDetails', 'StudentController@updateContactDetails')->name('stud.update.contact');
+    Route::post('/updateEducationalDetails', 'StudentController@updateEducationalDetails')->name('stud.update.education');
+    Route::post('/updateParentDetails', 'StudentController@updateParentDetails')->name('stud.update.parent');
+    Route::post('/addExperienceDetails', 'StudentController@addExperienceDetails')->name('stud.add.experience');
+    Route::post('/updateExperienceDetails/{id}', 'StudentController@updateExperienceDetails')->name('stud.update.experience');
+    Route::post('/deleteExperienceDetails/{id}', 'StudentController@deleteExperienceDetails')->name('stud.delte.experience');
 });
 
 Route::prefix('sa')->group(function() {
@@ -357,6 +373,4 @@ Route::prefix('message')->group(function () {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
-Route::get('/test', function() {
-
-});
+Route::view('/test', 'mail.status.hired');

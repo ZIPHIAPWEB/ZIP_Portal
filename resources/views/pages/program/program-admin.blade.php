@@ -39,7 +39,7 @@
                         <button @click="loadStudents()" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="overflow-x: auto">
                     <form @submit.prevent="filterStatus()" class="form-inline pull-left m-b-10">
                         <div class="form-group">
                             <label for="" class="control-label">From Date:</label>
@@ -1932,7 +1932,7 @@
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {
-                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}id=${userId}`)
+                    axios.get(`/visa/viewUserRequirement?sponsor_id=${sponsorId}&id=${userId}`)
                         .then((response) => {
                             this.visaRequirements = response.data.data;
                         })

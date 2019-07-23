@@ -14,49 +14,49 @@
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center">
-                            Deposit Slip Details
+                            <img src="{{ asset('logo2.png') }}" style="width: 120px; height: 120px;" alt="" srcset="">
                         </td>
                     </tr>
                 </table>
-                <table width="80%" cellpadding="0" cellspacing="0" border="0">
+                <table width="80%" cellpadding="0" cellspacing="0" border="0" style="padding-top: 20px;">
                     <tr>
-                        <td style="padding: 10px;">
-                            Name: {{ $data['full_name'] }}
+                        <td align="center" style="font-size: 30px;">
+                            APPLICATION STATUS
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Bank Code: {{ $data['payment']->bank_code }}
+                            Congratulations!
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Reference No.: {{ $data['payment']->reference_no }}
+                            Your Application Status is now set to:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 20px; padding-bottom: 20px; padding-left: 10px;">
+                            <a href="" style="background-color: #002561; color: white; padding: 10px; border-radius: 10px; text-decoration: none;">FOR VISA INTERVIEW</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px;">
+                            <b>Trial Interview: {{ $data['visa_interview_schedule'] }} | {{ $data['visa_interview_time'] }}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px 10px;">
+                            <b>US Embassy Interview Schedule: {{ $data['visa_interview_schedule'] }} | {{ $data['visa_interview_time'] }}</b>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Date: {{ $data['payment']->date_deposit }}
+                            You will receive an email from your program coordinator regarding specific details. Please be on time.
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            Bank Account No.: {{ $data['payment']->bank_account_no }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px;">
-                            Amount: {{ $data['payment']->amount }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ url(Storage::disk('uploaded_payment')->url($data['payment']->path)) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">View Deposit Slip</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ route('verify.slip', $data['payment']->id) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">Verify Deposit Slip</a>
+                            If you need technical assistance in using ZIP Portal, please send us an email at support@ziptravel.com.ph 
                         </td>
                     </tr>
                     <tr>

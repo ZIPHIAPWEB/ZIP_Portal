@@ -94,6 +94,11 @@
         </div>
         <div class="col-md-9 col-xs-12">
             <div class="nav-tabs-custom">
+                <button v-if="!settings.personalIsEdit" @click="settings.personalIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <div v-else>
+                        <button @click="cancelPersonalDetails" class="btn btn-xs btn-danger pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
+                        <button @click="updatePersonalDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                </div>
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#profile" data-toggle="tab" aria-expanded="true">
@@ -108,561 +113,85 @@
                             <tbody>
                                 <tr>
                                     <td style="width: 35%;">First name</td>
-                                    <td v-if="!setting.firstNameIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold"> @{{ student.first_name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('firstName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.first_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Middle name</td>
-                                    <td v-if="!setting.middleNameIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold">@{{ student.middle_name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('middleName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.middle_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Last name</td>
-                                    <td v-if="!setting.lastNameIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold">@{{ student.last_name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('lastName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.last_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Birthdate</td>
-                                    <td v-if="!setting.birthDateIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold">@{{ student.birthdate | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('birthdate');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.birthdate" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Gender</td>
-                                    <td v-if="!setting.genderIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold">@{{ student.gender }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('gender');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <select v-model="field" class="form-control input-sm">
+                                        <div class="input-group-sm">
+                                            <select v-model="personal.gender" class="form-control input-sm">
                                                 <option value="">Select gender</option>
                                                 <option value="MALE">Male</option>
                                                 <option value="FEMALE">Female</option>
                                             </select>
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">Present Address</td>
-                                    <td v-if="!setting.addressIsEdit">
-                                        <label class="text-bold">@{{ student.permanent_address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('address');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('permanent_address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%;">Permanent Address</td>
-                                    <td v-if="!setting.addressIsEdit">
-                                        <label class="text-bold">@{{ student.provincial_address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('address');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('provincial_address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Home number</td>
-                                    <td v-if="!setting.homeNumberIsEdit">
-                                        <label class="text-bold">@{{ student.home_number }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('homeNumber');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="number" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile number</td>
-                                    <td v-if="!setting.mobileNumberIsEdit">
-                                        <label class=" text-bold">@{{ student.mobile_number }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('mobileNumber');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="number" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Skype ID</td>
-                                    <td v-if="!setting.skypeIdIsEdit">
+                                    <td v-if="!settings.personalIsEdit">
                                         <label class="text-bold">@{{ student.skype_id }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('skypeId');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.skype_id" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Facebook URL</td>
-                                    <td v-if="!setting.fbIsEdit" class="text-bold">
+                                    <td v-if="!settings.personalIsEdit" class="text-bold">
                                         <a :href="'/' + student.fb_email" target="_blank">@{{ student.fb_email }}</a>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('fb');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateField('fb_email', field); setting.fbIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="setting.fbIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="personal.fb_email" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#family" data-toggle="tab" aria-expanded="true">
-                            <span class="fa fa-users"></span>
-                            <label for="" class="control-label">Family Details</label>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div id="family" class="tab-pane active">
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                            <tr>
-                                <td colspan="2"><label for="" class="control-label">Father</label></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 35%" >First Name</td>
-                                <td v-if="!father.firstNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.first_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherFirstName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('first_name', field); father.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Middle Name</td>
-                                <td v-if="!father.middleNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.middle_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherMiddleName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('middle_name', field); father.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td v-if="!father.lastNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.last_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherLastName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('last_name', field); father.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Occupation</td>
-                                <td v-if="!father.occupationIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.occupation }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherOccupation');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('occupation', field); father.occupationIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.occupationIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Company</td>
-                                <td v-if="!father.companyIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.company }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherCompany');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('company', field); father.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.companyIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Contact No.</td>
-                                <td v-if="!father.contactNumberIsEdit">
-                                    <label for="" class="text-bold">@{{ student.father.contact_no }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('fatherContactNumber');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateFather('contact_no', field); father.contactNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="father.contactNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><label for="" class="control-label">Mother</label></td>
-                            </tr>
-                            <tr>
-                                <td>First Name</td>
-                                <td v-if="!mother.firstNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.first_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherFirstName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('first_name', field); mother.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Middle Name</td>
-                                <td v-if="!mother.middleNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.middle_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherMiddleName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('middle_name', field); mother.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Last Name</td>
-                                <td v-if="!mother.lastNameIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.last_name }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherLastName');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('last_name', field); mother.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Occupation</td>
-                                <td v-if="!mother.occupationIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.occupation }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherOccupation');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="text" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('occupation', field); mother.occupationIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.occupationIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Company</td>
-                                <td v-if="!mother.companyIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.company }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherCompany');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="number" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('company', field); mother.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.companyIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Contact No.</td>
-                                <td v-if="!mother.contactNumberIsEdit">
-                                    <label for="" class="text-bold">@{{ student.mother.contact_no }}</label>
-                                    <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                    <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                    <a v-else @click="hideField('motherContactNumber');" class="pull-right">
-                                        <span class="fa fa-edit"></span>
-                                    </a>
-                                </td>
-                                <td v-else>
-                                    <div class="input-group">
-                                        <input v-model="field" type="number" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button @click="updateMother('contact_no', field); mother.contactNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                        </span>
-                                        <span class="input-group-btn">
-                                            <button @click="mother.contactNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -670,6 +199,11 @@
             </div>
 
             <div class="nav-tabs-custom">
+                <button v-if="!settings.educationIsEdit" @click="settings.educationIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <div v-else>
+                    <button @click="cancelEducationalDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
+                    <button @click="updateEducationalDetails" class="btn btn-xs btn-success pull-right m-t-10 m-r-10"><span class="fa fa-check"></span></button>
+                </div>
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#educational" data-toggle="tab" aria-expanded="true">
@@ -683,74 +217,66 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td colspan="2" ><label for="" class="control-label">Primary Level</label></td>
+                                    <td colspan="2"><label class="control-label">Tertiary Level</label></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 35%;">School</td>
-                                    <td v-if="!primary.schoolNameIsEdit">
-                                        <label for="" class="text-bold">@{{ student.primary.school_name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('primarySchoolName');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
+                                    <td>School</td>
+                                    <td v-if="!settings.educationIsEdit">
+                                        <label for="" class="text-bold" v-if="student.tertiary.school">@{{ student.tertiary.school.name }}</label>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updatePrimary('school_name', field); primary.schoolNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="primary.schoolNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <select v-model="education.t_school_name" class="form-control input-sm">
+                                                <option value="">Select School</option>
+                                                <option v-for="school in schools.data" :value="school.id">@{{ school.name }}</option>
+                                            </select>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td v-if="!primary.addressIsEdit">
-                                        <label for="" class="text-bold">@{{ student.primary.address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('primaryAddress');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
+                                    <td v-if="!settings.educationIsEdit">
+                                        <label for="" class="text-bold">@{{ student.tertiary.address }}</label>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updatePrimary('address', field); primary.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="primary.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.t_address" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Date Graduated</td>
-                                    <td v-if="!primary.graduatedIsEdit">
-                                        <label for="" class="text-bold">@{{ student.primary.date_graduated | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('primaryGraduated');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
+                                    <td>Degree</td>
+                                    <td v-if="!settings.educationIsEdit">
+                                        <label for="" class="text-bold">@{{ student.tertiary.degree }}</label>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="month" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updatePrimary('date_graduated', field); primary.graduatedIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="primary.graduatedIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <select v-model="education.t_degree" class="form-control input-sm">
+                                                <option value="">Select Degree</option>
+                                                <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td v-if="!settings.educationIsEdit">
+                                        <label for="" class="text-bold">@{{ student.tertiary.start_date | toFormattedDateString }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.t_start_date" type="date" class="form-control input-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date Graduated (<i>expected</i>)</td>
+                                    <td v-if="!settings.educationIsEdit">
+                                        <label for="" class="text-bold">@{{ student.tertiary.date_graduated | toFormattedDateString }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.t_end_date" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -759,217 +285,45 @@
                                 </tr>
                                 <tr>
                                     <td>School</td>
-                                    <td v-if="!secondary.schoolNameIsEdit">
+                                    <td v-if="!settings.educationIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.school_name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('secondarySchoolName');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateSecondary('school_name', field); secondary.schoolNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="secondary.schoolNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.s_school_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td v-if="!secondary.addressIsEdit">
+                                    <td v-if="!settings.educationIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('secondaryAddress');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateSecondary('address', field); secondary.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="secondary.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.s_address" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Start Date</td>
-                                    <td v-if="!secondary.startDateIsEdit">
+                                    <td v-if="!settings.educationIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.start_date | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('secondaryStartDate');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateSecondary('start_date', field); secondary.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="secondary.startDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.s_start_date" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Date Graduated</td>
-                                    <td v-if="!secondary.graduatedIsEdit">
+                                    <td v-if="!settings.educationIsEdit">
                                         <label for="" class="text-bold">@{{ student.secondary.date_graduated | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('secondaryGraduated');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateSecondary('date_graduated', field); secondary.graduatedIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="secondary.graduatedIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><label class="control-label">Tertiary Level</label></td>
-                                </tr>
-                                <tr>
-                                    <td>School</td>
-                                    <td v-if="!tertiary.schoolNameIsEdit">
-                                        <label for="" class="text-bold" v-if="student.tertiary.school">@{{ student.tertiary.school.name }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('tertiarySchoolName');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <select v-model="field" class="form-control input-sm">
-                                                <option value="">Select School</option>
-                                                <option v-for="school in schools.data" :value="school.id">@{{ school.name }}</option>
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button @click="updateTertiary('school_name', field); tertiary.schoolNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="tertiary.schoolNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td v-if="!tertiary.addressIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('tertiaryAddress');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateTertiary('address', field); tertiary.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="tertiary.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Degree</td>
-                                    <td v-if="!tertiary.degreeIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.degree }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('tertiaryDegree');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <select v-model="field" class="form-control input-sm">
-                                                <option value="">Select Degree</option>
-                                                <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button @click="updateTertiary('degree', field); tertiary.degreeIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="tertiary.degreeIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Start Date</td>
-                                    <td v-if="!tertiary.startDateIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.start_date | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('tertiaryStartDate');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateTertiary('start_date', field); tertiary.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="tertiary.startDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Date Graduated (<i>expected</i>)</td>
-                                    <td v-if="!tertiary.graduatedIsEdit">
-                                        <label for="" class="text-bold">@{{ student.tertiary.date_graduated | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('tertiaryGraduated');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateTertiary('date_graduated', field); tertiary.graduatedIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="tertiary.graduatedIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="education.s_end_date" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -980,6 +334,238 @@
             </div>
 
             <div class="nav-tabs-custom">
+                <button v-if="!settings.contactIsEdit" @click="settings.contactIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <div v-else>
+                    <button @click="cancelContactDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
+                    <button @click="updateContactDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#contact" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-users"></span>
+                            <label for="" class="control-label">Contact Details</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="contact" class="tab-pane active">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%;">Present Address</td>
+                                    <td v-if="!settings.contactIsEdit">
+                                        <label class="text-bold">@{{ student.permanent_address }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="contact.permanent_address" type="text" class="form-control input-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%;">Permanent Address</td>
+                                    <td v-if="!settings.contactIsEdit">
+                                        <label class="text-bold">@{{ student.provincial_address }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="contact.provincial_address" type="text" class="form-control input-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Home number</td>
+                                    <td v-if="!settings.contactIsEdit">
+                                        <label class="text-bold">@{{ student.home_number }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="contact.home_number" type="number" class="form-control input-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile number</td>
+                                    <td v-if="!settings.contactIsEdit">
+                                        <label class=" text-bold">@{{ student.mobile_number }}</label>
+                                    </td>
+                                    <td v-else>
+                                        <div class="input-group-sm">
+                                            <input v-model="contact.mobile_number" type="number" class="form-control input-sm">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom">
+                <button v-if="!settings.parentIsEdit" @click="settings.parentIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <div v-else>
+                    <button @click="cancelParentDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
+                    <button @click="updateParentDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#family" data-toggle="tab" aria-expanded="true">
+                            <span class="fa fa-users"></span>
+                            <label for="" class="control-label">Family Details</label>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="family" class="tab-pane active">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <label for="" class="control-label">Father</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 35%" >First Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.first_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_first_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.middle_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_middle_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.last_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_last_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Occupation</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.occupation }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_occupation" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.company }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_company" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Contact No.</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.father.contact_no }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.f_contact_no" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><label for="" class="control-label">Mother</label></td>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.first_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.m_first_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.middle_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.m_middle_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.last_name }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.m_last_name" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Occupation</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.occupation }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.m_occupation" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Company</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.company }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-grou-sm">
+                                        <input v-model="parent.m_company" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Contact No.</td>
+                                <td v-if="!settings.parentIsEdit">
+                                    <label for="" class="text-bold">@{{ student.mother.contact_no }}</label>
+                                </td>
+                                <td v-else>
+                                    <div class="input-group-sm">
+                                        <input v-model="parent.m_contact_no" type="text" class="form-control input-sm">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-tabs-custom">
+                <button @click="createExperienceDetails" class="btn btn-primary btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-plus"></span></button>
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#work-experience" data-toggle="tab" aria-expanded="true">
@@ -993,117 +579,69 @@
                         <table v-for="exp in student.experience" class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
+                                    <td colspan="2">
+                                        <div v-if="settings.experienceIsEdit != exp.id">
+                                            <button @click="deleteExperienceDetails(exp.id)" class="btn btn-danger btn-xs pull-right"><span class="fa fa-trash"></span></button>
+                                            <button @click="editExperienceDetails(exp.id)" class="btn btn-primary btn-xs pull-right" style="margin-right: 5px;"><span class="fa fa-pencil"></span></button>
+                                        </div>
+                                        <div v-else>
+                                            <button @click="settings.experienceIsEdit = 0" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                            <button @click="updateExperienceDetails(exp.id)" class="btn btn-success btn-xs pull-right" style="margin-right: 5px;"><span class="fa fa-check"></span></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td style="width: 35%;">Company Name</td>
-                                    <td v-if="!experience.companyIsEdit">
+                                    <td v-if="settings.experienceIsEdit != exp.id">
                                         <label for="" class="text-bold">@{{ exp.company }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('experienceCompany')" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateExperience('company', field, exp.id); experience.companyIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="experience.companyIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="experience.company_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Company Address</td>
-                                    <td v-if="!experience.addressIsEdit">
+                                    <td v-if="settings.experienceIsEdit != exp.id">
                                         <label for="" class="text-bold">@{{ exp.address }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('experienceAddress')" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateExperience('address', field, exp.id); experience.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="experience.addressIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="experience.company_address" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Start Date</td>
-                                    <td v-if="!experience.startDateIsEdit">
+                                    <td v-if="settings.experienceIsEdit != exp.id">
                                         <label for="" class="text-bold">@{{ exp.start_date | toFormattedDateString }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('experienceStart')" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateExperience('start_date', field, exp.id); experience.startDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="experience.startDateIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="experience.start_date" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>End Date</td>
-                                    <td v-if="!experience.endDateIsEdit">
-                                        <label for="" class="text-bold">@{{ exp.end_date }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('experienceEnd')" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
+                                    <td v-if="settings.experienceIsEdit != exp.id">
+                                        <label for="" class="text-bold">@{{ exp.end_date | toFormattedDateString }}</label>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateExperience('end_date', field, exp.id); experience.endDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="experience.endDateIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="experience.end_date" type="date" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Job Description</td>
-                                    <td v-if="!experience.descriptionIsEdit">
+                                    <td v-if="settings.experienceIsEdit != exp.id">
                                         <label for="" class="text-bold">@{{ exp.description }}</label>
-                                        <span v-if="student.application_status == 'For PDOS'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'For CFO'" class="sr-only"></span>
-                                        <span v-else-if="student.application_status == 'Program Proper'" class="sr-only"></span>
-                                        <a v-else @click="hideField('experienceDescription');" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
                                     </td>
                                     <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateExperience('description', field, exp.id); experience.descriptionIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="experience.descriptionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                        <div class="input-group-sm">
+                                            <input v-model="experience.job_description" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -1114,265 +652,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="overlay-wrapper" :style="{ display: loading ? 'block' : 'none' }">
-                        <div class="overlay">
-                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
-                        </div>
-                    </div>
-                    <div class="modal-header">
-                        <label for="" class="control-label"><i class="fa fa-user"></i>  User Profile</label>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <label class="control-label">Personal Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td class="text-sm" style="width: 20%;">First name</td>
-                                    <td v-if="!setting.firstNameIsEdit" class="text-center">
-                                        <label class="text-sm text-bold"> @{{ student.first_name }}</label>
-                                        <a @click="hideField('firstName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('first_name', field); setting.firstNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.firstNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Middle name</td>
-                                    <td v-if="!setting.middleNameIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.middle_name }}</label>
-                                        <a @click="hideField('middleName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('middle_name', field); setting.middleNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.middleNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Last name</td>
-                                    <td v-if="!setting.lastNameIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.last_name }}</label>
-                                        <a @click="hideField('lastName');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('last_name', field); setting.lastNameIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.lastNameIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Birthdate</td>
-                                    <td v-if="!setting.birthDateIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.birthdate }}</label>
-                                        <a @click="hideField('birthdate');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="date" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('birthdate', field); setting.birthDateIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.birthDateIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Gender</td>
-                                    <td v-if="!setting.genderIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.gender }}</label>
-                                        <a @click="hideField('gender');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <select v-model="field" class="form-control input-sm">
-                                                <option value="">Select gender</option>
-                                                <option value="MALE">Male</option>
-                                                <option value="FEMALE">Female</option>
-                                            </select>
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('gender', field); setting.genderIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.genderIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label class="control-label">Contact Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td class="text-sm" style="width: 20%;">Address</td>
-                                    <td v-if="!setting.addressIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.address }}</label>
-                                        <a @click="hideField('address');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('address', field); setting.addressIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.addressIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Home number</td>
-                                    <td v-if="!setting.homeNumberIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.home_number }}</label>
-                                        <a @click="hideField('homeNumber');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('home_number', field); setting.homeNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.homeNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Mobile number</td>
-                                    <td v-if="!setting.mobileNumberIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.mobile_number }}</label>
-                                        <a @click="hideField('mobileNumber');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="number" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                    <button @click="updateField('mobile_number', field); setting.mobileNumberIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                            <span class="input-group-btn">
-                                                    <button @click="setting.mobileNumberIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <label class="control-label">School Details</label>
-                        <table class="table table-striped table-bordered table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td class="text-sm" style="width: 20%;">School</td>
-                                    <td v-if="!setting.schoolIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.school }}</label>
-                                        <a @click="hideField('school');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <select v-model="field" class="form-control input-sm">
-                                                <option value="">Select school</option>
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button @click="updateField('school', field); setting.schoolIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="setting.schoolIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Course</td>
-                                    <td v-if="!setting.courseIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.course }}</label>
-                                        <a @click="hideField('course');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateField('course', field); setting.courseIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="setting.courseIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Skype ID</td>
-                                    <td v-if="!setting.skypeIdIsEdit" class="text-center">
-                                        <label class="text-sm text-bold">@{{ student.skype_id }}</label>
-                                        <a @click="hideField('skypeId');" href="#" class="pull-right">
-                                            <span class="fa fa-edit"></span>
-                                        </a>
-                                    </td>
-                                    <td v-else>
-                                        <div class="input-group">
-                                            <input v-model="field" type="text" class="form-control input-sm">
-                                            <span class="input-group-btn">
-                                                <button @click="updateField('skype_id', field); setting.skypeIdIsEdit = false;" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <button @click="setting.skypeIdIsEdit = false;" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        
 
         <div class="modal fade" id="view-event" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
             <form>
@@ -1450,60 +730,61 @@
                 events: [],
                 event: [],
                 user_id: '{{ Auth::user()->id }}',
-                setting: {
-                    firstNameIsEdit: false,
-                    middleNameIsEdit: false,
-                    lastNameIsEdit: false,
-                    birthDateIsEdit: false,
-                    genderIsEdit: false,
-                    addressIsEdit: false,
-                    homeNumberIsEdit: false,
-                    mobileNumberIsEdit: false,
-                    schoolIsEdit: false,
-                    courseIsEdit: false,
-                    skypeIdIsEdit: false,
-                    fbIsEdit: false,
+                settings: {
+                    personalIsEdit: false,
+                    contactIsEdit: false,
+                    parentIsEdit: false,
+                    educationIsEdit: false,
+                    experienceIsEdit: false
                 },
-                father: {
-                    firstNameIsEdit: false,
-                    middleNameIsEdit: false,
-                    lastNameIsEdit: false,
-                    occupationIsEdit: false,
-                    companyIsEdit: false,
-                    contactNumberIsEdit: false
+                personal: {
+                    first_name: '',
+                    middle_name: '',
+                    last_name: '',
+                    birthdate: '',
+                    gender: '',
+                    skype_id: '',
+                    fb_email: ''
                 },
-                mother: {
-                    firstNameIsEdit: false,
-                    middleNameIsEdit: false,
-                    lastNameIsEdit: false,
-                    occupationIsEdit: false,
-                    companyIsEdit: false,
-                    contactNumberIsEdit: false
+                contact: {
+                    permanent_address: '',
+                    provincial_address: '',
+                    home_number: '',
+                    mobile_number: ''
                 },
-                primary: {
-                    schoolNameIsEdit: false,
-                    addressIsEdit: false,
-                    graduatedIsEdit: false
+                parent: {
+                    f_first_name: '',
+                    f_middle_name: '',
+                    f_last_name: '',
+                    f_occupation: '',
+                    f_company: '',
+                    f_contact_no: '',
+
+                    m_first_name: '',
+                    m_middle_name: '',
+                    m_last_name: '',
+                    m_occupation: '',
+                    m_company: '',
+                    m_contact_no: ''
                 },
-                secondary: {
-                    schoolNameIsEdit: false,
-                    addressIsEdit: false,
-                    startDateIsEdit: false,
-                    graduatedIsEdit: false
-                },
-                tertiary: {
-                    schoolNameIsEdit: false,
-                    addressIsEdit: false,
-                    degreeIsEdit: false,
-                    startDateIsEdit: false,
-                    graduatedIsEdit: false
+                education: {
+                    t_school_name: '',
+                    t_address: '',
+                    t_degree: '',
+                    t_start_date: '',
+                    t_end_date: '',
+
+                    s_school_name: '',
+                    s_address: '',
+                    s_start_date: '',
+                    s_end_date: ''
                 },
                 experience: {
-                    companyIsEdit: false,
-                    addressIsEdit: false,
-                    startDateIsEdit: false,
-                    endDateIsEdit: false,
-                    descriptionIsEdit: false,
+                    company_name: '',
+                    company_address: '',
+                    start_date: '',
+                    end_date: '',
+                    job_description: ''
                 },
                 field: '',
                 loading: false,
@@ -1609,17 +890,15 @@
                             })
                         });
                 },
-                updateField(field, input) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
-                        .then((response) => {
+                updatePersonalDetails() {
+                    this.loading = true; 
+                    axios.post(`/stud/updatePersonalDetails`, this.personal)
+                        .then(({data}) => {
                             this.loading = false;
-                            this.field = '';
+                            this.settings.personalIsEdit = false;
                             this.loadStudentDetails();
                             swal({
-                                title: `${field} Updated!`,
+                                title: data.message,
                                 type: 'success',
                                 confirmButtonText: 'Continue'
                             })
@@ -1632,518 +911,177 @@
                             })
                     })
                 },
-                updateFather(field, input) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/father/${field}/${this.student.father.id}/update`, formData)
-                        .then((response) => {
-                            this.loading = false;
-                            this.field = '';
-                            this.loadStudentDetails();
-                            swal({
-                                title: response.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                            this.loading = false;
-                            swal({
-                                title: 'Something went wrong',
-                                type: 'error',
-                                confirmButtonText: 'Go Back'
-                            })
-                    })
+                cancelPersonalDetails() {
+                    this.settings.personalIsEdit = false;
+                    this.personal.first_name = '';
+                    this.personal.middle_name = '',
+                    this.personal.last_name = '',
+                    this.personal.birthdate = '',
+                    this.personal.gender = '',
+                    this.personal.skype_id = '',
+                    this.personal.fb_email = ''
                 },
-                updateMother(field, input) {
+                updateContactDetails() {
                     this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/mother/${field}/${this.student.mother.id}/update`, formData)
-                        .then((response) => {
+                    axios.post(`/stud/updateContactDetails`, this.contact)
+                        .then(({data}) => {
                             this.loading = false;
-                            this.field = '';
+                            this.settings.contactIsEdit = false;
                             this.loadStudentDetails();
                             swal({
-                                title: response.data.message,
+                                title: data.message,
                                 type: 'success',
                                 confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                        this.loading = false;
-                        swal({
-                            title: 'Something went wrong',
-                            type: 'error',
-                            confirmButtonText: 'Go Back'
-                        })
-                    })
-                },
-                updatePrimary(field, input) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/primary/${field}/${this.student.primary.id}/update`, formData)
-                        .then((response) => {
-                            this.loading = false;
-                            this.field = '';
-                            this.loadStudentDetails();
-                            swal({
-                                title: response.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                            this.loading = false;
-                            swal({
-                                title: 'Something went wrong',
-                                type: 'error',
-                                confirmButtonText: 'Go Back'
-                            })
-                    })
-                },
-                updateSecondary(field, input) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/secondary/${field}/${this.student.secondary.id}/update`, formData)
-                        .then((response) => {
-                            this.loading = false;
-                            this.field = '';
-                            this.loadStudentDetails();
-                            swal({
-                                title: response.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                        this.loading = false;
-                        swal({
-                            title: 'Something went wrong',
-                            type: 'error',
-                            confirmButtonText: 'Go Back'
-                        })
-                    })
-                },
-                updateTertiary(field, input) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/tertiary/${field}/${this.student.tertiary.id}/update`, formData)
-                        .then((response) => {
-                            this.loading = false;
-                            this.field = '';
-                            this.loadStudentDetails();
-                            swal({
-                                title: response.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                        this.loading = false;
-                        swal({
-                            title: 'Something went wrong',
-                            type: 'error',
-                            confirmButtonText: 'Go Back'
-                        })
-                    })
-                },
-                updateExperience(field, input, id) {
-                    this.loading = true;
-                    let formData = new FormData();
-                    formData.append('field', input);
-                    axios.post(`/experience/${field}/${id}/update`, formData)
-                        .then((response) => {
-                            this.loading = false;
-                            this.field = '';
-                            this.loadStudentDetails();
-                            swal({
-                                title: response.data.message,
-                                type: 'success',
-                                confirmButtonText: 'Continue'
-                            });
-                        }).catch((error) => {
-                            swal({
-                                title: 'Something went wrong',
-                                type: 'error',
-                                confirmButtonText: 'Go Back'
+                            }).catch((error) => {
+                                this.loading = false;
+                                swal({
+                                    title: 'Something went wrong.',
+                                    type: 'error',
+                                    confirmButtonText: 'Go Back!'
+                                })
                             })
                         })
                 },
-                hideField(field) {
-                    switch (field) {
-                        case 'firstName':
-                            this.setting.firstNameIsEdit = true;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'middleName':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = true;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'lastName':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = true;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'birthdate':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = true;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'gender':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = true;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;                            
-                            break;
-                        case 'address':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = true;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'homeNumber':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = true;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'mobileNumber':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = true;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'school':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = true;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'course':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = true;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'skypeId':
-                            this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = true;
-                            this.setting.fbIsEdit = false;
-                            break;
-                        case 'fb':
-                        this.setting.firstNameIsEdit = false;
-                            this.setting.middleNameIsEdit = false;
-                            this.setting.lastNameIsEdit = false;
-                            this.setting.birthDateIsEdit = false;
-                            this.setting.genderIsEdit = false;
-                            this.setting.addressIsEdit = false;
-                            this.setting.homeNumberIsEdit = false;
-                            this.setting.mobileNumberIsEdit = false;
-                            this.setting.schoolIsEdit = false;
-                            this.setting.courseIsEdit = false;
-                            this.setting.skypeIdIsEdit = false;
-                            this.setting.fbIsEdit = true;
-                            break;
-                        case 'fatherFirstName':
-                            this.father.firstNameIsEdit = true;
-                            this.father.middleNameIsEdit = false;
-                            this.father.lastNameIsEdit = false;
-                            this.father.occupationIsEdit = false;
-                            this.father.companyIsEdit = false;
-                            this.father.contactNumberIsEdit = false;
-                            break;
-                        case 'fatherMiddleName':
-                            this.father.firstNameIsEdit = false;
-                            this.father.middleNameIsEdit = true;
-                            this.father.lastNameIsEdit = false;
-                            this.father.occupationIsEdit = false;
-                            this.father.companyIsEdit = false;
-                            this.father.contactNumberIsEdit = false;
-                            break;
-                        case 'fatherLastName':
-                            this.father.firstNameIsEdit = false;
-                            this.father.middleNameIsEdit = false;
-                            this.father.lastNameIsEdit = true;
-                            this.father.occupationIsEdit = false;
-                            this.father.companyIsEdit = false;
-                            this.father.contactNumberIsEdit = false;
-                            break;
-                        case 'fatherOccupation':
-                            this.father.firstNameIsEdit = false;
-                            this.father.middleNameIsEdit = false;
-                            this.father.lastNameIsEdit = false;
-                            this.father.occupationIsEdit = true;
-                            this.father.companyIsEdit = false;
-                            this.father.contactNumberIsEdit = false;
-                            break;
-                        case 'fatherCompany':
-                            this.father.firstNameIsEdit = false;
-                            this.father.middleNameIsEdit = false;
-                            this.father.lastNameIsEdit = false;
-                            this.father.occupationIsEdit = false;
-                            this.father.companyIsEdit = true;
-                            this.father.contactNumberIsEdit = false;
-                            break;
-                        case 'fatherContactNumber':
-                            this.father.firstNameIsEdit = false;
-                            this.father.middleNameIsEdit = false;
-                            this.father.lastNameIsEdit = false;
-                            this.father.occupationIsEdit = false;
-                            this.father.companyIsEdit = false;
-                            this.father.contactNumberIsEdit = true;
-                            break;
-                        case 'motherFirstName':
-                            this.mother.firstNameIsEdit = true;
-                            this.mother.middleNameIsEdit = false;
-                            this.mother.lastNameIsEdit = false;
-                            this.mother.occupationIsEdit = false;
-                            this.mother.companyIsEdit = false;
-                            this.mother.graduatedIsEdit = false;
-                            break;
-                        case 'motherMiddleName':
-                            this.mother.firstNameIsEdit = false;
-                            this.mother.middleNameIsEdit = true;
-                            this.mother.lastNameIsEdit = false;
-                            this.mother.occupationIsEdit = false;
-                            this.mother.companyIsEdit = false;
-                            this.mother.graduatedIsEdit = false;
-                            break;
-                        case 'motherLastName':
-                            this.mother.firstNameIsEdit = false;
-                            this.mother.middleNameIsEdit = false;
-                            this.mother.lastNameIsEdit = true;
-                            this.mother.occupationIsEdit = false;
-                            this.mother.companyIsEdit = false;
-                            this.mother.graduatedIsEdit = false;
-                            break;
-                        case 'motherOccupation':
-                            this.mother.firstNameIsEdit = false;
-                            this.mother.middleNameIsEdit = false;
-                            this.mother.lastNameIsEdit = false;
-                            this.mother.occupationIsEdit = true;
-                            this.mother.companyIsEdit = false;
-                            this.mother.contactNumberIsEdit = false;
-                            break;
-                        case 'motherCompany':
-                            this.mother.firstNameIsEdit = false;
-                            this.mother.middleNameIsEdit = false;
-                            this.mother.lastNameIsEdit = false;
-                            this.mother.occupationIsEdit = false;
-                            this.mother.companyIsEdit = true;
-                            this.mother.graduatedIsEdit = false;
-                            break;
-                        case 'motherContactNumber':
-                            this.mother.firstNameIsEdit = false;
-                            this.mother.middleNameIsEdit = false;
-                            this.mother.lastNameIsEdit = false;
-                            this.mother.occupationIsEdit = false;
-                            this.mother.companyIsEdit = false;
-                            this.mother.contactNumberIsEdit = true;
-                            break;
-                        case 'primarySchoolName':
-                            this.primary.schoolNameIsEdit = true;
-                            this.primary.addressIsEdit = false;
-                            this.primary.graduatedIsEdit = false;
-                            break;
-                        case 'primaryAddress':
-                            this.primary.schoolNameIsEdit = false;
-                            this.primary.addressIsEdit = true;
-                            this.primary.graduatedIsEdit = false;
-                            break;
-                        case 'primaryGraduated':
-                            this.primary.schoolNameIsEdit = false;
-                            this.primary.addressIsEdit = false;
-                            this.primary.graduatedIsEdit = true;
-                            break;
-                        case 'secondarySchoolName':
-                            this.secondary.schoolNameIsEdit = true;
-                            this.secondary.addressIsEdit = false;
-                            this.secondary.startDateIsEdit = false;
-                            this.secondary.graduatedIsEdit = false;
-                            break;
-                        case 'secondaryAddress':
-                            this.secondary.schoolNameIsEdit = false;
-                            this.secondary.addressIsEdit = true;
-                            this.secondary.startDateIsEdit = false;
-                            this.secondary.graduatedIsEdit = false;
-                            break;
-                        case 'secondaryStartDate':
-                            this.secondary.schoolNameIsEdit = false;
-                            this.secondary.addressIsEdit = false;
-                            this.secondary.startDateIsEdit = true;
-                            this.secondary.graduatedIsEdit = false;
-                            break;
-                        case 'secondaryGraduated':
-                            this.secondary.schoolNameIsEdit = false;
-                            this.secondary.addressIsEdit = false;
-                            this.secondary.startDateIsEdit = false;
-                            this.secondary.graduatedIsEdit = true;
-                            break;
-                        case 'tertiarySchoolName':
-                            this.tertiary.schoolNameIsEdit = true;
-                            this.tertiary.addressIsEdit = false;
-                            this.tertiary.degreeIsEdit = false;
-                            this.tertiary.startDateIsEdit = false;
-                            this.tertiary.graduatedIsEdit = false;
-                            break;
-                        case 'tertiaryAddress':
-                            this.tertiary.schoolNameIsEdit = false;
-                            this.tertiary.addressIsEdit = true;
-                            this.tertiary.degreeIsEdit = false;
-                            this.tertiary.graduatedIsEdit = false;
-                            break;
-                        case 'tertiaryDegree':
-                            this.tertiary.schoolNameIsEdit = false;
-                            this.tertiary.addressIsEdit = false;
-                            this.tertiary.degreeIsEdit = true;
-                            this.tertiary.startDateIsEdit = false;
-                            this.tertiary.graduatedIsEdit = false;
-                            break;
-                        case 'tertiaryStartDate':
-                            this.tertiary.schoolNameIsEdit = false;
-                            this.tertiary.addressIsEdit = false;
-                            this.tertiary.degreeIsEdit = false;
-                            this.tertiary.startDateIsEdit = true;
-                            this.tertiary.graduatedIsEdit = false;
-                            break;
-                        case 'tertiaryGraduated':
-                            this.tertiary.schoolNameIsEdit = false;
-                            this.tertiary.addressIsEdit = false;
-                            this.tertiary.degreeIsEdit = false;
-                            this.tertiary.startDateIsEdit = false;
-                            this.tertiary.graduatedIsEdit = true;
-                            break;
-                        case 'experienceCompany':
-                            this.experience.companyIsEdit = true;
-                            this.experience.addressIsEdit = false;
-                            this.experience.startDateIsEdit = false;
-                            this.experience.endDateIsEdit = false;
-                            this.experience.descriptionIsEdit = false;
-                            break;
-                        case 'experienceAddress':
-                            this.experience.companyIsEdit = false;
-                            this.experience.addressIsEdit = true;
-                            this.experience.startDateIsEdit = false;
-                            this.experience.endDateIsEdit = false;
-                            this.experience.descriptionIsEdit = false;
-                            break;
-                        case 'experienceStart':
-                            this.experience.companyIsEdit = false;
-                            this.experience.addressIsEdit = false;
-                            this.experience.startDateIsEdit = true;
-                            this.experience.endDateIsEdit = false;
-                            this.experience.descriptionIsEdit = false;
-                            break;
-                        case 'experienceEnd':
-                            this.experience.companyIsEdit = false;
-                            this.experience.addressIsEdit = false;
-                            this.experience.startDateIsEdit = false;
-                            this.experience.endDateIsEdit = true;
-                            this.experience.descriptionIsEdit = false;
-                            break;
-                        case 'experienceDescription':
-                            this.experience.companyIsEdit = false;
-                            this.experience.addressIsEdit = false;
-                            this.experience.startDateIsEdit = false;
-                            this.experience.endDateIsEdit = false;
-                            this.experience.descriptionIsEdit = true;
-                            break;
-                    }
+                cancelContactDetails() {
+                    this.settings.contactIsEdit = false;
+                    this.contact.permanent_address = '';
+                    this.contact.provincial_address = '';
+                    this.contact.home_number = '';
+                    this.contact.mobile_number = '';
+                },
+                updateParentDetails() {
+                    this.loading = true;
+                    axios.post('/stud/updateParentDetails', this.parent)
+                        .then(({data}) => {
+                            this.loading = false;
+                            this.settings.parentIsEdit = false;
+                            this.loadStudentDetails();
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText : 'Continue'
+                            }).catch((error) => {
+                                this.loading = false;
+                                swal({
+                                    title: 'Something went wrong.',
+                                    type: 'error',
+                                    confirmButtonText: 'Go Back!'
+                                })
+                            })
+                        })
+                },
+                cancelParentDetails() {
+                    this.settings.parentIsEdit = false;
+                    this.parent.f_first_name = '';
+                    this.parent.f_middle_name = '';
+                    this.parent.f_last_name = '';
+                    this.parent.f_occupation = '';
+                    this.parent.f_company = '';
+                    this.parent.f_contact_no = '';
+
+                    this.parent.m_first_name = '';
+                    this.parent.m_middle_name = '';
+                    this.parent.m_last_name = '';
+                    this.parent.m_occupation = '';
+                    this.parent.m_company = '';
+                    this.parent.m_contact_no = '';
+
+                },
+                updateEducationalDetails() {
+                    this.loading = true;
+                    axios.post('/stud/updateEducationalDetails', this.education)
+                        .then(({data}) => {
+                            this.loading = false;
+                            this.settings.educationIsEdit = false;
+                            this.loadStudentDetails();
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                            }).catch((error) => {
+                                this.loading = false;
+                                swal({
+                                    title: 'Something went wrong.',
+                                    type: 'error',
+                                    confirmButtonText: 'Go Back!'
+                                })
+                            })
+                },
+                cancelEducationalDetails() {
+                    this.settings.educationIsEdit = false;
+                    this.education.t_school_name = '';
+                    this.education.t_address = '';
+                    this.education.t_degree = '';
+                    this.education.t_start_date = '';
+                    this.education.t_end_date = '';
+
+                    this.education.s_school_name = '';
+                    this.education.s_address = '';
+                    this.education.s_start_date = '';
+                    this.education.s_end_date = '';
+                },
+                updateExperienceDetails(id) {
+                    this.loading = true;
+                    axios.post(`/stud/updateExperienceDetails/${id}`, this.experience)
+                        .then(({data}) => {
+                            this.loading = false;
+                            this.settings.experienceIsEdit = false;
+                            this.loadStudentDetails();
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            this.loading = false;
+                            swal({
+                                title: 'Something went wrong.',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                        })
+                },
+                cancelExperienceDetails() {
+                    this.settings.experienceIsEdit = false;
+                    this.experience.company_name = '';
+                    this.experience.company_address = '';
+                    this.experience.start_date = '';
+                    this.experience.end_date = '';
+                    this.experience.job_description = '';
+                },
+                createExperienceDetails() {
+                    axios.post('/stud/addExperienceDetails')
+                        .then(({data}) => {
+                            this.loadStudentDetails();
+                            console.log(data.message);
+                        })
+                },
+                editExperienceDetails(id) {
+                    this.settings.experienceIsEdit = id;
+                    this.experience.company_name = '';
+                    this.experience.company_address = '';
+                    this.experience.start_date = '';
+                    this.experience.end_date = '';
+                    this.experience.job_description = '';
+                },
+                deleteExperienceDetails(id) {
+                    axios.post(`/stud/deleteExperienceDetails/${id}`)
+                        .then(({data}) => {
+                            this.loadStudentDetails()
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        })
+                        .catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                        })
                 }
             }
         });

@@ -4,7 +4,7 @@
 
 @section('content')
     <div id="app" class="m-t-10" v-cloak>
-        <div class="col-md-3">
+        <div class="col-xs-12 col-md-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <a href="javascript:void(0)" @click="selectPhoto()">
@@ -92,7 +92,7 @@
             </div>
             -->
         </div>
-        <div class="col-xs-9">
+        <div class="col-xs-12 col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -102,7 +102,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" style="overflow-x: auto">
                     <div id="payment" class="tab-pane active">
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
