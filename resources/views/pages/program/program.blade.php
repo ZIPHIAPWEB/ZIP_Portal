@@ -1396,7 +1396,7 @@
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in visaRequirements">
-                                            <td class="text-sm">@{{ requirement.name }}</td>
+                                            <td style="width: 70%" class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.student_visa.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
