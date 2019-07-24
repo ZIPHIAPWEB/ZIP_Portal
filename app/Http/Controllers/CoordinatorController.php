@@ -142,17 +142,6 @@ class CoordinatorController extends Controller
                 break;
 
             case 'Hired' :
-                $request->validate([
-                    'name'          =>  'required',
-                    'position'      =>  'required',
-                    'place'         =>  'required',
-                    'housing'       =>  'required',
-                    'stipend'       =>  'required',
-                    'start'         =>  'required',
-                    'end'           =>  'required',
-                    'sponsor'       =>  'required'
-                ]);
-
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_status'    =>  'Hired',
                     'host_company_id'       =>  $request->input('name'),
