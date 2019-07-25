@@ -276,8 +276,16 @@ class CoordinatorController extends Controller
 
     public function SetProgram($id, $program)
     {
+        $coordinator = $this->coordinatorRepository->getCoordinatorByUserId(Auth::user()->id);
+
         $this->studentRepository->whereUpdate(['user_id' => $id], [
             'program_id' => $program
+        ]);
+        
+        $this->coordinatorActionRepository->saveCoordinatorAction([
+            'user_id'   =>  Auth::user()->id,
+            'client_id' =>  $id,
+            'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' change program.'
         ]);
 
         return 'Program Changed!';
@@ -285,10 +293,18 @@ class CoordinatorController extends Controller
 
     public function SetVisaInterviewStatus($id, $status)
     {
+        $coordinator = $this->coordinatorRepository->getCoordinatorByUserId(Auth::user()->id);
+
         $this->studentRepository->whereUpdate(['user_id' => $id], [
             'visa_interview_status' =>  $status
         ]);
 
+        $this->coordinatorActionRepository->saveCoordinatorAction([
+            'user_id'   =>  Auth::user()->id,
+            'client_id' =>  $id,
+            'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set visa interview status to ' . $status
+        ]);
+        
         return 'Status '. $status;
     }
 
