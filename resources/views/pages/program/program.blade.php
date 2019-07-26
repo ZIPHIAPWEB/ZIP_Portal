@@ -912,7 +912,7 @@
                                                     Visa Interview Schedule
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
+                                                    <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -938,7 +938,7 @@
                                                     Trial Interview Schedule
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                   <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
+                                                   <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -978,7 +978,7 @@
                                                     PDOS Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
+                                                    <label class="text-sm">@{{ student.pdos_schedule }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1004,7 +1004,7 @@
                                                     CFO Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
+                                                    <label class="text-sm">@{{ student.cfo_schedule }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
