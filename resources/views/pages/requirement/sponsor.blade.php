@@ -144,7 +144,7 @@
                                 </td>
                             </tr>
                             <tr v-else v-for="requirement in requirements">
-                                <td style="width: 70%">@{{ requirement.name }}</td>
+                                <td>@{{ requirement.name }}</td>
                                 <td v-cloak class="text-center">
                                     <button v-if="requirement.description" class="btn btn-default btn-xs" data-balloon-length="xlarge" :aria-label="requirement.description" data-balloon-pos="up"><span class="fa fa-info"></span></button>
                                 </td>
