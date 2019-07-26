@@ -44,9 +44,7 @@ class MailResetPasswordToken extends Notification
         return (new MailMessage)
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                     ->subject('Reset your password')
-                    ->line('Hey, did you forget your password? Click the button to reset it.')
-                    ->action('Reset Password', route('password.reset', $this->token))
-                    ->line('Thank you for using our application!');
+                    ->markdown('mail.forgot_password', ['token' => $this->token]);
     }
 
     /**

@@ -373,4 +373,8 @@ Route::prefix('message')->group(function () {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
-Route::view('/test', 'mail.status.hired');
+Route::get('/test', function () {
+    $password = bcrypt("MikeLaurencePadilla");
+
+    return $password;
+});

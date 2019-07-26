@@ -142,7 +142,7 @@
                                     <span class="help-block text-red" v-if="errors.t_start_date">required</span>
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <label for="">Date Graduated (<small>date indicated in diploma</small>)<i class="text-red">*</i></label>
+                                    <label for="">Expected/Date Graduated (<small>date indicated in diploma</small>)<i class="text-red">*</i></label>
                                     <input v-model="tertiary.date_graduated" type="date" class="form-control input-sm">
                                     <span class="help-block text-red" v-if="errors.t_date_graduated">required</span>
                                 </div>
