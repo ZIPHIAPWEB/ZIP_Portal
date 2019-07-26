@@ -76,75 +76,76 @@
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                            <download-excel
+                                <download-excel
                                     class="btn btn-success btn-flat btn-sm"
                                     :data="students"
                                     :fields="testField"
-                                    name="{{ date('Ymd') }}.xls"
+                                    name="generated-report-as-of-{{ date('Ymd') }}.xls"
                                     title="ZIP Generated Report">
                                 <span class="glyphicon glyphicon-export"></span> Export
                             </download-excel>
                         </div>
                     </form>
                     <div class="form-group-sm pull-right">
-                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By First Name, Middle Name, or Last Name">
+                        <input v-model="filterName" type="text" class="form-control" placeholder="Search By Last Name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                        <th class="text-center" style="width: 10%">Date of Application</th>
-                        <th class="text-center" style="width: 10%">Status</th>
-                        <th class="text-center" style="width: 10%">Application ID</th>
-                        <th class="text-center" style="width: 10%">Email</th>
-                        <th class="text-center" style="width: 10%">First Name</th>
-                        <th class="text-center" style="width: 10%">Middle Name</th>
-                        <th class="text-center" style="width: 10%">Last Name</th>
-                        <th class="text-center" style="width: 10%">Program</th>
-                        <th class="text-center" style="width: 10%">Course</th>
-                        <th class="text-center" style="width: 10%">Contact</th>
-                        <th class="text-center" style="width: 10%">School</th>
-                        <th class="text-center" style="width: 10%">Recent Activity</th>
-                        <th class="text-center" style="width: 10%">Action</th>
+                            <th class="text-center" style="width: 10%">Date of Application</th>
+                            <th class="text-center" style="width: 10%">Status</th>
+                            <th class="text-center" style="width: 10%">Application ID</th>
+                            <th class="text-center" style="width: 10%">Email</th>
+                            <th class="text-center" style="width: 10%">First Name</th>
+                            <th class="text-center" style="width: 10%">Middle Name</th>
+                            <th class="text-center" style="width: 10%">Last Name</th>
+                            <th class="text-center" style="width: 10%">Contact</th>
+                            <th class="text-center" style="width: 10%">School</th>
+                            <th class="text-center" style="width: 10%">Branch</th>
+                            <th class="text-center" style="width: 10%">Program</th>
+                            <th class="text-center" style="width: 10%">Recent Action</th>
+                            <th class="text-center" style="width: 10%">Action</th>
                         </thead>
                         <tbody v-if="hasRecords">
-                        <tr v-if="loading.table">
-                            <td valign="top" colspan="15" class="text-center">
-                                <span class="fa fa-circle-o-notch fa-spin"></span>
-                            </td>
-                        </tr>
-                        <tr v-else v-for="student in students">
-                            <td class="text-sm text-center">@{{ student.created_at }}</td>
-                            <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
-                            <td class="text-sm text-center">@{{ student.application_id }}</td>
-                            <th class="text-sm text-center">@{{ student.user.email }}</th>
-                            <td class="text-sm text-center">@{{ student.first_name }}</td>
-                            <td class="text-sm text-center">@{{ student.middle_name }}</td>
-                            <td class="text-sm text-center">@{{ student.last_name }}</td>
-                            <td class="text-sm text-center">@{{ student.program.display_name }}</td>
-                            <td class="text-sm text-center">@{{ student.tertiary.degree }}</td>
-                            <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
-                            <td class="text-sm text-center">@{{ (student.tertiary.school) ? student.tertiary.school.name : '' }}</td>
-                            <td class="text-sm text-center">
-                                <div v-if="!student.log">
-                                    @{{ student.log[0].activity }}
-                                </div>
-                                <div v-else>
-                                    No Recent Actions
-                                </div></td>
-                            <td class="text-center">
-                                <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
-                            </td>
-                        </tr>
+                            <tr v-if="loading.table">
+                                <td valign="top" colspan="15" class="text-center">
+                                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                                </td>
+                            </tr>
+                            <tr v-else v-for="student in students">
+                                <td class="text-sm text-center">@{{ student.created_at }}</td>
+                                <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
+                                <td class="text-sm text-center">@{{ student.application_id }}</td>
+                                <td class="text-sm text-center">@{{ student.user.email }}</td>
+                                <td class="text-sm text-center">@{{ student.first_name }}</td>
+                                <td class="text-sm text-center">@{{ student.middle_name }}</td>
+                                <td class="text-sm text-center">@{{ student.last_name }}</td>
+                                <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
+                                <td class="text-sm text-center"><div v-if="student.tertiary.school"> @{{ student.tertiary.school.name }}</div></td>
+                                <td class="text-sm text-center">@{{ student.branch }}</td>
+                                <td class="text-sm text-center">@{{ student.program.display_name }}</td>
+                                <td class="text-sm text-center">
+                                    <div v-if="!student.log[0]">
+                                        No Recent Actions
+                                    </div>
+                                    <div v-else>
+                                        @{{ student.log[0].activity }}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
+                                </td>
+                            </tr>
                         </tbody>
                         <tbody v-else>
-                        <tr>
-                            <td valign="top" colspan="15" class="text-center">
-                                No Records
-                            </td>
-                        </tr>
+                            <tr>
+                                <td valign="top" colspan="15" class="text-center">
+                                    No Records
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="box-footer">
+                <!--<div class="box-footer">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li>
                             <a @click="next()" href="#">«</a>
@@ -162,7 +163,7 @@
                             <a @click="previous()" href="#">»</a>
                         </li>
                     </ul>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="modal fade" id="student-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -197,7 +198,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active m-t-10" id="tab-profile">
-                                    <section id="program">
+                                    <section id="program" v-if="student.application_status == 'New Applicant' || student.application_status == 'Assessed'">
                                         <table class="table table-condensed table-striped table-bordered">
                                             <tbody>
                                                 <tr>
@@ -267,34 +268,6 @@
                                         </table>
                                     </section>
                                     <transition name="slide-fade">
-                                        <section v-if="show.assessed">
-                                            <div class="box box-primary">
-                                                <div class="box-header">
-                                                    <div class="box-tools pull-right">
-                                                        <button @click="show.assessed = false" class="btn btn-box-tool">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="box-body">
-                                                    <div class="form-group col-xs-12">
-                                                        <label for="" class="control-label">Assessment Status</label>
-                                                        <select v-model="assessed.status" class="form-control input-sm">
-                                                            <option value="">Select status</option>
-                                                            <option value="Passed">Passed</option>
-                                                            <option value="Failed">Failed</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-xs-12">
-                                                        <label for="" class="control-label">Assessment Message</label>
-                                                        <textarea v-model="assessed.message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
-                                                    </div>
-                                                    <div class="form-group col-xs-12">
-                                                        <button @click="submitAssessed()" class="btn btn-primary btn-block btn-flat btn-sm">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
                                         <section v-if="show.hired">
                                             <div class="box box-primary">
                                                 <div class="box-header">
@@ -362,17 +335,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="box-body">
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">SEVIS ID</label>
                                                         <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter the SEVIS ID">
                                                     </div>
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="control-label">Program ID</label>
                                                         <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter the Program ID">
                                                     </div>
-                                                    <div class="form-group col-xs-12">
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Trial Schedule</label>
+                                                        <input v-model="visa.trial_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Trial Time</label>
+                                                        <input v-model="visa.trial_time" type="text" class="form-control input-sm" placeholder="Enter trial time">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="control-label">Interview Schedule</label>
                                                         <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="control-label">Interview Time</label>
+                                                        <input v-model="visa.time" type="text" class="form-control input-sm" placeholder="Enter interview time">
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForVisaInterview()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
@@ -390,13 +375,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="box-body">
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">PDOS Schedule</label>
                                                         <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
                                                     </div>
-                                                    <div class="form-group col-xs-6">
+                                                    <div class="form-group col-xs12 col-md-6">
+                                                        <label class="label-control">PDOS Time</label>
+                                                        <input v-model="program.pdos_time" type="text" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
                                                         <label class="label-control">CFO Schedule</label>
                                                         <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                    <div class="form-group col-xs-12 col-md-6">
+                                                        <label class="label-control">CFO Time</label>
+                                                        <input v-model="program.cfo_time" type="text" class="form-control input-sm">
                                                     </div>
                                                     <div class="form-group-sm col-xs-12">
                                                         <button @click="submitForPDOSAndCFO()" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
@@ -617,40 +610,56 @@
                                     <section id="school-details">
                                         <label class="control-label">Educational Background</label>
                                         <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td colspan="2" class="text-bold">
-                                                    Primary
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm" style="width: 200px">
-                                                    School
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.school_name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Date Graduated
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.primary.date_graduated }}
-                                                </td>
-                                            </tr>
-                                        </table>
+                                                <tr>
+                                                    <td colspan="2" class="text-bold">
+                                                        Tertiary Level
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm" style="width: 200px">
+                                                        School
+                                                    </td>
+                                                    <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
+                                                        @{{ student.tertiary.school.name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Address
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.address }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Degree
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.degree }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Start Date
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.start_date }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-sm">
+                                                        Date Graduated (expected)
+                                                    </td>
+                                                    <td v-cloak class="text-sm text-bold">
+                                                        @{{ student.tertiary.date_graduated | toFormattedDateString }}
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
                                                 <td colspan="2" class="text-bold">
-                                                    Secondary
+                                                    Secondary Level
                                                 </td>
                                             </tr>
                                             <tr>
@@ -685,53 +694,6 @@
                                                 </td>
                                                 <td v-cloak class="text-sm text-bold">
                                                     @{{ student.secondary.date_graduated | toFormattedDateString }}
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <tr>
-                                                <td colspan="2" class="text-bold">
-                                                    Tertiary
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm" style="width: 200px">
-                                                    School
-                                                </td>
-                                                <td v-cloak v-if="student.tertiary.school" class="text-sm text-bold">
-                                                    @{{ student.tertiary.school.name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Address
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.address }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Degree
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.degree }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Start Date
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.start_date }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-sm">
-                                                    Date Graduated (expected)
-                                                </td>
-                                                <td v-cloak class="text-sm text-bold">
-                                                    @{{ student.tertiary.date_graduated | toFormattedDateString }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -785,25 +747,27 @@
                                         <label class="control-label">Host Company Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2">
+                                                    <button v-if="!settings.hostCompanyIsEdit" @click="settings.hostCompanyIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.hostCompanyIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateHostCompanyDetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Visa Sponsor
                                                 </td>
-                                                <td v-if="!setting.host.sponsorIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.sponsor.name }}</label>
-                                                    <a @click="hideField('sponsor')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.sponsor" class="form-control input-sm">
                                                             <option value="">Select visa sponsor</option>
                                                             <option v-for="sponsor in sponsors" :value="sponsor.id">@{{ sponsor.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('visa_sponsor_id', field); setting.host.sponsorIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.sponsorIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -811,22 +775,15 @@
                                                 <td class="text-sm">
                                                     Host Company
                                                 </td>
-                                                <td v-if="!setting.host.nameIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.company.name }}</label>
-                                                    <a @click="hideField('name')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.name" class="form-control input-sm">
                                                             <option value="">Select host company</option>
                                                             <option v-for="host in hosts" :value="host.id">@{{ host.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('host_company_id', field); setting.host.nameIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.nameIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -834,22 +791,15 @@
                                                 <td class="text-sm">
                                                     Location
                                                 </td>
-                                                <td v-if="!setting.host.locationIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.location }}</label>
-                                                    <a @click="hideField('location')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.place" class="form-control input-sm">
                                                             <option value="">Select Location</option>
                                                             <option v-for="state in states" :value="state.display_name">@{{ state.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('location', field); setting.host.locationIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.locationIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -857,19 +807,12 @@
                                                 <td class="text-sm">
                                                     Housing Address
                                                 </td>
-                                                <td v-if="!setting.host.housingIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.housing_details }}</label>
-                                                    <a @click="hideField('housing')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('housing_details', field); setting.host.housingIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.host.housingIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.housing" type="text" class="form-control input-sm" placeholder="Enter housing address">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -877,22 +820,15 @@
                                                 <td class="text-sm">
                                                     Position
                                                 </td>
-                                                <td v-if="!setting.host.positionIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.position }}</label>
-                                                    <a @click="hideField('position')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="host.position" class="form-control input-sm">
                                                             <option value="">Select Position</option>
                                                             <option v-for="position in positions" :value="position.display_name">@{{ position.name }}</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('position', field); setting.host.positionIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.positionIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -900,55 +836,34 @@
                                                 <td class="text-sm">
                                                     Stipend Per Hour
                                                 </td>
-                                                <td v-if="!setting.host.stipendIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.hostCompanyIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.stipend }}</label>
-                                                    <a @click="hideField('stipend')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('stipend', field); setting.host.stipendIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.stipendIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.stipend" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">Start Date</td>
-                                                <td v-if="!setting.host.startIsEdit">
+                                                <td v-if="!settings.hostCompanyIsEdit">
                                                     <label class="text-sm">@{{ student.program_start_date | toFormattedDateString }}</label>
-                                                    <a @click="hideField('start')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('program_start_date', field); setting.host.startIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.startIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.start" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">End Date</td>
-                                                <td v-if="!setting.host.endIsEdit">
+                                                <td v-if="!settings.hostCompanyIsEdit">
                                                     <label class="text-sm">@{{ student.program_end_date | toFormattedDateString }}</label>
-                                                    <a @click="hideField('end')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                    <button @click="updateField('program_end_date', field); setting.host.endIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                </span>
-                                                        <span class="input-group-btn">
-                                                    <button @click="setting.host.endIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="host.end" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -958,22 +873,24 @@
                                         <label class="control-label">Visa Interview Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2">
+                                                    <button v-if="!settings.visaInterviewIsEdit" @click="settings.visaInterviewIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.visaInterviewIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateVisaInterviewDetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px;"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Program ID Number
                                                 </td>
-                                                <td v-if="!setting.visa.programIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.visaInterviewIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.program_id_no }}</label>
-                                                    <a @click="hideField('program')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('program_id_no', field); setting.visa.programIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.programIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.programId" type="text" class="form-control input-sm" placeholder="Enter Program ID Number...">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -981,39 +898,64 @@
                                                 <td class="text-sm">
                                                     SEVIS ID
                                                 </td>
-                                                <td v-if="!setting.visa.sevisIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.visaInterviewIsEdit" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.sevis_id }}</label>
-                                                    <a @click="hideField('sevis')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('sevis_id', field); setting.visa.sevisIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.sevisIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.sevis" type="text" class="form-control input-sm" placeholder="Enter SEVIS ID...">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm">
-                                                    Interview Schedule
+                                                    Visa Interview Schedule
                                                 </td>
-                                                <td v-if="!setting.visa.scheduleIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
-                                                    <a @click="hideField('schedule')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                <button @click="updateField('visa_interview_schedule', field); setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                            </span>
-                                                        <span class="input-group-btn">
-                                                <button @click="setting.visa.scheduleIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                            </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Visa Interview Time
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.time" type="text" class="form-control input-sm" placeholder="Enter visa interview time...">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Trial Interview Schedule
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                   <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.trial_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    Trial Interview Time
+                                                </td>
+                                                <td v-if="!settings.visaInterviewIsEdit">
+                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="visa.trial_time" type="text" class="form-control input-sm" placeholder="Enter trial interview time...">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1023,22 +965,37 @@
                                         <label class="control-label">PDOS & CFO Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
+                                                <td colspan="2"ass="text-sm">
+                                                    <button v-if="!settings.pdoscfoIsEdit" @click="settings.pdoscfoIsEdit = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.pdoscfoIsEdit = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updatePDOSCFODetails" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     PDOS Schedule
                                                 </td>
-                                                <td v-if="!setting.program.pdosIsEdit" class="text-bold">
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
                                                     <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
-                                                    <a @click="hideField('pdos');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('pdos_schedule', field); setting.program.pdosIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.program.pdosIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.pdos_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    PDOS Time
+                                                </td>
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.pdos_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.pdos_time" type="text" class="form-control" placeholder="Enter PDOS Schedule">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1046,19 +1003,25 @@
                                                 <td class="text-sm">
                                                     CFO Schedule
                                                 </td>
-                                                <td v-if="!setting.program.cfoIsEdit" class="text-bold">
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
                                                     <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
-                                                    <a @click="hideField('cfo');" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('cfo_schedule', field); setting.program.cfoIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.program.cfoIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.cfo_schedule" type="date" class="form-control input-sm">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-sm">
+                                                    CFO Time
+                                                </td>
+                                                <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
+                                                    <label class="text-sm">@{{ student.cfo_time }}</label>
+                                                </td>
+                                                <td v-else>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="program.cfo_time" type="text" class="form-control input-sm" placeholder="Enter CFO Schedule Time">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1068,27 +1031,27 @@
                                         <label class="control-label">Flight Details</label>
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Departure from MANILA
                                                 </td>
+                                                <td>
+                                                    <button v-if="!settings.departureFromManila" @click="settings.departureFromManila = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.departureFromManila = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateDepartureMNL" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
-                                                    <a @click="hideField('us_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_date', field); setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1096,19 +1059,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureTimeIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_time }}</label>
-                                                    <a @click="hideField('us_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_time }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_time', field); setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1116,19 +1072,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureFlightIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_flight_no }}</label>
-                                                    <a @click="hideField('us_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_flight_no }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_flight_no', field); setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_mnl.mnl_departure_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1136,23 +1085,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightUS.departureAirlineIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.us_departure_airline }}</label>
-                                                    <a @click="hideField('us_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.mnl_departure_airline }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="departure_mnl.mnl_departure_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_departure_airline', field); setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1160,27 +1102,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Arrival to US
                                                 </td>
+                                                <td>
+                                                    <button v-if="!settings.arrivalToUs" @click="settings.arrivalToUs = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.arrivalToUs = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateArrivalUS" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.us_arrival_date }}</label>
-                                                    <a @click="hideField('us_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_date', field); setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1188,19 +1130,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_time }}</label>
-                                                    <a @click="hideField('us_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_time', field); setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1208,19 +1143,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_flight_no }}</label>
-                                                    <a @click="hideField('us_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_flight_no', field); setting.flightUs.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_us.us_arrival_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1228,23 +1156,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightUS.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.us_arrival_airline }}</label>
-                                                    <a @click="hideField('us_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="arrival_us.us_arrival_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('us_arrival_airline', field); setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightUS.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1252,27 +1173,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Departure from US
+                                                </td>
+                                                <td>
+                                                    <button v-if="!settings.departureFromUs" @click="settings.departureFromUs = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.departureFromUs = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateDepartureUS" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureIsEdit" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
-                                                    <a @click="hideField('mnl_departure_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_date', field); setting.flightMNL.departureIsEdit = false; field= '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1280,19 +1201,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureTimeIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_time }}</label>
-                                                    <a @click="hideField('mnl_departure_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_time }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_time', field); setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1300,19 +1214,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureFlightIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_flight_no }}</label>
-                                                    <a @click="hideField('mnl_departure_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_flight_no }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_flight_no', field); setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="departure_us.us_departure_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1320,23 +1227,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightMNL.departureAirlineIsEdit" v-cloak class="text-bold">
-                                                    <label for="" class="text-sm">@{{ student.mnl_departure_airline }}</label>
-                                                    <a @click="hideField('mnl_departure_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
+                                                <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
+                                                    <label for="" class="text-sm">@{{ student.us_departure_airline }}</label>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="departure_us.us_departure_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_departure_airline', field); setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.departureAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1344,27 +1244,27 @@
 
                                         <table class="table table-striped table-bordered table-condensed">
                                             <tr>
-                                                <td class="text-sm text-bold" colspan="2">
+                                                <td class="text-sm text-bold">
                                                     Arrival to MANILA
+                                                </td>
+                                                <td>
+                                                    <button v-if="!settings.arrivalToManila" @click="settings.arrivalToManila = true" class="btn btn-primary btn-xs pull-right"><span class="fa fa-pencil"></span></button>
+                                                    <div v-else>
+                                                        <button @click="settings.arrivalToManila = false" class="btn btn-danger btn-xs pull-right"><span class="fa fa-times"></span></button>
+                                                        <button @click="updateArrivalMNL" class="btn btn-success btn-xs pull-right" style="margin-right: 5px"><span class="fa fa-check"></span></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-sm" style="width: 200px;">
                                                     Date
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label class="text-sm">@{{ student.mnl_arrival_date }}</label>
-                                                    <a @click="hideField('mnl_arrival_date')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="date" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_date', field); setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_date" type="date" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1372,19 +1272,12 @@
                                                 <td class="text-sm">
                                                     Time
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalTimeIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_time }}</label>
-                                                    <a @click="hideField('mnl_arrival_time')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="time" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_time', field); setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalTimeIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_time" type="time" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1392,19 +1285,12 @@
                                                 <td class="text-sm">
                                                     Flight No.
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalFlightIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_flight_no }}</label>
-                                                    <a @click="hideField('mnl_arrival_flight')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <input v-model="field" type="text" class="form-control input-sm">
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_flight_no', field); setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalFlightIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
+                                                    <div class="input-group-sm">
+                                                        <input v-model="arrival_mnl.mnl_arrival_flight_no" type="text" class="form-control input-sm">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1412,23 +1298,16 @@
                                                 <td class="text-sm">
                                                     Airlines
                                                 </td>
-                                                <td v-if="!setting.flightMNL.arrivalAirlineIsEdit" v-cloak class="text-bold">
+                                                <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
                                                     <label for="" class="text-sm">@{{ student.mnl_arrival_airline }}</label>
-                                                    <a @click="hideField('mnl_arrival_airline')" href="#" class="pull-right"><span class="fa fa-edit"></span></a>
                                                 </td>
                                                 <td v-else>
-                                                    <div class="input-group">
-                                                        <select v-model="field" name="" id="" class="form-control input-sm">
+                                                    <div class="input-group-sm">
+                                                        <select v-model="arrival_mnl.mnl_arrival_flight" name="" id="" class="form-control input-sm">
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
                                                         </select>
-                                                        <span class="input-group-btn">
-                                                            <button @click="updateField('mnl_arrival_airline', field); setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-primary btn-flat btn-sm">Update</button>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <button @click="setting.flightMNL.arrivalAirlineIsEdit = false; field = '';" class="btn btn-danger btn-flat btn-sm">Cancel</button>
-                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1438,9 +1317,15 @@
                                 <div class="tab-pane" id="tab-basic-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                            <th>Requirement</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Action</th>
+                                        <th>
+                                            Requirement
+                                        </th>
+                                        <th class="text-center">
+                                            Status
+                                        </th>
+                                        <th class="text-center">
+                                            Action
+                                        </th>
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in basicRequirements">
@@ -1461,7 +1346,7 @@
                                 <div class="tab-pane " id="tab-payment-req">
                                     <table class="table table-condensed table-striped table-bordered">
                                         <thead>
-                                            <th>Requirement/th>
+                                            <th>Requirement</th>
                                             <th class="text-center">Bank Code</th>
                                             <th class="text-center">Reference No</th>
                                             <th class="text-center">Date Deposit</th>
@@ -1511,7 +1396,7 @@
                                         </thead>
                                         <tbody>
                                         <tr v-for="requirement in visaRequirements">
-                                            <td class="text-sm">@{{ requirement.name }}</td>
+                                            <td style="width: 70%" class="text-sm">@{{ requirement.name }}</td>
                                             <td class="text-center">
                                                 <span v-if="requirement.student_visa.status" class="fa fa-check text-green"></span>
                                                 <span v-else class="fa fa-times text-red"></span>
@@ -1609,6 +1494,8 @@
                 programs: [],
                 hasRecords: true,
                 hosts: [],
+                states: [],
+                positions: [],
                 sponsors: [],
                 students: [],
                 student: {
@@ -1678,17 +1565,24 @@
                     "Program Start Date"             : "program_start_date",
                     "Program End Date"               : "program_end_date"
                 },
-                show: {
-                    hired: false,
-                    visa: false
+                assessed: {
+                    status: '',
+                    message: ''
                 },
-
+                show: {
+                    assessed: false,
+                    hired: false,
+                    visa: false,
+                    pdoscfo: false,
+                    programProper: false,
+                    cancel: false,
+                },
                 field: '',
-
                 host: {
                     name: '',
                     position: '',
                     place: '',
+                    housing: '',
                     stipend: '',
                     start: '',
                     end: '',
@@ -1697,7 +1591,52 @@
                 visa: {
                     sevis: '',
                     programId: '',
-                    schedule: ''
+                    schedule: '',
+                    time: '',
+                    trial_schedule: '',
+                    trial_time: ''
+                },
+                program: {
+                    pdos_schedule: '',
+                    pdos_time: '',
+                    cfo_schedule: '',
+                    cfo_time: ''
+                },
+                departure_mnl: {
+                    mnl_departure_date: '',
+                    mnl_departure_time: '',
+                    mnl_departure_flight_no: '',
+                    mnl_departure_flight: ''
+                },
+                departure_us: {
+                    us_departure_date: '',
+                    us_departure_time: '',
+                    us_departure_flight_no: '',
+                    us_departure_flight: ''
+                },
+                arrival_mnl: {
+                    mnl_arrival_date: '',
+                    mnl_arrival_time: '',
+                    mnl_arrival_flight_no: '',
+                    mnl_arrival_flight: '',
+                },
+                arrival_us: {
+                    us_arrival_date: '',
+                    us_arrival_time: '',
+                    us_arrival_flight_no: '',
+                    us_arrival_flight: ''
+                },
+                cancel: {
+                    status: ''
+                },
+                settings: {
+                    hostCompanyIsEdit: false,
+                    visaInterviewIsEdit: false,
+                    pdoscfoIsEdit: false,
+                    departureFromManila: false,
+                    arrivalToUs: false,
+                    departureFromUs: false,
+                    arrivalToManila: false,
                 },
                 setting: {
                     host: {
@@ -1714,6 +1653,10 @@
                         programIsEdit: false,
                         sevisIsEdit: false,
                         scheduleIsEdit: false
+                    },
+                    program: {
+                        pdosIsEdit: false,
+                        cfoIsEdit: false
                     },
                     flightUS: {
                         departureIsEdit: false,
@@ -1741,6 +1684,8 @@
                 this.loadStudents();
                 this.loadHostCompany();
                 this.loadVisaSponsor();
+                this.loadStates();
+                this.loadPositions();
                 this.loadPrograms();
             },
             watch: {
@@ -1766,7 +1711,7 @@
                                     this.hasRecords = false;
                                 }
                             }).catch((error) => {
-                            this.loading.table = false;
+                                this.loading.table = false;
                         })
                     } else {
                         this.loadStudents(programId)
@@ -1785,9 +1730,9 @@
                     let formData = new FormData();
                     formData.append('program_id', programId);
                     formData.append('status', this.filter.status);
+                    formData.append('branch', this.filter.branch);
                     formData.append('from', this.filter.from);
                     formData.append('to', this.filter.to);
-                    formData.append('branch', this.filter.branch);
                     this.loading.table = true;
                     axios.post(`/filter/status`, formData)
                         .then((response) => {
@@ -1802,7 +1747,7 @@
                                 this.hasRecords = false;
                             }
                         }).catch((error) => {
-                        this.loading.table = false;
+                            this.loading.table = false;
                     })
                 },
                 next () {
@@ -1868,19 +1813,37 @@
                             this.loadPaymentRequirements(programId, response.data.data.user_id);
                             this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
                             this.loadAdditionalRequirement(programId, response.data.data.user_id);
-                            console.log(response.data.data.user_id);
+                            console.log(response.data.data);
                             $('#student-modal').modal('show');
                         })
                 },
-                openInNewTab ($id) {
-                    axios.get(`/studPreliminary/download`, {
-                        params: {
-                            requirement_id: $id
-                        }
-                    })
+                openInNewTab (id, requirement) {
+                    let url = '';
+
+                    switch(requirement) {
+                        case 'preliminary':
+                            url = `/studPreliminary/download?requirement_id=${id}`;
+                            break;
+                        case 'additional':
+                            url = `/studAdditional/download?requirement_id=${id}`;
+                            break;
+                        case 'payment':
+                            url = `/studPayment/download?requirement_id=${id}`;
+                            break;
+                        case 'visa':
+                            url = `/studVisa/download?requirement_id=${id}`;
+                            break;
+                    }
+
+                    axios.get(url)
                         .then((response) => {
-                            let win = window.open(response.data);
-                            win.focus();
+                            if(requirement == 'payment') {
+                                win = window.open(`${response.data}`, '_blank');
+                                win.focus();
+                            } else {
+                                win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
+                                win.focus();
+                            }
                         })
                 },
                 loadBasicRequirements (programId, userId) {
@@ -1915,7 +1878,7 @@
                             link.click();
                         })
                 },
-                loadAdditionalRequirement (programId, userId) {
+                loadAdditionalRequirement (programId, userId) { 
                     axios.get(`/additional/viewUserRequirement?program_id=${programId}&id=${userId}`)
                         .then((response) => {
                             this.additionalRequirements = response.data.data;
@@ -1937,6 +1900,12 @@
                             this.visaRequirements = response.data.data;
                         })
                 },
+                loadStates() {
+                    axios.get('/state/getAll')
+                        .then((response) => {
+                            this.states = response.data;
+                        })
+                },
                 loadHostCompany() {
                     axios.get(`/helper/host/view`)
                         .then((response) => {
@@ -1949,8 +1918,14 @@
                             this.sponsors = response.data.data;
                         })
                 },
+                loadPositions() {
+                    axios.get('/position/getAll')
+                        .then((response) => {
+                            this.positions = response.data;
+                        })
+                },
                 downloadVisaRequirement(id) {
-                    axios.get(`/download/visa/requirement/${id}`)
+                    axios.get(`/studVisa/download?requirement_id=${id}`)
                         .then((response) => {
                             const link = document.createElement('a');
                             link.href = response.data;
@@ -1958,6 +1933,116 @@
                             document.body.appendChild(link);
                             link.click();
                         })
+                },
+                setApplicationStatus(status) {
+                    this.appStatus = '';
+                    switch (status) {
+                        case 'Assessed':
+                            if (this.student.application_status == 'New Applicant') {
+                                this.loading.modal = true;
+                                axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                    .then(({data}) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: data,
+                                            type: 'success',
+                                            confirmButonText: 'Continue'
+                                        })
+                                    }).catch((error) => {
+                                        swal({
+                                            title: 'Something went wrong.',
+                                            type: 'error',
+                                            confirmButonText: 'Go Back!'
+                                        })
+                                    })
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                            break;
+                        case 'Confirmed':
+                            if (this.student.application_status == 'Assessed') {
+                                this.loading.modal = true;
+                                axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                    .then((response) => {
+
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: response.data,
+                                            type: 'success',
+                                            confirmButtonText: 'Continue'
+                                        })
+                                    }).catch((error) => {
+                                    swal({
+                                        title: 'Something went wrong!',
+                                        type: 'error',
+                                        confirmButtonText: 'Go Back!'
+                                    })
+                                });
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                            break;
+                        case 'Hired':
+                            if (this.student.application_status == 'Confirmed') {
+                                this.show.assessed = false;
+                                this.show.hired = true;
+                                this.show.visa = false;
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                            break;
+                        case 'ForVisaInterview':
+                            if (this.student.application_status == 'Hired') {
+                                this.show.assessed = false;
+                                this.show.visa = true;
+                                this.show.hired = false;
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                            break;
+                        case 'ForPDOSCFO': 
+                            if(this.student.application_status == 'For Visa Interview') {
+                                this.show.assessed = false;
+                                this.show.visa = false;
+                                this.show.hired = false;
+                                this.show.pdoscfo = true;
+                                this.show.programProper = false;
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                            break;
+                        case 'ProgramProper':
+                            this.loading.modal = false;
+                            if(this.student.application_status == 'For PDOS & CFO') {
+                                axios.post(`/coor/${this.student.user_id}/application/ProgramProper`)
+                                    .then((response) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: response.data,
+                                            type: 'success',
+                                            confirmButtonText: 'Continue'
+                                        }).catch((error) => {
+                                            swal({
+                                                title: 'Something went wrong!',
+                                                type: 'error',
+                                                confirmButonText: 'Go Back!'
+                                            })
+                                        })
+                                    })
+                            } else {
+                                alert('You Cannot Revert Application Status');
+                            }
+                            break;
+                        case 'Canceled':
+                            this.show.cancel = true;
+                            break;
+                    }
                 },
                 setProgram(program) {
                     axios.post(`/coor/${this.student.user_id}/program/${program}`)
@@ -1970,63 +2055,6 @@
                             this.loadStudents(programId);
                             $('#student-modal').modal('hide');
                         })
-                },
-                setApplicationStatus(status) {
-                    this.appStatus = '';
-                    switch (status) {
-                        case 'Assessed':
-                            this.loading.modal = true;
-                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
-                                .then((response) => {
-                                    this.loadStudents(programId);
-                                    this.viewStudent(this.student.user_id);
-                                    this.loading.modal = false;
-                                    swal({
-                                        title: response.data,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    })
-                                }).catch((error) => {
-                                swal({
-                                    title: 'Something went wrong!',
-                                    type: 'error',
-                                    confirmButtonText: 'Go Back!'
-                                })
-                            });
-                            break;
-                        case 'Confirmed':
-                            this.loading.modal = true;
-                            axios.post(`/coor/${this.student.user_id}/application/${status}`)
-                                .then((response) => {
-
-                                    this.loadStudents(programId);
-                                    this.viewStudent(this.student.user_id);
-                                    this.loading.modal = false;
-                                    swal({
-                                        title: response.data,
-                                        type: 'success',
-                                        confirmButtonText: 'Continue'
-                                    })
-                                }).catch((error) => {
-                                swal({
-                                    title: 'Something went wrong!',
-                                    type: 'error',
-                                    confirmButtonText: 'Go Back!'
-                                })
-                            });
-                            break;
-                        case 'Hired':
-                            this.show.hired = true;
-                            this.show.visa = false;
-                            break;
-                        case 'For Visa Interview':
-                            this.show.visa = true;
-                            this.show.hired = false;
-                            break;
-                        case 'Canceled':
-                            alert(status);
-                            break;
-                    }
                 },
                 setInterviewStatus(status) {
                     this.visaStatus = '';
@@ -2049,17 +2077,55 @@
                             break;
                     }
                 },
+                setCancellationStatus() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/Cancelled`, this.cancel)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.cancel = false;
+                            alert(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                },
+                submitAssessed() {
+                    this.loading.modal = true;
+                    let formData = new FormData();
+                        formData.append('status', this.assessed.status);
+                        formData.append('message', this.assessed.message);
+                    axios.post(`/coor/${this.student.user_id}/application/Assessed`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.assessed = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                        swal({
+                            title: 'Something went wrong!',
+                            type: 'error',
+                            confirmButtonText: 'Go Back!'
+                        })
+                    });
+                },
                 submitHostCompany() {
                     this.loading.modal = true;
                     let formData = new FormData();
-                    formData.append('name', this.host.name);
-                    formData.append('position', this.host.position);
-                    formData.append('place', this.host.place);
-                    formData.append('housing', this.host.housing);
-                    formData.append('stipend', this.host.stipend);
-                    formData.append('start', this.host.start);
-                    formData.append('end', this.host.end);
-                    formData.append('sponsor', this.host.sponsor);
+                        formData.append('name', this.host.name);
+                        formData.append('position', this.host.position);
+                        formData.append('place', this.host.place);
+                        formData.append('housing', this.host.housing);
+                        formData.append('stipend', this.host.stipend);
+                        formData.append('start', this.host.start);
+                        formData.append('end', this.host.end);
+                        formData.append('sponsor', this.host.sponsor);
                     axios.post(`/coor/${this.student.user_id}/application/Hired`, formData)
                         .then((response) => {
                             this.loadStudents(programId);
@@ -2072,20 +2138,17 @@
                                 confirmButtonText: 'Continue'
                             })
                         }).catch((error) => {
-                        swal({
-                            title: 'Something went wrong!',
-                            type: 'error',
-                            confirmButtonText: 'Go Back!'
-                        })
+                            this.loading.modal = false;
+                            swal({
+                                title: 'All Fields are Required!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
                     })
                 },
                 submitForVisaInterview() {
                     this.loading.modal = true;
-                    let formData = new FormData();
-                    formData.append('sevis', this.visa.sevis);
-                    formData.append('program', this.visa.programId);
-                    formData.append('schedule', this.visa.schedule);
-                    axios.post(`/coor/${this.student.user_id}/application/For Visa Interview`, formData)
+                    axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, this.visa)
                         .then((response) => {
                             this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
@@ -2097,11 +2160,32 @@
                                 confirmButtonText: 'Continue'
                             })
                         }).catch((error) => {
-                        swal({
-                            title: 'Something went wrong!',
-                            type: 'error',
-                            confirmButtonText: 'Go Back!'
-                        })
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
+                },
+                submitForPDOSAndCFO() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, this.program)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.pdoscfo = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
+                            })
                     })
                 },
                 removePrelimFile(requirement) {
@@ -2234,10 +2318,101 @@
                         }
                     })
                 },
+                updateHostCompanyDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateHostCompanyDetails/${this.student.user_id}`, this.host)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.hostCompanyIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        })
+                },
+                updateVisaInterviewDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateVisaInterviewDetails/${this.student.user_id}`, this.visa)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.visaInterviewIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updatePDOSCFODetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updatePDOSCFODetails/${this.student.user_id}`, this.program)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.pdoscfoIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureMNL/${this.student.user_id}`, this.departure_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalUS/${this.student.user_id}`, this.arrival_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureUS/${this.student.user_id}`, this.departure_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalMNL/${this.student.user_id}`, this.arrival_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
                 updateField(field, input) {
                     this.loading.modal = true;
                     let formData = new FormData();
-                    formData.append('field', input);
+                        formData.append('field', input);
                     axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
                         .then((response) => {
                             this.loading.modal = false;
@@ -2249,882 +2424,14 @@
                                 confirmButtonText: 'Continue'
                             })
                         }).catch((error) => {
-                        this.loading.modal = false;
-                        swal({
-                            title: 'Something went wrong!',
-                            type: 'error',
-                            confirmButonText: 'Go Back!'
-                        })
+                            this.loading.modal = false;
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
+                            })
                     })
                 },
-                hideField(field) {
-                    switch (field) {
-                        case 'name' :
-                            this.setting.host.nameIsEdit = true;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'position' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = true;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'location' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = true;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'housing' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = true;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'start' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = true;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'end' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = true;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'stipend' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = true;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'sponsor' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = true;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'sevis' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = true;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'program' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = true;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.schedule = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'schedule' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = true;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_departure_date' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = true;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_departure_time' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = true;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_departure_flight' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = true;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_departure_airline' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = true;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_arrival_date' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = true;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_arrival_time' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = true;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_arrival_flight' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = true;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'us_arrival_airline' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = true;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_departure_date' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = true;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_departure_time' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = true;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_departure_flight' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = true;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_departure_airline' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = true;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_arrival_date' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = true;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_arrival_time' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = true;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_arrival_flight' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = true;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = false;
-                            break;
-                        case 'mnl_arrival_airline' :
-                            this.setting.host.nameIsEdit = false;
-                            this.setting.host.positionIsEdit = false;
-                            this.setting.host.locationIsEdit = false;
-                            this.setting.host.housingIsEdit = false;
-                            this.setting.host.startIsEdit = false;
-                            this.setting.host.endIsEdit = false;
-                            this.setting.host.stipendIsEdit = false;
-                            this.setting.host.sponsorIsEdit = false;
-
-                            this.setting.visa.programIsEdit = false;
-                            this.setting.visa.sevisIsEdit = false;
-                            this.setting.visa.scheduleIsEdit = false;
-
-                            this.setting.flightUS.departureIsEdit = false;
-                            this.setting.flightUS.departureTimeIsEdit = false;
-                            this.setting.flightUS.departureFlightIsEdit = false;
-                            this.setting.flightUS.departureAirlineIsEdit = false;
-                            this.setting.flightUS.arrivalIsEdit = false;
-                            this.setting.flightUS.arrivalTimeIsEdit = false;
-                            this.setting.flightUS.arrivalFlightIsEdit = false;
-                            this.setting.flightUS.arrivalAirlineIsEdit = false;
-
-                            this.setting.flightMNL.departureIsEdit = false;
-                            this.setting.flightMNL.departureTimeIsEdit = false;
-                            this.setting.flightMNL.departureFlightIsEdit = false;
-                            this.setting.flightMNL.departureAirlineIsEdit = false;
-                            this.setting.flightMNL.arrivalIsEdit = false;
-                            this.setting.flightMNL.arrivalTimeIsEdit = false;
-                            this.setting.flightMNL.arrivalFlightIsEdit = false;
-                            this.setting.flightMNL.arrivalAirlineIsEdit = true;
-                            break;
-                    }
-                }
             }
         })
     </script>
