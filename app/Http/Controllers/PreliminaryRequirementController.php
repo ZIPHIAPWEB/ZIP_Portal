@@ -46,7 +46,6 @@ class PreliminaryRequirementController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -55,14 +54,14 @@ class PreliminaryRequirementController extends Controller
             $this->preliminaryRepository->savePreliminaryRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path
             ]);
         } else {
             $this->preliminaryRepository->savePreliminaryRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }
@@ -76,7 +75,6 @@ class PreliminaryRequirementController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -85,14 +83,14 @@ class PreliminaryRequirementController extends Controller
             $this->preliminaryRepository->updatePreliminaryRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path
             ]);
         } else {
             $this->preliminaryRepository->updatePreliminaryRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }

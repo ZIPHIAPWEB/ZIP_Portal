@@ -133,6 +133,7 @@
                         <table class="table table-bordered table-striped table-condensed">
                             <thead>
                                 <th>Requirements</th>
+                                <th class="text-center">Instruction</th>
                                 <th class="text-center">Status</th>
                                 <th>Action</th>
                             </thead>
@@ -144,6 +145,9 @@
                                 </tr>
                                 <tr v-else v-for="requirement in requirements">
                                     <td v-cloak>@{{ requirement.name }}</td>
+                                    <td v-cloak class="text-center">
+                                        <button v-if="requirement.description" class="btn btn-default btn-xs" data-balloon-length="xlarge" :aria-label="requirement.description" data-balloon-pos="up"><span class="fa fa-info"></span></button>
+                                    </td>
                                     <td v-cloak class="text-center">
                                         <span v-if="requirement.student_preliminary.status" class="fa fa-check" style="color: green;"></span>
                                         <span v-else class="fa fa-remove" style="color: red"></span>

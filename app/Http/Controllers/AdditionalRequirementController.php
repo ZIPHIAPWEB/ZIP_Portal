@@ -46,7 +46,6 @@ class AdditionalRequirementController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -55,14 +54,14 @@ class AdditionalRequirementController extends Controller
             $this->additionalRequirementRepository->saveAdditionalRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path
             ]);
         } else {
             $this->additionalRequirementRepository->saveAdditionalRequirement([
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }
@@ -76,7 +75,6 @@ class AdditionalRequirementController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -85,14 +83,14 @@ class AdditionalRequirementController extends Controller
             $this->additionalRequirementRepository->updateAdditionalRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path
             ]);
         } else {
             $this->additionalRequirementRepository->updateAdditionalRequirement($id, [
                 'program_id'    =>  $request->input('program_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }

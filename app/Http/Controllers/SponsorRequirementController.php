@@ -36,7 +36,6 @@ class SponsorRequirementController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -45,14 +44,14 @@ class SponsorRequirementController extends Controller
             $this->sponsorRequirementRepository->saveSponsorRequirement([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path,
             ]);
         } else {
             $this->sponsorRequirementRepository->saveSponsorRequirement([
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }
@@ -73,7 +72,6 @@ class SponsorRequirementController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         if ($request->hasFile('file')) {
@@ -84,7 +82,7 @@ class SponsorRequirementController extends Controller
             $this->sponsorRequirementRepository->updateSponsorRequirement($id, [
                 'sponsor_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  $path
             ]);
         } else {
@@ -95,7 +93,7 @@ class SponsorRequirementController extends Controller
             $this->sponsorRequirementRepository->updateSponsorRequirement($id, [
                 'program_id'    =>  $request->input('sponsor_id'),
                 'name'          =>  $request->input('name'),
-                'description'   =>  $request->input('description'),
+                'description'   =>  $request->input('description') ? $request->input('description') : '',
                 'path'          =>  ''
             ]);
         }

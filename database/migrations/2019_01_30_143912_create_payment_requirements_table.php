@@ -17,7 +17,7 @@ class CreatePaymentRequirementsTable extends Migration
             $table->increments('id');
             $table->integer('program_id')->unsigned();
             $table->string('name');
-            $table->mediumText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

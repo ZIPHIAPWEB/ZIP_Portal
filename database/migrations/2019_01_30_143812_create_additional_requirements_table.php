@@ -17,8 +17,8 @@ class CreateAdditionalRequirementsTable extends Migration
             $table->increments('id');
             $table->integer('program_id')->unsigned();
             $table->string('name');
-            $table->mediumText('description');
-            $table->longText('path');
+            $table->longText('description')->nullable();
+            $table->longText('path')->nullable();
             $table->timestamps();
         });
     }

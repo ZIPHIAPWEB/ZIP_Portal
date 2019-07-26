@@ -45,13 +45,12 @@ class PaymentRequirementController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required'
         ])->validate();
 
         $this->paymentRequirementRepository->savePaymentRequirement([
             'program_id'    =>  $request->input('program_id'),
             'name'          =>  $request->input('name'),
-            'description'   =>  $request->input('description')
+            'description'   =>  $request->input('description') ? $request->input('description') : ''
         ]);
 
         return response()->json(['message'  =>  'Requirement Added']);
@@ -61,13 +60,12 @@ class PaymentRequirementController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'          =>  'required',
-            'description'   =>  'required',
         ])->validate();
 
         $this->paymentRequirementRepository->updatePaymentRequirement($request->input('id'), [
             'program_id'    =>  $request->input('program_id'),
             'name'          =>  $request->input('name'),
-            'description'   =>  $request->input('description')
+            'description'   =>  $request->input('description') ? $request->input('description') : ''
         ]);
 
         return response()->json(['message'  =>  'Requirement Updated']);
