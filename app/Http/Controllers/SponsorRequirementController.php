@@ -86,7 +86,7 @@ class SponsorRequirementController extends Controller
                 'path'          =>  $path
             ]);
         } else {
-            if ($this->sponsor->getById($id)->path) {
+            if ($this->sponsorRequirementRepository->getById($id)->path) {
                 Storage::delete($this->sponsorRequirementRepository->getById($id)->path);
             }
 
