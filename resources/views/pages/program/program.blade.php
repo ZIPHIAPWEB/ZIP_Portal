@@ -912,7 +912,7 @@
                                                     Visa Interview Schedule
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
+                                                    <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -938,7 +938,7 @@
                                                     Trial Interview Schedule
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                   <label class="text-sm">@{{ student.visa_interview_schedule }}</label>
+                                                   <label class="text-sm">@{{ student.trial_interview_schedule | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -951,7 +951,7 @@
                                                     Trial Interview Time
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                    <label class="text-sm">@{{ student.trial_interview_time }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -978,7 +978,7 @@
                                                     PDOS Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.pdos_schedule }}</label>
+                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1004,7 +1004,7 @@
                                                     CFO Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.cfo_schedule }}</label>
+                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1047,7 +1047,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
+                                                    <label class="text-sm">@{{ student.mnl_departure_date | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1118,7 +1118,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_arrival_date }}</label>
+                                                    <label class="text-sm">@{{ student.us_arrival_date | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1189,7 +1189,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
+                                                    <label class="text-sm">@{{ student.us_departure_date | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1260,7 +1260,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_arrival_date }}</label>
+                                                    <label class="text-sm">@{{ student.mnl_arrival_date | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1723,7 +1723,12 @@
                 toFormattedDateString: function (value) {
                     let d = new Date(value);
                     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                    
+                    if (value) {
+                        return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                    } else {
+                        return '';
+                    }
                 }
             },
             methods: {

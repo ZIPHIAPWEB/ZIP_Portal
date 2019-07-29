@@ -1722,7 +1722,12 @@
                 toFormattedDateString: function (value) {
                     let d = new Date(value);
                     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                    
+                    if (value) {
+                        return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                    } else {
+                        return '';
+                    }
                 }
             },
             methods: {
