@@ -47,7 +47,7 @@ class HelperController extends Controller
         if ($program == 'All') {
             $count = Student::count();
         } else {
-            $count = Student::where('program_id', Program::where('name', $program)->first()->id)
+            $count = Student::where('program_id', Program::where('description', $program)->first()->id)
                 ->count();
         }
 
@@ -59,7 +59,7 @@ class HelperController extends Controller
         if ($program == 'All') {
             $count = Student::where('application_status', $status)->count();
         } else {
-            $count = Student::where('program_id', Program::where('name', $program)->first()->id)
+            $count = Student::where('program_id', Program::where('description', $program)->first()->id)
                 ->where('application_status', $status)
                 ->count();
         }
@@ -71,7 +71,7 @@ class HelperController extends Controller
     {
         if ($program) {
             $count = Student::where('visa_interview_status', $filter)
-                ->where('program_id', 'like', '%' . Program::where('display_name', $program)->first()->id)
+                ->where('program_id', 'like', '%' . Program::where('description', $program)->first()->id)
                 ->count();
         } else {
             $count = Student::where('visa_interview_status', $filter)

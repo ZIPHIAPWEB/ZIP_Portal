@@ -12,10 +12,10 @@
                         <div class="pull-right">
                             <select v-model="summaryFilter" class="form-control input-sm">
                                 <option value="All">All</option>
-                                <option value="SWT - Spring">Summer Work and Travel - Spring</option>
-                                <option value="SWT - Summer">Summer Work and Travel - Summer</option>
-                                <option value="Career Training">Career Training</option>
-                                <option value="Internship">Internship</option>
+                                <option value="SWT-SP">Summer Work and Travel - Spring</option>
+                                <option value="SWT-SM">Summer Work and Travel - Summer</option>
+                                <option value="CTP">Career Training</option>
+                                <option value="INT">Internship</option>
                             </select>
                         </div>
                     </div>
