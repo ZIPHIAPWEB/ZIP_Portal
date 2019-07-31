@@ -197,7 +197,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-group">
                                         <label for="">Amount</label>
-                                        <input v-model="payment.amount" type="number" class="form-control input-sm">
+                                        <input v-model="payment.amount" type="text" class="form-control input-sm">
                                         <span class="help-block text-red" v-if="errors.amount">Required</span>
                                     </div>
                                 </div>
