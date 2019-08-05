@@ -140,13 +140,15 @@ class RegisterController extends Controller
 
     public function verified($email, $token)
     {
-        $user = User::where(['email' => $email, 'vToken' => $token]);
-        
-        Auth::loginUsingId($user->first()->id);
+        if ($token) {
+            $user = User::where(['email' => $email, 'vToken' => $token]);
+            Auth::loginUsingId($user->first()->id);
+            $user->update(['verified' => 1, 'vToken' => '']);
+            return redirect('/portal');
+        }
 
-        $user->update(['verified' => 1, 'vToken' => '']);
-
-        return redirect('/portal');
+        return redirect('/auth/login')
+                ->with('Info', 'Your account already activated! You can now login to your portal.');
     }
 
     public function showRegistrationForm()
