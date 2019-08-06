@@ -140,9 +140,8 @@ class RegisterController extends Controller
 
     public function verified($email, $token)
     {
-        if ($token) {
-            $user = User::where(['email' => $email, 'vToken' => $token]);
-            Auth::loginUsingId($user->first()->id);
+        if ($user = User::where(['email' => $email, 'vToken' => $token])->first()) {
+            Auth::loginUsingId($user->id);
             $user->update(['verified' => 1, 'vToken' => '']);
             return redirect('/portal');
         }
