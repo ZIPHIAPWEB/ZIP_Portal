@@ -1534,7 +1534,7 @@
                     "Gender"                         : "gender",
                     "Birthday"                       : "birthdate",
                     "Status"                         : "application_status",
-                    "School"                         : "tertiary.school.name",
+                    "School"                         : "tertiary.school",
                     "Course"                         : "tertiary.degree",
                     "Contact"                        : "home_number",
                     "Program"                        : "program.display_name",
