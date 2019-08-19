@@ -1533,7 +1533,7 @@
                     "Gender"                         : "gender",
                     "Birthday"                       : "birthdate",
                     "Status"                         : "application_status",
-                    "School"                         : "tertiary.school_name",
+                    "School"                         : "tertiary.school.display_name",
                     "Course"                         : "tertiary.degree",
                     "Contact"                        : "home_number",
                     "Program"                        : "program.display_name",
