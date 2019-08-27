@@ -60,6 +60,18 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                    <label>Home Number <i class="text-red">*</i></label>
+                                    <input v-model="student.homeNumber" type="text" class="form-control input-sm" placeholder="546-1234">
+                                    <span class="help-block text-red" v-if="errors.home_number">@{{ errors.home_number[0] }}</span>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                                    <label>Mobile <i class="text-red">*</i></label>
+                                    <input v-model="student.mobileNumber" type="text" class="form-control input-sm" placeholder="09123456789">
+                                    <span class="help-block text-red" v-if="errors.mobile_number">@{{ errors.mobile_number[0] }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6">
                                     <label for="">Facebook URL <i class="text-red">*</i></label>
                                     <input v-model="student.fb_email" type="text" class="form-control input-sm" placeholder="https://www.facebook.com/sample">
                                     <span class="help-block text-red" v-if="errors.fb_email">@{{ errors.fb_email[0] }}</span>
@@ -301,6 +313,14 @@
                                     <td class="text-bold">@{{ student.gender }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Home Number</td>
+                                    <td class="text-bold">@{{ student.homeNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile Number</td>
+                                    <td class="text-bold">@{{ student.mobileNumber }}</td>
+                                </tr>
+                                <tr>
                                     <td>Facebook Email</td>
                                     <td class="text-bold">@{{ student.fb_email }}</td>
                                 </tr>
@@ -496,6 +516,8 @@
                     formData.append('provincial_address', this.student.provincial_address);
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
+                    formData.append('home_number', this.homeNumber);
+                    formData.append('mobile_number', this.student.mobileNumber);
                     formData.append('year', this.student.year);
                     formData.append('program_id', this.student.program_id.id);
                     formData.append('t_school', this.tertiary.school.id);
@@ -527,6 +549,8 @@
                     formData.append('mobile_number', this.student.mobileNumber);
                     formData.append('provincial_address', this.student.provincial_address);
                     formData.append('permanent_address', this.student.permanent_address);
+                    formData.append('home_number', this.student.homeNumber);
+                    formData.append('mobile_number', this.student.mobileNumber);
                     formData.append('fb_email', this.student.fb_email);
                     formData.append('skype_id', this.student.skype_id);
                     formData.append('year', this.student.year);
