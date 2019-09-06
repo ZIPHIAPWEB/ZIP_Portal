@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 5px 10px;">
-                            <b>Trial Interview: {{ $data['visa_interview_schedule'] }} | {{ $data['visa_interview_time'] }}</b>
+                            <b>Trial Interview: {{ $data['trial_interview_schedule'] }} | {{ $data['trial_interview_time'] }}</b>
                         </td>
                     </tr>
                     <tr>
