@@ -440,7 +440,7 @@
                     });
                 },
                 deleteRequirement(id) {
-                    axios.post(`/sponsor/delete`, {
+                    axios.post(`/visa/delete`, {
                         id: id
                     })
                         .then((response) => {

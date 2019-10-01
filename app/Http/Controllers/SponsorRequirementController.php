@@ -101,9 +101,9 @@ class SponsorRequirementController extends Controller
         return response()->json(['message'  =>  'Requirement Updated']);
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        Storage::disk('uploaded_files')->delete($this->sponsorRequirementRepository->delete($id)->path);
+        Storage::disk('uploaded_files')->delete($this->sponsorRequirementRepository->delete($request->input('id'))->path);
 
         return response()->json(['message'  =>  'Requirement Deleted']);
     }
