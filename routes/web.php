@@ -234,7 +234,7 @@ Route::prefix('visa')->group(function () {
     Route::post('/store', 'SponsorRequirementController@store')->name('sponsor.requirement.store');
     Route::get('/edit', 'SponsorRequirementController@edit')->name('sponsor.requirement.edit');
     Route::post('/update', 'SponsorRequirementController@update')->name('sponsor.requirement.update');
-    Route::get('/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
+    Route::post('/delete', 'SponsorRequirementController@delete')->name('sponsor.requirement.delete');
     Route::get('/download', 'SponsorRequirementController@download')->name('sponsor.requirement.download');
 });
 
