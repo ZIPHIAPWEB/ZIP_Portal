@@ -78,13 +78,31 @@ class LoginController extends Controller
             } else {
                 $user = User::find($socialProvider->user_id);
 
-                $user->update([
-                    'isOnline'  =>  true
-                ]);
+                if ($user) {
+                    $user->update([
+                        'isOnline'  =>  true
+                    ]);
+    
+                    auth()->login($user, false);
 
-                auth()->login($user, false);
+                    return redirect('portal');                    
+                } else {
+                    $user = User::create([
+                        'name'      =>  str_replace(' ', '', $social_user->getName()),
+                        'email'     =>  $social_user->getEmail(),
+                        'password'  =>  '',
+                        'verified'  =>  true,
+                        'vToken'    =>  '',
+                        'isOnline'  =>  false,
+                        'isFilled'  =>  false
+                    ]);
 
-                return redirect('portal');
+                    $user->attachRole('student');
+
+                    auth()->login($user, false);
+                
+                    return redirect('portal');
+                }
             }
         } catch (Exception $e) {
             return redirect('portal');
