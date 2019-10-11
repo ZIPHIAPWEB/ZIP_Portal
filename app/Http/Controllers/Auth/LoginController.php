@@ -79,6 +79,14 @@ class LoginController extends Controller
                 $user = User::find($socialProvider->user_id);
 
                 if ($user) {
+                    $user->update([
+                        'isOnline'  =>  true
+                    ]);
+    
+                    auth()->login($user, false);
+
+                    return redirect('portal');                    
+                } else {
                     $user = User::create([
                         'name'      =>  str_replace(' ', '', $social_user->getName()),
                         'email'     =>  $social_user->getEmail(),
@@ -90,18 +98,16 @@ class LoginController extends Controller
                     ]);
 
                     $user->attachRole('student');
+                    
+                    SocialProvider::where('provider_id', $social_user->getId())->update([
+                        'user_id'       =>  $user->id,
+                        'provider_id'   =>  $social_user->getId(),
+                        'provider'      =>  'google'
+                    ]);
 
                     auth()->login($user, false);
                 
-                    return redirect('portal');        
-                } else {
-                    $user->update([
-                        'isOnline'  =>  true
-                    ]);
-    
-                    auth()->login($user, false);
-
-                    return redirect('portal');            
+                    return redirect('portal');
                 }
             }
         } catch (Exception $e) {
