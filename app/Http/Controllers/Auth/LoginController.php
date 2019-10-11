@@ -79,14 +79,6 @@ class LoginController extends Controller
                 $user = User::find($socialProvider->user_id);
 
                 if ($user) {
-                    $user->update([
-                        'isOnline'  =>  true
-                    ]);
-    
-                    auth()->login($user, false);
-
-                    return redirect('portal');                    
-                } else {
                     $user = User::create([
                         'name'      =>  str_replace(' ', '', $social_user->getName()),
                         'email'     =>  $social_user->getEmail(),
@@ -101,7 +93,15 @@ class LoginController extends Controller
 
                     auth()->login($user, false);
                 
-                    return redirect('portal');
+                    return redirect('portal');        
+                } else {
+                    $user->update([
+                        'isOnline'  =>  true
+                    ]);
+    
+                    auth()->login($user, false);
+
+                    return redirect('portal');            
                 }
             }
         } catch (Exception $e) {
