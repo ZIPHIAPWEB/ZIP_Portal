@@ -1861,11 +1861,8 @@
                 downloadBasicRequirement (id) {
                     axios.get(`/studPreliminary/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 loadPaymentRequirements (programId, userId) {
@@ -1893,11 +1890,8 @@
                 downloadAdditionalRequirement (id) {
                     axios.get(`/studAdditional/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {
@@ -1933,11 +1927,8 @@
                 downloadVisaRequirement(id) {
                     axios.get(`/studVisa/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 setApplicationStatus(status) {
