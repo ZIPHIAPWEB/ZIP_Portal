@@ -50,7 +50,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/our-programs') }}">OUR PROGRAMS</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/j1-cares') }}">J1 CARES</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/contact-us') }}">CONTACT US</a></li>
-                    <li class="nav-item" role="presentation"><button class="btn btn-primary" type="button" style="background-color: #002157;border-radius: 10px;">JOIN US</button></li>
+                    <li class="nav-item" role="presentation"><a href="{{ url('/auth/login') }}" class="btn btn-primary" style="background-color: #002157;border-radius: 10px;">JOIN US</a></li>
                 </ul>
             </div>
         </div>

@@ -50,8 +50,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ url('/our-programs') }}">OUR PROGRAMS</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/j1-cares') }}">J1 CARES</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/contact-us') }}">CONTACT US</a></li>
-                    <li class="nav-item" role="presentation"><button class="btn btn-primary" type="button" style="background-color: #002157;border-radius: 10px;">JOIN US</button></li>
-                </ul>
+                    <li class="nav-item" role="presentation"><a href="{{ url('/auth/login') }}" class="btn btn-primary" style="background-color: #002157;border-radius: 10px;">JOIN US</a></li>                </ul>
             </div>
         </div>
     </nav>
@@ -80,7 +79,7 @@
                     <div class="card d-md-flex flex-fill align-items-md-center">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Summer Work Travel Program</h5><small>3 months (March - June or May - August)</small>
-                            <p class="text-center" style="font-size: 13px;">Summer Work Travel program is a three-month program from March to June or May to August designed for college and university students...&nbsp;</p><a class="btn btn-primary btn-block white-read-more" role="button" href="program-swt-spring.html">READ MORE</a></div>
+                            <p class="text-center" style="font-size: 13px;">Summer Work Travel program is a three-month program from March to June or May to August designed for college and university students...&nbsp;</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-swt') }}">READ MORE</a></div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 align-items-md-center justify-content-xl-center mb-2">
@@ -88,14 +87,14 @@
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Internship Program</h5><small>6 to 12 months</small>
                             <p class="text-center" style="font-size: 13px;">Internship programs are six to 12-month programs designed to allow college and university students and fresh graduates to come&nbsp;to the United States...<br></p><a class="btn btn-primary btn-block white-read-more" role="button"
-                                href="program-internship.html">READ MORE</a></div>
+                                href="{{ url('/program-internship') }}">READ MORE</a></div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 mb-2">
                     <div class="card">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Trainee Program</h5><small>12 &nbsp;months</small>
-                            <p class="text-center" style="font-size: 13px;">Trainee Program are year-round program designed to allow young professionals to come to the United States gain exposure to U.S. culture...</p><a class="btn btn-primary btn-block white-read-more" role="button" href="program-career.html">READ MORE</a></div>
+                            <p class="text-center" style="font-size: 13px;">Trainee Program are year-round program designed to allow young professionals to come to the United States gain exposure to U.S. culture...</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-career') }}">READ MORE</a></div>
                     </div>
                 </div>
             </div>
@@ -155,7 +154,7 @@
                         <div class="card-body text-center d-flex flex-column justify-content-between align-items-xl-center">
                             <h5 style="font-size: 16px;font-weight: bold;"><strong>Study with Co-op Internship in Canada</strong></h5>
                             <p class="text-center" style="font-size: 13px;">This program allows participants to have a deeper understanding of the Canadian and North American culture. It also allows them to have the opportunity to experience ...<br></p><a class="btn btn-primary btn-block white-read-more"
-                                role="button" href="program-canada.html">READ MORE</a></div>
+                                role="button" href="{{ url('/program-canada') }}">READ MORE</a></div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-2">
@@ -163,7 +162,7 @@
                         <div class="card-body text-center">
                             <h5 style="font-size: 16px;font-weight: bold;"><strong>Trainee Program in Australia</strong></h5>
                             <p class="text-center" style="font-size: 13px;">This program allows participants to visit Australia and discover more about its history, culture, and workplace through immersion. Participants will gain cultural and career ...<br></p><a class="btn btn-primary btn-block white-read-more"
-                                role="button" href="program-australian.html">READ MORE</a></div>
+                                role="button" href="{{ url('/program-australian') }}">READ MORE</a></div>
                     </div>
                 </div>
             </div>
