@@ -137,7 +137,7 @@
                     </ul>
                 </div>
                 <div class="col-xl-12">
-                    <div class="text-center" style="margin: 10px;"><a href="#" style="margin: 10px;"><i class="fa fa-facebook" style="font-size: 15px;"></i></a><a href="#" style="margin: 10px;"><i class="fa fa-instagram" style="font-size: 15px;"></i></a><a href="#" style="margin: 10px;"><i class="fa fa-youtube-play" style="font-size: 15px;"></i></a></div>
+                    <div class="text-center" style="margin: 10px;"><a href="https://www.facebook.com/ZipTravelPhilippines/" style="margin: 10px;"><i class="fa fa-facebook" style="font-size: 15px;"></i></a><a href="https://www.instagram.com/ziptravelph/" style="margin: 10px;"><i class="fa fa-instagram" style="font-size: 15px;"></i></a><a href="https://www.youtube.com/user/ablack2000" style="margin: 10px;"><i class="fa fa-youtube-play" style="font-size: 15px;"></i></a></div>
                 </div>
                 <div class="col-xl-12 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <ul class="list-inline" style="margin: 0;">
