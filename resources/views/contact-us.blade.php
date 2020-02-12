@@ -174,24 +174,43 @@
             </div>
         </div>
     </section>
-    <section class="section">
-        <form>
+    <section id="contact-form" class="section">
+        <form action="{{ URL::to('/submitInquiry') }}" method="POST">
+            {{ csrf_field() }}
             <div class="container-fluid">
                 <div class="form-row" style="margin-bottom: 16px;">
                     <div class="col text-center">
                         <h5 style="font-weight: bold;margin: 20px;">We'd love to hear from you. We're here to help and answer your inquiries. Please fill out this form:<br></h5>
                     </div>
                 </div>
+                @if(session('message'))
                 <div class="form-row">
-                    <div class="col-6">
-                        <div class="form-group"><label>FULLNAME (Required)</label><input class="form-control" type="text" placeholder="Enter your fullname here..."></div>
+                    <div class="alert alert-success alert-dismissible w-100">
+                        <strong>Success!</strong> {{ session('message') }}
                     </div>
-                    <div class="col-6">
-                        <div class="form-group"><label>E-MAIL (Required)</label><input class="form-control" type="text" placeholder="Enter your email here..."></div>
+                </div>
+                @endif
+                @if ($errors->any())
+                <div class="form-row">
+                    <div class="alert alert-danger alert-dismissible w-100">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                @endif
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group"><label>FULLNAME (Required)</label><input name="name" class="form-control" type="text" placeholder="Enter your fullname here..."></div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group"><label>E-MAIL (Required)</label><input name="email" class="form-control" type="text" placeholder="Enter your email here..."></div>
                     </div>
                     <div class="col-12">
-                        <div class="form-group"><label>Message:</label><textarea class="form-control" rows="10" placeholder="Enter your message here..."></textarea></div>
-                        <div class="form-group"><button class="btn btn-primary border rounded-0" type="button" style="font-weight: bold;background-color: rgb(0,33,87);">Send</button></div>
+                        <div class="form-group"><label>Message:</label><textarea name="message" class="form-control" rows="10" placeholder="Enter your message here..."></textarea></div>
+                        <div class="form-group"><button class="btn btn-primary border rounded-0" type="submit" style="font-weight: bold;background-color: rgb(0,33,87);">Send</button></div>
                     </div>
                 </div>
             </div>

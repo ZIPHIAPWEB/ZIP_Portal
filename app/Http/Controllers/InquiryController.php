@@ -10,26 +10,19 @@ class InquiryController extends Controller
 {
     public function submitInquiry(Request $request)
     {
-        $when = now()->addSeconds(10);
-
         $request->validate([
             'name'      =>  'required',
             'email'     =>  'required|email',
-            'subject'   =>  'required',
-            'message'   =>  'required|min:50'
+            'message'   =>  'required'
         ]);
 
         $data = [
             'name'      =>  $request->input('name'),
             'email'     =>  $request->input('email'),
-            'subject'   =>  $request->input('subject'),
             'message'   =>  $request->input('message')
         ];
-
-        Notification::route('mail', 'system@ziptravel.com.ph')->notify((new InquiryNotification($data))->delay($when));
-
-        return response()->json([
-            'message'   =>  'Inquiry has been sent!'
-        ]);
+        
+        Notification::route('mail', 'info@ziptravel.com.ph')->notify(new InquiryNotification($data));
+        return redirect()->back()->with('message', 'Inquiry Submitted!');
     }
 }
