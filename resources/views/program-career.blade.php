@@ -45,9 +45,9 @@
                 data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ url('/') }}">HOME</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link " href="{{ url('/') }}">HOME</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/about-us') }}">ABOUT US</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/our-programs') }}">OUR PROGRAMS</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ url('/our-programs') }}">OUR PROGRAMS</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/j1-cares') }}">J1 CARES</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/contact-us') }}">CONTACT US</a></li>
                     <li class="nav-item" role="presentation"><a href="{{ url('/auth/login') }}" class="btn btn-primary" style="background-color: #002157;border-radius: 10px;">JOIN US</a></li>                </ul>
