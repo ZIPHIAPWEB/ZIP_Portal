@@ -1,6 +1,14 @@
 <?php
 Route::view('/', 'welcome')->name('welcome');
-Route::view('/faqs', 'faqs')->name('faqs');
+Route::view('/about-us', 'about-us')->name('about-us');
+Route::view('/contact-us', 'contact-us')->name('contact_us');
+Route::view('/j1-cares', 'j1-cares')->name('j1');
+Route::view('/our-programs', 'our-programs')->name('our-programs');
+Route::view('/program-australian', 'program-australian')->name('program-australian');
+Route::view('/program-canada', 'program-canada')->name('program-canada');
+Route::view('/program-career', 'program-career')->name('program-career');
+Route::view('/program-internship', 'program-internship')->name('program-internship');
+Route::view('/program-swt', 'program-swt')->name('program-swt');
 
 Route::prefix('auth')->group(function() {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

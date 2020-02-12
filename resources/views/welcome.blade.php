@@ -3,369 +3,341 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ZIP</title>
-    <link rel="shortcut icon" href="{{ asset('logo.png') }}" type="image/x-icon"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ZIP Travel Philippines</title>
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:description" content="ZIP Travel is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges in the United States, Australia, and Canada.  As a global company, we have been in the business for over 27 years and have helped thousands of students worldwide obtain an opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State. ">
+    <meta name="twitter:image" content="{{ asset('assets/img/J1%20PROGRAMS-1.jpg') }}">
+    <meta name="description" content="ZIP Travel is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges in the United States, Australia, and Canada.  As a global company, we have been in the business for over 27 years and have helped thousands of students worldwide obtain an opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State. ">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ asset('assets/img/J1%20PROGRAMS-1.jpg') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ZIP Travel Philippines">
+    <link rel="icon" type="image/png" sizes="1944x1944" href="{{ asset('assets/img/LOGO_ZIP.png') }}">
+    <link rel="icon" type="image/png" sizes="1944x1944" href="{{ asset('assets/img/LOGO_ZIP.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome5-overrides.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
 </head>
 
 <body>
-<nav class="navbar navbar-light navbar-expand-lg fixed-top" style="padding:0;padding-top:16px;padding-bottom:16px;background-color:rgba(0,0,0,0.53);color:#000000;">
-    <div class="container"><a class="navbar-brand text-white" href="{{ route('welcome') }}" style="margin-left:0;font-weight:bold;">ZIP Travel Philippines</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div
-                class="collapse navbar-collapse flex-row-reverse" id="navcol-1">
-            <ul class="nav navbar-nav">
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#about" data-bs-hover-animate="pulse">ABOUT US</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#programs" data-bs-hover-animate="pulse">PROGRAMS</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active slide-section" href="#contact" data-bs-hover-animate="pulse">CONTACT</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white" href="{{ route('faqs') }}" data-bs-hover-animate="pulse">FAQS</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link text-white active btn btn-primary" href="{{ route('login') }}">JOIN US</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<header class="container v-header">
-    <div class="fullscreen-video-wrap"><video width="560" height="315" autoplay="" preload="auto" muted="" loop="">
-            <source src="{{ asset('assets/video/Sequence1.mp4') }}" type="video/mp4"></video>
-        <div class="header-overlay"></div>
-    </div>
-</header>
-<section id="about">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                <h2 class="text-center text-xl-left header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">ABOUT THE COMPANY</h2>
-                <p class="text-justify text-wrap" style="padding:0;margin:0px;margin-left:40px;margin-right:40px;">Zip Travel Philippines is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges and travels in the United States and in Australia.&nbsp;<br><br>As a global company,
-                    Zip Travel has been in the business for over twenty five (25) years and has helped thousands of students worldwide obtain the opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State.&nbsp;We
-                    have 4 offices in the Philippines with our main office located on Manila and branch offices in Cebu, Davao and Pampanga. We also have offices in Europe for European students and have offices in Tennessee, New York, California,
-                    Florida, South Carolina and Texas through our visa sponsors.&nbsp;<br><a class="btn btn-primary" role="button" href="#" style="background-color:rgb(6,20,89);margin-top:13px;margin-bottom:13px;"><strong>READ MORE</strong></a></p>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6" style="padding:0;">
-                <img src="{{ asset('assets/img/30547103_10209023119574526_1203608868_o.jpg') }}" data-bs-hover-animate="pulse" class="img-scale" style="background-size:cover;background-repeat:no-repeat;">
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section-gradient">
-    <div class="container-fluid" style="padding:0;">
-        <div class="row no-gutters">
-            <div class="col">
-                <h2 class="text-center text-xl-left text-white header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">INTERNATIONAL MEMBERSHIP</h2>
-                <div class="row" style="background-color:#ffffff;margin:44px;">
-                    <div class="col-xl-6">
-                        <p class="text-justify" style="margin:6px;padding:28px;margin-top:30px;">Zip Travel Philippines is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges and travels in the United States and in Australia.&nbsp;<br><br>As a global
-                            company, Zip Travel has been in the business for over twenty five (25) years and has helped thousands of students worldwide obtain the opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department
-                            of State.&nbsp;We have 4 offices in the Philippines with our main office located on Manila and branch offices in Cebu, Davao and Pampanga. We also have offices in Europe for European students and have offices in Tennessee,
-                            New York, California, Florida, South Carolina and Texas through our visa sponsors.&nbsp;<br><br></p>
-                    </div>
-                    <div class="col">
-                        <div class="row d-flex justify-content-center" style="padding:29px;">
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse" style="padding:0;"><img src="assets/img/4.png" width="150px" height="150px" style="width:50%;height:100%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/3.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/1024highup.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/5.png') }}" width="150px" height="150px" style="width:85%;height:94%;padding:12px;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/7.png') }}" width="150px" height="150px" style="width:112%;height:72%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/AAHHRM-logo-c.png') }}" width="150px" height="150px" style="width:50%;height:100%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/ASTD.png') }}" width="150px" height="150px" style="width:75%;height:60%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/iata.png') }}" width="150px" height="150px" style="width:100%;height:80%;"></div>
-                            <div class="col-lg-4 col-xl-4 d-flex justify-content-center align-items-center align-content-center" data-bs-hover-animate="pulse"
-                                 style="padding:0;"><img src="{{ asset('assets/img/8.png') }}" width="150px" height="150px" style="width:60%;height:105%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section style="width:100%;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center text-xl-left header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" style="margin:43px 0px 9px 40px">WHAT WE DO</h2>
-                <p class="text-justify" style="margin-left:40px;margin-right:40px;">Providing FIlipino students and those from other countries an inter-cultural opportunities to become familiar with company-specific and U.S technologies through U.S based training while obtaining a better understanding of one another
-                    and the world around them.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex flex-column justify-content-center align-items-center" style="padding:0;color:#040c32;background-color:#000347;">
-                <h2 class="text-uppercase text-center" style="color:rgb(250,250,252);padding:0;padding-top:40px;font-weight:bold;">25</h2>
-                <p class="text-center text-white" style="margin:0;padding-bottom:30px;">Years of Service</p>
-            </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex flex-column justify-content-center align-items-center align-content-center" style="padding:0;color:rgb(253,254,255);background-color:#07134f;">
-                <h2 class="text-uppercase text-center" style="padding:0;padding-top:40px;font-weight:bold;">50,000+</h2>
-                <p class="text-center" style="padding-bottom:30px;">Students and Alumni</p>
-            </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex flex-column justify-content-center align-items-center align-content-center" style="padding:0;background-color:#0a1c79;">
-                <h2 class="text-uppercase text-center" style="color:rgb(255,255,255);padding:0;padding-top:40px;font-weight:bold;">99.6%</h2>
-                <p class="text-center text-white" style="background-color:transparent;padding-bottom:30px;">Visa Approval Rate</p>
-            </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex flex-column justify-content-center align-items-center align-content-center" style="padding:0;background-color:#0d228e;">
-                <h2 class="text-uppercase text-center" style="color:rgb(255,255,255);padding:0;padding-top:40px;font-weight:bold;">38</h2>
-                <p class="text-center text-white" style="padding-bottom:30px;">States</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="programs" class="section-gradient" style="margin-top:20px;">
-    <div class="container-fluid" style="padding:0;">
-        <div class="row no-gutters">
-            <div class="col">
-                <h2 class="text-center text-xl-left text-white header-title" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">PROGRAMS</h2>
-            </div>
-        </div>
-        <div class="row no-gutters d-flex" style="margin-top:23px;">
-            <div class="col-12 d-flex flex-column justify-content-center align-self-baseline mx-auto">
-                <div class="row no-gutters d-flex">
-                    <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/spring.jpg') }});background-position:center;background-repeat:no-repeat;">
-                            <div class="media-body">
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>WORK TRAVEL PROGRAM - SPRING</strong></h6>
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>3 months (March - June)</em></h6>
-                                <p class="text-justify text-white">This program is for college and university students enrolled full time and pursuing studies at accredited academic institutions located outside the United States. They come to the United States to share their culture
-                                    and ideas with other people of the U.S. through temporary work and travel opportunities.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/summer.jpg') }});background-position:center;background-repeat:no-repeat;">
-                            <div class="media-body">
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>WORK TRAVEL PROGRAM - SUMMER</strong></h6>
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>3 months (May - August)</em></h6>
-                                <p class="text-justify text-white">This program is for college and university students enrolled full time and pursuing studies at accredited academic institutions located outside the United States. They come to the United States to share their culture
-                                    and ideas with other people of the U.S. through temporary work and travel opportunities.<br><br></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/intern.jpg') }});background-position:center;background-repeat:no-repeat;">
-                            <div class="media-body">
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>INTERNSHIP PROGRAM</strong></h6>
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>6 to 12 months (Year Round)</em></h6>
-                                <p class="text-justify text-white">These programs are designed to allow foreign college and university students or recent graduates to come to the United States to gain exposure to U.S. culture and to business practices in their chosen occupational field.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6 d-flex" data-aos="zoom-in-right" data-aos-once="true" style="padding:33px;">
-                        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center flex-sm-row justify-content-sm-start align-items-sm-start align-content-sm-start flex-md-row justify-content-md-start align-items-md-start align-content-md-start flex-lg-row justify-content-lg-start align-items-lg-start align-content-lg-start"><img class="rounded-circle mr-3" width="100px" height="100px" style="background-size:cover;background-image:url({{ asset('assets/img/career.jpg') }});background-position:center;background-repeat:no-repeat;">
-                            <div class="media-body">
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white"><strong>CAREER TRAINING PROGRAM</strong></h6>
-                                <h6 class="text-center text-sm-left text-md-left text-lg-left text-xl-left text-white" style="font-size:10px;"><em>12 months (Year Round)</em></h6>
-                                <p class="text-justify text-white">Training programs are designed to allow foreign professionals to come to the United States to gain exposure to U.S. culture and to receive training in U.S. business practices in their chosen.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="d-flex" style="min-height:324px;">
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col">
-                <h2 class="header-title">APPLICATION GUIDE</h2>
-                <div class="row" style="margin-top:25px;">
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 1</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/register.jpg') }});background-size:cover;background-position:center;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;margin-top:15px;">Register online at www.ziptravel.com.ph</p>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 2</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/orientation.jpeg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;margin-top:15px;">Program Orientation and Assessment</p>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 3</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/host_company.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;">U.S. Host Company Interview</p>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 4</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/j1_visa.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;margin-top:15px;">Processing of J1 Visa</p>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 5</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/preparation.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;margin-top:15px;">Preparation for Departure to U.S.A</p>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-4 col-lg-2 col-xl-2 d-flex flex-column justify-content-between align-items-center align-content-center">
-                        <h6 style="font-weight:bold;">Step 6</h6><img class="rounded-circle" width="100px" height="100px" data-aos="flip-right" data-aos-duration="1000" style="padding:0px;background-image:url({{ asset('assets/img/program_proper.jpg') }});background-position:center;background-size:cover;background-repeat:no-repeat;">
-                        <p
-                                class="text-center" style="font-size:13px;margin-top:15px;">Program Proper and Monitoring</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="carousel slide" data-ride="carousel" id="carousel-1" style="width:100%;height:auto;">
-    <div class="carousel-inner" role="listbox" style="background-image:url({{ asset('assets/img/zipbg.jpg') }});width:100%;height:519px;min-height:519px;">
-        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/30743876_1834799999874396_5398779036442820608_n.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
-            <div class="media-body">
-                <h5 class="text-center text-white"><strong>Jan Marc T. Cerezo</strong><br></h5>
-                <h6 class="text-center text-white" style="font-size:12px;">University of Baguio<br></h6>
-                <p class="text-center text-white">"This program helps every individual to get out of their shell. It would also help them show their talent. I highly recommend this program to everyone. It maybe difficult at first but trust me, you'll learn a lot and grow a lot
-                    and grow. Thanks ZIP Travel for the wonderful experience!"<br></p>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
-        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/29027763_2126204300737891_6969533389309214720_o.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
-            <div class="media-body">
-                <h5 class="text-center text-white"><strong>Rockney Ritz J. Roasa</strong><br></h5>
-                <h6 class="text-center text-white" style="font-size:12px;">University of Santo Tomas<br></h6>
-                <p class="text-center text-white">"To all aspiring and future Summer Work Travel participants, or maybe interns, I assure you that this program is really worth it. The application and the bills are just the beginning of the never ending fun and excitement when
-                    you get here in the United States. Most importantly, you shall never miss out the generosity of the United States of giving abundant life lessons. Take a huge leap of faith and reach your American dream!"<br></p>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
-        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/octavians.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
-            <div class="media-body">
-                <h5 class="text-center text-white"><strong>John Arrden Octaviano</strong><br></h5>
-                <h6 class="text-center text-white" style="font-size:12px;">PHINMA Araullo University<br></h6>
-                <p class="text-center text-white">"The experience was both fun and informative. Going to the country where you always dreamed of was definitely an achievement for me. I have gained new friends and made unforgettable memories."<br></p>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item" style="padding:100px 100px;margin-bottom:50px;">
-        <div class="media d-flex flex-column justify-content-center align-items-center align-content-center"><img class="rounded-circle thumbnail-border" width="150px" height="150px" style="background-image:url('assets/img/garcias.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
-            <div class="media-body">
-                <h5 class="text-center text-white"><strong>Gemuel Anthony O. Garcia</strong><br></h5>
-                <h6 class="text-center text-white" style="font-size:12px;">International School for Culinary Arts and Hotel Management<br></h6>
-                <p class="text-center text-white">"The program is good I learned a lot of things specially their culture.This is a great opportunity for other students to build the foundation of their career."<br></p>
-            </div>
-        </div>
-    </div>
-</div>
-<div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
-</div>
-<div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ziptravel+(ZIP%20Travel%20PH)&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div>
-<div
-        id="contact" class="footer-dark section-gradient">
-    <footer>
+    <div class="d-flex flex-row justify-content-xl-start align-items-xl-center top-bar-wrapper">
         <div class="container">
-            <div class="row no-gutters">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <h5 style="font-weight:bold;">CONTACT US</h5>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">MANILA OFFICE:</h5>
-                            <p style="font-size:12px;">2F 1985 C.M. Recto Avenue Sampaloc, Manila</p>
-                            <p style="font-size:12px;">(02)559-8213 | 0917-522-8213 | 0922-876-8213</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">DAVAO OFFICE:</h5>
-                            <p style="font-size:12px;">5F Metro Lifestyle Complex, F. Torres Street, Davao City</p>
-                            <p style="font-size:12px;">(082) 296-5941 | 0917-800-8213</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">CEBU OFFICE:</h5>
-                            <p style="font-size:12px;">Unit 216, Raintree Mall, 528 General Maxilom Avenue, Cebu City</p>
-                            <p style="font-size:12px;">(032)266-8840 | 0915-875-7618</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">PAMPANGA OFFICE:</h5>
-                            <p style="font-size:10px;">Unit 101-B Km 6 Green Fields Square Mac Arthur Highway Sindalan, San Fernando, Pampanga</p>
-                            <p style="font-size:12px;">0906-371-5897</p>
-                        </div>
-                        <div class="col-12">
-                            <div class="row no-gutters">
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-envelope-o" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">info@ziptravel.com.ph</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-facebook-square" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ZIP Travel Philippines</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-instagram" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ziptravelph</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-youtube-play" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ZIP Travel Philippines</h6>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col d-xl-flex">
+                    <h6 class="text-white align-items-xl-center">YOUR JOURNEY STARTS HERE!</h6>
+                </div>
+                <div class="col d-inline-flex justify-content-center align-items-center justify-content-sm-end justify-content-md-end align-items-md-center justify-content-lg-end align-items-lg-center justify-content-xl-end align-items-xl-center"><a href="https://www.facebook.com/ZipTravelPhilippines/" style="margin: 0px 5px;" target="_blank"><i class="fab fa-facebook-square mr-1 text-white"></i></a><a href="https://www.instagram.com/ziptravelph/" style="margin: 0px 5px;" target="_blank"><i class="fab fa-instagram mr-1 text-white"></i></a>
+                    <a
+                        href="https://www.youtube.com/user/ablack2000" style="margin: 0 5px;" target="_blank"><i class="fab fa-youtube mr-1 text-white"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-light navbar-expand-lg sticky-top" style="background-color: rgba(247,249,251,0.81);z-index: 9999;">
+        <div class="container"><a class="navbar-brand" style="background-repeat: no-repeat;width: 88px;height: 40px;background-image: url(&quot;assets/img/Zip%20Logo%20High%20Reso-01.png&quot;);background-position: center;background-size: cover;" href="{{ url('/') }}"></a><button data-toggle="collapse" class="navbar-toggler"
+                data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ url('/') }}">HOME</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/about-us') }}">ABOUT US</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/our-programs') }}">OUR PROGRAMS</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/j1-cares') }}">J1 CARES</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{ url('/contact-us') }}">CONTACT US</a></li>
+                    <li class="nav-item" role="presentation"><button class="btn btn-primary" type="button" style="background-color: #002157;border-radius: 10px;">JOIN US</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="carousel slide carousel-fade" data-ride="carousel" data-pause="false" data-keyboard="false" id="carousel-1">
+        <div class="carousel-inner header" role="listbox">
+            <div class="carousel-item active">
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/shutterstock_240592129blue-1.jpg&quot;);background-position: top;background-size: auto;background-repeat: no-repeat;display: flex;width: 100%;">
+                    <h1 class="text-center header-caption" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">STATUE OF LIBERTY</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue12.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">NIAGRA FALLS</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue7.jpg&quot;);background-size: cover;background-position: center;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLDEN GATE BRIDGE</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/COVER%204-1.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">THE&nbsp;WHITE HOUSE</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue10.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">MORAINE LAKE</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue9.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLD COAST</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue8.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">SYDNEY OPERA HOUSE</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue2.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GRAND CANYON</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue3.jpg&quot;);background-position: center;background-size: cover;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BROOKLYN BRIDGE</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue4.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BIG BEAN</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue5.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAS VEGAS</h1>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue6.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAKE TAHOE</h1>
+                </div>
+            </div>
+        </div>
+        <div class="invisible"><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+    </div>
+    <section class="d-sm-flex d-xl-flex justify-content-sm-center align-items-sm-center align-items-xl-center section">
+        <div class="container-fluid">
+            <div class="row" style="margin-bottom: 35px;">
+                <div class="col">
+                    <div>
+                        <h2 class="text-center" style="margin-bottom: 25px;font-weight: bold;">WHAT WE DO</h2>
+                        <p class="text-justify text-lg-center text-xl-center">We provide intercultural oppotunities to Filipino and foreign students to help them become familiar with U.S technologies through different types of U.S.-based training. We help them obtain a better understanding of one another
+                            and the world around them.</p>
                     </div>
                 </div>
-                <div id="inquiry" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left:17px;padding-right:17px;">
-                    <form @submit.prevent="SUBMIT_INQUIRY">
-                        <h5 style="font-weight:bold;">FOR INQUIRIES</h5>
-                        <div class="form-group"><input v-model="inquiry.name" class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);"></div>
-                        <div class="form-group"><input v-model="inquiry.email" class="form-control form-control-sm" type="email" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);"></div>
-                        <div class="form-group"><input v-model="inquiry.subject" class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);"></div>
-                        <div class="form-group"><textarea v-model="inquiry.message" class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea></div>
-                        <div class="form-group d-flex flex-row-reverse"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
-                    </form>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <div class="what-we-do-item"><img src="{{ asset('assets/img/customer.png') }}">
+                        <p>27 Years of Service</p>
+                    </div>
                 </div>
-                <div class="col-12">
-                    <div class="row no-gutters">
-                        <div class="col d-flex justify-content-start align-items-center align-content-center" style="margin-top:25px;">
-                            <h6 style="margin-bottom:0px;font-size:10px;">@ {{ date('Y') }} Zip Travel PH</h6>
+                <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <div class="what-we-do-item"><img src="{{ asset('assets/img/team-leader.png') }}">
+                        <p>54,570+ Students and Alumni</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <div class="what-we-do-item"><img src="{{ asset('assets/img/ZIP%20Resume%20Template%20(2).png') }}">
+                        <p>High Visa Approval Rate</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <div class="what-we-do-item"><img src="{{ asset('assets/img/usa-flag.png') }}">
+                        <p>38 States of Assignment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="d-flex d-xl-flex align-items-xl-center section-with-image" data-bs-parallax-bg="true" style="background-image: url(&quot;assets/img/HOMEPAFE%20-%20ABOUT%20US-1.jpg&quot;);background-size: cover;background-position: center;background-repeat: no-repeat;">
+        <div class="container-fluid text-center text-xl-center">
+            <div class="about-us-wrapper">
+                <h2 class="text-center text-white">ABOUT US</h2>
+                <p class="text-justify text-lg-center text-xl-center text-white mb-4">ZIP Travel is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges in the United States, Australia, and Canada. &nbsp;As a global company, we have been in the business
+                    for over 27 years and have helped thousands of students worldwide obtain an opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State.&nbsp;<br></p>
+                <p class="text-justify text-lg-center text-xl-center text-white mb-4">ZIP Travel has four offices in the Philippines; Manila as our main office, Cebu, Davao, Bacolod, and Pampanga. We also have offices in Europe for European students in Tennessee, New York, California, Florida, South Carolina, and Texas
+                    through our visa sponsors.<br>
+                </p>    
+                <a href="{{ url('/about-us') }}" class="btn btn-outline-light border rounded-0 border-white">READ MORE</a>
+            </div>
+        </div>
+    </section>
+    <div class="carousel slide" data-ride="carousel" data-keyboard="false" id="carousel-2">
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active slide-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_MARRIOTT.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_COURTYARD.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_FAIRMONT.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HYATT.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_RENAISSANCE.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HOWARD.png') }}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item slide-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_GAYLORD.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_OMNI.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HILTON.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_JWMARRIOTT.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_FOURSEASONS.png') }}"></div>
+                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_MOHEGAN-1.png') }}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-2" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+    </div>
+    <div class="carousel slide d-flex d-xl-flex justify-content-center align-items-center align-items-xl-center testimonials-wrapper" data-ride="carousel" data-bs-parallax-bg="true" id="carousel-3" style="background-position: center;background-repeat: repeat;background-image: url(&quot;assets/img/ZIP%20BG.jpg&quot;);background-size: contain;">
+        <div class="carousel-inner d-xl-flex align-items-xl-center" role="listbox">
+            <div class="carousel-item active" id="moriones">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/GIAN.jpg') }}" alt="Testimonial Image" loading="lazy">
+                    <div class="testi-details">
+                        <div class="container">
+                            <h3 class="text-white">Gian Carlo Moriones<br></h3><small class="text-white mb-3">University of Santo Tomas<br></small>
+                            <p class="text-white">"As a recent graduate about to enter the hospitality scene, I knew that I needed more working experience to be able to confidently fulfill my future role in the industry. I decided to participate in an international internship
+                                program because I knew that it would give me the opportunity to learn directly from culinary and industry experts who would help me to further develop and sharpen the skills that I need to possess in order to become a more
+                                effective and efficient hospitality professional.<br></p>
+                            <p class="text-white">From the initial assessment to the visa application interview, the Zip Travel Philippines team has always been accomodating, transparent, and responsive. Not only did they deal with us professionally, but I feel as though I
+                                have become a part of their ever-growing family.<br></p>
+                            <p class="text-white">Zip Travel Philippines stays true to their promise: Your Journey Starts Here - as mine will soon begin. I want to express my deepest gratitude to the whole team for their guidance and support!"<br></p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="carousel-item" id="villaraza">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/villaraza.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                    <div class="testi-details">
+                        <h3 class="text-white">Kai Cruz Villaraza<br></h3><small class="text-white">Holy Angel University<br></small>
+                        <p class="text-white">"In two weeks time I will be flying to Austin, Texas for my internship. Thank you Zip for making this possible and most especially, big thanks to Miss Mj, Miss Lyka, Miss Leny and Miss Frezielle for all the guidance and help throughout
+                            the application process. I will surely learn and experience a lot from this. Can't wait to see what USA has to offer. Again , Thank you!"<br></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="paningbatan">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/paningbatan.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                    <div class="testi-details">
+                        <div class="container">
+                            <h3 class="text-white">Benlue Paningbatan<br></h3><small class="text-white">University of Santo Tomas<br></small>
+                            <p class="text-white">"Definitely a 10/10! Excellent assistance and they process everything quickly. Efficient and highly recommended."<br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="blessy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/blessy.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                    <div class="testi-details">
+                        <div class="container">
+                            <h3 class="text-white">Blessy Vil Rojas<br></h3><small class="text-white">University of Santo Tomas<br></small>
+                            <p class="text-white">"Zip Travel provides good opportunity for students and young professionals alike to practice their own careers in a globally competitive scale. It has helped me prepare for future steps in my career and I hope you find his
+                                as an encouragement to not be afraid to take big steps that would be beneficial for your own career."<br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="herbon">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/DEXTER.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                    <div class="testi-details">
+                        <div class="container">
+                            <h3 class="text-white">Dexter Herbon<br></h3><small class="text-white">Our Lady of Fatima University<br></small>
+                            <p class="text-white">“ZIP Travel helps me a lot in terms of processing my documents for my internship. They're very accommodating and hands on. Luckily, I passed my visa interview, now i can experience American Culture by the help of ZIP Travel
+                                Ph.”<br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="robles">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/73304978_10213952756566512_4325282334816337920_o.jpg') }}">
+                    <div class="testi-details">
+                        <div class="container">
+                            <h3 class="text-white">Con Robles<br></h3><small class="text-white">University of Santo Tomas<br></small>
+                            <p class="text-white">“ZIP Travel has been very concerned and open to the needs of their intern. From the start of processing the documents even up to the day before the visa interview, they have always been by our sides, guiding us to the right
+                                track. Thank you ZIP! ♥️”<br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><a class="carousel-control-prev" href="#carousel-3" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-3" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+        <ol
+            class="carousel-indicators">
+            <li data-target="#carousel-3" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-3" data-slide-to="1"></li>
+            <li data-target="#carousel-3" data-slide-to="2"></li>
+            <li data-target="#carousel-3" data-slide-to="3"></li>
+            <li data-target="#carousel-3" data-slide-to="4"></li>
+            <li data-target="#carousel-3" data-slide-to="5"></li>
+            </ol>
+    </div>
+    <footer class="footer-theme">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h6>MANILA OFFICE</h6>
+                    <ul>
+                        <li><a href="#">2F University Center Building, 1985 C.M. Recto Avenue, Manila, 1008</a></li>
+                        <li><a href="#">(02)559-8213 | (02)559-8213 | 0917-522-8213</a></li>
+                    </ul>
+                </div>
+                <div class="col text-justify">
+                    <h6>PAMPANGA OFFICE</h6>
+                    <ul>
+                        <li><a href="#">Unit 101-B Km 6 Green Fields Square Mac Arthur Highway Sindalan, San Fernando, Pampanga</a></li>
+                        <li><a href="#">0906-371-5897 | 0922-876-8213</a></li>
+                    </ul>
+                </div>
+                <div class="col text-justify">
+                    <h6>BACOLOD&nbsp;OFFICE</h6>
+                    <ul>
+                        <li>Jaunts and Journeys Travel Centre - Rm. 103. VSB Bldg. 6th Lacson St. Bacolod City</li>
+                        <li><a href="#">0915-315-2838 | 0967-243-2499</a></li>
+                    </ul>
+                </div>
+                <div class="col text-justify">
+                    <h6>CEBU OFFICE</h6>
+                    <ul>
+                        <li>Unit 216, Raintree Mall, 528 General Maxilom Avenue, Cebu City</li>
+                        <li><a href="#">(032)266-8840 | 0915-875-7618</a></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="col text-justify">
+                    <h6>DAVAO&nbsp;OFFICE</h6>
+                    <ul>
+                        <li><a href="#">5F Metro Lifestyle Complex F. Torres Street, Davao City</a></li>
+                        <li>(082)2965941 | 0917-800-8213</li>
+                    </ul>
+                </div>
+                <div class="col-xl-12">
+                    <div class="text-center" style="margin: 10px;"><a href="#" style="margin: 10px;"><i class="fa fa-facebook" style="font-size: 15px;"></i></a><a href="#" style="margin: 10px;"><i class="fa fa-instagram" style="font-size: 15px;"></i></a><a href="#" style="margin: 10px;"><i class="fa fa-youtube-play" style="font-size: 15px;"></i></a></div>
+                </div>
+                <div class="col-xl-12 d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <ul class="list-inline" style="margin: 0;">
+                        <li class="list-inline-item" style="margin: 0;"><a href="https://hospitalityinstituteofamerica.com.ph" target="_blank">Hospitality Insititute of America-Philippines |</a></li>
+                        <li class="list-inline-item" style="margin: 0;"><a href="https://cfo.gov.ph/" target="_blank">Commission on Filipino Overseas |</a></li>
+                        <li class="list-inline-item" style="margin: 0;"><a href="https://j1visa.state.gov/" target="_blank">J-1 Visa |</a></li>
+                        <li class="list-inline-item"><a href="https://acepp.ph/public/" target="_blank">ACEPP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 justify-content-xl-center align-items-xl-center">
+            <p>ZIP Travel @ 2020</p>
         </div>
     </footer>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-<script src="{{ asset('assets/js/script.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script type="text/javascript">
-    const inquiry = new Vue({
-        el: '#inquiry',
-        data: {
-            inquiry: {
-                name: '',
-                email: '',
-                subject: '',
-                message: ''
-            }
-        },
-        methods: {
-            SUBMIT_INQUIRY: function () {
-                let formData = new FormData();
-                formData.append('name', this.inquiry.name);
-                formData.append('email', this.inquiry.email);
-                formData.append('subject', this.inquiry.subject);
-                formData.append('message', this.inquiry.message);
-
-                axios.post('/submitInquiry', formData)
-                    .then((response) => {
-                        this.inquiry.name = '';
-                        this.inquiry.email = '';
-                        this.inquiry.subject = '';
-                        this.inquiry.message = '';
-
-                        alert(response.data.message);
-                    })
-                    .catch(function (error) {
-                        console.log(error['errors']);
-                    })
-            }
-        }
-    })
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+    <script src="{{ asset('assets/js/script.min.js') }}"></script>
 </body>
 
 </html>
