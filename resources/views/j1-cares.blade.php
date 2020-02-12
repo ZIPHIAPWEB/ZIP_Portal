@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-light navbar-expand-lg sticky-top" style="background-color: rgba(247,249,251,0.81);z-index: 9999;">
+    <nav class="navbar navbar-light navbar-expand-lg sticky-top" style="background-color: rgba(247,249,251,0.81);z-index: 999;">
         <div class="container"><a class="navbar-brand" style="background-repeat: no-repeat;width: 88px;height: 40px;background-image: url(&quot;assets/img/Zip%20Logo%20High%20Reso-01.png&quot;);background-position: center;background-size: cover;" href="{{ url('/') }}"></a><button data-toggle="collapse" class="navbar-toggler"
                 data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -132,7 +132,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+    <div style="z-index: 9999;" class="modal fade" role="dialog" tabindex="-1" id="modal-1">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+    <div style="z-index: 9999;" class="modal fade" role="dialog" tabindex="-1" id="modal-2">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,7 +172,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modal-3">
+    <div style="z-index: 9999;" class="modal fade" role="dialog" tabindex="-1" id="modal-3">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -191,7 +191,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modal-4">
+    <div style="z-index: 9999;" class="modal fade" role="dialog" tabindex="-1" id="modal-4">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -208,7 +208,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="modal-5">
+    <div style="z-index: 9999;" class="modal fade" role="dialog" tabindex="-1" id="modal-5">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
