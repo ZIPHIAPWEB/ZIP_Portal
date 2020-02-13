@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
                     <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img src="assets/img/team%20(2).png" width="120px">
-                        <h6 class="text-center text-white mt-3">Must have a minimum of six months work experience</h6>
+                        <h6 class="text-center text-white mt-3">Must have a minimum of 12 months work experience</h6>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
