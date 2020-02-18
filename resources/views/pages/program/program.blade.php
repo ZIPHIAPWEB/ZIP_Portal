@@ -1094,6 +1094,10 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1165,6 +1169,10 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1236,6 +1244,10 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1307,6 +1319,10 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
                                                         </select>
                                                     </div>
                                                 </td>
