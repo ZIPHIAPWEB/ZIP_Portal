@@ -1097,7 +1097,11 @@
                                                             <option value="Alaska Airlines">Alaska Airlines</option>
                                                             <option value="Korean Air">Korean Air</option>
                                                             <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1172,7 +1176,11 @@
                                                             <option value="Alaska Airlines">Alaska Airlines</option>
                                                             <option value="Korean Air">Korean Air</option>
                                                             <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1247,7 +1255,11 @@
                                                             <option value="Alaska Airlines">Alaska Airlines</option>
                                                             <option value="Korean Air">Korean Air</option>
                                                             <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1322,7 +1334,11 @@
                                                             <option value="Alaska Airlines">Alaska Airlines</option>
                                                             <option value="Korean Air">Korean Air</option>
                                                             <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                            <option value="AirAsia">Jetstar Japan Co Ltd</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
