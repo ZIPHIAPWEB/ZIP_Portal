@@ -90,63 +90,63 @@ theme_color="#1b2754">
     <div class="carousel slide carousel-fade" data-ride="carousel" data-pause="false" data-keyboard="false" id="carousel-1">
         <div class="carousel-inner header" role="listbox">
             <div class="carousel-item active">
-                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/shutterstock_240592129blue-1.jpg&quot;);background-position: top;background-size: auto;background-repeat: no-repeat;display: flex;width: 100%;">
-                    <h1 class="text-center header-caption" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">STATUE OF LIBERTY</h1>
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/shutterstock_240592129blue-1.jpg&quot;);background-position: top;background-size: auto;background-repeat: no-repeat;display: flex;width: 100%;">
+                    <h1 class="text-center header-caption" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">STATUE OF LIBERTY</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue12.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">NIAGRA FALLS</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue12.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">NIAGRA FALLS</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue7.jpg&quot;);background-size: cover;background-position: center;display: flex;width: 100%;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLDEN GATE BRIDGE</h1>
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue7.jpg&quot;);background-size: cover;background-position: center;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLDEN GATE BRIDGE</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/COVER%204-1.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">THE&nbsp;WHITE HOUSE</h1>
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/COVER%204-1.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">THE&nbsp;WHITE HOUSE</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue10.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">MORAINE LAKE</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue10.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">MORAINE LAKE</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue9.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLD COAST</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue9.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GOLD COAST</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue8.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">SYDNEY OPERA HOUSE</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue8.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">SYDNEY OPERA HOUSE</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue2.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GRAND CANYON</h1>
+                <div class="d-xl-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue2.jpg&quot;);background-position: center;background-size: cover;display: flex;width: 100%;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">GRAND CANYON</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue3.jpg&quot;);background-position: center;background-size: cover;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BROOKLYN BRIDGE</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue3.jpg&quot;);background-position: center;background-size: cover;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BROOKLYN BRIDGE</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue4.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BIG BEAN</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue4.jpg&quot;);background-position: bottom;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">BIG BEAN</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue5.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAS VEGAS</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue5.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAS VEGAS</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex justify-content-center align-items-center justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end header" style="background-image: url(&quot;assets/img/blue6.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
-                    <h1 class="text-center" style="margin-right: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAKE TAHOE</h1>
+                <div class="d-flex justify-content-center align-items-center justify-content-md-start align-items-md-end justify-content-xl-start align-items-xl-end header" style="background-image: url(&quot;assets/img/blue6.jpg&quot;);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                    <h1 class="text-center" style="margin-left: 20px;font-weight: bold;color: rgb(255,255,255);margin-bottom: 20px;">LAKE TAHOE</h1>
                 </div>
             </div>
         </div>
