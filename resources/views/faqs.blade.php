@@ -17,6 +17,30 @@
 </head>
 
 <body style="font-family:Montserrat, sans-serif;">
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v6.0'
+        });
+      };
+
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat"
+      attribution=setup_tool
+      page_id="156024204415228"
+theme_color="#1b2754">
+    </div>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top" style="padding:0;padding-top:16px;padding-bottom:16px;background-color:rgba(0,0,0,0.53);color:#000000;">
     <div class="container"><a class="navbar-brand text-white" href="index.html" style="margin-left:0;font-weight:bold;">ZIP Travel Philippines</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div

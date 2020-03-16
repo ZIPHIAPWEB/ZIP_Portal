@@ -382,7 +382,7 @@ Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->nam
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
 Route::get('/test', function () {
-    $password = bcrypt("MikeLaurencePadilla");
+    $password = bcrypt("Kenthrocks5000!");
 
     return $password;
 });
