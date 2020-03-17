@@ -95,7 +95,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="row" style="padding: 16px;">
-                <div class="col-xl-6" style="padding: 15px;"><img src="assets/img/MANILA.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Manila Branch" src="assets/img/MANILA.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Manila Office</h3>
@@ -114,7 +114,7 @@ theme_color="#1b2754">
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-6" style="padding: 15px;"><img src="assets/img/PAMPANGA.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Pampanga Branch" src="assets/img/PAMPANGA.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Pampanga Office</h3>
@@ -133,7 +133,7 @@ theme_color="#1b2754">
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-6" style="padding: 15px;"><img src="assets/img/CEBU.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines CEBU Branch" src="assets/img/CEBU.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Cebu Office</h3>
@@ -152,7 +152,7 @@ theme_color="#1b2754">
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-6" style="padding: 15px;"><img src="assets/img/BACOLOD.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines BACOLOD Branch" src="assets/img/BACOLOD.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Bacolod Office</h3>
@@ -171,7 +171,7 @@ theme_color="#1b2754">
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-6" style="padding: 15px;"><img src="assets/img/DAVAO.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines DAVAO Branch" src="assets/img/DAVAO.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Davao Office</h3>

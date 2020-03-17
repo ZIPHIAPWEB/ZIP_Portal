@@ -142,8 +142,15 @@ theme_color="#1b2754">
         <div class="container-fluid">
             <p class="text-left">Other affiliations:</p>
             <div class="row justify-content-center">
-                <div class="col-auto col-sm-12 col-md-4 col-lg-auto col-xl-auto text-center d-xl-flex justify-content-xl-center align-items-xl-center"><img class="membership-logo" src="assets/img/HIAP.png"><img class="membership-logo" src="assets/img/LOGO_ACEPP.png"><img class="membership-logo" src="assets/img/LOGO_EMBASSY.png"><img class="membership-logo" src="assets/img/LOGO_CFO.png"><img class="membership-logo"
-                        src="assets/img/LOGO_AAHRMEI.png"><img class="membership-logo" src="assets/img/LOGO_WORK.png"><img class="membership-logo" src="assets/img/LOGO_WYSETRAVEL.png"></div>
+                <div class="col-auto col-sm-12 col-md-4 col-lg-auto col-xl-auto text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+                    <img alt="Image containing the logo of Hospitality Institute of America-Philippines" class="membership-logo" src="assets/img/HIAP.png">
+                    <img alt="Image containing the logo of Alliance of Cultural Exchange Providers in the Philippines" class="membership-logo" src="assets/img/LOGO_ACEPP.png">
+                    <img alt="Image containing the logo of United States of America Embassy" class="membership-logo" src="assets/img/LOGO_EMBASSY.png">
+                    <img alt="Image containing the logo of Commission on Filipino Overseas" class="membership-logo" src="assets/img/LOGO_CFO.png">
+                    <img alt="Image containing the logo of Association of Administrators in Hospitality Hotel and Restaurant Management Educational Institution" class="membership-logo" src="assets/img/LOGO_AAHRMEI.png">
+                    <img alt="Image containing the logo of WYSE work and volunteer abroad" class="membership-logo" src="assets/img/LOGO_WORK.png">
+                    <img alt="Image containing the logo of WYSE Travel Organization" class="membership-logo" src="assets/img/LOGO_WYSETRAVEL.png">
+                </div>
             </div>
         </div>
     </section>

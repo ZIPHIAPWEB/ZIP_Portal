@@ -103,17 +103,17 @@ theme_color="#1b2754">
             </div>
             <div class="row mt-3">
                 <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="z-card"><img src="assets/img/plus-18-movie.png">
+                    <div class="z-card"><img alt="Image containing a circle with a number 18 in the center and a plus sign on the top" src="assets/img/plus-18-movie.png">
                         <p class="text-white" style="margin-top: 15px;">Must be at least 18 years old</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="z-card"><img src="assets/img/student.png" width="120px">
+                    <div class="z-card"><img alt="Image containing a diploma with white shade" src="assets/img/student.png" width="120px">
                         <p class="text-white" style="margin-top: 15px;">Must be a first, second, or third year college student</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="z-card"><img src="assets/img/man.png" width="120px">
+                    <div class="z-card"><img alt="Image containing three iconize person having a conversation on a table" src="assets/img/man.png" width="120px">
                         <p class="text-white" style="margin-top: 15px;">Must be able to interact in an English speaking environment</p>
                     </div>
                 </div>

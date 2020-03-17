@@ -105,17 +105,17 @@ theme_color="#1b2754">
             </div>
             <div class="row mt-3">
                 <div class="col-sm-12 col-md-4 col-xl-4">
-                    <div class="z-card"><img src="assets/img/plus-18-movie.png" width="120px">
+                    <div class="z-card"><img alt="Image containing a circle with a number 18 in the center and a plus sign on the top" src="assets/img/plus-18-movie.png" width="120px">
                         <p class="text-white">Must be 18 to 26 years old</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-4">
-                    <div class="z-card"><img src="assets/img/graduation.png" width="120px">
+                    <div class="z-card"><img alt="Image containing a diploma with white shade" src="assets/img/graduation.png" width="120px">
                         <p class="text-white">Must be a graduate of any course for not more than 12 months<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-4">
-                    <div class="z-card"><img src="assets/img/man.png" width="120px">
+                    <div class="z-card"><img alt="Image containing three iconize person having a conversation on a table" src="assets/img/man.png" width="120px">
                         <p class="text-white">Must be able to interact in an English speaking environment<br></p>
                     </div>
                 </div>

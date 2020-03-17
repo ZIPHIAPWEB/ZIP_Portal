@@ -165,22 +165,22 @@ theme_color="#1b2754">
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="what-we-do-item"><img src="{{ asset('assets/img/customer.png') }}">
+                    <div class="what-we-do-item"><img alt="An image with a hand with user icon on the top of it" src="{{ asset('assets/img/customer.png') }}">
                         <p>27 Years of Service</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="what-we-do-item"><img src="{{ asset('assets/img/team-leader.png') }}">
+                    <div class="what-we-do-item"><img alt="An image with a group of 5 people with black shade" src="{{ asset('assets/img/team-leader.png') }}">
                         <p>54,570+ Students and Alumni</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="what-we-do-item"><img src="{{ asset('assets/img/ZIP%20Resume%20Template%20(2).png') }}">
+                    <div class="what-we-do-item"><img alt="An image with Hand with a line graph pointing up and shaded black" src="{{ asset('assets/img/ZIP%20Resume%20Template%20(2).png') }}">
                         <p>High Visa Approval Rate</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="what-we-do-item"><img src="{{ asset('assets/img/usa-flag.png') }}">
+                    <div class="what-we-do-item"><img alt="Iconized image of flag of the United States of America"src="{{ asset('assets/img/usa-flag.png') }}">
                         <p>38 States of Assignment</p>
                     </div>
                 </div>
@@ -205,24 +205,24 @@ theme_color="#1b2754">
             <div class="carousel-item active slide-content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_MARRIOTT.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_COURTYARD.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_FAIRMONT.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HYATT.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_RENAISSANCE.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HOWARD.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Marriott Hotels, Resorts, and Suites" src="{{ asset('assets/img/LOGO_MARRIOTT.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Marriott Courtyard" src="{{ asset('assets/img/LOGO_COURTYARD.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Fairmont Hotels and Resorts" src="{{ asset('assets/img/LOGO_FAIRMONT.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Hyatt Hotels and Resorts" src="{{ asset('assets/img/LOGO_HYATT.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Renaissance Hotels" src="{{ asset('assets/img/LOGO_RENAISSANCE.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Howard Hospitality" src="{{ asset('assets/img/LOGO_HOWARD.png') }}"></div>
                     </div>
                 </div>
             </div>
             <div class="carousel-item slide-content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_GAYLORD.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_OMNI.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_HILTON.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_JWMARRIOTT.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_FOURSEASONS.png') }}"></div>
-                        <div class="col text-center img-container"><img src="{{ asset('assets/img/LOGO_MOHEGAN-1.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Gaylord Hotels" src="{{ asset('assets/img/LOGO_GAYLORD.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Omni Hotels and Resorts" src="{{ asset('assets/img/LOGO_OMNI.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Hilton" src="{{ asset('assets/img/LOGO_HILTON.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of JW Marriott" src="{{ asset('assets/img/LOGO_JWMARRIOTT.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Four Seasons Hotels and Resorts" src="{{ asset('assets/img/LOGO_FOURSEASONS.png') }}"></div>
+                        <div class="col text-center img-container"><img alt="Logo of Mohegan Sun" src="{{ asset('assets/img/LOGO_MOHEGAN-1.png') }}"></div>
                     </div>
                 </div>
             </div>
@@ -232,7 +232,7 @@ theme_color="#1b2754">
     <div class="carousel slide d-flex d-xl-flex justify-content-center align-items-center align-items-xl-center testimonials-wrapper" data-ride="carousel" data-bs-parallax-bg="true" id="carousel-3" style="background-position: center;background-repeat: repeat;background-image: url(&quot;assets/img/ZIP%20BG.jpg&quot;);background-size: contain;">
         <div class="carousel-inner d-xl-flex align-items-xl-center" role="listbox">
             <div class="carousel-item active" id="moriones">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/GIAN.jpg') }}" alt="Testimonial Image" loading="lazy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/GIAN.jpg') }}" alt="J1 Testimonial Image" loading="lazy">
                     <div class="testi-details">
                         <div class="container">
                             <h3 class="text-white">Gian Carlo Moriones<br></h3><small class="text-white mb-3">University of Santo Tomas<br></small>
@@ -247,7 +247,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="carousel-item" id="villaraza">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/villaraza.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/villaraza.jpg') }}" width="150px" alt="J1 Testimonial Image" loading="lazy">
                     <div class="testi-details">
                         <h3 class="text-white">Kai Cruz Villaraza<br></h3><small class="text-white">Holy Angel University<br></small>
                         <p class="text-white">"In two weeks time I will be flying to Austin, Texas for my internship. Thank you Zip for making this possible and most especially, big thanks to Miss Mj, Miss Lyka, Miss Leny and Miss Frezielle for all the guidance and help throughout
@@ -256,7 +256,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="carousel-item" id="paningbatan">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/paningbatan.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/paningbatan.jpg') }}" width="150px" alt="J1 Testimonial Image" loading="lazy">
                     <div class="testi-details">
                         <div class="container">
                             <h3 class="text-white">Benlue Paningbatan<br></h3><small class="text-white">University of Santo Tomas<br></small>
@@ -266,7 +266,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="carousel-item" id="blessy">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/blessy.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/blessy.jpg') }}" width="150px" alt="J1 Testimonial Image" loading="lazy">
                     <div class="testi-details">
                         <div class="container">
                             <h3 class="text-white">Blessy Vil Rojas<br></h3><small class="text-white">University of Santo Tomas<br></small>
@@ -277,7 +277,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="carousel-item" id="herbon">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/DEXTER.jpg') }}" width="150px" alt="Testimonial Image" loading="lazy">
+                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/DEXTER.jpg') }}" width="150px" alt="J1 Testimonial Image" loading="lazy">
                     <div class="testi-details">
                         <div class="container">
                             <h3 class="text-white">Dexter Herbon<br></h3><small class="text-white">Our Lady of Fatima University<br></small>
@@ -288,7 +288,7 @@ theme_color="#1b2754">
                 </div>
             </div>
             <div class="carousel-item" id="robles">
-                <div class="text-center testimonials m-5"><img class="rounded-circle img-fluid" src="{{ asset('assets/img/73304978_10213952756566512_4325282334816337920_o.jpg') }}">
+                <div class="text-center testimonials m-5"><img alt="J1 Testimonial Image" class="rounded-circle img-fluid" src="{{ asset('assets/img/73304978_10213952756566512_4325282334816337920_o.jpg') }}">
                     <div class="testi-details">
                         <div class="container">
                             <h3 class="text-white">Con Robles<br></h3><small class="text-white">University of Santo Tomas<br></small>

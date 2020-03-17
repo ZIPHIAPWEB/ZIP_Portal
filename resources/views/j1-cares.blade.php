@@ -95,7 +95,7 @@ theme_color="#1b2754">
                     <p class="text-justify section-text">The J1 Alumni, in cooperation with ZIP Travel Philippines, formed a foundation in 2013 called “J1-Connecting Alumni through Reliable and Efficient Service to the Community Foundation" (J1 CARES). J1 CARES aims to give back and share
                         blessings with other people through annual charity programs and activities.<br></p>
                 </div>
-                <div class="col-lg-6 col-xl-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center"><img src="assets/img/561%20(1).png" width="250px"></div>
+                <div class="col-lg-6 col-xl-3 text-center d-xl-flex justify-content-xl-center align-items-xl-center"><img alt="Image containing the logo of J1 CARES" src="assets/img/561%20(1).png" width="250px"></div>
             </div>
         </div>
     </section>
@@ -130,27 +130,27 @@ theme_color="#1b2754">
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="outreach-item"><img data-bs-hover-animate="pulse" src="assets/img/j1%202014.jpg"><a data-toggle="modal" data-target="#modal-3" href="#">Giving is Caring</a>
+                                        <div class="outreach-item"><img alt="Outreach Program Image" data-bs-hover-animate="pulse" src="assets/img/j1%202014.jpg"><a data-toggle="modal" data-target="#modal-3" href="#">Giving is Caring</a>
                                             <p class="text-center">December&nbsp;2014 | St. Ezekiel Moreno Hall</p>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="outreach-item"><img data-bs-hover-animate="pulse" src="assets/img/j1%202015.jpg"><a data-toggle="modal" data-target="#modal-2" href="#">Caring the J1 Way</a>
+                                        <div class="outreach-item"><img alt="Outreach Program Image" data-bs-hover-animate="pulse" src="assets/img/j1%202015.jpg"><a data-toggle="modal" data-target="#modal-2" href="#">Caring the J1 Way</a>
                                             <p class="text-center">December 2015 | Hospicio De San Jose Elderly Home</p>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="outreach-item"><img data-bs-hover-animate="pulse" src="assets/img/j1%202016%2012.jpg"><a data-toggle="modal" data-target="#modal-1" href="#">Happy Child, Happy Life</a>
+                                        <div class="outreach-item"><img alt="Outreach Program Image" data-bs-hover-animate="pulse" src="assets/img/j1%202016%2012.jpg"><a data-toggle="modal" data-target="#modal-1" href="#">Happy Child, Happy Life</a>
                                             <p class="text-center">August 2016 | Virlanie Children’s Home</p>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="outreach-item"><img data-bs-hover-animate="pulse" src="assets/img/j1%202017.jpg"><a data-toggle="modal" data-target="#modal-4" href="#">Cares on the Road</a>
+                                        <div class="outreach-item"><img alt="Outreach Program Image" data-bs-hover-animate="pulse" src="assets/img/j1%202017.jpg"><a data-toggle="modal" data-target="#modal-4" href="#">Cares on the Road</a>
                                             <p class="text-center">December 2017 | Streets of Manila</p>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="outreach-item"><img data-bs-hover-animate="pulse" src="assets/img/j1%202018.jpg"><a data-toggle="modal" data-target="#modal-5" href="#">Groove to Care: Dance for a Cause</a>
+                                        <div class="outreach-item"><img alt="Outreach Program Image" data-bs-hover-animate="pulse" src="assets/img/j1%202018.jpg"><a data-toggle="modal" data-target="#modal-5" href="#">Groove to Care: Dance for a Cause</a>
                                             <p class="text-center">February 2018 | Dapitan Sports Complex</p>
                                         </div>
                                     </div>

@@ -106,22 +106,22 @@ theme_color="#1b2754">
             </div>
             <div class="row mt-3">
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
-                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img src="assets/img/plus-18-movie.png" width="120px">
+                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img alt="Image containing a circle with a number 18 in the center and a plus sign on the top" src="assets/img/plus-18-movie.png" width="120px">
                         <h6 class="text-center text-white mt-3">18 to 28 years old</h6>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
-                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img src="assets/img/chef.png" width="120px">
+                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img alt="Image containing a chef's hat and a cross-spoons" src="assets/img/chef.png" width="120px">
                         <h6 class="text-center text-white mt-3">Must be a graduate of hospitality or culinary course for not more than 18 months</h6>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
-                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img src="assets/img/team.png" width="120px">
+                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img alt="Image containing a handshake with three people behind" src="assets/img/team.png" width="120px">
                         <h6 class="text-center text-white mt-3">Must have a minimum of 12 months work experience</h6>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
-                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img src="assets/img/man.png" width="120px">
+                    <div class="d-xl-flex flex-column justify-content-xl-center align-items-xl-center z-card"><img alt="Image containing three iconize person having a conversation on a table" src="assets/img/man.png" width="120px">
                         <h6 class="text-center text-white mt-3">Must be able to speak in an English speaking environment</h6>
                     </div>
                 </div>

@@ -141,32 +141,32 @@ theme_color="#1b2754">
             </div>
             <div class="row mt-4">
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE1b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containing an orientation at ZIP Travel Philippines Office with a color blue overlay" src="assets/img/APPGUIDE1b.png">
                         <p class="text-center guide-title">Program Orientation and Assessment<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE2b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containing a laptop on the desk viewing the website of ZIP Travel Philippines" src="assets/img/APPGUIDE2b.png">
                         <p class="text-center guide-title">Online Registration<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE3b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containing two people exchanging documents" src="assets/img/APPGUIDE3b.png">
                         <p class="text-center guide-title">Submission of Documents<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE4b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containing a host company interview of 2 students" src="assets/img/APPGUIDE4b.png">
                         <p class="text-center guide-title">Host Company Interview<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE5b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containg a group of students holding a banner 'VISA APPROVED'" src="assets/img/APPGUIDE5b.png">
                         <p class="text-center guide-title">J1 Visa Processing<br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
-                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img src="assets/img/APPGUIDE6b.png">
+                    <div class="d-flex flex-column justify-content-xl-center align-items-xl-center application-guide"><img alt="Image containing Three (3) J1 Students having a photo with the Golden Gate Bridge at San Francisco" src="assets/img/APPGUIDE6b.png">
                         <p class="text-center guide-title">Departure and Program Proper<br></p>
                     </div>
                 </div>
