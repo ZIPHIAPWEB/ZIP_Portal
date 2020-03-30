@@ -94,7 +94,7 @@
         </div>
         <div class="col-md-9 col-xs-12">
             <div class="nav-tabs-custom">
-                <button v-show="isAuthorized()" v-if="!settings.personalIsEdit" @click="settings.personalIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <button v-show="isAuthorize()" v-if="!settings.personalIsEdit" @click="settings.personalIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
                 <div v-else>
                         <button @click="cancelPersonalDetails" class="btn btn-xs btn-danger pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
                         <button @click="updatePersonalDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
@@ -791,7 +791,7 @@
                 file: ''
             },
             computed: {
-                isAuthorized () {
+                isAuthorize () {
                     if (this.student.application_status === "Program Proper") {
                         return false;
                     } else if (this.student.application_status === "For PDOS & CFO") {
