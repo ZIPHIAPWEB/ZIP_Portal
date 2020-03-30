@@ -199,7 +199,7 @@
             </div>
 
             <div class="nav-tabs-custom">
-                <button v-if="!settings.educationIsEdit" @click="settings.educationIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <button v-show="isAuthorize()" v-if="!settings.educationIsEdit" @click="settings.educationIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
                 <div v-else>
                     <button @click="cancelEducationalDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
                     <button @click="updateEducationalDetails" class="btn btn-xs btn-success pull-right m-t-10 m-r-10"><span class="fa fa-check"></span></button>
@@ -334,7 +334,7 @@
             </div>
 
             <div class="nav-tabs-custom">
-                <button v-if="!settings.contactIsEdit" @click="settings.contactIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <button v-show="isAuthorize()" v-if="!settings.contactIsEdit" @click="settings.contactIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
                 <div v-else>
                     <button @click="cancelContactDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
                     <button @click="updateContactDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
@@ -401,7 +401,7 @@
                 </div>
             </div>
             <div class="nav-tabs-custom">
-                <button v-if="!settings.parentIsEdit" @click="settings.parentIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
+                <button v-show="isAuthorize()" v-if="!settings.parentIsEdit" @click="settings.parentIsEdit = true;" class="btn btn-xs btn-primary pull-right m-t-10 m-r-10"><span class="fa fa-pencil"></span></button>
                 <div v-else>
                     <button @click="cancelParentDetails" class="btn btn-danger btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-times"></span></button>
                     <button @click="updateParentDetails" class="btn btn-xs btn-success pull-right m-t-10" style="margin-right: 5px"><span class="fa fa-check"></span></button>
@@ -565,7 +565,7 @@
             </div>
 
             <div class="nav-tabs-custom">
-                <button @click="createExperienceDetails" class="btn btn-primary btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-plus"></span></button>
+                <button v-show="isAuthorize()" @click="createExperienceDetails" class="btn btn-primary btn-xs pull-right m-t-10 m-r-10"><span class="fa fa-plus"></span></button>
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#work-experience" data-toggle="tab" aria-expanded="true">
@@ -580,7 +580,7 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">
-                                        <div v-if="settings.experienceIsEdit != exp.id">
+                                        <div v-show="isAuthorize()" v-if="settings.experienceIsEdit != exp.id">
                                             <button @click="deleteExperienceDetails(exp.id)" class="btn btn-danger btn-xs pull-right"><span class="fa fa-trash"></span></button>
                                             <button @click="editExperienceDetails(exp.id)" class="btn btn-primary btn-xs pull-right" style="margin-right: 5px;"><span class="fa fa-pencil"></span></button>
                                         </div>
@@ -792,9 +792,9 @@
             },
             computed: {
                 isAuthorized () {
-                    if (this.student.program.name === "Program Proper") {
+                    if (this.student.application_status === "Program Proper") {
                         return false;
-                    } else if (this.student.program.name === "For PDOS & CFO") {
+                    } else if (this.student.application_status === "For PDOS & CFO") {
                         return false;
                     } else {
                         return true;
