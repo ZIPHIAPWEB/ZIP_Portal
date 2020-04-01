@@ -1781,14 +1781,6 @@
                             return 'background: #bd3d26;'
                         break;
 
-                        case 'Hired':
-                            return 'background: #bd3d26;'
-                        break;
-
-                        case 'Hired':
-                            return 'background: #256eb6;'
-                        break;
-
                         case 'For Visa Interview':
                             return 'background: #174275;'
                         break;
@@ -1801,15 +1793,15 @@
                             return 'background: #118542;'
                         break;
 
-                        case 'Cancelled: Unqualified':
+                        case 'Cancel: Unqualified':
                             return 'background: #b92025;'
                         break;
                         
-                        case 'Cancelled: Visa Denial':
+                        case 'Cancel: Visa Denial':
                             return 'background: #b92025;'
                         break;
 
-                        case 'Cancelled: Program Cancellation':
+                        case 'Cancel: Program Cancellation':
                             return 'background: #b92025;'
                         break;
                     }
