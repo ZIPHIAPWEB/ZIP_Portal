@@ -50,10 +50,11 @@
                             <input v-model="filter.to" type="date" class="form-control input-sm">
                         </div>&nbsp;
                         <div class="form-group">
-                            <label for="" class="control-label">Filter By Program</label>
+                            <label for="" class="control-label">Filter By Status</label>
                             <select v-model="filter.status" class="form-control input-sm">
                                 <option value="" selected>All</option>
                                 <option value="New Applicant">New Applicant</option>
+                                <option value="Called">Called</option>
                                 <option value="Assessed">Assessed</option>
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
@@ -105,15 +106,15 @@
                             <th class="text-center" style="width: 10%">Recent Action</th>
                             <th class="text-center" style="width: 10%">Action</th>
                         </thead>
-                        <tbody v-if="hasRecords">
+                        <tbody v-if="filteredStudents.length > 0">
                             <tr v-if="loading.table">
                                 <td valign="top" colspan="15" class="text-center">
                                     <span class="fa fa-circle-o-notch fa-spin"></span>
                                 </td>
                             </tr>
-                            <tr v-else v-for="student in students">
+                            <tr v-else v-for="student in filteredStudents">
                                 <td class="text-sm text-center">@{{ student.created_at }}</td>
-                                <td class="text-center"><span class="label label-warning label-sm">@{{ student.application_status }}</span></td>
+                            <td class="text-center"><span :style="statusColor(student.application_status)" class="label label-sm">@{{ student.application_status }} @{{ (student.application_status == 'Called') ? `: ${student.contacted_status}` : '' }}</span></td>
                                 <td class="text-sm text-center">@{{ student.application_id }}</td>
                                 <td class="text-sm text-center">@{{ student.user.email }}</td>
                                 <td class="text-sm text-center">@{{ student.first_name }}</td>
@@ -239,6 +240,7 @@
                                                     <div class="form-group-sm">
                                                         <select @change="setApplicationStatus(appStatus)" v-model="appStatus" class="form-control">
                                                             <option value="">@{{ student.application_status }}</option>
+                                                            <option value="Called">Called</option>
                                                             <option value="Assessed">Assessed</option>
                                                             <option value="Confirmed">Confirmed</option>
                                                             <option value="Hired">Hired</option>
@@ -246,6 +248,23 @@
                                                             <option value="ForPDOSCFO">For PDOS & CFO</option>
                                                             <option value="ProgramProper">Program Proper</option>
                                                             <option value="Canceled">Cancel</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr v-if="student.application_status === 'Called'">
+                                                <td class="text-sm">
+                                                    Contacted Status
+                                                </td>
+                                                <td class="text-bold text-center">
+                                                    <div class="form-group-sm">
+                                                        <select @change="setContactStatus" class="form-control">
+                                                        <option value="">@{{ student.contacted_status }}</option>
+                                                            <option value="1st Attempt - CBR">1st Attempt - CBR</option>
+                                                            <option value="2nd Attempt - CBR">2nd Attempt - CBR</option>
+                                                            <option value="3rd Attempt - CBR">3rd Attempt - CBR</option>
+                                                            <option value="Scheduled For Assessment">Scheduled For Assessment</option>
+                                                            <option value="Client Undecided">Client Undecided</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -938,7 +957,7 @@
                                                     Trial Interview Schedule
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                   <label class="text-sm">@{{ student.visa_interview_schedule | toFormattedDateString }}</label>
+                                                   <label class="text-sm">@{{ student.trial_interview_schedule | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -951,7 +970,7 @@
                                                     Trial Interview Time
                                                 </td>
                                                 <td v-if="!settings.visaInterviewIsEdit">
-                                                    <label class="text-sm">@{{ student.visa_interview_time }}</label>
+                                                    <label class="text-sm">@{{ student.trial_interview_time }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -978,7 +997,7 @@
                                                     PDOS Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString }}</label>
+                                                    <label class="text-sm">@{{ student.pdos_schedule | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1004,7 +1023,7 @@
                                                     CFO Schedule
                                                 </td>
                                                 <td v-if="!settings.pdoscfoIsEdit" class="text-bold">
-                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString }}</label>
+                                                    <label class="text-sm">@{{ student.cfo_schedule | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1047,7 +1066,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.departureFromManila" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_departure_date }}</label>
+                                                    <label class="text-sm">@{{ student.mnl_departure_date | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1094,6 +1113,14 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1118,7 +1145,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.arrivalToUs" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_arrival_date }}</label>
+                                                    <label class="text-sm">@{{ student.us_arrival_date | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1165,6 +1192,14 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1189,7 +1224,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.departureFromUs" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.us_departure_date }}</label>
+                                                    <label class="text-sm">@{{ student.us_departure_date | toFormattedDateString}}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1236,6 +1271,14 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1260,7 +1303,7 @@
                                                     Date
                                                 </td>
                                                 <td v-if="!settings.arrivalToManila" v-cloak class="text-bold">
-                                                    <label class="text-sm">@{{ student.mnl_arrival_date }}</label>
+                                                    <label class="text-sm">@{{ student.mnl_arrival_date | toFormattedDateString }}</label>
                                                 </td>
                                                 <td v-else>
                                                     <div class="input-group-sm">
@@ -1307,6 +1350,14 @@
                                                             <option value="">Select Airlines</option>
                                                             <option value="PAL">Philippine Airlines</option>
                                                             <option value="AirAsia">Air Asia</option>
+                                                            <option value="Alaska Airlines">Alaska Airlines</option>
+                                                            <option value="Korean Air">Korean Air</option>
+                                                            <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
+                                                            <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
+                                                            <option value="Asiana Airlines">Asiana Airlines</option>
+                                                            <option value="Japan Airlines">Japan Airlines</option>
+                                                            <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+                                                            <option value="Cathay Dragon">Cathay Dragon</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1680,6 +1731,13 @@
                     }
                 },
             },
+            computed: {
+                filteredStudents () {
+                    return this.students.filter(e => {
+                        return e.last_name.toLowerCase().includes(this.filterName.toLowerCase());
+                    })
+                },
+            },
             mounted: function() {
                 this.loadStudents();
                 this.loadHostCompany();
@@ -1687,36 +1745,6 @@
                 this.loadStates();
                 this.loadPositions();
                 this.loadPrograms();
-            },
-            watch: {
-                filterName: function() {
-                    if (this.filterName) {
-                        this.loading.table = true;
-                        axios.get(`/filter/student`, {
-                            params: {
-                                program_id : programId,
-                                last_name: this.filterName
-                            }
-                        })
-                            .then((response) => {
-                                this.loading.table = false;
-                                if (response.data.data.length > 0) {
-                                    this.hasRecords = true;
-                                    this.students = response.data.data;
-                                    this.testData = response.data.data;
-                                    this.links = response.data.links;
-                                    this.current_page = response.data.meta.current_page;
-                                    this.last_page = response.data.meta.last_page;
-                                } else {
-                                    this.hasRecords = false;
-                                }
-                            }).catch((error) => {
-                                this.loading.table = false;
-                        })
-                    } else {
-                        this.loadStudents(programId)
-                    }
-                }
             },
             filters: {
                 toFormattedDateString: function (value) {
@@ -1731,6 +1759,54 @@
                 }
             },
             methods: {
+                statusColor (status) {
+                    switch (status) {
+                        case 'New Applicant':
+                            return 'background: #ecb021;'
+                        break;
+
+                        case 'Called':
+                            return 'background: #ec8023;'
+                        break;
+
+                        case 'Assessed':
+                            return 'background: #d25b27;'
+                        break;
+
+                        case 'Confirmed':
+                            return 'background: #bd3d26;'
+                        break;
+
+                        case 'Hired':
+                            return 'background: #bd3d26;'
+                        break;
+
+                        case 'Hired':
+                            return 'background: #bd3d26;'
+                        break;
+
+                        case 'Hired':
+                            return 'background: #256eb6;'
+                        break;
+
+                        case 'For Visa Interview':
+                            return 'background: #174275;'
+                        break;
+
+                        case 'For PDOS & CFO':
+                            return 'background: #15335c;'
+                        break;
+
+                        case 'Program Proper':
+                            return 'background: #118542;'
+                        break;
+
+                        case 'Cancelled':
+                            return 'background: #b92025;'
+                        break;
+                    }
+                    
+                },
                 filterStatus () {
                     let formData = new FormData();
                     formData.append('program_id', programId);
@@ -1742,15 +1818,7 @@
                     axios.post(`/filter/status`, formData)
                         .then((response) => {
                             this.loading.table = false;
-                            if  (response.data.data.length > 0) {
-                                this.hasRecords = true;
-                                this.students = response.data.data;
-                                this.links = response.data.links;
-                                this.current_page = response.data.meta.current_page;
-                                this.last_page = response.data.meta.last_page;
-                            } else {
-                                this.hasRecords = false;
-                            }
+                            this.students = response.data.data;
                         }).catch((error) => {
                             this.loading.table = false;
                     })
@@ -1860,11 +1928,8 @@
                 downloadBasicRequirement (id) {
                     axios.get(`/studPreliminary/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 loadPaymentRequirements (programId, userId) {
@@ -1892,11 +1957,8 @@
                 downloadAdditionalRequirement (id) {
                     axios.get(`/studAdditional/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 loadVisaRequirements(sponsorId, userId) {
@@ -1932,18 +1994,15 @@
                 downloadVisaRequirement(id) {
                     axios.get(`/studVisa/download?requirement_id=${id}`)
                         .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download', '');
-                            document.body.appendChild(link);
-                            link.click();
+                            var win = window.open(response.data);
+                            win.focus();
                         })
                 },
                 setApplicationStatus(status) {
                     this.appStatus = '';
                     switch (status) {
                         case 'Assessed':
-                            if (this.student.application_status == 'New Applicant') {
+                            if (this.student.application_status == 'Called') {
                                 this.loading.modal = true;
                                 axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                     .then(({data}) => {
@@ -1966,6 +2025,30 @@
                                 alert('You Cannot Revert Application Status.');
                             }
                             break;
+                        case 'Called':
+                            if (this.student.application_status == 'New Applicant') {
+                                this.loading.modal = true;
+                                axios.post(`/coor/${this.student.user_id}/application/${status}`)
+                                    .then(({data}) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: data,
+                                            type: 'success',
+                                            confirmButonText: 'Continue'
+                                        })
+                                    }).catch((error) => {
+                                        swal({
+                                            title: 'Something went wrong.',
+                                            type: 'error',
+                                            confirmButonText: 'Go Back!'
+                                        })
+                                    })
+                            } else {
+                                alert('You Cannot Revert Application Status.');
+                            }
+                        break;
                         case 'Confirmed':
                             if (this.student.application_status == 'Assessed') {
                                 this.loading.modal = true;
@@ -2069,7 +2152,11 @@
                                 .then((response) => {
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
-                                    alert(response.data);
+                                    swal({
+                                        title: response.data,
+                                        type: 'success',
+                                        confirmButonText: 'Continue'
+                                    })
                                 });
                             break;
                         case 'Denied':
@@ -2077,10 +2164,29 @@
                                 .then((response) => {
                                     this.loadStudents(programId);
                                     this.viewStudent(this.student.user_id);
-                                    alert(response.data);
+                                    swal({
+                                        title: response.data,
+                                        type: 'success',
+                                        confirmButonText: 'Continue'
+                                    })
                                 });
                             break;
                     }
+                },
+                setContactStatus(e) {
+                    axios.post(`/coor/${this.student.user_id}/setContactStatus`, { status: e.target.value })
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButonText: 'Continue'
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 },
                 setCancellationStatus() {
                     this.loading.modal = true;

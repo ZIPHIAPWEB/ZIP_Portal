@@ -140,7 +140,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group-sm">
-                                            <input v-model="personal.last_name" type="text" class="form-control input-sm">
+                                            <input :placeholder="student.last_name" v-model="personal.last_name" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -163,6 +163,7 @@
                                     <td v-else>
                                         <div class="input-group-sm">
                                             <select v-model="personal.gender" class="form-control input-sm">
+                                                <option active value="" hidden>@{{ student.gender }}</option>
                                                 <option value="">Select gender</option>
                                                 <option value="MALE">Male</option>
                                                 <option value="FEMALE">Female</option>
@@ -217,7 +218,7 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td colspan="2"><label class="control-label">Tertiary Level</label></td>
+                                <td colspan="2"><label class="control-label">Tertiary Level @{{ student.tertiary.school.name }}</label></td>
                                 </tr>
                                 <tr>
                                     <td>School</td>
@@ -252,6 +253,7 @@
                                     <td v-else>
                                         <div class="input-group-sm">
                                             <select v-model="education.t_degree" class="form-control input-sm">
+                                                <option selected hidden>@{{ student.tertiary.degree }}</option>
                                                 <option value="">Select Degree</option>
                                                 <option v-for="degree in degrees" :value="degree.name">@{{ degree.display_name }}</option>
                                             </select>
@@ -380,7 +382,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group-sm">
-                                            <input v-model="contact.home_number" type="number" class="form-control input-sm">
+                                            <input v-model="contact.home_number" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -391,7 +393,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group-sm">
-                                            <input v-model="contact.mobile_number" type="number" class="form-control input-sm">
+                                            <input v-model="contact.mobile_number" type="text" class="form-control input-sm">
                                         </div>
                                     </td>
                                 </tr>
@@ -844,6 +846,43 @@
                         .then((response) => {
                             this.student = response.data.data;
                             this.program_id = response.data.data.program_id;
+
+                            this.personal.first_name = response.data.data.first_name;
+                            this.personal.middle_name = response.data.data.middle_name;
+                            this.personal.last_name = response.data.data.last_name;
+                            this.personal.birthdate = response.data.data.birthdate;
+                            this.personal.gender = response.data.data.gender;
+                            this.personal.skype_id = response.data.data.skype_id;
+                            this.personal.fb_email = response.data.data.fb_email;
+
+                            this.education.t_school_name = response.data.data.tertiary.school_name;
+                            this.education.t_address = response.data.data.tertiary.address;
+                            this.education.t_degree = response.data.data.tertiary.degree;
+                            this.education.t_start_date = response.data.data.tertiary.start_date;
+                            this.education.t_end_date = response.data.data.tertiary.date_graduated;
+                            this.education.s_school_name = response.data.data.secondary.school_name;
+                            this.education.s_address = response.data.data.secondary.address;
+                            this.education.s_start_date = response.data.data.secondary.start_date;
+                            this.education.s_end_date = response.data.data.secondary.date_graduated;
+
+                            this.contact.permanent_address = response.data.data.permanent_address;
+                            this.contact.provincial_address = response.data.data.provincial_address;
+                            this.contact.home_number = response.data.data.home_number;
+                            this.contact.mobile_number = response.data.data.mobile_number;
+
+                            this.parent.f_first_name = response.data.data.father.first_name;
+                            this.parent.f_middle_name = response.data.data.father.middle_name;
+                            this.parent.f_last_name = response.data.data.father.last_name;
+                            this.parent.f_occupation = response.data.data.father.occupation;
+                            this.parent.f_company = response.data.data.father.company;
+                            this.parent.f_contact_no = response.data.data.father.contact_no;
+
+                            this.parent.m_first_name = response.data.data.mother.first_name;
+                            this.parent.m_middle_name = response.data.data.mother.middle_name;
+                            this.parent.m_last_name = response.data.data.mother.last_name;
+                            this.parent.m_occupation = response.data.data.mother.occupation;
+                            this.parent.m_company = response.data.data.mother.company;
+                            this.parent.m_contact_no = response.data.data.mother.contact_no;
                         }).catch((error) => {
                             console.log(error);
                     })
@@ -924,13 +963,6 @@
                 },
                 cancelPersonalDetails() {
                     this.settings.personalIsEdit = false;
-                    this.personal.first_name = '';
-                    this.personal.middle_name = '',
-                    this.personal.last_name = '',
-                    this.personal.birthdate = '',
-                    this.personal.gender = '',
-                    this.personal.skype_id = '',
-                    this.personal.fb_email = ''
                 },
                 updateContactDetails() {
                     this.loading = true;
@@ -955,10 +987,6 @@
                 },
                 cancelContactDetails() {
                     this.settings.contactIsEdit = false;
-                    this.contact.permanent_address = '';
-                    this.contact.provincial_address = '';
-                    this.contact.home_number = '';
-                    this.contact.mobile_number = '';
                 },
                 updateParentDetails() {
                     this.loading = true;
@@ -1021,16 +1049,6 @@
                 },
                 cancelEducationalDetails() {
                     this.settings.educationIsEdit = false;
-                    this.education.t_school_name = '';
-                    this.education.t_address = '';
-                    this.education.t_degree = '';
-                    this.education.t_start_date = '';
-                    this.education.t_end_date = '';
-
-                    this.education.s_school_name = '';
-                    this.education.s_address = '';
-                    this.education.s_start_date = '';
-                    this.education.s_end_date = '';
                 },
                 updateExperienceDetails(id) {
                     this.loading = true;

@@ -88,6 +88,7 @@ Route::prefix('coor')->group(function() {
     Route::get('/requirement/visa/{sponsorId}/{userId}', 'CoordinatorController@loadVisaRequirements')->name('coor.visa.requirements');
 
     Route::post('{id}/application/{status}', 'CoordinatorController@SetApplicationStatus')->name('coor.application.status');
+    Route::post('{id}/setContactStatus', 'CoordinatorController@SetContactedStatus')->name('coor.contacted.status');
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
     Route::post('{id}/program/{programId}', 'CoordinatorController@SetProgram')->name('coor.set.program');
     Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
@@ -377,6 +378,8 @@ Route::prefix('chat')->group(function () {
 Route::prefix('message')->group(function () {
     Route::view('/verified-payment', 'message.verified-payment')->name('message.verified.payment');
 });
+
+Route::get('/helper/getAllStudentCount', 'HelperController@getAllStudentCount')->name('helper.getAllStudentCount');
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
