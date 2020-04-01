@@ -177,7 +177,7 @@
                             return e.program_id == this.summaryFilter;
                         }
                     }).filter(e => {
-                        return e.application_status == 'New Applicants';
+                        return e.application_status == 'New Applicant';
                     }).length;
                 },
                 getAssessed() {
