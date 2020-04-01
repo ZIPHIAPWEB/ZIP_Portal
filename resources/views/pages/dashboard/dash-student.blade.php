@@ -185,7 +185,7 @@
                                 <tr>
                                     <td>Facebook URL</td>
                                     <td v-if="!settings.personalIsEdit" class="text-bold">
-                                        <a :href="'/' + student.fb_email" target="_blank">@{{ student.fb_email }}</a>
+                                        <a :href="student.fb_email" target="_blank">@{{ student.fb_email }}</a>
                                     </td>
                                     <td v-else>
                                         <div class="input-group-sm">
