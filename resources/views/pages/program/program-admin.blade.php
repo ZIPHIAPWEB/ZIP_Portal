@@ -1801,7 +1801,15 @@
                             return 'background: #118542;'
                         break;
 
-                        case 'Cancelled':
+                        case 'Cancelled: Unqualified':
+                            return 'background: #b92025;'
+                        break;
+                        
+                        case 'Cancelled: Visa Denial':
+                            return 'background: #b92025;'
+                        break;
+
+                        case 'Cancelled: Program Cancellation':
                             return 'background: #b92025;'
                         break;
                     }
