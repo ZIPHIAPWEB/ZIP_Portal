@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3">
+                            <div class="col-xs-6">
                                 <div class="progress-group">
                                 <span class="progress-text">For Visa Interview</span>
                                     <span class="progress-number">@{{ getForVisaInterview }}/@{{ getAllStudents }}</span>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            {{-- <div class="col-xs-3">
                                 <div class="progress-group">
                                     <span class="progress-text">Visa Approved</span>
                                     <span class="progress-number">@{{ getVisaApproved }}/@{{ getAllStudents }}</span>
@@ -117,8 +117,8 @@
                                         <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width: getVisaDenied / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-3">
+                            </div> --}}
+                            <div class="col-xs-6">
                                 <div class="progress-group">
                                     <span class="progress-text">Cancelled</span>
                                     <span class="progress-number">@{{ getCancelled }}/@{{ getAllStudents }}</span>
@@ -225,7 +225,7 @@
                             return e.program_id == this.summaryFilter;
                         }
                     }).filter(e => {
-                        return e.application_status == 'Contacted';
+                        return e.application_status == 'Called';
                     }).length;
                 },
                 getConfirmed() {

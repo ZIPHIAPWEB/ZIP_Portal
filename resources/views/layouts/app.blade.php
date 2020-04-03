@@ -21,7 +21,7 @@
     .bg-called { background: #ec8023; }
     .bg-assessed { background: #d25b27; }
     .bg-confirmed { background: #bd3d26; }
-    .bg-hired { background: #bd3d26; }
+    .bg-hired { background: #256eb6; }
     .bg-visa-interview { background: #174275 }
     .bg-cancelled { background: #b92025; }
     .bg-for-pdos-cfo { background: #15335c; }
