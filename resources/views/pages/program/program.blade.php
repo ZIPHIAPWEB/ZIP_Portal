@@ -1779,7 +1779,7 @@
                         break;
 
                         case 'Hired':
-                            return 'background: #bd3d26;'
+                            return 'background: #256eb6;'
                         break;
 
                         case 'For Visa Interview':
