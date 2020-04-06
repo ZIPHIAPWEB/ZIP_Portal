@@ -97,7 +97,7 @@
                             </tr>
                             <tr v-else v-for="student in filteredStudents">
                                 <td class="text-sm">@{{ student.created_at }}</td>
-                                <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }}</label></td>
+                                <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }} @{{ (student.application_status == 'Called') ? `: ${student.contacted_status}` : '' }}</label></td>
                                 <td class="text-center text-sm">@{{ student.application_id }}</td>
                                 <td class="text-center text-sm">@{{ student.first_name }} @{{ student.last_name }}</td>
                                 <td class="text-center text-sm">@{{ student.program.display_name }}</td>
