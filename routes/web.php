@@ -316,6 +316,7 @@ Route::prefix('event')->group(function() {
 });
 
 Route::prefix('helper')->group(function() {
+    Route::get('/getRegisteredAccounts', 'HelperController@getRegisteredAccounts');
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
     Route::get('/host/view', 'HelperController@hostHelper')->name('helper.host');

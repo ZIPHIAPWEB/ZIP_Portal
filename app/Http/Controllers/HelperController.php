@@ -19,6 +19,11 @@ class HelperController extends Controller
         return Student::all();
     }
 
+    public function getRegisteredAccounts()
+    {
+        return User::all();
+    }
+
     public function schoolHelper()
     {
         $schools = School::orderBy('name', 'asc')->get();

@@ -74,7 +74,7 @@
                 </div>
                 <div class="box-body" style="overflow: auto;">
                     <div class="form-group pull-right">
-                        <input v-model="search" type="text" class="form-control input-sm" placeholder="Search Name">
+                        <input v-model="search" type="text" class="form-control input-sm" placeholder="Search last name">
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
@@ -89,13 +89,13 @@
                             <th class="text-center">Activated</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody v-if="hasRecords">
+                        <tbody v-if="filteredStudents.length > 0">
                             <tr v-if="loading.table">
                                 <td valign="top" colspan="15" class="text-center">
                                     <span class="fa fa-circle-o-notch fa-spin"></span>
                                 </td>
                             </tr>
-                            <tr v-else v-for="student in students">
+                            <tr v-else v-for="student in filteredStudents">
                                 <td class="text-sm">@{{ student.created_at }}</td>
                                 <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }}</label></td>
                                 <td class="text-center text-sm">@{{ student.application_id }}</td>
@@ -108,7 +108,7 @@
                                     <span v-if="student.user.verified === 1" class="fa fa-check text-success"></span>
                                     <span v-else class="fa fa-remove text-danger"></span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <button @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
                                     <button @click="ExtractFiles(student.user_id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span></button>
                                     <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
@@ -695,13 +695,11 @@
                 },
                 hasRecords: true
             },
-            watch: {
-                search: function (value) {
-                    if (value) {
-                        this.FilterStudents(value);
-                    } else {
-                        this.LoadStudents();
-                    }
+            computed: {
+                filteredStudents () {
+                    return this.students.filter(e => {
+                        return e.last_name.toLowerCase().includes(this.search.toLowerCase());
+                    })
                 }
             },
             mounted () {
