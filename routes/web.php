@@ -9,6 +9,19 @@ Route::view('/program-canada', 'program-canada')->name('program-canada');
 Route::view('/program-career', 'program-career')->name('program-career');
 Route::view('/program-internship', 'program-internship')->name('program-internship');
 Route::view('/program-swt', 'program-swt')->name('program-swt');
+Route::view('/social-stream', 'social-stream')->name('social-stream');
+
+Route::get('/blog', 'BlogController@index');
+Route::get('/blog/{slug}', 'BlogController@view');
+Route::get('/getAllBlogs', 'BlogController@getAllBlogs');
+Route::post('/addBlog', 'BlogController@addBlog');
+Route::delete('/deleteBlog/{slug}', 'BlogController@deleteBlog');
+
+Route::get('/alumni', 'AlumniController@index');
+Route::get('/alumni/{slug}', 'AlumniController@view');
+Route::get('/getAllAlumni', 'AlumniController@getAllAlumni');
+Route::post('/addAlumniBlog', 'AlumniController@addAlumniBlog');
+Route::delete('/deleteAlumniBlog/{slug}', 'AlumniController@deleteAlumniBlog');
 
 Route::prefix('auth')->group(function() {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -52,6 +65,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/position', 'pages.setting.setting-student-position-superadmin')->name('s.position');
     Route::view('/sa/s/place-of-assignment', 'pages.setting.setting-place-of-assignment-superadmin')->name('s.place');
     Route::view('/sa/s/degree', 'pages.setting.setting-degree-superadmin')->name('s.degree');
+    Route::view('/sa/s/blog', 'pages.setting.setting-blog-superadmin')->name('s.blog');
+    Route::view('/sa/s/alumni', 'pages.setting.setting-alumni-superadmin')->name('s.alumni');
 
     Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
     Route::view('/sa/cms', 'pages.cms.content-management')->name('sa.cms');

@@ -55,6 +55,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'uploaded_blog' => [
+            'driver'    =>  'local',
+            'root'      =>  public_path('/blog_image'),
+            'url'       =>  '/',
+            'visibility'=>  'public'
+        ],
+
         'uploaded_files' => [
             'driver' => 'local',
             'root' => public_path('uploaded'),
