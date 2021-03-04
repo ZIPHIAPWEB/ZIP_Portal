@@ -1,4 +1,10 @@
 <?php
+
+use App\Mail\verifyEmail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/about-us', 'about-us')->name('about-us');
 Route::view('/contact-us', 'contact-us')->name('contact_us');
@@ -381,8 +387,6 @@ Route::prefix('message')->group(function () {
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
-Route::get('/test', function () {
-    $password = bcrypt("Kenthrocks5000!");
-
-    return $password;
+Route::get('/test', function (Request $request) {
+   return Hash::make('manuelperedo173');
 });

@@ -29,7 +29,7 @@ class verifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('system@ziptravel.com.ph', 'ZIP Travel PH')
+        return $this->from('support@hospitalityinstituteofamerica.com.ph', 'ZIP Travel')
             ->subject('Email Activation')
             ->markdown('mail.verifyEmail', ['user' => $this->user]);
     }
