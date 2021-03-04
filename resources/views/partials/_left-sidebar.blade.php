@@ -82,6 +82,18 @@
                         <li class="{{ Route::currentRouteNamed('s.degree') ? 'active' : '' }}"><a href="{{ route('s.degree') }}"><i class="fa fa-circle-o"></i> <small>Degree</small></a></li>
                     </ul>
                 </li>
+                <li class="treeview {{ Route::currentRouteNamed('s.blog') ? 'active' : '' }} {{ Route::currentRouteNamed('s.alumni') ? 'active' : '' }}">
+                    <a href="#">
+                        <i class="fa fa-gear"></i> <span><small>Articles</small></span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{{ Route::currentRouteNamed('s.blog') ? 'active' : '' }}"><a href="{{ route('s.blog') }}"><i class="fa fa-circle-o"></i> <small>Blog</small></a></li>
+                        <li class="{{ Route::currentRouteNamed('s.alumni') ? 'active' : '' }}"><a href="{{ route('s.alumni') }}"><i class="fa fa-circle-o"></i> <small>Alumni</small></a></li>
+                    </ul>
+                </li>
             @endif
             @if(Auth::user()->hasRole('administrator'))
                 @yield('sidenav');

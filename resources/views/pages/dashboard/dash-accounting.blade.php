@@ -39,10 +39,7 @@
                         <div class="pull-right">
                             <select v-model="summaryFilter" class="form-control input-sm">
                                 <option value="All">All</option>
-                                <option value="SWT - Spring">Summer Work and Travel - Spring</option>
-                                <option value="SWT - Summer">Summer Work and Travel - Summer</option>
-                                <option value="Career Training">Career Training</option>
-                                <option value="Internship">Internship</option>
+                                <option v-for="program in programs" :value="program.id">@{{ program.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -50,62 +47,103 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="progress-group">
-                                    <span class="progress-text">New Applicant</span>
-                                    <span class="progress-number">@{{ summary.newApplicant }}/@{{ totalStudents }}</span>
+                                <span class="progress-text">New Applicant</span>
+                                    <span class="progress-number">@{{ getNewApplications }}/@{{ getAllStudents }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-success" :style="{ width: summary.newApplicant / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar bg-new-applicant" :style="{ width: getNewApplications / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
+                                
                                 <div class="progress-group">
-                                    <span class="progress-text">Confirmed</span>
-                                    <span class="progress-number">@{{ summary.confirmed }}/@{{ totalStudents }}</span>
+                                <span class="progress-text">Confirmed</span>
+                                    <span class="progress-number">@{{ getConfirmed }}/@{{ getAllStudents }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-danger" :style="{ width: summary.confirmed / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar bg-confirmed" :style="{ width: getConfirmed / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="progress-group">
                                     <span class="progress-text">Assessed</span>
-                                    <span class="progress-number">@{{ summary.assessed }}/@{{ totalStudents }}</span>
+                                    <span class="progress-number">@{{ getAssessed }}/@{{ getAllStudents }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-aqua" :style="{ width: summary.assessed / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar bg-assessed" :style="{ width: getAssessed / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                                 <div class="progress-group">
-                                    <span class="progress-text">Hired</span>
-                                    <span class="progress-number">@{{ summary.hired }}/@{{ totalStudents }}</span>
+                                <span class="progress-text">Called</span>
+                                    <span class="progress-number">@{{ getContacted }}/@{{ getAllStudents }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-warning" :style="{ width: summary.hired / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar bg-called" :style="{ width: getContacted / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4">
+                            <div class="col-xs-12">
                                 <div class="progress-group">
-                                    <span class="progress-text">For Visa Interview</span>
-                                    <span class="progress-number">@{{ summary.forVisaInterview }}/@{{ totalStudents }}</span>
-                                    <div class="progress active">
-                                        <div class="progress-bar progress-bar-aqua progress-bar-striped" :style="{ width: summary.forVisaInterview / totalStudents * 100 + '%' }"></div>
+                                <span class="progress-text">Hired</span>
+                                    <span class="progress-number">@{{ getHired }}/@{{ getAllStudents }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-hired" :style="{ width: getHired / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                <span class="progress-text">For Visa Interview</span>
+                                    <span class="progress-number">@{{ getForVisaInterview }}/@{{ getAllStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar bg-visa-interview" :style="{ width: getForVisaInterview / getAllStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-xs-3">
                                 <div class="progress-group">
                                     <span class="progress-text">Visa Approved</span>
-                                    <span class="progress-number">@{{ summary.visaApproved }}/@{{ totalStudents }}</span>
+                                    <span class="progress-number">@{{ getVisaApproved }}/@{{ getAllStudents }}</span>
                                     <div class="progress active">
-                                        <div class="progress-bar progress-bar-yellow progress-bar-striped" :style="{ width: summary.visaApproved / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar progress-bar-yellow progress-bar-striped" :style="{ width: getVisaApproved / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-3">
                                 <div class="progress-group">
-                                    <span class="progress-text">Visa Denied</span>
-                                    <span class="progress-number">@{{ summary.visaDenied }}/@{{ totalStudents }}</span>
+                                <span class="progress-text">Visa Denied</span>
+                                    <span class="progress-number">@{{ getVisaDenied }}/@{{ getAllStudents }}</span>
                                     <div class="progress active">
-                                        <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width: summary.visaDenied / totalStudents * 100 + '%' }"></div>
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" :style="{ width: getVisaDenied / getAllStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Cancelled</span>
+                                    <span class="progress-number">@{{ getCancelled }}/@{{ getAllStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar bg-cancelled" :style="{ width: getCancelled / getAllStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">For PDOS & CFO</span>
+                                    <span class="progress-number">@{{ getForPdosCfo }}/@{{ getAllStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar bg-for-pdos-cfo" :style="{width: getForPdosCfo / getAllStudents * 100 + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="progress-group">
+                                    <span class="progress-text">Program Proper</span>
+                                    <span class="progress-number">@{{ getProgramProper }}/@{{ getAllStudents }}</span>
+                                    <div class="progress active">
+                                        <div class="progress-bar bg-program-proper" :style="{ width: getProgramProper / getAllStudents * 100 + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
@@ -143,66 +181,158 @@
         const app = new Vue({
             el: '#app',
             data: {
-                totalStudents: 0,
-                summary: {
-                    newApplicant: 0,
-                    assessed: 0,
-                    confirmed: 0,
-                    hired: 0,
-                    forVisaInterview: 0,
-                    visaApproved: 0,
-                    visaDenied: 0
-                },
+                students: [],
+                programs: [],
                 summaryFilter: ''
             },
-            watch: {
-                summaryFilter: function (value) {
-                    this.TotalApplicants(value);
-                    this.CountApplicants('New Applicant', value);
-                    this.CountApplicants('Assessed', value);
-                    this.CountApplicants('Confirmed', value);
-                    this.CountApplicants('Hired', value);
-                    this.CountApplicants('For Visa Interview', value);
-                    this.CountApplicants('Approved', value);
-                    this.CountApplicants('Denied', value);
+            computed: {
+                getAllStudents() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e;
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).length;
+                },
+                getNewApplications() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'New Applicant';
+                    }).length;
+                },
+                getAssessed() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Assessed';
+                    }).length;
+                },
+                getContacted() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Called';
+                    }).length;
+                },
+                getConfirmed() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Confirmed';
+                    }).length;
+                },
+                getHired() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Hired';
+                    }).length;
+                },
+                getForVisaInterview() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'For Visa Interview';
+                    }).length;
+                },
+                getForPdosCfo() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'For PDOS & CFO';
+                    }).length;
+                },
+                getProgramProper() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Program Proper';
+                    }).length;
+                },
+                getVisaApproved() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.visa_interview_status == 'Approved';
+                    }).length;
+                },
+                getVisaDenied() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.visa_interview_status == 'Disapproved';
+                    }).length;
+                },
+                getCancelled() {
+                    return this.students.filter(e => {
+                        if (this.summaryFilter == 'All') {
+                            return e
+                        } else {
+                            return e.program_id == this.summaryFilter;
+                        }
+                    }).filter(e => {
+                        return e.application_status == 'Cancel: Unqualified' || e.application_status == 'Cancel: Visa Denial' || e.application_status == 'Cancel: Program Cancellation';
+                    }).length;
                 }
             },
             mounted () {
                 this.summaryFilter = 'All';
+                this.getAllStudentCount();
+                this.loadPrograms();
             },
             methods: {
-                TotalApplicants (program) {
-                    axios.get(`/helper/applicant/${program}`)
+                loadPrograms() {
+                    axios.get('/helper/program/view')
                         .then((response) => {
-                            this.totalStudents = response.data;
+                            this.programs = response.data.data;
                         })
                 },
-                CountApplicants (status, program) {
-                    axios.get(`/helper/${status}/${program}`)
+                getAllStudentCount() {
+                    axios.get(`/helper/getAllStudentCount`)
                         .then((response) => {
-                            switch (status) {
-                                case 'New Applicant':
-                                    this.summary.newApplicant = response.data;
-                                    break;
-                                case 'Assessed':
-                                    this.summary.assessed = response.data;
-                                    break;
-                                case 'Confirmed':
-                                    this.summary.confirmed = response.data;
-                                    break;
-                                case 'Hired':
-                                    this.summary.hired = response.data;
-                                    break;
-                                case 'For Visa Interview':
-                                    this.summary.forVisaInterview = response.data;
-                                    break;
-                                case 'Approved':
-                                    this.summary.visaApproved = response.data;
-                                    break;
-                                case 'Denied':
-                                    this.summary.visaDenied = response.data;
-                                    break;
-                            }
+                            this.students = response.data;
                         })
                 }
             }

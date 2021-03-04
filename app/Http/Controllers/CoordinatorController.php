@@ -98,6 +98,22 @@ class CoordinatorController extends Controller
                 return 'Student Assessed!';
 
                 break;
+
+            case 'Called':
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_id'        =>  '',
+                    'application_status'    =>  'Called',
+                    'contacted_status'      =>  'Pending'
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Contacted.',
+                ]);
+
+                return 'Student Called.';
+            break;
             case 'Confirmed' :
                 $programId = Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
@@ -289,6 +305,22 @@ class CoordinatorController extends Controller
         ]);
 
         return 'Program Changed!';
+    }
+    
+    public function SetContactedStatus(Request $request, $id) {
+        $coordinator = $this->coordinatorRepository->getCoordinatorByUserId(Auth::user()->id);
+
+        $this->studentRepository->whereUpdate(['user_id' => $id], [
+            'contacted_status'  =>  $request->input('status')
+        ]);
+
+        $this->coordinatorActionRepository->saveCoordinatorAction([
+            'user_id'   =>  Auth::user()->id,
+            'client_id' =>  $id,
+            'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' change program.'
+        ]);
+
+        return 'Contacted Status set to ' . $request->input('status');
     }
 
     public function SetVisaInterviewStatus($id, $status)

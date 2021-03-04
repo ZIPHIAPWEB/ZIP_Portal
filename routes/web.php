@@ -15,6 +15,19 @@ Route::view('/program-canada', 'program-canada')->name('program-canada');
 Route::view('/program-career', 'program-career')->name('program-career');
 Route::view('/program-internship', 'program-internship')->name('program-internship');
 Route::view('/program-swt', 'program-swt')->name('program-swt');
+Route::view('/social-stream', 'social-stream')->name('social-stream');
+
+Route::get('/blog', 'BlogController@index');
+Route::get('/blog/{slug}', 'BlogController@view');
+Route::get('/getAllBlogs', 'BlogController@getAllBlogs');
+Route::post('/addBlog', 'BlogController@addBlog');
+Route::delete('/deleteBlog/{slug}', 'BlogController@deleteBlog');
+
+Route::get('/alumni', 'AlumniController@index');
+Route::get('/alumni/{slug}', 'AlumniController@view');
+Route::get('/getAllAlumni', 'AlumniController@getAllAlumni');
+Route::post('/addAlumniBlog', 'AlumniController@addAlumniBlog');
+Route::delete('/deleteAlumniBlog/{slug}', 'AlumniController@deleteAlumniBlog');
 
 Route::prefix('auth')->group(function() {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -58,6 +71,8 @@ Route::prefix('portal')->group(function() {
     Route::view('/sa/s/position', 'pages.setting.setting-student-position-superadmin')->name('s.position');
     Route::view('/sa/s/place-of-assignment', 'pages.setting.setting-place-of-assignment-superadmin')->name('s.place');
     Route::view('/sa/s/degree', 'pages.setting.setting-degree-superadmin')->name('s.degree');
+    Route::view('/sa/s/blog', 'pages.setting.setting-blog-superadmin')->name('s.blog');
+    Route::view('/sa/s/alumni', 'pages.setting.setting-alumni-superadmin')->name('s.alumni');
 
     Route::view('/sa/events', 'pages.event-management.event')->name('sa.events');
     Route::view('/sa/cms', 'pages.cms.content-management')->name('sa.cms');
@@ -94,6 +109,7 @@ Route::prefix('coor')->group(function() {
     Route::get('/requirement/visa/{sponsorId}/{userId}', 'CoordinatorController@loadVisaRequirements')->name('coor.visa.requirements');
 
     Route::post('{id}/application/{status}', 'CoordinatorController@SetApplicationStatus')->name('coor.application.status');
+    Route::post('{id}/setContactStatus', 'CoordinatorController@SetContactedStatus')->name('coor.contacted.status');
     Route::post('{id}/visa/{status}', 'CoordinatorController@SetVisaInterviewStatus')->name('coor.visa.status');
     Route::post('{id}/program/{programId}', 'CoordinatorController@SetProgram')->name('coor.set.program');
     Route::post('/update/{field}/{id}', 'CoordinatorController@UpdateField')->name('coor.field.update');
@@ -321,6 +337,7 @@ Route::prefix('event')->group(function() {
 });
 
 Route::prefix('helper')->group(function() {
+    Route::get('/getRegisteredAccounts', 'HelperController@getRegisteredAccounts');
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
     Route::get('/host/view', 'HelperController@hostHelper')->name('helper.host');
@@ -383,6 +400,8 @@ Route::prefix('chat')->group(function () {
 Route::prefix('message')->group(function () {
     Route::view('/verified-payment', 'message.verified-payment')->name('message.verified.payment');
 });
+
+Route::get('/helper/getAllStudentCount', 'HelperController@getAllStudentCount')->name('helper.getAllStudentCount');
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');

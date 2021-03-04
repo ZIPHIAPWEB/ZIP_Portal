@@ -14,6 +14,16 @@ use App\PaymentRequirement;
 
 class HelperController extends Controller
 {
+    public function getAllStudentCount() 
+    {
+        return Student::all();
+    }
+
+    public function getRegisteredAccounts()
+    {
+        return User::all();
+    }
+
     public function schoolHelper()
     {
         $schools = School::orderBy('name', 'asc')->get();
