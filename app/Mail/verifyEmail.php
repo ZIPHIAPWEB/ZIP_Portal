@@ -29,8 +29,9 @@ class verifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('support@hospitalityinstituteofamerica.com.ph', 'ZIP Travel')
-            ->subject('Email Activation')
-            ->markdown('mail.verifyEmail', ['user' => $this->user]);
+        return $this->markdown('mail.verifyEmail')
+                    ->from('system@ziptravel.com.ph', 'ZIP Travel')
+                    ->subject('Email Activation')
+                    ->with('verification_link', route('verified', ['email' => $this->user->email, 'token' => $this->user->vToken]));
     }
 }

@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 20px 0;">
-                            <a target="_blank" href="{{ route('verified', ['email' => $user->email, 'vToken' => $user->vToken]) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">Activate My Account</a>
+                            <a target="_blank" href="{{ $verification_link }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">Activate My Account</a>
                         </td>
                     </tr>
                     <tr>
