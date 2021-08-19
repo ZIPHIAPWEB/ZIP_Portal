@@ -37,7 +37,7 @@
                             <a data-toggle="collapse" href="#collapse1">Program Requirements</a>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
+                    <div v-if="student.program.name != 'Canada Program'" id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <a href="{{ route('req.basic') }}">
@@ -53,6 +53,22 @@
                             <li class="list-group-item">
                                 <a href="{{ route('req.additional') }}">
                                     Part 3: Additional Requirements
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-else id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ route('req.basic') }}">
+                                    Part 1: Preliminary Documents
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('req.additional') }}">
+                                    Part 2: Additional Requirements
                                     <i class="fa fa-arrow-right pull-right"></i>
                                 </a>
                             </li>

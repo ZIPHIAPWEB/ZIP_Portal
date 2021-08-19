@@ -13,7 +13,7 @@
                     <h5 class="profile-username text-center" style="font-size: 17px; padding-bottom: 0px; margin-top: 12px;">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h5>
                     <p class="text-muted text-center">@{{ student.program.name }}</p>
                     <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
+                        <li v-if="student.program.name != 'Canada Program'" class="list-group-item">
                             <b>Program ID</b>
                             <a v-if="!student.application_id" class="pull-right text-green text-sm">No Assigned Program ID</a>
                             <a v-else class="pull-right text-green text-sm">@{{ student.application_id }}</a>
@@ -39,7 +39,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
+                    <div v-if="student.program.name != 'Canada Program'" id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <a href="{{ route('req.basic') }}">
@@ -55,6 +55,22 @@
                             <li class="list-group-item">
                                 <a href="{{ route('req.additional') }}">
                                     Part 3: Additional Requirements
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-else id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ route('req.basic') }}">
+                                    Part 1: Preliminary Documents
+                                    <i class="fa fa-arrow-right pull-right"></i>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('req.additional') }}">
+                                    Part 2: Additional Requirements
                                     <i class="fa fa-arrow-right pull-right"></i>
                                 </a>
                             </li>
@@ -218,7 +234,7 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                <td colspan="2"><label class="control-label">Tertiary Level @{{ student.tertiary.school.name }}</label></td>
+                                <td colspan="2"><label class="control-label">Tertiary Level</label></td>
                                 </tr>
                                 <tr>
                                     <td>School</td>

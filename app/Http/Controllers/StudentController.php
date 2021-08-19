@@ -98,6 +98,7 @@ class StudentController extends Controller
             'branch'                    =>  $request->input('branch'),
             'visa_interview_status'     =>  'Pending',
             'application_status'        =>  'New Applicant',
+            'contacted_status'          =>  'Pending',
             'coordinator_id'            =>  0
         ]);
             

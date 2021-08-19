@@ -1,7 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/blog_image
+/public/uploaded
 /storage/*.key
+/storage/*
 /vendor
 /.idea
 /.vscode

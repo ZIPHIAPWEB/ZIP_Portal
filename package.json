@@ -23,6 +23,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^28.0.0",
+        "@ckeditor/ckeditor5-vue2": "^1.0.5",
         "chart.js": "^2.7.2",
         "laravel-echo": "^1.5.2",
         "pusher-js": "^4.3.1",

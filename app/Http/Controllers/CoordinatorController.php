@@ -1,29 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Coordinator;
-use App\CoordinatorAction;
+
 use App\Http\Resources\SuperAdminResource;
-use App\Log;
-use App\Notifications\AssessmentResponse;
 use App\Notifications\CoordinatorResponse;
 use App\Program;
-use App\ProgramPayment;
-use App\ProgramRequirement;
 use App\Repositories\Coordinator\CoordinatorRepository;
 use App\Repositories\CoordinatorAction\CoordinatorActionRepository;
 use App\Repositories\Student\StudentRepository;
-use App\Role;
-use App\SponsorRequirement;
 use App\User;
 use App\Student;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Sponsor\SponsorRepository;
 use App\Notifications\ConfirmedApplicantNotification;
+use App\PreliminaryRequirement;
+use App\StudentAdditional;
+use App\StudentPayment;
+use App\StudentPreliminary;
+use App\StudentSponsor;
 
 class CoordinatorController extends Controller
 {
@@ -287,6 +283,17 @@ class CoordinatorController extends Controller
 
                 return 'Canceled';
                 break;
+            default: 
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_status'    =>  $status
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to .' . $request->input('status'),
+                ]);
+                    
         }
     }
 
@@ -451,5 +458,88 @@ class CoordinatorController extends Controller
         return response()->json([
             'message'   =>  'Manila Arrival Updated'
         ], 200);
+    }
+
+    public function viewSelectedStudent($userId)
+    {
+        return view('pages.program.program-selected', ['userId' => $userId]);
+    }
+
+    public function coordinatorPrelimFileUpload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $path = $request->file('file')
+                        ->storeAs(User::where('id', $request->user_id)->first()->email . '/basic', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
+            
+            $result = StudentPreliminary::create([
+                'user_id'           =>  $request->input('user_id'),
+                'requirement_id'    =>  $request->input('requirement_id'),
+                'status'            =>  true,
+                'path'              =>  $path
+            ]);
+
+            return response()->json($result, 200);
+        }
+    }
+
+    public function coordinatorAdditionalFileUpload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $path = $request->file('file')
+                        ->storeAs(User::where('id', $request->user_id)->first()->email . '/additional', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
+                     
+            $result = StudentAdditional::create([
+                'user_id'           =>  $request->input('user_id'),
+                'requirement_id'    =>  $request->input('requirement_id'),
+                'status'            =>  true,
+                'path'              =>  $path
+            ]);
+
+            return response()->json($result, 200);
+        }
+    }
+
+    public function coordinatorPaymentFileUpload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $path = $request->file('file')
+                        ->storeAs(User::where('id', $request->user_id)->first()->email . '/payment', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
+                     
+            $result = StudentPayment::create([
+                'user_id'           =>  $request->input('user_id'),
+                'requirement_id'    =>  $request->input('requirement_id'),
+                'bank_code'         =>  $request->input('bank_code'),
+                'reference_no'      =>  $request->input('ref_no'),
+                'date_deposit'      =>  $request->input('date_deposit'),
+                'bank_account_no'   =>  $request->input('bank_account'),
+                'amount'            =>  $request->input('amount'),
+                'acknowledgement'   =>  false,
+                'status'            =>  true,
+                'path'              =>  $path
+            ]);
+
+            return response()->json($result, 200);
+        }
+    }
+
+    public function coordinatorVisaFileUpload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $path = $request->file('file')
+                        ->storeAs(User::where('id', $request->user_id)->first()->email . '/visa', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
+                     
+            $result = StudentSponsor::create([
+                'user_id'           =>  $request->input('user_id'),
+                'requirement_id'    =>  $request->input('requirement_id'),
+                'status'            =>  true,
+                'path'              =>  $path
+            ]);
+
+            return response()->json($result, 200);
+        }
     }
 }

@@ -39,6 +39,24 @@
         font-size: 15px;
         margin-bottom: 10px;
     }
+
+    .blog-wrapper {
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        transition: box-shadow 500ms;
+        
+    }
+
+    .blog-wrapper:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .blog-wrapper img {
+        width: 450px;
+        padding: 60px;
+    }
 </style>
 
 <body>
@@ -108,10 +126,10 @@ theme_color="#1b2754">
         <div class="container-fluid">
             <div class="row">
                 @foreach($blogs as $blog)
-                <div class="col-12 m-2 d-flex blog-item">
+                <div class="blog-wrapper col-12 m-2 d-flex blog-item">
                     <img src="{{ url('/blog_image/' . $blog->image_path) }}" alt="" style="width: 450px; border-radius: 10px; margin-right: 20px;">
                     <div class="blog-item-content d-flex flex-column">
-                        <h3><a href="{{ url('/blog/' . $blog->slug) }}">{{ $blog->title }}</a></h3>
+                        <h3><a href="{{ url('/blog/' . $blog->slug) }}" target="_blank">{{ $blog->title }}</a></h3>
                         <span>{{ $blog->created_at->diffForHumans() }}</span>
                         <p>{{ $blog->initial_content }}</p>
                         <a target="_blank" href="{{ url('/blog/' . $blog->slug) }}" class="btn btn-outline btn-primary" style="width: 120px; margin-bottom: 7px;">Read More</a>
@@ -123,8 +141,6 @@ theme_color="#1b2754">
                     </div>
                 </div>
                 @endforeach
-
-                {{ $blogs->links() }}
             </div>
         </div>
     </section>

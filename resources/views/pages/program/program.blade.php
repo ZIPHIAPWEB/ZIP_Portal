@@ -133,7 +133,8 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button>
+                                    <a :href="`/coor/program-selected/${student.user_id}`">View</a>
+                                    <!-- <button @click="viewStudent(student.user_id)" class="btn btn-default btn-flat btn-xs">View</button> -->
                                 </td>
                             </tr>
                         </tbody>

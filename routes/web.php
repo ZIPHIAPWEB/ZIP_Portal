@@ -23,6 +23,8 @@ Route::get('/getAllBlogs', 'BlogController@getAllBlogs');
 Route::post('/addBlog', 'BlogController@addBlog');
 Route::delete('/deleteBlog/{slug}', 'BlogController@deleteBlog');
 
+Route::post('/blogImage/upload', 'BlogImageController@upload');
+
 Route::get('/alumni', 'AlumniController@index');
 Route::get('/alumni/{slug}', 'AlumniController@view');
 Route::get('/getAllAlumni', 'AlumniController@getAllAlumni');
@@ -122,6 +124,13 @@ Route::prefix('coor')->group(function() {
     Route::post('/updateArrivalUS/{id}', 'CoordinatorController@updateArrivalUS')->name('coor.update.arrival.us');
     Route::post('/updateDepartureUS/{id}', 'CoordinatorController@updateDepartureUS')->name('coor.update.departure.us');
     Route::post('/updateArrivalMNL/{id}', 'CoordinatorController@updateArrivalMNL')->name('coor.update.arrival.manila');
+
+    Route::get('/program-selected/{userId}', 'CoordinatorController@viewSelectedStudent')->name('coor.view.selected');
+    
+    Route::post('/prelimFileUpload', 'CoordinatorController@coordinatorPrelimFileUpload')->name('coor.upload.prelim');
+    Route::post('/addFileUpload', 'CoordinatorController@coordinatorAdditionalFileUpload')->name('coor.upload.add');
+    Route::post('/paymentFileUpload', 'CoordinatorController@coordinatorPaymentFileUpload')->name('coor.upload.payment');
+    Route::post('/visaFileUpload', 'CoordinatorController@coordinatorVisaFileUpload')->name('coord.upload.visa');
 });
 
 Route::prefix('acc')->group(function () {
@@ -405,7 +414,3 @@ Route::get('/helper/getAllStudentCount', 'HelperController@getAllStudentCount')-
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
-
-Route::get('/test', function (Request $request) {
-   return Hash::make('manuelperedo173');
-});

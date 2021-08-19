@@ -15,8 +15,15 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+
 </head>
 <style>
+    body {
+        --ck-z-default: 100;
+        --ck-z-modal: calc( var(--ck-z-default) + 999 );
+    }
     .bg-new-application { background: #ecb021; }
     .bg-called { background: #ec8023; }
     .bg-assessed { background: #d25b27; }

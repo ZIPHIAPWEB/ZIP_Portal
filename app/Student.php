@@ -41,7 +41,8 @@ class Student extends Model
         'program_id',
         'application_status',
         'coordinator_id',
-        'branch'
+        'branch',
+        'contacted_status'
     ];
 
     public function log()

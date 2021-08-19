@@ -13,7 +13,7 @@
                     <h3 class="profile-username text-center">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h3>
                     <p class="text-muted text-center">@{{ student.program.name }}</p>
                     <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
+                        <li class="list-group-item" v-if="!student.program.name == 'Canada Program'">
                             <b>Program ID</b>
                             <a v-if="!student.application_id" class="pull-right text-green text-sm">No Program ID Assign</a>
                             <a v-else class="pull-right text-green text-sm">@{{ student.application_id }}</a>
@@ -89,7 +89,7 @@
             -->
         </div>
         <div class="col-md-9">
-            <div class="nav-tabs-custom">
+            <div class="nav-tabs-custom" v-if="student.program.name != 'Canada Program'">
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#host" data-toggle="tab" aria-expanded="true">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="nav-tabs-custom">
+            <div class="nav-tabs-custom" v-if="student.program.name != 'Canada Program'">
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#program-status" data-toggle="tab" aria-expanded="true">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div class="nav-tabs-custom">
+            <div class="nav-tabs-custom" v-if="student.program.name != 'Canada Program'">
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="#pdos" data-toggle="tab" aria-expanded="true">
@@ -260,7 +260,7 @@
                         <table class="table table-striped table-bordered table-condensed">
                             <tbody>
                                 <tr>
-                                    <td class="text-bold" colspan="2">Arrival To US</td>
+                                    <td class="text-bold" colspan="2">Arrival To @{{ student.program.name == 'Canada Program' ? 'Canada' : 'US' }}</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 35%;">Date</td>
@@ -288,7 +288,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-striped table-bordered table-condensed">
+                        <table v-if="student.program.name != 'Canada Program'" class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
                                 <td class="text-bold" colspan="2">Departure From US</td>
@@ -319,7 +319,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-striped table-bordered table-condensed">
+                        <table v-if="student.program.name != 'Canada Program'" class="table table-striped table-bordered table-condensed">
                             <tbody>
                             <tr>
                                 <td class="text-bold" colspan="2">Arrival To MANILA</td>
