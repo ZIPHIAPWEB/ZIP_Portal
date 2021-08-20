@@ -85,6 +85,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/ac/dash', 'pages.dashboard.dash-accounting')->name('dash.accounting');
     
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
+    Route::view('/s/change-password', 'pages.student-content.change-password')->name('student.change-password');
     Route::view('/s/program-status', 'pages.student-content.program-status')->name('student.program-status');
     Route::view('/s/post-program-evaluation', 'pages.student-content.post-program-evaluation')->name('student.post-program-evaluation');
 
@@ -414,3 +415,5 @@ Route::get('/helper/getAllStudentCount', 'HelperController@getAllStudentCount')-
 
 Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->name('verified');
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
+
+Route::post('/updatePassword', 'StudentController@updatePassword')->name('student.password-change');

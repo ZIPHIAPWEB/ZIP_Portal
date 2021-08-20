@@ -20,6 +20,7 @@ use App\Notifications\RegisteredStudentNotification;
 use Illuminate\Support\Facades\Notification;
 use DB;
 use App\Program;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -330,5 +331,25 @@ class StudentController extends Controller
         return response()->json([
             'message'   =>  'Experience Details Deleted!'
         ], 200);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password'      =>  'required',
+            'new_password'          =>  'required',
+            'retype_new_password'   =>  'required'
+        ]);
+
+        if(Hash::check($request->current_password, $request->user()->password)) {
+            User::where('id', $request->user()->id)
+                ->update([
+                    'password'  =>  Hash::make($request->new_password)
+                ]);
+
+            return response()->json(['message' => 'Password Updated!'], 200);
+        }
+
+        return abort(400, 'Invalid Password');
     }
 }

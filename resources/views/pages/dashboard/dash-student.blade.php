@@ -26,6 +26,9 @@
                     <a href="{{ route('dash.student') }}" class="btn btn-primary btn-block">
                         <b>Profile</b>
                     </a>
+                    <a href="{{ route('student.change-password') }}" class="btn btn-primary btn-block">
+                        <b>Change Password</b>
+                    </a>
                 </div>
             </div>
             <div v-if="student.application_status == 'New Applicant'"></div>
