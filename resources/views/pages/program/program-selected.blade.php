@@ -1631,7 +1631,8 @@
                 visaForm: {
                     file: [],
                     req_id: ''
-                }
+                },
+                programs: []
             },
             filters: {
                 toFormattedDateString: function (value) {
@@ -1647,8 +1648,15 @@
             },
             mounted () {
                 this.loadSelectedStudent();
+                this.loadPrograms();
             },
             methods: {
+                loadPrograms() {
+                    axios.get('/helper/program/view')
+                        .then((response) => {
+                            this.programs = response.data.data;
+                        })
+                },
                 selectPrelim(req_id) {
                     $('#upload-prelim').modal('show');
                     this.prelimForm.req_id = req_id;
