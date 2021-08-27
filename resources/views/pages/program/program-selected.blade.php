@@ -64,7 +64,7 @@
                                         <td class="text-bold">
                                             <select @change="setProgram(selProgram)" v-model="selProgram" class="form-control input-sm">
                                                 <option value="">@{{ student.program ? student.program.name : '' }}</option>
-                                                <option v-for="program in programs.data" :value="program.id">@{{ program.name }}</option>
+                                                <option v-for="program in programs" :value="program.id">@{{ program.name }}</option>
                                             </select>
                                         </td>
                                     </tr>
