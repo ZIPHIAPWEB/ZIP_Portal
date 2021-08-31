@@ -91,7 +91,9 @@ class CoordinatorController extends Controller
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Assessed.',
                 ]);
 
-                return 'Student Assessed!';
+                return response()->json([
+                    'message'   =>  'Student Assessed!'
+                ], 200);
 
                 break;
 
@@ -108,7 +110,9 @@ class CoordinatorController extends Controller
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Contacted.',
                 ]);
 
-                return 'Student Called.';
+                return response()->json([
+                    'message'   =>  'Student Called.'
+                ], 200);
             break;
             case 'Confirmed' :
                 $programId = Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
@@ -150,7 +154,10 @@ class CoordinatorController extends Controller
                         break;
                 }
 
-                return 'Student Confirmed';
+                return response()->json([
+                    'message'   =>  'Student Confirmed'
+                ], 200);
+
                 break;
 
             case 'Hired' :
@@ -187,7 +194,10 @@ class CoordinatorController extends Controller
 
                 Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
-                return 'Hired';
+                return response()->json([
+                    'message'   =>  'Hired'
+                ], 200);
+
                 break;
 
             case 'ForVisaInterview' :
@@ -218,7 +228,10 @@ class CoordinatorController extends Controller
 
                 Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
-                return 'For Visa Interview';
+                return response()->json([
+                    'message'   =>  'For Visa Interview'
+                ], 200);
+
                 break;
             case 'ForPDOSCFO' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
@@ -246,7 +259,10 @@ class CoordinatorController extends Controller
 
                 Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
-                return 'For PDOS & CFO';
+                return response()->json([
+                    'message'   =>  'For PDOS & CFO'
+                ], 200);
+
                 break;
 
             case 'ProgramProper':
@@ -267,7 +283,10 @@ class CoordinatorController extends Controller
 
                 Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
 
-                return 'Program Proper';
+                return response()->json([
+                    'message'   =>  'Program Proper'
+                ], 200);
+
                 break;
 
             case 'Cancelled' :
@@ -281,7 +300,10 @@ class CoordinatorController extends Controller
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Cancelled.',
                 ]);
 
-                return 'Canceled';
+                return response()->json([
+                    'message'   =>  'Cancelled'
+                ], 200);
+                
                 break;
             default: 
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [

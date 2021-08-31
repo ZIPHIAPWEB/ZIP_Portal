@@ -1632,7 +1632,9 @@
                     file: [],
                     req_id: ''
                 },
-                programs: []
+                programs: [],
+                hosts: [],
+
             },
             filters: {
                 toFormattedDateString: function (value) {
@@ -1649,8 +1651,18 @@
             mounted () {
                 this.loadSelectedStudent();
                 this.loadPrograms();
+                this.loadHostCompany();
+                this.loadVisaSponsor();
+                this.loadStates();
+                this.loadPositions();
             },
             methods: {
+                loadPositions() {
+                    axios.get('/position/getAll')
+                        .then((response) => {
+                            this.positions = response.data;
+                        })
+                },
                 loadPrograms() {
                     axios.get('/helper/program/view')
                         .then((response) => {
@@ -1990,6 +2002,255 @@
                                 win = window.open(`https://docs.google.com/gview?url=${response.data}&embedded=true`, '_blank');
                                 win.focus();
                             }
+                        })
+                },
+                loadStates() {
+                    axios.get('/state/getAll')
+                        .then((response) => {
+                            this.states = response.data;
+                        })
+                },
+                loadHostCompany() {
+                    axios.get(`/helper/host/view`)
+                        .then((response) => {
+                            this.hosts = response.data.data;
+                        })
+                },
+                loadVisaSponsor() {
+                    axios.get(`/helper/sponsor/view`)
+                        .then((response) => {
+                            this.sponsors = response.data.data;
+                        })
+                },
+                submitHostCompany() {
+                    this.loading.modal = true;
+                    let formData = new FormData();
+                        formData.append('name', this.host.name);
+                        formData.append('position', this.host.position);
+                        formData.append('place', this.host.place);
+                        formData.append('housing', this.host.housing);
+                        formData.append('stipend', this.host.stipend);
+                        formData.append('start', this.host.start);
+                        formData.append('end', this.host.end);
+                        formData.append('sponsor', this.host.sponsor);
+                    axios.post(`/coor/${this.student.user_id}/application/Hired`, formData)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.hired = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                            swal({
+                                title: 'All Fields are Required!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
+                },
+                submitForVisaInterview() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, this.visa)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.visa = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButtonText: 'Go Back!'
+                            })
+                    })
+                },
+                submitForPDOSAndCFO() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, this.program)
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.pdoscfo = false;
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
+                            })
+                    })
+                },
+                updateHostCompanyDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateHostCompanyDetails/${this.student.user_id}`, this.host)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.hostCompanyIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        })
+                },
+                updateVisaInterviewDetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateVisaInterviewDetails/${this.student.user_id}`, this.visa)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.visaInterviewIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updatePDOSCFODetails() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updatePDOSCFODetails/${this.student.user_id}`, this.program)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.pdoscfoIsEdit = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureMNL/${this.student.user_id}`, this.departure_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalUS/${this.student.user_id}`, this.arrival_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateDepartureUS() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateDepartureUS/${this.student.user_id}`, this.departure_us)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.departureFromUs = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateArrivalMNL() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/updateArrivalMNL/${this.student.user_id}`, this.arrival_mnl)
+                        .then(({data}) => {
+                            this.loading.modal = false;
+                            this.settings.arrivalToManila = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            alert(data.message);
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                        });
+                },
+                updateField(field, input) {
+                    this.loading.modal = true;
+                    let formData = new FormData();
+                        formData.append('field', input);
+                    axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
+                        .then((response) => {
+                            this.loading.modal = false;
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            })
+                        }).catch((error) => {
+                            this.loading.modal = false;
+                            swal({
+                                title: 'Something went wrong!',
+                                type: 'error',
+                                confirmButonText: 'Go Back!'
+                            })
+                    })
+                },
+                loadStudents () {
+                    this.loading.table = true;
+                    axios.get(`/coor/program/${programId}`)
+                        .then((response) => {
+                            this.loading.table = false;
+                            if (response.data.data.length > 0) {
+                                this.hasRecords = true;
+                                this.students = response.data.data;
+                                this.testData = response.data.data;
+                                this.links = response.data.links;
+                                this.current_page = response.data.meta.current_page;
+                                this.last_page = response.data.meta.last_page;
+                            } else {
+                                this.hasRecords = false;
+                            }
+                        })
+                },
+                viewStudent (studentId) {
+                    axios.get(`/stud/viewWithFullDetails?id=${studentId}`)
+                        .then((response) => {
+                            this.student = response.data.data;
+                            this.loadBasicRequirements(programId, response.data.data.user_id);
+                            this.loadPaymentRequirements(programId, response.data.data.user_id);
+                            this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
+                            this.loadAdditionalRequirement(programId, response.data.data.user_id);
+                            console.log(response.data.data);
+                            $('#student-modal').modal('show');
+                        })
+                },
+                setContactStatus(e) {
+                    axios.post(`/coor/${this.student.user_id}/setContactStatus`, { status: e.target.value })
+                        .then((response) => {
+                            this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButonText: 'Continue'
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error);
                         })
                 },
                 setApplicationStatus(status) {
