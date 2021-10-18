@@ -798,7 +798,7 @@
                         })
                 },
                 ViewVisaRequirements: function (sponsorId, userId) {
-                    axios.get(`/coor/requirement/visa/${sponsorId}/${userId}`)
+                    axios.get(`/visa/viewUserRequirement?program_id=${sponsorId}&id=${userId}`)
                         .then((response) => {
                             this.requirements.visa = response.data.data;
                         })

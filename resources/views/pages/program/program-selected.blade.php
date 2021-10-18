@@ -1845,6 +1845,13 @@
                             this.visaRequirements = response.data.data;
                         })
                 },
+                downloadVisaRequirement (id) {
+                    axios.get(`/studVisa/download?requirement_id=${id}`)
+                        .then((response) => {
+                            var win = window.open(response.data);
+                            win.focus();
+                        })
+                },
                 removePrelimFile(requirement) {
                     swal({
                         title: 'Are you sure?',
