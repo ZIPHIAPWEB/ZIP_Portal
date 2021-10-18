@@ -2035,8 +2035,6 @@
                         formData.append('sponsor', this.host.sponsor);
                     axios.post(`/coor/${this.student.user_id}/application/Hired`, formData)
                         .then((response) => {
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             this.loading.modal = false;
                             this.show.hired = false;
                             swal({
@@ -2057,8 +2055,6 @@
                     this.loading.modal = true;
                     axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, this.visa)
                         .then((response) => {
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             this.loading.modal = false;
                             this.show.visa = false;
                             swal({
@@ -2078,8 +2074,6 @@
                     this.loading.modal = true;
                     axios.post(`/coor/${this.student.user_id}/application/ForPDOSCFO`, this.program)
                         .then((response) => {
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             this.loading.modal = false;
                             this.show.pdoscfo = false;
                             swal({
@@ -2101,8 +2095,6 @@
                         .then(({data}) => {
                             this.loading.modal = false;
                             this.settings.hostCompanyIsEdit = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2114,8 +2106,6 @@
                         .then(({data}) => {
                             this.loading.modal = false;
                             this.settings.visaInterviewIsEdit = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2127,21 +2117,17 @@
                         .then(({data}) => {
                             this.loading.modal = false;
                             this.settings.pdoscfoIsEdit = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
                         });
                 },
                 updateDepartureMNL() {
-                    this.loading.modal = true;
                     axios.post(`/coor/updateDepartureMNL/${this.student.user_id}`, this.departure_mnl)
                         .then(({data}) => {
+                            this.viewStudent(this.student.user_id);
                             this.loading.modal = false;
                             this.settings.departureFromManila = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2151,10 +2137,9 @@
                     this.loading.modal = true;
                     axios.post(`/coor/updateArrivalUS/${this.student.user_id}`, this.arrival_us)
                         .then(({data}) => {
+                            this.viewStudent(this.student.user_id);
                             this.loading.modal = false;
                             this.settings.arrivalToUs = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2166,8 +2151,6 @@
                         .then(({data}) => {
                             this.loading.modal = false;
                             this.settings.departureFromUs = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2179,8 +2162,6 @@
                         .then(({data}) => {
                             this.loading.modal = false;
                             this.settings.arrivalToManila = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             alert(data.message);
                         }).catch((error) => {
                             this.loading.modal = false;
@@ -2193,8 +2174,6 @@
                     axios.post(`/coor/update/${field}/${this.student.user_id}`, formData)
                         .then((response) => {
                             this.loading.modal = false;
-                            this.loadStudents(programId);
-                            this.viewStudent(this.student.user_id);
                             swal({
                                 title: response.data,
                                 type: 'success',
@@ -2235,7 +2214,6 @@
                             this.loadVisaRequirements(response.data.data.visa_sponsor_id, response.data.data.user_id);
                             this.loadAdditionalRequirement(programId, response.data.data.user_id);
                             console.log(response.data.data);
-                            $('#student-modal').modal('show');
                         })
                 },
                 setContactStatus(e) {
