@@ -2058,6 +2058,18 @@
                             })
                     })
                 },
+                setProgram(program) {
+                    axios.post(`/coor/${this.student.user_id}/program/${program}`)
+                        .then((response) => {
+                            swal({
+                                title: response.data,
+                                type: 'success',
+                                confirmButtonText: 'Continue'
+                            });
+                            this.loadStudents(programId);
+                            $('#student-modal').modal('hide');
+                        })
+                },
                 submitForVisaInterview() {
                     this.loading.modal = true;
                     axios.post(`/coor/${this.student.user_id}/application/ForVisaInterview`, this.visa)
