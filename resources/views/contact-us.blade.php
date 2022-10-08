@@ -114,7 +114,7 @@ theme_color="#1b2754">
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Pampanga Branch" src="assets/img/PAMPANGA.jpg" style="width: 100%;"></div>
+                <!-- <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Pampanga Branch" src="assets/img/PAMPANGA.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold;">Pampanga Office</h3>
@@ -189,7 +189,7 @@ theme_color="#1b2754">
                             <li></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
