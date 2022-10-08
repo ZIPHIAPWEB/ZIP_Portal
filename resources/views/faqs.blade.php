@@ -228,70 +228,7 @@ theme_color="#1b2754">
     </div>
 </section>
 <div id="contact" class="footer-dark" style="background:linear-gradient(to right, #06124a, #071766);">
-    <footer>
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <h5 style="font-weight:bold;">CONTACT US</h5>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">MANILA OFFICE:</h5>
-                            <p style="font-size:12px;">2F 1985 C.M. Recto Avenue Sampaloc, Manila</p>
-                            <p style="font-size:12px;">(02)559-8213 | 0917-522-8213 | 0922-876-8213</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">DAVAO OFFICE:</h5>
-                            <p style="font-size:12px;">5F Metro Lifestyle Complex, F. Torres Street, Davao City</p>
-                            <p style="font-size:12px;">(082) 296-5941 | 0917-800-8213</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">CEBU OFFICE:</h5>
-                            <p style="font-size:12px;">Unit 216, Raintree Mall, 528 General Maxilom Avenue, Cebu City</p>
-                            <p style="font-size:12px;">(032)266-8840 | 0915-875-7618</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <h5 class="text-warning" style="font-weight:bold;">PAMPANGA OFFICE:</h5>
-                            <p style="font-size:10px;">Unit 101-B Km 6 Green Fields Square Mac Arthur Highway Sindalan, San Fernando, Pampanga</p>
-                            <p style="font-size:12px;">0906-371-5897</p>
-                        </div>
-                        <div class="col-12">
-                            <div class="row no-gutters">
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-envelope-o" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">info@ziptravel.com.ph</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-facebook-square" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ZIP Travel Philippines</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-instagram" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ziptravelph</h6>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-3 d-flex flex-row justify-content-center align-items-center"><i class="fa fa-youtube-play" style="margin-right:6px;"></i>
-                                    <h6 style="margin-bottom:0px;font-size:10px;">ZIP Travel Philippines</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left:17px;padding-right:17px;">
-                    <form>
-                        <h5 style="font-weight:bold;">FOR INQUIRIES</h5>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Name" style="background-color:rgba(255,255,255,0);color:rgb(248,249,251);"></div>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Email" style="background-color:rgba(255,255,255,0);color:rgb(248,248,248);"></div>
-                        <div class="form-group"><input class="form-control form-control-sm" type="text" placeholder="Subject" style="background-color:rgba(255,255,255,0);color:rgb(246,248,249);"></div>
-                        <div class="form-group"><textarea class="form-control" placeholder="Message" autocomplete="on" style="background-color:rgba(255,255,255,0);color:rgb(246,247,248);"></textarea></div>
-                        <div class="form-group d-flex flex-row-reverse"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
-                    </form>
-                </div>
-                <div class="col-12">
-                    <div class="row no-gutters">
-                        <div class="col d-flex justify-content-start align-items-center align-content-center" style="margin-top:25px;">
-                            <h6 style="margin-bottom:0px;font-size:10px;">@ 2018 Zip Travel PH</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+@include('partials._main-footer')
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
