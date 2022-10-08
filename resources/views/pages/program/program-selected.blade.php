@@ -975,16 +975,7 @@
                                         <div class="input-group-sm">
                                             <select v-model="departure_mnl.mnl_departure_flight" name="" id="" class="form-control input-sm">
                                                 <option value="">Select Airlines</option>
-                                                <option value="PAL">Philippine Airlines</option>
-                                                <option value="AirAsia">Air Asia</option>
-                                                <option value="Alaska Airlines">Alaska Airlines</option>
-                                                <option value="Korean Air">Korean Air</option>
-                                                <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
-                                                <option value="Asiana Airlines">Asiana Airlines</option>
-                                                <option value="Japan Airlines">Japan Airlines</option>
-                                                <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
-                                                <option value="Cathay Dragon">Cathay Dragon</option>
+                                                <option v-for="airline in airlines" :key="airline.id" :value="airline.value">@{{ airline.name }}</option>
                                             </select>
                                         </div>
                                     </td>
@@ -1054,16 +1045,7 @@
                                         <div class="input-group-sm">
                                             <select v-model="arrival_us.us_arrival_flight" name="" id="" class="form-control input-sm">
                                                 <option value="">Select Airlines</option>
-                                                <option value="PAL">Philippine Airlines</option>
-                                                <option value="AirAsia">Air Asia</option>
-                                                <option value="Alaska Airlines">Alaska Airlines</option>
-                                                <option value="Korean Air">Korean Air</option>
-                                                <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
-                                                <option value="Asiana Airlines">Asiana Airlines</option>
-                                                <option value="Japan Airlines">Japan Airlines</option>
-                                                <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
-                                                <option value="Cathay Dragon">Cathay Dragon</option>
+                                                <option v-for="airline in airlines" :key="airline.id" :value="airline.value">@{{ airline.name }}</option>
                                             </select>
                                         </div>
                                     </td>
@@ -1133,16 +1115,7 @@
                                         <div class="input-group-sm">
                                             <select v-model="departure_us.us_departure_flight" name="" id="" class="form-control input-sm">
                                                 <option value="">Select Airlines</option>
-                                                <option value="PAL">Philippine Airlines</option>
-                                                <option value="AirAsia">Air Asia</option>
-                                                <option value="Alaska Airlines">Alaska Airlines</option>
-                                                <option value="Korean Air">Korean Air</option>
-                                                <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
-                                                <option value="Asiana Airlines">Asiana Airlines</option>
-                                                <option value="Japan Airlines">Japan Airlines</option>
-                                                <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
-                                                <option value="Cathay Dragon">Cathay Dragon</option>
+                                                <option v-for="airline in airlines" :key="airline.id" :value="airline.value">@{{ airline.name }}</option>
                                             </select>
                                         </div>
                                     </td>
@@ -1212,16 +1185,7 @@
                                         <div class="input-group-sm">
                                             <select v-model="arrival_mnl.mnl_arrival_flight" name="" id="" class="form-control input-sm">
                                                 <option value="">Select Airlines</option>
-                                                <option value="PAL">Philippine Airlines</option>
-                                                <option value="AirAsia">Air Asia</option>
-                                                <option value="Alaska Airlines">Alaska Airlines</option>
-                                                <option value="Korean Air">Korean Air</option>
-                                                <option value="Delta Airlines Inc.">Delta Airlines Inc.</option>
-                                                <option value="Jetstar Japan Co Ltd">Jetstar Japan Co Ltd</option>
-                                                <option value="Asiana Airlines">Asiana Airlines</option>
-                                                <option value="Japan Airlines">Japan Airlines</option>
-                                                <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
-                                                <option value="Cathay Dragon">Cathay Dragon</option>
+                                                <option v-for="airline in airlines" :key="airline.id" :value="airline.value">@{{ airline.name }}</option>
                                             </select>
                                         </div>
                                     </td>
@@ -1463,7 +1427,7 @@
         const sidenav = new Vue({
             el: '#sidenav',
             data: {
-                auth: {{ \App\Coordinator::where('user_id', Auth::user()->id)->first()->program }},
+                auth: {!! \App\Coordinator::where('user_id', Auth::user()->id)->first() !!},
                 url: '/portal/c/program/',
                 programs: []
             },
@@ -1487,6 +1451,21 @@
                     modal: false,
                     table: false
                 },
+                airlines: [
+                    { id: 1, value: 'PAL', name: 'Philippine Airlines'},
+                    { id: 2, value: 'AirAsia', name: 'Air Asia'},
+                    { id: 3, value: 'Alaska Airlines', name: 'Alaska Airlines'},
+                    { id: 4, value: 'Korean Air', name: 'Korean Air'},
+                    { id: 5, value: 'Delta Airlines Inc.', name: 'Delta Airlines Inc.'},
+                    { id: 6, value: 'Jetstar Japan Co Ltd', name: 'Jetstar Japan Co Ltd'},
+                    { id: 7, value: 'Asiana Airlines', name: 'Asiana Airlines'},
+                    { id: 8, value: 'Japan Airlines', name: 'Japan Airlines'},
+                    { id: 9, value: 'Cathay Pacific Airways', name: 'Cathay Pacific Airways'},
+                    { id: 10, value: 'Cathay Dragon', name: 'Cathay Dragon'},
+                    { id: 11, value: 'American Airlines', name: 'American Airlines'},
+                    { id: 12, value: 'United Airlines', name: 'United Airlines'},
+                    { id: 13, value: 'Qatar Airways', name: 'Qatar Airways'}
+                ],
                 basicRequirements: [],
                 paymentRequirements: [],
                 visaRequirements: [],

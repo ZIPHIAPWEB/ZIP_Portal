@@ -107,7 +107,7 @@ theme_color="#1b2754">
                             </li>
                             <li>
                                 <div class="branch-address"><i class="fas fa-phone"></i>
-                                    <p>(02)559-8213 |&nbsp;(02)692-0907 | 0917-522-8213</p>
+                                    <p>(02)559-8213 | 0917-522-8213</p>
                                 </div>
                             </li>
                             <li></li>
