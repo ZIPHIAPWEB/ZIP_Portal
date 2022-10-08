@@ -5,7 +5,7 @@
                     <!-- <h6>MANILA OFFICE</h6> -->
                     <ul>
                         <li><a href="#">2F University Center Building, 1985 C.M. Recto Avenue, Manila, 1008</a></li>
-                        <li><a href="#">(02)559-8213 | (02)559-8213 | 0917-522-8213</a></li>
+                        <li><a href="#">(02)8559-8213 | 0917-522-8213</a></li>
                     </ul>
                 </div>
                 <!-- <div class="col text-justify">
