@@ -110,10 +110,10 @@
                                     <select v-model="student.branch" class="form-control input-sm">
                                         <option value="">Select Nearest Branch</option>
                                         <option value="MANILA">Manila</option>
-                                        <option value="PAMPANGA">Pampanga</option>
-                                        <option value="CEBU">Cebu</option>
+                                        <!-- <option value="PAMPANGA">Pampanga</option> -->
+                                        <!-- <option value="CEBU">Cebu</option> -->
                                         <option value="DAVAO">Davao</option>
-                                        <option value="BACOLOD">Bacolod</option>
+                                        <!-- <option value="BACOLOD">Bacolod</option> -->
                                     </select>
                                     <span class="help-block text-red" v-if="errors.branch">@{{ errors.branch[0] }}</span>
                                 </div>

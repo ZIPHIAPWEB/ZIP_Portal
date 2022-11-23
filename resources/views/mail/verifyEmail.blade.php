@@ -54,6 +54,11 @@
                             ZIP Travel Philippines
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding: 10px">
+                            Use this link if verification button is not working. {{ $verification_link }}
+                        </td>
+                    </tr>
                 </table>
                 <table width="80%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
