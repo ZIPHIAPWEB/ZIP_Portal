@@ -158,7 +158,7 @@ theme_color="#1b2754">
                 <div class="col">
                     <div>
                         <h2 class="text-center" style="margin-bottom: 25px;font-weight: bold;">WHAT WE DO</h2>
-                        <p class="text-justify text-lg-center text-xl-center">We provide intercultural oppotunities to Filipino and foreign students to help them become familiar with U.S technologies through different types of U.S.-based training. We help them obtain a better understanding of one another
+                        <p class="text-justify text-lg-center text-xl-center">We provide intercultural opportunities to Filipino and foreign students to help them become familiar with U.S technologies through different types of U.S.-based training. We help them obtain a better understanding of one another
                             and the world around them.</p>
                     </div>
                 </div>
