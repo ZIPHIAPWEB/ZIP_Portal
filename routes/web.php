@@ -16,6 +16,7 @@ Route::view('/program-career', 'program-career')->name('program-career');
 Route::view('/program-internship', 'program-internship')->name('program-internship');
 Route::view('/program-swt', 'program-swt')->name('program-swt');
 Route::view('/social-stream', 'social-stream')->name('social-stream');
+Route::view('/tax-services', 'tax-services')->name('tax-services');
 
 Route::get('/blog', 'BlogController@index');
 Route::get('/blog/{slug}', 'BlogController@view');
