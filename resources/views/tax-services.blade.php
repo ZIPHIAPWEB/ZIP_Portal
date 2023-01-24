@@ -136,6 +136,11 @@ After you login to Sprintax, it will ask you a series of questions about the tim
                 </div>
             </div>
             <div class="row">
+                <div class="col" style="display: flex; justify-content: center;">
+                    <a style="font-size: 1.2rem; text-decoration: none; color: white; padding: 15px; background-color: #002154; border-radius: 5px;" href="https://taxprep.sprintax.com/sprintax-zip-travel">CLICK HERE TO GET STARTED</a>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col">
                     <h3 class="text-center my-4" style="font-weight: bold;">Sprintax Educational Tax Videos and Blog</h3>
                     <p class="text-center">
