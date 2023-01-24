@@ -91,32 +91,47 @@ After you login to Sprintax, it will ask you a series of questions about the tim
             <div class="row mt-4 d-xl-flex flex-row justify-content-xl-center align-items-xl-center">
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <div class="d-flex flex-column justify-content-xl-center align-items-sm-center application-guide">
-                        <img alt="Image containing an orientation at ZIP Travel Philippines Office with a color blue overlay" src="assets/img/APPGUIDE1b.png">
-                        <p class="text-center guide-title">Gather Documents<br></p>
+                        <!-- <img alt="Image containing an orientation at ZIP Travel Philippines Office with a color blue overlay" src="https://dummyimage.com/150x150/000000/ffffff"> -->
+                        <div style="background-color: #002154; height: 120px; width: 120px; border-radius: 100px; display:flex; flex-direction: column; justify-content: center;">
+                            <h1 style="text-align: center; color: white; font-weight:bold; ">1</h1>
+                        </div>
+                        <p class="text-center guide-title">Gather Documents<br><br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <div class="d-flex flex-column justify-content-xl-center align-items-sm-center application-guide">
-                        <img alt="Image containing a laptop on the desk viewing the website of ZIP Travel Philippines" src="assets/img/APPGUIDE2b.png">
-                        <p class="text-center guide-title">Create Sprintax  Account<br></p>
+                        <!-- <img alt="Image containing a laptop on the desk viewing the website of ZIP Travel Philippines" src="assets/img/APPGUIDE2b.png"> -->
+                        <div style="background-color: #002154; height: 120px; width: 120px; border-radius: 100px; display:flex; flex-direction: column; justify-content: center;">
+                            <h1 style="text-align: center; color: white; font-weight:bold; ">2</h1>
+                        </div>
+                        <p class="text-center guide-title">Create Sprintax  Account<br><br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <div class="d-flex flex-column justify-content-xl-center align-items-sm-center application-guide">
-                        <img alt="Image containing two people exchanging documents" src="assets/img/APPGUIDE3b.png">
-                        <p class="text-center guide-title">Follow their Instructions<br></p>
+                        <!-- <img alt="Image containing two people exchanging documents" src="assets/img/APPGUIDE3b.png"> -->
+                        <div style="background-color: #002154; height: 120px; width: 120px; border-radius: 100px; display:flex; flex-direction: column; justify-content: center;">
+                            <h1 style="text-align: center; color: white; font-weight:bold; ">3</h1>
+                        </div>
+                        <p class="text-center guide-title">Follow their Instructions<br><br></p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <div class="d-flex flex-column justify-content-xl-center align-items-sm-center application-guide">
-                        <img alt="Image containing a host company interview of 2 students" src="assets/img/APPGUIDE4b.png">
-                        <p class="text-center guide-title">Complete State Tax Return  (if  required)</p>
+                        <!-- <img alt="Image containing a host company interview of 2 students" src="assets/img/APPGUIDE4b.png"> -->
+                        <div style="background-color: #002154; height: 120px; width: 120px; border-radius: 100px; display:flex; flex-direction: column; justify-content: center;">
+                            <h1 style="text-align: center; color: white; font-weight:bold; ">4</h1>
+                        </div>
+                        <p class="text-center guide-title">Complete State Tax Return  <br>(if  required)</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-xl-2 d-xl-flex justify-content-xl-center align-items-xl-center">
                     <div class="d-flex flex-column justify-content-xl-center align-items-sm-center application-guide">
-                        <img alt="Image containg a group of students holding a banner 'VISA APPROVED'" src="assets/img/APPGUIDE5b.png">
-                        <p class="text-center guide-title">Mail forms  to  IRS<br></p>
+                        <!-- <img alt="Image containg a group of students holding a banner 'VISA APPROVED'" src="assets/img/APPGUIDE5b.png"> -->
+                        <div style="background-color: #002154; height: 120px; width: 120px; border-radius: 100px; display:flex; flex-direction: column; justify-content: center;">
+                            <h1 style="text-align: center; color: white; font-weight:bold; ">5</h1>
+                        </div>
+                        <p class="text-center guide-title">Mail forms  to  IRS<br><br></p>
                     </div>
                 </div>
             </div>
