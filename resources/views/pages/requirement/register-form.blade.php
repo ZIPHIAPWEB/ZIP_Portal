@@ -104,20 +104,20 @@
                                     <span class="help-block text-red" v-if="errors.program_id">@{{ errors.program_id[0] }}</span>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="">Nearest ZIP Travel Branch</label>
                                     <select v-model="student.branch" class="form-control input-sm">
                                         <option value="">Select Nearest Branch</option>
                                         <option value="MANILA">Manila</option>
-                                        <!-- <option value="PAMPANGA">Pampanga</option> -->
-                                        <!-- <option value="CEBU">Cebu</option> -->
+                                        <option value="PAMPANGA">Pampanga</option>
+                                        <option value="CEBU">Cebu</option>
                                         <option value="DAVAO">Davao</option>
-                                        <!-- <option value="BACOLOD">Bacolod</option> -->
+                                        <option value="BACOLOD">Bacolod</option>
                                     </select>
                                     <span class="help-block text-red" v-if="errors.branch">@{{ errors.branch[0] }}</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <hr>
                             <div class="row">
                                 <div class="col-xs-12">
@@ -239,6 +239,8 @@
                                     <li>InterExchange</li>
                                     <li>Cultural Homestay International</li>
                                     <li>International Cultural Exchange Organization</li>
+                                    <li>Global Educational Concept</li>
+                                    <li>Global Cultural Exchange</li>
                                 </ul>
                                     
                                 <b>IV.	RIGHTS OF THE APPLICANT</b>
@@ -336,10 +338,10 @@
                                     <td>Program</td>
                                     <td class="text-bold">@{{ student.program_id.name }}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>ZIP Branch</td>
                                     <td class="text-bold">@{{ student.branch }}</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                         <table class="table table-striped table-bordered table-condensed">
@@ -560,7 +562,7 @@
                     formData.append('t_address', this.tertiary.address);
                     formData.append('t_start_date', this.tertiary.start_date);
                     formData.append('t_date_graduated', this.tertiary.date_graduated);
-                    formData.append('branch', this.student.branch);
+                    // formData.append('branch', this.student.branch);
 
                     axios.post(`/stud/validateDetails/${this.level}`, formData)
                         .then((response) => {

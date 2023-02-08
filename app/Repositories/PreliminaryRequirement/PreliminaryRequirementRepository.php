@@ -26,7 +26,7 @@ class PreliminaryRequirementRepository extends BaseRepository implements IPrelim
 
     public function getByProgram($id)
     {
-        return $this->findBy(['program_id' => $id]);
+        return $this->findBy(['program_id' => $id, 'is_active' => 1]);
     }
 
     public function getById($id)
@@ -36,7 +36,7 @@ class PreliminaryRequirementRepository extends BaseRepository implements IPrelim
 
     public function getByProgramIdAndUserId($programId, $userId)
     {
-        $data = $this->findByWhereWith(['program_id' => $programId], ['studentPreliminary' => function ($query) use ($userId) {
+        $data = $this->findByWhereWith(['program_id' => $programId, 'is_active' => 1], ['studentPreliminary' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
         }]);
 

@@ -54,17 +54,18 @@
                             <select v-model="filter.status" class="form-control input-sm">
                                 <option value="" selected>All</option>
                                 <option value="New Applicant">New Applicant</option>
-                                <option value="Called">Called</option>
+                                <!-- <option value="Called">Called</option> -->
                                 <option value="Assessed">Assessed</option>
                                 <option value="Confirmed">Confirmed</option>
                                 <option value="Hired">Hired</option>
                                 <option value="For Visa Interview">For Visa Interview</option>
                                 <option value="For PDOS & CFO">For PDOS & CFO</option>
                                 <option value="Program Proper">Program Proper</option>
+                                <option value="Visa Denied">Visa Denied</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="" class="control-label">Filter By Branch</label>
                             <select v-model="filter.branch" name="" id="" class="form-control input-sm">
                                 <option value="" selected>All</option>
@@ -74,7 +75,7 @@
                                 <option value="BACOLOD">Bacolod</option>
                                 <option value="DAVAO">Davao</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                                 <download-excel
@@ -94,14 +95,14 @@
                         <thead>
                             <th class="text-center" style="width: 10%">Date of Application</th>
                             <th class="text-center" style="width: 10%">Status</th>
-                            <th class="text-center" style="width: 10%">Application ID</th>
+                            <!-- <th class="text-center" style="width: 10%">Application ID</th> -->
                             <th class="text-center" style="width: 10%">Email</th>
                             <th class="text-center" style="width: 10%">First Name</th>
                             <th class="text-center" style="width: 10%">Middle Name</th>
                             <th class="text-center" style="width: 10%">Last Name</th>
                             <th class="text-center" style="width: 10%">Contact</th>
                             <th class="text-center" style="width: 10%">School</th>
-                            <th class="text-center" style="width: 10%">Branch</th>
+                            <!-- <th class="text-center" style="width: 10%">Branch</th> -->
                             <th class="text-center" style="width: 10%">Program</th>
                             <th class="text-center" style="width: 10%">Recent Action</th>
                             <th class="text-center" style="width: 10%">Action</th>
@@ -115,14 +116,14 @@
                             <tr v-else v-for="student in filteredStudents">
                                 <td class="text-sm text-center">@{{ student.created_at }}</td>
                             <td class="text-center"><span :style="statusColor(student.application_status)" class="label label-sm">@{{ student.application_status }} @{{ (student.application_status == 'Called') ? `: ${student.contacted_status}` : '' }}</span></td>
-                                <td class="text-sm text-center">@{{ student.application_id }}</td>
+                                <!-- <td class="text-sm text-center">@{{ student.application_id }}</td> -->
                                 <td class="text-sm text-center">@{{ student.user.email }}</td>
                                 <td class="text-sm text-center">@{{ student.first_name }}</td>
                                 <td class="text-sm text-center">@{{ student.middle_name }}</td>
                                 <td class="text-sm text-center">@{{ student.last_name }}</td>
                                 <td class="text-sm text-center">@{{ student.mobile_number }}/@{{ student.home_number }}</td>
                                 <td class="text-sm text-center"><div v-if="student.tertiary.school"> @{{ student.tertiary.school.name }}</div></td>
-                                <td class="text-sm text-center">@{{ student.branch }}</td>
+                                <!-- <td class="text-sm text-center">@{{ student.branch }}</td> -->
                                 <td class="text-sm text-center">@{{ student.program.display_name }}</td>
                                 <td class="text-sm text-center">
                                     <div v-if="!student.log[0]">

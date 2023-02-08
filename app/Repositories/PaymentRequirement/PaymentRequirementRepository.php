@@ -21,7 +21,7 @@ class PaymentRequirementRepository extends BaseRepository implements IPaymentReq
 
     public function getByProgramIdAndUserId($programId, $userId)
     {
-        return $this->findByWhereWith(['program_id' => $programId], ['studentPayment' => function ($query) use ($userId) {
+        return $this->findByWhereWith(['program_id' => $programId, 'is_active' => 1], ['studentPayment' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
         }]);
     }
@@ -48,6 +48,6 @@ class PaymentRequirementRepository extends BaseRepository implements IPaymentReq
 
     public function getByProgram($programId)
     {
-        return $this->findBy(['program_id' => $programId]);
+        return $this->findBy(['program_id' => $programId, 'is_active' => 1]);
     }
 }

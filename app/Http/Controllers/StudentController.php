@@ -69,7 +69,7 @@ class StudentController extends Controller
             'program_id'            =>  'required',
             'fb_email'              =>  'required',
             'skype_id'              =>  'required',
-            'branch'                =>  'required',
+            // 'branch'                =>  'required',
 
             't_school'              =>  'required',
             't_degree'              =>  'required',
@@ -96,7 +96,7 @@ class StudentController extends Controller
             'program_id'                =>  $request->input('program_id'),
             'fb_email'                  =>  $request->input('fb_email'),
             'skype_id'                  =>  $request->input('skype_id'),
-            'branch'                    =>  $request->input('branch'),
+            // 'branch'                    =>  $request->input('branch'),
             'visa_interview_status'     =>  'Pending',
             'application_status'        =>  'New Applicant',
             'contacted_status'          =>  'Pending',

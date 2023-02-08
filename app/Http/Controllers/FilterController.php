@@ -51,6 +51,7 @@ class FilterController extends Controller
                 ->where('branch', 'like', '%' . $request->input('branch') . '%')
                 ->where('application_status', 'like', '%' . $request->input('status') . '%')
                 ->with(['user', 'tertiary.school', 'company', 'coordinator', 'sponsor', 'log', 'program'])
+                ->orderBy('students.created_at', 'DESC')
                 ->get();
         } else {
             $students = Student::where('program_id', $request->input('program_id'))
@@ -58,7 +59,8 @@ class FilterController extends Controller
                 ->where('branch', 'like', '%' . $request->input('branch') . '%')
                 ->whereBetween('created_at', [$request->input('from'), $request->input('to')])
                 ->with(['user', 'tertiary.school', 'company', 'coordinator', 'sponsor', 'log', 'program'])
-                ->get();;
+                ->orderBy('students.created_at', 'DESC')
+                ->get();
         }
 
         return SuperAdminResource::collection($students);
