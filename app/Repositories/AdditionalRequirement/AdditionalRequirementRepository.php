@@ -26,7 +26,7 @@ class AdditionalRequirementRepository extends BaseRepository implements IAdditio
     
     public function getByProgramIdAndUserId($programId, $userId)
     {
-        return $this->findByWhereWith(['program_id' => $programId], ['studentAdditional' => function ($query) use ($userId) {
+        return $this->findByWhereWith(['program_id' => $programId, 'is_active' => 1], ['studentAdditional' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
         }]);
     }
@@ -48,7 +48,7 @@ class AdditionalRequirementRepository extends BaseRepository implements IAdditio
 
     public function getByProgram($programId)
     {
-        return $this->findBy(['program_id' => $programId]);
+        return $this->findBy(['program_id' => $programId, 'is_active' => 1]);
     }
 
     public function getById($id)

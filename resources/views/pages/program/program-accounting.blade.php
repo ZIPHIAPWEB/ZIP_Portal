@@ -63,7 +63,7 @@
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="" class="control-label">Filter By Branch</label>
                             <select v-model="filter.branch" name="" id="" class="form-control input-sm">
                                 <option value="" selected>All</option>
@@ -73,7 +73,7 @@
                                 <option value="BACOLOD">Bacolod</option>
                                 <option value="DAVAO">Davao</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                         </div>

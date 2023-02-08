@@ -390,14 +390,14 @@
                                         <a :href="student.fb_email">@{{ student.fb_email }}</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td class="text-sm">
                                         Branch
                                     </td>
                                     <td v-cloak class="text-sm text-bold">
                                         @{{ student.branch }}
                                     </td>
-                                </tr>
+                                </tr> -->
                                 </tbody>
                             </table>
                         </section>

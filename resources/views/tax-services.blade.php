@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
+        @include('partials._styles')
+
     </head>
 
 <body>
@@ -50,7 +52,9 @@
         </div>
     </div>
     @include('partials._navbar')
-    <header class="program-header" style="background-image: url(&quot;assets/img/TAX.jpg&quot;);background-size: cover;background-position: center;background-repeat: no-repeat;"></header>
+    <header class="program-header" style="position: relative; background-image: url(&quot;assets/img/TAX.jpg&quot;);background-size: cover;background-position: center;background-repeat: no-repeat;">
+        <a href="https://taxprep.sprintax.com/sprintax-zip-travel" style="position: absolute; top:20px; right: 50px; border: white 2px solid; padding: 1rem; display:flex; flex-direction: row; justify-content: center; text-decoration: none; color: white; border-radius: 5px; font-weight: bold;">CLICK HERE TO GET STARTED</a>
+    </header>
     <section class="align-items-xl-center p-5">
         <div class="container-fluid">
             <div class="row">
