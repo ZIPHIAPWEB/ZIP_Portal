@@ -43,6 +43,11 @@ class CoordinatorController extends Controller
         return view('pages.program.program')->with('program', $id);
     }
 
+    public function coordinatorAllProgram()
+    {
+        return view('pages.program.program-all');
+    }
+
     public function adminProgram($id)
     {
         return view('pages.program.program-admin')->with('program', $id);
@@ -51,6 +56,13 @@ class CoordinatorController extends Controller
     public function loadStudents($id)
     {
         $students = $this->studentRepository->getByProgramId($id);
+
+        return SuperAdminResource::collection($students);
+    }
+
+    public function loadAllStudents()
+    {
+        $students = Student::with(['user', 'company', 'tertiary.school', 'program', 'log'])->get();
 
         return SuperAdminResource::collection($students);
     }

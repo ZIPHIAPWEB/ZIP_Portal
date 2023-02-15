@@ -118,6 +118,12 @@
                         </span>
                     </a>
                     <ul class="treeview-menu" >
+                        <li>
+                            <a href="/portal/c/program-all">
+                                <i class="fa fa-circle-o"></i>
+                                <small>All Programs</small>
+                            </a>
+                        </li>
                         <li v-for="program in programs">
                             <a :href="url + program.id">
                                 <i class="fa fa-circle-o"></i>
