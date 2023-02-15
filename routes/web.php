@@ -97,6 +97,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/s/requirement/additional', 'pages.requirement.additional')->name('req.additional');
 
     Route::get('/c/program/{id}', 'CoordinatorController@coordinatorProgram')->name('coor.program');
+    Route::get('/c/program-all', 'CoordinatorController@coordinatorAllProgram')->name('coor.all.program');
     Route::get('/c/program-admin/{id}', 'CoordinatorController@adminProgram')->name('admin.program');
     Route::get('/ac/program-acc/{id}', 'AccountingController@accountingProgram')->name('acc.program');
 });
@@ -107,6 +108,7 @@ Route::view('/chat-student', 'pages.chatbox-student')->name('portal.chat-student
 Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
     Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
+    Route::get('/program-all-students', 'CoordinatorController@loadAllStudents')->name('coor.students.all');
 
     Route::get('/requirement/basic/{programId}/{userId}', 'CoordinatorController@loadBasicRequirements')->name('coor.basic.requirements');
     Route::get('/requirement/payment/{programId}/{userId}', 'CoordinatorController@loadPaymentRequirements')->name('coor.basic.requirements');

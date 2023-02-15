@@ -48,7 +48,6 @@ class Student extends Model
     public function log()
     {
         return $this->hasMany('App\Log', 'user_id', 'user_id');
-
     }
 
     public function user()

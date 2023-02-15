@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', \App\Program::find($program)->name . ' Program')
+@section('title', 'All Program')
 
 @section('sidenav')
     <li class="header">General</li>
@@ -19,6 +19,12 @@
             </span>
         </a>
         <ul class="treeview-menu" >
+            <li>
+                <a href="#">
+                    <i class="fa fa-circle-o"></i>
+                    <small>All Program</small>
+                </a>
+            </li>
             <li v-for="program in programs">
                 <a :href="url + program.id">
                     <i class="fa fa-circle-o"></i>
@@ -34,7 +40,7 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title text-center">{{ \App\Program::find($program)->name }} Students</h3>
+                    <h3 class="box-title text-center">All Students</h3>
                     <div class="pull-right">
                         <button @click="loadStudents()" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
                     </div>
@@ -1516,7 +1522,7 @@
         }
     </style>
     <script>
-        let programId = '{{ $program }}';
+        let programId = null;
 
         const sidenav = new Vue({
             el: '#sidenav',
@@ -1738,7 +1744,7 @@
                 filteredStudents () {
                     return this.students.filter(e => {
                         return e.last_name.toLowerCase().includes(this.filterName.toLowerCase());
-                    })
+                    });
                 },
             },
             mounted: function() {
@@ -1866,7 +1872,7 @@
                 },
                 loadStudents () {
                     this.loading.table = true;
-                    axios.get(`/coor/program/${programId}`)
+                    axios.get(`/coor/program-all-students`)
                         .then((response) => {
                             this.loading.table = false;
                             if (response.data.data.length > 0) {
