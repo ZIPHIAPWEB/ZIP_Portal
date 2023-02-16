@@ -109,6 +109,7 @@ Route::prefix('coor')->group(function() {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
     Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
     Route::get('/program-all-students', 'CoordinatorController@loadAllStudents')->name('coor.students.all');
+    Route::get('/export-student', 'CoordinatorController@exportStudent')->name('coor.students.export');
 
     Route::get('/requirement/basic/{programId}/{userId}', 'CoordinatorController@loadBasicRequirements')->name('coor.basic.requirements');
     Route::get('/requirement/payment/{programId}/{userId}', 'CoordinatorController@loadPaymentRequirements')->name('coor.basic.requirements');

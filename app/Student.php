@@ -45,6 +45,18 @@ class Student extends Model
         'contacted_status'
     ];
 
+    public static function getAllStudents()
+    {
+        return self::with(['user', 'company', 'tertiary.school', 'program', 'log'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    public static function getStudentByProgramId($id)
+    {
+        return self::getAllStudents()->where('program_id', $id);
+    }
+
     public function log()
     {
         return $this->hasMany('App\Log', 'user_id', 'user_id');
@@ -156,6 +168,11 @@ class Student extends Model
     //{
     //    return $this->hasMany('App\ProgramPayment', 'program_id', 'program_id');
     //}
+
+    public function studentPayment()
+    {
+        return $this->hasMany(StudentPayment::class, 'user_id', 'user_id');
+    }
 
     public function getByProgramId($id)
     {
