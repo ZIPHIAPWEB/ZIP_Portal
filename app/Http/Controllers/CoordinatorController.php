@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentExport;
 use App\Http\Resources\SuperAdminResource;
 use App\Notifications\CoordinatorResponse;
 use App\Program;
@@ -20,6 +21,7 @@ use App\StudentAdditional;
 use App\StudentPayment;
 use App\StudentPreliminary;
 use App\StudentSponsor;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CoordinatorController extends Controller
 {
@@ -55,16 +57,21 @@ class CoordinatorController extends Controller
 
     public function loadStudents($id)
     {
-        $students = $this->studentRepository->getByProgramId($id);
+        $students = Student::getStudentByProgramId($id);
 
         return SuperAdminResource::collection($students);
     }
 
     public function loadAllStudents()
     {
-        $students = Student::with(['user', 'company', 'tertiary.school', 'program', 'log'])->get();
+        $students = Student::getAllStudents();
 
         return SuperAdminResource::collection($students);
+    }
+
+    public function exportStudent(Request $request)
+    {
+        return Excel::download(new StudentExport($request->input('start'), $request->input('end'), $request->input('status'), $request->input('programId')), 'student.xlsx');
     }
 
     public function showCoordinator()

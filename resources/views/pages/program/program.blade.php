@@ -78,16 +78,12 @@
                         </div> -->
                         <div class="form-group">
                             <button class="btn btn-primary btn-flat btn-sm"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                            <download-excel
-                                class="btn btn-success btn-flat btn-sm"
-                                :data="students"
-                                :fields="testField"
-                                name="generated-report-as-of-{{ date('Ymd') }}.xls"
-                                title="ZIP Generated Report">
-                                <span class="glyphicon glyphicon-export"></span> Export
-                            </download-excel>
                         </div>
                     </form>
+                    <button @click="exportStudent" class="btn btn-success btn-flat btn-sm" style="margin-left: 5px;">
+                        <span class="glyphicon glyphicon-export"></span> 
+                        Export
+                    </button>
                     <div class="form-group-sm pull-right">
                         <input v-model="filterName" type="text" class="form-control" placeholder="Search By Last Name">
                     </div>
@@ -1825,6 +1821,14 @@
                         }).catch((error) => {
                             this.loading.table = false;
                     })
+                },
+                exportStudent () {
+                    let url = `/coor/export-student?status=${this.filter.status}&start=${this.filter.from}&end=${this.filter.to}&programId=${programId}`;
+                    const link = document.createElement('a')
+                    link.href = url;
+                    link.setAttribute('download', 'title');
+                    document.body.appendChild(link);
+                    link.click();
                 },
                 next () {
                     this.loading.table = true;
