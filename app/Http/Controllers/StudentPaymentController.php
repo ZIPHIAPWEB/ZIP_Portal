@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 use Whoops\Exception\ErrorException;
 use App\Notifications\verifyProcessing;
 use App\Notifications\PaymentNotification;
+use App\Program;
 
 class StudentPaymentController extends Controller
 {
@@ -85,6 +86,7 @@ class StudentPaymentController extends Controller
 
             $data = [
                 'full_name' => $student->first_name . ' ' . $student->last_name,
+                'program'   => Program::find($student->program_id)->display_name,
                 'payment'   => $savedPayment
             ];
 
