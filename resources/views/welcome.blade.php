@@ -157,10 +157,7 @@
             <div class="about-us-wrapper">
                 <h2 class="text-center text-white">ABOUT US</h2>
                 <p class="text-justify text-lg-center text-xl-center text-white mb-4">ZIP Travel is a career and education counseling/travel organization. We help students and young professionals attend cultural exchanges in the United States, Australia, and Canada. &nbsp;As a global company, we have been in the business
-                    for over 27 years and have helped thousands of students worldwide obtain an opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State.&nbsp;<br></p>
-                <p class="text-justify text-lg-center text-xl-center text-white mb-4">ZIP Travel has four offices in the Philippines; Manila as our main office, Cebu, Davao, Bacolod, and Pampanga. We also have offices in Europe for European students in Tennessee, New York, California, Florida, South Carolina, and Texas
-                    through our visa sponsors.<br>
-                </p>    
+                    for over 27 years and have helped thousands of students worldwide obtain an opportunity to participate in the Cultural Exchange Program authorized by the U.S. Department of State.&nbsp;<br></p> 
                 <a href="{{ url('/about-us') }}" class="btn btn-outline-light border rounded-0 border-white">READ MORE</a>
             </div>
         </div>
