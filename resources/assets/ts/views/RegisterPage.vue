@@ -2,8 +2,8 @@
     <h1>Register page</h1>
 </template>
 
-<script>
+<script lang="ts">
     export default {
-        name: 'register-page'
+        name: 'register-page',
     }
 </script>

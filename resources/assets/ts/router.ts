@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 import LoginPage from './views/LoginPage.vue';
 import RegisterPage from './views/RegisterPage.vue';
 
 let basePath = '/portal/v2';
 
-const routes = [
+let routes:Array<RouteRecordRaw> = [
     {
         path: basePath + "/login",
         name: "login",
@@ -15,12 +15,12 @@ const routes = [
         path: basePath + "/register",
         name: "register",
         component: RegisterPage
-    }
-];
+    },
+]
 
-const router = new createRouter({
+const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 export default router;
