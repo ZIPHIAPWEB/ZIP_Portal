@@ -52,7 +52,6 @@
         </div>
     </div>
     @include('partials._navbar')
-    <header class="program-header" style="background-image: url(&quot;assets/img/HOMEPAFE%20-%20ABOUT%20US-1.jpg&quot;);background-position: center;background-repeat: no-repeat;background-size: cover;"></header>
     <section class="section">
         <div class="container-fluid">
             <div id="curator-feed-default-layout"><a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a></div>
