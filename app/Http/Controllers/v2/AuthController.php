@@ -49,10 +49,11 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->username,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'vToken' => str_random(60),
         ]);
 
-        $user->sendEmailVerificationNotification();
+        $user->sendEmailVerification();
 
         return response()->json([
             'status_code' => 201,

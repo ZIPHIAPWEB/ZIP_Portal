@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function sendEmailVerification()
     {
-        Mail::to($this->email)->send(new verifyEmail($this->email));
+        Mail::to($this->email)->send(new verifyEmail($this));
     }
 
     public function checkIfUserVerified()
