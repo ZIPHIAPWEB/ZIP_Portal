@@ -1,7 +1,9 @@
 
-// require('./bootstrap');
+require('./bootstrap');
 
 import { createApp } from 'vue';
+
+import router from './router';
 
 import App from './App.vue';
 
@@ -13,4 +15,6 @@ import App from './App.vue';
 //    el: '#app'
 //});
 
-createApp(App).mount('#app');
+createApp(App)
+    .use(router)
+    .mount('#app');

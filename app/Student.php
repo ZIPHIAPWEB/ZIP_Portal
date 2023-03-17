@@ -64,7 +64,7 @@ class Student extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function company()
@@ -133,17 +133,6 @@ class Student extends Model
                     ->withDefault([
                         'school_name'   =>  '',
                         'address'       =>  '',
-                        'date_graduated'=>  ''
-                    ]);
-    }
-
-    public function tertiary()
-    {
-        return $this->hasOne('App\Tertiary', 'user_id', 'user_id')
-                    ->withDefault([
-                        'school_name'   =>  '',
-                        'address'       =>  '',
-                        'degree'        =>  '',
                         'date_graduated'=>  ''
                     ]);
     }

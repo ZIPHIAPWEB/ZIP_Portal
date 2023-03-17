@@ -421,3 +421,8 @@ Route::get('/verified/{email}/{token}', 'Auth\RegisterController@verified')->nam
 Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.inquiry');
 
 Route::post('/updatePassword', 'StudentController@updatePassword')->name('student.password-change');
+
+
+Route::get('/portal/v2/{any}', function() {
+    return view('portal.index');
+})->where('any', '.*');

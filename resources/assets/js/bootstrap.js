@@ -7,18 +7,18 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap-sass');
-    require('admin-lte');
-    require('admin-lte/plugins/bootstrap-slider/bootstrap-slider');
-    require('admin-lte/plugins/pace/pace');
-    require('admin-lte/plugins/iCheck/icheck');
-    require('admin-lte/plugins/input-mask/jquery.inputmask');
-    require('admin-lte/plugins/jQueryUI/jquery-ui');
-    require('admin-lte/plugins/timepicker/bootstrap-timepicker');
-    window.swal = require('sweetalert2')
-} catch (e) {}
+// try {
+//     window.$ = window.jQuery = require('jquery');
+//     require('bootstrap-sass');
+//     require('admin-lte');
+//     require('admin-lte/plugins/bootstrap-slider/bootstrap-slider');
+//     require('admin-lte/plugins/pace/pace');
+//     require('admin-lte/plugins/iCheck/icheck');
+//     require('admin-lte/plugins/input-mask/jquery.inputmask');
+//     require('admin-lte/plugins/jQueryUI/jquery-ui');
+//     require('admin-lte/plugins/timepicker/bootstrap-timepicker');
+//     window.swal = require('sweetalert2')
+// } catch (e) {}
 
     /**
  * We'll load the axios HTTP library which allows us to easily issue requests
