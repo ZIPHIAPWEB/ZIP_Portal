@@ -15,24 +15,11 @@ class AuthController extends Controller
     {
         if (!Auth::attempt(['name' => $request->username, 'password' => $request->password])) {
 
-            return response()->json([
-                'status_code' => 401,
-                'data' => [
-                    'message' => 'Invalid credentials'
-                ]
-            ], 401);            
+            abort(401, 'Invalid credentials');        
+            
         }
 
         $authUser = Auth::user();
-
-        if($authUser->checkIfUserVerified()) {
-            return response()->json([
-                'status_code' => 401,
-                'data' => [
-                    'message' => 'Account not verified'
-                ]
-            ], 401);
-        }
 
         return response()->json([
             'status_code' => 200,
@@ -59,8 +46,27 @@ class AuthController extends Controller
             'status_code' => 201,
             'data' => [
                 'message' => 'Registration successful! Please check your email to verify your account.',
-                'user' => new UserResource($user)
+                'user' => new UserResource($user),
+                'access_token' => $user->createToken($request->username)->plainTextToken
             ]
         ], 201);
+    }
+
+    public function resendEmailVerification()
+    {
+        $user = auth()->user();
+
+        if($user->checkIfUserVerified()) {
+            abort(403, 'User already verified');
+        }
+
+        $user->sendEmailVerification();
+
+        return response()->json([
+            'status_code' => 200,
+            'data' => [
+                'message' => 'Verification email sent'
+            ]
+        ], 200);
     }
 }

@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import AuthLayout from '../components/layouts/AuthLayout.vue';
+import AuthAPI from '../services/AuthAPI';
 
 import { ref, computed } from 'vue';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useRouter } from 'vue-router';
+import { useLocalStorage } from '@vueuse/core';
+
+const router = useRouter();
 
 const username = ref<string>('');
 const password = ref<string>('');
@@ -27,17 +31,30 @@ const passwordError = computed(() => {
     return false;
 });
 
-const login = () => {
+const login = async () => {
     errorMessage.value = '';
     isLoading.value = true;
 
-    axios.post('/api/login', {
-        username: username.value,
-        password: password.value
-    }).then((response: AxiosResponse) => {
+    try {
+        const response = await AuthAPI.login(username.value, password.value);
+
         console.log(response);
+
+        useLocalStorage('access_token', response.data.data.access_token);
+
+        if (response.data.data.user.is_verified) {
+            if (response.data.data.user.is_filled) {
+                router.push({ name: 'student-dashboard' });
+            } else {
+                router.push({ name: 'application-form'});
+            }
+        } else {
+            router.push({ name: 'email-verification' })       
+        }
+
         isLoading.value = false;
-    }).catch((error: AxiosError) => {
+
+    } catch (error: any) {
         isLoading.value = false;
         if(error.response?.status == 422) {
             errors.value = error.response?.data.errors;
@@ -46,7 +63,7 @@ const login = () => {
             errorMessage.value = error.response?.data.message;
         }
         errorMessage.value = error.response?.data.message;
-    });
+    }
 }
 
 </script>
@@ -64,7 +81,7 @@ const login = () => {
                 <i class="fas fa-3x fa-spinner fa-spin"></i>
             </div>
             <div class="card-header" style="border-bottom: 0; display: flex; justify-content: center;">
-                <img style="background-color: darkblue; border-radius: 50%; width: 8rem; height: 8rem;" src="../../../../public/logo.png" alt="company logo">
+                <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" src="../../../../public/logo.png" alt="company logo">
             </div>
             <div class="card-body">
             <p class="login-box-msg"><span style="font-weight: 900">ZIP TRAVEL</span> Philippines</p>

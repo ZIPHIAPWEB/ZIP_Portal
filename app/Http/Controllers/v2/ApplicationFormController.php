@@ -12,25 +12,30 @@ class ApplicationFormController extends Controller
         $user = auth()->user();
 
         $user->student()->create([
-            'first_name' =>  $request->first_name,
-            'last_name' =>  $request->last_name,
-            'birthdate' =>  $request->birthdate,
-            'gender' =>  $request->gender,
-            'year' =>  $request->year,
-            'home_number' =>  $request->home_number,
-            'mobile_number' =>  $request->mobile_number,
-            'program_id' =>  $request->program_id,
-            'fb_email' =>  $request->fb_email,
-            'skype_id' =>  $request->skype_id,
+            'first_name' =>  $request->input('firstName'),
+            'middle_name' => $request->input('middleName'),
+            'last_name' =>  $request->input('lastName'),
+            'birthdate' =>  $request->input('birthDate'),
+            'gender' =>  $request->input('gender'),
+            'permanent_address' =>  $request->input('permanentAddress'),
+            'provincial_address'=> $request->input('provincialAddress'),
+            'year' =>  $request->input('yearLevel'),
+            'home_number' =>  $request->input('homeNumber'),
+            'mobile_number' =>  $request->input('mobileNumber'),
+            'program_id' =>  $request->input('programId'),
+            'fb_email' =>  $request->input('fbLink'),
+            'skype_id' =>  $request->input('skypeId'),
         ]);
 
         $user->tertiary()->create([
-            'school' =>  $request->t_school,
-            'degree' =>  $request->t_degree,
-            'address' =>  $request->t_address,
-            'start_date' =>  $request->t_start_date,
-            'date_graduated' =>  $request->t_date_graduated,
+            'school_name' =>  $request->input('schoolId'),
+            'degree' =>  $request->input('degree'),
+            'address' =>  $request->input('address'),
+            'start_date' =>  $request->input('startDate'),
+            'date_graduated' =>  $request->input('dateGraduated'),
         ]);
+
+        $user->update(['isFilled' => true]);
 
         return response()->noContent();
     }

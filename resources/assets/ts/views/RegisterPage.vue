@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AuthLayout from '../components/layouts/AuthLayout.vue';
+import AuthAPI from '../services/AuthAPI';
 
 import { ref, computed } from 'vue';
-import axios, { AxiosError } from 'axios';
 
 const username = ref<string>('');
 const email = ref<string>('');
@@ -45,29 +45,26 @@ const passwordConfirmationError = computed(() => {
     return false;
 });
 
-const register = () => {
+const register = async () => {
     isLoading.value = true;
     errorMessage.value = '';
     errors.value = [];
 
-    axios.post('/api/register', {
-        username: username.value,
-        email: email.value,
-        password: password.value,
-        password_confirmation: password_confirmation.value
-    }).then((response) => {
+    try {
+        const response = await AuthAPI.register(username.value, email.value, password.value, password_confirmation.value);
+
         console.log(response);
         isLoading.value = false;
-    }).catch((error: AxiosError) => {
-        console.log(error.response?.status);
+    } catch (error: any) {
+        isLoading.value = false;
         if(error.response?.status == 422) {
             errors.value = error.response?.data.errors;
             errorMessage.value = error.response?.data.message;
         } else {
             errorMessage.value = error.response?.data.message;
         }
-        isLoading.value = false;
-    });
+        errorMessage.value = error.response?.data.message;
+    }
 }
 
 </script>
@@ -84,7 +81,7 @@ const register = () => {
                     <i class="fas fa-3x fa-spinner fa-spin"></i>
                 </div>
                 <div class="card-header" style="border-bottom: 0; display: flex; justify-content: center;">
-                    <img style="background-color: darkblue; border-radius: 50%; width: 8rem; height: 8rem;" src="../../../../public/logo.png" alt="company logo">
+                    <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" src="../../../../public/logo.png" alt="company logo">
                 </div>
                 <div class="card-body">
                 <p class="login-box-msg"><span style="font-weight: 900">ZIP TRAVEL</span> Philippines</p>
