@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getUserProfile()
+    public function getStudentProfile()
     {
         return response()->json([
             'status_code' => 200,
