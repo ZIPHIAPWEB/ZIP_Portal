@@ -397,16 +397,11 @@
                     })
                 },
                 downloadFile(requirement) {
-                    axios.get(`/preliminary/download?requirement_id=${requirement.id}`)
-                        .then((response) => {
-                            const link = document.createElement('a');
-                            link.href = response.data;
-                            link.setAttribute('download');
-                            document.body.appendChild(link);
-                            link.click();
-                        }).catch((error) => {
-                            console.log(error);
-                    })
+                    const link = document.createElement('a');
+                    link.href = '/uploaded/'+ requirement.path;
+                    link.setAttribute('download', '');
+                    document.body.appendChild(link);
+                    link.click();
                 },
                 openInNewTab(requirement) {
                     axios.get(`/studPreliminary/download?requirement_id=${requirement.student_preliminary.id}`)

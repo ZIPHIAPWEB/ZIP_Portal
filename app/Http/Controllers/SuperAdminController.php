@@ -107,4 +107,13 @@ class SuperAdminController extends Controller
             return response()->json(['message' => 'Something went wrong!'],500);
         }
     }
+
+    public function verifyUser($userId)
+    {
+        User::where('id', $userId)->update([
+            'verified' => 1
+        ]);
+
+        return response()->json(['message' => 'User account verified!'], 200);
+    }
 }

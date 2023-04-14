@@ -173,7 +173,7 @@ class StudentController extends Controller
 
     public function viewAllStudents()
     {
-        $student = $this->studentRepository->getAllStudents();
+        $student = User::get();
 
         return SuperAdminResource::collection($student);
     }
