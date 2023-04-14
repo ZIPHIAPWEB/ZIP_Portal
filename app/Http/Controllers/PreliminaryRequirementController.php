@@ -49,7 +49,7 @@ class PreliminaryRequirementController extends Controller
         ])->validate();
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storeAs('programRequirements', $request->file('file')->getClientOriginalName(), 'uploaded_files');
+            $path = $request->file('file')->store('programRequirements', 'uploaded_files');
 
             $this->preliminaryRepository->savePreliminaryRequirement([
                 'program_id'    =>  $request->input('program_id'),
@@ -114,6 +114,7 @@ class PreliminaryRequirementController extends Controller
         $requirement_id = $request->input('requirement_id');
         $preliminary = $this->preliminaryRepository->getById($requirement_id);
 
-        return Storage::disk('uploaded_files')->url($preliminary->path);
+        //return Storage::disk('uploaded_files')->download($preliminary->path);
+        return response()->download(public_path('uploaded/' . $preliminary->path));
     }
 }

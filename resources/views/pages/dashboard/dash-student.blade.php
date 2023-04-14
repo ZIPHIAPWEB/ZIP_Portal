@@ -8,7 +8,7 @@
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <a href="javascript:void(0)" @click="selectPhoto()">
-                        <img class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
+                        <img style="background-color:darkblue;" class="profile-user-img img-responsive img-circle" :src="student.profile_picture | avatar" alt="User profile picture"/>
                     </a>
                     <h5 class="profile-username text-center" style="font-size: 17px; padding-bottom: 0px; margin-top: 12px;">@{{ student.first_name }}&nbsp; @{{ student.last_name }}</h5>
                     <p class="text-muted text-center">@{{ student.program.name }}</p>
@@ -831,7 +831,7 @@
             filters: {
                 avatar: function (value) {
                     if (!value) {
-                        return 'https://placeimg.com/150/150/any'
+                        return '/logo.png'
                     } else {
                         return `/uploaded/${value}`
                     }
