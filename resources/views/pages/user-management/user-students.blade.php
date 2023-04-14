@@ -78,40 +78,37 @@
                     </div>
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
-                            <th>Date of Application</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Application ID</th>
-                            <th class="text-center">Fullname</th>
-                            <th class="text-center">Program</th>
-                            <th class="text-center">Course</th>
-                            <th class="text-center">Contact</th>
-                            <th class="text-center">School</th>
-                            <th class="text-center">Activated</th>
+                            <th>Date created</th>
+                            <th class="text-center">Username</th>
+                            <th class="text-center">Email address</th>
+                            <th class="text-center">Is Verified</th>
+                            <th class="text-center">Is Filled</th>
                             <th class="text-center">Action</th>
                         </thead>
-                        <tbody v-if="filteredStudents.length > 0">
+                        <tbody v-if="students.length > 0">
                             <tr v-if="loading.table">
                                 <td valign="top" colspan="15" class="text-center">
                                     <span class="fa fa-circle-o-notch fa-spin"></span>
                                 </td>
                             </tr>
-                            <tr v-else v-for="student in filteredStudents">
+                            <tr v-else v-for="student in students">
                                 <td class="text-sm">@{{ student.created_at }}</td>
-                                <td class="text-center text-sm"><label class="label label-warning">@{{ student.application_status }} @{{ (student.application_status == 'Called') ? `: ${student.contacted_status}` : '' }}</label></td>
-                                <td class="text-center text-sm">@{{ student.application_id }}</td>
-                                <td class="text-center text-sm">@{{ student.first_name }} @{{ student.last_name }}</td>
-                                <td class="text-center text-sm">@{{ student.program.display_name }}</td>
-                                <td class="text-center text-sm">@{{ student.tertiary.degree }}</td>
-                                <td class="text-center text-sm">@{{ student.home_number }}/@{{ student.mobile_number }}</td>
-                                <td class="text-center text-sm">@{{ (student.tertiary.school) ? student.tertiary.school.name : '' }}</td>
+                                <td class="text-center text-sm">@{{ student.name }}</td>
+                                <td class="text-center text-sm">@{{ student.email }}</td>
                                 <td class="text-center">
-                                    <span v-if="student.user.verified === 1" class="fa fa-check text-success"></span>
+                                    <span v-if="student.verified === 1" class="fa fa-check text-success"></span>
+                                    <span v-else class="fa fa-remove text-danger"></span>
+                                </td>
+                                <td class="text-center text-sm">
+                                    <span v-if="student.isFilled === 1" class="fa fa-check text-success"></span>
                                     <span v-else class="fa fa-remove text-danger"></span>
                                 </td>
                                 <td class="text-center">
-                                    <button @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
-                                    <button @click="ExtractFiles(student.user_id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span></button>
-                                    <button @click="DeleteStudent(student.user_id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button v-if="!student.verified" @click="verifyUser(student.id)" class="btn btn-success btn-flat btn-xs"><span class="fa fa-check"></span></button>
+                                    <button v-if="student.isFilled" @click="ViewStudent(student)" class="btn btn-default btn-flat btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button>
+                                    <button v-if="student.isFilled" @click="ExtractFiles(student.id)" class="btn btn-primary btn-flat btn-xs"><span class="glyphicon glyphicon-download"></span></button>
+                                    <button v-if="student.isFilled" @click="DeleteStudent(student.id)" class="btn btn-danger btn-flat btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <span v-if="student.verified && !student.isFilled">Not Applicable</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -767,15 +764,15 @@
                         })
                 },
                 ViewStudent: function (student) {
-                    axios.get(`/stud/viewWithFullDetails?id=${student.user_id}`)
+                    axios.get(`/stud/viewWithFullDetails?id=${student.id}`)
                         .then((response) => {
                             this.student = response.data.data;
-                            this.ViewBasicRequirements(student.program.id, student.user_id);
-                            this.ViewPaymentRequirements(student.program.id, student.user_id);
-                            this.ViewAdditionalRequirements(student.program.id, student.user_id);
-                            this.ViewVisaRequirements(student.sponsor, student.user_id);
-                            this.ViewCoordinatorActions(student.user_id);
-                            this.ViewActivityLogs(student.user_id);
+                            this.ViewBasicRequirements(this.student.program.id, this.student.user_id);
+                            this.ViewPaymentRequirements(this.student.program.id, this.student.user_id);
+                            this.ViewAdditionalRequirements(this.student.program.id, this.student.user_id);
+                            this.ViewVisaRequirements(this.student.sponsor, this.student.user_id);
+                            this.ViewCoordinatorActions(this.student.user_id);
+                            this.ViewActivityLogs(this.student.user_id);
                             $('#student-modal').modal('show');
                         });
                 },
@@ -846,6 +843,12 @@
                             })
                         }
                     });
+                },
+                verifyUser: function(userId) {
+                    axios.post(`/sa/user/${userId}/verify`)
+                        .then((response) => {
+                            this.LoadStudents();
+                        })
                 },
                 ExtractFiles: function (id) {
                     axios.get(`/download/student/${id}/files`)
