@@ -26,6 +26,11 @@
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
+                            Name: {{ $data['program'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">
                             Bank Code: {{ $data['payment']->bank_code }}
                         </td>
                     </tr>
