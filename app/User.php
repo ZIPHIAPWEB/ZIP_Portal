@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne(Tertiary::class, 'user_id', 'id');
     }
 
+    public function secondary()
+    {
+        return $this->hasOne(Secondary::class, 'user_id', 'id');
+    }
+
     public function coordinator()
     {
         return $this->hasOne('App\Coordinator', 'user_id', 'id');

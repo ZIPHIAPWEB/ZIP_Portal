@@ -16,9 +16,6 @@ class StudentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'first_name' => $this->student->first_name,
-            'middle_name' => $this->student->middle_name,
-            'last_name' => $this->student->last_name,
             'gender' => $this->student->gender,
             'permanent_address' => $this->student->permanent_address,
             'provincial_address' => $this->student->provincial_address,
@@ -27,7 +24,14 @@ class StudentResource extends JsonResource
             'year' => $this->student->year,
             'skype_id' => $this->student->skype_id,
             'program_id_no' => $this->student->program_id_no,
-            'sevis_id' => $this->student->sevis_id
+            'sevis_id' => $this->student->sevis_id,
+            'personal' => [
+                'first_name' => $this->student->first_name,
+                'middle_name' => $this->student->middle_name,
+                'last_name' => $this->student->last_name,
+                'birthdate' => $this->student->birthdate,
+                
+            ]
         ];
     }
 }

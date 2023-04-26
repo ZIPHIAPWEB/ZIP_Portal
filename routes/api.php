@@ -25,6 +25,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('student')->group(function() {
         Route::get('/profile', [App\Http\Controllers\v2\UserController::class, 'getStudentProfile']);
+
+        Route::put('/update-personal', [App\Http\Controllers\v2\StudentController::class, 'updatePersonalDetails']);
+        Route::put('/update-contact', [App\Http\Controllers\v2\StudentController::class, 'updateContactDetails']);
+        Route::put('/update-tertiary', [App\Http\Controllers\v2\StudentController::class, 'updateTertiaryDetails']);
+        Route::put('/update-secondary', [App\Http\Controllers\v2\StudentController::class, 'updateSecondaryDetails']);
+        Route::put('/update-father', [App\Http\Controllers\v2\StudentController::class, 'updateFatherDetails']);
+        Route::put('/update-mother', [App\Http\Controllers\v2\StudentController::class, 'updateMotherDetails']);
+
+        Route::post('/add-work-experience', [App\Http\Controllers\v2\StudentController::class, 'addWorkExperience']);
+        Route::put('/update-work-experience', [App\Http\Controllers\v2\StudentController::class, 'updateWorkExperience']);
     });
 });
 
