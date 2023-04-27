@@ -22,14 +22,14 @@ class ProfileResource extends JsonResource
                 'birthdate' => $this->student->birthdate,
                 'gender' => $this->student->gender,
                 'skype_id' => $this->student->skype_id,
-                'fb_url' => $this->student->fb_email
+                'fb_email' => $this->student->fb_email
             ],
             'education' => [
                 'tertiary' => new TertiaryResource($this->tertiary),
                 'secondary' => $this->student->secondary
             ],
             'contact' => [
-                'present_address' => $this->student->provincial_address,
+                'provincial_address' => $this->student->provincial_address,
                 'permanent_address' => $this->student->permanent_address,
                 'home_number' => $this->student->home_number,
                 'mobile_number' => $this->student->mobile_number

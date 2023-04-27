@@ -13,13 +13,13 @@ class StudentController extends Controller
         $student = auth()->user()->student();
 
         $student->update([
-            'first_name' => $request->firstName,
-            'middle_name' => $request->middleName,
-            'last_name' => $request->lastName,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
             'birthdate' => $request->birthdate,
             'gender' => $request->gender,
-            'skype_id' => $request->skypeId,
-            'fb_email' => $request->fbUrl
+            'skype_id' => $request->skype_id,
+            'fb_email' => $request->fb_email
         ]);
 
         return response()->noContent();
@@ -30,10 +30,10 @@ class StudentController extends Controller
         $student = auth()->user()->student();
 
         $student->update([
-            'provincial_address' => $request->provincialAddress,
-            'permanent_address' => $request->permanentAddress,
-            'mobile_number' => $request->mobileNumber,
-            'home_number' => $request->homeNumber,
+            'provincial_address' => $request->provincial_address,
+            'permanent_address' => $request->permanent_address,
+            'mobile_number' => $request->mobile_number,
+            'home_number' => $request->home_number,
         ]);
 
         return response()->noContent();

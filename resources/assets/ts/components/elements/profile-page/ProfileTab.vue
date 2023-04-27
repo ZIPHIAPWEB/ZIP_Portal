@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import StudentAPI from '../../../services/StudentAPI';
+import { PersonalType, PersonalInitial } from '../../../types/PersonalType';
+import { ContactType, ContactInitial } from '../../../types/ContactType';
+import { TertiaryType, TertiaryInitial } from '../../../types/TertiaryType';
+import { SecondaryType, SecondaryInitial } from '../../../types/SecondaryType';
+import { ParentType, ParentInitial } from '../../../types/ParentType';
+
+import SchoolAPI from '../../../services/SchoolAPI';
+import { SchoolType } from '../../../types/SchoolType';
 
 import { ref, reactive, computed, onMounted } from 'vue';
 
 const profile = ref<any>([]);
-const personal = ref<any>([]);
+const personal = ref<PersonalType>(PersonalInitial);
 const education = ref<any>([]);
-const tertiary = ref<any>([]);
-const secondary = ref<any>([]);
-const contact = ref<any>([]);
+const tertiary = ref<TertiaryType>(TertiaryInitial);
+const secondary = ref<SecondaryType>(SecondaryInitial);
+const contact = ref<ContactType>(ContactInitial);
 const family = ref<any>([]);
-const father = ref<any>([]);
-const mother = ref<any>([]);
+const father = ref<ParentType>(ParentInitial);
+const mother = ref<ParentType>(ParentInitial);
 const experiences = ref<any>([]);
+const schools = ref<SchoolType[]>([]);
 
 const personalIsEdit = ref<boolean>(false);
 const contactIsEdit = ref<boolean>(false);
@@ -33,6 +42,7 @@ const toBeExperience = reactive({
 
 onMounted(() => {
     loadProfile();
+    loadSchool();
 });
 
 const fullName = computed(() => {
@@ -53,6 +63,76 @@ const loadProfile = async () => {
         mother.value = response.data.data.profile.family.mother;
         experiences.value = response.data.data.profile.experience;
         console.log(profile.value);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const loadSchool = async () => {
+    try {
+        const response = await SchoolAPI.getSchools();
+        schools.value = response.data.data.schools;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updatePersonalDetails = async () => {
+    try {
+        const response = await StudentAPI.updatePersonalDetails(personal.value);
+        personalIsEdit.value = false;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updateContactDetails = async () => {
+    try {
+        const response = await StudentAPI.updateContactDetails(contact.value);
+        contactIsEdit.value = false;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updateTeriaryDetails = async () => {
+    try {
+        const response = await StudentAPI.updateTertiaryDetails(tertiary.value);
+        tertiaryIsEdit.value = false;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updateSecondaryDetails = async () => {
+    try {
+        const response = await StudentAPI.updateSecondaryDetails(secondary.value);
+        secondaryIsEdit.value = false;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updateFatherDetails = async () => {
+    try {
+        const response = await StudentAPI.updateFatherDetails(father.value);
+        fatherIsEdit.value = false;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const updateMotherDetails = async () => {
+    try {
+        const response = await StudentAPI.updateMotherDetails(mother.value);
+        motherIsEdit.value = false;
+        console.log(response);
     } catch (error: any) {
         console.log(error);
     }
@@ -101,7 +181,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Personal Details</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!personalIsEdit" @click="personalIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="personalIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="personalIsEdit" @click="updatePersonalDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="personalIsEdit" @click="personalIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
@@ -167,7 +247,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Contact Details</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!contactIsEdit" @click="contactIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="contactIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="contactIsEdit" @click="updateContactDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="contactIsEdit" @click="contactIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
@@ -175,9 +255,9 @@ const loadProfile = async () => {
                             <tbody>
                                 <tr>
                                     <td>Present Address</td>
-                                    <td v-if="!contactIsEdit">{{ contact.present_address }}</td>
+                                    <td v-if="!contactIsEdit">{{ contact.provincial_address }}</td>
                                     <td v-if="contactIsEdit">
-                                        <input type="text" class="form-control form-control-sm" v-model="contact.present_address">
+                                        <input type="text" class="form-control form-control-sm" v-model="contact.provincial_address">
                                     </td>
                                 </tr>
                                 <tr>
@@ -211,7 +291,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Tertiary</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!tertiaryIsEdit" @click="tertiaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="tertiaryIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="tertiaryIsEdit" @click="updateTeriaryDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="tertiaryIsEdit" @click="tertiaryIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
@@ -224,6 +304,7 @@ const loadProfile = async () => {
                                         <select class="form-control form-control-sm" v-model="tertiary.school">
                                             <option :value="tertiary.school">{{ tertiary.school }}</option>
                                             <!-- <option v-for="school in schools" :value="school.id">{{ school.name }}</option> -->
+                                            <option v-for="school in schools" :value="school.id">{{ school.name }}</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -263,7 +344,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Secondary</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!secondaryIsEdit" @click="secondaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="secondaryIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="secondaryIsEdit" @click="updateSecondaryDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="secondaryIsEdit" @click="secondaryIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
@@ -307,7 +388,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Father Details</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!fatherIsEdit" @click="fatherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="fatherIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="fatherIsEdit" @click="updateFatherDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="fatherIsEdit" @click="fatherIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
@@ -350,9 +431,9 @@ const loadProfile = async () => {
                                 </tr>
                                 <tr>
                                     <td>Contact No.</td>
-                                    <td v-if="!fatherIsEdit">{{ father.company }}</td>
+                                    <td v-if="!fatherIsEdit">{{ father.contact_no }}</td>
                                     <td v-if="fatherIsEdit">
-                                        <input type="text" class="form-control form-control-sm" v-model="father.company">
+                                        <input type="text" class="form-control form-control-sm" v-model="father.contact_no">
                                     </td>
                                 </tr>
                             </tbody>
@@ -363,7 +444,7 @@ const loadProfile = async () => {
                             <h5 class="profile-header__title">Mother Details</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!motherIsEdit" @click="motherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                                <button v-if="motherIsEdit" class="btn btn-success btn-xs mr-1">Save</button>
+                                <button v-if="motherIsEdit" @click="updateMotherDetails" class="btn btn-success btn-xs mr-1">Save</button>
                                 <button v-if="motherIsEdit" @click="motherIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>

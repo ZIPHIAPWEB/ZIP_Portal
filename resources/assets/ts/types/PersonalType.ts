@@ -1,11 +1,20 @@
 export type PersonalType = {
-    id: Number,
-    firstName: String,
-    middleName: String,
-    lastName: String,
+    first_name: String,
+    middle_name: String,
+    last_name: String,
     birthdate: Date|String,
     gender: String,
-    skypeId: String,
-    fbUrl: String,
+    skype_id: String,
+    fb_email: String
 };
+
+export const PersonalInitial: PersonalType = {
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    birthdate: '',
+    gender: '',
+    skype_id: '',
+    fb_email: ''
+}
     

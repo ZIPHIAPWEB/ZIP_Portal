@@ -1,8 +1,15 @@
 export type TertiaryType = {
-    id: Number,
     school: String,
     degree: String,
     address: String,
-    dateGraduated: Date|String,
-    startDate: Date|String
+    date_graduated: Date|String,
+    start_date: Date|String
 };
+
+export const TertiaryInitial: TertiaryType = {
+    school: '',
+    degree: '',
+    address: '',
+    date_graduated: '',
+    start_date: ''
+}

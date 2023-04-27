@@ -1,7 +1,13 @@
 export type SecondaryType = {
-    id: Number,
-    school: String,
+    school_name: String,
     address: String,
-    startDate: Date|String,
-    dateGraduated: Date|String
+    start_date: Date|String,
+    date_graduated: Date|String
 };
+
+export const SecondaryInitial: SecondaryType = {
+    school_name: '',
+    address: '',
+    start_date: '',
+    date_graduated: ''
+}

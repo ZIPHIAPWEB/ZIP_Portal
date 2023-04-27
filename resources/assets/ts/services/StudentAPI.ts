@@ -17,7 +17,7 @@ export default {
     },
 
     updateContactDetails(data: ContactType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/profile/update-contact', data);
+        return ApiRequest.put('/student/update-contact', data);
     },
 
     updateTertiaryDetails(data: TertiaryType) : Promise<AxiosResponse> {
