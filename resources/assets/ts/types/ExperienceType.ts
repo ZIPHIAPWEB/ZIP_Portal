@@ -1,8 +1,8 @@
 export type ExperienceType = {
-    id: Number,
+    id?: Number,
     company: String,
     address: String,
-    startDate: Date|String,
-    endDate: Date|String,
+    start_date: Date|String,
+    end_date: Date|String,
     description: String
 };

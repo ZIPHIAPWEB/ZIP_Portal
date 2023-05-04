@@ -24,5 +24,10 @@ export default {
 
         return ApiRequest.post('/verify/resend-email');
 
+    },
+    logout() : Promise<AxiosResponse> {
+            
+        return ApiRequest.post('/logout');
+    
     }
 }

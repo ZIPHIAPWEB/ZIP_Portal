@@ -37,6 +37,14 @@ export default {
     },
 
     storeWorkExperience(data: ExperienceType) : Promise<AxiosResponse> {
-        return ApiRequest.post('/student/profile/store-work-experience', data);
+        return ApiRequest.post('/student/add-work-experience', data);
+    },
+
+    updateWorkExperience(data: ExperienceType) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/student/${data.id}/update-work-experience`, data);
+    },
+
+    deleteWorkExperience(id?: number | string) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/student/${id}/delete-work-experience`);
     }
 }

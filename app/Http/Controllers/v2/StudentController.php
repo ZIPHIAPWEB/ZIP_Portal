@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Experience;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ExperienceResource;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -100,29 +101,38 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
-    public function storeWorkExperience(Request $request)
+    public function addWorkExperience(Request $request)
     {
         $experience = Experience::create([
             'user_id' => auth()->user()->id,
-            'company_name' => $request->companyName,
+            'company' => $request->company,
+            'address' => $request->address,
             'position' => $request->position,
-            'start_date' => $request->startDate,
-            'end_date' => $request->endDate,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'description' => $request->description
         ]);
 
-        return response()->json($experience);
+        return new ExperienceResource($experience);
     }
 
     public function updateWorkExperience(Request $request, Experience $experience)
     {
         $experience->update([
-            'company_name' => $request->companyName,
+            'company' => $request->company,
+            'address' => $request->address,
             'position' => $request->position,
-            'start_date' => $request->startDate,
-            'end_date' => $request->endDate,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'description' => $request->description
         ]);
+
+        return new ExperienceResource($experience);
+    }
+
+    public function deleteWorkExperience(Experience $experience)
+    {
+        $experience->delete();
 
         return response()->noContent();
     }

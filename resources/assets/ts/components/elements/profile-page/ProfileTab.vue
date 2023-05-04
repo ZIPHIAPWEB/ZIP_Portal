@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import WorkExperienceItem from './WorkExperienceItem.vue';
+
 import StudentAPI from '../../../services/StudentAPI';
 import { PersonalType, PersonalInitial } from '../../../types/PersonalType';
 import { ContactType, ContactInitial } from '../../../types/ContactType';
@@ -10,6 +12,7 @@ import SchoolAPI from '../../../services/SchoolAPI';
 import { SchoolType } from '../../../types/SchoolType';
 
 import { ref, reactive, computed, onMounted } from 'vue';
+import { ExperienceType } from '../../../types/ExperienceType';
 
 const profile = ref<any>([]);
 const personal = ref<PersonalType>(PersonalInitial);
@@ -20,7 +23,7 @@ const contact = ref<ContactType>(ContactInitial);
 const family = ref<any>([]);
 const father = ref<ParentType>(ParentInitial);
 const mother = ref<ParentType>(ParentInitial);
-const experiences = ref<any>([]);
+const experiences = ref<ExperienceType[]>([]);
 const schools = ref<SchoolType[]>([]);
 
 const personalIsEdit = ref<boolean>(false);
@@ -32,8 +35,8 @@ const motherIsEdit = ref<boolean>(false);
 const experiencesIsEdit = ref<boolean>(false);
 const experiencesIsAdd = ref<boolean>(false);
 
-const toBeExperience = reactive({
-    company_name: '',
+const toBeExperience = reactive<ExperienceType>({
+    company: '',
     address: '',
     start_date: '',
     end_date: '',
@@ -136,6 +139,20 @@ const updateMotherDetails = async () => {
     } catch (error: any) {
         console.log(error);
     }
+}
+
+const addWorkExperience = async () => {
+    try {
+        const response = await StudentAPI.storeWorkExperience(toBeExperience);
+        experiences.value.push(response.data.data);
+        experiencesIsAdd.value = false;
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
+const removeWorkExperience = (experienceId : number | string) => {
+    experiences.value = experiences.value.filter((experience: ExperienceType) => experience.id !== experienceId);
 }
 </script>
 
@@ -502,17 +519,17 @@ const updateMotherDetails = async () => {
                             <h5 class="profile-header__title">Work Experience/On-the-Job Training</h5>
                             <div class="profile-header__actions">
                                 <button v-if="!experiencesIsAdd" @click="experiencesIsAdd =  true" class="btn btn-success btn-xs ">Add</button>
-                                <button v-if="experiencesIsAdd" class="btn btn-primary btn-xs mr-1">Save</button>
+                                <button v-if="experiencesIsAdd" @click="addWorkExperience" class="btn btn-primary btn-xs mr-1">Save</button>
                                 <button v-if="experiencesIsAdd" @click="experiencesIsAdd =  false" class="btn btn-danger btn-xs">Cancel</button>
                             </div>
                         </div>
-                        <div v-if="experiencesIsAdd">
+                        <div v-if="experiencesIsAdd == true">
                             <table class="table table-sm table-striped">
                                 <tbody>
                                     <tr>
                                         <td>Company Name</td>
                                         <td>
-                                            <input v-model="toBeExperience.company_name" type="text" class="form-control form-control-sm">
+                                            <input v-model="toBeExperience.company" type="text" class="form-control form-control-sm">
                                         </td>
                                     </tr>
                                     <tr>
@@ -543,40 +560,12 @@ const updateMotherDetails = async () => {
                             </table>
                         </div>
                         <div v-if="experiences.length > 0 && !experiencesIsAdd">
-                            <table v-for="(exp, index) in experiences" :key="index" class="table table-sm table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2">
-                                            <button class="btn btn-primary btn-xs">
-                                                <span class="fa fa-pencil"></span>
-                                            </button>
-                                            <button class="btn btn-danger btn-xs">
-                                                <span class="fa fa-trash"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Company Name</td>
-                                        <td>{{ exp.company }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Company Address</td>
-                                        <td>{{ exp.address}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Start Date</td>
-                                        <td>{{ exp.start_date }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>End Date</td>
-                                        <td>{{ exp.end_date }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Job Description</td>
-                                        <td>{{ exp.description }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <WorkExperienceItem 
+                                v-for="(exp, index) in experiences" 
+                                :key="index" 
+                                :experienceProps="exp"
+                                @deleteExperience="removeWorkExperience"
+                            />
                         </div>
                         <div v-if="experiences.length == 0 && !experiencesIsAdd">
                             <p class="text-center">No work experience yet.</p>

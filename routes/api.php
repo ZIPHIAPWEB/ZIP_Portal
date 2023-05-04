@@ -5,6 +5,8 @@ Route::post('/register', [App\Http\Controllers\v2\AuthController::class, 'regist
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+    Route::get('/logout', [App\Http\Controllers\v2\AuthController::class, 'logout']);
+
     Route::get('/test', function() {
         return response()->json([
             'status_code' => 200,
@@ -34,7 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/update-mother', [App\Http\Controllers\v2\StudentController::class, 'updateMotherDetails']);
 
         Route::post('/add-work-experience', [App\Http\Controllers\v2\StudentController::class, 'addWorkExperience']);
-        Route::put('/update-work-experience', [App\Http\Controllers\v2\StudentController::class, 'updateWorkExperience']);
+        Route::put('/{experience}/update-work-experience', [App\Http\Controllers\v2\StudentController::class, 'updateWorkExperience']);
+        Route::delete('/{experience}/delete-work-experience', [App\Http\Controllers\v2\StudentController::class, 'deleteWorkExperience']);
     });
 });
 
