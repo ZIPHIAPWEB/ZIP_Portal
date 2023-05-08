@@ -11,6 +11,9 @@ import { ParentType, ParentInitial } from '../../../types/ParentType';
 import SchoolAPI from '../../../services/SchoolAPI';
 import { SchoolType } from '../../../types/SchoolType';
 
+import DegreeAPI from '../../../services/DegreeAPI';
+import { DegreeType } from '../../../types/DegreeType';
+
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ExperienceType } from '../../../types/ExperienceType';
 
@@ -25,6 +28,7 @@ const father = ref<ParentType>(ParentInitial);
 const mother = ref<ParentType>(ParentInitial);
 const experiences = ref<ExperienceType[]>([]);
 const schools = ref<SchoolType[]>([]);
+const degrees = ref<DegreeType[]>([]);
 
 const personalIsEdit = ref<boolean>(false);
 const contactIsEdit = ref<boolean>(false);
@@ -46,10 +50,15 @@ const toBeExperience = reactive<ExperienceType>({
 onMounted(() => {
     loadProfile();
     loadSchool();
+    loadDegree();
 });
 
 const fullName = computed(() => {
     return `${personal.value.last_name}, ${personal.value.first_name} ${personal.value.middle_name}`;
+});
+
+const tertiarySchoolName = computed(() => {
+    return schools.value.filter((school: SchoolType) => school.id === tertiary.value.school)[0]?.name;
 });
 
 const loadProfile = async () => {
@@ -81,6 +90,16 @@ const loadSchool = async () => {
     }
 }
 
+const loadDegree = async () => {
+    try {
+        const response = await DegreeAPI.getDegrees();
+        degrees.value = response.data.data.degrees;
+        console.log(response);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
+
 const updatePersonalDetails = async () => {
     try {
         const response = await StudentAPI.updatePersonalDetails(personal.value);
@@ -105,6 +124,7 @@ const updateTeriaryDetails = async () => {
     try {
         const response = await StudentAPI.updateTertiaryDetails(tertiary.value);
         tertiaryIsEdit.value = false;
+        tertiary.value = response.data.data;
         console.log(response);
     } catch (error: any) {
         console.log(error);
@@ -205,7 +225,7 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-striped table-sm">
                             <tbody>
                                 <tr>
-                                    <td>First name</td>
+                                    <td style="width: 40%">First name</td>
                                     <td v-if="!personalIsEdit">{{ personal.first_name}}</td>
                                     <td v-if="personalIsEdit">
                                         <input type="text" class="form-control form-control-sm" v-model="personal.first_name">
@@ -271,7 +291,7 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-sm table-striped">
                             <tbody>
                                 <tr>
-                                    <td>Present Address</td>
+                                    <td style="width: 40%">Present Address</td>
                                     <td v-if="!contactIsEdit">{{ contact.provincial_address }}</td>
                                     <td v-if="contactIsEdit">
                                         <input type="text" class="form-control form-control-sm" v-model="contact.provincial_address">
@@ -315,11 +335,11 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-striped table-sm">
                             <tbody>
                                 <tr>
-                                    <td>School</td>
+                                    <td style="width: 40%">School</td>
                                     <td v-if="!tertiaryIsEdit">{{ tertiary.school }}</td>
                                     <td v-if="tertiaryIsEdit">
                                         <select class="form-control form-control-sm" v-model="tertiary.school">
-                                            <option :value="tertiary.school">{{ tertiary.school }}</option>
+                                            <option :value="tertiary.school">{{ tertiarySchoolName }}</option>
                                             <!-- <option v-for="school in schools" :value="school.id">{{ school.name }}</option> -->
                                             <option v-for="school in schools" :value="school.id">{{ school.name }}</option>
                                         </select>
@@ -336,7 +356,10 @@ const removeWorkExperience = (experienceId : number | string) => {
                                     <td>Degree</td>
                                     <td v-if="!tertiaryIsEdit">{{ tertiary.degree }}</td>
                                     <td v-if="tertiaryIsEdit">
-                                        <input type="text" class="form-control form-control-sm" v-model="tertiary.degree">
+                                        <select class="form-control form-control-sm" v-model="tertiary.degree">
+                                            <option :value="tertiary.degree">{{ tertiary.degree }}</option>
+                                            <option v-for="(degree, index) in degrees" :value="degree.display_name">{{ degree.display_name }}</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -368,7 +391,7 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-striped table-sm">
                             <tbody>
                                 <tr>
-                                    <td>School</td>
+                                    <td style="width: 40%">School</td>
                                     <td v-if="!secondaryIsEdit">{{ secondary.school_name }}</td>
                                     <td v-if="secondaryIsEdit">
                                         <input type="text" class="form-control form-control-sm" v-model="secondary.school_name">
@@ -412,7 +435,7 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-sm table-striped">
                             <tbody>
                                 <tr>
-                                    <td>First name</td>
+                                    <td style="width: 40%">First name</td>
                                     <td v-if="!fatherIsEdit">{{ father.first_name }}</td>
                                     <td v-if="fatherIsEdit">
                                         <input type="text" class="form-control form-control-sm" v-model="father.first_name">
@@ -468,7 +491,7 @@ const removeWorkExperience = (experienceId : number | string) => {
                         <table class="table table-sm table-striped">
                             <tbody>
                                 <tr>
-                                    <td>First name</td>
+                                    <td style="width: 40%">First name</td>
                                     <td v-if="!motherIsEdit">{{ mother.first_name }}</td>
                                     <td v-if="motherIsEdit">
                                         <input type="text" class="form-control form-control-sm" v-model="mother.first_name">
@@ -504,9 +527,9 @@ const removeWorkExperience = (experienceId : number | string) => {
                                 </tr>
                                 <tr>
                                     <td>Contact No.</td>
-                                    <td v-if="!motherIsEdit">{{ mother.company }}</td>
+                                    <td v-if="!motherIsEdit">{{ mother.contact_no }}</td>
                                     <td v-if="motherIsEdit">
-                                        <input type="text" class="form-control form-control-sm" v-model="mother.company">
+                                        <input type="text" class="form-control form-control-sm" v-model="mother.contact_no">
                                     </td>
                                 </tr>
                             </tbody>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Experience;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExperienceResource;
+use App\Http\Resources\TertiaryResource;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -42,61 +43,77 @@ class StudentController extends Controller
 
     public function updateTertiaryDetails(Request $request)
     {
-        $tertiary = auth()->user()->tertiary();
+        $auth = auth()->user();
 
-        $tertiary->update([
-            'school_name' => $request->schoolName,
-            'address' => $request->address,
-            'degree' => $request->degree,
-            'start_date' => $request->startDate,
-            'date_graduated' => $request->dateGraduated
-        ]);
+        $auth->tertiary()->updateOrCreate(
+            [
+                'user_id' => $auth->id
+            ], 
+            [
+                'school_name' => $request->school,
+                'address' => $request->address,
+                'degree' => $request->degree,
+                'start_date' => $request->start_date,
+                'date_graduated' => $request->date_graduated
+            ]);
 
-        return response()->noContent();
+        return new TertiaryResource($auth->tertiary);
     }
 
     public function updateSecondaryDetails(Request $request)
     {
-        $secondary = auth()->user()->secondary();
+        $auth = auth()->user();
 
-        $secondary->update([
-            'school_name' => $request->schoolName,
-            'address' => $request->address,
-            'start_date' => $request->startDate,
-            'date_graduated' => $request->dateGraduated
-        ]);
+        $auth->secondary()->updateOrCreate(
+            [
+                'user_id' => $auth->id
+            ],
+            [
+                'school_name' => $request->school_name,
+                'address' => $request->address,
+                'start_date' => $request->start_date,
+                'date_graduated' => $request->date_graduated
+            ]);
 
         return response()->noContent();
     }
 
     public function updateFatherDetails(Request $request)
     {
-        $father = auth()->user()->father();
+        $auth = auth()->user();
 
-        $father->update([
-            'first_name' => $request->firstName,
-            'middle_name' => $request->middleName,
-            'last_name' => $request->lastName,
-            'occupation' => $request->occupation,
-            'contact_no' => $request->contactNo,
-            'company' => $request->company
-        ]);
+        $auth->father()->updateOrCreate(
+            [
+                'user_id' => $auth->id
+            ],
+            [
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'last_name' => $request->last_name,
+                'occupation' => $request->occupation,
+                'contact_no' => $request->contact_no,
+                'company' => $request->company
+            ]);
 
         return response()->noContent();
     }
 
     public function updateMotherDetails(Request $request)
     {
-        $mother = auth()->user()->mother();
+        $auth = auth()->user();
 
-        $mother->update([
-            'first_name' => $request->firstName,
-            'middle_name' => $request->middleName,
-            'last_name' => $request->lastName,
-            'occupation' => $request->occupation,
-            'contact_no' => $request->contactNo,
-            'company' => $request->company
-        ]);
+        $auth->mother()->updateOrCreate(
+            [
+                'user_id' => $auth->id
+            ],
+            [
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'last_name' => $request->last_name,
+                'occupation' => $request->occupation,
+                'contact_no' => $request->contact_no,
+                'company' => $request->company
+            ]);
 
         return response()->noContent();
     }

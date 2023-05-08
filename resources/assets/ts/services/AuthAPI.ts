@@ -2,13 +2,8 @@ import { AxiosResponse } from "axios";
 import { ApiRequest, ApiRequestWithoutAuth } from "./ApiRequest";
 
 export default {
-    login(
-        username: string, 
-        password: string
-    ) : Promise<AxiosResponse> {
-
+    login(username: string, password: string) : Promise<AxiosResponse> {
         return ApiRequestWithoutAuth.post('/login', { username, password });
-
     },
     register(
         username: string, 

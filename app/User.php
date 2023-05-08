@@ -49,6 +49,16 @@ class User extends Authenticatable
         return $this->hasOne(Secondary::class, 'user_id', 'id');
     }
 
+    public function father()
+    {
+        return $this->hasOne(Father::class, 'user_id', 'id');
+    }
+
+    public function mother()
+    {
+        return $this->hasOne(Mother::class, 'user_id', 'id');
+    }
+
     public function coordinator()
     {
         return $this->hasOne('App\Coordinator', 'user_id', 'id');

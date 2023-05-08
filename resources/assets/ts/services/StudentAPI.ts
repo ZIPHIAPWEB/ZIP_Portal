@@ -21,19 +21,19 @@ export default {
     },
 
     updateTertiaryDetails(data: TertiaryType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/profile/update-tertiary', data);
+        return ApiRequest.put('/student/update-tertiary', data);
     },
 
     updateSecondaryDetails(data: SecondaryType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/profile/update-secondary', data);
+        return ApiRequest.put('/student/update-secondary', data);
     },
 
     updateFatherDetails(data: ParentType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/profile/update-father', data);
+        return ApiRequest.put('/student/update-father', data);
     },
 
     updateMotherDetails(data: ParentType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/profile/update-mother', data);
+        return ApiRequest.put('/student/update-mother', data);
     },
 
     storeWorkExperience(data: ExperienceType) : Promise<AxiosResponse> {

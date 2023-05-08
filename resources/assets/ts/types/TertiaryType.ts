@@ -1,5 +1,5 @@
 export type TertiaryType = {
-    school: String,
+    school: String|Number,
     degree: String,
     address: String,
     date_graduated: Date|String,

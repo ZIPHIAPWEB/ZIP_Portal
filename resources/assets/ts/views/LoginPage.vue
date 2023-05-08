@@ -6,6 +6,9 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useLocalStorage } from '@vueuse/core';
 
+import { useAuthStore } from '../store/auth';
+const authStore = useAuthStore();
+
 const router = useRouter();
 
 const username = ref<string>('');
@@ -35,35 +38,37 @@ const login = async () => {
     errorMessage.value = '';
     isLoading.value = true;
 
-    try {
-        const response = await AuthAPI.login(username.value, password.value);
+    authStore.login(username.value, password.value)
 
-        console.log(response);
+    // try {
+    //     const response = await AuthAPI.login(username.value, password.value);
 
-        useLocalStorage('access_token', response.data.data.access_token);
+    //     console.log(response);
 
-        if (response.data.data.user.is_verified) {
-            if (response.data.data.user.is_filled) {
-                router.push({ name: 'student-dashboard' });
-            } else {
-                router.push({ name: 'application-form'});
-            }
-        } else {
-            router.push({ name: 'email-verification' })       
-        }
+    //     useLocalStorage('access_token', response.data.data.access_token);
 
-        isLoading.value = false;
+    //     if (response.data.data.user.is_verified) {
+    //         if (response.data.data.user.is_filled) {
+    //             router.push({ name: 'student-dashboard' });
+    //         } else {
+    //             router.push({ name: 'application-form'});
+    //         }
+    //     } else {
+    //         router.push({ name: 'email-verification' })       
+    //     }
 
-    } catch (error: any) {
-        isLoading.value = false;
-        if(error.response?.status == 422) {
-            errors.value = error.response?.data.errors;
-            errorMessage.value = error.response?.data.message;
-        } else {
-            errorMessage.value = error.response?.data.message;
-        }
-        errorMessage.value = error.response?.data.message;
-    }
+    //     isLoading.value = false;
+
+    // } catch (error: any) {
+    //     isLoading.value = false;
+    //     if(error.response?.status == 422) {
+    //         errors.value = error.response?.data.errors;
+    //         errorMessage.value = error.response?.data.message;
+    //     } else {
+    //         errorMessage.value = error.response?.data.message;
+    //     }
+    //     errorMessage.value = error.response?.data.message;
+    // }
 }
 
 </script>
@@ -77,7 +82,7 @@ const login = async () => {
             {{ errorMessage }}
         </div>
         <div class="card card-outline card-primary">
-            <div v-if="isLoading" class="overlay dark">
+            <div v-if="authStore.isLoading" class="overlay dark">
                 <i class="fas fa-3x fa-spinner fa-spin"></i>
             </div>
             <div class="card-header" style="border-bottom: 0; display: flex; justify-content: center;">

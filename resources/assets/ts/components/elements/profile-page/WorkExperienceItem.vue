@@ -53,7 +53,7 @@ const deleteWorkExperience = async () => {
                 </td>
             </tr>
             <tr>
-                <td>Company Name</td>
+                <td style="width: 40%">Company Name</td>
                 <td v-if="!experienceIsEdit">{{ compExperience.company }}</td>
                 <td v-if="experienceIsEdit">
                     <input v-model="compExperience.company" type="text" class="form-control form-control-sm" />
