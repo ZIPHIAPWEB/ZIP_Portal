@@ -290,7 +290,7 @@
                                         </div>
                                     </div>
                                     <div class="box-body">
-                                        <div class="form-group col-xs-6">
+                                        <div class="form-group-sm col-12">
                                             <label for="" class="control-label">Reason</label>
                                             <select v-model="cancel.status" class="form-control input-sm">
                                                 <option value="">Select Reason Of Cancellation</option>
@@ -299,7 +299,7 @@
                                                 <option value="Cancel: Program Cancellation">Program Cancellation</option>
                                             </select>
                                         </div>
-                                        <div class="form-group-sm col-xs-12">
+                                        <div class="form-group-sm col-xs-12 px-0">
                                             <button @click="setCancellationStatus" class="btn btn-primary btn-flat btn-block btn-sm">Submit</button>
                                         </div>
                                     </div>
@@ -2045,7 +2045,7 @@
                                 type: 'success',
                                 confirmButtonText: 'Continue'
                             });
-                            this.loadStudents(programId);
+                            // this.loadStudents(programId);
                             $('#student-modal').modal('hide');
                         })
                 },
@@ -2217,7 +2217,7 @@
                 setContactStatus(e) {
                     axios.post(`/coor/${this.student.user_id}/setContactStatus`, { status: e.target.value })
                         .then((response) => {
-                            this.loadStudents(programId);
+                            // this.loadStudents(programId);
                             this.viewStudent(this.student.user_id);
                             swal({
                                 title: response.data,
@@ -2229,6 +2229,20 @@
                             console.log(error);
                         })
                 },
+                setCancellationStatus() {
+                    this.loading.modal = true;
+                    axios.post(`/coor/${this.student.user_id}/application/Cancelled`, this.cancel)
+                        .then((response) => {
+                            // this.loadStudents(programId);
+                            this.viewStudent(this.student.user_id);
+                            this.loading.modal = false;
+                            this.show.cancel = false;
+                            alert(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                },
                 setApplicationStatus(status) {
                     this.appStatus = '';
                     switch (status) {
@@ -2237,7 +2251,7 @@
                                 this.loading.modal = true;
                                 axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                     .then(({data}) => {
-                                        this.loadStudents(programId);
+                                        // this.loadStudents(programId);
                                         this.viewStudent(this.student.user_id);
                                         this.loading.modal = false;
                                         swal({
@@ -2261,7 +2275,7 @@
                                 this.loading.modal = true;
                                 axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                     .then(({data}) => {
-                                        this.loadStudents(programId);
+                                        // this.loadStudents(programId);
                                         this.viewStudent(this.student.user_id);
                                         this.loading.modal = false;
                                         swal({
@@ -2286,7 +2300,7 @@
                                 axios.post(`/coor/${this.student.user_id}/application/${status}`)
                                     .then((response) => {
 
-                                        this.loadStudents(programId);
+                                        // this.loadStudents(programId);
                                         this.viewStudent(this.student.user_id);
                                         this.loading.modal = false;
                                         swal({
@@ -2339,7 +2353,7 @@
                             if(this.student.application_status == 'For PDOS & CFO') {
                                 axios.post(`/coor/${this.student.user_id}/application/ProgramProper`)
                                     .then((response) => {
-                                        this.loadStudents(programId);
+                                        // this.loadStudents(programId);
                                         this.viewStudent(this.student.user_id);
                                         this.loading.modal = false;
                                         swal({
