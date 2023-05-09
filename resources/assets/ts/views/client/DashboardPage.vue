@@ -3,6 +3,9 @@ import ClientLayout from '../../components/layouts/ClientLayout.vue';
 import ProfileTab from '../../components/elements/profile-page/ProfileTab.vue';
 import RequirementsTab from '../../components/elements/profile-page/RequirementsTab.vue';
 
+import { useAuthStore } from '../../store/auth';
+const authStore = useAuthStore();
+
 </script>
 
 <template>
@@ -17,12 +20,10 @@ import RequirementsTab from '../../components/elements/profile-page/Requirements
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle"
-                                src="#"
-                                alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" :src="authStore.auth.profile_picture" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center py-4">Test Test Test</h3>
+                            <h3 class="profile-username text-center py-4">{{ authStore.auth.full_name }}</h3>
 
                             <p v-if="false" class="text-muted text-center">Sd</p>
 
@@ -38,7 +39,7 @@ import RequirementsTab from '../../components/elements/profile-page/Requirements
                                 </li>
                             </ul> -->
 
-                            <button class="btn btn-primary btn-block"><b>Logout</b></button>
+                            <button @click="authStore.logout()" class="btn btn-primary btn-block"><b>Logout</b></button>
                             <hr>
                             <button class="btn btn-default btn-block text-left">Profile</button>
                             <button class="btn btn-default btn-block text-left">Payment Requirements</button>

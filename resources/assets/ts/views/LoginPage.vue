@@ -1,85 +1,28 @@
 <script setup lang="ts">
 import AuthLayout from '../components/layouts/AuthLayout.vue';
-import AuthAPI from '../services/AuthAPI';
 
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useLocalStorage } from '@vueuse/core';
+import { ref } from 'vue';
 
 import { useAuthStore } from '../store/auth';
 const authStore = useAuthStore();
 
-const router = useRouter();
-
 const username = ref<string>('');
 const password = ref<string>('');
-const isLoading = ref<boolean>(false);
-
-const errors = ref<string[]|any>([]);
-const errorMessage = ref<string>('');
-
-const usernameError = computed(() => {
-    if (errors.value['username']) {
-        return errors.value['username'][0];
-    }
-
-    return false;
-});
-
-const passwordError = computed(() => {
-    if (errors.value['password']) {
-        return errors.value['password'][0];
-    }
-
-    return false;
-});
 
 const login = async () => {
-    errorMessage.value = '';
-    isLoading.value = true;
 
-    authStore.login(username.value, password.value)
+    await authStore.login(username.value, password.value);
 
-    // try {
-    //     const response = await AuthAPI.login(username.value, password.value);
-
-    //     console.log(response);
-
-    //     useLocalStorage('access_token', response.data.data.access_token);
-
-    //     if (response.data.data.user.is_verified) {
-    //         if (response.data.data.user.is_filled) {
-    //             router.push({ name: 'student-dashboard' });
-    //         } else {
-    //             router.push({ name: 'application-form'});
-    //         }
-    //     } else {
-    //         router.push({ name: 'email-verification' })       
-    //     }
-
-    //     isLoading.value = false;
-
-    // } catch (error: any) {
-    //     isLoading.value = false;
-    //     if(error.response?.status == 422) {
-    //         errors.value = error.response?.data.errors;
-    //         errorMessage.value = error.response?.data.message;
-    //     } else {
-    //         errorMessage.value = error.response?.data.message;
-    //     }
-    //     errorMessage.value = error.response?.data.message;
-    // }
 }
-
 </script>
 
 <template>
     <AuthLayout>
         <div class="login-box">
     <!-- /.login-logo -->
-        <div v-if="errorMessage" class="alert alert-danger">
+        <div v-if="authStore.errorMessage" class="alert alert-danger">
             <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            {{ errorMessage }}
+            {{ authStore.errorMessage }}
         </div>
         <div class="card card-outline card-primary">
             <div v-if="authStore.isLoading" class="overlay dark">
@@ -92,7 +35,7 @@ const login = async () => {
             <p class="login-box-msg"><span style="font-weight: 900">ZIP TRAVEL</span> Philippines</p>
             <form @submit.prevent="login">
                 <div class="input-group mb-3">
-                    <input :class="{ 'is-invalid' : usernameError }" v-model="username" type="text" class="form-control" placeholder="Username">
+                    <input :class="{ 'is-invalid' : authStore.getUsernameError }" v-model="username" type="text" class="form-control" placeholder="Username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -100,7 +43,7 @@ const login = async () => {
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input :class="{ 'is-invalid' : passwordError }" v-model="password" type="password" class="form-control" placeholder="Password">
+                    <input :class="{ 'is-invalid' : authStore.getPasswordError }" v-model="password" type="password" class="form-control" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
