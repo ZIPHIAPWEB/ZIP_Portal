@@ -19,11 +19,14 @@ class StudentPayment extends Model
         'path'
     ];
 
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function payment()
     {
-        return $this->hasOne('App\PaymentRequirement' ,'requirement_id', 'id');
+        return $this->belongsTo(PaymentRequirement::class, 'requirement_id');
     }
 
     public function getById($id)

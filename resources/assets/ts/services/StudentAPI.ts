@@ -46,5 +46,17 @@ export default {
 
     deleteWorkExperience(id?: number | string) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/student/${id}/delete-work-experience`);
+    },
+
+    getPaymentRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/payment-requirements');
+    },
+
+    storePaymentRequirement(requirementId: number, data: any) : Promise<AxiosResponse> {
+        return ApiRequest.post(`/student/payment-requirement/${requirementId}/store`, data);
+    },
+
+    removePaymentRequirement(requirementId: number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/student/payment-requirement/${requirementId}/delete`, {});
     }
 }

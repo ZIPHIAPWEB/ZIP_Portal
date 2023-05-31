@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/add-work-experience', [App\Http\Controllers\v2\StudentController::class, 'addWorkExperience']);
         Route::put('/{experience}/update-work-experience', [App\Http\Controllers\v2\StudentController::class, 'updateWorkExperience']);
         Route::delete('/{experience}/delete-work-experience', [App\Http\Controllers\v2\StudentController::class, 'deleteWorkExperience']);
+
+        Route::get('/payment-requirements', [App\Http\Controllers\v2\StudentPaymentRequirementController::class, 'index']);
+        Route::post('/payment-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentPaymentRequirementController::class, 'store']);
+        Route::delete('/payment-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentPaymentRequirementController::class, 'destroy']);
     });
 });
 

@@ -3,8 +3,34 @@ import ClientLayout from '../../components/layouts/ClientLayout.vue';
 import ProfileTab from '../../components/elements/profile-page/ProfileTab.vue';
 import RequirementsTab from '../../components/elements/profile-page/RequirementsTab.vue';
 
+import { ref, onMounted } from 'vue';
+
 import { useAuthStore } from '../../store/auth';
 const authStore = useAuthStore();
+
+const selectedTab = ref();
+const tabs = [
+    {
+        name: 'Profile',
+        component: ProfileTab,
+    },
+    {
+        name: 'Payment Requirements',
+        component: RequirementsTab,
+    },
+    {
+        name: 'Program Requirements',
+        component: RequirementsTab,
+    },
+    {
+        name: 'Program Information',
+        component: RequirementsTab,
+    },
+];
+
+onMounted(() => {
+    selectedTab.value = tabs[0].component;
+});
 
 </script>
 
@@ -41,10 +67,14 @@ const authStore = useAuthStore();
 
                             <button @click="authStore.logout()" class="btn btn-primary btn-block"><b>Logout</b></button>
                             <hr>
-                            <button class="btn btn-default btn-block text-left">Profile</button>
-                            <button class="btn btn-default btn-block text-left">Payment Requirements</button>
-                            <button class="btn btn-default btn-block text-left">Program Requirements</button>
-                            <button class="btn btn-default btn-block text-left">Program Information</button>
+                            <button 
+                                class="btn btn-default btn-block text-left"
+                                v-for="(tab, index) in tabs" 
+                                :key="index"
+                                @click="selectedTab = tab.component"
+                            >
+                                {{ tab.name }}
+                            </button>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -53,7 +83,9 @@ const authStore = useAuthStore();
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
-                    <ProfileTab />
+                    <KeepAlive>
+                        <component :is="selectedTab" />
+                    </KeepAlive>
                 </div>
                 <!-- /.col -->
                 </div>

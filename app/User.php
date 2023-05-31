@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasOne(Student::class,'user_id', 'id');
     }
 
+    public function studentPayment()
+    {
+        return $this->hasMany(StudentPayment::class, 'user_id', 'id');
+    }
+
     public function tertiary()
     {
         return $this->hasOne(Tertiary::class, 'user_id', 'id');
