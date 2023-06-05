@@ -6,6 +6,7 @@ import RequirementsTab from '../../components/elements/profile-page/Requirements
 import { ref, onMounted } from 'vue';
 
 import { useAuthStore } from '../../store/auth';
+import ProgramRequirementsTab from '../../components/elements/profile-page/ProgramRequirementsTab.vue';
 const authStore = useAuthStore();
 
 const selectedTab = ref();
@@ -20,7 +21,7 @@ const tabs = [
     },
     {
         name: 'Program Requirements',
-        component: RequirementsTab,
+        component: ProgramRequirementsTab,
     },
     {
         name: 'Program Information',

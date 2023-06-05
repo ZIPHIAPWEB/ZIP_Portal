@@ -58,5 +58,9 @@ export default {
 
     removePaymentRequirement(requirementId: number) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/student/payment-requirement/${requirementId}/delete`, {});
+    },
+
+    getStudentBasicRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/basic-requirements');
     }
 }
