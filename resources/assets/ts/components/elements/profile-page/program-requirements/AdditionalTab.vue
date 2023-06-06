@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+import { useStudentAdditionalRequirement } from '../../../../store/studentAdditionalRequirement';
+import { storeToRefs } from 'pinia';
+
+const studentAdditionalRequirementStore = useStudentAdditionalRequirement();
+const { isLoading, isSuccess, requirements } = storeToRefs(studentAdditionalRequirementStore);
+
+onMounted(async () => {
+    await studentAdditionalRequirementStore.loadStudentAdditionalRequirements();
+})
 
 </script>
 
@@ -10,11 +20,24 @@
             <th>Status</th>
             <th>Action</th>
         </thead>
-        <tbody>
+        <tbody v-if="isLoading && !isSuccess">
             <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
+                <td colspan="4" class="text-center">Loading...</td>
+            </tr>
+        </tbody>
+        <tbody v-if="!isLoading && isSuccess && requirements.length == 0">
+            <tr>
+                <td colspan="4" class="text-center">No requirements</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr v-for="(requirement, index) in requirements" :key="index">
+                <td>{{ requirement.name }}</td>
+                <td>{{ requirement.description  }}</td>
+                <td>
+                    <span v-if="requirement.student_additional?.status == true" class="fa fa-check text-success"></span>
+                    <span v-else class="fa fa-times text-danger"></span>
+                </td>
                 <td>
                     <button class="btn btn-default btn-xs mr-1">Upload</button>
                     <button class="btn btn-primary btn-xs">Download File</button>

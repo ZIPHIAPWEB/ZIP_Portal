@@ -62,5 +62,13 @@ export default {
 
     getStudentBasicRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/basic-requirements');
+    },
+
+    getStudentAdditionalRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/additional-requirements');
+    },
+
+    getStudentVisaSponsorRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/visa-sponsor-requirements');
     }
 }
