@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import UploadButton from './UploadButton.vue';
+
 import { onMounted } from 'vue';
 
-import { useStudentBasicRequirement } from '../../../../store/basicRequirement';
+import { useStudentBasicRequirement, IBasicRequirement } from '../../../../store/basicRequirement';
 import { storeToRefs } from 'pinia';
 
 const studentBasicRequirementStore = useStudentBasicRequirement();
@@ -10,6 +12,14 @@ const { isLoading, isSuccess, requirements } = storeToRefs(studentBasicRequireme
 onMounted(async () => {
     await studentBasicRequirementStore.loadStudentBasicRequirements();
 });
+
+const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    await studentBasicRequirementStore.storeStudentBasicRequirement(requirementId, file)
+}
+
+const deleteFileHandler = async (requirement : IBasicRequirement) => {
+    await studentBasicRequirementStore.removeStudentBasicRequirement(requirement);
+}
 
 </script>
 
@@ -40,8 +50,9 @@ onMounted(async () => {
                     <span v-else class="fa fa-times text-danger"></span>
                 </td>
                 <td>
-                    <button class="btn btn-default btn-xs mr-1">Upload</button>
-                    <button class="btn btn-primary btn-xs">Download File</button>
+                    <UploadButton v-if="!requirement.student_preliminary?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
+                    <button v-if="!requirement.student_preliminary?.status" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.student_preliminary?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>
         </tbody>

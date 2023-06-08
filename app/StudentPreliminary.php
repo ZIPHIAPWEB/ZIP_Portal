@@ -15,7 +15,7 @@ class StudentPreliminary extends Model
 
    public function preliminary()
    {
-       return $this->hasMany('App\Preliminary', 'requirement_id', 'id');
+       return $this->belongsTo(PreliminaryRequirement::class, 'requirement_id');
    }
 
    public function getById($id)

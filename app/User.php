@@ -44,6 +44,21 @@ class User extends Authenticatable
         return $this->hasMany(StudentPayment::class, 'user_id', 'id');
     }
 
+    public function studentPreliminary()
+    {
+        return $this->hasMany(StudentPreliminary::class, 'user_id', 'id');
+    }
+
+    public function studentAdditional()
+    {
+        return $this->hasMany(StudentAdditional::class, 'user_id', 'id');
+    }
+
+    public function studentVisaSponsor()
+    {
+        return $this->hasMany(StudentSponsor::class, 'user_id', 'id');
+    }
+
     public function tertiary()
     {
         return $this->hasOne(Tertiary::class, 'user_id', 'id');

@@ -64,11 +64,23 @@ export default {
         return ApiRequest.get('/student/basic-requirements');
     },
 
+    storeStudentBasicRequirement(requirementId : string | number | undefined, file: File) : Promise<AxiosResponse> {
+        
+        let formData = new FormData();
+        formData.append('file', file);
+
+        return ApiRequest.post(`/student/basic-requirement/${requirementId}/store`, formData);
+    },
+
+    deleteStudentBasicRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/student/basic-requirement/${requirementId}/delete`);
+    },
+
     getStudentAdditionalRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/additional-requirements');
     },
 
     getStudentVisaSponsorRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/visa-sponsor-requirements');
-    }
+    },
 }

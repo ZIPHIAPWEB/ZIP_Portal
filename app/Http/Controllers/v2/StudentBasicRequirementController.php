@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentPreliminaryResource;
 use App\PreliminaryRequirement;
+use App\StudentPreliminary;
 use Illuminate\Http\Request;
 
 class StudentBasicRequirementController extends Controller
@@ -21,6 +23,32 @@ class StudentBasicRequirementController extends Controller
 
         return response()->json([
             'data' => $basicRequirements
+        ], 200);
+    }
+
+    public function store(Request $request, PreliminaryRequirement $requirement)
+    {
+        $user = auth()->user();
+
+        $uploadedRequirement = $user->studentPreliminary()->create([
+            'requirement_id' => $requirement->id,
+            'path' => '',
+            'status' => true,
+        ]);
+
+        return new StudentPreliminaryResource($uploadedRequirement);
+    }
+
+    public function destroy(StudentPreliminary $requirement)
+    {
+        $user = auth()->user();
+
+        $user->studentPreliminary()
+            ->where('id', $requirement->id)
+            ->delete();
+
+        return response()->json([
+            'message' => 'Requirement deleted successfully'
         ], 200);
     }
 }

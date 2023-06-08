@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import UploadButton from './UploadButton.vue';
+
 import { onMounted } from 'vue';
 import { useStudentAdditionalRequirement } from '../../../../store/studentAdditionalRequirement';
 import { storeToRefs } from 'pinia';
@@ -9,6 +11,10 @@ const { isLoading, isSuccess, requirements } = storeToRefs(studentAdditionalRequ
 onMounted(async () => {
     await studentAdditionalRequirementStore.loadStudentAdditionalRequirements();
 })
+
+const uploadFileHander = (file : File, requirementId : string | number | undefined) => {
+    console.log(file, requirementId);
+}
 
 </script>
 
@@ -39,7 +45,7 @@ onMounted(async () => {
                     <span v-else class="fa fa-times text-danger"></span>
                 </td>
                 <td>
-                    <button class="btn btn-default btn-xs mr-1">Upload</button>
+                    <UploadButton :requirementId="requirement.id" @getFile="uploadFileHander" />
                     <button class="btn btn-primary btn-xs">Download File</button>
                 </td>
             </tr>

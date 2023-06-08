@@ -44,7 +44,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('/payment-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentPaymentRequirementController::class, 'destroy']);
 
         Route::get('/basic-requirements', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'index']);
-
+        Route::post('/basic-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'store']);
+        Route::delete('/basic-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'destroy']);
+        
         Route::get('/additional-requirements', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'index']);
 
         Route::get('/visa-sponsor-requirements', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'index']);

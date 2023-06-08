@@ -49,6 +49,58 @@ export const useStudentBasicRequirement = defineStore({
                 this.isLoading = false;
                 this.isSuccess = false;
             }
+        },
+
+        async storeStudentBasicRequirement(requirementId: string | number | undefined, file : File) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = await StudentAPI.storeStudentBasicRequirement(requirementId, file);
+                
+                this.requirements = this.requirements.map(requirement => {
+                    if (requirement.id === requirementId) {
+                        requirement.student_preliminary = response.data.data;
+                    }
+
+                    return requirement;
+                });
+
+                this.isLoading = false;
+                this.isSuccess = true;
+                return response.data;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+                return error.response.data;
+            }
+        },
+
+        async removeStudentBasicRequirement(requirement : IBasicRequirement) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = await StudentAPI.deleteStudentBasicRequirement(requirement.student_preliminary?.id);
+                
+                this.requirements = this.requirements.map(rq => {
+                    if (requirement.id === rq.id) {
+                        rq.student_preliminary = undefined;
+                    }
+
+                    return rq;
+                });
+
+                this.isLoading = false;
+                this.isSuccess = true;
+                return response.data;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+                return error.response.data;
+            }
         }
     }
 });
