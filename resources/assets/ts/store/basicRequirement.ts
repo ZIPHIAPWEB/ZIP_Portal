@@ -77,7 +77,7 @@ export const useStudentBasicRequirement = defineStore({
             }
         },
 
-        async removeStudentBasicRequirement(requirement : IBasicRequirement) {
+        async removeStudentBasicRequirement(requirement : IBasicRequirement) : Promise<void> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -94,7 +94,6 @@ export const useStudentBasicRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-                return response.data;
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;

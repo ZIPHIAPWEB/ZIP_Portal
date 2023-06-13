@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentSponsorResource;
 use App\SponsorRequirement;
+use App\StudentSponsor;
 use Illuminate\Http\Request;
 
 class StudentVisaSponsorRequirementController extends Controller
@@ -21,6 +23,32 @@ class StudentVisaSponsorRequirementController extends Controller
 
         return response()->json([
             'data' => $visaSponsorRequirements
+        ], 200);
+    }
+
+    public function store(Request $request, SponsorRequirement $requirement)
+    {
+        $user = auth()->user();
+
+        $uploadedSponsorRequirement = $user->studentVisaSponsor()->create([
+            'requirement_id' => $requirement->id,
+            'path' => '',
+            'status' => true,
+        ]);
+
+        return new StudentSponsorResource($uploadedSponsorRequirement);
+    }
+
+    public function destroy(StudentSponsor $requirement)
+    {
+        $user = auth()->user();
+
+        $user->studentVisaSponsor()
+            ->where('id', $requirement->id)
+            ->delete();
+
+        return response()->json([
+            'message' => 'Requirement deleted successfully'
         ], 200);
     }
 }

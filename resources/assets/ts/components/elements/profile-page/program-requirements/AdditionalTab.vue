@@ -4,6 +4,7 @@ import UploadButton from './UploadButton.vue';
 import { onMounted } from 'vue';
 import { useStudentAdditionalRequirement } from '../../../../store/studentAdditionalRequirement';
 import { storeToRefs } from 'pinia';
+import { IAdditionalRequirement } from '../../../../store/studentAdditionalRequirement';
 
 const studentAdditionalRequirementStore = useStudentAdditionalRequirement();
 const { isLoading, isSuccess, requirements } = storeToRefs(studentAdditionalRequirementStore);
@@ -12,8 +13,12 @@ onMounted(async () => {
     await studentAdditionalRequirementStore.loadStudentAdditionalRequirements();
 })
 
-const uploadFileHander = (file : File, requirementId : string | number | undefined) => {
-    console.log(file, requirementId);
+const uploadFileHander = async (file : File, requirementId : string | number | undefined) => {
+    await studentAdditionalRequirementStore.storeStudentAdditionalRequirement(requirementId, file)
+}
+
+const deleteFileHandler = async (requirement : IAdditionalRequirement) => {
+    await studentAdditionalRequirementStore.removeStudentAdditionalRequirement(requirement);
 }
 
 </script>
@@ -36,7 +41,7 @@ const uploadFileHander = (file : File, requirementId : string | number | undefin
                 <td colspan="4" class="text-center">No requirements</td>
             </tr>
         </tbody>
-        <tbody>
+        <tbody v-if="!isLoading && isSuccess && requirements.length > 0">
             <tr v-for="(requirement, index) in requirements" :key="index">
                 <td>{{ requirement.name }}</td>
                 <td>{{ requirement.description  }}</td>
@@ -45,8 +50,9 @@ const uploadFileHander = (file : File, requirementId : string | number | undefin
                     <span v-else class="fa fa-times text-danger"></span>
                 </td>
                 <td>
-                    <UploadButton :requirementId="requirement.id" @getFile="uploadFileHander" />
-                    <button class="btn btn-primary btn-xs">Download File</button>
+                    <UploadButton v-if="!requirement.student_additional?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
+                    <button v-if="!requirement.student_additional?.status" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.student_additional?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>
         </tbody>

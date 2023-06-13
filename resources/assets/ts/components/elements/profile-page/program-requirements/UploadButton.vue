@@ -3,7 +3,7 @@ import { ref, defineEmits, defineProps } from 'vue';
 
 const fileInputRef = ref<HTMLInputElement | null>(null);
 const emit = defineEmits<{ (event: 'getFile', file: File, requirementId: string | number | undefined) : void }>();
-const props = defineProps<{ requirementId: string | number | undefined }>();
+const props = defineProps<{ requirementId?: string | number }>();
 
 const fileHandler = (event: Event) => {
     const target = event.target as HTMLInputElement;

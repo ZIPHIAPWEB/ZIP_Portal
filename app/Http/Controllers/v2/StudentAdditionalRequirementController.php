@@ -4,6 +4,8 @@ namespace App\Http\Controllers\v2;
 
 use App\AdditionalRequirement;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentAdditionalResource;
+use App\StudentAdditional;
 use Illuminate\Http\Request;
 
 class StudentAdditionalRequirementController extends Controller
@@ -21,6 +23,32 @@ class StudentAdditionalRequirementController extends Controller
 
         return response()->json([
             'data' => $additionalRequirements
+        ], 200);
+    }
+
+    public function store(Request $request, AdditionalRequirement $requirement) 
+    {
+        $user = auth()->user();
+
+        $uploadedAdditionalRequirement = $user->studentAdditional()->create([
+            'requirement_id' => $requirement->id,
+            'path' => '',
+            'status' => true
+        ]);
+
+        return new StudentAdditionalResource($uploadedAdditionalRequirement);
+    }
+
+    public function destroy(StudentAdditional $requirement)
+    {
+        $user = auth()->user();
+
+        $user->studentAdditional()
+            ->where('id', $requirement->id)
+            ->delete();
+
+        return response()->json([
+            'message' => 'Requirement deleted successfully'
         ], 200);
     }
 }

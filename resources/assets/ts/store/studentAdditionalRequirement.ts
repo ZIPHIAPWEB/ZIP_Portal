@@ -40,8 +40,11 @@ export const useStudentAdditionalRequirement = defineStore({
         async loadStudentAdditionalRequirements() {
             try {
                 this.isLoading = true;
+                this.isSuccess = false;
+
                 const response = await StudentAPI.getStudentAdditionalRequirements();
                 this.requirements = response.data.data;
+
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error : any) {
@@ -51,6 +54,52 @@ export const useStudentAdditionalRequirement = defineStore({
             }
         },
 
+        async storeStudentAdditionalRequirement(requirementId: string | number | undefined, file : File) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
 
+                const response = await StudentAPI.storeStudentAdditionalRequirement(requirementId, file);
+                this.requirements = this.requirements.map((addReq => {
+                    if (addReq.id === requirementId) {
+                        addReq.student_additional = response.data.data;
+                    }
+                    return addReq;
+                }));
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+                return error.response.data;
+            }
+        },
+
+        async removeStudentAdditionalRequirement(requirement : IAdditionalRequirement) : Promise<void> {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = await StudentAPI.deleteStudentAdditionalRequirement(requirement.student_additional?.id);
+                
+                this.requirements = this.requirements.map(rq => {
+                    if (requirement.id === rq.id) {
+                        rq.student_additional = undefined;
+                    }
+
+                    return rq;
+                });
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+                return error.response.data;
+            }
+        }
     }
 });

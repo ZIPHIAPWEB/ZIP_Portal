@@ -80,7 +80,31 @@ export default {
         return ApiRequest.get('/student/additional-requirements');
     },
 
+    storeStudentAdditionalRequirement(requirementId : string | number | undefined, file: File) : Promise<AxiosResponse> {
+        
+        let formData = new FormData();
+        formData.append('file', file);
+        
+        return ApiRequest.post(`/student/additional-requirement/${requirementId}/store`, formData);
+    },
+
+    deleteStudentAdditionalRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> { 
+        return ApiRequest.delete(`/student/additional-requirement/${requirementId}/delete`);
+    },
+
     getStudentVisaSponsorRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/visa-sponsor-requirements');
     },
+
+    storeStudentVisaSponsorRequirement(requirementId : string | number | undefined, file: File) : Promise<AxiosResponse> {
+            
+        let formData = new FormData();
+        formData.append('file', file);
+        
+        return ApiRequest.post(`/student/visa-sponsor-requirement/${requirementId}/store`, formData);
+    },
+
+    deleteStudentVisaSponsorRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/student/visa-sponsor-requirement/${requirementId}/delete`);
+    }
 }
