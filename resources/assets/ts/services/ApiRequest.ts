@@ -5,8 +5,18 @@ axios.defaults.headers.common = {
     'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
 };
 
+let url = 'http://127.0.0.1:8000/api';
+
 export const ApiRequest = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: url,
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
+    },
+    withCredentials: true
+});
+
+export const ApiRequestWithFile = axios.create({
+    baseURL: url,
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
         'Content-Type': 'multipart/form-data'
@@ -15,6 +25,6 @@ export const ApiRequest = axios.create({
 });
 
 export const ApiRequestWithoutAuth = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: url,
     withCredentials: true
 });

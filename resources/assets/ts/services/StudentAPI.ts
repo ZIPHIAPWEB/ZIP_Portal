@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { ApiRequest } from "./ApiRequest";
+import { ApiRequest, ApiRequestWithFile } from "./ApiRequest";
 import { PersonalType } from "../types/PersonalType";
 import { ContactType } from "../types/ContactType";
 import { TertiaryType } from "../types/TertiaryType";
@@ -69,7 +69,7 @@ export default {
         let formData = new FormData();
         formData.append('file', file);
 
-        return ApiRequest.post(`/student/basic-requirement/${requirementId}/store`, formData);
+        return ApiRequestWithFile.post(`/student/basic-requirement/${requirementId}/store`, formData);
     },
 
     deleteStudentBasicRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
@@ -85,7 +85,7 @@ export default {
         let formData = new FormData();
         formData.append('file', file);
         
-        return ApiRequest.post(`/student/additional-requirement/${requirementId}/store`, formData);
+        return ApiRequestWithFile.post(`/student/additional-requirement/${requirementId}/store`, formData);
     },
 
     deleteStudentAdditionalRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> { 
@@ -101,7 +101,7 @@ export default {
         let formData = new FormData();
         formData.append('file', file);
         
-        return ApiRequest.post(`/student/visa-sponsor-requirement/${requirementId}/store`, formData);
+        return ApiRequestWithFile.post(`/student/visa-sponsor-requirement/${requirementId}/store`, formData);
     },
 
     deleteStudentVisaSponsorRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {

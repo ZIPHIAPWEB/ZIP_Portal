@@ -9,12 +9,8 @@ import { useAuthStore } from '../../store/auth';
 import ProgramRequirementsTab from '../../components/elements/profile-page/ProgramRequirementsTab.vue';
 const authStore = useAuthStore();
 
-const selectedTab = ref();
+const selectedTab = ref(ProfileTab);
 const tabs = [
-    {
-        name: 'Profile',
-        component: ProfileTab,
-    },
     {
         name: 'Payment Requirements',
         component: RequirementsTab,
@@ -28,10 +24,6 @@ const tabs = [
         component: RequirementsTab,
     },
 ];
-
-onMounted(() => {
-    selectedTab.value = tabs[0].component;
-});
 
 </script>
 
@@ -47,10 +39,10 @@ onMounted(() => {
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" :src="authStore.auth.profile_picture" alt="User profile picture">
+                                <img style="height: 170px; width: 170px;" class="profile-user-img img-fluid img-circle" src="https://placeimg.com/150/150/any" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center py-4">{{ authStore.auth.full_name }}</h3>
+                            <h3 class="profile-username text-center py-4">Renz D. Mergenio</h3>
 
                             <p v-if="false" class="text-muted text-center">Sd</p>
 
@@ -65,8 +57,8 @@ onMounted(() => {
                                     <b>Friends</b> <a class="float-right">13,287</a>
                                 </li>
                             </ul> -->
-
-                            <button @click="authStore.logout()" class="btn btn-primary btn-block"><b>Logout</b></button>
+                            <button @click="selectedTab = ProfileTab" class="btn btn-primary btn-block"><b>Profile</b></button>
+                            <button @click="authStore.logout()" class="btn btn-danger btn-block"><b>Logout</b></button>
                             <hr>
                             <button 
                                 class="btn btn-default btn-block text-left"

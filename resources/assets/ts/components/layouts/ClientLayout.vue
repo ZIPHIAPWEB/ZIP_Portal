@@ -12,30 +12,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="padding-top: 50px;">
-            <!-- Content Header (Page header) -->
-            <!-- <section class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Profile</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
-                        </ol>
-                    </div>
-                    </div>
-                </div>
-            </section> -->
-
+    <div class="client-wrapper">
+       <div style="flex: 1; overflow: hidden; padding: 15px 0;">
             <slot />
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
+       </div>
+       <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
             <b>Version</b> 3.2.0
             </div>
@@ -43,3 +24,13 @@ onUnmounted(() => {
         </footer>
     </div>
 </template>
+
+<style scoped>
+    .client-wrapper {
+        height: 100vh;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
