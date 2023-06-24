@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/visa-sponsor-requirements', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'index']);
         Route::post('/visa-sponsor-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'store']);
         Route::delete('/visa-sponsor-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'destroy']);
+
     });
 });
 
