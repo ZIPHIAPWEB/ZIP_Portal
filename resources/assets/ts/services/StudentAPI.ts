@@ -106,5 +106,25 @@ export default {
 
     deleteStudentVisaSponsorRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/student/visa-sponsor-requirement/${requirementId}/delete`);
+    },
+
+    getStudentVisaSponsor() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/student/visa-sponsor');
+    },
+
+    getStudentVisaInterviewDetails() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/student/visa-interview-details');
+    },
+
+    getStudentPdosCfoScheduleDetails() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/student/pdos-cfo-schedule');
+    },
+
+    getStudentFlightDetails() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/student/flight-details');
     }
 }

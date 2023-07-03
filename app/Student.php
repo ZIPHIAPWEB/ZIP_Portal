@@ -144,7 +144,7 @@ class Student extends Model
 
     public function sponsor()
     {
-        return $this->hasOne('App\Sponsor', 'id', 'visa_sponsor_id')
+        return $this->hasOne(Sponsor::class, 'id', 'visa_sponsor_id')
                     ->withDefault([
                         'id'            =>  '',
                         'name'          =>  '',

@@ -27,6 +27,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('student')->group(function() {
         Route::get('/profile', [App\Http\Controllers\v2\UserController::class, 'getStudentProfile']);
+        
+        Route::get('/visa-sponsor', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getVisaSponsor']);
+        Route::get('/visa-interview-details', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getVisaInterviewDetails']);
+        Route::get('/pdos-cfo-schedule', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getPdosCfoSchedule']);
+        Route::get('/flight-details', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getFlightDetails']);
 
         Route::put('/update-personal', [App\Http\Controllers\v2\StudentController::class, 'updatePersonalDetails']);
         Route::put('/update-contact', [App\Http\Controllers\v2\StudentController::class, 'updateContactDetails']);
