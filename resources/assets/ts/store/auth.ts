@@ -2,12 +2,20 @@ import { defineStore } from 'pinia';
 import AuthAPI from '../services/AuthAPI';
 import { UserInitial, UserType } from '../types/UserType';
 
+export interface IAuthState {
+    auth: UserType;
+    accessToken: string;
+    authErrors: any
+    errorMessage: string;
+    isLoading: boolean;
+}
+
 export const useAuthStore = defineStore({
     id: 'authState',
-    state: () => ({
+    state: () : IAuthState => ({
         auth: UserInitial as UserType,
         accessToken: '',
-        authErrors: {} as any,
+        authErrors: {},
         errorMessage: '',
         isLoading: false
     }),
@@ -23,6 +31,15 @@ export const useAuthStore = defineStore({
         },
         getPasswordConfirmationError(state) {
             return state.authErrors?.password_confirmation ? state.authErrors?.password_confirmation[0] : '';
+        },
+        getIsAuthenticate(state) : boolean {
+            return state.accessToken != '';
+        },
+        getIsVerified(state) : boolean {
+            return state.auth.is_verified;
+        },
+        getIsFilled(state) : boolean {
+            return state.auth.is_filled;
         }
     },
     actions: {
@@ -66,6 +83,21 @@ export const useAuthStore = defineStore({
                 this.isLoading = false;
 
                 this.router.push({ name: 'email-verification' });
+            } catch (error: any) {
+                console.log(error.response.data);
+                this.isLoading = false;
+                this.authErrors = error.response.data.errors;
+                this.errorMessage = error.response.data.message;
+            }
+        },
+
+        async sendForgotPasswordLink(email: string) {
+
+            try {
+                this.isLoading = true;
+                const response = await AuthAPI.sendForgotPasswordLink(email);
+
+                this.isLoading = false;
             } catch (error: any) {
                 console.log(error.response.data);
                 this.isLoading = false;

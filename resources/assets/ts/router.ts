@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { useAuthStore } from './store/auth';
 
 import LoginPage from './views/LoginPage.vue';
 import RegisterPage from './views/RegisterPage.vue';
+import ForgotPasswordPage from './views/ForgotPasswordPage.vue';
 import EmailVerificationPage from './views/client/EmailVerificationPage.vue';
 import ApplicationFormPage from './views/client/ApplicationFormPage.vue';
 import StudentDashboardPage from './views/client/DashboardPage.vue';
@@ -20,19 +22,33 @@ let routes:Array<RouteRecordRaw> = [
         component: RegisterPage
     },
     {
+        path: basePath + "/forgot-password",
+        name: "forgot-password",
+        component: ForgotPasswordPage
+    },
+    {
         path: basePath + "/email-verification",
         name: "email-verification",
-        component: EmailVerificationPage
+        component: EmailVerificationPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: basePath + "/application-form",
         name: "application-form",
-        component: ApplicationFormPage
+        component: ApplicationFormPage,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: basePath + "/student/dashboard",
         name: "student-dashboard",
-        component: StudentDashboardPage
+        component: StudentDashboardPage,
+        meta: {
+            requiresAuth: true
+        }
     }
 ]
 
@@ -40,5 +56,17 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    const authStore = useAuthStore();
+
+    if (to.meta.requiresAuth && !authStore.getIsAuthenticate) {
+
+        next({ name: 'login'});
+    } else {
+
+        next();
+    }
+})
 
 export default router;

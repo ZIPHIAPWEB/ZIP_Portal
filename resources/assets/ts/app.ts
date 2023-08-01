@@ -14,13 +14,6 @@ declare module 'pinia' {
 
 const app = createApp(App);
 const pinia = createPinia();
-// Vue.use(require('@ckeditor/ckeditor5-vue2'));
-
-// Vue.component('download-excel', require('vue-json-excel'));
-// Vue.component('chart-component', require('./components/Chart.vue'));
-//const app = new Vue({
-//    el: '#app'
-//});
 
 pinia.use(({ store }) => {
     store.router = markRaw(router);

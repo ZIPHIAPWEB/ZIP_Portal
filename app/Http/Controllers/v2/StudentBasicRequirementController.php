@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentPreliminaryResource;
 use App\PreliminaryRequirement;
@@ -34,6 +35,7 @@ class StudentBasicRequirementController extends Controller
             'requirement_id' => $requirement->id,
             'path' => '',
             'status' => true,
+            'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'basic')
         ]);
 
         return new StudentPreliminaryResource($uploadedRequirement);

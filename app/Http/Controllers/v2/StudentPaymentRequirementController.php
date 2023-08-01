@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentPaymentResource;
 use App\PaymentRequirement;
@@ -39,6 +40,7 @@ class StudentPaymentRequirementController extends Controller
             'amount' => $request->amount,
             'status' => true,
             'acknowledgement' => false,
+            'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'payment')
         ]);
 
         return new StudentPaymentResource($uploadedPayment);

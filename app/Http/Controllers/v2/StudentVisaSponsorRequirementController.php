@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentSponsorResource;
 use App\SponsorRequirement;
@@ -34,6 +35,7 @@ class StudentVisaSponsorRequirementController extends Controller
             'requirement_id' => $requirement->id,
             'path' => '',
             'status' => true,
+            'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'visa')
         ]);
 
         return new StudentSponsorResource($uploadedSponsorRequirement);

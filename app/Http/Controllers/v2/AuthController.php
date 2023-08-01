@@ -7,10 +7,14 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\User;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    use SendsPasswordResetEmails;
+
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt(['name' => $request->username, 'password' => $request->password])) {
@@ -40,7 +44,7 @@ class AuthController extends Controller
             'vToken' => str_random(60),
         ]);
 
-        $user->sendEmailVerification();
+        // $user->sendEmailVerification();
 
         return response()->json([
             'status_code' => 201,

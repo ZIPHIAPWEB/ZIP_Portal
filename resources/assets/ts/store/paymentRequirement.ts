@@ -1,6 +1,15 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
 
+export interface IStudentPaymentRequirementForm {
+    bank_code: string;
+    reference_no: string;
+    date_deposit: string | Date;
+    bank_account_no: string,
+    amount: number | string,
+    file: any
+}
+
 export interface IStudentPaymentRequirement {
     id?: number;
     bank_code: string;
@@ -8,7 +17,7 @@ export interface IStudentPaymentRequirement {
     date_deposit: string | Date;
     bank_account_no: string,
     amount: number | string,
-    file_path: string,
+    path: string,
 }
 
 export interface IPaymentRequirement {
@@ -54,7 +63,7 @@ export const useStudentPaymentRequirement = defineStore({
             }
         },
 
-        async storePaymentRequirement(requirementId: any, data: any) {
+        async storePaymentRequirement(requirementId: any, data: IStudentPaymentRequirementForm) {
             console.log(requirementId);
             try {
                 this.isLoading = true;

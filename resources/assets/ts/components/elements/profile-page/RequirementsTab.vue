@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 
 import PopUp from '../PopUp.vue';
 
-import { useStudentPaymentRequirement, IPaymentRequirement, IStudentPaymentRequirement } from '../../../store/paymentRequirement';
+import { useStudentPaymentRequirement, IPaymentRequirement, IStudentPaymentRequirementForm } from '../../../store/paymentRequirement';
 import { storeToRefs } from 'pinia';
 
 const studentPaymentRequirementStore = useStudentPaymentRequirement();
@@ -12,13 +12,13 @@ const { isLoading, isSuccess, requirements } = storeToRefs(studentPaymentRequire
 const selectedRequirement = ref<IPaymentRequirement>();
 const isPopUpOpen = ref(false);
 const isDeletePopUpOpen = ref(false);
-const requirement = ref<IStudentPaymentRequirement>({
+const requirement = ref<IStudentPaymentRequirementForm>({
     bank_code: '',
     reference_no: '',
     date_deposit: '',
     bank_account_no: '',
     amount: '',
-    file_path: ''
+    file: undefined
 });
 
 onMounted(async () => {
@@ -28,7 +28,6 @@ onMounted(async () => {
 const submitRequirement = async () => {
     await studentPaymentRequirementStore.storePaymentRequirement(selectedRequirement.value?.id, requirement.value);
     isPopUpOpen.value = false;
-    alert('Requirement submitted!');
 }
 
 const removeRequirement = async () => {
@@ -45,6 +44,13 @@ const openRequirement = (requirement : IPaymentRequirement) => {
 const openDeletePopUp = (requirement : IPaymentRequirement) => {
     selectedRequirement.value = requirement;
     isDeletePopUpOpen.value = true;
+}
+
+const fileUploadHandler = (e : Event) => {
+    let target = e.target as HTMLInputElement
+    const files = target.files as FileList;
+
+    requirement.value.file = files[0];
 }
 
 </script>
@@ -74,7 +80,7 @@ const openDeletePopUp = (requirement : IPaymentRequirement) => {
                     <input v-model="requirement.amount" type="number" class="form-control" placeholder="Enter amount">
                 </div>
                 <div class="form-group">
-                    <input type="file">
+                    <input @change="fileUploadHandler" type="file">
                 </div>
 
                 <div style="display: flex; justify-content: flex-end;">

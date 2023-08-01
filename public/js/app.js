@@ -20029,7 +20029,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       date_deposit: '',
       bank_account_no: '',
       amount: '',
-      file_path: ''
+      file: undefined
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -20053,8 +20053,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return studentPaymentRequirementStore.storePaymentRequirement((_selectedRequirement$ = selectedRequirement.value) === null || _selectedRequirement$ === void 0 ? void 0 : _selectedRequirement$.id, requirement.value);
             case 2:
               isPopUpOpen.value = false;
-              alert('Requirement submitted!');
-            case 4:
+            case 3:
             case "end":
               return _context2.stop();
           }
@@ -20093,6 +20092,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedRequirement.value = requirement;
       isDeletePopUpOpen.value = true;
     };
+    var fileUploadHandler = function fileUploadHandler(e) {
+      var target = e.target;
+      var files = target.files;
+      requirement.value.file = files[0];
+    };
     var __returned__ = {
       studentPaymentRequirementStore: studentPaymentRequirementStore,
       isLoading: isLoading,
@@ -20106,6 +20110,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       removeRequirement: removeRequirement,
       openRequirement: openRequirement,
       openDeletePopUp: openDeletePopUp,
+      fileUploadHandler: fileUploadHandler,
       PopUp: _PopUp_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20866,6 +20871,68 @@ __webpack_require__.r(__webpack_exports__);
       document.body.classList.remove('layout-top-nav');
     });
     var __returned__ = {};
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+}));
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts":
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _components_layouts_AuthLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/AuthLayout.vue */ "./resources/assets/ts/components/layouts/AuthLayout.vue");
+/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/auth */ "./resources/assets/ts/store/auth.ts");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  name: 'ForgotPasswordPage',
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose;
+    expose();
+    var authStore = (0,_store_auth__WEBPACK_IMPORTED_MODULE_2__.useAuthStore)();
+    var email = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+    var sendForgotPasswordLink = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return authStore.sendForgotPasswordLink(email.value);
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function sendForgotPasswordLink() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+    var __returned__ = {
+      authStore: authStore,
+      email: email,
+      sendForgotPasswordLink: sendForgotPasswordLink,
+      AuthLayout: _components_layouts_AuthLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
       value: true
@@ -22601,11 +22668,9 @@ var _hoisted_10 = {
   "class": "form-group"
 };
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, "Amount", -1 /* HOISTED */);
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_12 = {
   "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "file"
-})], -1 /* HOISTED */);
+};
 var _hoisted_13 = {
   style: {
     "display": "flex",
@@ -22700,7 +22765,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "number",
         "class": "form-control",
         placeholder: "Enter amount"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.requirement.amount]])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.requirement.amount]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        onChange: $setup.fileUploadHandler,
+        type: "file"
+      }, null, 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[5] || (_cache[5] = function ($event) {
           return $setup.isPopUpOpen = false;
         }),
@@ -23457,6 +23525,104 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _public_logo_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../public/logo.png */ "./public/logo.png");
+
+
+var _hoisted_1 = {
+  "class": "login-box"
+};
+var _hoisted_2 = {
+  "class": "card card-outline card-primary"
+};
+var _hoisted_3 = {
+  key: 0,
+  "class": "overlay dark"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fas fa-3x fa-spinner fa-spin"
+}, null, -1 /* HOISTED */);
+var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-header",
+  style: {
+    "border-bottom": "0",
+    "display": "flex",
+    "justify-content": "center"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  style: {
+    "background-color": "#0d133b",
+    "border-radius": "50%",
+    "width": "8rem",
+    "height": "8rem"
+  },
+  src: _public_logo_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "company logo"
+})], -1 /* HOISTED */);
+var _hoisted_7 = {
+  "class": "card-body"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "login-box-msg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  style: {
+    "font-weight": "900"
+  }
+}, "ZIP TRAVEL"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Philippines")], -1 /* HOISTED */);
+var _hoisted_9 = ["onSubmit"];
+var _hoisted_10 = {
+  "class": "input-group mb-3"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-success btn-block"
+}, "Send Reset Password Link")])], -1 /* HOISTED */);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("I already have a membership");
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AuthLayout"], null, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.authStore.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.sendForgotPasswordLink, ["prevent"])
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $setup.email = $event;
+        }),
+        type: "email",
+        "class": "form-control",
+        placeholder: "E-mail"
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.email]])]), _hoisted_11], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+        "class": "text-center mt-1",
+        to: "/portal/v2/login"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_12];
+        }),
+        _: 1 /* STABLE */
+      })])])])];
+    }),
+
+    _: 1 /* STABLE */
+  });
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/LoginPage.vue?vue&type=template&id=c62538ea&ts=true":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/LoginPage.vue?vue&type=template&id=c62538ea&ts=true ***!
@@ -23517,6 +23683,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "login-box-msg"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   style: {
+    "font-size": "20px",
     "font-weight": "900"
   }
 }, "ZIP TRAVEL"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Philippines")], -1 /* HOISTED */);
@@ -23557,15 +23724,14 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fab fa-google-plus mr-2"
 }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign in using Google+ ")])], -1 /* HOISTED */);
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_18 = {
   "class": "mb-1 mt-1"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "forgot-password.html"
-}, "I forgot my password")], -1 /* HOISTED */);
-var _hoisted_19 = {
+};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("I forgot my password");
+var _hoisted_20 = {
   "class": "mb-0"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Register as a participant");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Register as a participant");
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AuthLayout"], null, {
@@ -23590,12 +23756,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         type: "password",
         placeholder: "Password"
-      }, null, 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.password]]), _hoisted_15]), _hoisted_16], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_11), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /.social-auth-links "), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      }, null, 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.password]]), _hoisted_15]), _hoisted_16], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_11), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /.social-auth-links "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+        to: "/portal/v2/forgot-password"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_19];
+        }),
+        _: 1 /* STABLE */
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         "class": "text-center",
         to: "/portal/v2/register"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_20];
+          return [_hoisted_21];
         }),
         _: 1 /* STABLE */
       })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /.card-body ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /.card ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /.login-box ")];
@@ -24353,12 +24526,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_3__.createPinia)();
-// Vue.use(require('@ckeditor/ckeditor5-vue2'));
-// Vue.component('download-excel', require('vue-json-excel'));
-// Vue.component('chart-component', require('./components/Chart.vue'));
-//const app = new Vue({
-//    el: '#app'
-//});
 pinia.use(function (_ref) {
   var store = _ref.store;
   store.router = (0,vue__WEBPACK_IMPORTED_MODULE_0__.markRaw)(_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -24380,12 +24547,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
-/* harmony import */ var _views_LoginPage_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/LoginPage.vue */ "./resources/assets/ts/views/LoginPage.vue");
-/* harmony import */ var _views_RegisterPage_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/RegisterPage.vue */ "./resources/assets/ts/views/RegisterPage.vue");
-/* harmony import */ var _views_client_EmailVerificationPage_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/client/EmailVerificationPage.vue */ "./resources/assets/ts/views/client/EmailVerificationPage.vue");
-/* harmony import */ var _views_client_ApplicationFormPage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/client/ApplicationFormPage.vue */ "./resources/assets/ts/views/client/ApplicationFormPage.vue");
-/* harmony import */ var _views_client_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/client/DashboardPage.vue */ "./resources/assets/ts/views/client/DashboardPage.vue");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store/auth */ "./resources/assets/ts/store/auth.ts");
+/* harmony import */ var _views_LoginPage_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/LoginPage.vue */ "./resources/assets/ts/views/LoginPage.vue");
+/* harmony import */ var _views_RegisterPage_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/RegisterPage.vue */ "./resources/assets/ts/views/RegisterPage.vue");
+/* harmony import */ var _views_ForgotPasswordPage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/ForgotPasswordPage.vue */ "./resources/assets/ts/views/ForgotPasswordPage.vue");
+/* harmony import */ var _views_client_EmailVerificationPage_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/client/EmailVerificationPage.vue */ "./resources/assets/ts/views/client/EmailVerificationPage.vue");
+/* harmony import */ var _views_client_ApplicationFormPage_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/client/ApplicationFormPage.vue */ "./resources/assets/ts/views/client/ApplicationFormPage.vue");
+/* harmony import */ var _views_client_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/client/DashboardPage.vue */ "./resources/assets/ts/views/client/DashboardPage.vue");
+
+
 
 
 
@@ -24396,27 +24567,50 @@ var basePath = '/portal/v2';
 var routes = [{
   path: basePath + "/login",
   name: "login",
-  component: _views_LoginPage_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  component: _views_LoginPage_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: basePath + "/register",
   name: "register",
-  component: _views_RegisterPage_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  component: _views_RegisterPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: basePath + "/forgot-password",
+  name: "forgot-password",
+  component: _views_ForgotPasswordPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: basePath + "/email-verification",
   name: "email-verification",
-  component: _views_client_EmailVerificationPage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _views_client_EmailVerificationPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: basePath + "/application-form",
   name: "application-form",
-  component: _views_client_ApplicationFormPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _views_client_ApplicationFormPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: basePath + "/student/dashboard",
   name: "student-dashboard",
-  component: _views_client_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _views_client_DashboardPage_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.createWebHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createWebHistory)(),
   routes: routes
+});
+router.beforeEach(function (to, from, next) {
+  var authStore = (0,_store_auth__WEBPACK_IMPORTED_MODULE_0__.useAuthStore)();
+  if (to.meta.requiresAuth && !authStore.getIsAuthenticate) {
+    next({
+      name: 'login'
+    });
+  } else {
+    next();
+  }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -24513,6 +24707,11 @@ __webpack_require__.r(__webpack_exports__);
       email: email,
       password: password,
       password_confirmation: password_confirmation
+    });
+  },
+  sendForgotPasswordLink: function sendForgotPasswordLink(email) {
+    return _ApiRequest__WEBPACK_IMPORTED_MODULE_0__.ApiRequestWithoutAuth.post('/send-forgot-password', {
+      email: email
     });
   },
   resendEmailVerification: function resendEmailVerification() {
@@ -24636,7 +24835,14 @@ __webpack_require__.r(__webpack_exports__);
     return _ApiRequest__WEBPACK_IMPORTED_MODULE_0__.ApiRequest.get('/student/payment-requirements');
   },
   storePaymentRequirement: function storePaymentRequirement(requirementId, data) {
-    return _ApiRequest__WEBPACK_IMPORTED_MODULE_0__.ApiRequest.post("/student/payment-requirement/".concat(requirementId, "/store"), data);
+    var formData = new FormData();
+    formData.append('bank_code', data.bank_code);
+    formData.append('reference_no', data.reference_no);
+    formData.append('date_deposit', String(data.date_deposit));
+    formData.append('bank_account_no', data.bank_account_no);
+    formData.append('amount', String(data.amount));
+    formData.append('file', data.file);
+    return _ApiRequest__WEBPACK_IMPORTED_MODULE_0__.ApiRequestWithFile.post("/student/payment-requirement/".concat(requirementId, "/store"), formData);
   },
   removePaymentRequirement: function removePaymentRequirement(requirementId) {
     return _ApiRequest__WEBPACK_IMPORTED_MODULE_0__.ApiRequest["delete"]("/student/payment-requirement/".concat(requirementId, "/delete"), {});
@@ -24738,6 +24944,15 @@ var useAuthStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)({
     getPasswordConfirmationError: function getPasswordConfirmationError(state) {
       var _state$authErrors7, _state$authErrors8;
       return (_state$authErrors7 = state.authErrors) !== null && _state$authErrors7 !== void 0 && _state$authErrors7.password_confirmation ? (_state$authErrors8 = state.authErrors) === null || _state$authErrors8 === void 0 ? void 0 : _state$authErrors8.password_confirmation[0] : '';
+    },
+    getIsAuthenticate: function getIsAuthenticate(state) {
+      return state.accessToken != '';
+    },
+    getIsVerified: function getIsVerified(state) {
+      return state.auth.is_verified;
+    },
+    getIsFilled: function getIsFilled(state) {
+      return state.auth.is_filled;
     }
   },
   actions: {
@@ -24827,25 +25042,55 @@ var useAuthStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)({
         }, _callee2, null, [[2, 13]]);
       }))();
     },
-    logout: function logout() {
+    sendForgotPasswordLink: function sendForgotPasswordLink(email) {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return _services_AuthAPI__WEBPACK_IMPORTED_MODULE_0__["default"].logout();
-            case 2:
-              _this3.router.push({
-                name: 'login'
-              });
-              _this3.auth = _types_UserType__WEBPACK_IMPORTED_MODULE_1__.UserInitial;
-              _this3.accessToken = '';
-            case 5:
+              _context3.prev = 0;
+              _this3.isLoading = true;
+              _context3.next = 4;
+              return _services_AuthAPI__WEBPACK_IMPORTED_MODULE_0__["default"].sendForgotPasswordLink(email);
+            case 4:
+              response = _context3.sent;
+              _this3.isLoading = false;
+              _context3.next = 14;
+              break;
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](0);
+              console.log(_context3.t0.response.data);
+              _this3.isLoading = false;
+              _this3.authErrors = _context3.t0.response.data.errors;
+              _this3.errorMessage = _context3.t0.response.data.message;
+            case 14:
             case "end":
               return _context3.stop();
           }
-        }, _callee3);
+        }, _callee3, null, [[0, 8]]);
+      }))();
+    },
+    logout: function logout() {
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _services_AuthAPI__WEBPACK_IMPORTED_MODULE_0__["default"].logout();
+            case 2:
+              _this4.router.push({
+                name: 'login'
+              });
+              _this4.auth = _types_UserType__WEBPACK_IMPORTED_MODULE_1__.UserInitial;
+              _this4.accessToken = '';
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -27516,6 +27761,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/assets/ts/views/ForgotPasswordPage.vue":
+/*!**********************************************************!*\
+  !*** ./resources/assets/ts/views/ForgotPasswordPage.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ForgotPasswordPage_vue_vue_type_template_id_d09d64ac_ts_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true */ "./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true");
+/* harmony import */ var _ForgotPasswordPage_vue_vue_type_script_setup_true_lang_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts */ "./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts");
+/* harmony import */ var D_laragon_www_zip_portal_pt_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,D_laragon_www_zip_portal_pt_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ForgotPasswordPage_vue_vue_type_script_setup_true_lang_ts__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ForgotPasswordPage_vue_vue_type_template_id_d09d64ac_ts_true__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/ts/views/ForgotPasswordPage.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/assets/ts/views/LoginPage.vue":
 /*!*************************************************!*\
   !*** ./resources/assets/ts/views/LoginPage.vue ***!
@@ -27928,6 +28201,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts":
+/*!*********************************************************************************************!*\
+  !*** ./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ForgotPasswordPage_vue_vue_type_script_setup_true_lang_ts__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ForgotPasswordPage_vue_vue_type_script_setup_true_lang_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/ts-loader/index.js??clonedRuleSet-6!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=script&setup=true&lang=ts");
+ 
+
+/***/ }),
+
 /***/ "./resources/assets/ts/views/LoginPage.vue?vue&type=script&setup=true&lang=ts":
 /*!************************************************************************************!*\
   !*** ./resources/assets/ts/views/LoginPage.vue?vue&type=script&setup=true&lang=ts ***!
@@ -28276,6 +28565,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ClientLayout_vue_vue_type_template_id_c378fff0_scoped_true_ts_true__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ClientLayout_vue_vue_type_template_id_c378fff0_scoped_true_ts_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/ts-loader/index.js??clonedRuleSet-6!../../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ClientLayout.vue?vue&type=template&id=c378fff0&scoped=true&ts=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/components/layouts/ClientLayout.vue?vue&type=template&id=c378fff0&scoped=true&ts=true");
+
+
+/***/ }),
+
+/***/ "./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true":
+/*!************************************************************************************************!*\
+  !*** ./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ForgotPasswordPage_vue_vue_type_template_id_d09d64ac_ts_true__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_ts_loader_index_js_clonedRuleSet_6_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ForgotPasswordPage_vue_vue_type_template_id_d09d64ac_ts_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/ts-loader/index.js??clonedRuleSet-6!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/ts-loader/index.js??clonedRuleSet-6!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/assets/ts/views/ForgotPasswordPage.vue?vue&type=template&id=d09d64ac&ts=true");
 
 
 /***/ }),

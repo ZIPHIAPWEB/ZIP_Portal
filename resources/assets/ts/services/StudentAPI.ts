@@ -6,6 +6,7 @@ import { TertiaryType } from "../types/TertiaryType";
 import { SecondaryType } from "../types/SecondaryType";
 import { ParentType } from "../types/ParentType";
 import { ExperienceType } from "../types/ExperienceType";
+import { IStudentPaymentRequirementForm } from "../store/paymentRequirement";
 
 export default {
     getStudentProfile() : Promise<AxiosResponse> {
@@ -52,8 +53,16 @@ export default {
         return ApiRequest.get('/student/payment-requirements');
     },
 
-    storePaymentRequirement(requirementId: number, data: any) : Promise<AxiosResponse> {
-        return ApiRequest.post(`/student/payment-requirement/${requirementId}/store`, data);
+    storePaymentRequirement(requirementId: number, data: IStudentPaymentRequirementForm) : Promise<AxiosResponse> {
+        let formData = new FormData();
+        formData.append('bank_code', data.bank_code);
+        formData.append('reference_no', data.reference_no);
+        formData.append('date_deposit', String(data.date_deposit));
+        formData.append('bank_account_no', data.bank_account_no);
+        formData.append('amount', String(data.amount))
+        formData.append('file', data.file);
+
+        return ApiRequestWithFile.post(`/student/payment-requirement/${requirementId}/store`, formData);
     },
 
     removePaymentRequirement(requirementId: number) : Promise<AxiosResponse> {
