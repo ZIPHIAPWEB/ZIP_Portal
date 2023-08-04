@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import AuthAPI from '../services/AuthAPI';
 import { UserInitial, UserType } from '../types/UserType';
+import { useLocalStorage } from '@vueuse/core';
 
 export interface IAuthState {
     auth: UserType;
@@ -12,12 +13,12 @@ export interface IAuthState {
 
 export const useAuthStore = defineStore({
     id: 'authState',
-    state: () : IAuthState => ({
-        auth: UserInitial as UserType,
-        accessToken: '',
-        authErrors: {},
+    state: () => ({
+        auth: useLocalStorage('auth', UserInitial),
+        accessToken: useLocalStorage('access_token', ''),
+        authErrors: {} as any,
         errorMessage: '',
-        isLoading: false
+        isLoading: false  
     }),
     getters: {
         getUsernameError(state) {
@@ -43,6 +44,23 @@ export const useAuthStore = defineStore({
         }
     },
     actions: {
+        async getAuthUser() {
+
+            try {
+                this.isLoading = true;
+                const response = await AuthAPI.getAuthUser();
+
+                this.auth = response.data.data.user;
+
+                this.isLoading = false;
+            } catch (error: any) {
+
+                this.isLoading = false;
+                this.authErrors = error.response.data.errors;
+                this.errorMessage = error.response.data.message;
+            }
+        },
+        
         async login(username: string, password: string) {
             this.authErrors = {};
             this.errorMessage = '';
@@ -50,8 +68,10 @@ export const useAuthStore = defineStore({
             try {
                 this.isLoading = true;
                 const response = await AuthAPI.login(username, password);
-                this.auth = response.data.data.user;
+
                 this.accessToken = response.data.data.access_token;
+                this.auth = response.data.data.user;
+
                 this.isLoading = false;
 
                 if (this.auth.is_verified) {
@@ -109,7 +129,7 @@ export const useAuthStore = defineStore({
         async logout() {
             await AuthAPI.logout();
             this.router.push({ name: 'login' });
-            this.auth = UserInitial as UserType;
+            this.auth = {...UserInitial};
             this.accessToken = '';
         }
     }

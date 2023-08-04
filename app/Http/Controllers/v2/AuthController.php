@@ -15,6 +15,15 @@ class AuthController extends Controller
 {
     use SendsPasswordResetEmails;
 
+    public function getAuthUser()
+    {
+        return response()->json([
+            'data' => [
+                'user' => new UserResource(auth()->user())
+            ]
+        ]);
+    }
+
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt(['name' => $request->username, 'password' => $request->password])) {

@@ -2,11 +2,24 @@
 import AuthLayout from '../../components/layouts/AuthLayout.vue';
 import AuthAPI from '../../services/AuthAPI';
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useAuthStore } from '../../store/auth';
+import router from '../../router';
+
+const authStore = useAuthStore();
 
 const cooldown = ref<number>(120);
 
 const isButtonReady = ref<boolean>(true);
+
+onMounted(async () => {
+    await authStore.getAuthUser();
+    
+    if(authStore.getIsVerified) {
+
+        router.push({name: 'student-dashboard'});
+    }
+});
 
 const resendEmail = async () => {
     try {

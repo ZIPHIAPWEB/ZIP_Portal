@@ -4,9 +4,10 @@ Route::post('/login', [App\Http\Controllers\v2\AuthController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\v2\AuthController::class, 'register']);
 Route::post('/send-forgot-password', [App\Http\Controllers\v2\AuthController::class, 'sendResetLinkEmail']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/logout', [App\Http\Controllers\v2\AuthController::class, 'logout']);
+    Route::get('/user', [App\Http\Controllers\v2\AuthController::class, 'getAuthUser']);
 
     Route::get('/test', function() {
         return response()->json([

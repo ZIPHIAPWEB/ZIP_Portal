@@ -60,10 +60,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
 
-    if (to.meta.requiresAuth && !authStore.getIsAuthenticate) {
+    if (to.meta.requiresAuth && !authStore.getIsAuthenticate && to.name !== 'login') {
 
         next({ name: 'login'});
     } else {
+        if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
+
+            next({ name: 'email-verification'});
+        } 
+
+        if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
+
+            next({ name: 'application-form'});
+        }
 
         next();
     }
