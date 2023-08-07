@@ -30,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('student')->group(function() {
         Route::get('/profile', [App\Http\Controllers\v2\UserController::class, 'getStudentProfile']);
         
+        Route::get('/personal-details', [App\Http\Controllers\v2\StudentController::class, 'getPersonalDetails']);
+        Route::get('/contact-details', [App\Http\Controllers\v2\StudentController::class, 'getContactDetails']);
+
         Route::get('/visa-sponsor', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getVisaSponsor']);
         Route::get('/visa-interview-details', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getVisaInterviewDetails']);
         Route::get('/pdos-cfo-schedule', [App\Http\Controllers\v2\StudentProgramInfoController::class, 'getPdosCfoSchedule']);

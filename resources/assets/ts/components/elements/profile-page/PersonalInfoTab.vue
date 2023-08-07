@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import WorkExperienceItem from './WorkExperienceItem.vue';
+import PersonalDetailsCard from './personal-information/PersonalDetailsCard.vue';
+import ContactDetailsCard from './personal-information/ContactDetailsCard.vue';
 
 import StudentAPI from '../../../services/StudentAPI';
 import { PersonalType, PersonalInitial } from '../../../types/PersonalType';
@@ -178,119 +180,8 @@ const removeWorkExperience = (experienceId : number | string) => {
 
 <template>
     <div class="profile-content-body">
-        <div class="card card-default">
-            <div class="card-body">
-                <div class="profile-header">
-                    <h5 class="profile-header__title">Personal Details</h5>
-                    <div class="profile-header__actions">
-                        <button v-if="!personalIsEdit" @click="personalIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                        <button v-if="personalIsEdit" @click="updatePersonalDetails" class="btn btn-success btn-xs mr-1">Save</button>
-                        <button v-if="personalIsEdit" @click="personalIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
-                    </div>
-                </div>
-                <table class="table table-striped table-sm">
-                    <tbody>
-                        <tr>
-                            <td style="width: 40%">First name</td>
-                            <td v-if="!personalIsEdit">{{ personal.first_name}}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="personal.first_name">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Middle name</td>
-                            <td v-if="!personalIsEdit">{{ personal.middle_name }}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="personal.middle_name">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Last name</td>
-                            <td v-if="!personalIsEdit">{{ personal.last_name }}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="personal.last_name">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Birthdate</td>
-                            <td v-if="!personalIsEdit">{{ personal.birthdate}}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="date" class="form-control form-control-sm" v-model="personal.birthdate">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Gender</td>
-                            <td v-if="!personalIsEdit">{{ personal.gender }}</td>
-                            <td v-if="personalIsEdit">
-                                <select v-model="personal.gender" class="form-control form-control-sm">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Skype ID</td>
-                            <td v-if="!personalIsEdit">{{ personal.skype_id }}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="personal.skype_id">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Facebook URL</td>
-                            <td v-if="!personalIsEdit">{{ personal.fb_email }}</td>
-                            <td v-if="personalIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="personal.fb_email">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card card-default">
-            <div class="card-body">
-                <div class="profile-header">
-                    <h5 class="profile-header__title">Contact Details</h5>
-                    <div class="profile-header__actions">
-                        <button v-if="!contactIsEdit" @click="contactIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
-                        <button v-if="contactIsEdit" @click="updateContactDetails" class="btn btn-success btn-xs mr-1">Save</button>
-                        <button v-if="contactIsEdit" @click="contactIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
-                    </div>
-                </div>
-                <table class="table table-sm table-striped">
-                    <tbody>
-                        <tr>
-                            <td style="width: 40%">Present Address</td>
-                            <td v-if="!contactIsEdit">{{ contact.provincial_address }}</td>
-                            <td v-if="contactIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="contact.provincial_address">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Permanent Address</td>
-                            <td v-if="!contactIsEdit">{{ contact.permanent_address}}</td>
-                            <td v-if="contactIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="contact.permanent_address">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Home number</td>
-                            <td v-if="!contactIsEdit">{{ contact.home_number }}</td>
-                            <td v-if="contactIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="contact.home_number">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mobile number</td>
-                            <td v-if="!contactIsEdit">{{ contact.mobile_number }}</td>
-                            <td v-if="contactIsEdit">
-                                <input type="text" class="form-control form-control-sm" v-model="contact.mobile_number">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <PersonalDetailsCard />
+        <ContactDetailsCard />
 
         <div class="card card-default">
             <div class="card-body">
@@ -577,20 +468,6 @@ const removeWorkExperience = (experienceId : number | string) => {
 </template>
 
 <style scoped>
-    .profile-header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    .profile-header__title {
-        font-weight: bold;
-        font-size: 15px;
-        margin: 0;
-    }
-
     .profile-content-body {
         height:84vh; 
         overflow-y: auto;

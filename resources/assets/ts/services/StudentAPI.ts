@@ -1,23 +1,31 @@
 import { AxiosResponse } from "axios";
 import { ApiRequest, ApiRequestWithFile } from "./ApiRequest";
-import { PersonalType } from "../types/PersonalType";
-import { ContactType } from "../types/ContactType";
 import { TertiaryType } from "../types/TertiaryType";
 import { SecondaryType } from "../types/SecondaryType";
 import { ParentType } from "../types/ParentType";
 import { ExperienceType } from "../types/ExperienceType";
 import { IStudentPaymentRequirementForm } from "../store/paymentRequirement";
+import { IStudentPersonalInfo } from "../store/studentPersonal";
+import { IStudentContactInfo } from "../store/studentContact";
 
 export default {
     getStudentProfile() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/profile');
     },
 
-    updatePersonalDetails(data: PersonalType) : Promise<AxiosResponse> {
+    getStudentPersonal() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/personal-details');
+    },
+
+    getStudentContact() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/contact-details');
+    },
+
+    updatePersonalDetails(data: IStudentPersonalInfo) : Promise<AxiosResponse> {
         return ApiRequest.put('/student/update-personal', data);
     },
 
-    updateContactDetails(data: ContactType) : Promise<AxiosResponse> {
+    updateContactDetails(data: IStudentContactInfo) : Promise<AxiosResponse> {
         return ApiRequest.put('/student/update-contact', data);
     },
 

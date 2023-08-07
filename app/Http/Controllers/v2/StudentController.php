@@ -5,11 +5,27 @@ namespace App\Http\Controllers\v2;
 use App\Experience;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExperienceResource;
+use App\Http\Resources\StudentContactResource;
+use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\TertiaryResource;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    public function getPersonalDetails()
+    {
+        $student = auth()->user();
+
+        return new StudentPersonalResource($student);
+    }
+
+    public function getContactDetails()
+    {
+        $student = auth()->user()->student;
+
+        return new StudentContactResource($student);
+    }
+
     public function updatePersonalDetails(Request $request)
     {
         $student = auth()->user()->student();
