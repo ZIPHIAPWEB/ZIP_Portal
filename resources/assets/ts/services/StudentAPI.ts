@@ -7,6 +7,8 @@ import { ExperienceType } from "../types/ExperienceType";
 import { IStudentPaymentRequirementForm } from "../store/paymentRequirement";
 import { IStudentPersonalInfo } from "../store/studentPersonal";
 import { IStudentContactInfo } from "../store/studentContact";
+import { IStudentTertiary } from "../store/studentTertiary";
+import { IStudentSecondary } from "../store/studentSecondary";
 
 export default {
     getStudentProfile() : Promise<AxiosResponse> {
@@ -21,6 +23,22 @@ export default {
         return ApiRequest.get('/student/contact-details');
     },
 
+    getStudentTertiaryDetails() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/tertiary-details');
+    },
+
+    getStudentSecondaryDetails() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/secondary-details');
+    },
+
+    getStudentFatherDetails() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/father-details');
+    },
+
+    getStudentMotherDetails() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/mother-details');
+    },
+
     updatePersonalDetails(data: IStudentPersonalInfo) : Promise<AxiosResponse> {
         return ApiRequest.put('/student/update-personal', data);
     },
@@ -29,11 +47,19 @@ export default {
         return ApiRequest.put('/student/update-contact', data);
     },
 
-    updateTertiaryDetails(data: TertiaryType) : Promise<AxiosResponse> {
-        return ApiRequest.put('/student/update-tertiary', data);
+    updateTertiaryDetails(data: IStudentTertiary) : Promise<AxiosResponse> {
+        let formData = {
+            'school' : data.school_id,
+            'address': data.address,
+            'degree': data.degree,
+            'start_date': data.start_date,
+            'date_graduated': data.date_graduated
+        };
+
+        return ApiRequest.put('/student/update-tertiary', formData);
     },
 
-    updateSecondaryDetails(data: SecondaryType) : Promise<AxiosResponse> {
+    updateSecondaryDetails(data: IStudentSecondary) : Promise<AxiosResponse> {
         return ApiRequest.put('/student/update-secondary', data);
     },
 

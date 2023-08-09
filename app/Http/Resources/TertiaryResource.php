@@ -15,12 +15,13 @@ class TertiaryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'school' => $this->school->name,
-            'address' => $this->address,
-            'degree' => $this->degree,
-            'start_date' => $this->start_date,
-            'date_graduated' => $this->date_graduated
+            'id' => $this->tertiary->id,
+            'school' => $this->tertiary->school->name ?? '',
+            'school_id' => $this->tertiary->id,
+            'address' => $this->tertiary->address,
+            'degree' => $this->tertiary->degree,
+            'start_date' => $this->tertiary->start_date,
+            'date_graduated' => $this->tertiary->date_graduated
         ];
     }
 }

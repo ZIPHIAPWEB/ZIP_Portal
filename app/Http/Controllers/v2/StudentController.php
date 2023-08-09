@@ -6,7 +6,9 @@ use App\Experience;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExperienceResource;
 use App\Http\Resources\StudentContactResource;
+use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPersonalResource;
+use App\Http\Resources\StudentSecondaryResource;
 use App\Http\Resources\TertiaryResource;
 use Illuminate\Http\Request;
 
@@ -24,6 +26,34 @@ class StudentController extends Controller
         $student = auth()->user()->student;
 
         return new StudentContactResource($student);
+    }
+
+    public function getTertiaryDetails()
+    {
+        $student = auth()->user();
+
+        return new TertiaryResource($student);
+    }
+
+    public function getSecondaryDetails() 
+    {
+        $student = auth()->user()->secondary;
+
+        return new StudentSecondaryResource($student);
+    }
+
+    public function getFatherDetails() 
+    {
+        $student = auth()->user()->father;
+
+        return new StudentParentResource($student);
+    }
+
+    public function getMotherDetails() 
+    {
+        $student = auth()->user()->mother;
+
+        return new StudentParentResource($student);
     }
 
     public function updatePersonalDetails(Request $request)
@@ -73,7 +103,7 @@ class StudentController extends Controller
                 'date_graduated' => $request->date_graduated
             ]);
 
-        return new TertiaryResource($auth->tertiary);
+        return response()->noContent();
     }
 
     public function updateSecondaryDetails(Request $request)
@@ -85,7 +115,7 @@ class StudentController extends Controller
                 'user_id' => $auth->id
             ],
             [
-                'school_name' => $request->school_name,
+                'school_name' => $request->school,
                 'address' => $request->address,
                 'start_date' => $request->start_date,
                 'date_graduated' => $request->date_graduated
