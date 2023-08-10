@@ -3,28 +3,27 @@ import { ExperienceType } from '../../../types/ExperienceType';
 import StudentAPI from '../../../services/StudentAPI';
 
 import { ref } from 'vue';
+import { IStudentWorkExperience } from '../../../store/studentWorkExperience';
 
 const props = defineProps<{
-    experienceProps: ExperienceType
+    experienceProps: IStudentWorkExperience
 }>();
 
-const emits = defineEmits(['delete-experience']);
+const emits = defineEmits<{
+  (e: 'deleteExperienceEvent', updatedExperience: IStudentWorkExperience): void
+  (e: 'updateExperienceEvent', updatedExperience: IStudentWorkExperience): void
+}>()
 
 const experienceIsEdit = ref<boolean>(false);
-const compExperience = ref<ExperienceType>(props.experienceProps);
+const compExperience = ref<IStudentWorkExperience>(props.experienceProps);
 
 const editWorkExperience = () => {
     experienceIsEdit.value = true;
 }
 
 const updateWorkExperience = async () => {
-    try {
-        const response = await StudentAPI.updateWorkExperience(props.experienceProps);
-        compExperience.value = response.data.data;
-        experienceIsEdit.value = false;
-    } catch (error: any) {
-        console.log(error);
-    }
+    emits('updateExperienceEvent', compExperience.value);
+    experienceIsEdit.value = false;
 }
 
 const cancelEditWorkExperience = () => {
@@ -32,12 +31,7 @@ const cancelEditWorkExperience = () => {
 }
 
 const deleteWorkExperience = async () => {
-    try {
-        await StudentAPI.deleteWorkExperience(compExperience.value.id?.valueOf());
-        emits('delete-experience', compExperience.value.id?.valueOf());
-    } catch (error: any) {
-        console.log(error);
-    }
+    emits('deleteExperienceEvent', compExperience.value);
 }
 </script>
 

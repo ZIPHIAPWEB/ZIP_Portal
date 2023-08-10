@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import WorkExperienceItem from './WorkExperienceItem.vue';
 import PersonalDetailsCard from './personal-information/PersonalDetailsCard.vue';
 import ContactDetailsCard from './personal-information/ContactDetailsCard.vue';
 import TertiaryDetailsCard from './personal-information/TertiaryDetailsCard.vue';
 import SecondaryDetailsCard from './personal-information/SecondaryDetailsCard.vue';
 import FatherDetailsCard from './personal-information/FatherDetailsCard.vue';
 import MotherDetailsCard from './personal-information/MotherDetailsCard.vue';
+import WorkExperienceCard from './personal-information/WorkExperienceCard.vue';
 
 import StudentAPI from '../../../services/StudentAPI';
 import { PersonalType, PersonalInitial } from '../../../types/PersonalType';
@@ -190,66 +190,7 @@ const removeWorkExperience = (experienceId : number | string) => {
         <SecondaryDetailsCard />
         <FatherDetailsCard />
         <MotherDetailsCard />
-
-        <div class="card card-default">
-            <div class="card-body" id="work-experience">
-                <div class="profile-header">
-                    <h5 class="profile-header__title">Work Experience/On-the-Job Training</h5>
-                    <div class="profile-header__actions">
-                        <button v-if="!experiencesIsAdd" @click="experiencesIsAdd =  true" class="btn btn-success btn-xs ">Add</button>
-                        <button v-if="experiencesIsAdd" @click="addWorkExperience" class="btn btn-primary btn-xs mr-1">Save</button>
-                        <button v-if="experiencesIsAdd" @click="experiencesIsAdd =  false" class="btn btn-danger btn-xs">Cancel</button>
-                    </div>
-                </div>
-                <div v-if="experiencesIsAdd == true">
-                    <table class="table table-sm table-striped">
-                        <tbody>
-                            <tr>
-                                <td>Company Name</td>
-                                <td>
-                                    <input v-model="toBeExperience.company" type="text" class="form-control form-control-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Company Address</td>
-                                <td>
-                                    <input v-model="toBeExperience.address" type="text" class="form-control form-control-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Start Date</td>
-                                <td>
-                                    <input v-model="toBeExperience.start_date" type="date" class="form-control form-control-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>End Date</td>
-                                <td>
-                                    <input v-model="toBeExperience.end_date" type="date" class="form-control form-control-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Job Description</td>
-                                <td>
-                                    <input v-model="toBeExperience.description" type="text" class="form-control form-control-sm">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div v-if="experiences.length > 0 && !experiencesIsAdd">
-                    <WorkExperienceItem 
-                        v-for="(exp, index) in experiences" 
-                        :key="index" 
-                        :experienceProps="exp"
-                        @deleteExperience="removeWorkExperience"
-                    />
-                </div>
-                <div v-if="experiences.length == 0 && !experiencesIsAdd">
-                    <p class="text-center">No work experience yet.</p>
-                </div>
-            </div>
-        </div>
+        <WorkExperienceCard />
     </div>
 </template>
 

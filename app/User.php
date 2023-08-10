@@ -34,6 +34,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function experiences() 
+    {
+        return $this->hasMany(Experience::class, 'user_id', 'id');
+    }
+
     public function student()
     {
         return $this->hasOne(Student::class,'user_id', 'id');

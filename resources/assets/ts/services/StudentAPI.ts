@@ -9,6 +9,7 @@ import { IStudentPersonalInfo } from "../store/studentPersonal";
 import { IStudentContactInfo } from "../store/studentContact";
 import { IStudentTertiary } from "../store/studentTertiary";
 import { IStudentSecondary } from "../store/studentSecondary";
+import { IStudentWorkExperience } from "../store/studentWorkExperience";
 
 export default {
     getStudentProfile() : Promise<AxiosResponse> {
@@ -37,6 +38,10 @@ export default {
 
     getStudentMotherDetails() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/mother-details');
+    },
+
+    getStudentExperienceDetails() : Promise<AxiosResponse> {
+        return ApiRequest.get('/student/experience-details');
     },
 
     updatePersonalDetails(data: IStudentPersonalInfo) : Promise<AxiosResponse> {
@@ -71,11 +76,11 @@ export default {
         return ApiRequest.put('/student/update-mother', data);
     },
 
-    storeWorkExperience(data: ExperienceType) : Promise<AxiosResponse> {
+    storeWorkExperience(data: IStudentWorkExperience) : Promise<AxiosResponse> {
         return ApiRequest.post('/student/add-work-experience', data);
     },
 
-    updateWorkExperience(data: ExperienceType) : Promise<AxiosResponse> {
+    updateWorkExperience(data: IStudentWorkExperience) : Promise<AxiosResponse> {
         return ApiRequest.put(`/student/${data.id}/update-work-experience`, data);
     },
 

@@ -6,6 +6,7 @@ use App\Experience;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExperienceResource;
 use App\Http\Resources\StudentContactResource;
+use App\Http\Resources\StudentExperienceResource;
 use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
@@ -54,6 +55,13 @@ class StudentController extends Controller
         $student = auth()->user()->mother;
 
         return new StudentParentResource($student);
+    }
+
+    public function getExperiencesDetails()
+    {
+        $student = auth()->user()->experiences()->orderBy('created_at', 'DESC')->get();
+
+        return StudentExperienceResource::collection($student);
     }
 
     public function updatePersonalDetails(Request $request)

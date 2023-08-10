@@ -8,8 +8,8 @@ class Experience extends Model
 {
     protected $fillable = ['user_id', 'company', 'address', 'start_date', 'end_date', 'description'];
 
-    public function student()
+    public function user()
     {
-        return $this->belongsTo('App\Student', 'user_id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
