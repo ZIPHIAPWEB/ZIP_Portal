@@ -20,7 +20,15 @@ export const useStudentPersonal = defineStore({
         personal: {} as IStudentPersonalInfo,
         errors: {} as any
     }),
-    getters: {},
+    getters: {
+        getFullname({ personal, isLoading }) {
+            if (isLoading) {
+                return '';
+            }
+
+            return `${personal.first_name} ${personal.last_name}`
+        }
+    },
     actions: {
         
         async loadStudentPersonalDetails() {
@@ -43,7 +51,7 @@ export const useStudentPersonal = defineStore({
                 this.isLoading = true;
 
                 await StudentAPI.updatePersonalDetails(data);
-                this.personal = data;
+                this.personal = {...data};
                 
                 this.isLoading = false;
                 this.isSuccess = true;

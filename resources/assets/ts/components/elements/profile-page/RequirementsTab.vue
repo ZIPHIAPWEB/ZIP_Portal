@@ -99,9 +99,6 @@ const fileUploadHandler = (e : Event) => {
     </Teleport>
 
     <div class="card card-primary card-outline">
-        <div v-if="isLoading && !isSuccess" class="overlay dark">
-            <i class="fas fa-3x fa-spinner fa-spin"></i>
-        </div>
         <div class="card-header p-2">
             <ul class="nav nav-pills">
                 <li class="nav-item mx-3">
@@ -120,7 +117,7 @@ const fileUploadHandler = (e : Event) => {
                     <th>Amount</th>
                     <th>Action</th>
                 </thead>
-                <tbody>
+                <tbody v-if="!isLoading && isSuccess && requirements.length > 0" >
                     <tr v-for="(requirement, index) in requirements" :key="index">
                         <td>{{ requirement.name }}</td>
                         <td>{{ requirement.student_payment?.bank_code }}</td>
@@ -132,6 +129,16 @@ const fileUploadHandler = (e : Event) => {
                             <button v-if="!requirement.student_payment" @click="openRequirement(requirement)" class="btn btn-success btn-xs">Upload File</button>
                             <button v-else @click="openDeletePopUp(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                         </td>
+                    </tr>
+                </tbody>
+                <tbody v-if="isLoading && !isSuccess">
+                    <tr>
+                        <td colspan="7" class="text-center">Loading...</td>
+                    </tr>
+                </tbody>
+                <tbody v-if="!isLoading && isSuccess && requirements.length == 0">
+                    <tr>
+                        <td colspan="7" class="text-center">No requirements</td>
                     </tr>
                 </tbody>
             </table>

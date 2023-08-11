@@ -7,6 +7,7 @@ import ForgotPasswordPage from './views/ForgotPasswordPage.vue';
 import EmailVerificationPage from './views/client/EmailVerificationPage.vue';
 import ApplicationFormPage from './views/client/ApplicationFormPage.vue';
 import StudentDashboardPage from './views/client/DashboardPage.vue';
+import CoordinatorDashboardPage from './views/coordinator/DashboardPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -46,6 +47,14 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/student/dashboard",
         name: "student-dashboard",
         component: StudentDashboardPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/coord/dashboard",
+        name: "coordinator-dashboard",
+        component: CoordinatorDashboardPage,
         meta: {
             requiresAuth: true
         }

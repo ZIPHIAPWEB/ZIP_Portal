@@ -19,7 +19,7 @@ const personalFormData = ref<IStudentPersonalInfo>({
 
 onMounted(async () => {
     await studentPersonalStore.loadStudentPersonalDetails();
-    personalFormData.value = personal.value;
+    personalFormData.value = {...personal.value};
 })
 
 const updatePersonalDetails = async () => {

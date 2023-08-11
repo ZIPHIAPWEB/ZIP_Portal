@@ -11,10 +11,19 @@ use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
 use App\Http\Resources\TertiaryResource;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
+use LogicException;
 
 class StudentController extends Controller
 {
+    /**
+     * @return StudentPersonalResource 
+     * @throws BindingResolutionException 
+     */
     public function getPersonalDetails()
     {
         $student = auth()->user();
@@ -22,6 +31,10 @@ class StudentController extends Controller
         return new StudentPersonalResource($student);
     }
 
+    /**
+     * @return StudentContactResource 
+     * @throws BindingResolutionException 
+     */
     public function getContactDetails()
     {
         $student = auth()->user()->student;
@@ -29,6 +42,10 @@ class StudentController extends Controller
         return new StudentContactResource($student);
     }
 
+    /**
+     * @return TertiaryResource 
+     * @throws BindingResolutionException 
+     */
     public function getTertiaryDetails()
     {
         $student = auth()->user();
@@ -36,6 +53,10 @@ class StudentController extends Controller
         return new TertiaryResource($student);
     }
 
+    /**
+     * @return StudentSecondaryResource 
+     * @throws BindingResolutionException 
+     */
     public function getSecondaryDetails() 
     {
         $student = auth()->user()->secondary;
@@ -43,6 +64,10 @@ class StudentController extends Controller
         return new StudentSecondaryResource($student);
     }
 
+    /**
+     * @return StudentParentResource 
+     * @throws BindingResolutionException 
+     */
     public function getFatherDetails() 
     {
         $student = auth()->user()->father;
@@ -50,6 +75,10 @@ class StudentController extends Controller
         return new StudentParentResource($student);
     }
 
+    /**
+     * @return StudentParentResource 
+     * @throws BindingResolutionException 
+     */
     public function getMotherDetails() 
     {
         $student = auth()->user()->mother;
@@ -57,6 +86,10 @@ class StudentController extends Controller
         return new StudentParentResource($student);
     }
 
+    /**
+     * @return AnonymousResourceCollection 
+     * @throws BindingResolutionException 
+     */
     public function getExperiencesDetails()
     {
         $student = auth()->user()->experiences()->orderBy('created_at', 'DESC')->get();
@@ -64,6 +97,11 @@ class StudentController extends Controller
         return StudentExperienceResource::collection($student);
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updatePersonalDetails(Request $request)
     {
         $student = auth()->user()->student();
@@ -81,6 +119,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updateContactDetails(Request $request)
     {
         $student = auth()->user()->student();
@@ -95,6 +138,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updateTertiaryDetails(Request $request)
     {
         $auth = auth()->user();
@@ -114,6 +162,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updateSecondaryDetails(Request $request)
     {
         $auth = auth()->user();
@@ -132,6 +185,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updateFatherDetails(Request $request)
     {
         $auth = auth()->user();
@@ -152,6 +210,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return Response 
+     * @throws BindingResolutionException 
+     */
     public function updateMotherDetails(Request $request)
     {
         $auth = auth()->user();
@@ -172,6 +235,11 @@ class StudentController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * @param Request $request 
+     * @return ExperienceResource 
+     * @throws BindingResolutionException 
+     */
     public function addWorkExperience(Request $request)
     {
         $experience = Experience::create([
@@ -187,6 +255,12 @@ class StudentController extends Controller
         return new ExperienceResource($experience);
     }
 
+    /**
+     * @param Request $request 
+     * @param Experience $experience 
+     * @return ExperienceResource 
+     * @throws MassAssignmentException 
+     */
     public function updateWorkExperience(Request $request, Experience $experience)
     {
         $experience->update([
@@ -201,6 +275,12 @@ class StudentController extends Controller
         return new ExperienceResource($experience);
     }
 
+    /**
+     * @param Experience $experience 
+     * @return Response 
+     * @throws LogicException 
+     * @throws BindingResolutionException 
+     */
     public function deleteWorkExperience(Experience $experience)
     {
         $experience->delete();

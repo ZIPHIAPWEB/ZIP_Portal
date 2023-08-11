@@ -7,6 +7,7 @@ export type UserType = {
     is_filled: boolean,
     profile_picture: string,
     date_registered: Date|string,
+    application_status: string
 }
 
 export const UserInitial : UserType = {
@@ -16,5 +17,6 @@ export const UserInitial : UserType = {
     is_verified: false,
     is_filled: false,
     profile_picture: '',
-    date_registered: ''
+    date_registered: '',
+    application_status: ''
 }

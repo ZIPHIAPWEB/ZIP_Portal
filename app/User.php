@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return $this->verified == 1 ? true : false;
     }
+
+    public function getApplicationStatus()
+    {
+        return $this->student->applicaton_status ?? null;
+    }
 }

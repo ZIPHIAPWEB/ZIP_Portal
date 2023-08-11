@@ -2,12 +2,18 @@
 import ClientLayout from '../../components/layouts/ClientLayout.vue';
 import ProfileTab from '../../components/elements/profile-page/ProfileTab.vue';
 import RequirementsTab from '../../components/elements/profile-page/RequirementsTab.vue';
+import ProgramRequirementsTab from '../../components/elements/profile-page/ProgramRequirementsTab.vue';
 
 import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 
 import { useAuthStore } from '../../store/auth';
-import ProgramRequirementsTab from '../../components/elements/profile-page/ProgramRequirementsTab.vue';
+import { useStudentPersonal } from '../../store/studentPersonal';
+
 const authStore = useAuthStore();
+const studentPersonal = useStudentPersonal();
+const { auth } = storeToRefs(authStore);
+const { getFullname } = storeToRefs(studentPersonal);
 
 const selectedTab = ref(ProfileTab);
 const tabs = [
@@ -25,6 +31,10 @@ const tabs = [
     },
 ];
 
+onMounted(async () => {
+    await authStore.getAuthUser();
+})
+
 </script>
 
 <template>
@@ -39,12 +49,14 @@ const tabs = [
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img style="height: 170px; width: 170px;" class="profile-user-img img-fluid img-circle" src="https://placeimg.com/150/150/any" alt="User profile picture">
+                                <img style="height: 170px; width: 170px; background-color: #0d133b;"  class="profile-user-img img-fluid img-circle" :src="auth.profile_picture" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center py-4">Renz D. Mergenio</h3>
+                            <h3 class="profile-username text-center pt-2">
+                                <b>{{ getFullname }}</b>
+                            </h3>
 
-                            <p v-if="false" class="text-muted text-center">Sd</p>
+                            <p class="text-muted text-center">{{ auth.application_status }}</p>
 
                             <!-- <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">

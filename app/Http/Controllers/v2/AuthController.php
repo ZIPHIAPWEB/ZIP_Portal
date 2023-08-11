@@ -10,11 +10,15 @@ use App\User;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Auth;
+use RuntimeException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthController extends Controller
 {
     use SendsPasswordResetEmails;
 
+    /** @return mixed  */
     public function getAuthUser()
     {
         return response()->json([
@@ -24,6 +28,10 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @param LoginRequest $request 
+     * @return mixed 
+     */
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt(['name' => $request->username, 'password' => $request->password])) {
@@ -32,6 +40,7 @@ class AuthController extends Controller
             
         }
 
+        /** @var \App\User */
         $authUser = Auth::user();
 
         return response()->json([
@@ -44,6 +53,11 @@ class AuthController extends Controller
         ], 200);
     }
 
+    /**
+     * @param RegisterRequest $request 
+     * @return mixed 
+     * @throws RuntimeException 
+     */
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -65,8 +79,14 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * @return mixed 
+     * @throws HttpException 
+     * @throws NotFoundHttpException 
+     */
     public function resendEmailVerification()
     {
+        /** @var \App\User */
         $user = auth()->user();
 
         if($user->checkIfUserVerified()) {
@@ -83,8 +103,10 @@ class AuthController extends Controller
         ], 200);
     }
 
+    /** @return mixed  */
     public function logout()
     {
+        /** @var \App\User */
         $user = auth()->user();
 
         $user->tokens()->delete();
