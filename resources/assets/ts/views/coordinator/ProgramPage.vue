@@ -1,0 +1,110 @@
+<script setup lang="ts">
+import AdminLayout from '../../components/layouts/AdminLayout.vue';
+
+import { ref } from 'vue';
+
+</script>
+
+<template>
+    <AdminLayout>
+        <div class="container-fluid">
+            <div class="card card-primary card-outline">
+                <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div style="flex: 1;">
+                        <div style="width: max-content; display:flex; flex-direction: row;">
+                            <div class="input-group input-group-sm mr-2">
+                                <label for="from-date" style="margin-right: 5px;">From date</label>
+                                <input class="form-control" type="date">
+                            </div>
+    
+                            <div class="input-group input-group-sm mr-2">
+                                <label for="from-date" style="margin-right: 5px;">To date</label>
+                                <input class="form-control" type="date">
+                            </div>
+
+                            <div class="input-group input-group-sm mr-2">
+                                <label for="filter-statue" style="margin-right: 5px;">Filter by Status</label>
+                                <select class="form-control">
+                                    <option>Select</option>
+                                    <option value="Hellow">Hellow</option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-primary btn-sm mr-1">Filter</button>
+                                <button class="btn btn-success btn-sm">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+        
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0" style="height: 75vh">
+                    <table class="table table-head-fixed text-nowrap table-sm">
+                        <thead>
+                            <tr>
+                                <th>Date of Application</th>
+                                <th>Status</th>
+                                <th>Email</th>
+                                <th>First name</th>
+                                <th>Middle name</th>
+                                <th>Last name</th>
+                                <th>Contact</th>
+                                <th>School</th>
+                                <th>Program</th>
+                                <th>Recent Action</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="sample in 100">
+                                <td>Testing</td>
+                                <td>
+                                    <span class="badge bg-success">New applicant</span>
+                                </td>
+                                <td>tjksjfkldj</td>
+                                <td>jfkdlsjfkl</td>
+                                <td>jklfdjsklj</td>
+                                <td>klfjdklsj</td>
+                                <td>kljfkldsjkl</td>
+                                <td>thskdhfjkdsh</td>
+                                <td>hfjdkshjfk</td>
+                                <td>hjkfdhjskh</td>
+                                <td>
+                                    <a href="##">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div v-if="true" class="card-footer clearfix p-1">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </AdminLayout>    
+</template>
+
+<style scoped>
+    tbody > * {
+        font-size: 14px;
+    }
+
+    label {
+        margin: 0;
+    }
+</style>
