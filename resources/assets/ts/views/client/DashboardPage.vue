@@ -24,11 +24,7 @@ const tabs = [
     {
         name: 'Program Requirements',
         component: ProgramRequirementsTab,
-    },
-    {
-        name: 'Program Information',
-        component: RequirementsTab,
-    },
+    }
 ];
 
 onMounted(async () => {

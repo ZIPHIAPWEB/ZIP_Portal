@@ -2,11 +2,23 @@
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 
 import { ref } from 'vue';
+import router from '../../router';
+
+
+const viewStudent = (userId: number | string) => {
+
+    router.push({
+        name: "coordinator-student-profile",
+        params: {
+            id: userId
+        }
+    });
+}
 
 </script>
 
 <template>
-    <AdminLayout>
+    <AdminLayout :title="$route.params.name">
         <div class="container-fluid">
             <div class="card card-primary card-outline">
                 <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between">
@@ -79,7 +91,7 @@ import { ref } from 'vue';
                                 <td>hfjdkshjfk</td>
                                 <td>hjkfdhjskh</td>
                                 <td>
-                                    <a href="##">View</a>
+                                    <a href="#" @click.prevent="viewStudent(1)">View</a>
                                 </td>
                             </tr>
                         </tbody>

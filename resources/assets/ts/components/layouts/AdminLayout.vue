@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, defineProps } from 'vue';
 import router from '../../router';
+
+const props = defineProps<{
+  title?: string | string[]
+}>()
 
 const programs = ref([
   { title: "SWT - Spring", slug: 'swt-spring' },
@@ -238,11 +242,11 @@ const gotoPage = (slug : string) => {
         </aside>
 
         <div class="content-wrapper">
-            <section class="content-header">
+            <section v-if="props.title" class="content-header">
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1>{{ $route.params.name }}</h1>
+                    <h1>{{ props.title }}</h1>
                   </div>
                 </div>
               </div><!-- /.container-fluid -->

@@ -9,6 +9,7 @@ import ApplicationFormPage from './views/client/ApplicationFormPage.vue';
 import StudentDashboardPage from './views/client/DashboardPage.vue';
 import CoordinatorDashboardPage from './views/coordinator/DashboardPage.vue';
 import CoordinatorProgramPage from './views/coordinator/ProgramPage.vue';
+import SelectedStudentPageVue from './views/coordinator/SelectedStudentPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -64,6 +65,14 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/coord/program/:name",
         name: "coordinator-program",
         component: CoordinatorProgramPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/coord/student-profile/:id",
+        name: "coordinator-student-profile",
+        component: SelectedStudentPageVue,
         meta: {
             requiresAuth: true
         }
