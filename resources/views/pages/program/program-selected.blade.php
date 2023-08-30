@@ -133,11 +133,14 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr v-if="student.application_status === 'For Visa Interview'">
-                                    <td>
+                                <tr v-if="student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'">
+                                    <td class="text-sm">
                                         Visa Interview Status
                                     </td>
-                                    <td v-cloak class="text-bold text-center">
+                                    <td v-cloak class="text-sm text-bold" v-if="student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'">
+                                        @{{ student.visa_interview_status }}
+                                    </td>
+                                    <td v-if="student.application_status === 'For Visa Interview'" v-cloak class="text-bold text-center">
                                         <div class="form-group-sm">
                                             <select @change="setInterviewStatus(visaStatus)" v-model="visaStatus" class="form-control">
                                                 <option value="">@{{ student.visa_interview_status }}</option>
@@ -708,10 +711,7 @@
                                     </td>
                                     <td v-else>
                                         <div class="input-group-sm">
-                                            <select v-model="host.position" class="form-control input-sm">
-                                                <option value="">Select Position</option>
-                                                <option v-for="position in positions" :value="position.display_name">@{{ position.name }}</option>
-                                            </select>
+                                            <input v-model="student.position" type="text" class="form-control input-sm" placeholder="Enter applicant stipend">
                                         </div>
                                     </td>
                                 </tr>
