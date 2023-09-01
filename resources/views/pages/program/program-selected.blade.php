@@ -102,6 +102,7 @@
                                                 <option value="ForVisaInterview">For Visa Interview</option>
                                                 <option value="ForPDOSCFO">For PDOS & CFO</option>
                                                 <option value="ProgramProper">Program Proper</option>
+                                                <option value="Returnee">Returnee</option>
                                                 <option value="Canceled">Cancel</option>
                                             </select>
                                         </div>
@@ -626,7 +627,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section v-if="student.application_status === 'Hired' && student.program.name != 'Canada Program' || student.application_status === 'For Visa Interview' && student.program.name != 'Canada Program' || student.application_status === 'For PDOS & CFO' && student.program.name != 'Canada Program' || student.application_status === 'Program Proper' && student.program.name != 'Canada Program'" id="host-company-details">
+                        <section v-if="student.application_status === 'Returnee' && student.program.name != 'Canada Program' || student.application_status === 'Hired' && student.program.name != 'Canada Program' || student.application_status === 'For Visa Interview' && student.program.name != 'Canada Program' || student.application_status === 'For PDOS & CFO' && student.program.name != 'Canada Program' || student.application_status === 'Program Proper' && student.program.name != 'Canada Program'" id="host-company-details">
                             <label class="control-label">Host Company Details</label>
                             <table class="table table-striped table-bordered table-condensed">
                                 <tr>
@@ -844,7 +845,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section v-if="student.application_status === 'For PDOS & CFO' && student.program.name != 'Canada Program' || student.application_status === 'Program Proper' && student.program.name != 'Canada Program'" id="PDOS">
+                        <section v-if="student.application_status === 'Returnee' && student.program.name != 'Canada Program' || student.application_status === 'For PDOS & CFO' && student.program.name != 'Canada Program' || student.application_status === 'Program Proper' && student.program.name != 'Canada Program'" id="PDOS">
                             <label class="control-label">PDOS & CFO Details</label>
                             <table class="table table-striped table-bordered table-condensed">
                                 <tr>
@@ -910,7 +911,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section v-if="student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="flight-details">
+                        <section v-if="student.application_status === 'Returnee' && student.program.name != 'Canada Program' || student.application_status === 'Hired' || student.application_status === 'For Visa Interview' || student.application_status === 'For PDOS & CFO' || student.application_status === 'Program Proper'" id="flight-details">
                             <label class="control-label">Flight Details</label>
                             <table class="table table-striped table-bordered table-condensed">
                                 <tr>
@@ -2357,7 +2358,33 @@
                             } else {
                                 alert('You Cannot Revert Application Status');
                             }
-                            break;
+                        break;
+
+                        case 'Returnee':
+                            this.loading.modal = false;
+                            if(this.student.application_status == 'Program Proper') {
+                                axios.post(`/coor/${this.student.user_id}/application/Returnee`)
+                                    .then((response) => {
+                                        this.loadStudents(programId);
+                                        this.viewStudent(this.student.user_id);
+                                        this.loading.modal = false;
+                                        swal({
+                                            title: response.data,
+                                            type: 'success',
+                                            confirmButtonText: 'Continue'
+                                        }).catch((error) => {
+                                            swal({
+                                                title: 'Something went wrong!',
+                                                type: 'error',
+                                                confirmButonText: 'Go Back!'
+                                            })
+                                        })
+                                    })
+                            } else {
+                                alert('You Cannot Revert Application Status');
+                            }
+                        break;
+
                         case 'Canceled':
                             this.show.cancel = true;
                             break;

@@ -306,7 +306,30 @@ class CoordinatorController extends Controller
                     'message'   =>  'Program Proper'
                 ], 200);
 
-                break;
+            break;
+
+            case 'Returnee':
+                $this->studentRepository->updateStudentBy(['user_id' => $id], [
+                    'application_status'    =>  'Returnee'
+                ]);
+
+                $this->coordinatorActionRepository->saveCoordinatorAction([
+                    'user_id'   =>  Auth::user()->id,
+                    'client_id' =>  $id,
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Returnee'
+                ]);
+
+                $data = [
+                    'coordinator'   => (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' ' . $coordinator->lastName,
+                    'status'        => 'Returnee'
+                ];
+
+                Notification::route('mail', $program->email)->notify(new CoordinatorResponse($data));
+
+                return response()->json([
+                    'message'   =>  'Returnee'
+                ], 200);
+            break;
 
             case 'Cancelled' :
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
