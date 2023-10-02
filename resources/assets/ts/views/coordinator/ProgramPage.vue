@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
+import { useCoordStudent } from '../../store/coordStudents'
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import router from '../../router';
+import { storeToRefs } from 'pinia';
 
+const coordStudent = useCoordStudent();
+const { students } = storeToRefs(coordStudent);
+
+onMounted(async () => {
+    await coordStudent.loadCoordStudentsData();
+});
 
 const viewStudent = (userId: number | string) => {
 
@@ -77,10 +85,10 @@ const viewStudent = (userId: number | string) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="sample in 100">
-                                <td>Testing</td>
+                            <tr v-for="student in students">
+                                <td>{{ student.created_at }}</td>
                                 <td>
-                                    <span class="badge bg-success">New applicant</span>
+                                    <span class="badge bg-success">{{ student.application_status }}</span>
                                 </td>
                                 <td>tjksjfkldj</td>
                                 <td>jfkdlsjfkl</td>

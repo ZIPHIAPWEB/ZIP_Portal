@@ -71,5 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/visa-sponsor-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'destroy']);
 
     });
+
+    Route::prefix('coord')->group(function () {
+        Route::get('/get-students', [App\Http\Controllers\v2\CoordController::class, 'getStudents']);
+    });
 });
 

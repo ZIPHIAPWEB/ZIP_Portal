@@ -10,7 +10,7 @@ let url = 'http://127.0.0.1:8000/api';
 export const ApiRequest = axios.create({
     baseURL: url,
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
     },
     withCredentials: true
 });
@@ -18,7 +18,7 @@ export const ApiRequest = axios.create({
 export const ApiRequestWithFile = axios.create({
     baseURL: url,
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
         'Content-Type': 'multipart/form-data'
     },
     withCredentials: true
