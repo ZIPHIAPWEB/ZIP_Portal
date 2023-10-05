@@ -59,7 +59,7 @@ class Student extends Model
 
     public function log()
     {
-        return $this->hasMany('App\Log', 'user_id', 'user_id');
+        return $this->hasMany(Log::class, 'user_id', 'user_id');
     }
 
     public function user()
@@ -74,11 +74,6 @@ class Student extends Model
                         'name'  =>  '',
                         'states'=>  ''
                     ]);
-    }
-
-    public function school()
-    {
-        return $this->hasOne('App\School', 'id', 'school');
     }
 
     public function program()

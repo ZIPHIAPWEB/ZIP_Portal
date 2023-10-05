@@ -86,18 +86,18 @@ const viewStudent = (userId: number | string) => {
                         </thead>
                         <tbody>
                             <tr v-for="student in students">
-                                <td>{{ student.created_at }}</td>
+                                <td>{{ student.date_of_application }}</td>
                                 <td>
                                     <span class="badge bg-success">{{ student.application_status }}</span>
                                 </td>
-                                <td>tjksjfkldj</td>
-                                <td>jfkdlsjfkl</td>
-                                <td>jklfdjsklj</td>
-                                <td>klfjdklsj</td>
-                                <td>kljfkldsjkl</td>
-                                <td>thskdhfjkdsh</td>
-                                <td>hfjdkshjfk</td>
-                                <td>hjkfdhjskh</td>
+                                <td>{{ student.email }}</td>
+                                <td>{{ student.first_name }}</td>
+                                <td>{{ student.middle_name }}</td>
+                                <td>{{ student.last_name }}</td>
+                                <td>{{ student.contact_no }}</td>
+                                <td>{{ student.school }}</td>
+                                <td>{{ student.program }}</td>
+                                <td>{{ student.recent_action }}</td>
                                 <td>
                                     <a href="#" @click.prevent="viewStudent(1)">View</a>
                                 </td>

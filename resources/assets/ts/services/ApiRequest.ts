@@ -11,6 +11,7 @@ export const ApiRequest = axios.create({
     baseURL: url,
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
+        'Content-Type': 'application/json'
     },
     withCredentials: true
 });
