@@ -4,13 +4,22 @@ import { useCoordStudent } from '../../store/coordStudents'
 
 import { ref, onMounted } from 'vue';
 import router from '../../router';
+import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
 const coordStudent = useCoordStudent();
-const { students } = storeToRefs(coordStudent);
+const { students, pagination, isLoading } = storeToRefs(coordStudent);
+
+const route = useRoute();
+
+const program = ref<string | string[]>('');
+const fromDate = ref<string>('');
+const toDate = ref<string>('');
+const status = ref<string>('');
 
 onMounted(async () => {
-    await coordStudent.loadCoordStudentsData();
+    program.value = route.params.name;
+    await coordStudent.loadCoordStudentsData(program.value);
 });
 
 const viewStudent = (userId: number | string) => {
@@ -21,6 +30,16 @@ const viewStudent = (userId: number | string) => {
             id: userId
         }
     });
+}
+
+const filterResult = async () => {
+
+    await coordStudent.filterCoordStudentsData(program.value, fromDate.value, toDate.value, status.value);
+}
+
+const paginatedResult = async (page : number) => {
+
+    await coordStudent.loadPaginatedStudentsData(page, program.value, fromDate.value, toDate.value, status.value);
 }
 
 </script>
@@ -34,23 +53,24 @@ const viewStudent = (userId: number | string) => {
                         <div style="width: max-content; display:flex; flex-direction: row;">
                             <div class="input-group input-group-sm mr-2">
                                 <label for="from-date" style="margin-right: 5px;">From date</label>
-                                <input class="form-control" type="date">
+                                <input v-model="fromDate" class="form-control" type="date">
                             </div>
     
                             <div class="input-group input-group-sm mr-2">
                                 <label for="from-date" style="margin-right: 5px;">To date</label>
-                                <input class="form-control" type="date">
+                                <input v-model="toDate" class="form-control" type="date">
                             </div>
 
                             <div class="input-group input-group-sm mr-2">
                                 <label for="filter-statue" style="margin-right: 5px;">Filter by Status</label>
-                                <select class="form-control">
-                                    <option>Select</option>
-                                    <option value="Hellow">Hellow</option>
+                                <select v-model="status" class="form-control">
+                                    <option selected>Select</option>
+                                    <option value="New Applicant">New Applicant</option>
+                                    <option value="Confirmed">Confirmed</option>
                                 </select>
                             </div>
                             <div class="input-group input-group-sm">
-                                <button class="btn btn-primary btn-sm mr-1">Filter</button>
+                                <button @click="filterResult()" class="btn btn-primary btn-sm mr-1">Filter</button>
                                 <button class="btn btn-success btn-sm">Export</button>
                             </div>
                         </div>
@@ -87,8 +107,12 @@ const viewStudent = (userId: number | string) => {
                         <tbody>
                             <tr v-for="student in students">
                                 <td>{{ student.date_of_application }}</td>
-                                <td>
-                                    <span class="badge bg-success">{{ student.application_status }}</span>
+                                <td class="text-white">
+                                    <span v-if="student.application_status == 'New Applicant'" class="badge bg-new-applicant">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Confirmed'" class="badge bg-confirmed">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
+
                                 </td>
                                 <td>{{ student.email }}</td>
                                 <td>{{ student.first_name }}</td>
@@ -107,11 +131,9 @@ const viewStudent = (userId: number | string) => {
                 </div>
                 <div v-if="true" class="card-footer clearfix p-1">
                     <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        <li v-for="link in pagination" class="page-item">
+                            <a @click.prevent="paginatedResult(+link.label)" v-if="link.active" class="page-link" href="#" v-html="link.label"></a>
+                        </li>
                       </ul>
                 </div>
             </div>
@@ -126,5 +148,41 @@ const viewStudent = (userId: number | string) => {
 
     label {
         margin: 0;
+    }
+
+    .bg-new-applicant {
+        background: rgb(236, 176, 33);
+    }
+
+    .bg-confirmed {
+        background: rgb(189, 61, 38);
+    }
+
+    .bg-assessed {
+        background: rgb(210, 91, 39);
+    }
+
+    .bg-hired {
+        background: rgb(37, 110, 182);
+    }
+
+    .bg-visa-interview {
+        background: rgb(23, 66, 117);
+    }
+
+    .bg-pdos-cfo {
+        background: rgb(21, 51, 92);
+    }
+
+    .bg-program-proper {
+        background: rgb(17, 133, 66);
+    }
+
+    .bg-visa-denied {
+        background: rgb(185, 32, 37);
+    }
+
+    .bg-cancelled {
+        background: rgb(185, 32, 37);
     }
 </style>

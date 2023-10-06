@@ -11,6 +11,6 @@ class ConvertProgramToIdAction
     {
         $normalizedProgram = Str::lower($program);
 
-        return Program::query()->where('name', $normalizedProgram)->id;
+        return Program::query()->where('name', $normalizedProgram)->first()->id;
     }
 }
