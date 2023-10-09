@@ -1,31 +1,44 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, defineProps } from 'vue';
 import router from '../../router';
+import ProgramAPI from '../../services/ProgramAPI';
 
 const props = defineProps<{
   title?: string | string[]
 }>()
 
-const programs = ref([
-  { title: "SWT - Spring", slug: 'swt-spring' },
-  { title: "SWT - Summer", slug: 'swt-summer' },
-  { title: "Career Training", slug: 'career-training' },
-  { title: "Internship", slug: 'internship' },
-  { title: "Canada", slug: "canada"}
-]);
+interface IProgram {
+  id: number | string;
+  name: string;
+  display_name: string;
+  description: string;
+}
+
+const programs = ref<IProgram[]>([]);
 
 
-onMounted(() => {
+onMounted(async () => {
     document.body.classList.add('layout-fixed');
+    
+    await loadPrograms();
 });
 
 onUnmounted(() => {
     document.body.classList.remove('layout-fixed');
 });
 
+const loadPrograms = async () => {
+    try {
+        const response = await ProgramAPI.getPrograms();
+        programs.value = response.data.data.programs;
+    } catch (error: any) {
+        console.log(error.response);
+    }
+};
+
 const gotoPage = (slug : string) => {
 
-  router.push({
+  router.replace({
     name: "coordinator-program",
     params: {
       name: slug
@@ -227,9 +240,9 @@ const gotoPage = (slug : string) => {
                     </a>
                     <ul class="nav nav-treeview">
                       <li v-for="(program, index) in programs" :key="index" class="nav-item">
-                        <a href="#" @click.prevent="gotoPage(program.slug)" class="nav-link">
+                        <a href="#" @click.prevent="gotoPage(program.name)" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
-                          <p>{{ program.title }}</p>
+                          <p>{{ program.display_name }}</p>
                         </a>
                       </li>
                     </ul>

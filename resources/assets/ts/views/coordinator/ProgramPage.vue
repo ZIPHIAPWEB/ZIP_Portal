@@ -2,7 +2,7 @@
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 import { useCoordStudent } from '../../store/coordStudents'
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import router from '../../router';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
@@ -21,6 +21,12 @@ onMounted(async () => {
     program.value = route.params.name;
     await coordStudent.loadCoordStudentsData(program.value);
 });
+
+watch(() => route.path, async () => {
+
+    program.value = route.params.name;
+    await coordStudent.loadCoordStudentsData(program.value);
+})
 
 const viewStudent = (userId: number | string) => {
 
@@ -104,7 +110,17 @@ const paginatedResult = async (page : number) => {
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="isLoading">
+                            <tr>
+                                <td colspan="11" class="text-center">Loading...</td>
+                            </tr>
+                        </tbody>
+                        <tbody v-if="!isLoading && students.length == 0">
+                            <tr>
+                                <td colspan="11" class="text-center">No record found</td>
+                            </tr>
+                        </tbody>
+                        <tbody v-if="!isLoading && students.length > 0">
                             <tr v-for="student in students">
                                 <td>{{ student.date_of_application }}</td>
                                 <td class="text-white">
@@ -112,7 +128,10 @@ const paginatedResult = async (page : number) => {
                                     <span v-if="student.application_status == 'Confirmed'" class="badge bg-confirmed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
-
+                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-for-visa">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'For PDOS CFO'" class="badge bg-for-visa">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Cancelled'" class="badge bg-visa-denied">{{ student.application_status }}</span>
                                 </td>
                                 <td>{{ student.email }}</td>
                                 <td>{{ student.first_name }}</td>
@@ -127,9 +146,10 @@ const paginatedResult = async (page : number) => {
                                 </td>
                             </tr>
                         </tbody>
+                        
                     </table>
                 </div>
-                <div v-if="true" class="card-footer clearfix p-1">
+                <div v-if="students.length > 0 && !isLoading" class="card-footer clearfix p-1">
                     <ul class="pagination pagination-sm m-0 float-right">
                         <li v-for="link in pagination" class="page-item">
                             <a @click.prevent="paginatedResult(+link.label)" v-if="link.active" class="page-link" href="#" v-html="link.label"></a>
