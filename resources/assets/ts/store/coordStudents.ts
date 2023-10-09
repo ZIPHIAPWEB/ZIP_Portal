@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import CoordinatorApi from "../services/CoordinatorApi";
 
 export interface ICoordinatorStudent {
-    id?: number | string,
+    id: number | string,
     date_of_application: string,
     application_status: string,
     email: string,

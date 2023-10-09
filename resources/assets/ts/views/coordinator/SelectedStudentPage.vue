@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import type { Component } from 'vue';
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 import ProfileTab from '../../components/elements/coordinator-page/profile-tab/ProfileDetailsCard.vue';
@@ -7,6 +7,17 @@ import PrelimTab from '../../components/elements/coordinator-page/prelim-tab/Pre
 import VisaTab from '../../components/elements/coordinator-page/visa-tab/VisaRequirementCard.vue';
 import AdditionalTab from '../../components/elements/coordinator-page/additional-tab/AdditionalRequirementCard.vue';
 import PaymentTab from '../../components/elements/coordinator-page/payments-tab/PaymentRequirementCard.vue';
+
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+import { useCoordSelectedStudent } from '../../store/coordSelectedStudent';
+
+const useCoordStudent = useCoordSelectedStudent();
+
+onMounted(async () => {
+    await useCoordStudent.loadSelectedStudent(+route.params.id);
+})
 
 interface ITabs {
     name: string,

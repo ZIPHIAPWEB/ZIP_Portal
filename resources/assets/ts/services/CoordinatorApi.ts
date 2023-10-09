@@ -2,6 +2,10 @@ import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
 
 export default {
+    getSelectedStudent(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/get-selected-student/${userId}`);
+    },
+
     getCoordStudents(program : string | string[]) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-students?program=${program}`);
     },

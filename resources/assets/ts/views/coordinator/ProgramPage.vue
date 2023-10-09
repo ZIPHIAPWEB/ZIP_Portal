@@ -142,7 +142,7 @@ const paginatedResult = async (page : number) => {
                                 <td>{{ student.program }}</td>
                                 <td>{{ student.recent_action }}</td>
                                 <td>
-                                    <a href="#" @click.prevent="viewStudent(1)">View</a>
+                                    <a href="#" @click.prevent="viewStudent(student.id)">View</a>
                                 </td>
                             </tr>
                         </tbody>

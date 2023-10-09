@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('coord')->group(function () {
         Route::get('/get-students', [App\Http\Controllers\v2\CoordController::class, 'getStudents']);
+        Route::get('/get-selected-student/{student}', [App\Http\Controllers\v2\CoordController::class, 'showStudent']);
     });
 });
 

@@ -15,11 +15,11 @@ class StudentSecondaryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'school' => $this->school_name,
-            'address' => $this->address,
-            'start_date' => $this->start_date,
-            'date_graduated' => $this->date_graduated
+            'id' => $this->id ?? "",
+            'school' => $this->school_name ?? "",
+            'address' => $this->address ?? "",
+            'start_date' => $this->start_date ?? "",
+            'date_graduated' => $this->date_graduated ?? ""
         ];
     }
 }

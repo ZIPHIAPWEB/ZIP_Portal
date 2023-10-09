@@ -1,6 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import { storeToRefs } from 'pinia';
+
+const useCoordStudent = useCoordSelectedStudent();
+const { 
+    isLoading,
+    userInfo,
+    personal, 
+    contact,
+    father,
+    mother,
+    tertiary,
+    secondary,
+    experiences
+} = storeToRefs(useCoordStudent);
 
 </script>
 
@@ -24,7 +42,7 @@ import { ref } from 'vue';
                         <td>Application status</td>
                         <td>
                             <select class="form-control form-control-sm">
-                                <option>New Applicant</option>
+                                <option selected>{{ userInfo.application_status }}</option>
                                 <option value="swt-spring">SWT - Spring</option>
                             </select>
                         </td>
@@ -41,7 +59,7 @@ import { ref } from 'vue';
                                 <span>Full name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ `${personal.first_name} ${personal.middle_name} ${personal.last_name}` }}
                             </td>
                         </tr>
                         <tr>
@@ -49,7 +67,7 @@ import { ref } from 'vue';
                                 <span>Birth date</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ personal.birthdate }}
                             </td>
                         </tr>
                         <tr>
@@ -57,7 +75,7 @@ import { ref } from 'vue';
                                 <span>Gender</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{  personal.gender }}
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +83,7 @@ import { ref } from 'vue';
                                 <span>Present address</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ contact.permanent_address }}
                             </td>
                         </tr>
                         <tr>
@@ -73,7 +91,7 @@ import { ref } from 'vue';
                                 <span>Permanent address</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ contact.provincial_address }}
                             </td>
                         </tr>
                         <tr>
@@ -81,7 +99,7 @@ import { ref } from 'vue';
                                 <span>Home number</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ contact.home_number }}
                             </td>
                         </tr>
                         <tr>
@@ -89,7 +107,7 @@ import { ref } from 'vue';
                                 <span>Mobile number</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ contact.mobile_number }}
                             </td>
                         </tr>
                         <tr>
@@ -97,7 +115,7 @@ import { ref } from 'vue';
                                 <span>Email</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ userInfo.email }}
                             </td>
                         </tr>
                         <tr>
@@ -105,7 +123,7 @@ import { ref } from 'vue';
                                 <span>Skype ID</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ personal.skype_id }}
                             </td>
                         </tr>
                         <tr>
@@ -113,7 +131,7 @@ import { ref } from 'vue';
                                 <span>Facebook URL</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ personal.fb_email }}
                             </td>
                         </tr>
                     </tbody>
@@ -134,7 +152,7 @@ import { ref } from 'vue';
                                 <span>First name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.first_name }}
                             </td>
                         </tr>
                         <tr>
@@ -142,7 +160,7 @@ import { ref } from 'vue';
                                 <span>Middle name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.middle_name }}
                             </td>
                         </tr>
                         <tr>
@@ -150,7 +168,7 @@ import { ref } from 'vue';
                                 <span>Last name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.last_name }}
                             </td>
                         </tr>
                         <tr>
@@ -158,7 +176,7 @@ import { ref } from 'vue';
                                 <span>Occupation</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.occupation }}
                             </td>
                         </tr>
                         <tr>
@@ -166,7 +184,7 @@ import { ref } from 'vue';
                                 <span>Company</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.company }}
                             </td>
                         </tr>
                         <tr>
@@ -174,7 +192,7 @@ import { ref } from 'vue';
                                 <span>Contact no.</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ father.contact_no }}
                             </td>
                         </tr>
                     </tbody>
@@ -192,7 +210,7 @@ import { ref } from 'vue';
                                 <span>First name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.first_name }}
                             </td>
                         </tr>
                         <tr>
@@ -200,7 +218,7 @@ import { ref } from 'vue';
                                 <span>Middle name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.middle_name }}
                             </td>
                         </tr>
                         <tr>
@@ -208,7 +226,7 @@ import { ref } from 'vue';
                                 <span>Last name</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.last_name }}
                             </td>
                         </tr>
                         <tr>
@@ -216,7 +234,7 @@ import { ref } from 'vue';
                                 <span>Occupation</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.occupation }}
                             </td>
                         </tr>
                         <tr>
@@ -224,7 +242,7 @@ import { ref } from 'vue';
                                 <span>Company</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.company }}
                             </td>
                         </tr>
                         <tr>
@@ -232,7 +250,7 @@ import { ref } from 'vue';
                                 <span>Contact no.</span>
                             </td>
                             <td>
-                                Testing testing tesitng
+                                {{ mother.contact_no }}
                             </td>
                         </tr>
                     </tbody>
@@ -252,32 +270,32 @@ import { ref } from 'vue';
                         <tr>
                             <td style="width: 30%;">
                                 <span>School</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ tertiary.school }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Address</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ tertiary.address }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Degree</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ tertiary.degree }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Start date</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ tertiary.start_date }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Date graduated</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ tertiary.date_graduated }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -292,59 +310,59 @@ import { ref } from 'vue';
                         <tr>
                             <td style="width: 30%;">
                                 <span>School</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ secondary.school }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Address</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ secondary.address }}</td>
                         </tr>
                         <tr>
                             <td style="width: 30%;">
                                 <span>Date graduated</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ secondary.date_graduated }}</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
-            <section id="education-section">
+            <section id="education-section" style="margin-bottom: 10px;">
                 <label  class="control-label ml-2">Work Experience/On-the-Job Training</label>
 
-                <table class="table table-striped table-bordered table-sm mb-4">
+                <table v-for="(exp, index) in experiences" :key="index" class="table table-striped table-bordered table-sm mb-4">
                     <tbody>
                         <tr>
-                            <td >
+                            <td>
                                 <span>Company</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ exp.company }}</td>
                         </tr>
                         <tr>
                             <td >
                                 <span>Address</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ exp.address }}</td>
                         </tr>
                         <tr>
                             <td >
                                 <span>Description</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ exp.description }}</td>
                         </tr>
                         <tr>
                             <td>
                                 <span>Start date</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ exp.start_date }}</td>
                         </tr>
                         <tr>
                             <td>
                                 <span>End date</span>
-                                <td>Testing</td>
                             </td>
+                            <td>{{ exp.end_date }}</td>
                         </tr>
                     </tbody>
                 </table>
