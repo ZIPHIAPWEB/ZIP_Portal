@@ -27,6 +27,7 @@ interface ITabs {
 
 const tabs = ref<ITabs[]>([
     { name: "Profile", isActive: true, component: ProfileTab },
+    { name: "Program", isActive: false, component: ProfileTab}, // will update component
     { name: "Preliminary", isActive: false, component: PrelimTab },
     { name: "Visa Sponsor", isActive: false, component: VisaTab },
     { name: "Additional", isActive: false, component: AdditionalTab },

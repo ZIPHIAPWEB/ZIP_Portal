@@ -17,6 +17,7 @@ export interface IUserInfo {
     is_filled: string;
     date_registered: string;
     application_status: string;
+    program: string;
 }
 
 export interface ICoordSelectedStudentState {
@@ -63,6 +64,23 @@ export const useCoordSelectedStudent = defineStore({
                 this.father = response.data.data.father;
                 this.mother = response.data.data.mother;
                 this.experiences = response.data.data.experiences;
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
+        async updateProgramInfo(programId : number | string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+                
+                const response = await CoordinatorApi.updateStudentProgram(this.userInfo.id, programId);
+                this.userInfo.program = response.data.data.program;
 
                 this.isLoading = false;
                 this.isSuccess = true;

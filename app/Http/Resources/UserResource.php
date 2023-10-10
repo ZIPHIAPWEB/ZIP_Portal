@@ -23,7 +23,8 @@ class UserResource extends JsonResource
             'is_verified' => (bool) $this->verified,
             'is_filled' => (bool) $this->isFilled,
             'date_registered' => $this->created_at->toDateTimeString(),
-            'application_status' => $this->student->application_status ?? ""
+            'application_status' => $this->student->application_status ?? "",
+            'program' => $this->student->program->display_name ?? ""
         ];
     }
 }

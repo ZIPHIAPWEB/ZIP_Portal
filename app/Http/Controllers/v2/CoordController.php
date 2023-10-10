@@ -58,4 +58,48 @@ class CoordController extends Controller
             ]
         ]);
     }
+
+    public function updateStudentProgram($userId, Request $request)
+    {
+        $request->validate([
+            'programId' => 'required'
+        ]);
+
+        Student::query()
+            ->where('user_id', $userId)
+            ->update([
+                'program_id' => $request->input('programId')
+            ]);
+
+        return response()->json([
+            'data' => [
+                'message' => 'Student program successfully updated!',
+                'program' => Student::query()->where('user_id', $userId)->first()->program->display_name,
+                'status' => 200
+            ]
+        ]);
+    }
+
+    public function updateProgramStatus($userId, Request $request)
+    {
+        $request->validate([
+            'status' => 'required'
+        ]);
+
+        $status = $request->input('status');
+
+        Student::query()
+            ->where('user_id', $userId)
+            ->update([
+                'application_status' => $status
+            ]);
+
+        return response()->json([
+            'data' => [
+                'message' => 'Student program successfully updated!',
+                'application_status' => $status,
+                'status' => 200
+            ]
+        ]);
+    }
 }

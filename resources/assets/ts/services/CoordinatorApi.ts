@@ -44,5 +44,10 @@ export default {
         }
         
         return ApiRequest.get(`/coord/get-students?page=${page}&program=${program}` + forFilter);
+    },
+
+    updateStudentProgram(userId : string | number, programId : number | string) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/coord/update-student-program/${userId}`, { programId: programId });
     }
 }

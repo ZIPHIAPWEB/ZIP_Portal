@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import UpdateProgramModal from './UpdateProgramModal.vue';
+import { ref, onMounted, Teleport } from 'vue';
 
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
 import { storeToRefs } from 'pinia';
+import PopUp from '../../PopUp.vue';
 
 const useCoordStudent = useCoordSelectedStudent();
 const { 
@@ -20,32 +22,50 @@ const {
     experiences
 } = storeToRefs(useCoordStudent);
 
+const isProgramEditOpen = ref<boolean>(false);
+
+const editProgramToggle = () => {
+    isProgramEditOpen.value = !isProgramEditOpen.value;
+}
+
 </script>
 
 <template>
+    <Teleport to="body">
+        <PopUp v-if="isProgramEditOpen" title="Update program" size="md">
+            <UpdateProgramModal
+                @updatedEvent="isProgramEditOpen = false"
+                @cancelEvent="isProgramEditOpen = false"
+            />
+        </PopUp>
+    </Teleport>
     <div class="card card-default">
         <div class="card-body p-0">
             <table class="table table-striped table-bordered table-sm" style="margin-bottom: 20px;">
                 <tbody>
                     <tr>
                         <td>
-                            <span>Change program</span>
+                            <span>Program</span>
                         </td>
                         <td>
-                            <select class="form-control form-control-sm">
-                                <option>Select program</option>
-                                <option value="swt-spring">SWT - Spring</option>
-                            </select>
+                            <div style="display: flex; justify-content: space-between;">
+                                <b>{{ userInfo.program }}</b>
+                                <a v-if="!isProgramEditOpen" @click.prevent="editProgramToggle()" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>Application status</td>
                         <td>
-                            <select class="form-control form-control-sm">
-                                <option selected>{{ userInfo.application_status }}</option>
-                                <option value="swt-spring">SWT - Spring</option>
-                            </select>
+                            <div style="display: flex; justify-content: space-between;">
+                                <b>{{ userInfo.application_status }}</b>
+                                <a v-if="userInfo.application_status === 'New Applicant' || userInfo.application_status == 'Assessed'" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
+                            </div>
                         </td>
+                    </tr>
+                    <tr v-if="false">
+                        <td>Applicaton ID</td>
+                        <td>############</td>
                     </tr>
                 </tbody>
             </table>
