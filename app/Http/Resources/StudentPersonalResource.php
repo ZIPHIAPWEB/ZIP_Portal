@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentPersonalResource extends JsonResource
@@ -18,7 +19,7 @@ class StudentPersonalResource extends JsonResource
             'first_name' => $this->student->first_name,
             'middle_name' => $this->student->middle_name,
             'last_name' => $this->student->last_name,
-            'birthdate' => $this->student->birthdate,
+            'birthdate' => Carbon::parse($this->student->birthdate)->toFormattedDateString(),
             'gender' => $this->student->gender,
             'skype_id' => $this->student->skype_id,
             'fb_email' => $this->student->fb_email

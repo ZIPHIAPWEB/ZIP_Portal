@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import UpdateProgramModal from './UpdateProgramModal.vue';
+import UpdateProgramStatus from './UpdateProgramStatus.vue';
+
 import { ref, onMounted, Teleport } from 'vue';
 
 import { useRoute } from 'vue-router';
@@ -44,6 +46,12 @@ const editProgramToggle = () => {
             <table class="table table-striped table-bordered table-sm" style="margin-bottom: 20px;">
                 <tbody>
                     <tr>
+                        <td>Application status</td>
+                        <td>
+                            <UpdateProgramStatus :status="userInfo.application_status" />
+                        </td>
+                    </tr>
+                    <tr v-if="userInfo.application_status == 'New Applicant' || userInfo.application_status == 'Assessed'">
                         <td>
                             <span>Program</span>
                         </td>
@@ -54,18 +62,9 @@ const editProgramToggle = () => {
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Application status</td>
-                        <td>
-                            <div style="display: flex; justify-content: space-between;">
-                                <b>{{ userInfo.application_status }}</b>
-                                <a v-if="userInfo.application_status === 'New Applicant' || userInfo.application_status == 'Assessed'" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr v-if="false">
+                    <tr v-if="!(userInfo.application_status == 'New Applicant' || userInfo.application_status == 'Assessed')">
                         <td>Applicaton ID</td>
-                        <td>############</td>
+                        <td>{{ userInfo.application_id }}</td>
                     </tr>
                 </tbody>
             </table>

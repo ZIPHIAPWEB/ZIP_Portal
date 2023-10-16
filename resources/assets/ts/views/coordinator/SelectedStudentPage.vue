@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import type { Component } from 'vue';
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 import ProfileTab from '../../components/elements/coordinator-page/profile-tab/ProfileDetailsCard.vue';
+import ProgramInfoTab from '../../components/elements/coordinator-page/program-tab/ProgramInfoCard.vue';
 import PrelimTab from '../../components/elements/coordinator-page/prelim-tab/PrelimRequirementCard.vue';
 import VisaTab from '../../components/elements/coordinator-page/visa-tab/VisaRequirementCard.vue';
 import AdditionalTab from '../../components/elements/coordinator-page/additional-tab/AdditionalRequirementCard.vue';
@@ -27,7 +28,7 @@ interface ITabs {
 
 const tabs = ref<ITabs[]>([
     { name: "Profile", isActive: true, component: ProfileTab },
-    { name: "Program", isActive: false, component: ProfileTab}, // will update component
+    { name: "Program", isActive: false, component: ProgramInfoTab},
     { name: "Preliminary", isActive: false, component: PrelimTab },
     { name: "Visa Sponsor", isActive: false, component: VisaTab },
     { name: "Additional", isActive: false, component: AdditionalTab },

@@ -49,5 +49,10 @@ export default {
     updateStudentProgram(userId : string | number, programId : number | string) : Promise<AxiosResponse> {
 
         return ApiRequest.put(`/coord/update-student-program/${userId}`, { programId: programId });
+    },
+
+    updateStudentProgramStatus(userId : string | number, status : string) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/coord/update-student-program-status/${userId}`, { status: status})
     }
 }

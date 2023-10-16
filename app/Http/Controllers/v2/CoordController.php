@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v2;
 
 use App\Actions\ConvertProgramToIdAction;
+use App\Actions\ProgressToNextStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CoordStudentResource;
 use App\Http\Resources\StudentContactResource;
@@ -12,6 +13,7 @@ use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
 use App\Http\Resources\TertiaryResource;
 use App\Http\Resources\UserResource;
+use App\Program;
 use App\Student;
 use App\User;
 use Carbon\Carbon;
@@ -86,18 +88,36 @@ class CoordController extends Controller
             'status' => 'required'
         ]);
 
-        $status = $request->input('status');
+        $processedStatus = (new ProgressToNextStatus)->execute($request->input('status'));
 
-        Student::query()
-            ->where('user_id', $userId)
-            ->update([
-                'application_status' => $status
+        if(!isset($processedStatus)) {
+
+            return response()->json([
+                'data' => [
+                    'message' => 'Unable to process this request',
+                    'status' => 422   
+                ]
             ]);
+        }
+
+        $student = Student::query()->where('user_id', $userId);
+        
+        if ($processedStatus['status'] == 'Confirmed') {
+            $programId = Program::find($student->first()->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
+            $student->update([
+                'application_id' => $programId,
+                'application_status' => $processedStatus['status']
+            ]);
+        } else {
+            $student->update([
+                'application_status' => $processedStatus['status']
+            ]);
+        }
 
         return response()->json([
             'data' => [
                 'message' => 'Student program successfully updated!',
-                'application_status' => $status,
+                'application_status' => $processedStatus['status'],
                 'status' => 200
             ]
         ]);
