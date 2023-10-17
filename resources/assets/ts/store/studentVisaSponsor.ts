@@ -8,7 +8,9 @@ export interface IVisaSponsor {
     position: string,
     stipend: string | number,
     start_date: string | Date,
-    end_date: string | Date
+    formatted_start_date: string | Date,
+    end_date: string | Date,
+    formatted_end_date: string | Date
 }
 
 export interface IStudentVisaSponsorState {
@@ -23,15 +25,7 @@ export const useStudentVisaSponsor = defineStore({
     state: () : IStudentVisaSponsorState => ({
         isSuccess: false,
         isLoading: false,
-        visaSponsor: {
-            visa_sponsor: '',
-            host_company: '',
-            housing_address: '',
-            position: '',
-            stipend: '',
-            start_date: '',
-            end_date: ''
-        },
+        visaSponsor: {} as IVisaSponsor,
         error: undefined
     }),
     getters : {

@@ -11,6 +11,7 @@ use App\Http\Resources\StudentExperienceResource;
 use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
+use App\Http\Resources\StudentVisaSponsorResource;
 use App\Http\Resources\TertiaryResource;
 use App\Http\Resources\UserResource;
 use App\Program;
@@ -121,5 +122,34 @@ class CoordController extends Controller
                 'status' => 200
             ]
         ]);
+    }
+
+    public function getStudentHostInfo($userId)
+    {
+        $student = Student::query()->where('user_id', $userId)->first();
+        
+        return response()->json([
+            'data' => [
+                'status' => 200,
+                'visa_sponsor' => new StudentVisaSponsorResource($student)
+            ]
+        ]);
+    }
+
+    public function updateStudentHostInfo($userId, Request $request) 
+    {
+        $student = Student::query()->where('user_id', $userId);
+            
+        $student->update([
+            'visa_sponsor_id' => $request->input('visa_sponsor'),
+            'host_company_id' => $request->input('host_company'),
+            'housing_details' => $request->input('housing_address'),
+            'position' => $request->input('position'),
+            'stipend' => $request->input('stipend'),
+            'program_start_date' => $request->input('start_date'),
+            'program_end_date' => $request->input('end_date')
+        ]);
+
+        return new StudentVisaSponsorResource($student->first());
     }
 }

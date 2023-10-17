@@ -18,11 +18,13 @@ class StudentVisaSponsorResource extends JsonResource
         return [
             'visa_sponsor' => $this->sponsor->name,
             'host_company' => $this->company->name,
-            'housing_address' => $this->location,
+            'housing_address' => $this->housing_details,
             'position' => $this->position,
             'stipend' => $this->stipend,
-            'start_date' => Carbon::make($this->program_start_date)->toFormattedDateString(),
-            'end_date' => Carbon::make($this->program_end_date)->toFormattedDateString()
+            'start_date' => $this->program_start_date,
+            'formatted_start_date' => $this->program_start_date ? Carbon::make($this->program_start_date)->toFormattedDateString() : "",
+            'end_date' => $this->program_end_date,
+            'formatted_end_date' => $this->program_end_date ? Carbon::make($this->program_end_date)->toFormattedDateString() : "",
         ];
     }
 }

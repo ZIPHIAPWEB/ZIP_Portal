@@ -1,9 +1,14 @@
 import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
+import { IVisaSponsor } from "../store/studentVisaSponsor";
 
 export default {
     getSelectedStudent(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-selected-student/${userId}`);
+    },
+
+    getSelectedStudentHostInfo(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/get-student-host-info/${userId}`);
     },
 
     getCoordStudents(program : string | string[]) : Promise<AxiosResponse> {
@@ -53,6 +58,10 @@ export default {
 
     updateStudentProgramStatus(userId : string | number, status : string) : Promise<AxiosResponse> {
 
-        return ApiRequest.put(`/coord/update-student-program-status/${userId}`, { status: status})
+        return ApiRequest.put(`/coord/update-student-program-status/${userId}`, { status: status});
+    },
+
+    updateStudentHostInfo(userId : string | number, data : IVisaSponsor) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/coord/update-student-host-info/${userId}`, data);
     }
 }
