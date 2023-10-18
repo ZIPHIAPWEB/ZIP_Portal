@@ -5,8 +5,10 @@ export interface IVisaInterview {
     program_id_number: string;
     sevis_id: string;
     visa_interview_schedule: string;
+    formatted_visa_interview_schedule: string;
     visa_interview_time: string;
     trial_interview_schedule: string;
+    formatted_trial_interview_schedule: string;
     trial_interview_time: string;
 }
 
@@ -22,14 +24,7 @@ export const useStudentVisaInterview = defineStore({
     state: () : IStudentVisaInterview => ({
         isSuccess: false,
         isLoading: false,
-        visaInterview: {
-            program_id_number: '',
-            sevis_id: '',
-            visa_interview_schedule: '',
-            visa_interview_time: '',
-            trial_interview_schedule: '',
-            trial_interview_time: ''
-        },
+        visaInterview: {} as IVisaInterview,
         error: undefined
     }),
     getters: {

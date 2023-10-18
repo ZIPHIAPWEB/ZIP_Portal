@@ -3,7 +3,9 @@ import StudentAPI from "../services/StudentAPI";
 
 export interface IVisaSponsor {
     visa_sponsor: string,
+    visa_sponsor_id: string | number,
     host_company: string,
+    host_company_id: string | number,
     housing_address: string,
     position: string,
     stipend: string | number,

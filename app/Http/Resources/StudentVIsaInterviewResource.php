@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentVIsaInterviewResource extends JsonResource
@@ -15,11 +16,13 @@ class StudentVIsaInterviewResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'program_id_number' => $this->program_id_number,
+            'program_id_number' => $this->program_id_no,
             'sevis_id' => $this->sevis_id,
             'visa_interview_schedule' => $this->visa_interview_schedule,
+            'formatted_visa_interview_schedule' => $this->visa_interview_schedule ? Carbon::parse($this->visa_interview_schedule)->toFormattedDateString() : "",
             'visa_interview_time' => $this->visa_interview_time,
             'trial_interview_schedule' => $this->trial_interview_schedule,
+            'formatted_trial_interview_schedule' => $this->trial_interview_schedule ? Carbon::parse($this->trial_interview_schedule)->toFormattedDateString() : "",
             'trial_interview_time' => $this->trial_interview_time
         ];
     }

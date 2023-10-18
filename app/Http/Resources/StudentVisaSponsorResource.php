@@ -16,8 +16,10 @@ class StudentVisaSponsorResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'visa_sponsor_id' => $this->visa_sponsor_id,
             'visa_sponsor' => $this->sponsor->name,
             'host_company' => $this->company->name,
+            'host_company_id' => $this->host_company_id,
             'housing_address' => $this->housing_details,
             'position' => $this->position,
             'stipend' => $this->stipend,

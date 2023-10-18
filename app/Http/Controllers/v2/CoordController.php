@@ -11,6 +11,7 @@ use App\Http\Resources\StudentExperienceResource;
 use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
+use App\Http\Resources\StudentVIsaInterviewResource;
 use App\Http\Resources\StudentVisaSponsorResource;
 use App\Http\Resources\TertiaryResource;
 use App\Http\Resources\UserResource;
@@ -141,8 +142,8 @@ class CoordController extends Controller
         $student = Student::query()->where('user_id', $userId);
             
         $student->update([
-            'visa_sponsor_id' => $request->input('visa_sponsor'),
-            'host_company_id' => $request->input('host_company'),
+            'visa_sponsor_id' => $request->input('visa_sponsor_id'),
+            'host_company_id' => $request->input('host_company_id'),
             'housing_details' => $request->input('housing_address'),
             'position' => $request->input('position'),
             'stipend' => $request->input('stipend'),
@@ -151,5 +152,28 @@ class CoordController extends Controller
         ]);
 
         return new StudentVisaSponsorResource($student->first());
+    }
+
+    public function getStudentInterviewInfo($userId)
+    {
+        $student = Student::query()->where('user_id', $userId)->first();
+
+        return new StudentVIsaInterviewResource($student);
+    }
+
+    public function updateStudentInterviewInfo($userId, Request $request) 
+    {
+        $student = Student::query()->where('user_id', $userId);
+
+        $student->update([
+            'program_id_no' => $request->input('program_id_number'),
+            'sevis_id' => $request->input('sevis_id'),
+            'visa_interview_schedule' => $request->input('visa_interview_schedule'),
+            'visa_interview_time' => $request->input('visa_interview_time'),
+            'trial_interview_schedule' => $request->input('trial_interview_schedule'),
+            'trial_interview_time' => $request->input('trial_interview_time')
+        ]);
+
+        return new StudentVIsaInterviewResource($student->first());
     }
 }

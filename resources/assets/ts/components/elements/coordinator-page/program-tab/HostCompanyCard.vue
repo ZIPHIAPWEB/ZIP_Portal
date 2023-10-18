@@ -3,14 +3,19 @@ import { ref, onMounted } from 'vue';
 import { useCoordStudentHostInfo } from '../../../../store/coordStudentHostInfo';
 import { IVisaSponsor } from '../../../../store/studentVisaSponsor';
 import { storeToRefs } from 'pinia';
+import VisaSponsorAPI from '../../../../services/VisaSponsorAPI';
+import HostCompaniesAPI from '../../../../services/HostCompaniesAPI';
 
 const coordStudentHostInfoStore = useCoordStudentHostInfo();
 const { isLoading, visaSponsor } = storeToRefs(coordStudentHostInfoStore);
-
+const sponsors = ref();
+const companies = ref();
 const hostCompanyIsEdit = ref<boolean>(false);
 const hostCompanyForm = ref<IVisaSponsor>({
     host_company: '',
+    host_company_id: '',
     visa_sponsor: '',
+    visa_sponsor_id: '',
     housing_address: '',
     position: '',
     stipend: '',
@@ -22,6 +27,8 @@ const hostCompanyForm = ref<IVisaSponsor>({
 
 onMounted(async () => {
     await coordStudentHostInfoStore.loadCoordStudentHostInfo();
+    sponsors.value = (await VisaSponsorAPI.getAllVisaSponsors()).data;
+    companies.value = (await HostCompaniesAPI.getAllHostCompanies()).data;
     hostCompanyForm.value = {...visaSponsor.value};
 })
 
@@ -48,8 +55,8 @@ const updateHostCompany = async () => {
                     <td style="width: 40%">Visa Sponsor</td>
                     <td v-if="!hostCompanyIsEdit">{{ visaSponsor.visa_sponsor }}</td>
                     <td v-if="hostCompanyIsEdit">
-                        <select v-model="hostCompanyForm.visa_sponsor" class="form-control form-control-sm">
-                            <option value="1">Test</option>
+                        <select v-model="hostCompanyForm.visa_sponsor_id" class="form-control form-control-sm">
+                            <option v-for="(sponsor, index) in sponsors.data" :key="index" :value="sponsor.id">{{ sponsor.display_name }}</option>
                         </select>
                     </td>
                 </tr>
@@ -57,8 +64,8 @@ const updateHostCompany = async () => {
                     <td style="width: 40%">Host Company</td>
                     <td v-if="!hostCompanyIsEdit">{{ visaSponsor.host_company }}</td>
                     <td v-if="hostCompanyIsEdit">
-                        <select v-model="hostCompanyForm.host_company" class="form-control form-control-sm">
-                            <option value="1">Test</option>
+                        <select v-model="hostCompanyForm.host_company_id" class="form-control form-control-sm">
+                            <option v-for="(company, index) in companies.data" :key="index" :value="company.id">{{ company.name }}</option>
                         </select>
                     </td>
                 </tr>

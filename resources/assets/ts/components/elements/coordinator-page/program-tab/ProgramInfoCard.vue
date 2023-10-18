@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import HostCompanyDetails from './HostCompanyCard.vue';
+import VisaInterviewDetails from './VisaInterviewDetails.vue';
 
 import { ref } from 'vue';
 
-const visaSponsor = ref();
 const visaInterview = ref();
 const schedule = ref();
 const flightDetails = ref();
@@ -14,40 +14,7 @@ const flightDetails = ref();
     <div class="card card-default">
         <div class="card-body p-0">
             <HostCompanyDetails />
-
-            <section id="visa-interview-details">
-                <div class="ml-2 mt-2">
-                    <label class="control-label">Visa interview details</label>
-                </div>
-                <table class="table table-striped table-bordered table-sm">
-                    <tbody>
-                        <tr>
-                            <td style="width: 40%">Program ID Number</td>
-                            <td>{{ visaInterview?.program_id_number }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">SEVIS ID</td>
-                            <td>{{ visaInterview?.sevis_id }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Visa Interview Schedule</td>
-                            <td>{{ visaInterview?.visa_interview_schedule }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Visa Interview Time</td>
-                            <td>{{ visaInterview?.visa_interview_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Trial Interview Schedule</td>
-                            <td>{{ visaInterview?.trial_interview_schedule }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Trial Interview Time</td>
-                            <td>{{ visaInterview?.trial_interview_time }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <VisaInterviewDetails />
 
             <section id="pdos-cfo-details">
                 <div class="ml-2 mt-2">
