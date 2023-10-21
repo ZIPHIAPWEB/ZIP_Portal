@@ -21,6 +21,10 @@ export default {
         return ApiRequest.get(`/coord/get-student-pdos-cfo-info/${userId}`);
     },
 
+    getSelectedStudentFlightDetails(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/get-student-flight-info/${userId}`);
+    },
+
     getCoordStudents(program : string | string[]) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-students?program=${program}`);
     },
@@ -81,5 +85,9 @@ export default {
 
     updateStudentPdosCfoInfo(userId : string | number, data : IStudentPdosCfoSchedule) : Promise<AxiosResponse> {
         return ApiRequest.put(`/coord/update-student-pdos-cfo-info/${userId}`, data);
+    },
+
+    updateStudentFlightInfo(userId : string | number, data : any) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/coord/update-student-flight-info/${userId}`, data);
     }
 }

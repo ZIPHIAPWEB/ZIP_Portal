@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\v2;
 
 use App\Actions\ConvertProgramToIdAction;
+use App\Actions\ProcessFlightInfoAction;
 use App\Actions\ProgressToNextStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CoordStudentResource;
 use App\Http\Resources\StudentContactResource;
 use App\Http\Resources\StudentExperienceResource;
+use App\Http\Resources\StudentFlightDetailsResource;
 use App\Http\Resources\StudentParentResource;
 use App\Http\Resources\StudentPdosCfoScheduleResource;
 use App\Http\Resources\StudentPersonalResource;
@@ -197,5 +199,32 @@ class CoordController extends Controller
         ]);
 
         return new StudentPdosCfoScheduleResource($student->first());
+    }
+
+    public function getStudentFlightInfo($userId)
+    {
+        $student = Student::query()->where('user_id', $userId)->first();
+
+        return new StudentFlightDetailsResource($student);
+    }
+
+    public function updateStudentFlightInfo($userId, Request $request)
+    {
+        $request->validate([
+            'data' => 'required'
+        ]);
+
+        try {
+            $student = Student::query()->where('user_id', $userId);
+
+            $student->update($request->input('data'));
+
+            return new StudentFlightDetailsResource($student->first());
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 422,
+                'message' => 'Unable to process data'
+            ], 422);
+        }
     }
 }

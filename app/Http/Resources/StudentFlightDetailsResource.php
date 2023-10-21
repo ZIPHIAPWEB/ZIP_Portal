@@ -2,6 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\flight\StudentArrivalToManilaResource;
+use App\Http\Resources\flight\StudentArrivalToUsResource;
+use App\Http\Resources\flight\StudentDepartFromManilaResource;
+use App\Http\Resources\flight\StudentDepartFromUsResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentFlightDetailsResource extends JsonResource
@@ -15,25 +19,10 @@ class StudentFlightDetailsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'mnl_departure_date' => $this->mnl_departure_date,
-            'mnl_departure_time' => $this->mnl_departure_time,
-            'mnl_departure_flight_no' => $this->mnl_departure_flight_no,
-            'mnl_departure_airline' => $this->mnl_departure_airline,
-
-            'us_arrival_date' => $this->us_arrival_date,
-            'us_arrival_time' => $this->us_arrival_time,
-            'us_arrival_flight_no' => $this->us_arrival_flight_no,
-            'us_arrival_airline' => $this->us_arrival_airline,
-
-            'us_departure_date' => $this->us_departure_date,
-            'us_departure_time' => $this->us_departure_time,
-            'us_departure_flight_no' => $this->us_departure_flight_no,
-            'us_depature_airline' => $this->us_departure_airline,
-
-            'mnl_arrival_date' => $this->mnl_arrival_date,
-            'mnl_arrival_time' => $this->mnl_arrival_time,
-            'mnl_arrival_flight_no' => $this->mnl_arrival_flight_no,
-            'mnl_arrival_airline' => $this->mnl_arrival_airline
+            'mnl_depart' => new StudentDepartFromManilaResource($this),
+            'us_arrival' => new StudentArrivalToUsResource($this),
+            'us_depart' => new StudentDepartFromUsResource($this),
+            'mnl_arrival' => new StudentArrivalToManilaResource($this)
         ];
     }
 }

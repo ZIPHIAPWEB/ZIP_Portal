@@ -2,6 +2,7 @@
 import HostCompanyDetails from './HostCompanyCard.vue';
 import VisaInterviewDetails from './VisaInterviewDetails.vue';
 import PdosCfoDetailsCard from './PdosCfoDetailsCard.vue';
+import FlightDetailsCard from './FlightDetailsCard.vue';
 
 import { ref } from 'vue';
 
@@ -17,107 +18,7 @@ const flightDetails = ref();
             <HostCompanyDetails />
             <VisaInterviewDetails />
             <PdosCfoDetailsCard />
-
-            <section id="flight-details">
-                <div class="ml-2 mt-2">
-                    <label class="control-label">Flight details</label>
-                </div>
-                <table style="margin-bottom: 20px;" class="table table-striped table-sm">
-                    <tbody>
-                        <tr>
-                            <td colspan="2"><b>Departure from Manila</b></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Date</td>
-                            <td>{{ flightDetails?.mnl_departure_date }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Time</td>
-                            <td>{{ flightDetails?.mnl_departure_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Flight No.</td>
-                            <td>{{ flightDetails?.mnl_departure_flight_no }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Airline</td>
-                            <td>{{ flightDetails?.mnl_departure_airline }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        
-                <table style="margin-bottom: 20px;" class="table table-striped table-sm">
-                    <tbody>
-                        <tr>
-                            <td colspan="2"><b>Arrival to US</b></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Date</td>
-                            <td>{{ flightDetails?.us_arrival_date }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Time</td>
-                            <td>{{ flightDetails?.us_arrival_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Flight No.</td>
-                            <td>{{ flightDetails?.us_arrival_flight_no }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Airline</td>
-                            <td>{{ flightDetails?.us_arrival_airline }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        
-                <table style="margin-bottom: 20px;" class="table table-striped table-sm">
-                    <tbody>
-                        <tr>
-                            <td colspan="2"><b>Departure from US</b></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Date</td>
-                            <td>{{ flightDetails?.us_departure_date }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Time</td>
-                            <td>{{ flightDetails?.us_departure_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Flight No.</td>
-                            <td>{{ flightDetails?.us_departure_flight_no }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Airline</td>
-                            <td>{{ flightDetails?.us_departure_airline }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        
-                <table style="margin-bottom: 20px;" class="table table-striped table-sm">
-                    <tbody>
-                        <tr>
-                            <td colspan="2"><b>Arrival to Manila</b></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Date</td>
-                            <td>{{ flightDetails?.mnl_arrival_date }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Time</td>
-                            <td>{{ flightDetails?.mnl_arrival_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Flight No.</td>
-                            <td>{{ flightDetails?.mnl_arrival_flight_no }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Airline</td>
-                            <td>{{ flightDetails?.mnl_arrival_airline }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <FlightDetailsCard />
         </div>
     </div>
 </template>

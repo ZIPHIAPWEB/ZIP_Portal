@@ -85,6 +85,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/get-student-pdos-cfo-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'getStudentPdosCfoInfo']);
         Route::put('/update-student-pdos-cfo-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentPdosCfoInfo']);
+
+        Route::get('/get-student-flight-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'getStudentFlightInfo']);
+        Route::put('/update-student-flight-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentFlightInfo']);
     });
 });
 
