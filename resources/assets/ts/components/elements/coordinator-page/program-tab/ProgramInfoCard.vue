@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HostCompanyDetails from './HostCompanyCard.vue';
 import VisaInterviewDetails from './VisaInterviewDetails.vue';
+import PdosCfoDetailsCard from './PdosCfoDetailsCard.vue';
 
 import { ref } from 'vue';
 
@@ -15,32 +16,7 @@ const flightDetails = ref();
         <div class="card-body p-0">
             <HostCompanyDetails />
             <VisaInterviewDetails />
-
-            <section id="pdos-cfo-details">
-                <div class="ml-2 mt-2">
-                    <label class="control-label">PDOS & CFO details</label>
-                </div>
-                <table class="table table-striped table-bordered table-sm">
-                    <tbody>
-                        <tr>
-                            <td style="width: 40%">PDOS Schedule</td>
-                            <td>{{ schedule?.pdos_schedule }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">PDOS Time</td>
-                            <td>{{ schedule?.pdos_schedule_time }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">CFO Schedule</td>
-                            <td>{{ schedule?.cfo_schedule }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">CFO Time</td>
-                            <td>{{ schedule?.cfo_schedule_time }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <PdosCfoDetailsCard />
 
             <section id="flight-details">
                 <div class="ml-2 mt-2">

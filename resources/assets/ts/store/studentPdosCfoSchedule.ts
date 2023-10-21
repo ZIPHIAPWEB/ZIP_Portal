@@ -3,8 +3,10 @@ import StudentAPI from "../services/StudentAPI";
 
 export interface IStudentPdosCfoSchedule {
     pdos_schedule: string;
+    formatted_pdos_schedule: string;
     pdos_schedule_time: string;
     cfo_schedule: string;
+    formatted_cfo_schedule: string;
     cfo_schedule_time: string;
 }
 
@@ -20,12 +22,7 @@ export const useStudentPdosCfoSchedule = defineStore({
     state: () : IStudentPdosCfoScheduleState => ({
         isLoading: false,
         isSuccess: false,
-        schedule: {
-            pdos_schedule: '',
-            pdos_schedule_time: '',
-            cfo_schedule: '',
-            cfo_schedule_time: ''
-        },
+        schedule: {} as IStudentPdosCfoSchedule,
         error: undefined
     }),
     getters: {

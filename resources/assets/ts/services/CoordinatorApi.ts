@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
 import { IVisaSponsor } from "../store/studentVisaSponsor";
 import { IVisaInterview } from "../store/studentVisaInterview";
+import { IStudentPdosCfoSchedule } from "../store/studentPdosCfoSchedule";
 
 export default {
     getSelectedStudent(userId : string | number) : Promise<AxiosResponse> {
@@ -14,6 +15,10 @@ export default {
 
     getSelectedStudentInterviewInfo(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-student-interview-info/${userId}`);
+    },
+
+    getSelectedStudentPdosCfoInfo(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/get-student-pdos-cfo-info/${userId}`);
     },
 
     getCoordStudents(program : string | string[]) : Promise<AxiosResponse> {
@@ -72,5 +77,9 @@ export default {
 
     updateStudentInterviewInfo(userId : string | number, data : IVisaInterview) : Promise<AxiosResponse> {
         return ApiRequest.put(`/coord/update-student-interview-info/${userId}`, data);
+    },
+
+    updateStudentPdosCfoInfo(userId : string | number, data : IStudentPdosCfoSchedule) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/coord/update-student-pdos-cfo-info/${userId}`, data);
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Resources\CoordStudentResource;
 use App\Http\Resources\StudentContactResource;
 use App\Http\Resources\StudentExperienceResource;
 use App\Http\Resources\StudentParentResource;
+use App\Http\Resources\StudentPdosCfoScheduleResource;
 use App\Http\Resources\StudentPersonalResource;
 use App\Http\Resources\StudentSecondaryResource;
 use App\Http\Resources\StudentVIsaInterviewResource;
@@ -175,5 +176,26 @@ class CoordController extends Controller
         ]);
 
         return new StudentVIsaInterviewResource($student->first());
+    }
+
+    public function getStudentPdosCfoInfo($userId)
+    {
+        $student = Student::query()->where('user_id', $userId)->first();
+
+        return new StudentPdosCfoScheduleResource($student);
+    }
+
+    public function updateStudentPdosCfoInfo($userId, Request $request)
+    {
+        $student = Student::query()->where('user_id', $userId);
+
+        $student->update([
+            'pdos_schedule' => $request->input('pdos_schedule'),
+            'pdos_schedule_time' => $request->input('pdos_schedule_time'),
+            'cfo_schedule' => $request->input('cfo_schedule'),
+            'cfo_schedule_time' => $request->input('cfo_schedule_time')
+        ]);
+
+        return new StudentPdosCfoScheduleResource($student->first());
     }
 }
