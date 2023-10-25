@@ -8,7 +8,8 @@ export default {
     getSelectedStudent(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-selected-student/${userId}`);
     },
-
+    
+    //Student Prelim Req
     getSelectedStudentPrelimRequirement(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/student/${userId}/preliminary`);
     },
@@ -21,6 +22,7 @@ export default {
         return ApiRequest.delete(`/coord/student/${userId}/preliminary/${requirementId}`);
     },
 
+    //Student Additional Req
     getSelectedStudentAdditionalRequirement(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/student/${userId}/additional`);
     },
@@ -31,6 +33,19 @@ export default {
 
     removeSelectedStudentAdditionalRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/coord/student/${userId}/additional/${requirementId}`);
+    },
+
+    //Student visa sponsor req
+    getSelectedStudentVisaSponsorRequirement(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/sponsor`);
+    },
+
+    downloadSelectedStudentVisaSponsorRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/sponsor/${requirementId}`);
+    },
+
+    removeSelectedStudentVisaSponsorRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/coord/student/${userId}/sponsor/${requirementId}`);
     },
 
     getSelectedStudentHostInfo(userId : string | number) : Promise<AxiosResponse> {
