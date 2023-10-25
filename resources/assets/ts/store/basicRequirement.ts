@@ -8,7 +8,7 @@ export interface IStudentBasicRequirement {
 }
 
 export interface IBasicRequirement {
-    id?: number;
+    id: number;
     name: string;
     description: string;
     program_id: number | string;

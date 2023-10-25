@@ -9,6 +9,18 @@ export default {
         return ApiRequest.get(`/coord/get-selected-student/${userId}`);
     },
 
+    getSelectedStudentPrelimRequirement(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/preliminary`);
+    },
+
+    downloadSelectedStudentPrelimRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/preliminary/${requirementId}`);
+    },
+
+    removeSelectedStudentPrelimRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/coord/student/${userId}/preliminary/${requirementId}`);
+    },
+
     getSelectedStudentHostInfo(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-student-host-info/${userId}`);
     },

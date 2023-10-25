@@ -88,6 +88,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/get-student-flight-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'getStudentFlightInfo']);
         Route::put('/update-student-flight-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentFlightInfo']);
+
+        Route::get('/student/{userId}/preliminary', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'getStudentPreliminaryRequirements']);
+        Route::post('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'storeStudentPreliminaryRequirement']);
+        Route::get('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'downloadStudentPreliminaryRequirement']);
+        Route::delete('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'deleteStudentPreliminaryRequirement']);
     });
 });
 
