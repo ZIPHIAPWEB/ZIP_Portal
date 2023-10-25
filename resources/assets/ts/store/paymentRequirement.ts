@@ -15,13 +15,15 @@ export interface IStudentPaymentRequirement {
     bank_code: string;
     reference_no: string;
     date_deposit: string | Date;
-    bank_account_no: string,
-    amount: number | string,
-    path: string,
+    bank_account_no: string;
+    amount: number | string;
+    path: string;
+    status: boolean;
+    acknowledgement: boolean;
 }
 
 export interface IPaymentRequirement {
-    id?: number;
+    id: number;
     name: string;
     description: string;
     program_id: number | string;

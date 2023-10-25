@@ -3,50 +3,50 @@
 namespace App\Http\Controllers\v2;
 
 use App\Actions\UploadedFilePathAction;
-use App\AdditionalRequirement;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\StudentAdditionalResource;
+use App\Http\Resources\StudentPaymentResource;
+use App\PaymentRequirement;
 use App\Student;
-use App\StudentAdditional;
+use App\StudentPayment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Response as FacadesResponse;
 
-class CoordStudentAdditionalController extends Controller
+class CoordStudentPaymentController extends Controller
 {
-    public function getStudentAdditionalRequirements($userId)
+    public function getStudentPaymentRequirements($userId)
     {
         $student = Student::query()->where('user_id', $userId)->first();
 
-        $additionalRequirements = AdditionalRequirement::query()
+        $paymentRequirements = PaymentRequirement::query()
             ->where('program_id', $student->program_id)
-            ->with(['studentAdditional' => function ($query) use ($student) {
+            ->with(['studentPayment' => function ($query) use ($student) {
                 $query->where('user_id', $student->user_id);
             }])
             ->get();
 
         return response()->json([
-            'data' => $additionalRequirements
+            'data' => $paymentRequirements
         ]);
     }
 
-    public function storeStudentAdditionalRequirement($userId, Request $request, $requirementId)
+    public function storeStudentSponsorRequirement($userId, Request $request, $requirementId)
     {
         $user = User::where('id', $userId)->first();
 
-        $uploadedRequirement = $user->studentAdditional()->create([
+        $uploadedRequirement = $user->studentPayment()->create([
             'requirement_id' => $requirementId,
             'status' => true,
             'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'basic')
         ]);
 
-        return new StudentAdditionalResource($uploadedRequirement);
+        return new StudentPaymentResource($uploadedRequirement);
     }
 
-    public function downloadStudentAdditionalRequirement($userId, $requirementId)
+    public function downloadStudentSponsorRequirement($userId, $requirementId)
     {
-        $requirement = StudentAdditional::query()
+        $requirement = StudentPayment::query()
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId)
             ->first();
@@ -61,9 +61,9 @@ class CoordStudentAdditionalController extends Controller
         return FacadesResponse::download($requirement->path, uniqid() . $requirementId);
     }
 
-    public function deleteStudentAdditionalRequirement($userId, $requirementId)
+    public function deleteStudentSponsorRequirement($userId, $requirementId)
     {
-        $requirement = StudentAdditional::query()
+        $requirement = StudentPayment::query()
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId);
 

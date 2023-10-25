@@ -11,6 +11,7 @@ use App\StudentPreliminary;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class CoordStudentPrelimController extends Controller
 {
@@ -57,7 +58,7 @@ class CoordStudentPrelimController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return $requirement->path;
+        return FacadesResponse::download($requirement->path, uniqid() . $requirementId);;
     }
 
     public function deleteStudentPreliminaryRequirement($userId, $requirementId)

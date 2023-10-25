@@ -10,6 +10,7 @@ use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class CoordStudentSponsorController extends Controller
 {
@@ -56,7 +57,7 @@ class CoordStudentSponsorController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return $requirement->path;
+        return FacadesResponse::download($requirement->path, uniqid() . $requirementId);;
     }
 
     public function deleteStudentSponsorRequirement($userId, $requirementId)

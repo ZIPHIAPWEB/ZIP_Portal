@@ -102,7 +102,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/student/{userId}/sponsor', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'getStudentSponsorRequirements']);
         Route::post('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'storeStudentSponsorRequirement']);
         Route::get('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'downloadStudentSponsorRequirement']);
-        Route::delete('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorlController::class, 'deleteStudentSponsorRequirement']);
+        Route::delete('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'deleteStudentSponsorRequirement']);
+
+        Route::get('/student/{userId}/payment', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'getStudentPaymentRequirements']);
+        Route::post('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'storeStudentPaymentRequirement']);
+        Route::get('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'downloadStudentPaymentRequirement']);
+        Route::delete('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'deleteStudentPaymentRequirement']);
     });
 });
 

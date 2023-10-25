@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useCoordStudentPaymentRequirement } from '../../../../store/coordStudentPaymentRequirement';
+import { storeToRefs } from 'pinia';
+const coordStudentPaymentRequirementStore = useCoordStudentPaymentRequirement();
+const { isLoading, paymentRequirements } = storeToRefs(coordStudentPaymentRequirementStore);
+
+onMounted(async () => {
+    await coordStudentPaymentRequirementStore.loadSelectedStudentAdditionalRequirement();
+})
+
 </script>
 
 <template>
@@ -19,26 +29,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in 5">
-                        <td class="text-left">Test</td>
-                        <td class="text-center">Test</td>
-                        <td class="text-center">Test</td>
-                        <td class="text-center">Test</td>
-                        <td class="text-center">Test</td>
-                        <td class="text-center">Test</td>
+                    <tr v-for="item in paymentRequirements">
+                        <td class="text-left">{{ item.name }}</td>
+                        <td class="text-center">{{ item.student_payment?.bank_code }}</td>
+                        <td class="text-center">{{ item.student_payment?.reference_no }}</td>
+                        <td class="text-center">{{ item.student_payment?.date_deposit }}</td>
+                        <td class="text-center">{{ item.student_payment?.bank_account_no }}</td>
+                        <td class="text-center">{{ item.student_payment?.amount}}</td>
                         <td class="text-center">
-                            <span v-if="false" class="fa fa-times text-red"></span>
+                            <span v-if="!item.student_payment?.status" class="fa fa-times text-red"></span>
                             <span v-else class="fa fa-check text-success"></span>
                         </td>
                         <td class="text-center">
-                            <span v-if="false" class="fa fa-times text-red"></span>
+                            <span v-if="!item.student_payment?.acknowledgement" class="fa fa-times text-red"></span>
                             <span v-else class="fa fa-check text-success"></span>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-success btn-xs mr-1">Upload</button>
-                            <button class="btn btn-warning btn-xs mr-1">View</button>
-                            <button class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button class="btn btn-danger btn-xs mr-1">Delete</button>
+                            <span v-if="!item.student_payment">Not uploaded yet</span>
+                            <button v-if="item.student_payment" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_payment" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                     </tr>
                 </tbody>

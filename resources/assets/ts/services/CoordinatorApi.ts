@@ -48,6 +48,18 @@ export default {
         return ApiRequest.delete(`/coord/student/${userId}/sponsor/${requirementId}`);
     },
 
+    getSelectedStudentPaymentRequirement(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/payment`);
+    },
+
+    downloadSelectedStudentPaymentRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/payment/${requirementId}`);
+    },
+
+    removeSelectedStudentPaymentRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/coord/student/${userId}/payment/${requirementId}`);
+    },
+
     getSelectedStudentHostInfo(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-student-host-info/${userId}`);
     },
