@@ -8,7 +8,7 @@ export interface IStudentAdditionalRequirement {
 }
 
 export interface IAdditionalRequirement {
-    id?: number;
+    id: number;
     name: string;
     description: string;
     program_id: number | string;

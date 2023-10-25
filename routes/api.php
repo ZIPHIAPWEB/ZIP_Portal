@@ -93,6 +93,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'storeStudentPreliminaryRequirement']);
         Route::get('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'downloadStudentPreliminaryRequirement']);
         Route::delete('/student/{userId}/preliminary/{requirementId}', [App\Http\Controllers\v2\CoordStudentPrelimController::class, 'deleteStudentPreliminaryRequirement']);
+
+        Route::get('/student/{userId}/additional', [App\Http\Controllers\v2\CoordStudentAdditionalController::class, 'getStudentAdditionalRequirements']);
+        Route::post('/student/{userId}/additional/{requirementId}', [App\Http\Controllers\v2\CoordStudentAdditionalController::class, 'storeStudentAdditionalRequirement']);
+        Route::get('/student/{userId}/additional/{requirementId}', [App\Http\Controllers\v2\CoordStudentAdditionalController::class, 'downloadStudentAdditionalRequirement']);
+        Route::delete('/student/{userId}/additional/{requirementId}', [App\Http\Controllers\v2\CoordStudentAdditionalController::class, 'deleteStudentAdditionalyRequirement']);
+
+        Route::get('/student/{userId}/sponsor', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'getStudentAdditionalRequirements']);
+        Route::post('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'storeStudentAdditionalRequirement']);
+        Route::get('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorController::class, 'downloadStudentAdditionalRequirement']);
+        Route::delete('/student/{userId}/sponsor/{requirementId}', [App\Http\Controllers\v2\CoordStudentSponsorlController::class, 'deleteStudentAdditionalyRequirement']);
     });
 });
 

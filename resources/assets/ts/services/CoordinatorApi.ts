@@ -21,6 +21,18 @@ export default {
         return ApiRequest.delete(`/coord/student/${userId}/preliminary/${requirementId}`);
     },
 
+    getSelectedStudentAdditionalRequirement(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/additional`);
+    },
+
+    downloadSelectedStudentAdditionalRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/coord/student/${userId}/additional/${requirementId}`);
+    },
+
+    removeSelectedStudentAdditionalRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/coord/student/${userId}/additional/${requirementId}`);
+    },
+
     getSelectedStudentHostInfo(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-student-host-info/${userId}`);
     },
