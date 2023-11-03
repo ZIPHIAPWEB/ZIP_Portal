@@ -8,6 +8,10 @@ const props = defineProps({
     }
 });
 
+const emits = defineEmits<{
+    (e: 'cancelEventTrigger') : void
+}>();
+
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
 const useCoordStudent = useCoordSelectedStudent();
 
@@ -62,12 +66,15 @@ const updateApplicationStatus = async () => {
         await useCoordStudent.updateProgramStatus(nextStatus);
     }
 }
-
 </script>
 
 <template>
     <div style="display: flex; justify-content: space-between;">
         <b>{{ props.status }}</b>
-        <a @click.prevent="updateApplicationStatus" href="#" style="font-style: normal; font-weight: normal;">Progress to next step</a>
+        <div>
+            <a @click.prevent="updateApplicationStatus" href="#" style="font-style: normal; font-weight: normal;">Progress to next step</a>
+            <span style="margin: 0 5px;">|</span>
+            <a @click.prevent="emits('cancelEventTrigger')" href="#" style="font-style: normal; font-weight: normal;">Cancel program</a>
+        </div>
     </div>
 </template>

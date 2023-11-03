@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UpdateProgramModal from './UpdateProgramModal.vue';
 import UpdateProgramStatus from './UpdateProgramStatus.vue';
+import CancelProgramModal from './CancelProgramModal.vue';
 
 import { ref, onMounted, Teleport } from 'vue';
 
@@ -25,11 +26,15 @@ const {
 } = storeToRefs(useCoordStudent);
 
 const isProgramEditOpen = ref<boolean>(false);
+const isCancelOpen = ref<boolean>(false);
 
 const editProgramToggle = () => {
     isProgramEditOpen.value = !isProgramEditOpen.value;
 }
 
+const setStatusToCancelled = () => {
+    isCancelOpen.value = !isCancelOpen.value;
+}
 </script>
 
 <template>
@@ -40,6 +45,13 @@ const editProgramToggle = () => {
                 @cancelEvent="isProgramEditOpen = false"
             />
         </PopUp>
+
+        <PopUp v-if="isCancelOpen" title="Cancel program" size="md">
+            <CancelProgramModal
+                @submitEventTrigger="isCancelOpen = false"
+                @cancelEventTrigger="isCancelOpen = false"
+            />
+        </PopUp>
     </Teleport>
     <div class="card card-default">
         <div class="card-body p-0">
@@ -48,7 +60,10 @@ const editProgramToggle = () => {
                     <tr>
                         <td>Application status</td>
                         <td>
-                            <UpdateProgramStatus :status="userInfo.application_status" />
+                            <UpdateProgramStatus 
+                                :status="userInfo.application_status" 
+                                @cancelEventTrigger="setStatusToCancelled"
+                            />
                         </td>
                     </tr>
                     <tr v-if="userInfo.application_status == 'New Applicant' || userInfo.application_status == 'Assessed'">

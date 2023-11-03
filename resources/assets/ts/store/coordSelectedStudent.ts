@@ -107,6 +107,23 @@ export const useCoordSelectedStudent = defineStore({
                 this.isLoading = false;
                 this.isSuccess = false;
             }
+        },
+
+        async cancelStudentProgram(reason : string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = (await CoordinatorApi.cancelStudentStatus(this.userInfo.id, reason)).data;
+                this.userInfo.application_status = response.application_status;
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
         }
     }
 })

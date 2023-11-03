@@ -23,6 +23,7 @@ use App\Student;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CoordController extends Controller
 {
@@ -85,6 +86,34 @@ class CoordController extends Controller
                 'status' => 200
             ]
         ]);
+    }
+
+    public function cancelStudentProgram($userId, Request $request)
+    {
+        $request->validate([
+            'reason' => 'required'
+        ]);
+
+        $reason = 'Cancel: ' . $request->input('reason');
+
+        $student = Student::query()
+            ->where('user_id', $userId);
+
+        if (!$student->exists()) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => 'User not exists'
+            ], Response::HTTP_NOT_FOUND);
+        }
+        
+        $student->update([
+            'application_status' => $reason
+        ]);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'application_status' => $reason
+        ], Response::HTTP_OK);
     }
 
     public function updateProgramStatus($userId, Request $request)

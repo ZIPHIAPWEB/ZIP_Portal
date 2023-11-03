@@ -140,5 +140,9 @@ export default {
 
     updateStudentFlightInfo(userId : string | number, data : any) : Promise<AxiosResponse> {
         return ApiRequest.put(`/coord/update-student-flight-info/${userId}`, data);
+    },
+
+    cancelStudentStatus(userId : string | number, data: any) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/coord/cancel-student/${userId}`, { reason: data});
     }
 }
