@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 use App\Notifications\MailResetPasswordToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -33,6 +34,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getUserRole()
+    {
+        return DB::table('role_user')
+            ->select(['roles.*'])
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->where('user_id', $this->id)
+            ->first() ?? null;            
+    }
 
     public function experiences() 
     {

@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/visa-sponsors', [App\Http\Controllers\v2\VisaSponsorController::class, 'getVisaSponsors']);
     Route::get('/host-companies', [App\Http\Controllers\v2\HostCompanyController::class, 'getHostCompanies']);
 
-    Route::prefix('student')->group(function() {
+    Route::prefix('student')->middleware(['is_student'])->group(function() {
         Route::get('/profile', [App\Http\Controllers\v2\UserController::class, 'getStudentProfile']);
         
         Route::get('/personal-details', [App\Http\Controllers\v2\StudentController::class, 'getPersonalDetails']);
@@ -71,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     });
 
-    Route::prefix('coord')->group(function () {
+    Route::prefix('coord')->middleware(['is_admin'])->group(function () {
         Route::get('/get-students', [App\Http\Controllers\v2\CoordController::class, 'getStudents']);
         Route::get('/get-selected-student/{student}', [App\Http\Controllers\v2\CoordController::class, 'showStudent']);
         Route::put('/update-student-program/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentProgram']);

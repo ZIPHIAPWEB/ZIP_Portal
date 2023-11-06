@@ -9,6 +9,7 @@ const { isLoading, visaInterview } = storeToRefs(coordStudentInterviewInfoStore)
 
 const visaInterviewIsEdit = ref<boolean>(false);
 const visaInterviewForm = ref<IVisaInterview>({
+    visa_interview_status: '',
     program_id_number: '',
     sevis_id: '',
     trial_interview_schedule: '',
@@ -44,6 +45,17 @@ const updateVisaInterviewDetails = async () => {
         </div>
         <table class="table table-striped table-bordered table-sm">
             <tbody>
+                <tr>
+                    <td style="width: 40%">Visa Interview Status</td>
+                    <td v-if="!visaInterviewIsEdit">{{ visaInterview.visa_interview_status }}</td>
+                    <td v-if="visaInterviewIsEdit">
+                        <select v-model="visaInterviewForm.visa_interview_status" class="form-control form-control-sm">
+                            <option>{{ visaInterview.visa_interview_status }}</option>
+                            <option value="approved">Approved</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width: 40%">Program ID Number</td>
                     <td v-if="!visaInterviewIsEdit">{{ visaInterview.program_id_number }}</td>

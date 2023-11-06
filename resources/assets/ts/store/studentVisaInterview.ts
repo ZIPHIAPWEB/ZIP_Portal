@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
 
 export interface IVisaInterview {
+    visa_interview_status: string;
     program_id_number: string;
     sevis_id: string;
     visa_interview_schedule: string;

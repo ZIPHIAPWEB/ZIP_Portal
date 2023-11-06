@@ -198,6 +198,7 @@ class CoordController extends Controller
         $student = Student::query()->where('user_id', $userId);
 
         $student->update([
+            'visa_interview_status' => $request->input('visa_interview_status'),
             'program_id_no' => $request->input('program_id_number'),
             'sevis_id' => $request->input('sevis_id'),
             'visa_interview_schedule' => $request->input('visa_interview_schedule'),

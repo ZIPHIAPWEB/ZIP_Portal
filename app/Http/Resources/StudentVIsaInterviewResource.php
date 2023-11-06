@@ -16,6 +16,8 @@ class StudentVIsaInterviewResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'testing' => auth()->user()->getUserRole(),
+            'visa_interview_status' => $this->visa_interview_status ? ucfirst($this->visa_interview_status) : 'Pending',
             'program_id_number' => $this->program_id_no,
             'sevis_id' => $this->sevis_id,
             'visa_interview_schedule' => $this->visa_interview_schedule,
