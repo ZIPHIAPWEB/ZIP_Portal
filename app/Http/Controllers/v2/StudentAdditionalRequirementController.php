@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentAdditionalResource;
 use App\StudentAdditional;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class StudentAdditionalRequirementController extends Controller
 {
@@ -45,6 +47,8 @@ class StudentAdditionalRequirementController extends Controller
     {
         $user = auth()->user();
 
+        Storage::disk('uploaded_files')->delete($requirement->path);
+
         $user->studentAdditional()
             ->where('id', $requirement->id)
             ->delete();
@@ -52,5 +56,19 @@ class StudentAdditionalRequirementController extends Controller
         return response()->json([
             'message' => 'Requirement deleted successfully'
         ], 200);
+    }
+
+    public function download(AdditionalRequirement $requirement)
+    {
+        if (!$requirement->path) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => ucfirst($requirement->name) . ' not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $file = Storage::get($requirement->path);
+
+        return response()->download($file);
     }
 }

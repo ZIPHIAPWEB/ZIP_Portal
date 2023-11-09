@@ -60,14 +60,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/basic-requirements', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'index']);
         Route::post('/basic-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'store']);
         Route::delete('/basic-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'destroy']);
+        Route::get('/basic-requirement/{requirementId}/download', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'download']);
         
         Route::get('/additional-requirements', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'index']);
         Route::post('/additional-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'store']);
         Route::delete('/additional-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'destroy']);
+        Route::get('/additional-requirement/{requirementId}/download', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'download']);
 
         Route::get('/visa-sponsor-requirements', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'index']);
         Route::post('/visa-sponsor-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'store']);
         Route::delete('/visa-sponsor-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'destroy']);
+        Route::get('/visa-sponsor-requirement/{requirementId}/download', [App\Http\Controllers\v2\StudentVisaSponsorRequirementController::class, 'download']);
 
     });
 

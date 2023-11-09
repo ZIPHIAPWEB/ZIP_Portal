@@ -54,6 +54,18 @@ export const useStudentVisaSponsorRequirement = defineStore({
             }
         },
 
+        async downloadVisaSponsorRequirement(requirementId: string | number | undefined) {
+            try {
+                this.isLoading = true;
+                await StudentAPI.downloadVisaSponsorRequirement(requirementId);
+                this.isLoading = false;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
         async storeVisaSponsorRequirement(requirementId: string | number | undefined, file : File) : Promise<void> {
             try {
                 this.isLoading = true;

@@ -54,6 +54,18 @@ export const useStudentAdditionalRequirement = defineStore({
             }
         },
 
+        async downloadAdditionalRequirement(requirementId: string | number | undefined) {
+            try {
+                this.isLoading = true;
+                await StudentAPI.downloadAdditionalRequirement(requirementId);
+                this.isLoading = false;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
         async storeStudentAdditionalRequirement(requirementId: string | number | undefined, file : File) {
             try {
                 this.isLoading = true;

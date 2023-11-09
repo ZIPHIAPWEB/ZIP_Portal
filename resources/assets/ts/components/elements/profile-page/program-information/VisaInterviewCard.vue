@@ -18,6 +18,12 @@ onMounted(async () => {
         <table class="table table-striped table-sm">
             <tbody>
                 <tr>
+                    <td style="width: 40%">Visa Interview Status</td>
+                    <td>
+                        <b>{{ visaInterview?.visa_interview_status }}</b>
+                    </td>
+                </tr>
+                <tr>
                     <td style="width: 40%">Program ID Number</td>
                     <td>{{ visaInterview?.program_id_number }}</td>
                 </tr>

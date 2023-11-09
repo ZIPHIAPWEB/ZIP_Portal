@@ -8,6 +8,7 @@ import EmailVerificationPage from './views/client/EmailVerificationPage.vue';
 import ApplicationFormPage from './views/client/ApplicationFormPage.vue';
 import StudentDashboardPage from './views/client/DashboardPage.vue';
 import CoordinatorDashboardPage from './views/coordinator/DashboardPage.vue';
+import CoordinatorAdminStopperPage from './views/coordinator/AdminStopperPage.vue';
 import CoordinatorProgramPage from './views/coordinator/ProgramPage.vue';
 import SelectedStudentPageVue from './views/coordinator/SelectedStudentPage.vue';
 
@@ -62,6 +63,14 @@ let routes:Array<RouteRecordRaw> = [
         }
     },
     {
+        path: basePath + "/coord/admin-verification",
+        name: "coordinator-admin-veriff",
+        component: CoordinatorAdminStopperPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
         path: basePath + "/coord/program/:name",
         name: "coordinator-program",
         component: CoordinatorProgramPage,
@@ -91,14 +100,25 @@ router.beforeEach((to, from, next) => {
 
         next({ name: 'login'});
     } else {
-        if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
+        
+        if(authStore.getAuthRole == 'student') {
+            if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
 
-            next({ name: 'email-verification'});
-        } 
+                next({ name: 'email-verification'});
+            } 
+    
+            if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
+    
+                next({ name: 'application-form'});
+            }
+        }
 
-        if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
+        if (authStore.getAuthRole == 'coordinator') {
 
-            next({ name: 'application-form'});
+            if (authStore.getIsAuthenticate && !authStore.getIsVerified && to.name !== 'coordinator-admin-veriff') {
+
+                next({ name: 'coordinator-admin-veriff' });
+            } 
         }
 
         next();

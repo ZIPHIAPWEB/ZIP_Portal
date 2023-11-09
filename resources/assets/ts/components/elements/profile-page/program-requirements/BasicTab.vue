@@ -21,6 +21,10 @@ const deleteFileHandler = async (requirement : IBasicRequirement) => {
     await studentBasicRequirementStore.removeStudentBasicRequirement(requirement);
 }
 
+const downloadFileHandler = async (requirementId : string | number | undefined) => {
+    await studentBasicRequirementStore.downloadBasicRequirement(requirementId);
+}
+
 </script>
 
 <template>
@@ -51,7 +55,7 @@ const deleteFileHandler = async (requirement : IBasicRequirement) => {
                 </td>
                 <td>
                     <UploadButton v-if="!requirement.student_preliminary?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
-                    <button v-if="!requirement.student_preliminary?.status" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.path" @click="downloadFileHandler(requirement.id)" class="btn btn-primary btn-xs">Download File</button>
                     <button v-if="requirement.student_preliminary?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>

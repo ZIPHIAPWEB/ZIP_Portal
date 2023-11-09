@@ -51,6 +51,18 @@ export const useStudentBasicRequirement = defineStore({
             }
         },
 
+        async downloadBasicRequirement(requirementId: string | number | undefined) {
+            try {
+                this.isLoading = true;
+                await StudentAPI.downloadBasicRequirement(requirementId);
+                this.isLoading = false;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
         async storeStudentBasicRequirement(requirementId: string | number | undefined, file : File) {
             try {
                 this.isLoading = true;

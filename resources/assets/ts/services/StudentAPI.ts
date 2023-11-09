@@ -124,6 +124,10 @@ export default {
         return ApiRequest.delete(`/student/basic-requirement/${requirementId}/delete`);
     },
 
+    downloadBasicRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/student/basic-requirement/${requirementId}/download`);
+    },
+
     getStudentAdditionalRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/additional-requirements');
     },
@@ -140,6 +144,10 @@ export default {
         return ApiRequest.delete(`/student/additional-requirement/${requirementId}/delete`);
     },
 
+    downloadAdditionalRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/student/additional-requirement/${requirementId}/download`);
+    },
+
     getStudentVisaSponsorRequirements() : Promise<AxiosResponse> {
         return ApiRequest.get('/student/visa-sponsor-requirements');
     },
@@ -154,6 +162,10 @@ export default {
 
     deleteStudentVisaSponsorRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/student/visa-sponsor-requirement/${requirementId}/delete`);
+    },
+
+    downloadVisaSponsorRequirement(requirementId : string | number | undefined) : Promise<AxiosResponse> {
+        return ApiRequest.get(`/student/visa-sponsor-requirement/${requirementId}/download`);
     },
 
     getStudentVisaSponsor() : Promise<AxiosResponse> {

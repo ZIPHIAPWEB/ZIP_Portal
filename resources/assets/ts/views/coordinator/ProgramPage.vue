@@ -129,8 +129,7 @@ const paginatedResult = async (page : number) => {
                                     <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-for-visa">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For PDOS CFO'" class="badge bg-for-visa">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'For PDOS & CFO'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
                                     <span v-if="student.application_status.includes('Cancel')" class="badge bg-visa-denied">{{ student.application_status }}</span>
                                 </td>
                                 <td>{{ student.email }}</td>

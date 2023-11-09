@@ -18,6 +18,10 @@ const uploadFileHander = async (file : File, requirementId : string | number | u
 const deleteFileHandler = async (requirement : IVisaSponsorRequirement) => {
     await studentVisaSponsorRequirementStore.deleteVisaSponsorRequirement(requirement);
 }
+
+const downloadFileHandler = async (requirementId : string | number | undefined) => {
+    await studentVisaSponsorRequirementStore.downloadVisaSponsorRequirement(requirementId);
+}
 </script>
 
 <template>
@@ -48,7 +52,7 @@ const deleteFileHandler = async (requirement : IVisaSponsorRequirement) => {
                 </td>
                 <td>
                     <UploadButton v-if="!requirement.student_visa?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
-                    <button v-if="!requirement.student_visa?.status" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.path" @click="downloadFileHandler(requirement.id)" class="btn btn-primary btn-xs">Download File</button>
                     <button v-if="requirement.student_visa?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>

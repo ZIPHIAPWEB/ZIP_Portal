@@ -23,7 +23,7 @@ class CoordStudentResource extends JsonResource
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
             'contact_no' => $this->mobile_number . '/' . $this->home_number,
-            'school' => $this->user->tertiary->school_name,
+            'school' => $this->user->tertiary->school->name ?? '',
             'program' => $this->program->display_name,
             'recent_action' => $this->user->logs()->orderBy('created_at', 'desc')->first()->activity ?? "No Recent Action"
         ];

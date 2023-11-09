@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Response as FacadesResponse;
+use Illuminate\Support\Facades\Storage;
 
 class CoordStudentAdditionalController extends Controller
 {
@@ -58,7 +59,7 @@ class CoordStudentAdditionalController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return FacadesResponse::download($requirement->path, uniqid() . $requirementId);
+        return FacadesResponse::download(Storage::disk('uploaded_files')->get($requirement->path), uniqid() . $requirementId);
     }
 
     public function deleteStudentAdditionalRequirement($userId, $requirementId)
@@ -73,7 +74,8 @@ class CoordStudentAdditionalController extends Controller
                 'message' => 'File not found'
             ], Response::HTTP_NOT_FOUND);
         }
-        //TODO delete file on storage
+        
+        Storage::disk('uploaded_files')->delete($requirement->path);
 
         $requirement->delete();
 

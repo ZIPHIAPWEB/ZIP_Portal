@@ -8,6 +8,8 @@ use App\Http\Resources\StudentPreliminaryResource;
 use App\PreliminaryRequirement;
 use App\StudentPreliminary;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class StudentBasicRequirementController extends Controller
 {
@@ -45,6 +47,8 @@ class StudentBasicRequirementController extends Controller
     {
         $user = auth()->user();
 
+        Storage::disk('uploaded_files')->delete($requirement->path);
+
         $user->studentPreliminary()
             ->where('id', $requirement->id)
             ->delete();
@@ -52,5 +56,19 @@ class StudentBasicRequirementController extends Controller
         return response()->json([
             'message' => 'Requirement deleted successfully'
         ], 200);
+    }
+
+    public function download(PreliminaryRequirement $requirement)
+    {
+        if (!$requirement->path) {
+            return response()->json([
+                'status' => Response::HTTP_NOT_FOUND,
+                'message' => ucfirst($requirement->name) . ' not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $file = Storage::get($requirement->path);
+
+        return response()->download($file);
     }
 }

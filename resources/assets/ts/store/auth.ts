@@ -41,6 +41,9 @@ export const useAuthStore = defineStore({
         },
         getIsFilled(state) : boolean {
             return state.auth.is_filled;
+        },
+        getAuthRole(state) : string {
+            return state.auth.role;
         }
     },
     actions: {
@@ -74,14 +77,32 @@ export const useAuthStore = defineStore({
 
                 this.isLoading = false;
 
-                if (this.auth.is_verified) {
-                    if (this.auth.is_filled) {
-                        this.router.push({ name: 'student-dashboard' });
+                if (this.auth.role == 'coordinator') {
+
+                    if (this.auth.is_verified) {
+
+                        this.router.push({ name: 'coordinator-dashboard' });
                     } else {
-                        this.router.push({ name: 'application-form'});
+
+                        this.router.push({ name: 'coordinator-admin-veriff'});
                     }
-                } else {
-                    this.router.push({ name: 'email-verification' })       
+
+                    return;
+                }
+
+                if (this.auth.role == 'student') {
+
+                    if (this.auth.is_verified) {
+                    
+                        if (this.auth.is_filled) {
+                            this.router.push({ name: 'student-dashboard' });
+                        } else {
+                            this.router.push({ name: 'application-form'});
+                        }
+                    } else {
+
+                        this.router.push({ name: 'email-verification' })       
+                    }
                 }
             } catch (error: any) {
                 console.log(error.response.data);
