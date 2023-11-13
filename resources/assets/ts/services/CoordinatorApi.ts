@@ -80,6 +80,16 @@ export default {
         return ApiRequest.get(`/coord/get-students?program=${program}`);
     },
 
+    getCoordStudentsStats(program? : string) : Promise<AxiosResponse> {
+        let forFilter = ``;
+
+        if (!(program == '' || program == undefined)) {
+            forFilter += `?program=${program}`
+        }
+
+        return ApiRequest.get(`/coord/get-statistics${forFilter}`);
+    },
+
     getFilteredCoordStudents(program : string | string[], from : string, to : string, status : string) : Promise<AxiosResponse> {
         let forFilter = ``;
 

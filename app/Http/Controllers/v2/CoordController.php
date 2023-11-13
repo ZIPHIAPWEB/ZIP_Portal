@@ -27,6 +27,34 @@ use Illuminate\Http\Response;
 
 class CoordController extends Controller
 {
+    public function getStatusStatistics(Request $request)
+    {
+        $query = Student::query();
+
+        $query->when($request->input('program') !== null, function ($q) use ($request) {
+
+            return $q->where('program_id', $request->input('program'));
+        });
+
+        $students = $query->get();
+
+        return response()->json([
+            'message' => 'Student statistics loaded!',
+            'status' => Response::HTTP_OK,
+            'data' => [
+                'all' => count($students),
+                'new_applicant' => $students->where('application_status', 'New Applicant')->count(),
+                'assessed' => $students->where('application_status', 'Assessed')->count(),
+                'confirmed' => $students->where('application_status', 'Confirmed')->count(),
+                'hired' => $students->where('application_status', 'Hired')->count(),
+                'for_visa_interview' => $students->where('application_status', 'For Visa Interview')->count(),
+                'for_pdos_cfo' => $students->where('application_status', 'For PDOS & CFO')->count(),
+                'program_proper' => $students->where('application_status', 'Program Proper')->count(),
+                'returned' => $students->where('application_status', 'Returned')->count()
+            ]
+        ], Response::HTTP_OK);
+    }
+
     public function getStudents(Request $request)
     {
         $query = Student::query();

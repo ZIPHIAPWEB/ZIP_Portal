@@ -72,7 +72,13 @@ const paginatedResult = async (page : number) => {
                                 <select v-model="status" class="form-control">
                                     <option selected>Select</option>
                                     <option value="New Applicant">New Applicant</option>
+                                    <option value="Assessed">Assessed</option>
                                     <option value="Confirmed">Confirmed</option>
+                                    <option value="Hired">Hired</option>
+                                    <option value="For Visa Interview">For Visa Interview</option>
+                                    <option value="For PDOS %26 CFO">For PDOS & CFO</option>
+                                    <option value="Program Proper">Program Proper</option>
+                                    <option value="Returned">Returned</option>
                                 </select>
                             </div>
                             <div class="input-group input-group-sm">
