@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Actions\ConvertProgramToIdAction;
 use App\Actions\ProcessFlightInfoAction;
 use App\Actions\ProgressToNextStatus;
+use App\Exports\StudentExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CoordStudentResource;
 use App\Http\Resources\StudentContactResource;
@@ -24,9 +25,24 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CoordController extends Controller
 {
+    public function exportStudentDatas(Request $request)
+    {
+        $filename = 'student-data-'. Carbon::now()->timestamp;
+        Excel::store(
+            new StudentExport(
+                $request->input('from'), 
+                $request->input('to'), 
+                $request->input('status'),
+                (new ConvertProgramToIdAction)->execute($request->input('program'))
+            ), $filename .'.xlsx', 'local');
+        
+        return response()->json($filename . '.xlsx', 200);
+    }
+
     public function getStatusStatistics(Request $request)
     {
         $query = Student::query();

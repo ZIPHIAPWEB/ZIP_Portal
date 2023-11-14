@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 import { useCoordStudent } from '../../store/coordStudents'
+import CoordinatorApi from '../../services/CoordinatorApi';
 
 import { ref, onMounted, watch } from 'vue';
 import router from '../../router';
@@ -48,6 +49,16 @@ const paginatedResult = async (page : number) => {
     await coordStudent.loadPaginatedStudentsData(page, program.value, fromDate.value, toDate.value, status.value);
 }
 
+const exportStudentDatas = async () => {
+    let filename = (await CoordinatorApi.downloadExportedData(program.value, status.value, fromDate.value, toDate.value)).data;
+    let url = `http://127.0.0.1:8000/download-exported/${filename}`;
+    const link = document.createElement('a')
+    link.href = url;
+    link.setAttribute('download', 'title');
+    document.body.appendChild(link);
+    link.click();
+}
+
 </script>
 
 <template>
@@ -70,7 +81,7 @@ const paginatedResult = async (page : number) => {
                             <div class="input-group input-group-sm mr-2">
                                 <label for="filter-statue" style="margin-right: 5px;">Filter by Status</label>
                                 <select v-model="status" class="form-control">
-                                    <option selected>Select</option>
+                                    <option value="" selected>All</option>
                                     <option value="New Applicant">New Applicant</option>
                                     <option value="Assessed">Assessed</option>
                                     <option value="Confirmed">Confirmed</option>
@@ -83,7 +94,7 @@ const paginatedResult = async (page : number) => {
                             </div>
                             <div class="input-group input-group-sm">
                                 <button @click="filterResult()" class="btn btn-primary btn-sm mr-1">Filter</button>
-                                <button class="btn btn-success btn-sm">Export</button>
+                                <button @click="exportStudentDatas()" class="btn btn-success btn-sm">Export</button>
                             </div>
                         </div>
                     </div>

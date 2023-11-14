@@ -1,9 +1,27 @@
 <?php
 
+use App\Actions\ProgressToNextStatus;
 use App\Mail\verifyEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
+Route::get('/testing', function () {
+    return Auth::user();
+});
+
+Route::get('/download-exported/{filename}', function ($filename) {
+    if (!Storage::disk('local')->exists($filename)) {
+        abort(404, 'File not found');
+    }
+
+    return response()
+        ->download(Storage::disk('local')
+        ->path($filename))
+        ->deleteFileAfterSend();
+});
 
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/about-us', 'about-us')->name('about-us');

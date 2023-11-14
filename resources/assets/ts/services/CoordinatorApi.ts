@@ -5,6 +5,10 @@ import { IVisaInterview } from "../store/studentVisaInterview";
 import { IStudentPdosCfoSchedule } from "../store/studentPdosCfoSchedule";
 
 export default {
+    downloadExportedData(program : string[] | string, status: string, from : string, to : string) : Promise<AxiosResponse> {
+        return ApiRequest.post(`/coord/export-student`, { program, status, from, to });
+    },
+
     getSelectedStudent(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/get-selected-student/${userId}`);
     },

@@ -55,21 +55,20 @@ class StudentExport implements FromCollection, WithHeadings
         }
 
         if ($this->programId) {
-            $students = Student::OrWhereBetween('created_at', [$this->start, $this->end])
-                ->OrWhere('application_status', 'like', '%' . $this->status . '%')
+            $students = Student::query()
+                ->orWhereBetween('created_at', [$this->start, $this->end])
+                ->orWhere('application_status', 'like', '%' . $this->status . '%')
                 ->where('program_id', 'like', '%' . $this->programId . '%')
-                ->with(['user', 'company', 'tertiary.school', 'program', 'log', 'sponsor', 'company', 'studentPayment'])
                 ->orderBy('created_at', 'desc')
                 ->get();
         } else {
-            $students = Student::OrWhereBetween('created_at', [$this->start, $this->end])
-                ->OrWhere('application_status', 'like', '%' . $this->status . '%')
-                ->with(['user', 'company', 'tertiary.school', 'program', 'log', 'sponsor', 'company', 'studentPayment'])
+            $students = Student::query()
+                ->orWhereBetween('created_at', [$this->start, $this->end])
+                ->orWhere('application_status', 'like', '%' . $this->status . '%')
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
         
-
         return ExportStudentResource::collection($students);
     }
 }

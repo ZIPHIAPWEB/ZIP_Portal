@@ -77,7 +77,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('coord')->middleware(['is_admin'])->group(function () {
         Route::get('/get-students', [App\Http\Controllers\v2\CoordController::class, 'getStudents']);
         Route::get('/get-statistics', [App\Http\Controllers\v2\CoordController::class, 'getStatusStatistics']);
-        
+        Route::post('/export-student', [App\Http\Controllers\v2\CoordController::class, 'exportStudentDatas']);
+
         Route::get('/get-selected-student/{student}', [App\Http\Controllers\v2\CoordController::class, 'showStudent']);
         Route::put('/update-student-program/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentProgram']);
         Route::put('/update-student-program-status/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateProgramStatus']);
