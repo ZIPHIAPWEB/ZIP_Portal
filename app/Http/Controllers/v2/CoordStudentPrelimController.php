@@ -11,7 +11,6 @@ use App\StudentPreliminary;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Storage;
 
 class CoordStudentPrelimController extends Controller
@@ -51,7 +50,7 @@ class CoordStudentPrelimController extends Controller
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId)
             ->first();
-        
+
         if (!$requirement) {
             return response()->json([
                 'code' => Response::HTTP_NOT_FOUND,
@@ -59,7 +58,7 @@ class CoordStudentPrelimController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return FacadesResponse::download(Storage::disk('uploaded_files')->get($requirement->path), uniqid() . $requirementId);;
+        return Storage::disk('uploaded_files')->url($requirement->path);
     }
 
     public function deleteStudentPreliminaryRequirement($userId, $requirementId)

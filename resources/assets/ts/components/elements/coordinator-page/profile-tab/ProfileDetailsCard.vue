@@ -46,10 +46,9 @@ const setStatusToCancelled = () => {
             />
         </PopUp>
 
-        <PopUp v-if="isCancelOpen" title="Cancel program" size="md">
+        <PopUp v-if="isCancelOpen" @trigger-close-event="isCancelOpen = false" title="Cancel program" size="md">
             <CancelProgramModal
                 @submitEventTrigger="isCancelOpen = false"
-                @cancelEventTrigger="isCancelOpen = false"
             />
         </PopUp>
     </Teleport>

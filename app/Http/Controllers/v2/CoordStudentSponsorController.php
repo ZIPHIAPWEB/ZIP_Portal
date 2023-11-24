@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentSponsorResource;
 use App\SponsorRequirement;
 use App\Student;
+use App\StudentSponsor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Support\Facades\Storage;
 
 class CoordStudentSponsorController extends Controller
@@ -46,11 +46,11 @@ class CoordStudentSponsorController extends Controller
 
     public function downloadStudentSponsorRequirement($userId, $requirementId)
     {
-        $requirement = SponsorRequirement::query()
+        $requirement = StudentSponsor::query()
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId)
             ->first();
-        
+
         if (!$requirement) {
             return response()->json([
                 'code' => Response::HTTP_NOT_FOUND,
@@ -58,7 +58,7 @@ class CoordStudentSponsorController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return FacadesResponse::download(Storage::disk('uploaded_files')->get($requirement->path), uniqid() . $requirementId);;
+        return Storage::disk('uploaded_files')->url($requirement->path);
     }
 
     public function deleteStudentSponsorRequirement($userId, $requirementId)
@@ -73,7 +73,7 @@ class CoordStudentSponsorController extends Controller
                 'message' => 'File not found'
             ], Response::HTTP_NOT_FOUND);
         }
-        
+
         Storage::disk('uploaded_files')->delete($requirement->path);
 
         $requirement->delete();

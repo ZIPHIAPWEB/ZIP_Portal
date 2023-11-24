@@ -9,7 +9,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [App\Http\Controllers\v2\AuthController::class, 'logout']);
     Route::get('/user', [App\Http\Controllers\v2\AuthController::class, 'getAuthUser']);
 
-    Route::get('/test', function() {
+    Route::get('/test', function () {
         return response()->json([
             'status_code' => 200,
             'data' => [
@@ -26,9 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/visa-sponsors', [App\Http\Controllers\v2\VisaSponsorController::class, 'getVisaSponsors']);
     Route::get('/host-companies', [App\Http\Controllers\v2\HostCompanyController::class, 'getHostCompanies']);
 
-    Route::prefix('student')->middleware(['is_student'])->group(function() {
+    Route::prefix('student')->middleware(['is_student'])->group(function () {
         Route::get('/profile', [App\Http\Controllers\v2\UserController::class, 'getStudentProfile']);
-        
+
         Route::get('/personal-details', [App\Http\Controllers\v2\StudentController::class, 'getPersonalDetails']);
         Route::get('/contact-details', [App\Http\Controllers\v2\StudentController::class, 'getContactDetails']);
         Route::get('/tertiary-details', [App\Http\Controllers\v2\StudentController::class, 'getTertiaryDetails']);
@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/basic-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'store']);
         Route::delete('/basic-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'destroy']);
         Route::get('/basic-requirement/{requirementId}/download', [App\Http\Controllers\v2\StudentBasicRequirementController::class, 'download']);
-        
+
         Route::get('/additional-requirements', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'index']);
         Route::post('/additional-requirement/{requirement}/store', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'store']);
         Route::delete('/additional-requirement/{requirement}/delete', [App\Http\Controllers\v2\StudentAdditionalRequirementController::class, 'destroy']);
@@ -83,7 +83,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/update-student-program/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentProgram']);
         Route::put('/update-student-program-status/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateProgramStatus']);
         Route::put('/cancel-student/{userId}', [App\Http\Controllers\v2\CoordController::class, 'cancelStudentProgram']);
-        
+
         Route::get('/get-student-host-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'getStudentHostInfo']);
         Route::put('/update-student-host-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentHostInfo']);
 
@@ -115,6 +115,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'storeStudentPaymentRequirement']);
         Route::get('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'downloadStudentPaymentRequirement']);
         Route::delete('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\CoordStudentPaymentController::class, 'deleteStudentPaymentRequirement']);
+
+        Route::put('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\AccountingController::class, 'acknowledgePayment']);
     });
 });
-

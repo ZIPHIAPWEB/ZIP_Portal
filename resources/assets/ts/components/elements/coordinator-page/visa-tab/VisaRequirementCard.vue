@@ -2,6 +2,10 @@
 import { onMounted } from 'vue';
 import { userCoordStudentVisaSponsorRequirement } from '../../../../store/coordStudentSponsorRequirement';
 import { storeToRefs } from 'pinia';
+import { useAuthStore } from '../../../../store/auth';
+
+const authStore = useAuthStore();
+
 const coordStudentVisaSponsorRequirementStore = userCoordStudentVisaSponsorRequirement();
 const { isLoading, sponsorRequirements } = storeToRefs(coordStudentVisaSponsorRequirementStore);
 
@@ -32,10 +36,13 @@ onMounted(async () => {
                             <span v-if="!item.student_visa" class="fa fa-times text-red"></span>
                             <span v-else class="fa fa-check text-success"></span>
                         </td>
-                        <td class="text-center">
+                        <td v-if="authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'superadmin'" class="text-center">
                             <button v-if="!item.student_visa" class="btn btn-success btn-xs mr-1">Upload</button>
                             <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                             <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.removeSelectedStudentAdditionalRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
+                        </td>
+                        <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
+                            <span>Not Applicable</span>
                         </td>
                     </tr>
                 </tbody>

@@ -11,7 +11,7 @@ use App\StudentPayment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Response as FacadesResponse;
+use Illuminate\Support\Facades\Storage;
 
 class CoordStudentPaymentController extends Controller
 {
@@ -50,7 +50,7 @@ class CoordStudentPaymentController extends Controller
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId)
             ->first();
-        
+
         if (!$requirement) {
             return response()->json([
                 'code' => Response::HTTP_NOT_FOUND,
@@ -58,7 +58,7 @@ class CoordStudentPaymentController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        return FacadesResponse::download($requirement->path, uniqid() . $requirementId);
+        return Storage::disk('uploaded_files')->url($requirement->path);
     }
 
     public function deleteStudentSponsorRequirement($userId, $requirementId)

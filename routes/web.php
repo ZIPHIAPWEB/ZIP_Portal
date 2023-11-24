@@ -1,16 +1,6 @@
 <?php
 
-use App\Actions\ProgressToNextStatus;
-use App\Mail\verifyEmail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-
-Route::get('/testing', function () {
-    return Auth::user();
-});
 
 Route::get('/download-exported/{filename}', function ($filename) {
     if (!Storage::disk('local')->exists($filename)) {
@@ -50,7 +40,7 @@ Route::get('/getAllAlumni', 'AlumniController@getAllAlumni');
 Route::post('/addAlumniBlog', 'AlumniController@addAlumniBlog');
 Route::delete('/deleteAlumniBlog/{slug}', 'AlumniController@deleteAlumniBlog');
 
-Route::prefix('auth')->group(function() {
+Route::prefix('auth')->group(function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::get('/coor/register', 'Auth\RegisterController@showCoorRegistrationForm')->name('coor.register');
@@ -75,7 +65,7 @@ Route::prefix('auth')->group(function() {
 
 });
 
-Route::prefix('portal')->group(function() {
+Route::prefix('portal')->group(function () {
     Route::view('/', 'pages.welcome')->middleware('verify');
     Route::view('/sa/dash', 'pages.dashboard.dash-superadmin')->name('dash.superadmin');
     Route::view('/sa/ac/role', 'pages.access-control.access-role')->name('ac.role');
@@ -102,7 +92,7 @@ Route::prefix('portal')->group(function() {
     Route::view('/c/dash', 'pages.dashboard.dash-coordinator')->name('dash.coordinator');
     Route::view('/sp/dash', 'pages.dashboard.dash-sponsor')->name('dash.sponsor');
     Route::view('/ac/dash', 'pages.dashboard.dash-accounting')->name('dash.accounting');
-    
+
     Route::view('/s/dash', 'pages.dashboard.dash-student')->name('dash.student');
     Route::view('/s/change-password', 'pages.student-content.change-password')->name('student.change-password');
     Route::view('/s/program-status', 'pages.student-content.program-status')->name('student.program-status');
@@ -123,7 +113,7 @@ Route::prefix('portal')->group(function() {
 Route::view('/chat', 'pages.chatbox')->name('portal.chat');
 Route::view('/chat-student', 'pages.chatbox-student')->name('portal.chat-student');
 
-Route::prefix('coor')->group(function() {
+Route::prefix('coor')->group(function () {
     Route::get('/show', 'CoordinatorController@showCoordinator')->name('coor.show');
     Route::get('/program/{id}', 'CoordinatorController@loadStudents')->name('coor.students');
     Route::get('/program-all-students', 'CoordinatorController@loadAllStudents')->name('coor.students.all');
@@ -142,14 +132,14 @@ Route::prefix('coor')->group(function() {
     Route::post('/updateHostCompanyDetails/{id}', 'CoordinatorController@updateHostCompanyDetails')->name('coor.update.hostCompanyDetails');
     Route::post('/updateVisaInterviewDetails/{id}', 'CoordinatorController@updateVisaInterviewDetails')->name('coor.update.visaInterviewDetails');
     Route::post('/updatePDOSCFODetails/{id}', 'CoordinatorController@updatePDOSCFODetails')->name('coor.update.pdoscfoDetails');
-    
+
     Route::post('/updateDepartureMNL/{id}', 'CoordinatorController@updateDepartureMNL')->name('coor.update.departure.manila');
     Route::post('/updateArrivalUS/{id}', 'CoordinatorController@updateArrivalUS')->name('coor.update.arrival.us');
     Route::post('/updateDepartureUS/{id}', 'CoordinatorController@updateDepartureUS')->name('coor.update.departure.us');
     Route::post('/updateArrivalMNL/{id}', 'CoordinatorController@updateArrivalMNL')->name('coor.update.arrival.manila');
 
     Route::get('/program-selected/{userId}', 'CoordinatorController@viewSelectedStudent')->name('coor.view.selected');
-    
+
     Route::post('/prelimFileUpload', 'CoordinatorController@coordinatorPrelimFileUpload')->name('coor.upload.prelim');
     Route::post('/addFileUpload', 'CoordinatorController@coordinatorAdditionalFileUpload')->name('coor.upload.add');
     Route::post('/paymentFileUpload', 'CoordinatorController@coordinatorPaymentFileUpload')->name('coor.upload.payment');
@@ -161,7 +151,7 @@ Route::prefix('acc')->group(function () {
     Route::get('/program/{id}', 'AccountingController@viewAllStudents')->name('acc.getStudents');
 });
 
-Route::prefix('stud')->group(function() {
+Route::prefix('stud')->group(function () {
     Route::get('/show', 'StudentController@viewAllStudents')->name('stud.show');
     Route::get('/view', 'StudentController@viewStudent')->name('stud.view');
     Route::get('/viewWithProgramInfo', 'StudentController@viewStudentWithProgramInfo')->name('stud.viewWithProgramInfo');
@@ -192,7 +182,7 @@ Route::prefix('stud')->group(function() {
     Route::post('/deleteExperienceDetails/{id}', 'StudentController@deleteExperienceDetails')->name('stud.delte.experience');
 });
 
-Route::prefix('sa')->group(function() {
+Route::prefix('sa')->group(function () {
     Route::get('/coor/actions/view/{role}/{id}', 'SuperAdminController@loadCoordinationActions')->name('sa.coor.actions.view');
     Route::get('/activity/logs/{id}', 'SuperAdminController@loadActivityLogs')->name('sa.activity.logs');
 
@@ -203,12 +193,12 @@ Route::prefix('sa')->group(function() {
     Route::post('/user/{userId}/verify', 'SuperAdminController@verifyUser')->name('verify.user');
 });
 
-Route::prefix('guard')->group(function() {
+Route::prefix('guard')->group(function () {
     Route::view('/verify', 'auth.not-verified')->name('verify');
     Route::view('/notactivated', 'auth.not-activated')->name('not.activated');
 });
 
-Route::prefix('role')->group(function() {
+Route::prefix('role')->group(function () {
     Route::get('/view', 'RoleController@viewRoles')->name('role.view');
     Route::post('/store', 'RoleController@storeRoles')->name('role.store');
     Route::get('/edit/{id}', 'RoleController@editRoles')->name('role.edit');
@@ -216,7 +206,7 @@ Route::prefix('role')->group(function() {
     Route::get('/delete/{id}', 'RoleController@deleteRoles')->name('role.delete');
 });
 
-Route::prefix('permission')->group(function() {
+Route::prefix('permission')->group(function () {
     Route::get('/view', 'PermissionController@viewPermission')->name('permission.view');
     Route::post('/store', 'PermissionController@storePermission')->name('permission.store');
     Route::get('/edit/{id}', 'PermissionController@editPermission')->name('permission.edit');
@@ -224,7 +214,7 @@ Route::prefix('permission')->group(function() {
     Route::get('/delete/{id}', 'PermissionController@deletePermission')->name('permission.delete');
 });
 
-Route::prefix('program')->group(function() {
+Route::prefix('program')->group(function () {
     Route::get('/view', 'ProgramController@viewProgram')->name('program.view');
     Route::post('/store', 'ProgramController@storeProgram')->name('program.store');
     Route::get('/edit/{id}', 'ProgramController@editProgram')->name('program.edit');
@@ -244,7 +234,7 @@ Route::prefix('program')->group(function() {
     Route::get('/payment/{id}/delete', 'ProgramPaymentController@deletePayment')->name('program.payment.delete');
 });
 
-Route::prefix('preliminary')->group(function (){
+Route::prefix('preliminary')->group(function () {
     Route::get('/viewUserRequirement', 'PreliminaryRequirementController@viewUserRequirement');
     Route::get('/view', 'PreliminaryRequirementController@view')->name('preliminary.view');
     Route::get('/edit', 'PreliminaryRequirementController@edit')->name('preliminary.edit');
@@ -255,9 +245,9 @@ Route::prefix('preliminary')->group(function (){
 });
 
 Route::prefix('studPreliminary')->group(function () {
-   Route::post('/store', 'StudentPreliminaryController@store');
-   Route::post('/remove', 'StudentPreliminaryController@remove');
-   Route::get('/download', 'StudentPreliminaryController@download');
+    Route::post('/store', 'StudentPreliminaryController@store');
+    Route::post('/remove', 'StudentPreliminaryController@remove');
+    Route::get('/download', 'StudentPreliminaryController@download');
 });
 
 Route::prefix('additional')->group(function () {
@@ -286,10 +276,10 @@ Route::prefix('payment')->group(function () {
 });
 
 Route::prefix('studPayment')->group(function () {
-   Route::post('/store', 'StudentPaymentController@store');
-   Route::get('/verifySlip/{id}', 'StudentPaymentController@verifyDepositSlip')->name('verify.slip');
-   Route::post('/remove', 'StudentPaymentController@remove');
-   Route::get('/download', 'StudentPaymentController@download');
+    Route::post('/store', 'StudentPaymentController@store');
+    Route::get('/verifySlip/{id}', 'StudentPaymentController@verifyDepositSlip')->name('verify.slip');
+    Route::post('/remove', 'StudentPaymentController@remove');
+    Route::get('/download', 'StudentPaymentController@download');
 });
 
 Route::prefix('visa')->group(function () {
@@ -308,7 +298,7 @@ Route::prefix('studVisa')->group(function () {
     Route::get('/download', 'StudentSponsorController@download');
 });
 
-Route::prefix('host')->group(function() {
+Route::prefix('host')->group(function () {
     Route::get('/view', 'HostCompanyController@viewHost')->name('host.view');
     Route::post('/store', 'HostCompanyController@storeHost')->name('host.store');
     Route::get('/edit/{id}', 'HostCompanyController@editHost')->name('host.edit');
@@ -316,7 +306,7 @@ Route::prefix('host')->group(function() {
     Route::get('/delete/{id}', 'HostCompanyController@deleteHost')->name('host.delete');
 });
 
-Route::prefix('sponsor')->group(function() {
+Route::prefix('sponsor')->group(function () {
     Route::get('/view', 'SponsorController@view')->name('sponsor.view');
     Route::post('/store', 'SponsorController@store')->name('sponsor.store');
     Route::get('/{id}/edit', 'SponsorController@edit')->name('sponsor.edit');
@@ -324,7 +314,7 @@ Route::prefix('sponsor')->group(function() {
     Route::get('/{id}/delete', 'SponsorController@delete')->name('sponsor.delete');
 });
 
-Route::prefix('school')->group(function() {
+Route::prefix('school')->group(function () {
     Route::get('/view', 'SchoolController@view')->name('school.view');
     Route::post('/store', 'SchoolController@store')->name('school.store');
     Route::get('/{id}/edit', 'SchoolController@edit')->name('school.edit');
@@ -332,37 +322,37 @@ Route::prefix('school')->group(function() {
     Route::post('{id}/delete', 'SchoolController@delete')->name('school.delete');
 });
 
-Route::prefix('father')->group(function() {
+Route::prefix('father')->group(function () {
     Route::post('/{id}/{field}/update', 'FatherController@update')->name('father.update');
     Route::post('/{id}/delete', 'FatherController@delete')->name('father.delete');
 });
 
-Route::prefix('mother')->group(function() {
+Route::prefix('mother')->group(function () {
     Route::post('/{id}/{field}/update', 'MotherController@update')->name('mother.update');
     Route::post('/{id}/delete', 'MotherController@delete')->name('mother.delete');
 });
 
-Route::prefix('experience')->group(function() {
+Route::prefix('experience')->group(function () {
     Route::post('{id}/{field}/update', 'ExperienceController@update')->name('experience.update');
     Route::post('/{id}/delete', 'ExperienceController@delete')->name('experience.delete');
 });
 
-Route::prefix('primary')->group(function() {
+Route::prefix('primary')->group(function () {
     Route::post('/{id}/{field}/update', 'PrimaryController@update')->name('primary.update');
     Route::post('/{id}/delete', 'PrimaryController@delete')->name('primary.delete');
 });
 
-Route::prefix('secondary')->group(function() {
+Route::prefix('secondary')->group(function () {
     Route::post('/{id}/{field}/update', 'SecondaryController@update')->name('secondary.update');
     Route::post('/{id}/delete', 'SecondaryController@delete')->name('secondary.delete');
 });
 
-Route::prefix('tertiary')->group(function() {
+Route::prefix('tertiary')->group(function () {
     Route::post('/{id}/{field}/update', 'TertiaryController@update')->name('tertiary.update');
     Route::post('/{id}/delete', 'TertiaryController@delete')->name('tertiary.delete');
 });
 
-Route::prefix('event')->group(function() {
+Route::prefix('event')->group(function () {
     Route::get('/view', 'EventController@view')->name('event.view');
     Route::post('/store', 'EventController@store')->name('event.store');
     Route::get('/{id}/edit', 'EventController@edit')->name('event.edit');
@@ -370,7 +360,7 @@ Route::prefix('event')->group(function() {
     Route::post('/{id}/delete', 'EventController@delete')->name('event.delete');
 });
 
-Route::prefix('helper')->group(function() {
+Route::prefix('helper')->group(function () {
     Route::get('/getRegisteredAccounts', 'HelperController@getRegisteredAccounts');
     Route::get('/school/view', 'HelperController@schoolHelper')->name('helper.school');
     Route::get('/program/view', 'HelperController@programHelper')->name('helper.program');
@@ -386,7 +376,7 @@ Route::prefix('helper')->group(function() {
     Route::get('/status/{programId}/{from}/{to}/{status?}', 'HelperController@exportToExcel')->name('export.data');
 });
 
-Route::prefix('download')->group(function() {
+Route::prefix('download')->group(function () {
     Route::get('/basic/form/{id}', 'DownloadController@downloadBasic')->name('download.basic');
     Route::get('/sponsor/form/{id}', 'DownloadController@downloadSponsor')->name('download.sponsor');
 
@@ -397,7 +387,7 @@ Route::prefix('download')->group(function() {
     Route::get('/student/{id}/files', 'DownloadController@downloadStudentFiles')->name('download.student.files');
 });
 
-Route::prefix('filter')->group(function() {
+Route::prefix('filter')->group(function () {
     Route::get('/student', 'FilterController@filterStudentBy')->name('filter.student');
     Route::post('/status', 'FilterController@filterStatus')->name('filter.status');
 
@@ -443,6 +433,6 @@ Route::post('/submitInquiry', 'InquiryController@submitInquiry')->name('submit.i
 Route::post('/updatePassword', 'StudentController@updatePassword')->name('student.password-change');
 
 
-Route::get('/portal/v2/{any}', function() {
+Route::get('/portal/v2/{any}', function () {
     return view('portal.index');
 })->where('any', '.*');

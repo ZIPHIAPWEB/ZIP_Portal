@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useCoordStudentInterviewInfo } from '../../../../store/coordStudentInterviewInfo';
 import { storeToRefs } from 'pinia';
-import { IVisaInterview } from '@/resources/assets/ts/store/studentVisaInterview';
+import { IVisaInterview } from '../../../../store/studentVisaInterview';
 
 const coordStudentInterviewInfoStore = useCoordStudentInterviewInfo();
 const { isLoading, visaInterview } = storeToRefs(coordStudentInterviewInfoStore);

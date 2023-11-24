@@ -13,13 +13,20 @@ const props = defineProps({
     }
 })
 
+const emits = defineEmits<{
+    (e: 'triggerCloseEvent') : void
+}>();
+
 </script>
 
 <template>
     <div class="popup-wrapper">
         <div class="card card-primary card-outline" :class="`--${props.size}`">
-            <div class="card-header">
-                <h3>{{ props.title }}</h3>
+            <div class="card-header" style="display: flex">
+                <h3 style="flex: 1;">{{ props.title }}</h3>
+                <button @click="emits('triggerCloseEvent')" class="close">
+                    <span>x</span>
+                </button>
             </div>
             <div class="card-body">
                 <slot />

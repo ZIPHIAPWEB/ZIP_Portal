@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import AuthAPI from '../services/AuthAPI';
 import { UserInitial, UserType } from '../types/UserType';
-import { useLocalStorage } from '@vueuse/core';
+import { RemovableRef, useLocalStorage } from '@vueuse/core';
+import { AxiosError } from 'axios';
 
 export interface IAuthState {
-    auth: UserType;
-    accessToken: string;
+    auth: RemovableRef<UserType>;
+    accessToken: RemovableRef<string>;
     authErrors: any
     errorMessage: string;
     isLoading: boolean;
@@ -13,7 +14,7 @@ export interface IAuthState {
 
 export const useAuthStore = defineStore({
     id: 'authState',
-    state: () => ({
+    state: () : IAuthState => ({
         auth: useLocalStorage('auth', UserInitial),
         accessToken: useLocalStorage('access_token', ''),
         authErrors: {} as any,
@@ -56,11 +57,11 @@ export const useAuthStore = defineStore({
                 this.auth = response.data.data.user;
 
                 this.isLoading = false;
-            } catch (error: any) {
-
+            } catch (err) {
+                const error = err as AxiosError;
                 this.isLoading = false;
-                this.authErrors = error.response.data.errors;
-                this.errorMessage = error.response.data.message;
+                this.authErrors = error.response?.data.errors;
+                this.errorMessage = error.response?.data.message;
             }
         },
         
@@ -104,11 +105,11 @@ export const useAuthStore = defineStore({
                         this.router.push({ name: 'email-verification' })       
                     }
                 }
-            } catch (error: any) {
-                console.log(error.response.data);
+            } catch (err) {
+                const error = err as AxiosError;
                 this.isLoading = false;
-                this.authErrors = error.response.data.errors;
-                this.errorMessage = error.response.data.message;
+                this.authErrors = error.response?.data.errors;
+                this.errorMessage = error.response?.data.message;
             }
         },
 
@@ -124,11 +125,11 @@ export const useAuthStore = defineStore({
                 this.isLoading = false;
 
                 this.router.push({ name: 'email-verification' });
-            } catch (error: any) {
-                console.log(error.response.data);
+            } catch (err) {
+                const error = err as AxiosError;
                 this.isLoading = false;
-                this.authErrors = error.response.data.errors;
-                this.errorMessage = error.response.data.message;
+                this.authErrors = error.response?.data.errors;
+                this.errorMessage = error.response?.data.message;
             }
         },
 
@@ -139,11 +140,11 @@ export const useAuthStore = defineStore({
                 const response = await AuthAPI.sendForgotPasswordLink(email);
 
                 this.isLoading = false;
-            } catch (error: any) {
-                console.log(error.response.data);
+            } catch (err) {
+                const error = err as AxiosError;
                 this.isLoading = false;
-                this.authErrors = error.response.data.errors;
-                this.errorMessage = error.response.data.message;
+                this.authErrors = error.response?.data.errors;
+                this.errorMessage = error.response?.data.message;
             }
         },
         

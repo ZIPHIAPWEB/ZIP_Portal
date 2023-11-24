@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { useAuthStore } from '../store/auth';
 
 axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
@@ -10,7 +11,6 @@ let url = 'http://127.0.0.1:8000/api';
 export const ApiRequest = axios.create({
     baseURL: url,
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
         'Content-Type': 'application/json'
     },
     withCredentials: true
@@ -19,7 +19,6 @@ export const ApiRequest = axios.create({
 export const ApiRequestWithFile = axios.create({
     baseURL: url,
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token') || '',
         'Content-Type': 'multipart/form-data'
     },
     withCredentials: true
@@ -29,3 +28,17 @@ export const ApiRequestWithoutAuth = axios.create({
     baseURL: url,
     withCredentials: true
 });
+
+ApiRequest.interceptors.request.use((config) => {
+    const authStore = useAuthStore();
+
+    config.headers['Authorization'] = `Bearer ${authStore.accessToken}`;
+    return config;
+});
+
+ApiRequestWithFile.interceptors.request.use((config) => {
+    const authStore = useAuthStore();
+
+    config.headers['Authorization'] = `Bearer ${authStore.accessToken}`;
+    return config;
+})

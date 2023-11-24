@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import CoordinatorApi from "../services/CoordinatorApi";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
 import { IVisaSponsorRequirement } from "./studentVisaSponsorRequirement";
+import { downloadFile } from "../hooks/useFileDownload";
 
 export interface ICoordStudentVisaSponsorRequirement {
     isSuccess: boolean;
@@ -43,7 +44,8 @@ export const userCoordStudentVisaSponsorRequirement = defineStore({
 
                 const coordSelectedStudent = useCoordSelectedStudent();
 
-                await CoordinatorApi.downloadSelectedStudentVisaSponsorRequirement(coordSelectedStudent.userInfo.id, requirementId);
+                const response = (await CoordinatorApi.downloadSelectedStudentVisaSponsorRequirement(coordSelectedStudent.userInfo.id, requirementId)).data;
+                downloadFile(response); 
 
                 this.isLoading = false;
                 this.isSuccess = true;

@@ -53,6 +53,22 @@ export const useCoordStudentPaymentRequirement = defineStore({
             }
         },
 
+        async acknowledgeStudentPayment(requirementId : number | string) {
+            try {
+                
+            } catch (err) {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const coordSelectedStudent = useCoordSelectedStudent();
+
+                await CoordinatorApi.removeSelectedStudentPaymentRequirement(coordSelectedStudent.userInfo.id, requirementId);
+                
+                this.isLoading = false;
+                this.isSuccess = true;
+            }
+        },
+
         async removeSelectedStudentAdditionalRequirement(requirementId : number | string) {
             try {
                 this.isLoading = true;

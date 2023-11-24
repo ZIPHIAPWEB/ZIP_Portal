@@ -7,7 +7,7 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "paths": {
-    "@/*": ["./*"]
+    "@/*": ["./resources/assets/ts/*"]
     }
 }
 }

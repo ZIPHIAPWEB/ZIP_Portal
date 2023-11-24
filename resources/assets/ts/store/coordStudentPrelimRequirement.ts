@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import CoordinatorApi from "../services/CoordinatorApi";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
 import { IBasicRequirement } from "./basicRequirement";
+import { downloadFile } from "../hooks/useFileDownload";
 
 export interface ICoordStudentPrelimRequirement {
     isSuccess: boolean;
@@ -43,7 +44,9 @@ export const userCoordStudentPrelimRequirement = defineStore({
 
                 const coordSelectedStudent = useCoordSelectedStudent();
 
-                await CoordinatorApi.downloadSelectedStudentPrelimRequirement(coordSelectedStudent.userInfo.id, requirementId);
+                const response = (await CoordinatorApi.downloadSelectedStudentPrelimRequirement(coordSelectedStudent.userInfo.id, requirementId)).data;
+                
+                downloadFile(response);
 
                 this.isLoading = false;
                 this.isSuccess = true;

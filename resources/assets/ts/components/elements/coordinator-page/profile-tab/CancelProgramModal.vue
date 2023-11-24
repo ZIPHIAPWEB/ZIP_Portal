@@ -11,7 +11,6 @@ const emits = defineEmits<{
 const reason = ref<string>('');
 
 const cancelStudentHandler = async () => {
-    //TODO submit a request on the backend
     await coordSelectedStudentStore.cancelStudentProgram(reason.value);
     emits('submitEventTrigger');
 }

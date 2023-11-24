@@ -5,6 +5,10 @@ import { IVisaInterview } from "../store/studentVisaInterview";
 import { IStudentPdosCfoSchedule } from "../store/studentPdosCfoSchedule";
 
 export default {
+    acknowledgeStudentPayment(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/coord/student/${userId}/payment/${requirementId}`);
+    },
+
     downloadExportedData(program : string[] | string, status: string, from : string, to : string) : Promise<AxiosResponse> {
         return ApiRequest.post(`/coord/export-student`, { program, status, from, to });
     },
