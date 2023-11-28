@@ -28956,7 +28956,7 @@ var _document$head$queryS;
   'X-Requested-With': 'XMLHttpRequest',
   'X-CSRF-TOKEN': (_document$head$queryS = document.head.querySelector('meta[name="csrf-token"]')) === null || _document$head$queryS === void 0 ? void 0 : _document$head$queryS.getAttribute('content')
 };
-var url = 'http://127.0.0.1:8000/api';
+var url = 'https://prototype.ziptravel.com.ph/api';
 var ApiRequest = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
   baseURL: url,
   headers: {

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\BasicRequirement;
 use App\PaymentRequirement;
 use App\ProgramRequirement;
 use App\SponsorRequirement;
 use App\User;
 use App\VisaRequirement;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
@@ -41,16 +39,17 @@ class DownloadController extends Controller
         $uniqueID = User::find($id)->email;
 
         if (File::exists(public_path('backup'))) {
-            $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
+            $this->zipData(public_path('uploaded/'. $uniqueID), public_path('backup/' . $uniqueID . '.zip'));
         } else {
             File::makeDirectory(public_path('backup'), 0765, true, true);
-            $this->zipData(public_path('uploaded/'. $uniqueID ) , public_path('backup/' . $uniqueID . '.zip'));
+            $this->zipData(public_path('uploaded/'. $uniqueID), public_path('backup/' . $uniqueID . '.zip'));
         }
 
         return response()->json(asset('backup/'. $uniqueID . '.zip'));
     }
 
-    function zipData($source, $destination) {
+    public function zipData($source, $destination)
+    {
         if (extension_loaded('zip')) {
             if (file_exists($source)) {
                 $zip = new ZipArchive();
@@ -64,11 +63,11 @@ class DownloadController extends Controller
                             $file = realpath($file);
                             if (is_dir($file)) {
                                 $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
-                            } else if (is_file($file)) {
+                            } elseif (is_file($file)) {
                                 $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
                             }
                         }
-                    } else if (is_file($source)) {
+                    } elseif (is_file($source)) {
                         $zip->addFromString(basename($source), file_get_contents($source));
                     }
                 }

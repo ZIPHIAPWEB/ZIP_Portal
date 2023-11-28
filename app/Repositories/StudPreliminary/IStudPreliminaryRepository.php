@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudPreliminary;
 
-
 interface IStudPreliminaryRepository
 {
     public function getById($id);

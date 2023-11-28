@@ -104,7 +104,7 @@ class SuperAdminController extends Controller
 
             return response()->json(['message' => 'User account successfully deleted!']);
         } else {
-            return response()->json(['message' => 'Something went wrong!'],500);
+            return response()->json(['message' => 'Something went wrong!'], 500);
         }
     }
 

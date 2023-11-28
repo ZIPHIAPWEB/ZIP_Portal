@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Blog extends Model implements HasMedia
 {
     use InteractswithMedia;
-    
+
     protected $fillable = [
         'title',
         'slug',

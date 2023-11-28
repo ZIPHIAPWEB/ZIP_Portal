@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Sponsor;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\Sponsor;
 

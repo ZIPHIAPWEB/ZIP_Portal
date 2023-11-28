@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Log;
 use App\Notifications\StudentUploadedFile;
-use App\PreliminaryRequirement;
 use App\Repositories\Log\LogRepository;
 use App\Repositories\PreliminaryRequirement\PreliminaryRequirementRepository;
 use App\Repositories\Student\StudentRepository;
 use App\Repositories\StudPreliminary\StudPreliminaryRepository;
-use App\Student;
-use App\StudentPreliminary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
@@ -21,11 +17,12 @@ class StudentPreliminaryController extends Controller
     private $preliminaryRepository;
     private $studPreliminaryRepository;
     private $logRepository;
-    public function __construct(StudPreliminaryRepository $studPreliminaryRepository,
-                                StudentRepository $studentRepository,
-                                PreliminaryRequirementRepository $preliminaryRequirementRepository,
-                                LogRepository $logRepository)
-    {
+    public function __construct(
+        StudPreliminaryRepository $studPreliminaryRepository,
+        StudentRepository $studentRepository,
+        PreliminaryRequirementRepository $preliminaryRequirementRepository,
+        LogRepository $logRepository
+    ) {
         $this->studentRepository = $studentRepository;
         $this->studPreliminaryRepository = $studPreliminaryRepository;
         $this->preliminaryRepository = $preliminaryRequirementRepository;

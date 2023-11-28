@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Coordinator;
 
-
 interface ICoordinatorRepository
 {
     public function getCoordinatorByUserId($userId);

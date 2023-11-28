@@ -72,7 +72,7 @@ class Student extends Model
         return $this->hasOne('App\HostCompany', 'id', 'host_company_id')
                     ->withDefault([
                         'name'  =>  '',
-                        'states'=>  ''
+                        'states' =>  ''
                     ]);
     }
 
@@ -118,7 +118,7 @@ class Student extends Model
                     ->withDefault([
                         'school_name'   =>  '',
                         'address'       =>  '',
-                        'date_graduated'=>  ''
+                        'date_graduated' =>  ''
                     ]);
     }
 
@@ -128,7 +128,7 @@ class Student extends Model
                     ->withDefault([
                         'school_name'   =>  '',
                         'address'       =>  '',
-                        'date_graduated'=>  ''
+                        'date_graduated' =>  ''
                     ]);
     }
 
@@ -160,7 +160,7 @@ class Student extends Model
 
     public function getByProgramId($id)
     {
-        $user = User:: whereRoleIs('student')
+        $user = User::whereRoleIs('student')
                     ->with('student')
                     ->get();
 

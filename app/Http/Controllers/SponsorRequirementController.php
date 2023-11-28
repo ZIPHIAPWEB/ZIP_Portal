@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
 use App\Repositories\SponsorRequirement\SponsorRequirementRepository;
-use App\SponsorRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;

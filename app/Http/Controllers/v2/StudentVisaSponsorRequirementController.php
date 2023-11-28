@@ -66,7 +66,7 @@ class StudentVisaSponsorRequirementController extends Controller
                 'message' => ucfirst($requirement->name) . ' not found'
             ], Response::HTTP_NOT_FOUND);
         }
-        
+
         $file = Storage::get($requirement->path);
 
         return response()->download($file);

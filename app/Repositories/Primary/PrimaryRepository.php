@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Primary;
 
-
 use App\Primary;
 use App\Repositories\Base\BaseRepository;
 

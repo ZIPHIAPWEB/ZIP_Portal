@@ -68,7 +68,7 @@ class StudentExport implements FromCollection, WithHeadings
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
-        
+
         return ExportStudentResource::collection($students);
     }
 }

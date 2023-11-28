@@ -9,12 +9,10 @@ use App\School;
 use App\Sponsor;
 use App\Student;
 use App\User;
-use Illuminate\Http\Request;
-use App\PaymentRequirement;
 
 class HelperController extends Controller
 {
-    public function getAllStudentCount() 
+    public function getAllStudentCount()
     {
         return Student::all();
     }

@@ -98,7 +98,7 @@ class RegisterController extends Controller
         ]);
 
         $user->attachRole('student');
-        
+
         return $user;
     }
 
@@ -107,7 +107,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name'      => $data['name'],
             'email'     => $data['email'],
-            'password'  => bcrypt( $data['password']),
+            'password'  => bcrypt($data['password']),
             'vToken'    => '',
             'verified'  => false,
             'isOnline'  => false,
@@ -179,7 +179,7 @@ class RegisterController extends Controller
         //return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
-    public function resend($id) 
+    public function resend($id)
     {
         $user = User::find($id);
 

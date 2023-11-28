@@ -4,8 +4,7 @@ namespace App\Actions;
 
 class UploadedFilePathAction
 {
-
-    public function execute($request, $directory) : string
+    public function execute($request, $directory): string
     {
         $extension = $request->getClientOriginalExtension();
 

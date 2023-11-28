@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Log;
 use App\Notifications\AccountingNotification;
-use App\Notifications\StudentUploadedFile;
-use App\Notifications\VerifiedDepositSlipNotification;
 use App\PaymentRequirement;
 use App\Repositories\Log\LogRepository;
 use App\Repositories\PaymentRequirement\PaymentRequirementRepository;
@@ -14,7 +11,6 @@ use App\Repositories\StudPayment\StudPaymentRepository;
 use App\Student;
 use App\StudentPayment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Whoops\Exception\ErrorException;
@@ -31,11 +27,12 @@ class StudentPaymentController extends Controller
     private $studentRepository;
     private $paymentRepository;
     private $logRepository;
-    public function __construct(StudentRepository $studentRepository,
-                                PaymentRequirementRepository $paymentRequirementRepository,
-                                StudPaymentRepository $studPaymentRepository,
-                                LogRepository $logRepository)
-    {
+    public function __construct(
+        StudentRepository $studentRepository,
+        PaymentRequirementRepository $paymentRequirementRepository,
+        StudPaymentRepository $studPaymentRepository,
+        LogRepository $logRepository
+    ) {
         $this->studPayment = new StudentPayment();
         $this->student = new Student();
         $this->payment = new PaymentRequirement();
@@ -107,11 +104,11 @@ class StudentPaymentController extends Controller
         $this->studPaymentRepository->updateStudPayment($id, [
             'acknowledgement'   =>  true
         ]);
-        
+
         $payment = $this->studPaymentRepository->findOneBy(['id' => $id]);
         $student = $this->studentRepository->findOneBy(['user_id' => $payment->user_id]);
         $req = $this->paymentRepository->findOneBy(['id' => $payment->requirement_id]);
-        
+
         $data = [
             'first_name'    =>  $student->first_name,
             'last_name'     =>  $student->last_name,
@@ -136,9 +133,9 @@ class StudentPaymentController extends Controller
             'user_id'   =>  $request->user()->id,
             'activity'  =>  'Deleted a ' . $requirement->name
         ]);
-        
+
         $payment->delete();
-        
+
         return response()->json(['message' => 'File Removed']);
     }
 

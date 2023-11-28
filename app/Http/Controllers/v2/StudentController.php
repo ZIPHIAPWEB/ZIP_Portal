@@ -21,8 +21,8 @@ use LogicException;
 class StudentController extends Controller
 {
     /**
-     * @return StudentPersonalResource 
-     * @throws BindingResolutionException 
+     * @return StudentPersonalResource
+     * @throws BindingResolutionException
      */
     public function getPersonalDetails()
     {
@@ -32,8 +32,8 @@ class StudentController extends Controller
     }
 
     /**
-     * @return StudentContactResource 
-     * @throws BindingResolutionException 
+     * @return StudentContactResource
+     * @throws BindingResolutionException
      */
     public function getContactDetails()
     {
@@ -43,8 +43,8 @@ class StudentController extends Controller
     }
 
     /**
-     * @return TertiaryResource 
-     * @throws BindingResolutionException 
+     * @return TertiaryResource
+     * @throws BindingResolutionException
      */
     public function getTertiaryDetails()
     {
@@ -54,10 +54,10 @@ class StudentController extends Controller
     }
 
     /**
-     * @return StudentSecondaryResource 
-     * @throws BindingResolutionException 
+     * @return StudentSecondaryResource
+     * @throws BindingResolutionException
      */
-    public function getSecondaryDetails() 
+    public function getSecondaryDetails()
     {
         $student = auth()->user()->secondary;
 
@@ -65,10 +65,10 @@ class StudentController extends Controller
     }
 
     /**
-     * @return StudentParentResource 
-     * @throws BindingResolutionException 
+     * @return StudentParentResource
+     * @throws BindingResolutionException
      */
-    public function getFatherDetails() 
+    public function getFatherDetails()
     {
         $student = auth()->user()->father;
 
@@ -76,10 +76,10 @@ class StudentController extends Controller
     }
 
     /**
-     * @return StudentParentResource 
-     * @throws BindingResolutionException 
+     * @return StudentParentResource
+     * @throws BindingResolutionException
      */
-    public function getMotherDetails() 
+    public function getMotherDetails()
     {
         $student = auth()->user()->mother;
 
@@ -87,8 +87,8 @@ class StudentController extends Controller
     }
 
     /**
-     * @return AnonymousResourceCollection 
-     * @throws BindingResolutionException 
+     * @return AnonymousResourceCollection
+     * @throws BindingResolutionException
      */
     public function getExperiencesDetails()
     {
@@ -98,9 +98,9 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updatePersonalDetails(Request $request)
     {
@@ -120,9 +120,9 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updateContactDetails(Request $request)
     {
@@ -139,9 +139,9 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updateTertiaryDetails(Request $request)
     {
@@ -150,22 +150,23 @@ class StudentController extends Controller
         $auth->tertiary()->updateOrCreate(
             [
                 'user_id' => $auth->id
-            ], 
+            ],
             [
                 'school_name' => $request->school,
                 'address' => $request->address,
                 'degree' => $request->degree,
                 'start_date' => $request->start_date,
                 'date_graduated' => $request->date_graduated
-            ]);
+            ]
+        );
 
         return response()->noContent();
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updateSecondaryDetails(Request $request)
     {
@@ -180,15 +181,16 @@ class StudentController extends Controller
                 'address' => $request->address,
                 'start_date' => $request->start_date,
                 'date_graduated' => $request->date_graduated
-            ]);
+            ]
+        );
 
         return response()->noContent();
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updateFatherDetails(Request $request)
     {
@@ -205,15 +207,16 @@ class StudentController extends Controller
                 'occupation' => $request->occupation,
                 'contact_no' => $request->contact_no,
                 'company' => $request->company
-            ]);
+            ]
+        );
 
         return response()->noContent();
     }
 
     /**
-     * @param Request $request 
-     * @return Response 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return Response
+     * @throws BindingResolutionException
      */
     public function updateMotherDetails(Request $request)
     {
@@ -230,15 +233,16 @@ class StudentController extends Controller
                 'occupation' => $request->occupation,
                 'contact_no' => $request->contact_no,
                 'company' => $request->company
-            ]);
+            ]
+        );
 
         return response()->noContent();
     }
 
     /**
-     * @param Request $request 
-     * @return ExperienceResource 
-     * @throws BindingResolutionException 
+     * @param Request $request
+     * @return ExperienceResource
+     * @throws BindingResolutionException
      */
     public function addWorkExperience(Request $request)
     {
@@ -256,10 +260,10 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Request $request 
-     * @param Experience $experience 
-     * @return ExperienceResource 
-     * @throws MassAssignmentException 
+     * @param Request $request
+     * @param Experience $experience
+     * @return ExperienceResource
+     * @throws MassAssignmentException
      */
     public function updateWorkExperience(Request $request, Experience $experience)
     {
@@ -276,10 +280,10 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Experience $experience 
-     * @return Response 
-     * @throws LogicException 
-     * @throws BindingResolutionException 
+     * @param Experience $experience
+     * @return Response
+     * @throws LogicException
+     * @throws BindingResolutionException
      */
     public function deleteWorkExperience(Experience $experience)
     {

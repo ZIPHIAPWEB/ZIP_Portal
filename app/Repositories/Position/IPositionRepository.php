@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Position;
 
-
 interface IPositionRepository
 {
     public function getAll();

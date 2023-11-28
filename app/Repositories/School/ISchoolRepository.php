@@ -8,7 +8,6 @@
 
 namespace App\Repositories\School;
 
-
 interface ISchoolRepository
 {
     public function getAllSchool();

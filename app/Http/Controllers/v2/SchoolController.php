@@ -5,7 +5,6 @@ namespace App\Http\Controllers\v2;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SchoolResource;
 use App\School;
-use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {

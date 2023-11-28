@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Father;
 
-
 interface IFatherRepository
 {
     public function saveFather(array $attributes);

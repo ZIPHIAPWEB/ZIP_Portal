@@ -8,7 +8,6 @@
 
 namespace App\Repositories\AdditionalRequirement;
 
-
 interface IAdditionalRequirementRepository
 {
     public function getAllAdditionalRequirements();

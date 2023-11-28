@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudAdditional;
 
-
 interface IStudAdditionalRepository
 {
     public function getById($id);

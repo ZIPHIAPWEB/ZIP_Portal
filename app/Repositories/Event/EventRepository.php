@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Event;
 
-
 use App\Event;
 use App\Repositories\Base\BaseRepository;
 

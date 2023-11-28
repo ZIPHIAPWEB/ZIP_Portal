@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Log;
 
-
 use App\Log;
 use App\Repositories\Base\BaseRepository;
 

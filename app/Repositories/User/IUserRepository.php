@@ -8,8 +8,6 @@
 
 namespace App\Repositories\User;
 
-
 interface IUserRepository
 {
-
 }

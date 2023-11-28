@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\v2;
 
 use App\Actions\ConvertProgramToIdAction;
-use App\Actions\ProcessFlightInfoAction;
 use App\Actions\ProgressToNextStatus;
 use App\Exports\StudentExport;
 use App\Http\Controllers\Controller;
@@ -34,12 +33,15 @@ class CoordController extends Controller
         $filename = 'student-data-'. Carbon::now()->timestamp;
         Excel::store(
             new StudentExport(
-                $request->input('from'), 
-                $request->input('to'), 
+                $request->input('from'),
+                $request->input('to'),
                 $request->input('status'),
-                (new ConvertProgramToIdAction)->execute($request->input('program'))
-            ), $filename .'.xlsx', 'local');
-        
+                (new ConvertProgramToIdAction())->execute($request->input('program'))
+            ),
+            $filename .'.xlsx',
+            'local'
+        );
+
         return response()->json($filename . '.xlsx', 200);
     }
 
@@ -77,7 +79,7 @@ class CoordController extends Controller
 
         $query->when($request->input('program') !== null, function ($q) use ($request) {
 
-            return $q->where('program_id', (new ConvertProgramToIdAction)->execute($request->input('program')));
+            return $q->where('program_id', (new ConvertProgramToIdAction())->execute($request->input('program')));
         });
 
         $query->when($request->input('from_date') !== null, function ($q) use ($request) {
@@ -149,7 +151,7 @@ class CoordController extends Controller
                 'message' => 'User not exists'
             ], Response::HTTP_NOT_FOUND);
         }
-        
+
         $student->update([
             'application_status' => $reason
         ]);
@@ -166,20 +168,20 @@ class CoordController extends Controller
             'status' => 'required'
         ]);
 
-        $processedStatus = (new ProgressToNextStatus)->execute($request->input('status'));
+        $processedStatus = (new ProgressToNextStatus())->execute($request->input('status'));
 
         if(!isset($processedStatus)) {
 
             return response()->json([
                 'data' => [
                     'message' => 'Unable to process this request',
-                    'status' => 422   
+                    'status' => 422
                 ]
             ]);
         }
 
         $student = Student::query()->where('user_id', $userId);
-        
+
         if ($processedStatus['status'] == 'Confirmed') {
             $programId = Program::find($student->first()->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
             $student->update([
@@ -204,7 +206,7 @@ class CoordController extends Controller
     public function getStudentHostInfo($userId)
     {
         $student = Student::query()->where('user_id', $userId)->first();
-        
+
         return response()->json([
             'data' => [
                 'status' => 200,
@@ -213,10 +215,10 @@ class CoordController extends Controller
         ]);
     }
 
-    public function updateStudentHostInfo($userId, Request $request) 
+    public function updateStudentHostInfo($userId, Request $request)
     {
         $student = Student::query()->where('user_id', $userId);
-            
+
         $student->update([
             'visa_sponsor_id' => $request->input('visa_sponsor_id'),
             'host_company_id' => $request->input('host_company_id'),
@@ -237,7 +239,7 @@ class CoordController extends Controller
         return new StudentVIsaInterviewResource($student);
     }
 
-    public function updateStudentInterviewInfo($userId, Request $request) 
+    public function updateStudentInterviewInfo($userId, Request $request)
     {
         $student = Student::query()->where('user_id', $userId);
 

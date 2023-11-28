@@ -42,7 +42,7 @@ class BlogController extends Controller
                 'slug'              =>  str_slug($request->title, '-'),
                 'initial_content'   =>  $request->input('initial_content'),
                 'content'           =>  $request->input('content'),
-                'image_path'        =>  $path 
+                'image_path'        =>  $path
             ])->format();
         } else {
             return response()->json('Error! Invalid', 500);

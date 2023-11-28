@@ -59,7 +59,7 @@ return [
             'driver'    =>  'local',
             'root'      =>  public_path('/blog_image'),
             'url'       =>  '/',
-            'visibility'=>  'public'
+            'visibility' =>  'public'
         ],
 
         'uploaded_files' => [

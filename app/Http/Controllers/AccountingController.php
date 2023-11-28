@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Repositories\Student\StudentRepository;
 
 class AccountingController extends Controller
 {
     private $studentRepository;
-    public function __construct(StudentRepository $studentRepository) 
+    public function __construct(StudentRepository $studentRepository)
     {
         $this->studentRepository = $studentRepository;
     }

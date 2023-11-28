@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Degree;
 
-
 interface IDegreeRepository
 {
     public function getAllDegree();

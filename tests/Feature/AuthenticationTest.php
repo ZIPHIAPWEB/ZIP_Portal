@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Mail\verifyEmail;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -13,7 +12,7 @@ class AuthenticationTest extends TestCase
 {
     use WithFaker;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->setUpFaker();
@@ -65,7 +64,7 @@ class AuthenticationTest extends TestCase
     }
 
     public function test_user_cannot_login_if_not_registered()
-    {        
+    {
         $response = $this->postJson('api/login', [
             'username' => 'dsadasdsa',
             'password' => 'sadasd'

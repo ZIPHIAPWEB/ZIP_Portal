@@ -5,7 +5,6 @@ namespace App\Http\Controllers\v2;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProgramResource;
 use App\Program;
-use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Program;
 
-
 interface IProgramRepository
 {
     public function getAllProgram();

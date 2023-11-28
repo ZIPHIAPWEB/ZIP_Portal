@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudAdditional;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\StudentAdditional;
 

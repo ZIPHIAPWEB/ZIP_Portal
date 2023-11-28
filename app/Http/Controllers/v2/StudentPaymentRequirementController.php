@@ -6,7 +6,6 @@ use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentPaymentResource;
 use App\PaymentRequirement;
-use App\Student;
 use Illuminate\Http\Request;
 
 class StudentPaymentRequirementController extends Controller
@@ -27,7 +26,7 @@ class StudentPaymentRequirementController extends Controller
         ], 200);
     }
 
-    public function store(Request $request, PaymentRequirement $requirement) 
+    public function store(Request $request, PaymentRequirement $requirement)
     {
         $user = auth()->user();
 

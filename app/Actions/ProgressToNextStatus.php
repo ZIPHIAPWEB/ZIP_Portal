@@ -4,7 +4,7 @@ namespace App\Actions;
 
 class ProgressToNextStatus
 {
-    public function execute(string $currentStatus) : array
+    public function execute(string $currentStatus): array
     {
         $applicationStatuses = collect([
             ['status' => 'Cancel', 'pos' => 0],

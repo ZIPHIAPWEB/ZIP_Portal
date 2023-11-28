@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Position;
 
-
 use App\Position;
 use App\Repositories\Base\BaseRepository;
 

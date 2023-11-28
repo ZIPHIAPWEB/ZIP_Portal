@@ -36,7 +36,7 @@ class ApplicationFormRequest extends FormRequest
             'programId' =>  'required',
             'fbLink'    =>  'required',
             'skypeId'   =>  'required',
-            
+
             'schoolId'  =>  'required',
             'degree'    =>  'required',
             'address'   =>  'required',

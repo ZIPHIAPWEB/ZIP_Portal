@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ConvertProgramToIdAction
 {
-    public function execute(string $program) : int
+    public function execute(string $program): int
     {
         $normalizedProgram = Str::lower($program);
 

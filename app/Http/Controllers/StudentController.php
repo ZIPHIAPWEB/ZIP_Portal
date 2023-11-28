@@ -14,11 +14,9 @@ use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\RegisteredStudentNotification;
 use Illuminate\Support\Facades\Notification;
-use DB;
 use App\Program;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,14 +31,15 @@ class StudentController extends Controller
     private $tertiaryRepository;
     private $experienceRepository;
 
-    public function __construct(StudentRepository $studentRepository,
-                                FatherRepository $fatherRepository,
-                                MotherRepository $motherRepository,
-                                PrimaryRepository $primaryRepository,
-                                SecondaryRepository $secondaryRepository,
-                                TertiaryRepository $tertiaryRepository,
-                                ExperienceRepository $experienceRepository)
-    {
+    public function __construct(
+        StudentRepository $studentRepository,
+        FatherRepository $fatherRepository,
+        MotherRepository $motherRepository,
+        PrimaryRepository $primaryRepository,
+        SecondaryRepository $secondaryRepository,
+        TertiaryRepository $tertiaryRepository,
+        ExperienceRepository $experienceRepository
+    ) {
         $this->student = new Student();
         $this->studentRepository = $studentRepository;
         $this->fatherRepository = $fatherRepository;
@@ -102,7 +101,7 @@ class StudentController extends Controller
             'contacted_status'          =>  'Pending',
             'coordinator_id'            =>  0
         ]);
-            
+
         if (isset($student)) {
             $this->fatherRepository->saveFather([
                 'user_id'       =>  Auth::user()->id,
@@ -113,7 +112,7 @@ class StudentController extends Controller
                 'company'       =>  '',
                 'contact_no'    =>  '',
             ]);
-    
+
             $this->motherRepository->saveMother([
                 'user_id'       =>  Auth::user()->id,
                 'first_name'    =>  '',
@@ -123,14 +122,14 @@ class StudentController extends Controller
                 'company'       =>  '',
                 'contact_no'    =>  '',
             ]);
-    
+
             $this->primaryRepository->savePrimary([
                 'user_id'           =>  Auth::user()->id,
                 'school_name'       =>  '',
                 'address'           =>  '',
                 'date_graduated'    =>  '',
             ]);
-    
+
             $this->secondaryRepository->saveSecondary([
                 'user_id'           =>  Auth::user()->id,
                 'school_name'       =>  '',
@@ -138,7 +137,7 @@ class StudentController extends Controller
                 'start_date'        =>  '',
                 'date_graduated'    =>  '',
             ]);
-    
+
             $this->tertiaryRepository->saveTertiary([
                 'user_id'           =>  Auth::user()->id,
                 'school_name'       =>  $request->input('t_school'),
@@ -147,7 +146,7 @@ class StudentController extends Controller
                 'start_date'        =>  $request->input('t_start_date'),
                 'date_graduated'    =>  $request->input('t_date_graduated'),
             ]);
-    
+
             $this->experienceRepository->save([
                 'user_id'       => Auth::user()->id,
                 'company'       =>  '',

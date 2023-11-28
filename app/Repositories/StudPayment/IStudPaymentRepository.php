@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudPayment;
 
-
 interface IStudPaymentRepository
 {
     public function saveStudPayment(array $attributes);

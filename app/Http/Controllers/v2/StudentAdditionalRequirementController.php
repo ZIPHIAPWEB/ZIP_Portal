@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentAdditionalRequirementController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $student = auth()->user()->student()->first();
 
@@ -29,7 +29,7 @@ class StudentAdditionalRequirementController extends Controller
         ], 200);
     }
 
-    public function store(Request $request, AdditionalRequirement $requirement) 
+    public function store(Request $request, AdditionalRequirement $requirement)
     {
         $user = auth()->user();
 

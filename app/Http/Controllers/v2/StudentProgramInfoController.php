@@ -7,14 +7,13 @@ use App\Http\Resources\StudentFlightDetailsResource;
 use App\Http\Resources\StudentPdosCfoScheduleResource;
 use App\Http\Resources\StudentVIsaInterviewResource;
 use App\Http\Resources\StudentVisaSponsorResource;
-use Illuminate\Http\Request;
 
 class StudentProgramInfoController extends Controller
 {
     public function getVisaSponsor()
     {
         $student = auth()->user()->student()->first();
-        
+
         return new StudentVisaSponsorResource($student);
     }
 

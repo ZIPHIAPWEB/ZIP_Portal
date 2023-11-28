@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Event;
 
-
 interface IEventRepository
 {
     public function getAllEvent();

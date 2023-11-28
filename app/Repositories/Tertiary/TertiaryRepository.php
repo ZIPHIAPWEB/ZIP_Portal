@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Tertiary;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\Tertiary;
 

@@ -4,8 +4,6 @@ namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProfileResource;
-use App\Http\Resources\StudentResource;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\State;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\State;
 

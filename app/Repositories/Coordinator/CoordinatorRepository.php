@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Coordinator;
 
-
 use App\Coordinator;
 use App\Repositories\Base\BaseRepository;
 

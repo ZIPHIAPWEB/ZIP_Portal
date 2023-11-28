@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Student;
 
-
 interface IStudentRepository
 {
     public function getAllStudents();

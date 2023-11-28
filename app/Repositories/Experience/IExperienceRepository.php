@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Experience;
 
-
 interface IExperienceRepository
 {
     public function saveExperience(array $attributes);

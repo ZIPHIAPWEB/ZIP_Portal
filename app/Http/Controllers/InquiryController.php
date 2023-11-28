@@ -21,7 +21,7 @@ class InquiryController extends Controller
             'email'     =>  $request->input('email'),
             'message'   =>  $request->input('message')
         ];
-        
+
         Notification::route('mail', 'info@ziptravel.com.ph')->notify(new InquiryNotification($data));
         return redirect()->back()->with('message', 'Inquiry Submitted!');
     }

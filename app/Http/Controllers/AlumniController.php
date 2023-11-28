@@ -42,7 +42,7 @@ class AlumniController extends Controller
                 'slug'              =>  str_slug($request->input('title')),
                 'initial_content'   =>  $request->input('initial_content'),
                 'content'           =>  $request->input('content'),
-                'image_path'        =>  $path 
+                'image_path'        =>  $path
             ])->format();
         }
     }

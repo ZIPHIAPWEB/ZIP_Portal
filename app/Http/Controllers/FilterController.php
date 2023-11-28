@@ -30,19 +30,19 @@ class FilterController extends Controller
     {
         $query = Student::query();
 
-        $query->when($request->input('program_id'), function($query, $programId){
+        $query->when($request->input('program_id'), function ($query, $programId) {
             return $query->where('program_id', $programId);
         });
 
-        $query->when([$request->input('from'), $request->input('to')], function($query, $date){
+        $query->when([$request->input('from'), $request->input('to')], function ($query, $date) {
             return $query->whereBetween('created_at', $date);
         });
 
-        $query->when($request->input('status'), function($query, $status){
+        $query->when($request->input('status'), function ($query, $status) {
             return $query->where('application_status', $status);
         });
 
-        $query->when($request->input('branch'), function($query, $branch){
+        $query->when($request->input('branch'), function ($query, $branch) {
             return $query->where('branch', $branch);
         });
 

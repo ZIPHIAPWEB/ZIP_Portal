@@ -11,25 +11,25 @@ class ProcessFlightInfoAction
                 return [
                     ''
                 ];
-            break;
+                break;
 
             case 'arrive-us':
                 return [
 
                 ];
-            break;
+                break;
 
             case 'depart-us':
                 return [
                     ''
                 ];
-            break;
+                break;
 
             case 'arrive-mnl':
                 return [
 
                 ];
-            break;
+                break;
         }
     }
 }

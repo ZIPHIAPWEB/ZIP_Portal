@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Sponsor;
 
-
 interface ISponsorRepository
 {
     public function getAllSponsor();

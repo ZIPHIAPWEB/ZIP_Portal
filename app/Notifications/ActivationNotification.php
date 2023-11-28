@@ -42,7 +42,7 @@ class ActivationNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->from('system@ziptravel.com.ph', 'ZIP Travel PH')
+        return (new MailMessage())->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                                 ->markdown('mail.activation', ['data' => $this->data]);
     }
 

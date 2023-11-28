@@ -18,7 +18,7 @@ class ApplicationFormController extends Controller
             'birthdate' =>  $request->input('birthDate'),
             'gender' =>  $request->input('gender'),
             'permanent_address' =>  $request->input('permanentAddress'),
-            'provincial_address'=> $request->input('provincialAddress'),
+            'provincial_address' => $request->input('provincialAddress'),
             'year' =>  $request->input('yearLevel'),
             'home_number' =>  $request->input('homeNumber'),
             'mobile_number' =>  $request->input('mobileNumber'),

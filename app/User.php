@@ -15,7 +15,9 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
-    use Notifiable, HasApiTokens, HasFactory;
+    use Notifiable;
+    use HasApiTokens;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -41,17 +43,17 @@ class User extends Authenticatable
             ->select(['roles.*'])
             ->join('roles', 'roles.id', '=', 'role_user.role_id')
             ->where('user_id', $this->id)
-            ->first() ?? null;            
+            ->first() ?? null;
     }
 
-    public function experiences() 
+    public function experiences()
     {
         return $this->hasMany(Experience::class, 'user_id', 'id');
     }
 
     public function student()
     {
-        return $this->hasOne(Student::class,'user_id', 'id');
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 
     public function studentPayment()

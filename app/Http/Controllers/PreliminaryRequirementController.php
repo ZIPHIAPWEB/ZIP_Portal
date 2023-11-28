@@ -6,7 +6,6 @@ use App\Http\Resources\SuperAdminResource;
 use App\PreliminaryRequirement;
 use App\Repositories\PreliminaryRequirement\PreliminaryRequirementRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudPreliminary;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\StudentPreliminary;
 

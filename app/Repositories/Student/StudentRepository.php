@@ -8,10 +8,8 @@
 
 namespace App\Repositories\Student;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\Student;
-use Illuminate\Http\UploadedFile;
 
 class StudentRepository extends BaseRepository implements IStudentRepository
 {

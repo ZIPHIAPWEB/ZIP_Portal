@@ -7,7 +7,6 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\User;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Auth;
 use RuntimeException;
@@ -29,15 +28,15 @@ class AuthController extends Controller
     }
 
     /**
-     * @param LoginRequest $request 
-     * @return mixed 
+     * @param LoginRequest $request
+     * @return mixed
      */
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt(['name' => $request->username, 'password' => $request->password])) {
 
-            abort(401, 'Invalid credentials');        
-            
+            abort(401, 'Invalid credentials');
+
         }
 
         /** @var \App\User */
@@ -54,9 +53,9 @@ class AuthController extends Controller
     }
 
     /**
-     * @param RegisterRequest $request 
-     * @return mixed 
-     * @throws RuntimeException 
+     * @param RegisterRequest $request
+     * @return mixed
+     * @throws RuntimeException
      */
     public function register(RegisterRequest $request)
     {
@@ -80,9 +79,9 @@ class AuthController extends Controller
     }
 
     /**
-     * @return mixed 
-     * @throws HttpException 
-     * @throws NotFoundHttpException 
+     * @return mixed
+     * @throws HttpException
+     * @throws NotFoundHttpException
      */
     public function resendEmailVerification()
     {
