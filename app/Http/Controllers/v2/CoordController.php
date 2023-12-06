@@ -92,7 +92,7 @@ class CoordController extends Controller
             return $q->where('application_status', $request->input('status'));
         });
 
-        $students = $query->paginate(1);
+        $students = $query->paginate(20);
 
         return CoordStudentResource::collection($students);
     }
@@ -269,9 +269,9 @@ class CoordController extends Controller
 
         $student->update([
             'pdos_schedule' => $request->input('pdos_schedule'),
-            'pdos_schedule_time' => $request->input('pdos_schedule_time'),
+            'pdos_time' => $request->input('pdos_schedule_time'),
             'cfo_schedule' => $request->input('cfo_schedule'),
-            'cfo_schedule_time' => $request->input('cfo_schedule_time')
+            'cfo_time' => $request->input('cfo_schedule_time')
         ]);
 
         return new StudentPdosCfoScheduleResource($student->first());

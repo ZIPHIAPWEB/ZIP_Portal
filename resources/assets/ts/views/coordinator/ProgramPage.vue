@@ -51,7 +51,7 @@ const paginatedResult = async (page : number) => {
 
 const exportStudentDatas = async () => {
     let filename = (await CoordinatorApi.downloadExportedData(program.value, status.value, fromDate.value, toDate.value)).data;
-    let url = `http://127.0.0.1:8000/download-exported/${filename}`;
+    let url = `https://prototype.ziptravel.com.ph/download-exported/${filename}`;
     const link = document.createElement('a')
     link.href = url;
     link.setAttribute('download', 'title');
@@ -145,8 +145,9 @@ const exportStudentDatas = async () => {
                                     <span v-if="student.application_status == 'Confirmed'" class="badge bg-confirmed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-for-visa">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-for-visa-interview">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'For PDOS & CFO'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Program Proper'" class="badge bg-program-proper">{{ student.application_status }}</span>
                                     <span v-if="student.application_status.includes('Cancel')" class="badge bg-visa-denied">{{ student.application_status }}</span>
                                 </td>
                                 <td>{{ student.email }}</td>
@@ -167,8 +168,8 @@ const exportStudentDatas = async () => {
                 </div>
                 <div v-if="students.length > 0 && !isLoading" class="card-footer clearfix p-1">
                     <ul class="pagination pagination-sm m-0 float-right">
-                        <li v-for="link in pagination" class="page-item">
-                            <a @click.prevent="paginatedResult(+link.label)" v-if="link.active" class="page-link" href="#" v-html="link.label"></a>
+                        <li v-for="link in pagination" class="page-item" :class="{ 'disabled' : link.active }">
+                            <a @click.prevent="paginatedResult(+link.label)" class="page-link" href="#" v-html="link.label"></a>
                         </li>
                       </ul>
                 </div>

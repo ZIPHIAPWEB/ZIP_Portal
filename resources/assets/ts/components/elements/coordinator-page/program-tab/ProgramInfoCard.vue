@@ -13,7 +13,7 @@ const flightDetails = ref();
 </script>
 
 <template>
-    <div class="card card-default">
+    <div class="card card-default" style="height: 75vh; overflow-y: scroll; padding-right: 1px;">
         <div class="card-body p-0">
             <HostCompanyDetails />
             <VisaInterviewDetails />

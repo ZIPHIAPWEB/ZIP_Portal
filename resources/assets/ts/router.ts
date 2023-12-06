@@ -113,7 +113,7 @@ router.beforeEach((to, from, next) => {
             }
         }
 
-        if (authStore.getAuthRole == 'coordinator') {
+        if (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting') {
 
             if (authStore.getIsAuthenticate && !authStore.getIsVerified && to.name !== 'coordinator-admin-veriff') {
 

@@ -78,7 +78,7 @@ export const useAuthStore = defineStore({
 
                 this.isLoading = false;
 
-                if (this.auth.role == 'coordinator') {
+                if (this.auth.role == 'coordinator' || this.auth.role == 'accounting') {
 
                     if (this.auth.is_verified) {
 

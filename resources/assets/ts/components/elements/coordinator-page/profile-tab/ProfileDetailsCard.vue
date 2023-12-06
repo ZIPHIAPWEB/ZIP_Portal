@@ -52,7 +52,7 @@ const setStatusToCancelled = () => {
             />
         </PopUp>
     </Teleport>
-    <div class="card card-default">
+    <div class="card card-default" style="height: 75vh; overflow-y: scroll; padding-right: 1px;">
         <div class="card-body p-0">
             <table class="table table-striped table-bordered table-sm" style="margin-bottom: 20px;">
                 <tbody>
@@ -177,7 +177,7 @@ const setStatusToCancelled = () => {
                     <tbody>
                         <tr>
                             <td colspan="2">
-                                <span>Father</span>
+                                <b>Father</b>
                             </td>
                         </tr>
                         <tr>
@@ -235,7 +235,7 @@ const setStatusToCancelled = () => {
                     <tbody>
                         <tr>
                             <td colspan="2">
-                                <span>Mother</span>
+                                <b>Mother</b>
                             </td>
                         </tr>
                         <tr>

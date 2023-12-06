@@ -26,7 +26,7 @@ class UserResource extends JsonResource
             'application_status' => $this->student->application_status ?? "",
             'application_id' => $this->student->application_id ?? "",
             'program' => $this->student->program->display_name ?? "",
-            'role' => $this->getUserRole()->name
+            'role' => $this->getUserRole()->name ?? ""
         ];
     }
 }

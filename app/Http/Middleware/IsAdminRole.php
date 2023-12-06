@@ -18,7 +18,9 @@ class IsAdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->getUserRole()->name != 'coordinator') {
+        $authRole = Auth::user()->getUserRole()->name;
+
+        if ($authRole == 'student') {
 
             return response()->json([
                 'message' => 'Unable to proceed!',
