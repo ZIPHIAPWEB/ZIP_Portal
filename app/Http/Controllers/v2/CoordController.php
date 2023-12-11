@@ -75,6 +75,8 @@ class CoordController extends Controller
 
     public function getStudents(Request $request)
     {
+        $isSearch = $request->has('search');
+
         $query = Student::query();
 
         $query->when($request->input('program') !== null, function ($q) use ($request) {
@@ -82,17 +84,22 @@ class CoordController extends Controller
             return $q->where('program_id', (new ConvertProgramToIdAction())->execute($request->input('program')));
         });
 
-        $query->when($request->input('from_date') !== null, function ($q) use ($request) {
+        $query->when($isSearch && $request->input('search') !== null, function ($q) use ($request) {
+
+            return $q->where('last_name', 'like', '%'.$request->input('search').'%');
+        });
+
+        $query->when(!$isSearch && $request->input('from_date') !== null, function ($q) use ($request) {
 
             return $q->whereBetween('created_at', [$request->input('from_date'), $request->input('to_date') ?? Carbon::now()->toDateString()]);
         });
 
-        $query->when($request->input('status') !== null, function ($q) use ($request) {
+        $query->when(!$isSearch && $request->input('status') !== null, function ($q) use ($request) {
 
             return $q->where('application_status', $request->input('status'));
         });
 
-        $students = $query->paginate(20);
+        $students = $query->orderBy('created_at', 'desc')->paginate(20);
 
         return CoordStudentResource::collection($students);
     }

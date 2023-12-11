@@ -116,6 +116,11 @@ export default {
         return ApiRequest.get(`/coord/get-students?program=${program}` + forFilter);
     },
 
+    getSearchStudentLastName(program : string | string[], toBeSearch : string) {
+
+        return ApiRequest.get(`/coord/get-students?program=${program}&search=${toBeSearch}`);
+    },
+
     getPaginatedResult(page : number, program : string | string[], from : string, to : string, status : string) {
         let forFilter = ``;
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
+import SearchStudent from '../../components/elements/coordinator-page/SearchStudent.vue';
+
 import { useCoordStudent } from '../../store/coordStudents'
 import CoordinatorApi from '../../services/CoordinatorApi';
 
@@ -99,15 +101,7 @@ const exportStudentDatas = async () => {
                         </div>
                     </div>
                     <div>
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-        
-                            <div class="input-group-append">
-                              <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                              </button>
-                            </div>
-                          </div>
+                        <SearchStudent :program="program" />
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0" style="height: 75vh">
@@ -145,7 +139,7 @@ const exportStudentDatas = async () => {
                                     <span v-if="student.application_status == 'Confirmed'" class="badge bg-confirmed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-for-visa-interview">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-visa-interview">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'For PDOS & CFO'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Program Proper'" class="badge bg-program-proper">{{ student.application_status }}</span>
                                     <span v-if="student.application_status.includes('Cancel')" class="badge bg-visa-denied">{{ student.application_status }}</span>

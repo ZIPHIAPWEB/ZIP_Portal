@@ -40,10 +40,23 @@ export const useCoordStudent = defineStore({
     }),
     getters: {},
     actions: {
-        async exportCoordStudentsData() {
-            
+        async searchStudentData(program : string | string[], toBeSearch : string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+                
+                const response = (await CoordinatorApi.getSearchStudentLastName(program, toBeSearch)).data;
+                this.students = response.data;
+                this.pagination = response.data.meta.links;
+                
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
         },
-
         async loadCoordStudentsData(program : string | string[]) {
             try {
                 this.isLoading = true;
