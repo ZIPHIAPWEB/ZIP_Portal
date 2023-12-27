@@ -47,7 +47,7 @@ export const useCoordStudent = defineStore({
                 
                 const response = (await CoordinatorApi.getSearchStudentLastName(program, toBeSearch)).data;
                 this.students = response.data;
-                this.pagination = response.data.meta.links;
+                this.pagination = response.meta.links;
                 
                 this.isLoading = false;
                 this.isSuccess = true;

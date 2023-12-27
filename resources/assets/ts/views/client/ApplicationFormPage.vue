@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AuthLayout from '../../components/layouts/AuthLayout.vue';
 import OverlayLoading from '../../components/elements/OverlayLoading.vue';
+import PopUp from '../../components/elements/PopUp.vue';
 
 import { ref, reactive, computed, onMounted } from 'vue';
 import {useStudentAppFormStore} from '../../store/studentAppForm';
@@ -16,6 +17,7 @@ import { SchoolType } from '../../types/SchoolType';
 import DegreeAPI from '../../services/DegreeAPI';
 import { DegreeType } from '../../types/DegreeType';
 import { storeToRefs } from 'pinia';
+import TermsAndConditionCard from '../../components/elements/TermsAndConditionCard.vue';
 
 const applicationFormData = reactive<ApplicationFormType>({
     firstName: '',
@@ -40,6 +42,7 @@ const applicationFormData = reactive<ApplicationFormType>({
 
 const otherDegree = ref<String>(''); 
 const isOtherDegreeShow = ref<Boolean>(false);
+const isTermAndConditionOpen = ref<Boolean>(true);
 const programs = ref<ProgramType[]>([]);
 const schools = ref<SchoolType[]>([]);
 const degrees = ref<DegreeType[]>([]);
@@ -98,6 +101,17 @@ const submitApplicationForm = async () => {
 
 <template>
     <AuthLayout>
+        <PopUp 
+            v-if="isTermAndConditionOpen"
+            title="Terms and Conditions" 
+            size="lg" 
+            button-text="I accept"
+            :with-buttons="true"
+            :with-close="false"
+            @trigger-button-event="isTermAndConditionOpen = false"
+        >
+            <TermsAndConditionCard />
+        </PopUp>
         <div class="card card-primary">
             <OverlayLoading v-if="isLoading" />
             <form @submit.prevent="submitApplicationForm">

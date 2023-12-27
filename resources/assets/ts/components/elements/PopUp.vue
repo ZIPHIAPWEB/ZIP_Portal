@@ -10,11 +10,23 @@ const props = defineProps({
     size: {
         type: String,
         default: 'md'
+    },
+    withClose: {
+        type: Boolean,
+        default: true
+    },
+    withButtons: {
+        type: Boolean,
+        default: false
+    },
+    buttonText: {
+        type: String
     }
 })
 
 const emits = defineEmits<{
-    (e: 'triggerCloseEvent') : void
+    (e: 'triggerCloseEvent') : void,
+    (e: 'triggerButtonEvent') : void
 }>();
 
 </script>
@@ -24,12 +36,15 @@ const emits = defineEmits<{
         <div class="card card-primary card-outline" :class="`--${props.size}`">
             <div class="card-header" style="display: flex">
                 <h3 style="flex: 1;">{{ props.title }}</h3>
-                <button @click="emits('triggerCloseEvent')" class="close">
+                <button v-if="props.withClose" @click="emits('triggerCloseEvent')" class="close">
                     <span>x</span>
                 </button>
             </div>
             <div class="card-body">
                 <slot />
+            </div>
+            <div v-if="props.withButtons" class="card-footer">
+                <button @click="emits('triggerButtonEvent')" class="btn btn-success btn-sm">{{ props.buttonText ?? "Ok" }}</button>
             </div>
         </div>
     </div>

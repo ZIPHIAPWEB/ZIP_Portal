@@ -66,7 +66,9 @@ class AuthController extends Controller
             'vToken' => str_random(60),
         ]);
 
-        // $user->sendEmailVerification();
+        $user->attachRole('student');
+
+        $user->sendEmailVerification();
 
         return response()->json([
             'status_code' => 201,
