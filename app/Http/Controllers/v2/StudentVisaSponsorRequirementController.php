@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\CreateUserLogAction;
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentSponsorResource;
@@ -40,6 +41,8 @@ class StudentVisaSponsorRequirementController extends Controller
             'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'visa')
         ]);
 
+        (new CreateUserLogAction())->execute('Uploaded a ' . $requirement->display_name);
+
         return new StudentSponsorResource($uploadedSponsorRequirement);
     }
 
@@ -52,6 +55,8 @@ class StudentVisaSponsorRequirementController extends Controller
         $user->studentVisaSponsor()
             ->where('id', $requirement->id)
             ->delete();
+
+        (new CreateUserLogAction())->execute('Deleted ' . $requirement->display_name);
 
         return response()->json([
             'message' => 'Requirement deleted successfully'
@@ -68,6 +73,8 @@ class StudentVisaSponsorRequirementController extends Controller
         }
 
         $file = Storage::get($requirement->path);
+
+        (new CreateUserLogAction())->execute('Downloaded a ' . $requirement->display_name . ' template');
 
         return response()->download($file);
     }

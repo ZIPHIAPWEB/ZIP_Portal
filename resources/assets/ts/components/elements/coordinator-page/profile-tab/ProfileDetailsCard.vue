@@ -39,7 +39,7 @@ const setStatusToCancelled = () => {
 
 <template>
     <Teleport to="body">
-        <PopUp v-if="isProgramEditOpen" title="Update program" size="md">
+        <PopUp v-if="isProgramEditOpen" title="Update program" size="md" :with-close="false">
             <UpdateProgramModal
                 @updatedEvent="isProgramEditOpen = false"
                 @cancelEvent="isProgramEditOpen = false"

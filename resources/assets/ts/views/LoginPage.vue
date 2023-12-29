@@ -57,7 +57,7 @@ const login = async () => {
                 </div>
             </form>
 
-            <div class="social-auth-links text-center mt-2 mb-3">
+            <div v-if="false" class="social-auth-links text-center mt-2 mb-3">
                 <a href="#" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                 </a>

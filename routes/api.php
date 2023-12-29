@@ -4,6 +4,9 @@ Route::post('/login', [App\Http\Controllers\v2\AuthController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\v2\AuthController::class, 'register']);
 Route::post('/send-forgot-password', [App\Http\Controllers\v2\AuthController::class, 'sendResetLinkEmail']);
 
+Route::get('/provider/{provider}/redirect', [App\Http\Controllers\v2\AuthProviderController::class, 'redirectToProvider']);
+Route::get('/provider/{provider}/callback', [App\Http\Controllers\v2\AuthProviderController::class, 'handleProviderCallback']);
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/logout', [App\Http\Controllers\v2\AuthController::class, 'logout']);

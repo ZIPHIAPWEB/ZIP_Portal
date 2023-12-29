@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\CreateUserLogAction;
 use App\Experience;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExperienceResource;
@@ -116,6 +117,8 @@ class StudentController extends Controller
             'fb_email' => $request->fb_email
         ]);
 
+        (new CreateUserLogAction())->execute('Updated his/her personal details');
+
         return response()->noContent();
     }
 
@@ -134,6 +137,8 @@ class StudentController extends Controller
             'mobile_number' => $request->mobile_number,
             'home_number' => $request->home_number,
         ]);
+
+        (new CreateUserLogAction())->execute('Updated his/her contact details');
 
         return response()->noContent();
     }
@@ -160,6 +165,8 @@ class StudentController extends Controller
             ]
         );
 
+        (new CreateUserLogAction())->execute('Updated his/her tertiary details');
+
         return response()->noContent();
     }
 
@@ -183,6 +190,8 @@ class StudentController extends Controller
                 'date_graduated' => $request->date_graduated
             ]
         );
+
+        (new CreateUserLogAction())->execute('Updated his/her secondary details');
 
         return response()->noContent();
     }
@@ -210,6 +219,8 @@ class StudentController extends Controller
             ]
         );
 
+        (new CreateUserLogAction())->execute('Updated his/her father details');
+
         return response()->noContent();
     }
 
@@ -236,6 +247,8 @@ class StudentController extends Controller
             ]
         );
 
+        (new CreateUserLogAction())->execute('Updated his/her mother details');
+
         return response()->noContent();
     }
 
@@ -255,6 +268,8 @@ class StudentController extends Controller
             'end_date' => $request->end_date,
             'description' => $request->description
         ]);
+
+        (new CreateUserLogAction())->execute('Added a work experience');
 
         return new ExperienceResource($experience);
     }
@@ -276,6 +291,8 @@ class StudentController extends Controller
             'description' => $request->description
         ]);
 
+        (new CreateUserLogAction())->execute('Updated his/her work experience');
+
         return new ExperienceResource($experience);
     }
 
@@ -288,6 +305,8 @@ class StudentController extends Controller
     public function deleteWorkExperience(Experience $experience)
     {
         $experience->delete();
+
+        (new CreateUserLogAction())->execute('Deleted his/her work experience');
 
         return response()->noContent();
     }

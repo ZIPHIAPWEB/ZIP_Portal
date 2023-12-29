@@ -12,15 +12,16 @@ class ApplicationFormController extends Controller
         $user = auth()->user();
 
         $user->student()->create([
+            'application_status' => 'New Applicant',
             'first_name' =>  $request->input('firstName'),
             'middle_name' => $request->input('middleName'),
             'last_name' =>  $request->input('lastName'),
             'birthdate' =>  $request->input('birthDate'),
             'gender' =>  $request->input('gender'),
             'permanent_address' =>  $request->input('permanentAddress'),
-            'provincial_address' => $request->input('provincialAddress'),
+            'provincial_address' => $request->input('provincialAddress') ?? 'n/a',
             'year' =>  $request->input('yearLevel'),
-            'home_number' =>  $request->input('homeNumber'),
+            'home_number' =>  $request->input('homeNumber') ?? 'n/a',
             'mobile_number' =>  $request->input('mobileNumber'),
             'program_id' =>  $request->input('programId'),
             'fb_email' =>  $request->input('fbLink'),

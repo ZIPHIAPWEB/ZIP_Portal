@@ -118,15 +118,15 @@ const submitApplicationForm = async () => {
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-4">
-                            <label for="first-name">First Name <span class="text-red">*</span></label>
+                            <label for="first-name">First name <span class="text-red">*</span></label>
                             <input v-model="applicationFormData.firstName" :class="{ 'is-invalid' : 'firstName' in error }" type="text" class="form-control" placeholder="Juan">
                         </div>
                         <div class="col-4">
-                            <label for="middle-name">Middle Name</label>
+                            <label for="middle-name">Middle name</label>
                             <input v-model="applicationFormData.middleName" :class="{ 'is-invalid' : 'middleName' in error }" type="text" class="form-control" placeholder="Dela Cruz">
                         </div>
                         <div class="col-4">
-                            <label for="last-name">Last Name <span class="text-red">*</span></label>
+                            <label for="last-name">Last name <span class="text-red">*</span></label>
                             <input v-model="applicationFormData.lastName" :class="{ 'is-invalid' : 'lastName' in error }" type="text" class="form-control" placeholder="Dela Cruz">
                         </div>
                     </div>
@@ -150,13 +150,13 @@ const submitApplicationForm = async () => {
                             <input type="text" v-model="applicationFormData.permanentAddress" :class="{ 'is-invalid' : 'permanentAddress' in error }" class="form-control">
                         </div>
                         <div class="col-6">
-                            <label for="provincial-address">Provincial address <span class="text-red">*</span></label>
+                            <label for="provincial-address">Provincial address</label>
                             <input type="text" v-model="applicationFormData.provincialAddress" :class="{ 'is-invalid' : 'provincialAddress' in error }" class="form-control">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
-                            <label for="home-number">Home Number <span class="text-red">*</span></label>
+                            <label for="home-number">Home Number</label>
                             <input v-model="applicationFormData.homeNumber" :class="{ 'is-invalid' : 'homeNumber' in error }" type="text" class="form-control" placeholder="123456789">
                         </div>
                         <div class="col-6">
@@ -173,7 +173,7 @@ const submitApplicationForm = async () => {
                             </select>
                         </div>
                         <div class="col-6">
-                            <label for="year-level">Year Level <span class="text-red">*</span></label>
+                            <label for="year-level">Year level <span class="text-red">*</span></label>
                             <select v-model="applicationFormData.yearLevel" :class="{ 'is-invalid' : 'yearLevel' in error }" class="form-control">
                                 <option value="">Select year level</option>
                                 <option value="First Year">First Year</option>
@@ -190,7 +190,7 @@ const submitApplicationForm = async () => {
                             <input v-model="applicationFormData.skypeId" :class="{ 'is-invalid' : 'skypeId' in error }" type="text" class="form-control">
                         </div>
                         <div class="col-6">
-                            <label for="fb-link">Facebook Link</label>
+                            <label for="fb-link">Facebook link</label>
                             <input v-model="applicationFormData.fbLink" :class="{ 'is-invalid' : 'fbLink' in error }" type="text" class="form-control">
                         </div>
                     </div>
@@ -218,13 +218,13 @@ const submitApplicationForm = async () => {
                     </div>
                     <div class="row mb-2">
                         <div class="col-12">
-                            <label for="address">Address <span class="text-red">*</span></label>
+                            <label for="address">School address <span class="text-red">*</span></label>
                             <input v-model="applicationFormData.address" :class="{ 'is-invalid' : 'address' in error }" type="text" class="form-control" placeholder="Address">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <label for="start-date">Start Date <span class="text-red">*</span></label>
+                            <label for="start-date">Start date <span class="text-red">*</span></label>
                             <input v-model="applicationFormData.startDate" :class="{ 'is-invalid' : 'startDate' in error }" type="date" class="form-control">
                         </div>
                         <div class="col-6">

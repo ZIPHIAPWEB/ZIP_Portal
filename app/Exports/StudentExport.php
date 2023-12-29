@@ -64,7 +64,7 @@ class StudentExport implements FromCollection, WithHeadings
 
         $query->when($this->status !== '', function ($q) {
 
-            return $q->where('application_status', '%'. $this->status . '%');
+            return $q->where('application_status', 'like', '%'. $this->status . '%');
         });
 
         $query->when($this->programId, function ($q) {
@@ -73,21 +73,6 @@ class StudentExport implements FromCollection, WithHeadings
         });
 
         $students = $query->orderBy('created_at', 'DESC')->get();
-
-        // if ($this->programId) {
-        //     $students = Student::query()
-        //         ->orWhereBetween('created_at', [$this->start, $this->end])
-        //         ->orWhere('application_status', 'like', '%' . $this->status . '%')
-        //         ->where('program_id', 'like', '%' . $this->programId . '%')
-        //         ->orderBy('created_at', 'desc')
-        //         ->get();
-        // } else {
-        //     $students = Student::query()
-        //         ->orWhereBetween('created_at', [$this->start, $this->end])
-        //         ->orWhere('application_status', 'like', '%' . $this->status . '%')
-        //         ->orderBy('created_at', 'desc')
-        //         ->get();
-        // }
 
         return ExportStudentResource::collection($students);
     }

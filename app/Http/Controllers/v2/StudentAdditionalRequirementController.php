@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v2;
 
+use App\Actions\CreateUserLogAction;
 use App\Actions\UploadedFilePathAction;
 use App\AdditionalRequirement;
 use App\Http\Controllers\Controller;
@@ -40,6 +41,8 @@ class StudentAdditionalRequirementController extends Controller
             'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'additional')
         ]);
 
+        (new CreateUserLogAction())->execute('Uploaded a ' . $requirement->display_name);
+
         return new StudentAdditionalResource($uploadedAdditionalRequirement);
     }
 
@@ -52,6 +55,8 @@ class StudentAdditionalRequirementController extends Controller
         $user->studentAdditional()
             ->where('id', $requirement->id)
             ->delete();
+
+        (new CreateUserLogAction())->execute('Deleted ' . $requirement->display_name);
 
         return response()->json([
             'message' => 'Requirement deleted successfully'
@@ -68,6 +73,8 @@ class StudentAdditionalRequirementController extends Controller
         }
 
         $file = Storage::get($requirement->path);
+
+        (new CreateUserLogAction())->execute('Downloaded a ' . $requirement->display_name. ' template.');
 
         return response()->download($file);
     }

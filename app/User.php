@@ -46,6 +46,11 @@ class User extends Authenticatable
             ->first() ?? null;
     }
 
+    public function socialProvider()
+    {
+        return $this->hasMany(SocialProvider::class, 'user_id', 'id');
+    }
+
     public function experiences()
     {
         return $this->hasMany(Experience::class, 'user_id', 'id');
@@ -124,5 +129,12 @@ class User extends Authenticatable
     public function getApplicationStatus()
     {
         return $this->student->applicaton_status ?? null;
+    }
+
+    public function createLog($activity)
+    {
+        $this->logs()->create([
+            'activity' => $activity
+        ]);
     }
 }
