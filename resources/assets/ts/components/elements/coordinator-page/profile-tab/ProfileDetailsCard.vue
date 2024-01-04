@@ -365,7 +365,7 @@ const setStatusToCancelled = () => {
             <section id="education-section" style="margin-bottom: 10px;">
                 <label  class="control-label ml-2">Work Experience/On-the-Job Training</label>
 
-                <table v-for="(exp, index) in experiences" :key="index" class="table table-striped table-bordered table-sm mb-4">
+                <table v-if="experiences.length > 0" v-for="(exp, index) in experiences" :key="index" class="table table-striped table-bordered table-sm mb-4">
                     <tbody>
                         <tr>
                             <td>
@@ -396,6 +396,16 @@ const setStatusToCancelled = () => {
                                 <span>End date</span>
                             </td>
                             <td>{{ exp.end_date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table v-if="experiences.length == 0" class="table table-striped table-bordered table-sm mb-4">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <span>No record</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

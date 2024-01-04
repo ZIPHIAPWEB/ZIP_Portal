@@ -5,8 +5,11 @@ namespace App\Http\Controllers\v2;
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentPaymentResource;
+use App\Notifications\AccountingNotification;
 use App\PaymentRequirement;
+use App\Program;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 
 class StudentPaymentRequirementController extends Controller
 {
@@ -41,6 +44,16 @@ class StudentPaymentRequirementController extends Controller
             'acknowledgement' => false,
             'path' => (new UploadedFilePathAction())->execute($request->file('file'), 'payment')
         ]);
+
+        if (config('app.env') == 'production' || config('app.env') == 'staging') {
+
+            Notification::route('mail', 'accounting@ziptravel.com.ph')
+                ->notify(new AccountingNotification([
+                    'full_name' => $user->student->first_name . ' ' . $user->student->last_name,
+                    'program'   => Program::find($user->student->program_id)->display_name,
+                    'payment'   => $uploadedPayment
+                ]));
+        }
 
         return new StudentPaymentResource($uploadedPayment);
     }

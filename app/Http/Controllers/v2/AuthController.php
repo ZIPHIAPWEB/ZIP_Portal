@@ -68,7 +68,10 @@ class AuthController extends Controller
 
         $user->attachRole('student');
 
-        $user->sendEmailVerification();
+        if (config('app.env') == 'production' || config('app.env') == 'staging') {
+
+            $user->sendEmailVerification();
+        }
 
         return response()->json([
             'status_code' => 201,

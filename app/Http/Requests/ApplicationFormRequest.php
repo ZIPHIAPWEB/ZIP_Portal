@@ -31,7 +31,6 @@ class ApplicationFormRequest extends FormRequest
             'yearLevel' =>  'required',
             'permanentAddress'  => 'required',
             'provincialAddress' => 'required',
-            'homeNumber'    =>  'required',
             'mobileNumber'  =>  'required',
             'programId' =>  'required',
             'fbLink'    =>  'required',

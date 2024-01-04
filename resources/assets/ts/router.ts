@@ -93,36 +93,36 @@ const router = createRouter({
     routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//     const authStore = useAuthStore();
+router.beforeEach((to, from, next) => {
+    const authStore = useAuthStore();
 
-//     if (to.meta.requiresAuth && !authStore.getIsAuthenticate && to.name !== 'login') {
+    if (to.meta.requiresAuth && !authStore.getIsAuthenticate && to.name !== 'login') {
 
-//         next({ name: 'login'});
-//     } else {
+        next({ name: 'login'});
+    } else {
         
-//         if(authStore.getAuthRole == 'student') {
-//             if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
+        if(authStore.getAuthRole == 'student') {
+            if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
 
-//                 next({ name: 'email-verification'});
-//             } 
+                next({ name: 'email-verification'});
+            } 
     
-//             if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
+            if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
     
-//                 next({ name: 'application-form'});
-//             }
-//         }
+                next({ name: 'application-form'});
+            }
+        }
 
-//         if (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting') {
+        if (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting') {
 
-//             if (authStore.getIsAuthenticate && !authStore.getIsVerified && to.name !== 'coordinator-admin-veriff') {
+            if (authStore.getIsAuthenticate && !authStore.getIsVerified && to.name !== 'coordinator-admin-veriff') {
 
-//                 next({ name: 'coordinator-admin-veriff' });
-//             } 
-//         }
+                next({ name: 'coordinator-admin-veriff' });
+            } 
+        }
 
-//         next();
-//     }
-// })
+        next();
+    }
+})
 
 export default router;
