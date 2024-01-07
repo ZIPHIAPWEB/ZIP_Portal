@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IsStudentRole
+class IsSuperadminRole
 {
     /**
      * Handle an incoming request.
@@ -18,14 +18,15 @@ class IsStudentRole
      */
     public function handle(Request $request, Closure $next)
     {
+
         $userRole = Auth::user()->getUserRole();
 
-        if ($userRole && $userRole->name != 'student') {
+        if ($userRole && ($userRole->name == 'student' || $userRole->name == 'coordinator' || $userRole->name == 'accounting')) {
 
             return response()->json([
                 'message' => 'Unable to proceed!',
                 'status' => Response::HTTP_FORBIDDEN
-            ], Response::HTTP_FORBIDDEN);
+            ]);
         }
 
         return $next($request);

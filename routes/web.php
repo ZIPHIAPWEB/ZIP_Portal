@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Storage;
 
+Route::get('/test-route', [App\Http\Controllers\v2\SuperadminStudentController::class, 'getStudents']);
+
 Route::get('/download-exported/{filename}', function ($filename) {
     if (!Storage::disk('local')->exists($filename)) {
         abort(404, 'File not found');

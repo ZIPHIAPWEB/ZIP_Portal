@@ -121,4 +121,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::put('/student/{userId}/payment/{requirementId}', [App\Http\Controllers\v2\AccountingController::class, 'acknowledgePayment']);
     });
+
+    Route::prefix('sa')->middleware(['is_superadmin'])->group(function () {
+
+        Route::get('/students', [App\Http\Controllers\v2\SuperadminStudentController::class, 'getStudents']);
+        Route::put('/student/{user}/verify', [App\Http\Controllers\v2\SuperadminStudentController::class, 'verifyUser']);
+        Route::delete('/student/{user}/delete', [App\Http\Controllers\v2\SuperadminStudentController::class, 'deleteUser']);
+
+        Route::get('/roles', [App\Http\Controllers\v2\RoleController::class, 'index']);
+        Route::post('/roles', [App\Http\Controllers\v2\RoleController::class, 'store']);
+        Route::get('/roles/{role}', [App\Http\Controllers\v2\RoleController::class, 'show']);
+        Route::put('/roles/{role}/update', [App\Http\Controllers\v2\RoleController::class, 'update']);
+        Route::delete('/roles/{role}/delete', [App\Http\Controllers\v2\RoleController::class, 'delete']);
+    });
 });

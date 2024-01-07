@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
 
 const studentFlightDetailsStore = useStudentFlightDetailsStore();
-const { isLoading, isSuccess, flightDetails } = storeToRefs(studentFlightDetailsStore);
+const { isLoading, isSuccess, mnlDeparture, usArrival, usDeparture, mnlArrival } = storeToRefs(studentFlightDetailsStore);
 
 onMounted(async () => {
     await studentFlightDetailsStore.loadStudentFlightDetails();
@@ -21,19 +21,19 @@ onMounted(async () => {
                 </tr>
                 <tr>
                     <td style="width: 40%">Date</td>
-                    <td>{{ flightDetails?.mnl_departure_date }}</td>
+                    <td>{{ mnlDeparture?.mnl_departure_date }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Time</td>
-                    <td>{{ flightDetails?.mnl_departure_time }}</td>
+                    <td>{{ mnlDeparture?.mnl_departure_time }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Flight No.</td>
-                    <td>{{ flightDetails?.mnl_departure_flight_no }}</td>
+                    <td>{{ mnlDeparture?.mnl_departure_flight_no }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Airline</td>
-                    <td>{{ flightDetails?.mnl_departure_airline }}</td>
+                    <td>{{ mnlDeparture?.mnl_departure_airline }}</td>
                 </tr>
             </tbody>
         </table>
@@ -45,19 +45,19 @@ onMounted(async () => {
                 </tr>
                 <tr>
                     <td style="width: 40%">Date</td>
-                    <td>{{ flightDetails?.us_arrival_date }}</td>
+                    <td>{{ usArrival?.us_arrival_date }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Time</td>
-                    <td>{{ flightDetails?.us_arrival_time }}</td>
+                    <td>{{ usArrival?.us_arrival_time }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Flight No.</td>
-                    <td>{{ flightDetails?.us_arrival_flight_no }}</td>
+                    <td>{{ usArrival?.us_arrival_flight_no }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Airline</td>
-                    <td>{{ flightDetails?.us_arrival_airline }}</td>
+                    <td>{{ usArrival?.us_arrival_airline }}</td>
                 </tr>
             </tbody>
         </table>
@@ -69,19 +69,19 @@ onMounted(async () => {
                 </tr>
                 <tr>
                     <td style="width: 40%">Date</td>
-                    <td>{{ flightDetails?.us_departure_date }}</td>
+                    <td>{{ usDeparture?.us_departure_date }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Time</td>
-                    <td>{{ flightDetails?.us_departure_time }}</td>
+                    <td>{{ usDeparture?.us_departure_time }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Flight No.</td>
-                    <td>{{ flightDetails?.us_departure_flight_no }}</td>
+                    <td>{{ usDeparture?.us_departure_flight_no }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Airline</td>
-                    <td>{{ flightDetails?.us_departure_airline }}</td>
+                    <td>{{ usDeparture?.us_departure_airline }}</td>
                 </tr>
             </tbody>
         </table>
@@ -93,19 +93,19 @@ onMounted(async () => {
                 </tr>
                 <tr>
                     <td style="width: 40%">Date</td>
-                    <td>{{ flightDetails?.mnl_arrival_date }}</td>
+                    <td>{{ mnlArrival?.mnl_arrival_date }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Time</td>
-                    <td>{{ flightDetails?.mnl_arrival_time }}</td>
+                    <td>{{ mnlArrival?.mnl_arrival_time }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Flight No.</td>
-                    <td>{{ flightDetails?.mnl_arrival_flight_no }}</td>
+                    <td>{{ mnlArrival?.mnl_arrival_flight_no }}</td>
                 </tr>
                 <tr>
                     <td style="width: 40%">Airline</td>
-                    <td>{{ flightDetails?.mnl_arrival_airline }}</td>
+                    <td>{{ mnlArrival?.mnl_arrival_airline }}</td>
                 </tr>
             </tbody>
         </table>
