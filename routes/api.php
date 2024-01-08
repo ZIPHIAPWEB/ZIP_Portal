@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::post('/login', [App\Http\Controllers\v2\AuthController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\v2\AuthController::class, 'register']);
 Route::post('/send-forgot-password', [App\Http\Controllers\v2\AuthController::class, 'sendResetLinkEmail']);
@@ -133,5 +135,47 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/roles/{role}', [App\Http\Controllers\v2\RoleController::class, 'show']);
         Route::put('/roles/{role}/update', [App\Http\Controllers\v2\RoleController::class, 'update']);
         Route::delete('/roles/{role}/delete', [App\Http\Controllers\v2\RoleController::class, 'delete']);
+
+        Route::get('/programs', [App\Http\Controllers\v2\SuperadminProgramController::class, 'index']);
+        Route::post('/programs', [App\Http\Controllers\v2\SuperadminProgramController::class, 'store']);
+        Route::get('/programs/{program}', [App\Http\Controllers\v2\SuperadminProgramController::class, 'show']);
+        Route::put('/programs/{program}/update', [App\Http\Controllers\v2\SuperadminProgramController::class, 'update']);
+        Route::delete('/programs/{program}/delete', [App\Http\Controllers\v2\SuperadminProgramController::class, 'delete']);
+
+        Route::get('/visa-sponsors', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'index']);
+        Route::post('/visa-sponsors', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'store']);
+        Route::get('/visa-sponsors/{sponsor}', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'show']);
+        Route::put('/visa-sponsors/{sponsor}/update', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'update']);
+        Route::delete('/visa-sponsors/{sponsor}/delete', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'delete']);
+
+        Route::get('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'index']);
+        Route::post('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'store']);
+        Route::get('/host-companies/{hostCompany}', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'show']);
+        Route::put('/host-companies/{hostCompany}/update', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'update']);
+        Route::delete('/host-companies/{hostCompany}/delete', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'delete']);
+
+        Route::get('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'index']);
+        Route::post('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'store']);
+        Route::get('/schools/{school}', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'show']);
+        Route::put('/schools/{school}/update', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'update']);
+        Route::delete('/schools/{school}/delete', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'delete']);
+
+        Route::get('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'index']);
+        Route::post('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'store']);
+        Route::get('/positions/{position}', [App\Http\Controllers\v2\SuperadminPositionController::class, 'show']);
+        Route::put('/positions/{position}/update', [App\Http\Controllers\v2\SuperadminPositionController::class, 'update']);
+        Route::delete('/positions/{position}/delete', [App\Http\Controllers\v2\SuperadminPositionController::class, 'delete']);
+
+        Route::get('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'index']);
+        Route::post('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'store']);
+        Route::get('/states/{state}', [App\Http\Controllers\v2\SuperadminStateController::class, 'show']);
+        Route::put('/states/{state}/update', [App\Http\Controllers\v2\SuperadminStateController::class, 'update']);
+        Route::delete('/states/{state}/delete', [App\Http\Controllers\v2\SuperadminStateController::class, 'delete']);
+
+        Route::get('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'index']);
+        Route::post('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'store']);
+        Route::get('/degrees/{degree}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
+        Route::put('/degrees/{degree}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
+        Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
     });
 });
