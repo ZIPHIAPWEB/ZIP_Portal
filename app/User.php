@@ -108,7 +108,7 @@ class User extends Authenticatable
 
     public function coordinator()
     {
-        return $this->hasOne('App\Coordinator', 'user_id', 'id');
+        return $this->hasOne(Coordinator::class, 'user_id', 'id');
     }
 
     public function logs()

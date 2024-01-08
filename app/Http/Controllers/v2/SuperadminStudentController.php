@@ -6,11 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SuperadminStudentResource;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
+use InvalidArgumentException;
 
 class SuperadminStudentController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     */
     public function getStudents(Request $request)
     {
         $isSearch = $request->has('search');
@@ -36,16 +47,11 @@ class SuperadminStudentController extends Controller
         return SuperadminStudentResource::collection($students);
     }
 
-    public function verifyUser(User $user)
-    {
-        $user->update([
-            'verified' => 1,
-            'vToken' => null
-        ]);
-
-        return response()->noContent();
-    }
-
+    /**
+     * @param User $user
+     * @return Response
+     * @throws BindingResolutionException
+     */
     public function deleteUser(User $user)
     {
         DB::transaction(function () use ($user) {
