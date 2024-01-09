@@ -126,7 +126,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('sa')->middleware(['is_superadmin'])->group(function () {
 
-        Route::put('/user/{user}/{status}', App\Http\Controllers\v2\SuperadminUserActivationController::class);
+        Route::put('/user/{user}/{status}', [App\Http\Controllers\v2\SuperadminUserActivationController::class]);
 
         Route::get('/students', [App\Http\Controllers\v2\SuperadminStudentController::class, 'getStudents']);
         Route::delete('/student/{user}/delete', [App\Http\Controllers\v2\SuperadminStudentController::class, 'deleteUser']);
@@ -183,5 +183,29 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/degrees/{degree}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
         Route::put('/degrees/{degree}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
         Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+
+        Route::get('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'index']);
+        Route::post('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'store']);
+        Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
+        Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
+        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+
+        Route::get('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'index']);
+        Route::post('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'store']);
+        Route::get('/additional-reqs/{additionalRequirement}', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'show']);
+        Route::put('/additional-reqs/{additionalRequirement}/update', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'update']);
+        Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'delete']);
+
+        Route::get('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'index']);
+        Route::post('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'store']);
+        Route::get('/payment-reqs/{paymentRequirement}', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'show']);
+        Route::put('/payment-reqs/{paymentRequirement}/update', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'update']);
+        Route::delete('/payment-reqs/{paymentRequirement}/delete', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'delete']);
+
+        Route::get('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'index']);
+        Route::post('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'store']);
+        Route::get('/sponsor-reqs/{sponsorRequirement}', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'show']);
+        Route::put('/sponsor-reqs/{sponsorRequirement}/update', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'update']);
+        Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'delete']);
     });
 });

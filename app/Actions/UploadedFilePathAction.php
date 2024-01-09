@@ -8,6 +8,12 @@ class UploadedFilePathAction
     {
         $extension = $request->getClientOriginalExtension();
 
-        return $request->storeAs(auth()->user()->email . '/' . $directory, date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
+        $user = auth()->user();
+
+        $path = (!in_array('superadmin', $user->roles)) ? $directory : $user->email . '/' . $directory;
+
+        $filename = date('Ymd') . uniqid() . '.' . $extension;
+
+        return $request->storeAs($path, $filename, 'uploaded_files');
     }
 }
