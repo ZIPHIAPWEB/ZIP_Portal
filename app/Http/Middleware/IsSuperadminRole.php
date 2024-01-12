@@ -21,7 +21,7 @@ class IsSuperadminRole
 
         $userRole = Auth::user()->getUserRole();
 
-        if ($userRole && ($userRole->name == 'student' || $userRole->name == 'coordinator' || $userRole->name == 'accounting')) {
+        if ($userRole && $userRole != 'superadmin') {
 
             return response()->json([
                 'message' => 'Unable to proceed!',

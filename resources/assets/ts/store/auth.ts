@@ -78,6 +78,13 @@ export const useAuthStore = defineStore({
 
                 this.isLoading = false;
 
+                if (this.auth.role == 'superadmin') {
+                    
+                    this.router.push({ name: 'superadmin-dashboard' });
+
+                    return;
+                }
+
                 if (this.auth.role == 'coordinator' || this.auth.role == 'accounting') {
 
                     if (this.auth.is_verified) {

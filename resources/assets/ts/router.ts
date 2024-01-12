@@ -11,6 +11,7 @@ import CoordinatorDashboardPage from './views/coordinator/DashboardPage.vue';
 import CoordinatorAdminStopperPage from './views/coordinator/AdminStopperPage.vue';
 import CoordinatorProgramPage from './views/coordinator/ProgramPage.vue';
 import SelectedStudentPageVue from './views/coordinator/SelectedStudentPage.vue';
+import SuperadminDashboardPage from './views/superadmin/DashboardPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -42,6 +43,14 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/application-form",
         name: "application-form",
         component: ApplicationFormPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/sa/dashboard",
+        name: "superadmin-dashboard",
+        component: SuperadminDashboardPage,
         meta: {
             requiresAuth: true
         }
@@ -100,8 +109,22 @@ router.beforeEach((to, from, next) => {
 
         next({ name: 'login'});
     } else {
+
+        if(authStore.getAuthRole == 'superadmin') {
+            
+            if (authStore.getIsAuthenticate && (to.name == 'login' || to.name == 'register') ) {
+
+                next({ name: 'superadmin-dashboard'});
+            }
+        }
         
         if(authStore.getAuthRole == 'student') {
+
+            if (authStore.getIsAuthenticate && authStore.getIsVerified && authStore.getIsFilled && (to.name == 'login' || to.name == 'register') ) {
+
+                next({ name: 'student-dashboard'});
+            }
+            
             if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
 
                 next({ name: 'email-verification'});
@@ -114,6 +137,11 @@ router.beforeEach((to, from, next) => {
         }
 
         if (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting') {
+
+            if (authStore.getIsAuthenticate && authStore.getIsVerified && (to.name == 'login' || to.name == 'register')) {
+
+                next({ name: 'coordinator-dashboard' });
+            } 
 
             if (authStore.getIsAuthenticate && !authStore.getIsVerified && to.name !== 'coordinator-admin-veriff') {
 
