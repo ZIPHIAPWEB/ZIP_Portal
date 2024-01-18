@@ -10,6 +10,14 @@ const props = defineProps<{
   title?: string | string[]
 }>()
 
+interface IProgramCategory {
+  id: number | string;
+  name: string;
+  display_name: string;
+  description: string;
+  programs: IProgram[]
+}
+
 interface IProgram {
   id: number | string;
   name: string;
@@ -17,7 +25,7 @@ interface IProgram {
   description: string;
 }
 
-const programs = ref<IProgram[]>([]);
+const programs = ref<IProgramCategory[]>([]);
 
 
 onMounted(async () => {
@@ -122,16 +130,16 @@ const gotoDashboard = () => {
                       </p>
                     </a>
                   </li>
-                  <li class="nav-item menu-open">
+                  <li v-for="(category, index) in programs" :key="index" :class="{ 'd-none' : category.programs.length == 0 ? true : false }" class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
-                        Student Program(s)
+                        {{ category.display_name }}
                         <i class="fas fa-angle-left right"></i>
                       </p>
                     </a>
                     <ul class="nav nav-treeview">
-                      <li v-for="(program, index) in programs" :key="index" class="nav-item">
+                      <li v-for="(program, index) in category.programs" :key="index" class="nav-item">
                         <a href="#" @click.prevent="gotoPage(program.name)" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">{{ program.display_name }}</p>

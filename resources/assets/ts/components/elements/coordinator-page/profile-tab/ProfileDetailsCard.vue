@@ -65,20 +65,20 @@ const setStatusToCancelled = () => {
                             />
                         </td>
                     </tr>
-                    <tr v-if="userInfo.application_status == 'New Applicant' || userInfo.application_status == 'Assessed'">
+                    <tr>
                         <td>
                             <span>Program</span>
                         </td>
                         <td>
                             <div style="display: flex; justify-content: space-between;">
                                 <b>{{ userInfo.program }}</b>
-                                <a v-if="!isProgramEditOpen" @click.prevent="editProgramToggle()" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
+                                <a v-if="!isProgramEditOpen && (userInfo.application_status == 'New Applicant')" @click.prevent="editProgramToggle()" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
                             </div>
                         </td>
                     </tr>
-                    <tr v-if="!(userInfo.application_status == 'New Applicant' || userInfo.application_status == 'Assessed')">
+                    <tr>
                         <td>Applicaton ID</td>
-                        <td>{{ userInfo.application_id }}</td>
+                        <td>{{ userInfo.application_id ?? '' }}</td>
                     </tr>
                 </tbody>
             </table>

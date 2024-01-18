@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <p style="padding: 10px; font-family: monospace; height: 70vh; overflow: auto; background-color: #d3d3d3; color: white;">
+    <p style="padding: 10px; font-family: monospace; height: 70vh; overflow: auto; background-color: #d3d3d3; color: black;">
 I. PRIVACY POLICY STATEMENT <br>
 In accordance with the Data Privacy Act of 2019, and recognition of our clients’ right to privacy and security of their information and documents, Zip Travel Philippines, through this privacy policy, outlines the guidelines of how the company collects, stores, shares, and processes information and documents that the applicants may provide/upload upon registering in the company portal. As such, it is understood that upon registration, the applicant authorizes Zip Travel Philippines, its affiliates, partner schools, visa sponsors, and the pertinent government entities, and organizations, to use any and all information and/or documents that he/she may provide/upload, for the processing of his/her pertinent program application. It is also understood that the applicant authorizes the company, the government of the Philippines, its agencies, and its political subdivisions, and the US government, its agencies, and its political subdivisions, to use such information and/or documents for the enforcement, and to ensure compliance with any pertinent Philippine and US law/s. Rest assured, any and all information and/or documents, provided/uploaded in the website portal shall be kept confidential, and shall not be used for anything not related to the processing of the applicant’s program application, and the enforcement and/or compliance with any pertinent Philippine and US law, without the applicant’s consent.
 <br><br>

@@ -4,6 +4,14 @@ import { onMounted, ref } from 'vue';
 
 const emit = defineEmits<{ (event: 'cancelEvent') : void, (event: 'updatedEvent') : void }>()
 
+interface IProgramCategory {
+  id: number | string;
+  name: string;
+  display_name: string;
+  description: string;
+  programs: IProgram[]
+}
+
 interface IProgram {
   id: number | string;
   name: string;
@@ -24,7 +32,14 @@ onMounted(async () => {
 const loadPrograms = async () => {
     try {
         const response = await ProgramAPI.getPrograms();
-        programs.value = response.data.data.programs;
+
+        response.data.data.programs.forEach((p : IProgramCategory) => {
+
+            p.programs.forEach(prog => {
+
+                programs.value.push(prog);
+            });
+        });
     } catch (error: any) {
         console.log(error.response);
     }

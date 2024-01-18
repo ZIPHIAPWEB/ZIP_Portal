@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +67,9 @@ class AuthController extends Controller
             'vToken' => str_random(60),
         ]);
 
-        $user->attachRole('student');
+        $studentRole = Role::query()->where('name', 'student')->first();
+
+        $user->roles()->attach($studentRole->id, ['user_type' => 'App/User']);
 
         if (config('app.env') == 'production' || config('app.env') == 'staging') {
 

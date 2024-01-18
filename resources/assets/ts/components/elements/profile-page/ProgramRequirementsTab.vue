@@ -15,7 +15,7 @@ const programReqTabs = ref<IProgramRequirementsTabs[]>([
         isActive: true
     },
     {
-        name: 'Visa',
+        name: 'Visa Sponsor',
         component: VisaTab,
         isActive: false
     },

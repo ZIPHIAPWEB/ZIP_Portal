@@ -15,8 +15,8 @@ const searchHandler = async () => {
 </script>
 
 <template>
-    <div class="input-group input-group-sm" style="width: 150px;">
-        <input v-model="searchField" type="text" name="table_search" class="form-control float-right" placeholder="Search">
+    <div class="input-group input-group-sm" style="width: 200px;">
+        <input v-model="searchField" type="text" name="table_search" class="form-control float-right" placeholder="Search by Surname">
 
         <div class="input-group-append">
           <button @click="searchHandler()" type="submit" class="btn btn-default">

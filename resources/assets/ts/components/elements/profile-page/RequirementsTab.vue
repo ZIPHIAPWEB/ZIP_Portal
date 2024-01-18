@@ -60,8 +60,8 @@ const fileUploadHandler = (e : Event) => {
         <PopUp v-if="isPopUpOpen" :title="selectedRequirement?.name" size="md">
             <form @submit.prevent="submitRequirement">
                 <div class="form-group">
-                    <label>Bank code</label>
-                    <input v-model="requirement.bank_code" type="text" class="form-control" placeholder="Enter bank code">
+                    <label>Bank name</label>
+                    <input v-model="requirement.bank_code" type="text" class="form-control" placeholder="Enter bank name">
                 </div>
                 <div class="form-group">
                     <label>Reference No.</label>

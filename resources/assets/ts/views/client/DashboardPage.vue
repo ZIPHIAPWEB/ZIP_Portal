@@ -20,10 +20,12 @@ const tabs = [
     {
         name: 'Payment Requirements',
         component: RequirementsTab,
+        isActive: true
     },
     {
         name: 'Program Requirements',
         component: ProgramRequirementsTab,
+        isActive: auth.value.application_status == 'New Applicant' ? false : true
     }
 ];
 
@@ -73,6 +75,7 @@ onMounted(async () => {
                                 v-for="(tab, index) in tabs" 
                                 :key="index"
                                 @click="selectedTab = tab.component"
+                                :class="{ 'd-none' : !tab.isActive }"
                             >
                                 {{ tab.name }}
                             </button>

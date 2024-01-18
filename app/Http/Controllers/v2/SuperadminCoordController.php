@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Coordinator;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SuperadminCoordResource;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -64,6 +65,10 @@ class SuperadminCoordController extends Controller
                 'message' => 'Unable to create a coordinator'
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        $coordinatorRole = Role::query()->where('name', 'coordinator')->first();
+
+        $createdUser->roles()->attach($coordinatorRole->id, ['user_type' => 'App/User']);
 
         $createdUser->coordinator()->create([
             'firstName' => $request->input('first_name'),

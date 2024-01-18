@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
     status: {
@@ -15,66 +15,48 @@ const emits = defineEmits<{
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
 const useCoordStudent = useCoordSelectedStudent();
 
-const updateApplicationStatus = async () => {
-    let nextStatus = "";
+const isAppStatusEdit = ref<boolean>(false);
+const appStatus = ref<string[]>([
+    'New Applicant',
+    'Assessed',
+    'Confirmed',
+    'Hired',
+    'Visa Status',
+    'For PDOS & CFO',
+    'Program Proper',
+    'Program Compliance'
+]);
 
-    if (props.status == 'New Applicant') {
+const updateApplicationStatus = async (payload : Event) => {
 
-        nextStatus = 'Assessed';
-    }
+    const target = payload.target as HTMLSelectElement;
+    const nextStatus = target.value;
 
-    if (props.status == 'Assessed') {
+    if (nextStatus == props.status) {
 
-        nextStatus = 'Confirmed';
-    }
+        isAppStatusEdit.value = false;
 
-    if (props.status == 'Confirmed') {
-
-        nextStatus = 'Hired';
-    }
-
-    if (props.status == 'Hired') {
-
-        nextStatus = 'For Visa Interview';
-    }
-
-    if (props.status == 'For Visa Interview') {
-
-        nextStatus = 'For PDOS & CFO';
-    }
-
-    if (props.status == 'For PDOS & CFO') {
-     
-        nextStatus = 'Program Proper';
-    }
-
-    if (props.status == 'Program Proper') {
-
-        nextStatus = 'Returnee';
-    }
-
-    if (props.status == 'Cancel') {
-
-    }
-
-    if (nextStatus == "") {
         return;
     }
 
     if (confirm(`Tag student to ${nextStatus}`)) {
 
         await useCoordStudent.updateProgramStatus(nextStatus);
+
+        isAppStatusEdit.value = false;
     }
 }
 </script>
 
 <template>
-    <div style="display: flex; justify-content: space-between;">
-        <b>{{ props.status }}</b>
-        <div>
-            <a @click.prevent="updateApplicationStatus" href="#" style="font-style: normal; font-weight: normal;">Progress to next step</a>
-            <span style="margin: 0 5px;">|</span>
-            <a @click.prevent="emits('cancelEventTrigger')" href="#" style="font-style: normal; font-weight: normal;">Cancel program</a>
-        </div>
+    <div v-if="!isAppStatusEdit" style="display: flex; justify-content: space-between;">
+        <span>{{ props.status }}</span>
+        <a @click.prevent="isAppStatusEdit = true" href="#">Edit</a>
+    </div>
+    <div v-else>
+        <select @change="updateApplicationStatus" class="form-control form-control-sm" id="select-app-status">
+            <option>Select status</option>
+            <option v-for="(status, index) in appStatus" :key="index" :value="status">{{ status }}</option>
+        </select>
     </div>
 </template>
