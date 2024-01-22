@@ -34,11 +34,13 @@ class SuperadminCoordController extends Controller
 
         $coords = $query->orderBy('created_at', 'desc')->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Coordinator successfully loaded',
-            'data' => SuperadminCoordResource::collection($coords)
-        ], Response::HTTP_OK);
+        // return response()->json([
+        //     'status' => Response::HTTP_OK,
+        //     'message' => 'Coordinator successfully loaded',
+        //     'data' => SuperadminCoordResource::collection($coords)
+        // ], Response::HTTP_OK);
+
+        return SuperadminCoordResource::collection($coords);
     }
 
     /**

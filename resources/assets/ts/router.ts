@@ -12,6 +12,8 @@ import CoordinatorAdminStopperPage from './views/coordinator/AdminStopperPage.vu
 import CoordinatorProgramPage from './views/coordinator/ProgramPage.vue';
 import SelectedStudentPageVue from './views/coordinator/SelectedStudentPage.vue';
 import SuperadminDashboardPage from './views/superadmin/DashboardPage.vue';
+import SuperadminStudentPage from './views/superadmin/StudentPage.vue';
+import SuperadminCoordPage from './views/superadmin/CoordinatorPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -91,6 +93,22 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/coord/student-profile/:id",
         name: "coordinator-student-profile",
         component: SelectedStudentPageVue,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/sa/students",
+        name: "superadmin-student-lists",
+        component: SuperadminStudentPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/sa/coordinators",
+        name: "superadmin-coords-lists",
+        component: SuperadminCoordPage,
         meta: {
             requiresAuth: true
         }

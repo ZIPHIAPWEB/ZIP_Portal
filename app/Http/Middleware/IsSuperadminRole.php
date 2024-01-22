@@ -21,12 +21,12 @@ class IsSuperadminRole
 
         $userRole = Auth::user()->getUserRole();
 
-        if ($userRole && $userRole != 'superadmin') {
+        if ($userRole && $userRole->name !== 'superadmin') {
 
             return response()->json([
                 'message' => 'Unable to proceed!',
                 'status' => Response::HTTP_FORBIDDEN
-            ]);
+            ], Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);

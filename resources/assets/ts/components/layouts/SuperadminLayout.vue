@@ -96,17 +96,17 @@ const gotoDashboard = () => {
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-student-lists'}">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Students</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-lists'}">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Coordinators</p>
-                        </a>
+                        </router-link>
                       </li>
                     </ul>
                   </li>
@@ -171,7 +171,15 @@ const gotoDashboard = () => {
         </aside>
 
         <div class="content-wrapper">
-
+            <section class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h1></h1>
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
+            </section>
             <section class="content">
                 <slot />
             </section>

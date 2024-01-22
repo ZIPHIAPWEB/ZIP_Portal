@@ -126,7 +126,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('sa')->middleware(['is_superadmin'])->group(function () {
 
-        Route::put('/user/{user}/{status}', [App\Http\Controllers\v2\SuperadminUserActivationController::class]);
+        Route::put('/user/{user}/{status}', \v2\SuperadminUserActivationController::class);
 
         Route::get('/students', [App\Http\Controllers\v2\SuperadminStudentController::class, 'getStudents']);
         Route::delete('/student/{user}/delete', [App\Http\Controllers\v2\SuperadminStudentController::class, 'deleteUser']);

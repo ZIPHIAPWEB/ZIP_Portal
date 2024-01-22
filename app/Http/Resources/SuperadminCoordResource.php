@@ -19,9 +19,10 @@ class SuperadminCoordResource extends JsonResource
             'first_name' => $this->coordinator->firstName,
             'middle_name' => $this->coordinator->middleName ?? '',
             'last_name' => $this->coordinator->lastName,
-            'program' => $this->coordinator->program ?? 'n/a',
+            'program' => $this->coordinator->selectedProgram->display_name ?? 'n/a',
             'position' => $this->coordinator->position ?? 'n/a',
             'contact' => $this->coordinator->contact ?? 'n/a',
+            'is_activated' => (bool) $this->verified,
             'registered_at' => $this->coordinator->created_at->toFormattedDayDateString()
         ];
     }

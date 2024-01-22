@@ -21,4 +21,9 @@ class Coordinator extends Model
     {
         return $this->belongsTo('App\User', 'id', 'user_id');
     }
+
+    public function selectedProgram()
+    {
+        return $this->hasOne(Program::class, 'id', 'program');
+    }
 }
