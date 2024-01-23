@@ -10,7 +10,6 @@ const studentAppFormStore = useStudentAppFormStore();
 const { isSuccess, isLoading, error } = storeToRefs(studentAppFormStore);
 
 import ProgramAPI from '../../services/ProgramAPI';
-import { ProgramType } from '../../types/ProgramType';
 import {ApplicationFormType} from '../../types/ApplicationFormType';
 import SchoolAPI from '../../services/SchoolAPI';
 import { SchoolType } from '../../types/SchoolType';
@@ -18,6 +17,8 @@ import DegreeAPI from '../../services/DegreeAPI';
 import { DegreeType } from '../../types/DegreeType';
 import { storeToRefs } from 'pinia';
 import TermsAndConditionCard from '../../components/elements/TermsAndConditionCard.vue';
+import { IProgramCategory } from '../../interfaces/IProgramCategory';
+import { IProgram } from '../../interfaces/IProgram';
 
 const applicationFormData = reactive<ApplicationFormType>({
     firstName: '',
@@ -43,7 +44,7 @@ const applicationFormData = reactive<ApplicationFormType>({
 const otherDegree = ref<String>(''); 
 const isOtherDegreeShow = ref<Boolean>(false);
 const isTermAndConditionOpen = ref<Boolean>(true);
-const programs = ref<ProgramType[]>([]);
+const programs = ref<IProgram[]>([]);
 const schools = ref<SchoolType[]>([]);
 const degrees = ref<DegreeType[]>([]);
 
@@ -56,7 +57,14 @@ onMounted(() => {
 const loadPrograms = async () => {
     try {
         const response = await ProgramAPI.getPrograms();
-        programs.value = response.data.data.programs;
+
+        response.data.data.programs.forEach((p : IProgramCategory) => {
+
+            p.programs.forEach(prog => {
+
+                programs.value.push(prog);
+            });
+        });
     } catch (error: any) {
         console.log(error.response);
     }

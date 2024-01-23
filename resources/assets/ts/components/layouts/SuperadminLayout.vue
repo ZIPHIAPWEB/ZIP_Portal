@@ -123,6 +123,12 @@ const gotoDashboard = () => {
                       <li class="nav-item">
                         <a href="#" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Program Category</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Program</p>
                         </a>
                       </li>

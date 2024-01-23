@@ -15,7 +15,10 @@ class SuperadminCoordResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->coordinator->id,
             'user_id' => $this->id,
+            'email' => $this->email,
+            'username' => $this->name,
             'first_name' => $this->coordinator->firstName,
             'middle_name' => $this->coordinator->middleName ?? '',
             'last_name' => $this->coordinator->lastName,

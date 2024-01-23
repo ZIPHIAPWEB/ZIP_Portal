@@ -1,9 +1,13 @@
 import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
+import { ICoord } from "../store/superadminCoords";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
         return ApiRequest.get('/sa/students');
+    },
+    deleteSuperadminStudent(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/student/${userId}/delete`);
     },
     activateUserAccount(userId : string | number) {
         return ApiRequest.put(`/sa/user/${userId}/activate`);
@@ -13,5 +17,11 @@ export default {
     },
     getSuperadminCoords() : Promise<AxiosResponse> {
         return ApiRequest.get('/sa/coords');
+    },
+    storeSuperadminCoords(data : ICoord) : Promise<AxiosResponse> {
+        return ApiRequest.post('/sa/coords', data);
+    },
+    deleteSuperadminCoord(userId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/coords/${userId}/delete`);
     }
 }

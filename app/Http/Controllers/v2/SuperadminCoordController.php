@@ -52,9 +52,9 @@ class SuperadminCoordController extends Controller
     public function store(Request $request)
     {
         $createdUser = User::create([
-            'name' => $request->input('name'),
+            'name' => $request->input('username'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'password' => bcrypt('p@ssw0rd'),
             'vToken' => null,
             'verified' => 1,
             'isFilled' => 0
@@ -137,9 +137,8 @@ class SuperadminCoordController extends Controller
      */
     public function destroy(Coordinator $coordinator)
     {
-        $coordinator->delete();
-
         $coordinator->user()->delete();
+        $coordinator->delete();
 
         return response()->json([
             'status' => Response::HTTP_OK,

@@ -1,32 +1,21 @@
 <script setup lang="ts">
 import ProgramAPI from '../../../../services/ProgramAPI';
+import { IProgram } from '../../../../interfaces/IProgram';
+import { IProgramCategory } from '../../../../interfaces/IProgramCategory';
+
 import { onMounted, ref } from 'vue';
 
 const emit = defineEmits<{ (event: 'cancelEvent') : void, (event: 'updatedEvent') : void }>()
 
-interface IProgramCategory {
-  id: number | string;
-  name: string;
-  display_name: string;
-  description: string;
-  programs: IProgram[]
-}
-
-interface IProgram {
-  id: number | string;
-  name: string;
-  display_name: string;
-  description: string;
-}
-
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+
 const useCoordStudent = useCoordSelectedStudent();
 
 const programs = ref<IProgram[]>([]);
 const selectedProgram = ref<number | string>(0);
 
 onMounted(async () => {
-    await loadPrograms();
+    loadPrograms();
 });
 
 const loadPrograms = async () => {

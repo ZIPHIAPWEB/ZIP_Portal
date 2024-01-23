@@ -26,6 +26,21 @@ export const useSuperadminStudent = defineStore({
         links: []
     }),
     actions: {
+        async deleteSuperadminStudent(userId : number | string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                await SuperadminApi.deleteSuperadminStudent(userId);
+                await this.loadSuperadminStudentsData();
+
+                this.isLoading = false;
+                this.isSuccess = true;                
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
         async loadSuperadminStudentsData() {
             try {
                 this.isLoading = true;
@@ -48,6 +63,7 @@ export const useSuperadminStudent = defineStore({
                 this.isSuccess = false;
 
                 const response = (await SuperadminApi.activateUserAccount(userId)).data;
+                await this.loadSuperadminStudentsData();
 
                 this.isLoading = false;
                 this.isSuccess = true;                
@@ -62,6 +78,7 @@ export const useSuperadminStudent = defineStore({
                 this.isSuccess = false;
 
                 const response = (await SuperadminApi.deactivateUserAccount(userId)).data;
+                await this.loadSuperadminStudentsData();
 
                 this.isLoading = false;
                 this.isSuccess = true;                
