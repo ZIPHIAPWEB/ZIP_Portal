@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { userCoordStudentAdditionalRequirement } from '../../../../store/coordStudentAdditionalRequirement';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../../../store/auth';
+import UploadButton from '../../profile-page/program-requirements/UploadButton.vue';
 
 const authStore = useAuthStore();
 
@@ -13,6 +14,10 @@ onMounted(async () => {
     await coordStudentAdditionalRequirementStore.loadSelectedStudentAdditionalRequirement();
 })
 
+const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+
+await coordStudentAdditionalRequirementStore.uploadSelectedStudentAdditionalRequirement(requirementId, file)
+}
 </script>
 
 <template>
@@ -38,7 +43,7 @@ onMounted(async () => {
                             <span v-else class="fa fa-check text-success"></span>
                         </td>
                         <td v-if="authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'superadmin'" class="text-center">
-                            <button v-if="!item.student_additional" class="btn btn-success btn-xs mr-1">Upload</button>
+                            <UploadButton v-if="!item.student_additional" :requirementId="item.id" @getFile="uploadFileHander" />
                             <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                             <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.removeSelectedStudentAdditionalRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>

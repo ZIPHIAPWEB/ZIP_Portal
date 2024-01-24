@@ -10,7 +10,7 @@ class UploadedFilePathAction
 
         $user = auth()->user();
 
-        $path = (!in_array('superadmin', $user->roles)) ? $directory : $user->email . '/' . $directory;
+        $path = (!in_array('superadmin', $user->roles->toArray())) ? $directory : $user->email . '/' . $directory;
 
         $filename = date('Ymd') . uniqid() . '.' . $extension;
 

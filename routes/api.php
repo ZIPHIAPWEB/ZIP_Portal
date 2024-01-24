@@ -87,6 +87,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/get-selected-student/{student}', [App\Http\Controllers\v2\CoordController::class, 'showStudent']);
         Route::put('/update-student-program/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateStudentProgram']);
         Route::put('/update-student-program-status/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateProgramStatus']);
+        Route::put('/update-student-program-compliance/{userId}', [App\Http\Controllers\v2\CoordController::class, 'updateProgramCompliance']);
         Route::put('/cancel-student/{userId}', [App\Http\Controllers\v2\CoordController::class, 'cancelStudentProgram']);
 
         Route::get('/get-student-host-info/{userId}', [App\Http\Controllers\v2\CoordController::class, 'getStudentHostInfo']);

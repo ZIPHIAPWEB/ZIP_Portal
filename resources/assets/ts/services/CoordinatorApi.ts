@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios"
-import { ApiRequest } from "./ApiRequest"
+import { ApiRequest, ApiRequestWithFile } from "./ApiRequest"
 import { IVisaSponsor } from "../store/studentVisaSponsor";
 import { IVisaInterview } from "../store/studentVisaInterview";
 import { IStudentPdosCfoSchedule } from "../store/studentPdosCfoSchedule";
@@ -22,6 +22,14 @@ export default {
         return ApiRequest.get(`/coord/student/${userId}/preliminary`);
     },
 
+    uploadSelectedStudentPrelimRequirement(userId : string | number, requirementId : string | number | undefined, file : File) : Promise<AxiosResponse> {
+        
+        let formData = new FormData();
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/coord/student/${userId}/preliminary/${requirementId}`, formData);
+    },
+
     downloadSelectedStudentPrelimRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/student/${userId}/preliminary/${requirementId}`);
     },
@@ -33,6 +41,14 @@ export default {
     //Student Additional Req
     getSelectedStudentAdditionalRequirement(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/student/${userId}/additional`);
+    },
+
+    uploadSelectedStudentAdditionalRequirement(userId : string | number, requirementId : string | number | undefined, file : File) : Promise<AxiosResponse> {
+        
+        let formData = new FormData();
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/coord/student/${userId}/additional/${requirementId}`, formData);
     },
 
     downloadSelectedStudentAdditionalRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
@@ -147,6 +163,11 @@ export default {
     updateStudentProgramStatus(userId : string | number, status : string) : Promise<AxiosResponse> {
 
         return ApiRequest.put(`/coord/update-student-program-status/${userId}`, { status: status});
+    },
+
+    updateStudentProgramCompliance(userId : string | number, status : string) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/coord/update-student-program-compliance/${userId}`, { status : status});
     },
 
     updateStudentHostInfo(userId : string | number, data : IVisaSponsor) : Promise<AxiosResponse> {

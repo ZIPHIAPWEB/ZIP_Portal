@@ -37,6 +37,24 @@ export const userCoordStudentPrelimRequirement = defineStore({
             }
         },
 
+        async uploadSelectedStudentPrelimRequirement(requirementId : number | string | undefined, file : File) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const coordSelectedStudent = useCoordSelectedStudent();
+
+                await CoordinatorApi.uploadSelectedStudentPrelimRequirement(coordSelectedStudent.userInfo.id, requirementId, file);
+                await this.loadSelectedStudentPrelimRequirement();
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
         async downloadSelectedStudentPrelimRequirement(requirementId : number | string) {
             try {
                 this.isLoading = true;
@@ -64,14 +82,7 @@ export const userCoordStudentPrelimRequirement = defineStore({
                 const coordSelectedStudent = useCoordSelectedStudent();
 
                 await CoordinatorApi.removeSelectedStudentPrelimRequirement(coordSelectedStudent.userInfo.id, requirementId);
-                
-                this.prelimRequirement = this.prelimRequirement.map(rq => {
-                    if (requirementId === rq.id) {
-                        rq.student_preliminary = undefined;
-                    }
-
-                    return rq;
-                });
+                await this.loadSelectedStudentPrelimRequirement();
                 
                 this.isLoading = false;
                 this.isSuccess = true;

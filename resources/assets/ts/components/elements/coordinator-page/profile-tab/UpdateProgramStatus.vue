@@ -18,7 +18,6 @@ const useCoordStudent = useCoordSelectedStudent();
 const isAppStatusEdit = ref<boolean>(false);
 const appStatus = ref<string[]>([
     'New Applicant',
-    'Assessed',
     'Confirmed',
     'Hired',
     'Visa Status',
@@ -51,12 +50,16 @@ const updateApplicationStatus = async (payload : Event) => {
 <template>
     <div v-if="!isAppStatusEdit" style="display: flex; justify-content: space-between;">
         <span>{{ props.status }}</span>
-        <a @click.prevent="isAppStatusEdit = true" href="#">Edit</a>
+        <div>
+            <a @click.prevent="isAppStatusEdit = true" href="#">Edit</a>
+            <a @click.prevent="emits('cancelEventTrigger')" class="ml-2 text-red" href="#">Cancel student</a>
+        </div>
     </div>
-    <div v-else>
+    <div style="display: flex; justify-content: space-between; align-items: center;" v-else>
         <select @change="updateApplicationStatus" class="form-control form-control-sm" id="select-app-status">
             <option>Select status</option>
             <option v-for="(status, index) in appStatus" :key="index" :value="status">{{ status }}</option>
         </select>
+        <a class="ml-2" @click.prevent="isAppStatusEdit = false" href="#">Cancel</a>
     </div>
 </template>

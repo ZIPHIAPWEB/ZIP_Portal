@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             'date_registered' => $this->created_at->toDateTimeString(),
             'application_status' => $this->student->application_status ?? "",
             'application_id' => $this->student->application_id ?? "",
+            'program_compliance' => $this->student->program_compliance ?? "Pending",
             'program' => $this->student->program->display_name ?? "",
             'role' => $this->getUserRole()->name ?? ""
         ];

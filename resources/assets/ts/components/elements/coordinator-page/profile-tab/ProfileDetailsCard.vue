@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UpdateProgramModal from './UpdateProgramModal.vue';
 import UpdateProgramStatus from './UpdateProgramStatus.vue';
+import UpdateProgramCompliance from './UpdateProgramCompliance.vue';
 import CancelProgramModal from './CancelProgramModal.vue';
 
 import { ref, onMounted, Teleport } from 'vue';
@@ -31,10 +32,6 @@ const isCancelOpen = ref<boolean>(false);
 const editProgramToggle = () => {
     isProgramEditOpen.value = !isProgramEditOpen.value;
 }
-
-const setStatusToCancelled = () => {
-    isCancelOpen.value = !isCancelOpen.value;
-}
 </script>
 
 <template>
@@ -60,8 +57,16 @@ const setStatusToCancelled = () => {
                         <td>Application status</td>
                         <td>
                             <UpdateProgramStatus 
-                                :status="userInfo.application_status" 
-                                @cancelEventTrigger="setStatusToCancelled"
+                                :status="userInfo.application_status"
+                                @cancel-event-trigger="isCancelOpen = true"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Program Compliance</td>
+                        <td>
+                            <UpdateProgramCompliance
+                                :status="userInfo.program_compliance"
                             />
                         </td>
                     </tr>
@@ -72,7 +77,7 @@ const setStatusToCancelled = () => {
                         <td>
                             <div style="display: flex; justify-content: space-between;">
                                 <b>{{ userInfo.program }}</b>
-                                <a v-if="!isProgramEditOpen && (userInfo.application_status == 'New Applicant')" @click.prevent="editProgramToggle()" href="#" style="font-style: normal; font-weight: normal;">Edit</a>
+                                <a v-if="!isProgramEditOpen && (userInfo.application_status == 'New Applicant')" @click.prevent="editProgramToggle()" href="#" style="font-style: normal; font-weight: normal;"><b>Edit</b></a>
                             </div>
                         </td>
                     </tr>

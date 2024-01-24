@@ -37,6 +37,24 @@ export const userCoordStudentAdditionalRequirement = defineStore({
             }
         },
 
+        async uploadSelectedStudentAdditionalRequirement(requirementId : number | string | undefined, file : File) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const coordSelectedStudent = useCoordSelectedStudent();
+
+                await CoordinatorApi.uploadSelectedStudentAdditionalRequirement(coordSelectedStudent.userInfo.id, requirementId, file);
+                await this.loadSelectedStudentAdditionalRequirement();
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
         async downloadSelectedStudentAdditionalRequirement(requirementId : number | string) {
             try {
                 this.isLoading = true;
@@ -63,14 +81,7 @@ export const userCoordStudentAdditionalRequirement = defineStore({
                 const coordSelectedStudent = useCoordSelectedStudent();
 
                 await CoordinatorApi.removeSelectedStudentAdditionalRequirement(coordSelectedStudent.userInfo.id, requirementId);
-                
-                this.additionalRequirement = this.additionalRequirement.map(rq => {
-                    if (requirementId === rq.id) {
-                        rq.student_additional = undefined;
-                    }
-
-                    return rq;
-                });
+                await this.loadSelectedStudentAdditionalRequirement();
                 
                 this.isLoading = false;
                 this.isSuccess = true;

@@ -19,6 +19,7 @@ export interface IUserInfo {
     application_status: string;
     application_id: string;
     program: string;
+    program_compliance: string;
 }
 
 export interface ICoordSelectedStudentState {
@@ -82,6 +83,23 @@ export const useCoordSelectedStudent = defineStore({
                 
                 const response = await CoordinatorApi.updateStudentProgram(this.userInfo.id, programId);
                 this.userInfo.program = response.data.data.program;
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.error = error.response.data.message;
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
+        async updateProgramCompliance(status : string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = (await CoordinatorApi.updateStudentProgramCompliance(this.userInfo.id, status)).data;
+                this.userInfo.program_compliance = response.data;
 
                 this.isLoading = false;
                 this.isSuccess = true;

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\v2;
 
 use App\Actions\ConvertProgramToIdAction;
-use App\Actions\ProgressToNextStatus;
 use App\Exports\StudentExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CoordStudentResource;
@@ -169,42 +168,61 @@ class CoordController extends Controller
         ], Response::HTTP_OK);
     }
 
+    public function updateProgramCompliance($userId, Request $request)
+    {
+        $request->validate([
+            'status' => 'required|in:returnee,overstay'
+        ]);
+
+        $status = ucfirst($request->input('status'));
+
+        $studentQuery = Student::query()->where('user_id', $userId);
+
+        if (!(strtolower($studentQuery->first()->application_status) == 'program compliance')) {
+
+            return response()->json([
+                'status' => 422,
+                'message' => 'Unable to process data'
+            ], 422);
+        }
+
+        $studentQuery->update([
+            'program_compliance' => $status
+        ]);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Program compliance set to ' . $status,
+            'data' => $status
+        ], Response::HTTP_OK);
+    }
+
     public function updateProgramStatus($userId, Request $request)
     {
         $request->validate([
             'status' => 'required'
         ]);
 
-        $processedStatus = (new ProgressToNextStatus())->execute($request->input('status'));
-
-        if(!isset($processedStatus)) {
-
-            return response()->json([
-                'data' => [
-                    'message' => 'Unable to process this request',
-                    'status' => 422
-                ]
-            ]);
-        }
+        $processedStatus = $request->input('status');
 
         $student = Student::query()->where('user_id', $userId);
 
-        if ($processedStatus['status'] == 'Confirmed') {
+        if ($processedStatus == 'Confirmed') {
             $programId = Program::find($student->first()->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
             $student->update([
                 'application_id' => $programId,
-                'application_status' => $processedStatus['status']
+                'application_status' => $processedStatus
             ]);
         } else {
             $student->update([
-                'application_status' => $processedStatus['status']
+                'application_status' => $processedStatus
             ]);
         }
 
         return response()->json([
             'data' => [
                 'message' => 'Student program successfully updated!',
-                'application_status' => $processedStatus['status'],
+                'application_status' => $processedStatus,
                 'status' => 200
             ]
         ]);

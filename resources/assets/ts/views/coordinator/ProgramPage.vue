@@ -142,6 +142,7 @@ const exportStudentDatas = async () => {
                                     <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-visa-interview">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'For PDOS & CFO'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
                                     <span v-if="student.application_status == 'Program Proper'" class="badge bg-program-proper">{{ student.application_status }}</span>
+                                    <span v-if="student.application_status == 'Program Compliance'" class="badge bg-program-compliance">{{ student.application_status }}</span>
                                     <span v-if="student.application_status.includes('Cancel')" class="badge bg-visa-denied">{{ student.application_status }}</span>
                                 </td>
                                 <td>{{ student.email }}</td>
@@ -207,6 +208,11 @@ const exportStudentDatas = async () => {
 
     .bg-program-proper {
         background: rgb(17, 133, 66);
+    }
+
+    .bg-program-compliance {
+        background: rgb(228, 255, 27);
+        color: black;
     }
 
     .bg-visa-denied {

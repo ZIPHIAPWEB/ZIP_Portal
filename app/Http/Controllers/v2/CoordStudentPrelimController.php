@@ -74,7 +74,7 @@ class CoordStudentPrelimController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        Storage::disk('uploaded_files')->delete($requirement->path);
+        Storage::disk('uploaded_files')->delete($requirement->first()->path);
 
         $requirement->delete();
 
