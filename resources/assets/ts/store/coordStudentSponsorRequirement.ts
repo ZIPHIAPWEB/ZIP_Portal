@@ -19,7 +19,7 @@ export const userCoordStudentVisaSponsorRequirement = defineStore({
     }),
     getters: {},
     actions: {
-        async loadSelectedStudentAdditionalRequirement() {
+        async loadSelectedStudentSponsorRequirement() {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -37,7 +37,25 @@ export const userCoordStudentVisaSponsorRequirement = defineStore({
             }
         },
 
-        async downloadSelectedStudentAdditionalRequirement(requirementId : number | string) {
+        async uploadSelectedStudentVisaSponsorRequirement(requirementId : number | string | undefined, file : File) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const coordSelectedStudent = useCoordSelectedStudent();
+
+                await CoordinatorApi.uploadSelectedStudentVisaSponsorRequirement(coordSelectedStudent.userInfo.id, requirementId, file);
+                await this.loadSelectedStudentSponsorRequirement();
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
+
+        async downloadSelectedStudentVisaSponsorRequirement(requirementId : number | string) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -55,7 +73,7 @@ export const userCoordStudentVisaSponsorRequirement = defineStore({
             }
         },
 
-        async removeSelectedStudentAdditionalRequirement(requirementId : number | string) {
+        async removeSelectedStudentVisaSponsorRequirement(requirementId : number | string) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -63,14 +81,7 @@ export const userCoordStudentVisaSponsorRequirement = defineStore({
                 const coordSelectedStudent = useCoordSelectedStudent();
 
                 await CoordinatorApi.removeSelectedStudentVisaSponsorRequirement(coordSelectedStudent.userInfo.id, requirementId);
-                
-                this.sponsorRequirements = this.sponsorRequirements.map(rq => {
-                    if (requirementId === rq.id) {
-                        rq.student_visa = undefined;
-                    }
-
-                    return rq;
-                });
+                this.loadSelectedStudentSponsorRequirement();
                 
                 this.isLoading = false;
                 this.isSuccess = true;

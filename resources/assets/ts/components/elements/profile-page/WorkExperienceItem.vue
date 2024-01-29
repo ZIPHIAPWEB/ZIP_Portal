@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import { ExperienceType } from '../../../types/ExperienceType';
-import StudentAPI from '../../../services/StudentAPI';
+import { storeToRefs } from 'pinia';
 
 import { ref } from 'vue';
 import { IStudentWorkExperience } from '../../../store/studentWorkExperience';
+
+import { useAuthStore } from '../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
 
 const props = defineProps<{
     experienceProps: IStudentWorkExperience
@@ -40,9 +43,9 @@ const deleteWorkExperience = async () => {
         <tbody>
             <tr>
                 <td colspan="2" class="text-right">
-                    <button v-if="!experienceIsEdit" @click="editWorkExperience" class="btn btn-primary btn-xs mr-1">Edit</button>
+                    <button v-if="!experienceIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="editWorkExperience" class="btn btn-primary btn-xs mr-1">Edit</button>
                     <button v-if="experienceIsEdit" @click="updateWorkExperience" class="btn btn-success btn-xs mr-1">Update</button>
-                    <button v-if="!experienceIsEdit" @click="deleteWorkExperience" class="btn btn-danger btn-xs">Remove</button>
+                    <button v-if="!experienceIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="deleteWorkExperience" class="btn btn-danger btn-xs">Remove</button>
                     <button v-if="experienceIsEdit" @click="cancelEditWorkExperience" class="btn btn-danger btn-xs">Cancel</button>
                 </td>
             </tr>

@@ -64,6 +64,14 @@ export default {
         return ApiRequest.get(`/coord/student/${userId}/sponsor`);
     },
 
+    uploadSelectedStudentVisaSponsorRequirement(userId : string | number, requirementId : string | number | undefined, file : File) : Promise<AxiosResponse> {
+
+        let formData = new FormData();
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/coord/student/${userId}/sponsor/${requirementId}`, formData);
+    },
+
     downloadSelectedStudentVisaSponsorRequirement(userId : string | number, requirementId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.get(`/coord/student/${userId}/sponsor/${requirementId}`);
     },

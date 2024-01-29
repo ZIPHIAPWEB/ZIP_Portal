@@ -6,6 +6,10 @@ import { useStudentPersonal, IStudentPersonalInfo } from '../../../../store/stud
 const studentPersonalStore = useStudentPersonal();
 const { isLoading, isSuccess, personal } = storeToRefs(studentPersonalStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const personalIsEdit = ref<boolean>(false);
 const personalFormData = ref<IStudentPersonalInfo>({
     first_name: '',
@@ -37,7 +41,7 @@ const updatePersonalDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Personal Details</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!personalIsEdit" @click="personalIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!personalIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="personalIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="personalIsEdit" @click="updatePersonalDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="personalIsEdit" @click="personalIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

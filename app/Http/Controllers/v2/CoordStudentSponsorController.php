@@ -63,7 +63,7 @@ class CoordStudentSponsorController extends Controller
 
     public function deleteStudentSponsorRequirement($userId, $requirementId)
     {
-        $requirement = SponsorRequirement::query()
+        $requirement = StudentSponsor::query()
             ->where('user_id', $userId)
             ->where('requirement_id', $requirementId);
 
@@ -74,7 +74,7 @@ class CoordStudentSponsorController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        Storage::disk('uploaded_files')->delete($requirement->path);
+        Storage::disk('uploaded_files')->delete($requirement->first()->path);
 
         $requirement->delete();
 

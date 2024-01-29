@@ -6,6 +6,10 @@ import { useStudentFatherStore, IStudentFather } from '../../../../store/student
 const studentFatherStore = useStudentFatherStore();
 const { isLoading, isSuccess, father } = storeToRefs(studentFatherStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const fatherIsEdit = ref<boolean>(false);
 const fatherFormData = ref<IStudentFather>({
     first_name: '',
@@ -33,7 +37,7 @@ const updateFatherDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Father Details</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!fatherIsEdit" @click="fatherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!fatherIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="fatherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="fatherIsEdit" @click="updateFatherDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="fatherIsEdit" @click="fatherIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

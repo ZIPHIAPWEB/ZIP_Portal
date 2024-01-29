@@ -6,6 +6,10 @@ import { useStudentMotherStore, IStudentMother } from '../../../../store/student
 const studentMotherStore = useStudentMotherStore();
 const { isLoading, isSuccess, mother } = storeToRefs(studentMotherStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const motherIsEdit = ref<boolean>(false);
 const motherFormData = ref<IStudentMother>({
     first_name: '',
@@ -33,7 +37,7 @@ const updateMotherDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Mother Details</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!motherIsEdit" @click="motherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!motherIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="motherIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="motherIsEdit" @click="updateMotherDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="motherIsEdit" @click="motherIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

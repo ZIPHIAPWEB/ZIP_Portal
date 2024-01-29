@@ -9,6 +9,10 @@ import { storeToRefs } from 'pinia';
 const studentPaymentRequirementStore = useStudentPaymentRequirement();
 const { isLoading, isSuccess, requirements } = storeToRefs(studentPaymentRequirementStore);
 
+import { useAuthStore } from '../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const selectedRequirement = ref<IPaymentRequirement>();
 const isPopUpOpen = ref(false);
 const isDeletePopUpOpen = ref(false);
@@ -126,8 +130,8 @@ const fileUploadHandler = (e : Event) => {
                         <td>{{ requirement.student_payment?.bank_account_no }}</td>
                         <td>{{ requirement.student_payment?.amount }}</td>
                         <td>
-                            <button v-if="!requirement.student_payment" @click="openRequirement(requirement)" class="btn btn-success btn-xs">Upload File</button>
-                            <button v-else @click="openDeletePopUp(requirement)" class="btn btn-danger btn-xs">Delete File</button>
+                            <button v-if="!requirement.student_payment && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="openRequirement(requirement)" class="btn btn-success btn-xs">Upload File</button>
+                            <button v-if="requirement.student_payment && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="openDeletePopUp(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                         </td>
                     </tr>
                 </tbody>

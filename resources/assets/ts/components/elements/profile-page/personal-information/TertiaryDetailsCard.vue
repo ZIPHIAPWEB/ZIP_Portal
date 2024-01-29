@@ -11,6 +11,10 @@ import { DegreeType } from '../../../../types/DegreeType';
 const studentTertiaryStore = useStudentTertiaryStore();
 const { isLoading, isSuccess, tertiary } = storeToRefs(studentTertiaryStore)
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const schools = ref<SchoolType[]>([]);
 const degrees = ref<DegreeType[]>([]);
 const tertiaryIsEdit = ref<boolean>(false);
@@ -65,7 +69,7 @@ const updateTertiaryDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Tertiary</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!tertiaryIsEdit" @click="tertiaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!tertiaryIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="tertiaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="tertiaryIsEdit" @click="updateTertiaryDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="tertiaryIsEdit" @click="tertiaryIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

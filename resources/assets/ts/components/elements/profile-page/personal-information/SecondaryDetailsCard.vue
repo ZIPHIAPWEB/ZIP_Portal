@@ -6,6 +6,10 @@ import { useStudentSecondaryStore, IStudentSecondary } from '../../../../store/s
 const studentSecondaryStore = useStudentSecondaryStore();
 const { isLoading, isSuccess, secondary } = storeToRefs(studentSecondaryStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const secondaryIsEdit = ref<boolean>(false);
 const secondaryFormData = ref<IStudentSecondary>({
     school: '',
@@ -31,7 +35,7 @@ const updateSecondaryDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Secondary</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!secondaryIsEdit" @click="secondaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!secondaryIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="secondaryIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="secondaryIsEdit" @click="updateSecondaryDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="secondaryIsEdit" @click="secondaryIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

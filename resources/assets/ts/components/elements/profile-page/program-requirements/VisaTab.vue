@@ -7,6 +7,10 @@ import UploadButton from './UploadButton.vue';
 const studentVisaSponsorRequirementStore = useStudentVisaSponsorRequirement();
 const { isLoading, isSuccess, requirements } = storeToRefs(studentVisaSponsorRequirementStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 onMounted(async () => {
     await studentVisaSponsorRequirementStore.loadVisaSponsorRequirements();
 })
@@ -51,9 +55,9 @@ const downloadFileHandler = async (requirementId : string | number | undefined) 
                     <span v-else class="fa fa-times text-danger"></span>
                 </td>
                 <td>
-                    <UploadButton v-if="!requirement.student_visa?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
-                    <button v-if="requirement.path" @click="downloadFileHandler(requirement.id)" class="btn btn-primary btn-xs">Download File</button>
-                    <button v-if="requirement.student_visa?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
+                    <UploadButton v-if="!requirement.student_visa?.status && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" :requirementId="requirement.id" @getFile="uploadFileHander" />
+                    <button v-if="requirement.path && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="downloadFileHandler(requirement.id)" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.student_visa?.status && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>
         </tbody>

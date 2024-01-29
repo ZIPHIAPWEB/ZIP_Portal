@@ -232,7 +232,7 @@ const submitApplicationForm = async () => {
                     </div>
                     <div class="row mb-4">
                         <div class="col-6">
-                            <label for="start-date">Start date <span class="text-red">*</span></label>
+                            <label for="start-date">School admission date <span class="text-red">*</span></label>
                             <input v-model="applicationFormData.startDate" :class="{ 'is-invalid' : 'startDate' in error }" type="date" class="form-control">
                         </div>
                         <div class="col-6">

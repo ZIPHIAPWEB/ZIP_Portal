@@ -8,6 +8,10 @@ import { useStudentWorkExperienceStore, IStudentWorkExperience } from '../../../
 const studentWorkExperienceStore = useStudentWorkExperienceStore();
 const { isLoading, isSuccess, experiences } = storeToRefs(studentWorkExperienceStore)
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const experiencesIsAdd = ref<boolean>(false);
 const experienceFormData = ref<IStudentWorkExperience>({
     company: '',
@@ -41,7 +45,7 @@ const removeWorkExperience = async (experience: IStudentWorkExperience) => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Work Experience/On-the-Job Training</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!experiencesIsAdd" @click="experiencesIsAdd =  true" class="btn btn-success btn-xs ">Add</button>
+                    <button v-if="!experiencesIsAdd && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="experiencesIsAdd =  true" class="btn btn-success btn-xs ">Add</button>
                     <button v-if="experiencesIsAdd" @click="addWorkExperience" class="btn btn-primary btn-xs mr-1">Save</button>
                     <button v-if="experiencesIsAdd" @click="experiencesIsAdd =  false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>

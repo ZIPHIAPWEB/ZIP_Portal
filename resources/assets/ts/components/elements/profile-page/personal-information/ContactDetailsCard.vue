@@ -6,6 +6,10 @@ import { useStudentContactStore, IStudentContactInfo } from '../../../../store/s
 const studentContactStore = useStudentContactStore();
 const { isLoading, isSuccess, contact } = storeToRefs(studentContactStore);
 
+import { useAuthStore } from '../../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 const contactIsEdit = ref<boolean>(false);
 const contactFormData = ref<IStudentContactInfo>({
     permanent_address: '',
@@ -34,7 +38,7 @@ const updateContactDetails = async () => {
             <div class="profile-header">
                 <h5 class="profile-header__title">Contact Details</h5>
                 <div class="profile-header__actions">
-                    <button v-if="!contactIsEdit" @click="contactIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
+                    <button v-if="!contactIsEdit && !(auth.application_status == 'Program Proper' || auth.application_status == 'Program Compliance')" @click="contactIsEdit = true" class="btn btn-primary btn-xs">Edit</button>
                     <button v-if="contactIsEdit" @click="updateContactDetails" class="btn btn-success btn-xs mr-1">Save</button>
                     <button v-if="contactIsEdit" @click="contactIsEdit = false" class="btn btn-danger btn-xs">Cancel</button>
                 </div>
