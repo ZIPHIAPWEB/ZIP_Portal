@@ -10,17 +10,17 @@ import { onMounted, ref } from 'vue';
 const selectedTab = ref();
 const programReqTabs = ref<IProgramRequirementsTabs[]>([
     {
-        name: 'Basic',
+        name: 'Basic Req.',
         component: BasicTab,
         isActive: true
     },
     {
-        name: 'Visa Sponsor',
+        name: 'Visa Sponsor Req.',
         component: VisaTab,
         isActive: false
     },
     {
-        name: 'Additional',
+        name: 'Additional Req.',
         component: AdditionalTab,
         isActive: false
     },
@@ -46,7 +46,7 @@ const selectTabHandler = (selected : IProgramRequirementsTabs) : void => {
         <div class="card-header p-2">
             <ul class="nav nav-pills">
                 <li v-for="(tab, index) in programReqTabs" class="nav-item mx-3">
-                    <a href="#" @click.prevent="selectTabHandler(tab)" class="nav-link" :class="{ 'active' : tab.isActive }">{{ `${index + 1}. ${tab.name}` }}</a>
+                    <a href="#" @click.prevent="selectTabHandler(tab)" class="nav-link" :class="{ 'active' : tab.isActive }">{{ tab.name }}</a>
                 </li>
             </ul>
         </div>

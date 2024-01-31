@@ -62,7 +62,7 @@ const editProgramToggle = () => {
                             />
                         </td>
                     </tr>
-                    <tr>
+                    <tr v-if="userInfo.application_status == 'Program Compliance'">
                         <td>Program Compliance</td>
                         <td>
                             <UpdateProgramCompliance
@@ -81,7 +81,7 @@ const editProgramToggle = () => {
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr v-if="!(userInfo.application_status == 'New Applicant')">
                         <td>Applicaton ID</td>
                         <td>{{ userInfo.application_id ?? '' }}</td>
                     </tr>

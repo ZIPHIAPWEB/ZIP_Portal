@@ -5,10 +5,12 @@ import ProgramStatusStats from '../../components/elements/coordinator-page/Progr
 import { ref, onMounted } from 'vue';
 import CoordinatorApi from '../../services/CoordinatorApi';
 import ProgramAPI from '../../services/ProgramAPI';
+import { IProgramCategory } from '../../interfaces/IProgramCategory';
+import { IProgram } from '../../interfaces/IProgram';
 
 const stats = ref();
 const statuses = ref();
-const programs = ref();
+const programs = ref<IProgram[]>([]);
 
 onMounted(async () => {
     await loadPrograms();
@@ -23,17 +25,24 @@ const loadStatistics = async (program? : string) => {
         { name: 'Assessed', whole: stats.value.all, part: stats.value.assessed },
         { name: 'Confirmed', whole: stats.value.all, part: stats.value.confirmed },
         { name: 'Hired', whole: stats.value.all, part: stats.value.hired },
-        { name: 'For Visa Interview', whole: stats.value.all, part: stats.value.for_visa_interview },
+        { name: 'Visa Status', whole: stats.value.all, part: stats.value.for_visa_interview },
         { name: 'For PDOS & CFO', whole: stats.value.all, part: stats.value.for_pdos_cfo },
         { name: 'Program Proper', whole: stats.value.all, part: stats.value.program_proper },
-        { name: 'Returned', whole: stats.value.all, part: stats.value.returned },
+        { name: 'Program Compliance', whole: stats.value.all, part: stats.value.returned },
     ]
 }
 
 const loadPrograms = async () => {
     try {
         const response = await ProgramAPI.getPrograms();
-        programs.value = response.data.data.programs;
+
+        response.data.data.programs.forEach((p : IProgramCategory) => {
+
+            p.programs.forEach(prog => {
+
+                programs.value.push(prog);
+            });
+        });
     } catch (error: any) {
         console.log(error.response);
     }
@@ -54,7 +63,8 @@ const loadStatisticsHandler = async (event : Event) => {
                 <div class="card-header">
                     <h3 class="card-title"></h3>
                     <div class="card-tools">
-                        <div style="width: 150px;">
+                        <div style="width: 180px; display: flex; align-items: center;">
+                            <b style="margin-right: 10px;">Filter</b>
                             <select @change="loadStatisticsHandler" class="form-control form-control-sm">
                                 <option value="" selected>All</option>
                                 <option v-for="(program, index) in programs" :key="index" :value="program.id">{{ program.display_name }}</option>

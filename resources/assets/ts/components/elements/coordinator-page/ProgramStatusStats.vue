@@ -13,7 +13,9 @@ const calculatePercentage = (part : number, whole : number) => (part / whole) * 
 
 <template>
     <div class="col-6">
-        <h6>{{ props.name }} - {{ props.part }}/{{ props.whole }}</h6>
+        <h6>
+            <b>{{ props.name }} - {{ props.part }}/{{ props.whole }}</b>
+        </h6>
         <div class="progress">
             <div :style="{ width: `${calculatePercentage(props.part, props.whole)}%`}" class="progress-bar bg-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                 <span class="sr-only">40% Complete (success)</span>
