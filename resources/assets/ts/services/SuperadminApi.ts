@@ -23,5 +23,18 @@ export default {
     },
     deleteSuperadminCoord(userId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/sa/coords/${userId}/delete`);
+    },
+
+    getAllPrograms() : Promise<AxiosResponse> {
+        return ApiRequest.get(`/sa/programs`);
+    },
+    storeProgram(data : any) : Promise<AxiosResponse> {
+        return ApiRequest.post(`/sa/programs`, data);
+    },
+    updateProgram(data : any, programId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.put(`/sa/program/${programId}`, data);
+    },
+    deleteProgram(programId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/program/${programId}`);
     }
 }

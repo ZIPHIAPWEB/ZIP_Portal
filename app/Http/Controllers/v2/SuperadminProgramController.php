@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminProgramResource;
 use App\Program;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,11 +21,7 @@ class SuperadminProgramController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Programs successfully loaded',
-            'data' => $programs
-        ], Response::HTTP_OK);
+        return SuperadminProgramResource::collection($programs);
     }
 
     /**

@@ -14,6 +14,7 @@ import SelectedStudentPageVue from './views/coordinator/SelectedStudentPage.vue'
 import SuperadminDashboardPage from './views/superadmin/DashboardPage.vue';
 import SuperadminStudentPage from './views/superadmin/StudentPage.vue';
 import SuperadminCoordPage from './views/superadmin/CoordinatorPage.vue';
+import SuperadminProgramPage from './views/superadmin/settings/ProgramPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -112,6 +113,11 @@ let routes:Array<RouteRecordRaw> = [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: basePath + "/sa/programs",
+        name: "superadmin-coords-programs",
+        component: SuperadminProgramPage
     }
 ]
 

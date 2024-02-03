@@ -20,6 +20,6 @@ class Program extends Model
 
     public function programCategory()
     {
-        return $this->belongsTo(ProgramCategory::class, 'id', 'program_category_id');
+        return $this->belongsTo(ProgramCategory::class, 'program_category_id', 'id');
     }
 }
