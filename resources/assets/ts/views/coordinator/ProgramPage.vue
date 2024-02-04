@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AdminLayout from '../../components/layouts/AdminLayout.vue';
 import SearchStudent from '../../components/elements/coordinator-page/SearchStudent.vue';
+import ApplicationStatusPill from '../../components/elements/ApplicationStatusPill.vue';
 
 import { useCoordStudent } from '../../store/coordStudents'
 import CoordinatorApi from '../../services/CoordinatorApi';
@@ -135,15 +136,7 @@ const exportStudentDatas = async () => {
                             <tr v-for="student in students">
                                 <td>{{ student.date_of_application }}</td>
                                 <td class="text-white">
-                                    <span v-if="student.application_status == 'New Applicant'" class="badge bg-new-applicant">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'Confirmed'" class="badge bg-confirmed">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'Assessed'" class="badge bg-assessed">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'Hired'" class="badge bg-hired">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For Visa Interview'" class="badge bg-visa-interview">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'For PDOS & CFO'" class="badge bg-pdos-cfo">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'Program Proper'" class="badge bg-program-proper">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status == 'Program Compliance'" class="badge bg-program-compliance">{{ student.application_status }}</span>
-                                    <span v-if="student.application_status.includes('Cancel')" class="badge bg-visa-denied">{{ student.application_status }}</span>
+                                    <ApplicationStatusPill :status="student.application_status" />
                                 </td>
                                 <td>{{ student.email }}</td>
                                 <td>{{ student.first_name }}</td>
@@ -180,46 +173,5 @@ const exportStudentDatas = async () => {
 
     label {
         margin: 0;
-    }
-
-    .bg-new-applicant {
-        background: rgb(236, 176, 33);
-    }
-
-    .bg-confirmed {
-        background: rgb(189, 61, 38);
-    }
-
-    .bg-assessed {
-        background: rgb(210, 91, 39);
-    }
-
-    .bg-hired {
-        background: rgb(37, 110, 182);
-    }
-
-    .bg-visa-interview {
-        background: rgb(23, 66, 117);
-    }
-
-    .bg-pdos-cfo {
-        background: rgb(21, 51, 92);
-    }
-
-    .bg-program-proper {
-        background: rgb(17, 133, 66);
-    }
-
-    .bg-program-compliance {
-        background: rgb(228, 255, 27);
-        color: black;
-    }
-
-    .bg-visa-denied {
-        background: rgb(185, 32, 37);
-    }
-
-    .bg-cancelled {
-        background: rgb(185, 32, 37);
     }
 </style>

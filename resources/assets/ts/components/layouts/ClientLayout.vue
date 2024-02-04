@@ -19,7 +19,7 @@ onUnmounted(() => {
        <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
             </div>
-            <strong>Copyright &copy; {{ new Date().getFullYear() }} </strong>
+            <strong>Zip Travel PH &copy; {{ new Date().getFullYear() }} </strong>
         </footer>
     </div>
 </template>

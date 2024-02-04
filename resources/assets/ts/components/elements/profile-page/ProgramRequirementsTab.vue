@@ -3,9 +3,14 @@ import BasicTab from './program-requirements/BasicTab.vue';
 import VisaTab from './program-requirements/VisaTab.vue';
 import AdditionalTab from './program-requirements/AdditionalTab.vue';
 
+import { useAuthStore } from '../../../store/auth';
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
+
 import { IProgramRequirementsTabs } from '../../../types/ProgramReqTabsType'
 
 import { onMounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
 
 const selectedTab = ref();
 const programReqTabs = ref<IProgramRequirementsTabs[]>([
@@ -45,7 +50,7 @@ const selectTabHandler = (selected : IProgramRequirementsTabs) : void => {
         </div>
         <div class="card-header p-2">
             <ul class="nav nav-pills">
-                <li v-for="(tab, index) in programReqTabs" class="nav-item mx-3">
+                <li v-for="(tab, index) in programReqTabs" :key="index" :class="{ 'd-none' : (auth.application_status == 'New Applicant' || auth.application_status == 'Confirmed' || auth.application_status == 'Hired') }" class="nav-item mx-3">
                     <a href="#" @click.prevent="selectTabHandler(tab)" class="nav-link" :class="{ 'active' : tab.isActive }">{{ tab.name }}</a>
                 </li>
             </ul>

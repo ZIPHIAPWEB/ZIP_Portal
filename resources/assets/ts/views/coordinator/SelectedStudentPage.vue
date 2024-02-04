@@ -34,7 +34,7 @@ const tabs = ref<ITabs[]>([
     { name: "Preliminary", isActive: false, isShown: true, component: PrelimTab },
     { name: "Additional", isActive: false, isShown: true, component: AdditionalTab },
     { name: "Payments", isActive: false, isShown: true, component: PaymentTab },
-    { name: "Visa Sponsor", isActive: false, isShown: true, component: VisaTab },
+    { name: "Visa Sponsor", isActive: false, isShown: (userInfo.value.application_status == 'New Applicant' || userInfo.value.application_status == 'Confirmed') ? false : true, component: VisaTab },
 ]);
 
 watch(() => useCoordStudent.userInfo.application_status, () => {
@@ -45,7 +45,7 @@ watch(() => useCoordStudent.userInfo.application_status, () => {
         { name: "Preliminary", isActive: false, isShown: true, component: PrelimTab },
         { name: "Additional", isActive: false, isShown: true, component: AdditionalTab },
         { name: "Payments", isActive: false, isShown: true, component: PaymentTab },
-        { name: "Visa Sponsor", isActive: false, isShown: true, component: VisaTab }
+        { name: "Visa Sponsor", isActive: false, isShown: (userInfo.value.application_status == 'New Applicant' || userInfo.value.application_status == 'Confirmed') ? false : true, component: VisaTab }
     ];
 });
 

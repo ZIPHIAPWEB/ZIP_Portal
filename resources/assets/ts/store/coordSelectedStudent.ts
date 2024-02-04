@@ -118,6 +118,11 @@ export const useCoordSelectedStudent = defineStore({
                 const response = await CoordinatorApi.updateStudentProgramStatus(this.userInfo.id, status);
                 this.userInfo.application_status = response.data.data.application_status;
 
+                if (status == 'Confirmed') {
+                    
+                    this.userInfo.application_id = response.data.data.application_id;
+                }
+
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error : any) {

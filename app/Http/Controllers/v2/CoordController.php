@@ -207,12 +207,21 @@ class CoordController extends Controller
 
         $student = Student::query()->where('user_id', $userId);
 
+        $data = [
+            'message' => 'Student program successfully updated!',
+            'application_status' => $processedStatus,
+            'status' => 200
+        ];
+
         if ($processedStatus == 'Confirmed') {
             $programId = Program::find($student->first()->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
             $student->update([
                 'application_id' => $programId,
                 'application_status' => $processedStatus
             ]);
+
+            $data['application_id'] = $programId;
+
         } else {
             $student->update([
                 'application_status' => $processedStatus
@@ -220,11 +229,7 @@ class CoordController extends Controller
         }
 
         return response()->json([
-            'data' => [
-                'message' => 'Student program successfully updated!',
-                'application_status' => $processedStatus,
-                'status' => 200
-            ]
+            'data' => $data
         ]);
     }
 

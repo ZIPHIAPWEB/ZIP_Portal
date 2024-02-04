@@ -9,7 +9,7 @@ use App\Notifications\AccountingNotification;
 use App\PaymentRequirement;
 use App\Program;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 class StudentPaymentRequirementController extends Controller
 {
