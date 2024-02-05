@@ -4,7 +4,7 @@
 /public/blog_image
 /public/uploaded
 /storage/*.key
-/storage/*
+/storage
 /vendor
 /.idea
 /.vscode
