@@ -54,7 +54,7 @@ const paginatedResult = async (page : number) => {
 
 const exportStudentDatas = async () => {
     let filename = (await CoordinatorApi.downloadExportedData(program.value, status.value, fromDate.value, toDate.value)).data;
-    let url = `https://prototype.ziptravel.com.ph/download-exported/${filename}`;
+    let url = `https://ziptravel.com.ph/download-exported/${filename}`;
     const link = document.createElement('a')
     link.href = url;
     link.setAttribute('download', 'title');
