@@ -29,7 +29,7 @@ const login = async () => {
                 <i class="fas fa-3x fa-spinner fa-spin"></i>
             </div>
             <div class="card-header" style="border-bottom: 0; display: flex; justify-content: center;">
-                <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" src="../../../../public/logo.png" alt="company logo">
+                <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" :src="require('../../../../public/logo.png')" alt="company logo">
             </div>
             <div class="card-body">
             <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">ZIP TRAVEL Philippines</span></p>
