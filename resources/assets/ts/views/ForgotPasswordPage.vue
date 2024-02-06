@@ -23,7 +23,7 @@ const sendForgotPasswordLink = async () => {
                     <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" src="https://ziptravel.com.ph/logo.png" alt="company logo">
                 </div>
                 <div class="card-body">
-                    <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">ZIP TRAVEL</span> Philippines</p>
+                    <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">Zip Travel Philippines</span></p>
                     <form @submit.prevent="sendForgotPasswordLink">
                         <div class="input-group mb-3">
                             <input v-model="email" type="email" class="form-control" placeholder="E-mail">

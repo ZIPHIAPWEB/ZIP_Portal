@@ -32,7 +32,7 @@ const login = async () => {
                 <img style="background-color: #0d133b; border-radius: 50%; width: 8rem; height: 8rem;" src="https://ziptravel.com.ph/logo.png" alt="company logo">
             </div>
             <div class="card-body">
-            <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">ZIP TRAVEL Philippines</span></p>
+            <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">Zip Travel Philippines</span></p>
             <form @submit.prevent="login">
                 <div class="input-group mb-3">
                     <input :class="{ 'is-invalid' : authStore.getUsernameError }" v-model="username" type="text" class="form-control" placeholder="Username">
