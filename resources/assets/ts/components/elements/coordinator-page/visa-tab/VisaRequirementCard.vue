@@ -48,7 +48,7 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                             <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.removeSelectedStudentVisaSponsorRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                         <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
-                            <span>Not Applicable</span>
+                            <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.downloadSelectedStudentVisaSponsorRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                         </td>
                     </tr>
                 </tbody>

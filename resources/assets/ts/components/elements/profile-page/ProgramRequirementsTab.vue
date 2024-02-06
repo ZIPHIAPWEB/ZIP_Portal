@@ -50,7 +50,7 @@ const selectTabHandler = (selected : IProgramRequirementsTabs) : void => {
         </div>
         <div class="card-header p-2">
             <ul class="nav nav-pills">
-                <li v-for="(tab, index) in programReqTabs" :key="index" :class="{ 'd-none' : (auth.application_status == 'New Applicant' || auth.application_status == 'Confirmed' || auth.application_status == 'Hired') }" class="nav-item mx-3">
+                <li v-for="(tab, index) in programReqTabs" :key="index" class="nav-item mx-3">
                     <a href="#" @click.prevent="selectTabHandler(tab)" class="nav-link" :class="{ 'active' : tab.isActive }">{{ tab.name }}</a>
                 </li>
             </ul>

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import StudentAPI from '../services/StudentAPI';
+import { downloadFile } from '../hooks/useFileDownload';
 
 export interface IStudentAdditionalRequirement {
     id?: number;
@@ -57,7 +58,8 @@ export const useStudentAdditionalRequirement = defineStore({
         async downloadAdditionalRequirement(requirementId: string | number | undefined) {
             try {
                 this.isLoading = true;
-                await StudentAPI.downloadAdditionalRequirement(requirementId);
+                const response = (await StudentAPI.downloadAdditionalRequirement(requirementId)).data;
+                downloadFile(response);
                 this.isLoading = false;
             } catch (error : any) {
                 this.error = error.response.data.message;

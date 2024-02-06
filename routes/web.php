@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/test-route', [App\Http\Controllers\v2\SuperadminStudentController::class, 'getStudents']);
+Route::get('/online-registration', function () {
+    return redirect('https://docs.google.com/forms/d/e/1FAIpQLSfk8TyOqcnzpNIv8rfSzzXu4cjiwOiu6aEPHjFrz_9LMQvtYg/viewform');
+});
 
 Route::get('/download-exported/{filename}', function ($filename) {
     if (!Storage::disk('local')->exists($filename)) {
