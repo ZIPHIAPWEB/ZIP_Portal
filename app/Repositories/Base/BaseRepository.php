@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Base;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -16,7 +15,6 @@ use Illuminate\Support\Collection;
 
 class BaseRepository implements IBaseRepository
 {
-
     protected $model;
 
     public function __construct(Model $model)
@@ -87,9 +85,13 @@ class BaseRepository implements IBaseRepository
         $items = $items instanceof Collection ?
             $items : Collection::make($items);
 
-        $lap = new LengthAwarePaginator($items->forPage($page, $perPage),
+        $lap = new LengthAwarePaginator(
+            $items->forPage($page, $perPage),
             $items->count(),
-            $perPage, $page, $options);
+            $perPage,
+            $page,
+            $options
+        );
 
         if ($baseUrl) {
             $lap->setPath($baseUrl);

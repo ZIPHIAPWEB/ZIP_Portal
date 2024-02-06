@@ -8,7 +8,6 @@
 
 namespace App\Repositories\HostCompany;
 
-
 interface IHostCompanyRepository
 {
     public function getAllHostCompany();

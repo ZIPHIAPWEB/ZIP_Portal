@@ -15,10 +15,7 @@ class AdditionalRequirement extends Model
 
     public function studentAdditional()
     {
-        return $this->belongsTo('App\StudentAdditional', 'id', 'requirement_id')
-                    ->withDefault([
-                        'status'    =>  false
-                    ]);
+        return $this->belongsTo('App\StudentAdditional', 'id', 'requirement_id');
     }
 
     public function getById($id)

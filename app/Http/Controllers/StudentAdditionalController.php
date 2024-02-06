@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\AdditionalRequirement;
 use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\Repositories\AdditionalRequirement\AdditionalRequirementRepository;
 use App\Repositories\Log\LogRepository;
 use App\Repositories\StudAdditional\StudAdditionalRepository;
 use App\Repositories\Student\StudentRepository;
-use App\Student;
-use App\StudentAdditional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
@@ -21,11 +18,12 @@ class StudentAdditionalController extends Controller
     private $additionalRepository;
     private $studAdditionalRepository;
 
-    public function __construct(StudAdditionalRepository $studAdditionalRepository,
-                                StudentRepository $studentRepository,
-                                AdditionalRequirementRepository $additionalRequirementRepository,
-                                LogRepository $logRepository)
-    {
+    public function __construct(
+        StudAdditionalRepository $studAdditionalRepository,
+        StudentRepository $studentRepository,
+        AdditionalRequirementRepository $additionalRequirementRepository,
+        LogRepository $logRepository
+    ) {
         $this->studentRepository = $studentRepository;
         $this->additionalRepository = $additionalRequirementRepository;
         $this->studAdditionalRepository = $studAdditionalRepository;

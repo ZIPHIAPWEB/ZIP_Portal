@@ -16,7 +16,7 @@ class checkIfFilled
     public function handle($request, Closure $next)
     {
         if ($request->user()->isFilled) {
-            
+
         }
     }
 }

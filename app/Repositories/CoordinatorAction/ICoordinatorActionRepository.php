@@ -8,7 +8,6 @@
 
 namespace App\Repositories\CoordinatorAction;
 
-
 interface ICoordinatorActionRepository
 {
     public function saveCoordinatorAction(array $attributes);

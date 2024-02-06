@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use App\Http\Resources\SuperAdminResource;
 use App\Repositories\Event\EventRepository;
 use Illuminate\Http\Request;

@@ -4,10 +4,9 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CoordinatorResponse extends Notification 
+class CoordinatorResponse extends Notification
 {
     use Queueable;
 
@@ -44,31 +43,31 @@ class CoordinatorResponse extends Notification
     {
         switch ($this->data['status']) {
             case 'Confirmed':
-                return (new MailMessage)
+                return (new MailMessage())
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                     ->subject('E-mail Notification')
                     ->markdown('mail.status.confirmed', ['data' => $this->data]);
                 break;
             case 'Hired':
-                return (new MailMessage)
+                return (new MailMessage())
                         ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                         ->subject('E-mail Notification')
                         ->markdown('mail.status.hired', ['data' => $this->data]);
                 break;
-            case 'For Visa Interview': 
-                return (new MailMessage)
+            case 'For Visa Interview':
+                return (new MailMessage())
                         ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                         ->subject('E-mail Notification')
                         ->markdown('mail.status.visa_interview', ['data' => $this->data]);
                 break;
             case 'For PDOS & CFO':
-                return (new MailMessage)
+                return (new MailMessage())
                         ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                         ->subject('E-mail Notification')
                         ->markdown('mail.status.for_pdos_cfo', ['data' => $this->data]);
                 break;
             case 'Program Proper':
-                return (new MailMessage)
+                return (new MailMessage())
                         ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                         ->subject('E-mail Notification')
                         ->markdown('mail.status.program_proper', ['data' => $this->data]);

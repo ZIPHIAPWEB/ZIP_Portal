@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\HostCompany;
 use App\Http\Resources\SuperAdminResource;
 use App\Repositories\HostCompany\HostCompanyRepository;
 use Illuminate\Http\Request;

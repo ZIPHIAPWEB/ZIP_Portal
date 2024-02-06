@@ -14,7 +14,7 @@ class Sponsor extends Model
 
     public function student()
     {
-        return $this->belongsTo('App\Student', 'visa_sponsor_id', 'id');
+        return $this->belongsTo(Student::class, 'visa_sponsor_id', 'id');
     }
 
     public function sponsorRequirement()

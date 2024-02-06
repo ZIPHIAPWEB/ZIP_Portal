@@ -8,7 +8,6 @@
 
 namespace App\Repositories\PaymentRequirement;
 
-
 use App\PaymentRequirement;
 use App\Repositories\Base\BaseRepository;
 

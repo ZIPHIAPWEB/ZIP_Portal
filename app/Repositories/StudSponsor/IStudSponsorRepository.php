@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudSponsor;
 
-
 interface IStudSponsorRepository
 {
     public function saveStudSponsor(array $attributes);

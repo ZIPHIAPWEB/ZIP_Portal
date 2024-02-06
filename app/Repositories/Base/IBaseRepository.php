@@ -8,9 +8,6 @@
 
 namespace App\Repositories\Base;
 
-
-use Illuminate\Support\Collection;
-
 interface IBaseRepository
 {
     public function findAll();

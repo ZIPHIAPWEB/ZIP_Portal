@@ -19,4 +19,9 @@ class Tertiary extends Model
     {
         return $this->hasOne('App\School', 'id', 'school_name');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
-use App\Program;
-use App\ProgramRequirement;
 use App\Repositories\Program\ProgramRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -55,7 +53,7 @@ class ProgramController extends Controller
             'display_name'  =>  'required',
             'description'   =>  'required'
         ])->validate();
-        
+
         $this->programRepository->updateProgram($id, [
             'name'          =>  $request->input('name'),
             'display_name'  =>  $request->input('display_name'),

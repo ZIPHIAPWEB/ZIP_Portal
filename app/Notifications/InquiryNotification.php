@@ -4,10 +4,9 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class InquiryNotification extends Notification 
+class InquiryNotification extends Notification
 {
     use Queueable;
 
@@ -42,7 +41,7 @@ class InquiryNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->from('system@ziptravel.com.ph', 'ZIP Travel PH')
+        return (new MailMessage())->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                                 ->subject('ZIP Inquiry')
                                 ->markdown('mail.inquiry', ['data' => $this->data]);
     }

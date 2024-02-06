@@ -4,9 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Program;
 
 class RegisteredStudentNotification extends Notification
 {
@@ -43,7 +41,7 @@ class RegisteredStudentNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                     ->subject('New Applicant')
                     ->markdown('mail.registered', ['data' => $this->data]);

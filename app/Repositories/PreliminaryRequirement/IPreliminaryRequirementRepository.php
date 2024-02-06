@@ -8,7 +8,6 @@
 
 namespace App\Repositories\PreliminaryRequirement;
 
-
 interface IPreliminaryRequirementRepository
 {
     public function getAllPreliminaryRequirement();

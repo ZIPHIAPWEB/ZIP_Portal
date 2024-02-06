@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Experience;
 
-
 use App\Experience;
 use App\Repositories\Base\BaseRepository;
 

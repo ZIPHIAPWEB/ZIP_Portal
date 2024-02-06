@@ -18,7 +18,7 @@ class PermissionController extends Controller
         $permission = Permission::select(['id', 'name', 'display_name', 'description', 'created_at'])->get();
 
         return datatables()->of($permission)
-            ->addColumn('action', function($permission){
+            ->addColumn('action', function ($permission) {
                 return '<button class="btn btn-success btn-flat btn-xs" data="edit" data-id="'. $permission->id .'"><span class="fa fa-edit"></span></button>&nbsp;<button class="btn btn-danger btn-flat btn-xs" data="delete" data-id="'. $permission->id .'"><span class="fa fa-trash"></span></button>';
             })->toJson();
     }

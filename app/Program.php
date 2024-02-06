@@ -17,4 +17,9 @@ class Program extends Model
     {
         return $this->hasMany('App\ProgramRequirement', 'program_id', 'id');
     }
+
+    public function programCategory()
+    {
+        return $this->belongsTo(ProgramCategory::class, 'program_category_id', 'id');
+    }
 }

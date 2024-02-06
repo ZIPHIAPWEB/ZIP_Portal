@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Log;
 
-
 interface ILogRepository
 {
     public function saveLog(array $attributes);

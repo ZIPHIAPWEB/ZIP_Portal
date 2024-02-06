@@ -16,13 +16,13 @@ class ExportStudentResource extends JsonResource
     {
         return [
             'application_id' => $this->application_id,
-            'data_of_payment'=> $this->studentPayment()->first()->created_at ?? '',
+            'data_of_payment' => $this->studentPayment()->first()->created_at ?? '',
             'first_name' => $this->first_name,
-            'middle_name'=> $this->middle_name,
+            'middle_name' => $this->middle_name,
             'last_name' =>  $this->last_name,
-            'school' => $this->tertiary->school->name,
-            'course' => $this->tertiary->degree,
-            'date_graduated' => $this->tertiary->date_graduated,
+            'school' => $this->user->tertiary->school->name,
+            'course' => $this->user->tertiary->degree,
+            'date_graduated' => $this->user->tertiary->date_graduated,
             'contact_number' => $this->mobile_number . '/' . $this->home_number,
             'permanent_address' => $this->permanent_address,
             'email' => $this->user->email,

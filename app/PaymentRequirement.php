@@ -15,10 +15,7 @@ class PaymentRequirement extends Model
 
     public function studentPayment()
     {
-        return $this->belongsTo('App\StudentPayment', 'id', 'requirement_id')
-                    ->withDefault([
-                        'status'    =>  false
-                    ]);
+        return $this->belongsTo('App\StudentPayment', 'id', 'requirement_id');
     }
 
     public function getById($id)

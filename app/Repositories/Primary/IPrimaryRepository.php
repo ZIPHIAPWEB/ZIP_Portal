@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Primary;
 
-
 interface IPrimaryRepository
 {
     public function savePrimary(array $attributes);

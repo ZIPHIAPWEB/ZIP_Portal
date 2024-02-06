@@ -15,14 +15,7 @@ class PreliminaryRequirement extends Model
 
     public function studentPreliminary()
     {
-        return $this->belongsTo('App\StudentPreliminary', 'id', 'requirement_id')
-                    ->withDefault([
-                        'program_id' =>  false,
-                        'name'       =>  false,
-                        'description'=>  false,
-                        'path'       =>  false,
-                        'status'     =>  false
-                    ]);
+        return $this->belongsTo('App\StudentPreliminary', 'id', 'requirement_id');
     }
 
     public function getById($id)

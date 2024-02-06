@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SuperAdminResource;
 use App\Repositories\School\SchoolRepository;
-use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

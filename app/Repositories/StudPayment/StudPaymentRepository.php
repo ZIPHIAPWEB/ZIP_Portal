@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudPayment;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\StudentPayment;
 

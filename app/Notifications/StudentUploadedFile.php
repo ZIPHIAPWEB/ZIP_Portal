@@ -2,10 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Student;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class StudentUploadedFile extends Notification
@@ -43,7 +41,7 @@ class StudentUploadedFile extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->from('system@ziptravel.com.ph', 'ZIP Travel PH')
+        return (new MailMessage())->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                                 ->markdown('mail.uploaded', ['data' => $this->data]);
     }
 

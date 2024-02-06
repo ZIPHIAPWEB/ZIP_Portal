@@ -59,12 +59,12 @@ class Student extends Model
 
     public function log()
     {
-        return $this->hasMany('App\Log', 'user_id', 'user_id');
+        return $this->hasMany(Log::class, 'user_id', 'user_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function company()
@@ -72,13 +72,8 @@ class Student extends Model
         return $this->hasOne('App\HostCompany', 'id', 'host_company_id')
                     ->withDefault([
                         'name'  =>  '',
-                        'states'=>  ''
+                        'states' =>  ''
                     ]);
-    }
-
-    public function school()
-    {
-        return $this->hasOne('App\School', 'id', 'school');
     }
 
     public function program()
@@ -123,7 +118,7 @@ class Student extends Model
                     ->withDefault([
                         'school_name'   =>  '',
                         'address'       =>  '',
-                        'date_graduated'=>  ''
+                        'date_graduated' =>  ''
                     ]);
     }
 
@@ -133,18 +128,7 @@ class Student extends Model
                     ->withDefault([
                         'school_name'   =>  '',
                         'address'       =>  '',
-                        'date_graduated'=>  ''
-                    ]);
-    }
-
-    public function tertiary()
-    {
-        return $this->hasOne('App\Tertiary', 'user_id', 'user_id')
-                    ->withDefault([
-                        'school_name'   =>  '',
-                        'address'       =>  '',
-                        'degree'        =>  '',
-                        'date_graduated'=>  ''
+                        'date_graduated' =>  ''
                     ]);
     }
 
@@ -155,7 +139,7 @@ class Student extends Model
 
     public function sponsor()
     {
-        return $this->hasOne('App\Sponsor', 'id', 'visa_sponsor_id')
+        return $this->hasOne(Sponsor::class, 'id', 'visa_sponsor_id')
                     ->withDefault([
                         'id'            =>  '',
                         'name'          =>  '',
@@ -176,7 +160,7 @@ class Student extends Model
 
     public function getByProgramId($id)
     {
-        $user = User:: whereRoleIs('student')
+        $user = User::whereRoleIs('student')
                     ->with('student')
                     ->get();
 

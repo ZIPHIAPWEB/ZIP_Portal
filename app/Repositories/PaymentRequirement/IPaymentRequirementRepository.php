@@ -8,7 +8,6 @@
 
 namespace App\Repositories\PaymentRequirement;
 
-
 interface IPaymentRequirementRepository
 {
     public function getById($id);

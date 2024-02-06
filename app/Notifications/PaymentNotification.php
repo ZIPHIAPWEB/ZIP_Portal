@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class PaymentNotification extends Notification
@@ -41,7 +40,7 @@ class PaymentNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->from('system@ziptravel.com.ph', 'ZIP Travel PH')
                     ->subject('Deposit Slip - ' . $this->data['full_name'])
                     ->markdown('mail.depositSlip_no_verify', ['data' => $this->data]);

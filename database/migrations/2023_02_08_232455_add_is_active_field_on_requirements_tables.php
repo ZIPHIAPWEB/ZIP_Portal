@@ -13,19 +13,19 @@ class AddIsActiveFieldOnRequirementsTables extends Migration
      */
     public function up()
     {
-        Schema::table('preliminary_requirements', function(Blueprint $table) {
+        Schema::table('preliminary_requirements', function (Blueprint $table) {
             $table->boolean('is_active')->after('path')->default(1);
         });
 
-        Schema::table('additional_requirements', function(Blueprint $table) {
+        Schema::table('additional_requirements', function (Blueprint $table) {
             $table->boolean('is_active')->after('path')->default(1);
         });
 
-        Schema::table('payment_requirements', function(Blueprint $table) {
+        Schema::table('payment_requirements', function (Blueprint $table) {
             $table->boolean('is_active')->after('description')->default(1);
         });
 
-        Schema::table('sponsor_requirements', function(Blueprint $table) {
+        Schema::table('sponsor_requirements', function (Blueprint $table) {
             $table->boolean('is_active')->after('description')->default(1);
         });
     }
@@ -37,20 +37,20 @@ class AddIsActiveFieldOnRequirementsTables extends Migration
      */
     public function down()
     {
-        Schema::table('sponsor_requirements', function(Blueprint $table) {
+        Schema::table('sponsor_requirements', function (Blueprint $table) {
             $table->dropColumn('is_active');
         });
 
-        Schema::table('payment_requirements', function(Blueprint $table) {
+        Schema::table('payment_requirements', function (Blueprint $table) {
             $table->dropColumn('is_active');
         });
 
-        Schema::table('additional_requirements', function(Blueprint $table) {
+        Schema::table('additional_requirements', function (Blueprint $table) {
             $table->dropColumn('is_active');
-        });     
-        
-        Schema::table('preliminary_requirements', function(Blueprint $table) {
+        });
+
+        Schema::table('preliminary_requirements', function (Blueprint $table) {
             $table->dropColumn('is_active');
-        });   
+        });
     }
 }

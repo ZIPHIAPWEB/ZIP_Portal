@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Secondary;
 
-
 interface ISecondaryRepository
 {
     public function saveSecondary(array $attributes);

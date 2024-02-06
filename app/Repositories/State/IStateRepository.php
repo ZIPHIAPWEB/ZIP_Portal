@@ -8,7 +8,6 @@
 
 namespace App\Repositories\State;
 
-
 interface IStateRepository
 {
     public function getAllState();

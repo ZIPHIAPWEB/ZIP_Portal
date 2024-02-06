@@ -8,7 +8,6 @@
 
 namespace App\Repositories\HostCompany;
 
-
 use App\HostCompany;
 use App\Repositories\Base\BaseRepository;
 

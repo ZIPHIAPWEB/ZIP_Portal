@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Mother;
 
-
 use App\Mother;
 use App\Repositories\Base\BaseRepository;
 

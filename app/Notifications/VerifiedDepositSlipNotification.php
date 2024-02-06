@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Repositories\Student\StudentRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class VerifiedDepositSlipNotification extends Notification
@@ -44,7 +43,7 @@ class VerifiedDepositSlipNotification extends Notification
     {
         $student = $studentRepository->findOneBy(['user_id' => $this->id]);
 
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('The Accounting has verified the payslip of ' . $student->first_name . ' ' . $student->last_name)
                     ->line('Thank you for using our application!');
     }

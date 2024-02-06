@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Tertiary;
 
-
 interface ITertiaryRepository
 {
     public function saveTertiary(array $attributes);

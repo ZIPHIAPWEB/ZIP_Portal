@@ -8,7 +8,6 @@
 
 namespace App\Repositories\StudSponsor;
 
-
 use App\Repositories\Base\BaseRepository;
 use App\StudentSponsor;
 

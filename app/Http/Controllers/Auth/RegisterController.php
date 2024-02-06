@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -98,7 +97,7 @@ class RegisterController extends Controller
         ]);
 
         $user->attachRole('student');
-        
+
         return $user;
     }
 
@@ -107,7 +106,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name'      => $data['name'],
             'email'     => $data['email'],
-            'password'  => bcrypt( $data['password']),
+            'password'  => bcrypt($data['password']),
             'vToken'    => '',
             'verified'  => false,
             'isOnline'  => false,
@@ -140,14 +139,16 @@ class RegisterController extends Controller
 
     public function verified($email, $token)
     {
-        if ($user = User::where(['email' => $email, 'vToken' => $token])->first()) {
-            Auth::loginUsingId($user->id);
-            $user->update(['verified' => 1, 'vToken' => '']);
-            return redirect('/portal');
+        $user = User::where(['email' => $email, 'vToken' => $token])->first();
+
+        if (!$user) {
+
+            abort(403, 'User already verified!');
         }
 
-        return redirect('/auth/login')
-                ->with('Info', 'Your account already activated! You can now login to your portal.');
+        $user->update(['verified' => 1, 'vToken' => '']);
+
+        return redirect('/portal/v2/application-form');
     }
 
     public function showRegistrationForm()
@@ -179,7 +180,7 @@ class RegisterController extends Controller
         //return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
-    public function resend($id) 
+    public function resend($id)
     {
         $user = User::find($id);
 

@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Sponsor\SponsorRepository;
 use App\Notifications\ConfirmedApplicantNotification;
-use App\PreliminaryRequirement;
 use App\StudentAdditional;
 use App\StudentPayment;
 use App\StudentPreliminary;
@@ -29,11 +28,12 @@ class CoordinatorController extends Controller
     private $studentRepository;
     private $coordinatorActionRepository;
     private $sponsorRepository;
-    public function __construct(CoordinatorRepository $coordinatorRepository,
-                                StudentRepository $studentRepository,
-                                CoordinatorActionRepository $coordinatorActionRepository,
-                                SponsorRepository $sponsorRepository)
-    {
+    public function __construct(
+        CoordinatorRepository $coordinatorRepository,
+        StudentRepository $studentRepository,
+        CoordinatorActionRepository $coordinatorActionRepository,
+        SponsorRepository $sponsorRepository
+    ) {
         $this->coordinatorRepository = $coordinatorRepository;
         $this->studentRepository = $studentRepository;
         $this->coordinatorActionRepository = $coordinatorActionRepository;
@@ -132,7 +132,7 @@ class CoordinatorController extends Controller
                 return response()->json([
                     'message'   =>  'Student Called.'
                 ], 200);
-            break;
+                break;
             case 'Confirmed' :
                 $programId = Program::find($program->program_id)->description . '-'. (date('Y') + 1) . rand(0, 9999);
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
@@ -143,7 +143,7 @@ class CoordinatorController extends Controller
                 $this->coordinatorActionRepository->saveCoordinatorAction([
                     'user_id'   =>  Auth::user()->id,
                     'client_id' =>  $id,
-                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name :$coordinator->firstName . ' set the application status to Confirmed.',
+                    'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to Confirmed.',
                 ]);
 
                 $student = $this->studentRepository->findOneBy(['user_id' => $id]);
@@ -206,7 +206,7 @@ class CoordinatorController extends Controller
                     'location'          => $request->input('place'),
                     'housing_details'   => $request->input('housing'),
                     'stipend'           => $request->input('stipend'),
-                    'program_start_date'=> $request->input('start'),
+                    'program_start_date' => $request->input('start'),
                     'program_end_date'  => $request->input('end'),
                     'visa_sponsor'      => $this->sponsorRepository->findOneBy(['id' => $request->input('sponsor')])->name
                 ];
@@ -345,9 +345,9 @@ class CoordinatorController extends Controller
                 return response()->json([
                     'message'   =>  'Cancelled'
                 ], 200);
-                
+
                 break;
-            default: 
+            default:
                 $this->studentRepository->updateStudentBy(['user_id' => $id], [
                     'application_status'    =>  $status
                 ]);
@@ -357,7 +357,7 @@ class CoordinatorController extends Controller
                     'client_id' =>  $id,
                     'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set the application status to .' . $request->input('status'),
                 ]);
-                    
+
         }
     }
 
@@ -368,7 +368,7 @@ class CoordinatorController extends Controller
         $this->studentRepository->whereUpdate(['user_id' => $id], [
             'program_id' => $program
         ]);
-        
+
         $this->coordinatorActionRepository->saveCoordinatorAction([
             'user_id'   =>  Auth::user()->id,
             'client_id' =>  $id,
@@ -377,8 +377,9 @@ class CoordinatorController extends Controller
 
         return 'Program Changed!';
     }
-    
-    public function SetContactedStatus(Request $request, $id) {
+
+    public function SetContactedStatus(Request $request, $id)
+    {
         $coordinator = $this->coordinatorRepository->getCoordinatorByUserId(Auth::user()->id);
 
         $this->studentRepository->whereUpdate(['user_id' => $id], [
@@ -407,7 +408,7 @@ class CoordinatorController extends Controller
             'client_id' =>  $id,
             'actions'   =>  (Auth::user()->hasRole('administrator')) ? Auth::user()->name : $coordinator->firstName . ' set visa interview status to ' . $status
         ]);
-        
+
         return 'Status '. $status;
     }
 
@@ -428,7 +429,7 @@ class CoordinatorController extends Controller
             'position'          =>  $request->input('position'),
             'location'          =>  $request->input('place'),
             'housing_details'   =>  $request->input('housing'),
-            'program_start_date'=>  $request->input('start'),
+            'program_start_date' =>  $request->input('start'),
             'program_end_date'  =>  $request->input('end'),
             'stipend'           =>  $request->input('stipend')
         ]);
@@ -488,7 +489,7 @@ class CoordinatorController extends Controller
             'us_arrival_date'           =>  $request->input('us_arrival_date'),
             'us_arrival_time'           =>  $request->input('us_arrival_time'),
             'us_arrival_flight_no'      =>  $request->input('us_arrival_flight_no'),
-            'us_arrival_airline'         =>  $request->input('us_arrival_flight')       
+            'us_arrival_airline'         =>  $request->input('us_arrival_flight')
         ]);
 
         return response()->json([
@@ -535,7 +536,7 @@ class CoordinatorController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $path = $request->file('file')
                         ->storeAs(User::where('id', $request->user_id)->first()->email . '/basic', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
-            
+
             $result = StudentPreliminary::create([
                 'user_id'           =>  $request->input('user_id'),
                 'requirement_id'    =>  $request->input('requirement_id'),
@@ -553,7 +554,7 @@ class CoordinatorController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $path = $request->file('file')
                         ->storeAs(User::where('id', $request->user_id)->first()->email . '/additional', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
-                     
+
             $result = StudentAdditional::create([
                 'user_id'           =>  $request->input('user_id'),
                 'requirement_id'    =>  $request->input('requirement_id'),
@@ -571,7 +572,7 @@ class CoordinatorController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $path = $request->file('file')
                         ->storeAs(User::where('id', $request->user_id)->first()->email . '/payment', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
-                     
+
             $result = StudentPayment::create([
                 'user_id'           =>  $request->input('user_id'),
                 'requirement_id'    =>  $request->input('requirement_id'),
@@ -595,7 +596,7 @@ class CoordinatorController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
             $path = $request->file('file')
                         ->storeAs(User::where('id', $request->user_id)->first()->email . '/visa', date('Ymd') . uniqid() . '.' . $extension, 'uploaded_files');
-                     
+
             $result = StudentSponsor::create([
                 'user_id'           =>  $request->input('user_id'),
                 'requirement_id'    =>  $request->input('requirement_id'),

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Degree;
 
-
 use App\Degree;
 use App\Repositories\Base\BaseRepository;
 

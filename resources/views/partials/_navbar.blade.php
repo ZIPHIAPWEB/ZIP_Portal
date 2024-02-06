@@ -18,7 +18,7 @@
                           <a class="dropdown-item" href="{{ url('/social-stream') }}">SOCIAL STREAM</a>
                         </div>
                     </li>
-                    <li class="nav-item" role="presentation"><a href="{{ url('/auth/login') }}" class="btn btn-primary" style="background-color: #002157;border-radius: 10px;">JOIN US</a></li>                
+                    <li class="nav-item" role="presentation"><a href="{{ url('/portal/v2/login') }}" target="_blank" class="btn btn-primary" style="background-color: #002157;border-radius: 10px;">JOIN US</a></li>                
                 </ul>
             </div>
         </div>

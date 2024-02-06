@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Log;
 use App\Notifications\StudentUploadedFile;
 use App\Repositories\Log\LogRepository;
-use App\Repositories\Sponsor\SponsorRepository;
 use App\Repositories\SponsorRequirement\SponsorRequirementRepository;
 use App\Repositories\Student\StudentRepository;
 use App\Repositories\StudSponsor\StudSponsorRepository;
-use App\SponsorRequirement;
-use App\Student;
-use App\StudentSponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
@@ -22,11 +17,12 @@ class StudentSponsorController extends Controller
     private $sponsorRepository;
     private $studentRepository;
     private $logRepository;
-    public function __construct(StudentRepository $studentRepository,
-                                StudSponsorRepository $studSponsorRepository,
-                                SponsorRequirementRepository $sponsorRepository,
-                                LogRepository $logRepository)
-    {
+    public function __construct(
+        StudentRepository $studentRepository,
+        StudSponsorRepository $studSponsorRepository,
+        SponsorRequirementRepository $sponsorRepository,
+        LogRepository $logRepository
+    ) {
         $this->studentRepository = $studentRepository;
         $this->studSponsorRepository = $studSponsorRepository;
         $this->sponsorRepository = $sponsorRepository;

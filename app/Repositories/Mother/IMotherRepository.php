@@ -8,7 +8,6 @@
 
 namespace App\Repositories\Mother;
 
-
 interface IMotherRepository
 {
     public function saveMother(array $attributes);

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\PreliminaryRequirement;
 
-
 use App\PreliminaryRequirement;
 use App\Repositories\Base\BaseRepository;
 

@@ -8,7 +8,6 @@
 
 namespace App\Repositories\AdditionalRequirement;
 
-
 use App\AdditionalRequirement;
 use App\Repositories\Base\BaseRepository;
 
@@ -23,7 +22,7 @@ class AdditionalRequirementRepository extends BaseRepository implements IAdditio
     {
         return $this->findAll();
     }
-    
+
     public function getByProgramIdAndUserId($programId, $userId)
     {
         return $this->findByWhereWith(['program_id' => $programId, 'is_active' => 1], ['studentAdditional' => function ($query) use ($userId) {

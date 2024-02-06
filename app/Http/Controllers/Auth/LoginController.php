@@ -52,7 +52,7 @@ class LoginController extends Controller
         try {
             $social_user = Socialite::driver('google')->stateless()->user();
             $socialProvider = SocialProvider::where('provider_id', $social_user->getId())->first();
-        
+
             if (!$socialProvider) {
                 $user = User::firstOrCreate([
                     'name'      =>  str_replace(' ', '', $social_user->getName()),
@@ -73,7 +73,7 @@ class LoginController extends Controller
                 ]);
 
                 auth()->login($user, false);
-                
+
                 return redirect('portal');
             } else {
                 $user = User::find($socialProvider->user_id);
@@ -82,10 +82,10 @@ class LoginController extends Controller
                     $user->update([
                         'isOnline'  =>  true
                     ]);
-    
+
                     auth()->login($user, false);
 
-                    return redirect('portal');                    
+                    return redirect('portal');
                 } else {
                     $user = User::create([
                         'name'      =>  str_replace(' ', '', $social_user->getName()),
@@ -98,7 +98,7 @@ class LoginController extends Controller
                     ]);
 
                     $user->attachRole('student');
-                    
+
                     SocialProvider::where('provider_id', $social_user->getId())->update([
                         'user_id'       =>  $user->id,
                         'provider_id'   =>  $social_user->getId(),
@@ -106,7 +106,7 @@ class LoginController extends Controller
                     ]);
 
                     auth()->login($user, false);
-                
+
                     return redirect('portal');
                 }
             }
