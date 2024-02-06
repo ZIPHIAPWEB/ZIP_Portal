@@ -47,15 +47,10 @@ onMounted(async () => {
                             <span v-if="!item.student_payment?.acknowledgement" class="fa fa-times text-red"></span>
                             <span v-else class="fa fa-check text-success"></span>
                         </td>
-                        <td v-if="authStore.getAuthRole == 'coordinator'" class="text-center">
-                            <span>Not uploaded yet</span>
-                            <!--<button v-if="item.student_payment" class="btn btn-primary btn-xs mr-1">Download</button> -->
-                            <!--<button v-if="item.student_payment" class="btn btn-danger btn-xs mr-1">Delete</button> -->
-                        </td>
-                        <td v-if="authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin'" class="text-center">
+                        <td class="text-center">
                             <span v-if="!item.student_payment">Not uploaded yet</span>
-                            <button v-if="item.student_payment" @click="coordStudentPaymentRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button v-if="item.student_payment" @click="coordStudentPaymentRequirementStore.acknowledgeStudentPayment(item.id)" class="btn btn-success btn-xs mr-1">Verify</button>
+                            <button v-if="item.student_payment && (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="coordStudentPaymentRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_payment && (authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="coordStudentPaymentRequirementStore.acknowledgeStudentPayment(item.id)" class="btn btn-success btn-xs mr-1">Verify</button>
                         </td>
                     </tr>
                 </tbody>
