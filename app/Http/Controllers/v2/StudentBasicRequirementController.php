@@ -72,10 +72,10 @@ class StudentBasicRequirementController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $file = Storage::get($requirement->path);
+        $file = Storage::disk('uploaded_files')->url($requirement->path);
 
         (new CreateUserLogAction())->execute('Downloaded a ' . $requirement->display_name. ' template.');
 
-        return response()->download($file);
+        return $file;
     }
 }

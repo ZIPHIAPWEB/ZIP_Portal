@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { downloadFile } from "../hooks/useFileDownload";
 
 export interface IStudentVisaSponsorRequirement {
     id?: number;
@@ -57,7 +58,8 @@ export const useStudentVisaSponsorRequirement = defineStore({
         async downloadVisaSponsorRequirement(requirementId: string | number | undefined) {
             try {
                 this.isLoading = true;
-                await StudentAPI.downloadVisaSponsorRequirement(requirementId);
+                const response = (await StudentAPI.downloadVisaSponsorRequirement(requirementId)).data;
+                downloadFile(response);
                 this.isLoading = false;
             } catch (error : any) {
                 this.error = error.response.data.message;

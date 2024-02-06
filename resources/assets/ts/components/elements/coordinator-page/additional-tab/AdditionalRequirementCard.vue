@@ -48,7 +48,7 @@ await coordStudentAdditionalRequirementStore.uploadSelectedStudentAdditionalRequ
                             <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.removeSelectedStudentAdditionalRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                         <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
-                            <span>Not Applicable</span>
+                            <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                         </td>
                     </tr>
                 </tbody>
