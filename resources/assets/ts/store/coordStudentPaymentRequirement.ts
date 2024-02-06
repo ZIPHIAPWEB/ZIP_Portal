@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import CoordinatorApi from "../services/CoordinatorApi";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
 import { IPaymentRequirement } from "./paymentRequirement";
-
+import { downloadFile } from "../hooks/useFileDownload";
 export interface ICoordStudentPaymentRequirement {
     isSuccess: boolean;
     isLoading: boolean;
@@ -43,7 +43,8 @@ export const useCoordStudentPaymentRequirement = defineStore({
 
                 const coordSelectedStudent = useCoordSelectedStudent();
 
-                await CoordinatorApi.downloadSelectedStudentPaymentRequirement(coordSelectedStudent.userInfo.id, requirementId);
+                const response = (await CoordinatorApi.downloadSelectedStudentPaymentRequirement(coordSelectedStudent.userInfo.id, requirementId)).data;
+                downloadFile(response);
 
                 this.isLoading = false;
                 this.isSuccess = true;
