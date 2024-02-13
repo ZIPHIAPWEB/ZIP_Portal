@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [App\Http\Controllers\v2\AuthController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\v2\AuthController::class, 'register']);
+
 Route::post('/send-forgot-password', [App\Http\Controllers\v2\ResetPasswordController::class, 'sendResetEmailLink']);
+Route::get('/reset-password-page', [App\Http\Controllers\v2\ResetPasswordController::class, 'redirectToResetPasswordForm'])->name('password.reset-form');
+Route::put('/reset-password', [App\Http\Controllers\v2\ResetPasswordController::class, 'resetPassword']);
 
 Route::get('/provider/{provider}/redirect', [App\Http\Controllers\v2\AuthProviderController::class, 'redirectToProvider']);
 Route::get('/provider/{provider}/callback', [App\Http\Controllers\v2\AuthProviderController::class, 'handleProviderCallback']);

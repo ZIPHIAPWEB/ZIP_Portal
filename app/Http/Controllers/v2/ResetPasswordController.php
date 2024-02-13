@@ -50,7 +50,7 @@ class ResetPasswordController extends Controller
             abort(403, 'Invalid reset token');
         }
 
-        return redirect(env('APP_URL') . '/portal/v2/reset-password-form?token=' . $request->input('token'));
+        return redirect(env('APP_URL') . '/portal/v2/reset-password-form/' . $request->input('token'));
     }
 
     public function resetPassword(Request $request)
@@ -59,7 +59,8 @@ class ResetPasswordController extends Controller
             'token' => 'required',
             'username' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirm'
+            'current_password' => 'required',
+            'new_password' => 'required'
         ]);
 
         $user = User::query()

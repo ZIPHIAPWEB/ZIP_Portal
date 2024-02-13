@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            <a target="_blank" href="{{ route('password.reset', $token) }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">CLICK HERE TO RESET PASSWORD</a>
+                            <a target="_blank" href="{{ env('APP_URL') . /api/reset-password-page }}" style="padding: 12px; border: 1px solid none; border-radius: 20px; background-color: #002561; text-decoration: none; color: white;">CLICK HERE TO RESET PASSWORD</a>
                         </td>
                     </tr>
                     <tr>
