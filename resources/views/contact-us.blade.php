@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         @include('partials._styles')
 
     </head>
@@ -199,6 +200,7 @@
                     </div>
                 </div>
                 @endif
+
                 <div class="form-row">
                     <div class="col-12 col-md-6">
                         <div class="form-group"><label>FULLNAME (Required)</label><input name="name" class="form-control" type="text" placeholder="Enter your fullname here..."></div>
@@ -208,6 +210,9 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group"><label>Message:</label><textarea name="message" class="form-control" rows="10" placeholder="Enter your message here..."></textarea></div>
+                        @if(config('services.recaptcha.key'))
+                            <div style="margin-bottom: 8px;" class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                        @endif
                         <div class="form-group"><button class="btn btn-primary border rounded-0" type="submit" style="font-weight: bold;background-color: rgb(0,33,87);">Send</button></div>
                     </div>
                 </div>

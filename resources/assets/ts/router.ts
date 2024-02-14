@@ -4,6 +4,7 @@ import { useAuthStore } from './store/auth';
 import LoginPage from './views/LoginPage.vue';
 import RegisterPage from './views/RegisterPage.vue';
 import ForgotPasswordPage from './views/ForgotPasswordPage.vue';
+import ResetPasswordPage from './views/ResetPasswordPage.vue';
 import EmailVerificationPage from './views/client/EmailVerificationPage.vue';
 import ApplicationFormPage from './views/client/ApplicationFormPage.vue';
 import StudentDashboardPage from './views/client/DashboardPage.vue';
@@ -40,6 +41,14 @@ let routes:Array<RouteRecordRaw> = [
         component: EmailVerificationPage,
         meta: {
             requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/reset-password-form/:token",
+        name: "reset-password",
+        component: ResetPasswordPage,
+        meta: {
+            requiresAuth: false
         }
     },
     {

@@ -140,11 +140,11 @@ export const useAuthStore = defineStore({
             }
         },
 
-        async sendForgotPasswordLink(email: string) {
+        async sendForgotPasswordLink(email: string, username: string) {
 
             try {
                 this.isLoading = true;
-                const response = await AuthAPI.sendForgotPasswordLink(email);
+                const response = await AuthAPI.sendForgotPasswordLink(email, username);
 
                 this.isLoading = false;
             } catch (err) {

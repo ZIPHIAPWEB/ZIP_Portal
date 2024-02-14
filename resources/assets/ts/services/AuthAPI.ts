@@ -1,6 +1,8 @@
 import { AxiosResponse } from "axios";
 import { ApiRequest, ApiRequestWithoutAuth } from "./ApiRequest";
 
+import { IResetPasswordForm } from '../store/resetPassword';
+
 export default {
     login(username: string, password: string) : Promise<AxiosResponse> {
 
@@ -12,9 +14,14 @@ export default {
         return ApiRequestWithoutAuth.post('/register', { username, email, password, password_confirmation });
     },
 
-    sendForgotPasswordLink(email: string) : Promise<AxiosResponse> {
+    sendForgotPasswordLink(email: string, username: string) : Promise<AxiosResponse> {
 
-        return ApiRequestWithoutAuth.post('/send-forgot-password', { email });
+        return ApiRequestWithoutAuth.post('/send-forgot-password', { email, username });
+    },
+
+    changePassword(data : IResetPasswordForm) : Promise<AxiosResponse> {
+        console.log(data);
+        return ApiRequestWithoutAuth.put('/reset-password', { ...data });
     },
 
     resendEmailVerification() : Promise<AxiosResponse> {
