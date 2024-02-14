@@ -16,10 +16,13 @@ class ResetPasswordController extends Controller
     public function sendResetEmailLink(Request $request)
     {
         $request->validate([
+            'username' => 'required',
             'email' => 'required|email'
         ]);
 
-        $selectedUser = User::query()->where('email', $request->input('email'));
+        $selectedUser = User::query()
+            ->where('name', $request->input('username'))
+            ->where('email', $request->input('email'));
 
         if (!$selectedUser->exists()) {
 
@@ -32,7 +35,7 @@ class ResetPasswordController extends Controller
         $token = Str::random(60);
         $cacheKey = 'reset-token-user-' . $selectedUser->first()->id;
 
-        Cache::add($cacheKey, $token, 60);
+        Cache::put($cacheKey, $token, now()->addMinutes(60));
 
         Notification::route('mail', $request->input('email'))
             ->notify(new MailResetPasswordToken($token));
@@ -59,7 +62,6 @@ class ResetPasswordController extends Controller
             'token' => 'required',
             'username' => 'required',
             'email' => 'required|email',
-            'current_password' => 'required',
             'new_password' => 'required'
         ]);
 
@@ -75,7 +77,8 @@ class ResetPasswordController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $cachedToken = Cache::get('reset-token-user-' . $user->first()->id);
+        $cachedKey = 'reset-token-user-' . $user->first()->id;
+        $cachedToken = Cache::get($cachedKey);
 
         if (!($cachedToken == $request->input('token'))) {
 
@@ -86,12 +89,14 @@ class ResetPasswordController extends Controller
         }
 
         $user->update([
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('new_password'))
         ]);
+
+        Cache::forget($cachedKey);
 
         return response()->json([
             'status' => Response::HTTP_OK,
-            'message' => 'Password reset successfully'
+            'message' => 'Password reset successfully. Tab will close in 5 sec.'
         ], Response::HTTP_OK);
     }
 }

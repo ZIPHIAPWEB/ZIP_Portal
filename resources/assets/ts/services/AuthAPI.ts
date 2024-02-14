@@ -14,14 +14,14 @@ export default {
         return ApiRequestWithoutAuth.post('/register', { username, email, password, password_confirmation });
     },
 
-    sendForgotPasswordLink(email: string) : Promise<AxiosResponse> {
+    sendForgotPasswordLink(email: string, username: string) : Promise<AxiosResponse> {
 
-        return ApiRequestWithoutAuth.post('/send-forgot-password', { email });
+        return ApiRequestWithoutAuth.post('/send-forgot-password', { email, username });
     },
 
     changePassword(data : IResetPasswordForm) : Promise<AxiosResponse> {
-
-        return ApiRequestWithoutAuth.put('/reset-password', { data });
+        console.log(data);
+        return ApiRequestWithoutAuth.put('/reset-password', { ...data });
     },
 
     resendEmailVerification() : Promise<AxiosResponse> {

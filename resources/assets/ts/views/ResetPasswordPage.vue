@@ -9,19 +9,23 @@ const route = useRoute();
 
 import { IResetPasswordForm, useResetPassword } from '../store/resetPassword';
 const resetPasswordStore = useResetPassword();
-const { error, isSuccess, isLoading } = storeToRefs(resetPasswordStore);
+const { res_message, error, isSuccess, isLoading } = storeToRefs(resetPasswordStore);
 
 const resetPasswordForm = reactive<IResetPasswordForm>({
     token: route.params.token,
     username: '',
     email: '',
-    currentPassword: '',
-    newPassword: ''
+    new_password: ''
 });
 
 const resetPasswordHandler = async () => {
 
     await resetPasswordStore.changePassword(resetPasswordForm);
+
+    setTimeout(() => {
+
+        window.close();
+    }, 5000);
 }
 
 </script>
@@ -29,6 +33,10 @@ const resetPasswordHandler = async () => {
 <template>
     <AuthLayout>
         <div class="login-box">
+            <div v-if="!(res_message == '' || res_message == undefined)" :class="{'alert-danger': !isSuccess, 'alert-success': isSuccess}" class="alert">
+                <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                {{ res_message }}
+            </div>
             <div class="card card-outline card-primary">
                 <div v-if="isLoading" class="overlay dark">
                     <i class="fas fa-3x fa-spinner fa-spin"></i>
@@ -40,24 +48,17 @@ const resetPasswordHandler = async () => {
                     <p class="login-box-msg"><span style="font-size: 20px; font-weight: 900">Zip Travel Philippines</span></p>
                     <form @submit.prevent="resetPasswordHandler">
                         <div class="form-group mb-3">
-                            <label for="current-username">Current username</label>
-                            <input v-model="resetPasswordForm.username" type="email" class="form-control" placeholder="Username">
+                            <input :class="{ 'is-invalid': error?.username ? error?.username[0] : ''}" v-model="resetPasswordForm.username" type="text" class="form-control" placeholder="Current username">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="current-email">Current email</label>
-                            <input v-model="resetPasswordForm.email" type="email" class="form-control" placeholder="E-mail">
+                            <input :class="{ 'is-invalid': error?.email ? error?.email[0] : ''}" v-model="resetPasswordForm.email" type="email" class="form-control" placeholder="Current e-mail">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="current-password">Current password</label>
-                            <input v-model="resetPasswordForm.currentPassword" type="password" class="form-control" placeholder="*******">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="current-password">New password</label>
-                            <input v-model="resetPasswordForm.newPassword" type="password" class="form-control" placeholder="*******">
+                            <input :class="{ 'is-invalid': error?.new_password ? error?.new_password[0] : '' }" v-model="resetPasswordForm.new_password" type="password" class="form-control" placeholder="New password">
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" :disabled="isLoading" class="btn btn-success btn-block">Change password</button>
+                                <button type="submit" :disabled="isLoading || isSuccess" class="btn btn-success btn-block">Change password</button>
                             </div>
                         </div>
                     </form>
