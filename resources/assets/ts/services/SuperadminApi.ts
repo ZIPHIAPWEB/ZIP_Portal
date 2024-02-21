@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
 import { ICoord } from "../store/superadminCoords";
+import { IProgramCategoryForm } from "../store/superadminProgramCategory";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -36,5 +37,22 @@ export default {
     },
     deleteProgram(programId : string | number) : Promise<AxiosResponse> {
         return ApiRequest.delete(`/sa/program/${programId}`);
+    },
+
+    getAllProgramCategories() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/sa/program-categories');
+    },
+    storeProgramCategory(data : IProgramCategoryForm) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/program-categories`, data);
+    },
+    updateProgramCategory(data : IProgramCategoryForm, categoryId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/program-categories/${categoryId}/update`, data);
+    },
+    deleteProgramCategory(categoryId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/program-categories/${categoryId}`);
     }
 }

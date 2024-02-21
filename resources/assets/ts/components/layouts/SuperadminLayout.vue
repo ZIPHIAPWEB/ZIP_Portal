@@ -127,10 +127,10 @@ const gotoDashboard = () => {
                         </router-link>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-program-categories' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Program Category</p>
-                        </a>
+                        </router-link>
                       </li>
                       <li class="nav-item">
                         <a href="#" class="nav-link">
