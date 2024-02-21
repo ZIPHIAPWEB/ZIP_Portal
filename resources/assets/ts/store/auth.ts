@@ -157,6 +157,10 @@ export const useAuthStore = defineStore({
         
         async logout() {
             await AuthAPI.logout();
+            this.clearAuthData();
+        },
+
+        clearAuthData() {
             this.router.push({ name: 'login' });
             this.auth = {...UserInitial};
             this.accessToken = '';

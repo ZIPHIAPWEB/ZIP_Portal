@@ -42,3 +42,20 @@ ApiRequestWithFile.interceptors.request.use((config) => {
     config.headers['Authorization'] = `Bearer ${authStore.accessToken}`;
     return config;
 })
+
+ApiRequest.interceptors.response.use(
+    (res) => {
+
+        return res;
+    },
+    (err) => {
+        
+        const authStore = useAuthStore();
+        const statusCode = err.response.status;
+
+        if(statusCode == 401) {
+
+            authStore.clearAuthData();
+        }
+    }
+);
