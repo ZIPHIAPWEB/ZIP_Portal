@@ -156,16 +156,22 @@ router.beforeEach((to, from, next) => {
             if (authStore.getIsAuthenticate && authStore.getIsVerified && authStore.getIsFilled && (to.name == 'login' || to.name == 'register') ) {
 
                 next({ name: 'student-dashboard'});
+
+                return;
             }
             
             if (authStore.getIsAuthenticate && !authStore.getIsVerified && !authStore.getIsFilled && to.name !== 'email-verification') {
 
                 next({ name: 'email-verification'});
+
+                return;
             } 
     
             if (authStore.getIsAuthenticate && !authStore.getIsFilled && authStore.getIsVerified && to.name !== 'application-form') {
     
                 next({ name: 'application-form'});
+
+                return;
             }
         }
 
