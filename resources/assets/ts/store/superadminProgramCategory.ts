@@ -9,11 +9,11 @@ export interface IProgramCategoryForm {
 }
 
 export interface ISuperadminProgramCategory {
-    id: string | number;
+    id?: string | number;
     name: string;
     display_name: string;
     description: string;
-    created_at: string;
+    created_at?: string;
 }
 
 export interface ISuperadminProgramCategoryState extends IBaseState{
@@ -54,7 +54,7 @@ export const useSuperadminProgramCategory = defineStore({
                 this.loadProgramCategories();
 
                 this.isLoading = false;
-                this.isSuccess = false;
+                this.isSuccess = true;
             } catch (error) {
                 
                 this.isLoading = false;
@@ -82,7 +82,7 @@ export const useSuperadminProgramCategory = defineStore({
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.deleteProgram(categoryId);
+                await SuperadminApi.deleteProgramCategory(categoryId);
                 this.loadProgramCategories();
 
                 this.isLoading = false;

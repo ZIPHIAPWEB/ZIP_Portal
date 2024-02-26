@@ -53,6 +53,6 @@ export default {
     },
     deleteProgramCategory(categoryId : string | number) : Promise<AxiosResponse> {
 
-        return ApiRequest.delete(`/sa/program-categories/${categoryId}`);
+        return ApiRequest.delete(`/sa/program-categories/${categoryId}/delete`);
     }
 }

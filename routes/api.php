@@ -214,9 +214,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'index']);
         Route::post('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'store']);
-        Route::get('/program-categories/{sponsorRequirement}', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'show']);
-        Route::put('/program-categories/{sponsorRequirement}/update', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'update']);
-        Route::delete('/program-categories/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'delete']);
+        Route::get('/program-categories/{programCategory}', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'show']);
+        Route::put('/program-categories/{programCategory}/update', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'update']);
+        Route::delete('/program-categories/{programCategory}/delete', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'destroy']);
 
     });
 });
