@@ -133,10 +133,10 @@ const gotoDashboard = () => {
                         </router-link>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-visa-sponsor' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Visa Sponsor</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">

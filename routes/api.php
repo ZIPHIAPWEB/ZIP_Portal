@@ -156,7 +156,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/visa-sponsors', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'store']);
         Route::get('/visa-sponsors/{sponsor}', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'show']);
         Route::put('/visa-sponsors/{sponsor}/update', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'update']);
-        Route::delete('/visa-sponsors/{sponsor}/delete', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'delete']);
+        Route::delete('/visa-sponsors/{sponsor}/delete', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'destroy']);
 
         Route::get('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'index']);
         Route::post('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'store']);
@@ -210,7 +210,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'store']);
         Route::get('/sponsor-reqs/{sponsorRequirement}', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'show']);
         Route::put('/sponsor-reqs/{sponsorRequirement}/update', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'update']);
-        Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'delete']);
+        Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'destroy']);
 
         Route::get('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'index']);
         Route::post('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'store']);

@@ -17,6 +17,7 @@ import SuperadminStudentPage from './views/superadmin/StudentPage.vue';
 import SuperadminCoordPage from './views/superadmin/CoordinatorPage.vue';
 import SuperadminProgramPage from './views/superadmin/settings/ProgramPage.vue';
 import SuperadminProgramCategoryPage from './views/superadmin/settings/ProgramCategory.vue';
+import SuperadminVisaSponsorPage from './views/superadmin/settings/VisaSponsorPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -133,6 +134,11 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/sa/program-categories",
         name: "superadmin-program-categories",
         component: SuperadminProgramCategoryPage
+    },
+    {
+        path: basePath + "/sa/visa-sponsors",
+        name: "superadmin-visa-sponsor",
+        component: SuperadminVisaSponsorPage
     }
 ]
 

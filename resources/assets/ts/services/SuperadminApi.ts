@@ -2,6 +2,8 @@ import { AxiosResponse } from "axios"
 import { ApiRequest } from "./ApiRequest"
 import { ICoord } from "../store/superadminCoords";
 import { IProgramCategoryForm } from "../store/superadminProgramCategory";
+import { ISuperadminVisaSponsor } from "../store/superadminVisaSponsor";
+
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -54,5 +56,22 @@ export default {
     deleteProgramCategory(categoryId : string | number) : Promise<AxiosResponse> {
 
         return ApiRequest.delete(`/sa/program-categories/${categoryId}/delete`);
+    },
+
+    getAllVisaSponsors() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/sa/visa-sponsors');
+    },
+    storeVisaSponsor(data : ISuperadminVisaSponsor) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/visa-sponsors`, data);
+    },
+    updateVisaSponsor(data : ISuperadminVisaSponsor, sponsorId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/visa-sponsors/${sponsorId}/update`, data);
+    },
+    deleteVisaSponsor(sponsorId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/visa-sponsors/${sponsorId}/delete`);
     }
 }

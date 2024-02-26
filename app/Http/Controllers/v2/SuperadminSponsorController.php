@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminVisaSponsorResource;
 use App\Sponsor;
 
 use Illuminate\Http\Request;
@@ -21,11 +22,7 @@ class SuperadminSponsorController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Visa sponsor successfully loaded',
-            'data' => $sponsors
-        ], Response::HTTP_OK);
+        return SuperadminVisaSponsorResource::collection($sponsors);
     }
 
     /**
@@ -45,7 +42,7 @@ class SuperadminSponsorController extends Controller
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Visa sponsor successfully created',
-            'data' => $createdSponsor
+            'data' => new SuperadminVisaSponsorResource($createdSponsor)
         ], Response::HTTP_CREATED);
     }
 
@@ -61,7 +58,7 @@ class SuperadminSponsorController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Visa sponsor successfully loaded',
-            'data' => $sponsor
+            'data' => new SuperadminVisaSponsorResource($sponsor)
         ], Response::HTTP_OK);
     }
 
@@ -85,7 +82,7 @@ class SuperadminSponsorController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Visa sponsor successfully updated',
-            'data' => $sponsor
+            'data' => new SuperadminVisaSponsorResource($sponsor)
         ], Response::HTTP_OK);
     }
 
@@ -97,6 +94,11 @@ class SuperadminSponsorController extends Controller
      */
     public function destroy(Sponsor $sponsor)
     {
+        if (!$sponsor->exists()) {
+
+            abort(404, 'Sponsor not found.');
+        }
+
         $sponsor->delete();
 
         return response()->json([
