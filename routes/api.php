@@ -211,5 +211,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/sponsor-reqs/{sponsorRequirement}', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'show']);
         Route::put('/sponsor-reqs/{sponsorRequirement}/update', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'update']);
         Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'delete']);
+
+        Route::get('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'index']);
+        Route::post('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'store']);
+        Route::get('/program-categories/{programCategory}', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'show']);
+        Route::put('/program-categories/{programCategory}/update', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'update']);
+        Route::delete('/program-categories/{programCategory}/delete', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'destroy']);
+
     });
 });
