@@ -3,7 +3,7 @@ import { ApiRequest } from "./ApiRequest"
 import { ICoord } from "../store/superadminCoords";
 import { IProgramCategoryForm } from "../store/superadminProgramCategory";
 import { ISuperadminVisaSponsor } from "../store/superadminVisaSponsor";
-
+import { ISuperadminHostCompany } from "../store/superadminHosCompany";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -73,5 +73,22 @@ export default {
     deleteVisaSponsor(sponsorId : string | number) : Promise<AxiosResponse> {
 
         return ApiRequest.delete(`/sa/visa-sponsors/${sponsorId}/delete`);
-    }
+    },
+
+    getAllHostCompanies() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/sa/host-companies');
+    },
+    storeHostCompany(data : ISuperadminHostCompany) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/host-companies`, data);
+    },
+    updateHostCompany(data : ISuperadminHostCompany, companyId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/host-companies/${companyId}/update`, data);
+    },
+    deleteHostCompany(companyId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/host-companies/${companyId}/delete`);
+    },
 }

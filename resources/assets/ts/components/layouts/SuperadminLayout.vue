@@ -140,10 +140,10 @@ const gotoDashboard = () => {
                       </li>
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-host-company' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Host Company</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">

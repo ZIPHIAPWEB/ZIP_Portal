@@ -162,7 +162,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'store']);
         Route::get('/host-companies/{hostCompany}', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'show']);
         Route::put('/host-companies/{hostCompany}/update', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'update']);
-        Route::delete('/host-companies/{hostCompany}/delete', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'delete']);
+        Route::delete('/host-companies/{hostCompany}/delete', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'destroy']);
 
         Route::get('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'index']);
         Route::post('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'store']);

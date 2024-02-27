@@ -18,6 +18,7 @@ import SuperadminCoordPage from './views/superadmin/CoordinatorPage.vue';
 import SuperadminProgramPage from './views/superadmin/settings/ProgramPage.vue';
 import SuperadminProgramCategoryPage from './views/superadmin/settings/ProgramCategory.vue';
 import SuperadminVisaSponsorPage from './views/superadmin/settings/VisaSponsorPage.vue';
+import SuperadminHostCompanyPage from './views/superadmin/settings/HostCompanyPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -139,6 +140,11 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/sa/visa-sponsors",
         name: "superadmin-visa-sponsor",
         component: SuperadminVisaSponsorPage
+    },
+    {
+        path: basePath + "/sa/host-company",
+        name: "superadmin-host-company",
+        component: SuperadminHostCompanyPage
     }
 ]
 
