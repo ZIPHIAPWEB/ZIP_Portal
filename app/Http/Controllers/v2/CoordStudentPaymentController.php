@@ -31,7 +31,7 @@ class CoordStudentPaymentController extends Controller
         ]);
     }
 
-    public function storeStudentSponsorRequirement($userId, Request $request, $requirementId)
+    public function storeStudentPaymentRequirement($userId, Request $request, $requirementId)
     {
         $user = User::where('id', $userId)->first();
 
@@ -44,7 +44,7 @@ class CoordStudentPaymentController extends Controller
         return new StudentPaymentResource($uploadedRequirement);
     }
 
-    public function downloadStudentSponsorRequirement($userId, $requirementId)
+    public function downloadStudentPaymentRequirement($userId, $requirementId)
     {
         $requirement = StudentPayment::query()
             ->where('user_id', $userId)
@@ -61,7 +61,7 @@ class CoordStudentPaymentController extends Controller
         return Storage::disk('uploaded_files')->url($requirement->path);
     }
 
-    public function deleteStudentSponsorRequirement($userId, $requirementId)
+    public function deleteStudentPaymentRequirement($userId, $requirementId)
     {
         $requirement = StudentPayment::query()
             ->where('user_id', $userId)
