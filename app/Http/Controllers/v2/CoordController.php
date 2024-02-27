@@ -85,7 +85,7 @@ class CoordController extends Controller
 
         $query->when($isSearch && $request->input('search') !== null, function ($q) use ($request) {
 
-            return $q->where('last_name', 'like', '%'.$request->input('search').'%');
+            return $q->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ['%'.$request->input('search').'%']);
         });
 
         $query->when(!$isSearch && $request->input('from_date') !== null, function ($q) use ($request) {
