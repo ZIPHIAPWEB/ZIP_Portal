@@ -9,7 +9,7 @@ export interface IProgramCategoryForm {
 }
 
 export interface ISuperadminProgramCategory {
-    id?: string | number;
+    id: string | number;
     name: string;
     display_name: string;
     description: string;

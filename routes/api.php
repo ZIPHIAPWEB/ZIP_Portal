@@ -168,7 +168,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'store']);
         Route::get('/schools/{school}', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'show']);
         Route::put('/schools/{school}/update', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'update']);
-        Route::delete('/schools/{school}/delete', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'delete']);
+        Route::delete('/schools/{school}/delete', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'destroy']);
 
         Route::get('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'index']);
         Route::post('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'store']);

@@ -4,6 +4,7 @@ import { ICoord } from "../store/superadminCoords";
 import { IProgramCategoryForm } from "../store/superadminProgramCategory";
 import { ISuperadminVisaSponsor } from "../store/superadminVisaSponsor";
 import { ISuperadminHostCompany } from "../store/superadminHosCompany";
+import { ISuperadminSchool } from "../store/superadminSchool";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -90,5 +91,22 @@ export default {
     deleteHostCompany(companyId : string | number) : Promise<AxiosResponse> {
 
         return ApiRequest.delete(`/sa/host-companies/${companyId}/delete`);
+    },
+
+    getAllSchools() : Promise<AxiosResponse> {
+
+        return ApiRequest.get('/sa/schools');
+    },
+    storeSchool(data : ISuperadminSchool) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/schools`, data);
+    },
+    updateSchool(data : ISuperadminSchool, schoolId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/schools/${schoolId}/update`, data);
+    },
+    deleteSchool(schoolId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/schools/${schoolId}/delete`);
     },
 }

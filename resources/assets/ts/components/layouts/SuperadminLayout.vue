@@ -147,10 +147,10 @@ const gotoDashboard = () => {
                       </li>
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-school' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">School</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">

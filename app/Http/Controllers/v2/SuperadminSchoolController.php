@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminSchoolResource;
 use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,11 +21,7 @@ class SuperadminSchoolController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Schools successfully loaded.',
-            'data' => $schools
-        ], Response::HTTP_OK);
+        return SuperadminSchoolResource::collection($schools);
     }
 
     /**
@@ -44,7 +41,7 @@ class SuperadminSchoolController extends Controller
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'School successfully created',
-            'data' => $createdSchool
+            'data' => new SuperadminSchoolResource($createdSchool)
         ], Response::HTTP_CREATED);
     }
 
@@ -60,7 +57,7 @@ class SuperadminSchoolController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'School successfully loaded.',
-            'data' => $school
+            'data' => new SuperadminSchoolResource($school)
         ], Response::HTTP_OK);
     }
 
@@ -84,7 +81,7 @@ class SuperadminSchoolController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'School successfully updated',
-            'data' => $school
+            'data' => new SuperadminSchoolResource($school)
         ], Response::HTTP_OK);
     }
 
@@ -96,6 +93,11 @@ class SuperadminSchoolController extends Controller
      */
     public function destroy(School $school)
     {
+        if (!$school->exists()) {
+
+            abort('404', 'School not found.');
+        }
+
         $school->delete();
 
         return response()->json([

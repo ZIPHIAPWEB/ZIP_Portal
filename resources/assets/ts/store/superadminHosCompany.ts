@@ -3,7 +3,7 @@ import SuperadminApi from "../services/SuperadminApi";
 import { defineStore } from "pinia";
 
 export interface ISuperadminHostCompany {
-    id?: string | number;
+    id: string | number;
     name: string;
     description: string;
     created_at?: string;

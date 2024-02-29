@@ -3,7 +3,7 @@ import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import { defineStore } from "pinia";
 
-export interface ISuperadminVisaSponsor {
+export interface ISuperadminSchool {
     id: string | number;
     name: string;
     display_name: string;
@@ -11,79 +11,78 @@ export interface ISuperadminVisaSponsor {
     created_at?: string;
 }
 
-export interface ISuperadminVisaSponsorState extends IBaseState, IPagination {
-    sponsors: ISuperadminVisaSponsor[]
+export interface ISuperadminSchoolState extends IBaseState, IPagination {
+    schools: ISuperadminSchool[];
 }
 
-export const useSuperadminVisaSponsorStore = defineStore({
-    id: 'superadminVisaSponsor',
-    state: () : ISuperadminVisaSponsorState => ({
+export const useSuperadminSchoolStore = defineStore({
+    id: 'superadminSchool',
+    state: () : ISuperadminSchoolState => ({
         error: undefined,
         isLoading: false,
         isSuccess: false,
-        sponsors: [],
-        links: []
+        links: [],
+        schools: []
     }),
-    actions: {
-        async loadSuperadminVisaSponsors() {
+    actions : {
+        async loadSuperadminSchools() {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                const response = (await SuperadminApi.getAllVisaSponsors()).data;
-                this.sponsors = response.data;
-                this.links = response.meta.links;
+                const response = (await SuperadminApi.getAllSchools()).data;
+                this.schools = response.data;
 
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error) {
                 this.isLoading = false;
-                this.isSuccess = false;
+                this.isLoading = false;
             }
         },
-        async storeSuperadminVisaSponsor(data : ISuperadminVisaSponsor) {
+        async storeSuperadminSchool(data : ISuperadminSchool) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.storeVisaSponsor(data);
-                this.loadSuperadminVisaSponsors();
+                await SuperadminApi.storeSchool(data);
+                this.loadSuperadminSchools();
 
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error) {
                 this.isLoading = false;
-                this.isSuccess = false;
+                this.isLoading = false;
             }
         },
-        async updateSuperadminVisaSponsor(data : ISuperadminVisaSponsor, sponsorId : string | number) {
+        async updateSuperadminSchool(data : ISuperadminSchool, schoolId : string | number) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.updateProgram(data, sponsorId);
-                this.loadSuperadminVisaSponsors();
+                await SuperadminApi.updateSchool(data, schoolId);
+                this.loadSuperadminSchools();
 
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error) {
                 this.isLoading = false;
-                this.isSuccess = false;
+                this.isLoading = false;
             }
         },
-        async deleteSuperadminVisaSponsor(sponsorId : string | number) {
+        async deleteSuperadminSchool(schoolId : string | number) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.deleteVisaSponsor(sponsorId);
-                this.loadSuperadminVisaSponsors();
+                await SuperadminApi.deleteSchool(schoolId);
+                this.loadSuperadminSchools();
 
                 this.isLoading = false;
                 this.isSuccess = true;
             } catch (error) {
                 this.isLoading = false;
-                this.isSuccess = false;
+                this.isLoading = false;
             }
         }
     }
