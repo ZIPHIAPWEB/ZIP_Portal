@@ -17,7 +17,7 @@ class SuperadminHostCompanyResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->state,
+            'description' => $this->states,
             'created_at' => $this->created_at->toFormattedDayDateString()
         ];
     }

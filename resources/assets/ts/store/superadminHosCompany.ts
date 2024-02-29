@@ -5,7 +5,6 @@ import { defineStore } from "pinia";
 export interface ISuperadminHostCompany {
     id?: string | number;
     name: string;
-    display_name: string;
     description: string;
     created_at?: string;
 }

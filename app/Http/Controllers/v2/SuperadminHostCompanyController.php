@@ -34,7 +34,7 @@ class SuperadminHostCompanyController extends Controller
     {
         $createdHostCompany = HostCompany::create([
             'name' => $request->input('name'),
-            'state' => $request->input('description')
+            'states' => $request->input('description')
         ]);
 
         return response()->json([
@@ -71,7 +71,7 @@ class SuperadminHostCompanyController extends Controller
     {
         $hostCompany->update([
             'name' => $request->input('name'),
-            'state' => $request->input('description')
+            'states' => $request->input('description')
         ]);
 
         $hostCompany->refresh();

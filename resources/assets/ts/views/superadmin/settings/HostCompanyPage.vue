@@ -14,7 +14,6 @@ const isHostCompanyForEdit = ref<boolean>(false);
 const hostCompanyForm = ref<ISuperadminHostCompany>({
     id: '',
     description: '',
-    display_name: '',
     name: ''
 })
 
@@ -23,7 +22,18 @@ onMounted(async () => {
 });
 
 const openHostCompanyForm = (company? : ISuperadminHostCompany) => {
+    isHostCompanyFormOpen.value = true;
 
+    if (company) {
+
+        hostCompanyForm.value = {...company}
+
+        isHostCompanyForEdit.value = true;
+
+        return;
+    }
+
+    isHostCompanyForEdit.value = false;
 }
 
 const submitActionHandler = async () => {
@@ -52,7 +62,6 @@ const closeHostCompanyFormHandler = () => {
 const resetFormHandler = () => {
 
     hostCompanyForm.value.description = '';
-    hostCompanyForm.value.display_name = '';
     hostCompanyForm.value.name = '';
     hostCompanyForm.value.id = '';
 }
@@ -79,11 +88,6 @@ const resetFormHandler = () => {
                     </div>
 
                     <div class="form-group col-12">
-                        <label for="display-name">Display name</label>
-                        <input v-model="hostCompanyForm.display_name" type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group col-12">
                         <label for="description">Description</label>
                         <input v-model="hostCompanyForm.description" type="text" class="form-control">
                     </div>
@@ -97,7 +101,7 @@ const resetFormHandler = () => {
                     <span><b>Host companies</b></span>
                     <div class="card-tools">
                         <div>
-                            <button @click="openHostCompanyForm()" class="btn btn-primary btn-xs">Add sponsor</button>
+                            <button @click="openHostCompanyForm()" class="btn btn-primary btn-xs">Add host company</button>
                         </div>
                     </div>
                 </div>
@@ -107,7 +111,6 @@ const resetFormHandler = () => {
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th>Display name</th>
                                 <th>Description</th>
                                 <th>Date created</th>
                                 <th>Actions</th>
@@ -117,7 +120,6 @@ const resetFormHandler = () => {
                             <tr v-for="(company, index) in hostCompanies" :key="index">
                                 <td>{{ company.id }}</td>
                                 <td>{{ company.name }}</td>
-                                <td>{{ company.display_name }}</td>
                                 <td>{{ company.description }}</td>
                                 <td>{{ company.created_at }}</td>
                                 <td>
