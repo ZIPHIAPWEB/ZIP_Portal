@@ -153,18 +153,18 @@ const gotoDashboard = () => {
                         </router-link>
                       </li>
 
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Place of Assignment</p>
                         </a>
-                      </li>
+                      </li> -->
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-degree' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Degree</p>
-                        </a>
+                        </router-link>
                       </li>
                     </ul>
                   </li>

@@ -5,6 +5,7 @@ import { IProgramCategoryForm } from "../store/superadminProgramCategory";
 import { ISuperadminVisaSponsor } from "../store/superadminVisaSponsor";
 import { ISuperadminHostCompany } from "../store/superadminHosCompany";
 import { ISuperadminSchool } from "../store/superadminSchool";
+import { ISuperadminDegree } from "../store/superadminDegree";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -109,4 +110,20 @@ export default {
 
         return ApiRequest.delete(`/sa/schools/${schoolId}/delete`);
     },
+
+    getAllDegrees() : Promise<AxiosResponse> {
+        return ApiRequest.get('/sa/degrees');
+    },
+    storeDegree(data : ISuperadminDegree) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/degrees`, data);
+    },
+    updateDegree(data: ISuperadminDegree, degreeId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/degrees/${degreeId}/update`, data);
+    },
+    deleteDegree(degreeId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/degrees/${degreeId}/delete`);
+    }
 }

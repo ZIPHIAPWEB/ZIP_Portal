@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Degree;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminDegreeResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -20,11 +21,7 @@ class SuperadminDegreeController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Degrees successfully loaded',
-            'data' => $degrees
-        ], Response::HTTP_OK);
+        return SuperadminDegreeResource::collection($degrees);
     }
 
     /**
@@ -43,7 +40,7 @@ class SuperadminDegreeController extends Controller
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Degrees successfully created',
-            'data' => $createdDegree
+            'data' => new SuperadminDegreeResource($createdDegree)
         ], Response::HTTP_CREATED);
     }
 
@@ -58,7 +55,7 @@ class SuperadminDegreeController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Degrees successfully loaded',
-            'data' => $degree
+            'data' => new SuperadminDegreeResource($degree)
         ], Response::HTTP_OK);
     }
 
@@ -81,7 +78,7 @@ class SuperadminDegreeController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Degrees successfully updated',
-            'data' => $degree
+            'data' => new SuperadminDegreeResource($degree)
         ], Response::HTTP_OK);
     }
 
@@ -93,12 +90,16 @@ class SuperadminDegreeController extends Controller
      */
     public function destroy(Degree $degree)
     {
+        if (!$degree->exists()) {
+
+            abort('404', 'Degree not found');
+        }
+
         $degree->delete();
 
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Degrees successfully deleted',
-            'data' => $degree
         ], Response::HTTP_OK);
     }
 }

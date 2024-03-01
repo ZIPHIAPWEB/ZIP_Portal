@@ -174,31 +174,31 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'store']);
         Route::get('/positions/{position}', [App\Http\Controllers\v2\SuperadminPositionController::class, 'show']);
         Route::put('/positions/{position}/update', [App\Http\Controllers\v2\SuperadminPositionController::class, 'update']);
-        Route::delete('/positions/{position}/delete', [App\Http\Controllers\v2\SuperadminPositionController::class, 'delete']);
+        Route::delete('/positions/{position}/delete', [App\Http\Controllers\v2\SuperadminPositionController::class, 'destroy']);
 
         Route::get('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'index']);
         Route::post('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'store']);
         Route::get('/states/{state}', [App\Http\Controllers\v2\SuperadminStateController::class, 'show']);
         Route::put('/states/{state}/update', [App\Http\Controllers\v2\SuperadminStateController::class, 'update']);
-        Route::delete('/states/{state}/delete', [App\Http\Controllers\v2\SuperadminStateController::class, 'delete']);
+        Route::delete('/states/{state}/delete', [App\Http\Controllers\v2\SuperadminStateController::class, 'destroy']);
 
         Route::get('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'index']);
         Route::post('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'store']);
         Route::get('/degrees/{degree}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
         Route::put('/degrees/{degree}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
-        Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+        Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'destroy']);
 
         Route::get('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'index']);
         Route::post('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'store']);
         Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
         Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
-        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'destroy']);
 
         Route::get('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'index']);
         Route::post('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'store']);
         Route::get('/additional-reqs/{additionalRequirement}', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'show']);
         Route::put('/additional-reqs/{additionalRequirement}/update', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'update']);
-        Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'delete']);
+        Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'destroy']);
 
         Route::get('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'index']);
         Route::post('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'store']);
