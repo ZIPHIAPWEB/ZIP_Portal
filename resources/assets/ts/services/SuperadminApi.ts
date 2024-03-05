@@ -1,11 +1,12 @@
 import { AxiosResponse } from "axios"
-import { ApiRequest } from "./ApiRequest"
+import { ApiRequest, ApiRequestWithFile } from "./ApiRequest"
 import { ICoord } from "../store/superadminCoords";
 import { IProgramCategoryForm } from "../store/superadminProgramCategory";
 import { ISuperadminVisaSponsor } from "../store/superadminVisaSponsor";
 import { ISuperadminHostCompany } from "../store/superadminHosCompany";
 import { ISuperadminSchool } from "../store/superadminSchool";
 import { ISuperadminDegree } from "../store/superadminDegree";
+import { ISuperadminPrelimRequirement } from "../store/superadminPrelimRequirement";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -125,5 +126,32 @@ export default {
     deleteDegree(degreeId : string | number) : Promise<AxiosResponse> {
 
         return ApiRequest.delete(`/sa/degrees/${degreeId}/delete`);
+    },
+
+    getAllPrelimRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get(`/sa/prelim-reqs`);
+    },
+    storePrelimRequirement(data: ISuperadminPrelimRequirement) : Promise<AxiosResponse> {
+        
+        return ApiRequest.post(`/sa/prelim-reqs`, data);
+    },
+    updatePrelimRequire(data: ISuperadminPrelimRequirement, prelimId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/prelim-reqs/${prelimId}/update`, data);
+    },
+    deletePrelimRequirement(prelimId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/prelim-reqs/${prelimId}/delete`);
+    },
+    uploadPrelimReqFile(file: File, prelimId: string | number | undefined) : Promise<AxiosResponse> {
+        
+        const formData = new FormData();
+        formData.append('_method', 'put');
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/sa/prelim-reqs/${prelimId}/file/upload`, formData);
+    },
+    removePrelimReqFile(prelimId: string | number) : Promise<AxiosResponse> {
+        
+        return ApiRequest.put(`/sa/prelim-reqs/${prelimId}/file/remove`);
     }
 }

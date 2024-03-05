@@ -190,9 +190,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'index']);
         Route::post('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'store']);
-        Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
-        Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
-        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'destroy']);
+        Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'show']);
+        Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'update']);
+        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'destroy']);
+
+        Route::put('/prelim-reqs/{preliminaryRequirement}/file/upload', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'uploadPrelimFile']);
+        Route::put('/prelim-reqs/{preliminaryRequirement}/file/remove', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'removePrelimFile']);
 
         Route::get('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'index']);
         Route::post('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'store']);

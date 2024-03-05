@@ -3,7 +3,7 @@ import { IPagination } from "../interfaces/IPagination";
 import SuperadminApi from "../services/SuperadminApi";
 import { defineStore } from "pinia";
 
-interface ISuperadminProgram {
+export interface ISuperadminProgram {
     id: string | number;
     name: string;
     display_name: string;
@@ -12,7 +12,7 @@ interface ISuperadminProgram {
     date_created: string;
 }
 
-interface ISuperadminProgramState extends IBaseState, IPagination {
+export interface ISuperadminProgramState extends IBaseState, IPagination {
     programs: ISuperadminProgram[]
 }
 

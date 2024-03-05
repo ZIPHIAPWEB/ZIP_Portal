@@ -168,6 +168,38 @@ const gotoDashboard = () => {
                       </li>
                     </ul>
                   </li>
+                  <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>
+                        Requirements
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-prelim'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Preliminary</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-programs'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Additional</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-programs'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Visa Sponsor</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-programs'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Payment</p>
+                        </router-link>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </nav>
               <!-- /.sidebar-menu -->

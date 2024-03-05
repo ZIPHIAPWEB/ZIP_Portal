@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminPrelimRequirementResource;
 use App\PreliminaryRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,14 +20,10 @@ class SuperadminPrelimReqsController extends Controller
     public function index()
     {
         $reqs = PreliminaryRequirement::query()
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('created_at', 'DESC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Preliminary requirements successfully loaded',
-            'data' => $reqs
-        ], Response::HTTP_OK);
+        return SuperadminPrelimRequirementResource::collection($reqs);
     }
 
     /**
@@ -41,13 +38,13 @@ class SuperadminPrelimReqsController extends Controller
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => $request->hasFile('file') ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Preliminary requirement successfully created',
-            'data' => $createdReqs
+            'data' => new SuperadminPrelimRequirementResource($createdReqs)
         ], Response::HTTP_CREATED);
     }
 
@@ -62,7 +59,7 @@ class SuperadminPrelimReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Preliminary requirement successfully loaded',
-            'data' => $preliminaryRequirement
+            'data' => new SuperadminPrelimRequirementResource($preliminaryRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -84,7 +81,7 @@ class SuperadminPrelimReqsController extends Controller
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         $preliminaryRequirement->refresh();
@@ -92,7 +89,7 @@ class SuperadminPrelimReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Preliminary requirement successfully updated',
-            'data' => $preliminaryRequirement
+            'data' => new SuperadminPrelimRequirementResource($preliminaryRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -115,5 +112,38 @@ class SuperadminPrelimReqsController extends Controller
             'status' => Response::HTTP_OK,
             'message' => 'Preliminary requirement successfully deleted'
         ], Response::HTTP_OK);
+    }
+
+    public function uploadPrelimFile(Request $request, PreliminaryRequirement $preliminaryRequirement)
+    {
+        if(!$preliminaryRequirement->exists()) {
+
+            abort(404, 'Prelim requirement not found.');
+        }
+
+        if (!($preliminaryRequirement->path == '' || $preliminaryRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($preliminaryRequirement->path);
+        }
+
+        $preliminaryRequirement->update([
+            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+        ]);
+
+        return response()->noContent();
+    }
+
+    public function removePrelimFile(PreliminaryRequirement $preliminaryRequirement)
+    {
+        if (!($preliminaryRequirement->path == '' || $preliminaryRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($preliminaryRequirement->path);
+        }
+
+        $preliminaryRequirement->update([
+            'path' => ''
+        ]);
+
+        return response()->noContent();
     }
 }

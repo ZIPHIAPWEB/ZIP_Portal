@@ -10,12 +10,18 @@ class PreliminaryRequirement extends Model
         'program_id',
         'name',
         'description',
-        'path'
+        'path',
+        'is_active'
     ];
 
     public function studentPreliminary()
     {
         return $this->belongsTo('App\StudentPreliminary', 'id', 'requirement_id');
+    }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id', 'id');
     }
 
     public function getById($id)

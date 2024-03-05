@@ -21,6 +21,7 @@ import SuperadminVisaSponsorPage from './views/superadmin/settings/VisaSponsorPa
 import SuperadminHostCompanyPage from './views/superadmin/settings/HostCompanyPage.vue';
 import SuperadminSchoolPage from './views/superadmin/settings/SchoolPage.vue';
 import SuperadminDegreePage from './views/superadmin/settings/DegreePage.vue';
+import SuperadminPrelimReqsPage from './views/superadmin/requirements/PreliminaryPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -157,6 +158,11 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/sa/degree",
         name: "superadmin-degree",
         component: SuperadminDegreePage
+    },
+    {
+        path: basePath + "/sa/prelim-reqs",
+        name: "superadmin-prelim",
+        component: SuperadminPrelimReqsPage
     }
 ]
 
