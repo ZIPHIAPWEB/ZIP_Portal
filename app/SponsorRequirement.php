@@ -10,12 +10,18 @@ class SponsorRequirement extends Model
         'sponsor_id',
         'name',
         'description',
-        'path'
+        'path',
+        'is_active'
     ];
 
     public function studentVisa()
     {
         return $this->belongsTo('App\StudentSponsor', 'id', 'requirement_id');
+    }
+
+    public function sponsor()
+    {
+        return $this->belongsTo(Sponsor::class, 'sponsor_id', 'id');
     }
 
     public function getBySponsor($sponsorId)

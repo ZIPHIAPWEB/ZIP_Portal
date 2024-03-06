@@ -188,7 +188,7 @@ const gotoDashboard = () => {
                           <p class="text-sm" style="vertical-align: text-bottom;">Additional</p>
                         </router-link>
 
-                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-programs'}">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-sponsor-reqs'}">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Visa Sponsor</p>
                         </router-link>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminSponsorRequirementResource;
 use App\SponsorRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -22,11 +23,7 @@ class SuperadminSponsorReqsController extends Controller
             ->orderBy('created_at', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Sponsor requirements successfully loaded',
-            'data' => $reqs
-        ], Response::HTTP_OK);
+        return SuperadminSponsorRequirementResource::collection($reqs);
     }
 
     /**
@@ -41,13 +38,13 @@ class SuperadminSponsorReqsController extends Controller
             'sponsor_id' => $request->input('sponsor_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => $request->hasFile('file') ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Sponsosr requirement successfully created',
-            'data' => $createdReqs
+            'data' => new SuperadminSponsorRequirementResource($createdReqs)
         ], Response::HTTP_CREATED);
     }
 
@@ -62,7 +59,7 @@ class SuperadminSponsorReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Sponsor requirement successfully loaded',
-            'data' => $sponsorRequirement
+            'data' => new SuperadminSponsorRequirementResource($sponsorRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -75,16 +72,11 @@ class SuperadminSponsorReqsController extends Controller
      */
     public function update(Request $request, SponsorRequirement $sponsorRequirement)
     {
-        if (!($sponsorRequirement->path == '' || $sponsorRequirement->path == null)) {
-
-            Storage::disk('uploaded_files')->delete($sponsorRequirement->path);
-        }
-
         $sponsorRequirement->update([
             'sponsor_id' => $request->input('sponsor_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         $sponsorRequirement->refresh();
@@ -92,7 +84,7 @@ class SuperadminSponsorReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Sponsor requirement successfully updated',
-            'data' => $sponsorRequirement
+            'data' => new SuperadminSponsorRequirementResource($sponsorRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -115,5 +107,38 @@ class SuperadminSponsorReqsController extends Controller
             'status' => Response::HTTP_OK,
             'message' => 'Sponsor requirement successfully deleted'
         ], Response::HTTP_OK);
+    }
+
+    public function uploadSponsorFile(Request $request, SponsorRequirement $sponsorRequirement)
+    {
+        if(!$sponsorRequirement->exists()) {
+
+            abort(404, 'Sponsor requirement not found.');
+        }
+
+        if (!($sponsorRequirement->path == '' || $sponsorRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($sponsorRequirement->path);
+        }
+
+        $sponsorRequirement->update([
+            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+        ]);
+
+        return response()->noContent();
+    }
+
+    public function removeSponsorFile(SponsorRequirement $sponsorRequirement)
+    {
+        if (!($sponsorRequirement->path == '' || $sponsorRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($sponsorRequirement->path);
+        }
+
+        $sponsorRequirement->update([
+            'path' => ''
+        ]);
+
+        return response()->noContent();
     }
 }

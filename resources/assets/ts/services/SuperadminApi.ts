@@ -8,6 +8,7 @@ import { ISuperadminSchool } from "../store/superadminSchool";
 import { ISuperadminDegree } from "../store/superadminDegree";
 import { ISuperadminPrelimRequirement } from "../store/superadminPrelimRequirement";
 import { ISuperadminAdditionalRequirement } from "../store/superadminAdditionalRequirement";
+import { ISuperadminVisaSponsorRequirement } from "../store/superadminVisaSponsorRequirement";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -180,6 +181,33 @@ export default {
     },
     removeAdditionalReqFile(additionalId: string | number) : Promise<AxiosResponse> {
         
-        return ApiRequest.put(`/sa/additional-reqs/${additionalId}/file/remove`);
+        return ApiRequest.put(`/sa/sponsor-reqs/${additionalId}/file/remove`);
+    },
+
+    getAllVisaSponsorRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get(`/sa/sponsor-reqs`);
+    },
+    storeVisaSponsorRequirement(data: ISuperadminVisaSponsorRequirement) : Promise<AxiosResponse> {
+        
+        return ApiRequest.post(`/sa/sponsor-reqs`, data);
+    },
+    updateVisaSponsorRequirement(data: ISuperadminVisaSponsorRequirement, sponsorId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/sponsor-reqs/${sponsorId}/update`, data);
+    },
+    deleteVisaSponsorRequirement(sponsorId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/sponsor-reqs/${sponsorId}/delete`);
+    },
+    uploadVisaSponsorReqFile(file: File, sponsorId: string | number | undefined) : Promise<AxiosResponse> {
+        
+        const formData = new FormData();
+        formData.append('_method', 'put');
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/sa/sponsor-reqs/${sponsorId}/file/upload`, formData);
+    },
+    removeVisaSponsorReqFile(sponsorId: string | number) : Promise<AxiosResponse> {
+        
+        return ApiRequest.put(`/sa/sponsor-reqs/${sponsorId}/file/remove`);
     }
 }

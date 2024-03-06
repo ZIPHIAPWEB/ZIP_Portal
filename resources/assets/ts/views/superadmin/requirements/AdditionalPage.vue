@@ -29,13 +29,13 @@ onMounted(async () => {
     await superadminProgramStore.loadSuperadminPrograms();
 })
 
-const openPrelimRequirementForm = (prelim?: ISuperadminAdditionalRequirement) => {
+const openAdditionalRequirementForm = (additional?: ISuperadminAdditionalRequirement) => {
 
     isAdditionalReqFormOpen.value = true;
 
-    if (prelim) {
+    if (additional) {
 
-        additionalForm.value = {...prelim}
+        additionalForm.value = {...additional}
 
         isAdditionalForEdit.value = true;
 
@@ -62,7 +62,7 @@ const submitActionHandler = async () => {
     }
 }
 
-const closePrelimRequirementFormHandler = () => {
+const closeAdditionalRequirementFormHandler = () => {
 
     isAdditionalReqFormOpen.value = false;
     resetFormHandler();
@@ -89,7 +89,7 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
 
         <Teleport to="body">
             <PopUp 
-                @trigger-close-event="closePrelimRequirementFormHandler()"
+                @trigger-close-event="closeAdditionalRequirementFormHandler()"
                 @trigger-button-event="submitActionHandler"
                 v-if="isAdditionalReqFormOpen" 
                 title="Additional requirement" 
@@ -134,7 +134,7 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                     <span><b>Additional Requirements</b></span>
                     <div class="card-tools">
                         <div>
-                            <button @click="openPrelimRequirementForm()" class="btn btn-primary btn-xs">Add requirement</button>
+                            <button @click="openAdditionalRequirementForm()" class="btn btn-primary btn-xs">Add requirement</button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                                 <td>
                                     <UploadButton v-if="(req.path == '' || req.path == null)" :requirementId="req.id" @getFile="uploadFileHander" />
                                     <button v-if="!(req.path == '' || req.path == null)" @click="superadminAdditionalRequirementStore.removeSuperadminAdditionalRequirementFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
-                                    <button @click="openPrelimRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
+                                    <button @click="openAdditionalRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
                                     <button @click="superadminAdditionalRequirementStore.deleteSuperadminAdditionalRequriement(req.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>

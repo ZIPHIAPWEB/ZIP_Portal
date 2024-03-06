@@ -118,7 +118,7 @@ class SuperadminAdditionalReqsController extends Controller
     {
         if(!$additionalRequirement->exists()) {
 
-            abort(404, 'Prelim requirement not found.');
+            abort(404, 'Additional requirement not found.');
         }
 
         if (!($additionalRequirement->path == '' || $additionalRequirement->path == null)) {
