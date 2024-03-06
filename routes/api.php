@@ -203,6 +203,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/additional-reqs/{additionalRequirement}/update', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'update']);
         Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'destroy']);
 
+        Route::put('/additional-reqs/{additionalRequirement}/file/upload', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'uploadAdditionalFile']);
+        Route::put('/additional-reqs/{additionalRequirement}/file/remove', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'removeAdditionalFile']);
+
         Route::get('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'index']);
         Route::post('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'store']);
         Route::get('/payment-reqs/{paymentRequirement}', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'show']);

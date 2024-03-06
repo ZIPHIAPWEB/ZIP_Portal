@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v2;
 use App\Actions\UploadedFilePathAction;
 use App\AdditionalRequirement;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminAdditionalRequirementResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -22,11 +23,7 @@ class SuperadminAdditionalReqsController extends Controller
             ->orderBy('created_at', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Additional requirements successfully loaded',
-            'data' => $reqs
-        ], Response::HTTP_OK);
+        return SuperadminAdditionalRequirementResource::collection($reqs);
     }
 
     /**
@@ -41,13 +38,13 @@ class SuperadminAdditionalReqsController extends Controller
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => $request->hasFile('file') ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Additional requirement successfully created',
-            'data' => $createdReqs
+            'data' => new SuperadminAdditionalRequirementResource($createdReqs)
         ], Response::HTTP_CREATED);
     }
 
@@ -62,7 +59,7 @@ class SuperadminAdditionalReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Additional requirement successfully loaded',
-            'data' => $additionalRequirement
+            'data' => new SuperadminAdditionalRequirementResource($additionalRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -84,7 +81,7 @@ class SuperadminAdditionalReqsController extends Controller
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         $additionalRequirement->refresh();
@@ -92,7 +89,7 @@ class SuperadminAdditionalReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Additional requirement successfully updated',
-            'data' => $additionalRequirement
+            'data' => new SuperadminAdditionalRequirementResource($additionalRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -115,5 +112,38 @@ class SuperadminAdditionalReqsController extends Controller
             'status' => Response::HTTP_OK,
             'message' => 'Additional requirement successfully deleted'
         ], Response::HTTP_OK);
+    }
+
+    public function uploadAdditionalFile(Request $request, AdditionalRequirement $additionalRequirement)
+    {
+        if(!$additionalRequirement->exists()) {
+
+            abort(404, 'Prelim requirement not found.');
+        }
+
+        if (!($additionalRequirement->path == '' || $additionalRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($additionalRequirement->path);
+        }
+
+        $additionalRequirement->update([
+            'path' => ($request->hasFile('file')) ? (new UploadedFilePathAction())->execute($request->file('file'), 'programRequirements') : null
+        ]);
+
+        return response()->noContent();
+    }
+
+    public function removeAdditionalFile(AdditionalRequirement $additionalRequirement)
+    {
+        if (!($additionalRequirement->path == '' || $additionalRequirement->path == null)) {
+
+            Storage::disk('uploaded_files')->delete($additionalRequirement->path);
+        }
+
+        $additionalRequirement->update([
+            'path' => ''
+        ]);
+
+        return response()->noContent();
     }
 }

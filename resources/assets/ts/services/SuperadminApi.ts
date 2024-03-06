@@ -7,6 +7,7 @@ import { ISuperadminHostCompany } from "../store/superadminHosCompany";
 import { ISuperadminSchool } from "../store/superadminSchool";
 import { ISuperadminDegree } from "../store/superadminDegree";
 import { ISuperadminPrelimRequirement } from "../store/superadminPrelimRequirement";
+import { ISuperadminAdditionalRequirement } from "../store/superadminAdditionalRequirement";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -153,5 +154,32 @@ export default {
     removePrelimReqFile(prelimId: string | number) : Promise<AxiosResponse> {
         
         return ApiRequest.put(`/sa/prelim-reqs/${prelimId}/file/remove`);
+    },
+
+    getAllAdditionalRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get(`/sa/additional-reqs`);
+    },
+    storeAdditionalRequirement(data: ISuperadminAdditionalRequirement) : Promise<AxiosResponse> {
+        
+        return ApiRequest.post(`/sa/additional-reqs`, data);
+    },
+    updateAdditionalRequirement(data: ISuperadminAdditionalRequirement, additionalId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/additional-reqs/${additionalId}/update`, data);
+    },
+    deleteAdditionalRequirement(additionalId : string | number) : Promise<AxiosResponse> {
+        return ApiRequest.delete(`/sa/additional-reqs/${additionalId}/delete`);
+    },
+    uploadAdditionalReqFile(file: File, additionalId: string | number | undefined) : Promise<AxiosResponse> {
+        
+        const formData = new FormData();
+        formData.append('_method', 'put');
+        formData.append('file', file);
+
+        return ApiRequestWithFile.post(`/sa/additional-reqs/${additionalId}/file/upload`, formData);
+    },
+    removeAdditionalReqFile(additionalId: string | number) : Promise<AxiosResponse> {
+        
+        return ApiRequest.put(`/sa/additional-reqs/${additionalId}/file/remove`);
     }
 }

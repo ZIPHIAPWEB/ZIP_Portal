@@ -1,9 +1,9 @@
-import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import { defineStore } from "pinia";
+import SuperadminApi from "../services/SuperadminApi";
 
-export interface ISuperadminPrelimRequirement {
+export interface ISuperadminAdditionalRequirement {
     id: string | number;
     name: string;
     description: string;
@@ -14,31 +14,27 @@ export interface ISuperadminPrelimRequirement {
     created_at?: string;
 }
 
-export interface ISuperadminPrelimRequirementWithFile extends ISuperadminPrelimRequirement {
-    file : File;
+export interface ISuperadminAdditionalRequirementState extends IBaseState, IPagination{
+    additionals: ISuperadminAdditionalRequirement[]
 }
 
-export interface ISuperadminPrelimRequirementState extends IBaseState, IPagination {
-    prelims: ISuperadminPrelimRequirement[];
-}
-
-export const useSuperadminPrelimRequirementStore = defineStore({
-    id: 'superadminPrelimRequirement',
-    state: () : ISuperadminPrelimRequirementState => ({
+export const useSuperadminAdditionalRequirementStore = defineStore({
+    id: 'superadminAdditionalRequirement',
+    state: () : ISuperadminAdditionalRequirementState => ({
+        additionals: [],
         error: undefined,
         isLoading: false,
         isSuccess: false,
-        prelims: [],
         links: []
     }),
-    actions : {
-        async loadSuperadminPrelimRequirements() {
+    actions: {
+        async loadSuperadminAdditionalRequirements() {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                const response = (await SuperadminApi.getAllPrelimRequirements()).data;
-                this.prelims = response.data;
+                const response = (await SuperadminApi.getAllAdditionalRequirements()).data;
+                this.additionals = response.data;
                 this.links = response.meta.links;
 
                 this.isLoading = false;
@@ -48,13 +44,13 @@ export const useSuperadminPrelimRequirementStore = defineStore({
                 this.isSuccess = false;
             }
         },
-        async storeSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement) {
+        async storeSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.storePrelimRequirement(data);
-                this.loadSuperadminPrelimRequirements();
+                await SuperadminApi.storeAdditionalRequirement(data);
+                this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
@@ -63,13 +59,13 @@ export const useSuperadminPrelimRequirementStore = defineStore({
                 this.isSuccess = false;
             }
         },
-        async updateSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement, prelimId : string | number) {
+        async updateSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement, additionalId : string | number) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.updatePrelimRequire(data, prelimId);
-                this.loadSuperadminPrelimRequirements();
+                await SuperadminApi.updateAdditionalRequirement(data, additionalId);
+                this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
@@ -78,13 +74,13 @@ export const useSuperadminPrelimRequirementStore = defineStore({
                 this.isSuccess = false;
             }
         },
-        async deleteSuperadminPrelimRequirement(prelimId : string | number) {
+        async deleteSuperadminAdditionalRequriement(additionalId : string | number) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.deletePrelimRequirement(prelimId);
-                this.loadSuperadminPrelimRequirements();
+                await SuperadminApi.deleteAdditionalRequirement(additionalId);
+                this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
@@ -93,13 +89,13 @@ export const useSuperadminPrelimRequirementStore = defineStore({
                 this.isSuccess = false;
             }
         },
-        async uploadSuperadminPrelimRequirementFile(file: File, prelimId : string | number | undefined) {
+        async uploadSuperadminAdditionalRequirementFile(file: File, additionalId : string | number | undefined) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.uploadPrelimReqFile(file, prelimId);
-                this.loadSuperadminPrelimRequirements();
+                await SuperadminApi.uploadAdditionalReqFile(file, additionalId);
+                this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
@@ -108,13 +104,13 @@ export const useSuperadminPrelimRequirementStore = defineStore({
                 this.isSuccess = false;
             }
         },
-        async removeSuperadminPrelimRequirementFile(prelimId : string | number) {
+        async removeSuperadminAdditionalRequirementFile(additionalId : string | number) {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
-                await SuperadminApi.removePrelimReqFile(prelimId);
-                this.loadSuperadminPrelimRequirements();
+                await SuperadminApi.removeAdditionalReqFile(additionalId);
+                this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
