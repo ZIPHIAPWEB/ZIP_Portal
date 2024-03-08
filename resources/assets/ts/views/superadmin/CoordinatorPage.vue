@@ -11,10 +11,16 @@ const superadminCoordsStore = useSuperadminCoord();
 const { isLoading, isSuccess, coordinators } = storeToRefs(superadminCoordsStore);
 
 const isAddCoordFormOpen = ref<boolean>(false);
+const toBeSearch = ref<string>('');
 
 onMounted(async () => {
     await superadminCoordsStore.loadSuperadminCoordsData();
 });
+
+const searchCoordData = async () => {
+
+await superadminCoordsStore.searchSuperaminCoordData(toBeSearch.value);
+}
 
 </script>
 
@@ -28,11 +34,15 @@ onMounted(async () => {
 
         <div class="container-fluid">
             <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <span><b>Coordinators</b></span>
-                    <div class="card-tools">
-                        <div>
-                            <button @click="isAddCoordFormOpen = true" class="btn btn-primary btn-sm">Add coordinator</button>
+                <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div style="flex: 1"><b>Coordinators</b></div>
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input v-model="toBeSearch" type="text" name="table_search" class="form-control float-right" placeholder="Search by username">
+                
+                        <div class="input-group-append">
+                          <button @click="searchCoordData()" type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +81,7 @@ onMounted(async () => {
                                 <td class="text-center">
                                     <button @click="superadminCoordsStore.activateCoordUser(coordinator.user_id)" v-if="!coordinator.is_activated" class="btn btn-primary btn-xs mr-1">Activate</button>
                                     <button @click="superadminCoordsStore.deactivateCoordUser(coordinator.user_id)" v-if="coordinator.is_activated" class="btn btn-primary btn-xs mr-1">Deactivate</button>
-                                    <button @click="superadminCoordsStore.deleteSuperadminCoord(coordinator.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="superadminCoordsStore.deleteSuperadminCoord(coordinator.user_id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

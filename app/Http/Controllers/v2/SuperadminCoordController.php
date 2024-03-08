@@ -135,10 +135,14 @@ class SuperadminCoordController extends Controller
      * @param  \App\Coordinator  $coordinator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coordinator $coordinator)
+    public function destroy(User $user)
     {
-        $coordinator->user()->delete();
-        $coordinator->delete();
+        if ($user->coordinator()->exists()) {
+
+            $user->coordinator->delete();
+        }
+
+        $user->delete();
 
         return response()->json([
             'status' => Response::HTTP_OK,

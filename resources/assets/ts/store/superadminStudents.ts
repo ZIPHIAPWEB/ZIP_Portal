@@ -41,6 +41,22 @@ export const useSuperadminStudent = defineStore({
                 this.isSuccess = false;
             }
         },
+        async searchSuperaminStudentData(searchData : string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = (await SuperadminApi.getSearchStudentByUsername(searchData)).data;
+                this.students = response.data;
+                this.links = response.meta.links;
+
+                this.isLoading = false;
+                this.isSuccess = true;                
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
         async loadSuperadminStudentsData() {
             try {
                 this.isLoading = true;

@@ -12,6 +12,10 @@ import { ISuperadminVisaSponsorRequirement } from "../store/superadminVisaSponso
 import { ISuperadminPaymentRequirement } from "../store/superadminPaymentRequirement";
 
 export default {
+    getSearchStudentByUsername(toBeSearch : string) : Promise<AxiosResponse> {
+
+        return ApiRequest.get(`/sa/students?search=${toBeSearch}`);
+    },
     getSuperadminStudents() : Promise<AxiosResponse> {
         return ApiRequest.get('/sa/students');
     },
@@ -23,6 +27,11 @@ export default {
     },
     deactivateUserAccount(userId : string | number) {
         return ApiRequest.put(`/sa/user/${userId}/deactivate`);
+    },
+
+    getSearchCoordByUsername(toBeSearch : string) : Promise<AxiosResponse> {
+        
+        return ApiRequest.get(`/sa/coords?search=${toBeSearch}`);
     },
     getSuperadminCoords() : Promise<AxiosResponse> {
         return ApiRequest.get('/sa/coords');

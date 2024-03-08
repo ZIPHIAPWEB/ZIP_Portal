@@ -138,7 +138,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/coords', [App\Http\Controllers\v2\SuperadminCoordController::class, 'index']);
         Route::post('/coords', [App\Http\Controllers\v2\SuperadminCoordController::class, 'store']);
         Route::put('/coords/{coordinator}/update', [App\Http\Controllers\v2\SuperadminCoordController::class, 'update']);
-        Route::delete('/coords/{coordinator}/delete', [App\Http\Controllers\v2\SuperadminCoordController::class, 'destroy']);
+        Route::delete('/coords/{user}/delete', [App\Http\Controllers\v2\SuperadminCoordController::class, 'destroy']);
 
         Route::get('/roles', [App\Http\Controllers\v2\RoleController::class, 'index']);
         Route::post('/roles', [App\Http\Controllers\v2\RoleController::class, 'store']);
