@@ -46,7 +46,7 @@ const gotoDashboard = () => {
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="https://ziptravel.com.ph/" class="brand-link">
-              <img :src="require('../../../../../public/logo.png')" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+              <img src="https://ziptravel.com.ph/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
               <span class="brand-text font-weight-light">Zip Travel PH</span>
             </a>
         
@@ -127,44 +127,76 @@ const gotoDashboard = () => {
                         </router-link>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-program-categories' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Program Category</p>
-                        </a>
+                        </router-link>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-visa-sponsor' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Visa Sponsor</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-host-company' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Host Company</p>
-                        </a>
+                        </router-link>
                       </li>
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-school' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">School</p>
-                        </a>
+                        </router-link>
                       </li>
 
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Place of Assignment</p>
                         </a>
-                      </li>
+                      </li> -->
 
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-degree' }">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Degree</p>
-                        </a>
+                        </router-link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>
+                        Requirements
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-prelim'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Preliminary</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-additional'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Additional</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-sponsor-reqs'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Visa Sponsor</p>
+                        </router-link>
+
+                        <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-payment-reqs'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p class="text-sm" style="vertical-align: text-bottom;">Payment</p>
+                        </router-link>
                       </li>
                     </ul>
                   </li>

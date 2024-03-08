@@ -7,9 +7,16 @@ import { useSuperadminStudent } from '../../store/superadminStudents';
 const superadminStudentStore = useSuperadminStudent();
 const { isLoading, isSuccess, students } = storeToRefs(superadminStudentStore);
 
+const toBeSearch = ref<string>('');
+
 onMounted(async () => {
     await superadminStudentStore.loadSuperadminStudentsData();
 });
+
+const searchStudentData = async () => {
+
+    await superadminStudentStore.searchSuperaminStudentData(toBeSearch.value);
+}
 
 </script>
 
@@ -17,8 +24,17 @@ onMounted(async () => {
     <SuperadminLayout>
         <div class="container-fluid">
             <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <span><b>Students</b></span>
+                <div class="card-header" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <div style="flex: 1"><b>Students</b></div>
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input v-model="toBeSearch" type="text" name="table_search" class="form-control float-right" placeholder="Search by username">
+                
+                        <div class="input-group-append">
+                          <button @click="searchStudentData()" type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body table-responsive p-0" style="height: 75vh">
                     <table class="table table-head-fixed text-nowrap table-sm">
@@ -50,7 +66,6 @@ onMounted(async () => {
                                 <td class="text-center">
                                     <button @click="superadminStudentStore.verifyStudent(student.user_id)" v-if="!student.is_verified" class="btn btn-primary btn-xs mr-1">Verify</button>
                                     <button @click="superadminStudentStore.unverifyStudent(student.user_id)" v-if="student.is_verified" class="btn btn-primary btn-xs mr-1">Unverify</button>
-                                    <button v-if="student.is_filled" class="btn btn-success btn-xs mr-1">View</button>
                                     <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>

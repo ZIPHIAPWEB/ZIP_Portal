@@ -16,6 +16,15 @@ import SuperadminDashboardPage from './views/superadmin/DashboardPage.vue';
 import SuperadminStudentPage from './views/superadmin/StudentPage.vue';
 import SuperadminCoordPage from './views/superadmin/CoordinatorPage.vue';
 import SuperadminProgramPage from './views/superadmin/settings/ProgramPage.vue';
+import SuperadminProgramCategoryPage from './views/superadmin/settings/ProgramCategory.vue';
+import SuperadminVisaSponsorPage from './views/superadmin/settings/VisaSponsorPage.vue';
+import SuperadminHostCompanyPage from './views/superadmin/settings/HostCompanyPage.vue';
+import SuperadminSchoolPage from './views/superadmin/settings/SchoolPage.vue';
+import SuperadminDegreePage from './views/superadmin/settings/DegreePage.vue';
+import SuperadminPrelimReqsPage from './views/superadmin/requirements/PreliminaryPage.vue';
+import SuperadminAdditionalReqsPage from './views/superadmin/requirements/AdditionalPage.vue';
+import SuperadminSponsorReqPage from './views/superadmin/requirements/VisaSponsorPage.vue';
+import SuperadminPaymentReqPage from './views/superadmin/requirements/PaymentPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -127,7 +136,52 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/sa/programs",
         name: "superadmin-coords-programs",
         component: SuperadminProgramPage
-    }
+    },
+    {
+        path: basePath + "/sa/program-categories",
+        name: "superadmin-program-categories",
+        component: SuperadminProgramCategoryPage
+    },
+    {
+        path: basePath + "/sa/visa-sponsors",
+        name: "superadmin-visa-sponsor",
+        component: SuperadminVisaSponsorPage
+    },
+    {
+        path: basePath + "/sa/host-company",
+        name: "superadmin-host-company",
+        component: SuperadminHostCompanyPage
+    },
+    {
+        path: basePath + "/sa/school",
+        name: "superadmin-school",
+        component: SuperadminSchoolPage
+    },
+    {
+        path: basePath + "/sa/degree",
+        name: "superadmin-degree",
+        component: SuperadminDegreePage
+    },
+    {
+        path: basePath + "/sa/prelim-reqs",
+        name: "superadmin-prelim",
+        component: SuperadminPrelimReqsPage
+    },
+    {
+        path: basePath + "/sa/additional-reqs",
+        name: "superadmin-additional",
+        component: SuperadminAdditionalReqsPage
+    },
+    {
+        path: basePath + "/sa/sponsor-reqs",
+        name: "superadmin-sponsor-reqs",
+        component: SuperadminSponsorReqPage
+    },
+    {
+        path: basePath + "/sa/payment-reqs",
+        name: "superadmin-payment-reqs",
+        component: SuperadminPaymentReqPage
+    },
 ]
 
 const router = createRouter({

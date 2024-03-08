@@ -41,5 +41,4 @@ ApiRequestWithFile.interceptors.request.use((config) => {
 
     config.headers['Authorization'] = `Bearer ${authStore.accessToken}`;
     return config;
-})
-
+});

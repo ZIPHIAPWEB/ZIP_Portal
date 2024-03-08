@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminPaymentRequirementResource;
 use App\PaymentRequirement;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,14 +18,10 @@ class SuperadminPaymentReqsController extends Controller
     public function index()
     {
         $reqs = PaymentRequirement::query()
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('created_at', 'DESC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Payment requirements successfully loaded',
-            'data' => $reqs
-        ], Response::HTTP_OK);
+        return SuperadminPaymentRequirementResource::collection($reqs);
     }
 
     /**
@@ -38,13 +35,14 @@ class SuperadminPaymentReqsController extends Controller
         $createdReqs = PaymentRequirement::create([
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Payment requirement successfully created',
-            'data' => $createdReqs
+            'data' => new SuperadminPaymentRequirementResource($createdReqs)
         ], Response::HTTP_CREATED);
     }
 
@@ -56,10 +54,15 @@ class SuperadminPaymentReqsController extends Controller
      */
     public function show(PaymentRequirement $paymentRequirement)
     {
+        if(!$paymentRequirement->exists()) {
+
+            abort(404, 'Payment requirement not found');
+        }
+
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Payment requirement successfully loaded',
-            'data' => $paymentRequirement
+            'data' => new SuperadminPaymentRequirementResource($paymentRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -72,10 +75,16 @@ class SuperadminPaymentReqsController extends Controller
      */
     public function update(Request $request, PaymentRequirement $paymentRequirement)
     {
+        if(!$paymentRequirement->exists()) {
+
+            abort(404, 'Payment requirement not found');
+        }
+
         $paymentRequirement->update([
             'program_id' => $request->input('program_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'is_active' => $request->input('is_active') == 'true' ? 1 : 0
         ]);
 
         $paymentRequirement->refresh();
@@ -83,7 +92,7 @@ class SuperadminPaymentReqsController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Payment requirement successfully updated',
-            'data' => $paymentRequirement
+            'data' => new SuperadminPaymentRequirementResource($paymentRequirement)
         ], Response::HTTP_OK);
     }
 
@@ -95,6 +104,11 @@ class SuperadminPaymentReqsController extends Controller
      */
     public function destroy(PaymentRequirement $paymentRequirement)
     {
+        if(!$paymentRequirement->exists()) {
+
+            abort(404, 'Payment requirement not found');
+        }
+
         $paymentRequirement->delete();
 
         return response()->json([

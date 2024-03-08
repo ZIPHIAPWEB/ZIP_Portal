@@ -138,7 +138,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/coords', [App\Http\Controllers\v2\SuperadminCoordController::class, 'index']);
         Route::post('/coords', [App\Http\Controllers\v2\SuperadminCoordController::class, 'store']);
         Route::put('/coords/{coordinator}/update', [App\Http\Controllers\v2\SuperadminCoordController::class, 'update']);
-        Route::delete('/coords/{coordinator}/delete', [App\Http\Controllers\v2\SuperadminCoordController::class, 'destroy']);
+        Route::delete('/coords/{user}/delete', [App\Http\Controllers\v2\SuperadminCoordController::class, 'destroy']);
 
         Route::get('/roles', [App\Http\Controllers\v2\RoleController::class, 'index']);
         Route::post('/roles', [App\Http\Controllers\v2\RoleController::class, 'store']);
@@ -156,60 +156,76 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/visa-sponsors', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'store']);
         Route::get('/visa-sponsors/{sponsor}', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'show']);
         Route::put('/visa-sponsors/{sponsor}/update', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'update']);
-        Route::delete('/visa-sponsors/{sponsor}/delete', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'delete']);
+        Route::delete('/visa-sponsors/{sponsor}/delete', [App\Http\Controllers\v2\SuperadminSponsorController::class, 'destroy']);
 
         Route::get('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'index']);
         Route::post('/host-companies', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'store']);
         Route::get('/host-companies/{hostCompany}', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'show']);
         Route::put('/host-companies/{hostCompany}/update', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'update']);
-        Route::delete('/host-companies/{hostCompany}/delete', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'delete']);
+        Route::delete('/host-companies/{hostCompany}/delete', [App\Http\Controllers\v2\SuperadminHostCompanyController::class, 'destroy']);
 
         Route::get('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'index']);
         Route::post('/schools', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'store']);
         Route::get('/schools/{school}', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'show']);
         Route::put('/schools/{school}/update', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'update']);
-        Route::delete('/schools/{school}/delete', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'delete']);
+        Route::delete('/schools/{school}/delete', [App\Http\Controllers\v2\SuperadminSchoolController::class, 'destroy']);
 
         Route::get('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'index']);
         Route::post('/positions', [App\Http\Controllers\v2\SuperadminPositionController::class, 'store']);
         Route::get('/positions/{position}', [App\Http\Controllers\v2\SuperadminPositionController::class, 'show']);
         Route::put('/positions/{position}/update', [App\Http\Controllers\v2\SuperadminPositionController::class, 'update']);
-        Route::delete('/positions/{position}/delete', [App\Http\Controllers\v2\SuperadminPositionController::class, 'delete']);
+        Route::delete('/positions/{position}/delete', [App\Http\Controllers\v2\SuperadminPositionController::class, 'destroy']);
 
         Route::get('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'index']);
         Route::post('/states', [App\Http\Controllers\v2\SuperadminStateController::class, 'store']);
         Route::get('/states/{state}', [App\Http\Controllers\v2\SuperadminStateController::class, 'show']);
         Route::put('/states/{state}/update', [App\Http\Controllers\v2\SuperadminStateController::class, 'update']);
-        Route::delete('/states/{state}/delete', [App\Http\Controllers\v2\SuperadminStateController::class, 'delete']);
+        Route::delete('/states/{state}/delete', [App\Http\Controllers\v2\SuperadminStateController::class, 'destroy']);
 
         Route::get('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'index']);
         Route::post('/degrees', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'store']);
         Route::get('/degrees/{degree}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
         Route::put('/degrees/{degree}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
-        Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+        Route::delete('/degrees/{degree}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'destroy']);
 
         Route::get('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'index']);
         Route::post('/prelim-reqs', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'store']);
-        Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'show']);
-        Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'update']);
-        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminDegreeController::class, 'delete']);
+        Route::get('/prelim-reqs/{preliminaryRequirement}', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'show']);
+        Route::put('/prelim-reqs/{preliminaryRequirement}/update', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'update']);
+        Route::delete('/prelim-reqs/{preliminaryRequirement}/delete', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'destroy']);
+
+        Route::put('/prelim-reqs/{preliminaryRequirement}/file/upload', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'uploadPrelimFile']);
+        Route::put('/prelim-reqs/{preliminaryRequirement}/file/remove', [App\Http\Controllers\v2\SuperadminPrelimReqsController::class, 'removePrelimFile']);
 
         Route::get('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'index']);
         Route::post('/additional-reqs', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'store']);
         Route::get('/additional-reqs/{additionalRequirement}', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'show']);
         Route::put('/additional-reqs/{additionalRequirement}/update', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'update']);
-        Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'delete']);
+        Route::delete('/additional-reqs/{additionalRequirement}/delete', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'destroy']);
+
+        Route::put('/additional-reqs/{additionalRequirement}/file/upload', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'uploadAdditionalFile']);
+        Route::put('/additional-reqs/{additionalRequirement}/file/remove', [App\Http\Controllers\v2\SuperadminAdditionalReqsController::class, 'removeAdditionalFile']);
 
         Route::get('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'index']);
         Route::post('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'store']);
         Route::get('/payment-reqs/{paymentRequirement}', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'show']);
         Route::put('/payment-reqs/{paymentRequirement}/update', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'update']);
-        Route::delete('/payment-reqs/{paymentRequirement}/delete', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'delete']);
+        Route::delete('/payment-reqs/{paymentRequirement}/delete', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'destroy']);
 
         Route::get('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'index']);
         Route::post('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'store']);
         Route::get('/sponsor-reqs/{sponsorRequirement}', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'show']);
         Route::put('/sponsor-reqs/{sponsorRequirement}/update', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'update']);
-        Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'delete']);
+        Route::delete('/sponsor-reqs/{sponsorRequirement}/delete', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'destroy']);
+
+        Route::put('/sponsor-reqs/{sponsorRequirement}/file/upload', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'uploadSponsorFile']);
+        Route::put('/sponsor-reqs/{sponsorRequirement}/file/remove', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'removeSponsorFile']);
+
+        Route::get('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'index']);
+        Route::post('/program-categories', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'store']);
+        Route::get('/program-categories/{programCategory}', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'show']);
+        Route::put('/program-categories/{programCategory}/update', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'update']);
+        Route::delete('/program-categories/{programCategory}/delete', [App\Http\Controllers\v2\SuperadminProgramCategoryController::class, 'destroy']);
+
     });
 });

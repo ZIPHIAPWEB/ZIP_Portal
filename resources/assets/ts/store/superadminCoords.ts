@@ -50,6 +50,22 @@ export const useSuperadminCoord = defineStore({
                 this.isSuccess = false;
             }
         },
+        async searchSuperaminCoordData(searchData : string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = (await SuperadminApi.getSearchCoordByUsername(searchData)).data;
+                this.coordinators = response.data;
+                this.links = response.meta.links;
+
+                this.isLoading = false;
+                this.isSuccess = true;                
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
+        },
         async createSuperadminCoord(coordData : ICoord) {
             try {
                 this.isLoading = true;

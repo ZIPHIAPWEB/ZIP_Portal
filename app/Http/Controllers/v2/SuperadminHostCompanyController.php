@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\HostCompany;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SuperadminHostCompanyResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -20,11 +21,7 @@ class SuperadminHostCompanyController extends Controller
             ->orderBy('name', 'ASC')
             ->paginate(20);
 
-        return response()->json([
-            'status' => Response::HTTP_OK,
-            'message' => 'Host companies successfully loaded',
-            'data' => $hostCompanies
-        ], Response::HTTP_OK);
+        return SuperadminHostCompanyResource::collection($hostCompanies);
     }
 
     /**
@@ -37,13 +34,13 @@ class SuperadminHostCompanyController extends Controller
     {
         $createdHostCompany = HostCompany::create([
             'name' => $request->input('name'),
-            'state' => $request->input('state')
+            'states' => $request->input('description')
         ]);
 
         return response()->json([
             'status' => Response::HTTP_CREATED,
             'message' => 'Host company successfully created',
-            'data' => $createdHostCompany
+            'data' => new SuperadminHostCompanyResource($createdHostCompany)
         ], Response::HTTP_CREATED);
     }
 
@@ -59,7 +56,7 @@ class SuperadminHostCompanyController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Host company successfully loaded',
-            'data' => $hostCompany
+            'data' => new SuperadminHostCompanyResource($hostCompany)
         ], Response::HTTP_OK);
     }
 
@@ -74,7 +71,7 @@ class SuperadminHostCompanyController extends Controller
     {
         $hostCompany->update([
             'name' => $request->input('name'),
-            'state' => $request->input('state')
+            'states' => $request->input('description')
         ]);
 
         $hostCompany->refresh();
@@ -82,7 +79,7 @@ class SuperadminHostCompanyController extends Controller
         return response()->json([
             'status' => Response::HTTP_OK,
             'message' => 'Host company successfully loaded',
-            'data' => $hostCompany
+            'data' => new SuperadminHostCompanyResource($hostCompany)
         ], Response::HTTP_OK);
     }
 
@@ -94,6 +91,11 @@ class SuperadminHostCompanyController extends Controller
      */
     public function destroy(HostCompany $hostCompany)
     {
+        if ($hostCompany->exists()) {
+
+            abort(404, 'Host company not found.');
+        }
+
         $hostCompany->delete();
 
         return response()->json([

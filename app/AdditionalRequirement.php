@@ -10,12 +10,18 @@ class AdditionalRequirement extends Model
         'program_id',
         'name',
         'description',
-        'path'
+        'path',
+        'is_active'
     ];
 
     public function studentAdditional()
     {
         return $this->belongsTo('App\StudentAdditional', 'id', 'requirement_id');
+    }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id', 'id');
     }
 
     public function getById($id)
