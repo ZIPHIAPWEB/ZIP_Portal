@@ -210,7 +210,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/payment-reqs', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'store']);
         Route::get('/payment-reqs/{paymentRequirement}', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'show']);
         Route::put('/payment-reqs/{paymentRequirement}/update', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'update']);
-        Route::delete('/payment-reqs/{paymentRequirement}/delete', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'delete']);
+        Route::delete('/payment-reqs/{paymentRequirement}/delete', [App\Http\Controllers\v2\SuperadminPaymentReqsController::class, 'destroy']);
 
         Route::get('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'index']);
         Route::post('/sponsor-reqs', [App\Http\Controllers\v2\SuperadminSponsorReqsController::class, 'store']);

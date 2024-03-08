@@ -9,6 +9,7 @@ import { ISuperadminDegree } from "../store/superadminDegree";
 import { ISuperadminPrelimRequirement } from "../store/superadminPrelimRequirement";
 import { ISuperadminAdditionalRequirement } from "../store/superadminAdditionalRequirement";
 import { ISuperadminVisaSponsorRequirement } from "../store/superadminVisaSponsorRequirement";
+import { ISuperadminPaymentRequirement } from "../store/superadminPaymentRequirement";
 
 export default {
     getSuperadminStudents() : Promise<AxiosResponse> {
@@ -209,5 +210,21 @@ export default {
     removeVisaSponsorReqFile(sponsorId: string | number) : Promise<AxiosResponse> {
         
         return ApiRequest.put(`/sa/sponsor-reqs/${sponsorId}/file/remove`);
-    }
+    },
+    
+    getAllPaymentRequirements() : Promise<AxiosResponse> {
+        return ApiRequest.get('/sa/payment-reqs');
+    },
+    storePaymentRequirement(data : ISuperadminPaymentRequirement) : Promise<AxiosResponse> {
+
+        return ApiRequest.post(`/sa/payment-reqs`, data);
+    },
+    updatePaymentRequirement(data: ISuperadminPaymentRequirement, paymentId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.put(`/sa/payment-reqs/${paymentId}/update`, data);
+    },
+    deletePaymentRequirement(paymentId : string | number) : Promise<AxiosResponse> {
+
+        return ApiRequest.delete(`/sa/payment-reqs/${paymentId}/delete`);
+    },
 }
