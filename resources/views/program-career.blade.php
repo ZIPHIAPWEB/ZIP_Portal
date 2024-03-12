@@ -57,7 +57,26 @@
         <div class="container-fluid">
             <div>
                 <h3 class="text-center" style="font-weight: bold;">TRAINEE PROGRAM</h3>
-                <p class="text-justify text-lg-center text-xl-center mt-3">Trainee programs are year-round programs designed to allow young professionals to come to the United States, gain exposure to the U.S. culture, and learn U.S business practices.<br></p>
+                <p class="text-justify text-lg-center text-xl-center mt-3">
+                    Bridge the gap between formal education and work experience through a practical apprenticeship in the United States under BridgeUSA's Internship Program. Participants will be able to learn with industry leaders working in 4 and 5-star hotels and resorts.    
+                <br>
+                </p>
+                <p class="text-left ml-xl-5 pl-xl-5 pl-lg-0 mt-3">
+                    •	Application for the J1 Traineeship is open year-round <br>
+                    •	Put your studies into practice and enhance skills related to your field of study <br>
+                    •	Opportunities include positions in culinary, food and beverage, front office, and more! <br>
+                    •	Receive a stipend to support living in the US during the program <br>
+                    •	Gain experience to boost your CV and make you globally competitive <br>
+                    •	Countless chances to interact with people from different countries, make lifelong friendships <br>
+                    •	Discover and understand US work culture and practices <br>
+                    •	Enhance your English language competency by living and interacting in an English-speaking environment <br>
+                    •	Medical insurance coverage <br>
+                </p>
+                <p class="text-left mt-3 ml-xl-5 pl-xl-5 pl-lg-0">
+                Program Duration
+                <br><br>
+                The BridgeUSA Trainee Program is taken in 12 months with a 30-day grace period after the work commitment to travel around the US with their J1 visa.
+                </p>
             </div>
         </div>
     </section>

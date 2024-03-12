@@ -54,8 +54,26 @@
         <div class="container-fluid">
             <div>
                 <h3 class="text-center" style="font-weight: bold;">SUMMER WORK TRAVEL PROGRAM</h3>
-                <p class="text-justify text-lg-center text-xl-center mt-3">Summer Work Travel program is a three-month program from March to June or May to August designed for college and university students to experience living and working in the United States during their summer vacation from college or university.
-                    <br></p>
+                <p class="text-justify text-lg-center text-xl-center mt-3">
+                    The Summer Work Travel Program is for enrolled college and university students in the Philippines interested in experiencing living and working in the United States during their school summer vacation.<br>
+                </p>
+                <p class="text-left ml-xl-5 pl-xl-5 pl-lg-0 mt-3">
+                    •	Open to currently enrolled college and university students of any course <br>
+                    •	Exciting work opportunities in hotels, restaurants, amusement parks, retail stores, and ski resorts  <br>
+                    •	Gain experience to boost your CV and make you globally competitive  <br>
+                    •	Countless chances to interact with people from different countries, make lifelong friendships  <br>
+                    •	Discover and understand US work culture and practices  <br>
+                    •	Enhance your English language competency by living and interacting in an English-speaking environment  <br>
+                    •	Receive a competitive stipend to support your living and travel expenses during the program  <br>
+                    •	Medical insurance coverage  <br>
+                    •	Overtime and an additional part-time job are allowed but should be responsibly managed  <br>
+                    •	Past participants can reapply for the program  <br>
+                </p>
+                <p class="text-left mt-3 ml-xl-5 pl-xl-5 pl-lg-0">
+                Program Duration
+                <br><br>
+                The Summer Work Travel is a three-month program (from March to June or from May to August). Participants must return to their home country when classes begin.
+                </p>
             </div>
         </div>
     </section>
