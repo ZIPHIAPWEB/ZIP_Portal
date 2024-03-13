@@ -58,8 +58,9 @@
             <div class="row">
                 <div class="col">
                     <div>
-                        <h2 class="text-center" style="font-weight: bold;">U. S. A. J1 PROGRAM</h2>
-                        <p class="text-justify text-xl-center" style="margin-top: 16px;">The U.S.A. J1 Program is designed to allow international candidates who want to study, gain experience, and undergo on-the-job training to come to the United States for a few weeks to several years. <br></p>
+                        <h2 class="text-center" style="font-weight: bold;">BridgeUSA Programs</h2>
+                        <p class="text-center" style="font-weight: bold;">(FORMERLY KNOWN AS EXCHANGE VISITOR PROGRAM)</p>
+                        <p class="text-justify text-xl-center" style="margin-top: 16px;">BridgeUSA is a chance for students to visit the United States of America, be exposed to the diverse American citizens and culture, undergo practical learning, and seek career advancement.<br></p>
                     </div>
                 </div>
             </div>
@@ -67,24 +68,19 @@
     </section>
     <section data-bs-parallax-bg="true" class="p-5" style="background-image: url(&quot;assets/img/J1%20PROGRAMS-1.jpg&quot;);background-size: cover;background-repeat: no-repeat;background-position: center;">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <h3 class="text-center text-white" style="font-weight: bold;">OUR J1 PROGRAMS</h3>
-                </div>
-            </div>
             <div class="row mt-4">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-lg-flex align-items-lg-center mb-2">
                     <div class="card d-md-flex flex-fill align-items-md-center">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Summer Work Travel Program</h5><small>3 months (March - June or May - August)</small>
-                            <p class="text-center" style="font-size: 13px;">Summer Work Travel program is a three-month program from March to June or May to August designed for college and university students...&nbsp;</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-swt') }}">READ MORE</a></div>
+                            <p class="text-center" style="font-size: 13px;">The BrideUSA Internship Program is available to college and university students or recent graduates to gain exposure to US culture while receiving hands-on experience in business practices in their field. This program bridges the gap...&nbsp;</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-swt') }}">READ MORE</a></div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 align-items-md-center justify-content-xl-center mb-2">
                     <div class="card d-md-flex flex-fill m-auto justify-content-md-center align-items-md-center">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Internship Program</h5><small>6 to 12 months</small>
-                            <p class="text-center" style="font-size: 13px;">Internship programs are six to 12-month programs designed to allow college and university students and fresh graduates to come&nbsp;to the United States...<br></p><a class="btn btn-primary btn-block white-read-more" role="button"
+                            <p class="text-center" style="font-size: 13px;">The BrideUSA Internship Program is available to college and university students or recent graduates to gain exposure to US culture while receiving hands-on experience in business practices in their field. This program bridges the gap...<br></p><a class="btn btn-primary btn-block white-read-more" role="button"
                                 href="{{ url('/program-internship') }}">READ MORE</a></div>
                     </div>
                 </div>
@@ -92,7 +88,7 @@
                     <div class="card">
                         <div class="card-body text-center d-flex flex-column">
                             <h5 style="font-size: 16px;font-weight: bold;">Trainee Program</h5><small>12 &nbsp;months</small>
-                            <p class="text-center" style="font-size: 13px;">Trainee Program are year-round program designed to allow young professionals to come to the United States gain exposure to U.S. culture...</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-career') }}">READ MORE</a></div>
+                            <p class="text-center" style="font-size: 13px;">For young professionals with at least one year of work experience, BridgeUSA offers traineeships under US companies with an opportunity to make valuable contacts, learn the latest practices in the field, and...</p><a class="btn btn-primary btn-block white-read-more" role="button" href="{{ url('/program-career') }}">READ MORE</a></div>
                     </div>
                 </div>
             </div>
