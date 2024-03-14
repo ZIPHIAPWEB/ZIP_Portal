@@ -74,8 +74,8 @@
                     •	Medical insurance coverage<br>
                 </p>
                 <p class="text-left mt-3 ml-xl-5 pl-xl-5 pl-lg-0">
-                Program Duration
-                <br><br>
+                <b>Program Duration</b>
+                <br>
                 The BridgeUSA Internship Program could be taken in 12 months with a 30-day grace period after the work commitment to travel around the US for cultural exchange.
                 </p>
             </div>

@@ -59,6 +59,7 @@
                 <div class="col">
                     <div>
                         <h2 class="text-center" style="font-weight: bold;">BridgeUSA Programs</h2>
+                        <p class="text-center" style="font-weight: bold;">(FORMERLY KNOWN AS EXCHANGE VISITOR PROGRAM)</p>
                         <p class="text-justify text-xl-center" style="margin-top: 16px;">BridgeUSA is a chance for students to visit the United States of America, be exposed to the diverse American citizens and culture, undergo practical learning, and seek career advancement.<br></p>
                     </div>
                 </div>

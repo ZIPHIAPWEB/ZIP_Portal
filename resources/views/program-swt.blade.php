@@ -70,8 +70,8 @@
                     •	Past participants can reapply for the program  <br>
                 </p>
                 <p class="text-left mt-3 ml-xl-5 pl-xl-5 pl-lg-0">
-                Program Duration
-                <br><br>
+                <b>Program Duration</b>
+                <br>
                 The Summer Work Travel is a three-month program (from March to June or from May to August). Participants must return to their home country when classes begin.
                 </p>
             </div>
