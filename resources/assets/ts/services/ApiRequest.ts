@@ -29,6 +29,34 @@ export const ApiRequestWithoutAuth = axios.create({
     withCredentials: true
 });
 
+ApiRequest.interceptors.response.use((response) => {
+    
+    return response;
+}, (err) => {
+    const authStore = useAuthStore();
+
+    if (err.response.status === 401) {
+
+        authStore.clearAuthData();        
+    }
+
+    return Promise.reject(err);
+});
+
+ApiRequestWithFile.interceptors.response.use((response) => {
+    
+    return response;
+}, (err) => {
+    const authStore = useAuthStore();
+
+    if (err.response.status === 401) {
+
+        authStore.clearAuthData();        
+    }
+
+    return Promise.reject(err);
+});
+
 ApiRequest.interceptors.request.use((config) => {
     const authStore = useAuthStore();
 

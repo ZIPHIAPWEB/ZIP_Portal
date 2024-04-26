@@ -76,6 +76,6 @@ class StudentVisaSponsorRequirementController extends Controller
 
         (new CreateUserLogAction())->execute('Downloaded a ' . $requirement->display_name . ' template');
 
-        return response()->download($file);
+        return $file;
     }
 }
