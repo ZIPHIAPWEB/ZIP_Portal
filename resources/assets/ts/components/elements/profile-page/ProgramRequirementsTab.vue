@@ -55,7 +55,7 @@ const selectTabHandler = (selected : IProgramRequirementsTabs) : void => {
                 </li>
             </ul>
         </div>
-        <div class="card-body p-3">
+        <div class="card-body p-3" style="max-height: 83vh; overflow-y: auto;">
             <KeepAlive>
                 <component :is="selectedTab" />
             </KeepAlive>

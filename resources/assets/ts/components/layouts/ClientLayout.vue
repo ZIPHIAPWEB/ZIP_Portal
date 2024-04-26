@@ -13,12 +13,12 @@ onUnmounted(() => {
 
 <template>
     <div class="client-wrapper">
-       <div style="flex: 1; overflow: hidden; padding: 15px 0;">
+       <div style="flex: 1; padding: 15px 0;">
             <slot />
        </div>
        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-            </div>
+        <div class="float-right d-none d-sm-block">
+        </div>
             <strong>Zip Travel PH &copy; {{ new Date().getFullYear() }} </strong>
         </footer>
     </div>
