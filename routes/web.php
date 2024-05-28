@@ -20,18 +20,20 @@ Route::get('/download-exported/{filename}', function ($filename) {
         ->deleteFileAfterSend();
 });
 
-Route::view('/', 'welcome')->name('welcome');
-Route::view('/about-us', 'about-us')->name('about-us');
-Route::view('/contact-us', 'contact-us')->name('contact_us');
-Route::view('/j1-cares', 'j1-cares')->name('j1');
-Route::view('/our-programs', 'our-programs')->name('our-programs');
-Route::view('/program-australian', 'program-australian')->name('program-australian');
-Route::view('/program-canada', 'program-canada')->name('program-canada');
-Route::view('/program-career', 'program-career')->name('program-career');
-Route::view('/program-internship', 'program-internship')->name('program-internship');
-Route::view('/program-swt', 'program-swt')->name('program-swt');
-Route::view('/social-stream', 'social-stream')->name('social-stream');
-Route::view('/tax-services', 'tax-services')->name('tax-services');
+Route::view('/', 'new.index')->name('welcome');
+Route::view('/about-us', 'new.about-us')->name('about-us');
+Route::view('/contact-us', 'new.contact-us')->name('contact_us');
+Route::view('/j1-cares', 'new.j1-cares')->name('j1');
+Route::view('/program-bridgeusa', 'new.bridge-usa')->name('program-bridgeusa');
+Route::view('/program-asia', 'new.asia-program')->name('program-asia');
+Route::view('/program-australian', 'new.australia-program')->name('program-australian');
+Route::view('/program-canada', 'new.canada-program')->name('program-canada');
+Route::view('/program-spain', 'new.spain-program')->name('program.spain');
+Route::view('/program-career', 'new.trainee-program')->name('program-career');
+Route::view('/program-internship', 'new.intern-program')->name('program-internship');
+Route::view('/program-swt', 'new.swt-program')->name('program-swt');
+Route::view('/social-stream', 'new.social-streams')->name('social-stream');
+Route::view('/tax-services', 'new.tax-services')->name('tax-services');
 
 Route::get('/blog', 'BlogController@index');
 Route::get('/blog/{slug}', 'BlogController@view');
