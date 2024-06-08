@@ -32,20 +32,38 @@
             </div>
             <div style="margin-top: 25px;">
                 <ul class="nav nav-pills" role="tablist" style="display: flex;justify-content: center;gap: 29px;font-family: 'Outfit';font-size: 20px;font-weight: bold;margin-top: 75px;">
-                    <li class="nav-item" role="presentation"><a class="nav-link active text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#tab-1" style="background-color: #0C1C33;color: #FFFFFF;">VISION</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#tab-1" style="background-color: #0C1C33;color: #FFFFFF;">MISSION</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#tab-1" style="background-color: #0C1C33;color: #FFFFFF;">CORPORATE PHILOSOPHY</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#tab-1" style="background-color: #0C1C33;color: #FFFFFF;">INTERNATIONAL CREED</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#vision" style="background-color: #0C1C33;color: #FFFFFF;">VISION</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#mission" style="background-color: #0C1C33;color: #FFFFFF;">MISSION</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#corp-philosophy" style="background-color: #0C1C33;color: #FFFFFF;">CORPORATE PHILOSOPHY</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" role="tab" data-bs-toggle="pill" href="#international-creed" style="background-color: #0C1C33;color: #FFFFFF;">INTERNATIONAL CREED</a></li>
                 </ul>
                 <div class="tab-content" style="margin-top: 32px;color: #2A2A2A;font-family: 'Outfit';font-size: 18px;">
-                    <div class="tab-pane active" role="tabpanel" id="tab-1">
-                        <p style="border: 0;">To empower individuals through transformative educational and cultural exchange programs, fostering personal growth, global understanding, and professional development while cultivating lifelong connections across borders.</p>
+                    <div class="tab-pane" role="tabpanel" id="#vision">
+                        <p style="border: 0;">
+                        Reaching out to encourage a lifelong journey of global peace, respect, independence, and understanding.
+                        </p>
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="tab-2">
-                        <p>Content for tab 2.</p>
+                    <div class="tab-pane" role="tabpanel" id="#mission">
+                        <p style="border: 0;">Dedicated to helping Filipinos and those from other countries gain a better understanding of one another and the world around them.</p>
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="tab-3">
-                        <p>Content for tab 3.</p>
+                    <div class="tab-pane " role="tabpanel" id="#corp-philosophy">
+                        <p style="border: 0;">
+                            ZIP Travel strives for excellence in all the areas in which it is involved, globally expanding its commitment for intercultural understanding and harmony, upholding a high degree of professionalism among its people through the strict observance of work ethics, hard work, and loyalty as pillars of success.
+                            <br><br>
+                            ZIP Travel has the passion to compete globally. It shall create synergy among its branches worldwide, develop cost-efficient and less bureaucratic processes, and optimize collective and individual skills, mindful of the differences among cultures without losing sight for unity, founded upon competency in work and dedication to the universal language of training.
+                        </p>
+                    </div>
+                    <div class="tab-pane active" role="tabpanel" id="internation-creed">
+                        <p style="border: 0;">
+                            Because the client has a need, we have a job to do. <br>
+                            Because the client has a choice, we must be the better choice. <br>
+                            Because the client has sensibilities, we must be considerate. <br>
+                            Because the client has urgency, we must be quick. <br>
+                            Because the client is unique, we must be flexible. <br>
+                            Because the client has high expectations, we must exceed their expectations. <br>
+                            Because the client has influence, we have the hope of more clients. <br>
+                            Because of the client, we exist.
+                        </p>
                     </div>
                 </div>
             </div>

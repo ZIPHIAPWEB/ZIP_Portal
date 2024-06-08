@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>zip-website</title>
+    <title>Zip Travel</title>
     <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets_v3/css/styles.min.css">
@@ -27,7 +27,7 @@
         <!-- Start: 1 Row 2 Columns -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;"><img src="assets_v3/img/Rectangle%203.png" style="width: 397px;height: 369px;filter: blur(0px);object-fit: contain;border-radius: 50px;"></div>
+                <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;"><img src="assets_v3/img/hp_1.png" style="width: 397px;height: 369px;filter: blur(0px);object-fit: contain;border-radius: 50px;"></div>
                 <div class="col-lg-6 d-flex flex-column justify-content-center" style="font-family: 'Outfit';font-size: 18px;">
                     <p style="margin-bottom: 25px;"><strong>ZIP Travel Philippines</strong> provides intercultural opportunities for Filipinos to become globally competitive and future leaders of society through international programs.</p>
                     <p style="margin-bottom: 25px;">ZIP Travel is a career and education counseling organization helping students and fresh graduates participate in cultural exchanges in the United States, Australia, Canada, Spain, and Asia. Since our founding 30 years ago, ZIP Travel has helped thousands of students worldwide partake in study-and-work programs, internships, and training in some of the acclaimed hotels and restaurants.</p>
@@ -92,7 +92,7 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2011.png">
+                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">BridgeUSA</h5>
                                             <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2013.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Canada</h5>
                                             <p class="text-center" style="font-size: 18px;">Canadian Program with Pathway to Permanent Residency</p>
@@ -121,9 +121,9 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2011.png">
+                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/asia_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">BridgeUSA</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Asia</h5>
                                             <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
                                         </div>
                                     </div>
@@ -177,19 +177,25 @@
                     <!-- Start: Slide Wrapper -->
                     <div class="swiper-wrapper" style="font-family: Outfit, sans-serif;">
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/Ellipse%201.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Juan Dela Cruz</h6><span style="font-size: 18px;">University of Santo Tomas</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis finibus consequat. Quisque lobortis semper lectus non ornare. Nam porta dolor sem, et ultricies justo dictum quis. Fusce sodales bibendum ipsum ac bibendum. Praesent at massa elit. Sed ut posuere nibh, sed sagittis augue. Aliquam congue consequat imperdiet.</p>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/manganaey_testimonial.png">
+                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Rutherford Kenth Carlos Mangangey</h6><span style="font-size: 18px;">University of Baguio</span>
+                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                                If you're planning to take your Internship abroad, Zip Travel is the Agency for you. They are very Approachable and detailed and the Employees are very kind to you and you can ask them and they will answer your questions in a Minute! Thank you Zip travel for helping me to start my culinary journey for this internship program.
+                            </p>
                         </div><!-- End: Slide -->
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/Ellipse%201.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Juan Dela Cruz</h6><span style="font-size: 18px;">University of Santo Tomas</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis finibus consequat. Quisque lobortis semper lectus non ornare. Nam porta dolor sem, et ultricies justo dictum quis. Fusce sodales bibendum ipsum ac bibendum. Praesent at massa elit. Sed ut posuere nibh, sed sagittis augue. Aliquam congue consequat imperdiet.</p>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/trazo_testimonial.png">
+                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Paul Christian Trazo</h6><span style="font-size: 18px;">University of Santo Tomas</span>
+                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                            ZIP Travel Philippines opened its door as they gave me the opportunity to experience the Internship in the USA. I wouldn't have achieved this journey without them. From the start, they gave me assurance and  guidance with this process. They always keep their contacts in line. I appreciate their effort. Thank you, ZIP TRAVEL!
+                            </p>
                         </div><!-- End: Slide -->
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/Ellipse%201.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Juan Dela Cruz</h6><span style="font-size: 18px;">University of Santo Tomas</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis finibus consequat. Quisque lobortis semper lectus non ornare. Nam porta dolor sem, et ultricies justo dictum quis. Fusce sodales bibendum ipsum ac bibendum. Praesent at massa elit. Sed ut posuere nibh, sed sagittis augue. Aliquam congue consequat imperdiet.</p>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/trazo_testimonial.png">
+                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Jewel Reign Rilloraza</h6><span style="font-size: 18px;">University of Baguio</span>
+                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                                ZIP Travel Philippines has a really nice program which is a big leap for students like me to develop our technical and soft skills while performing at par with international standards. With my experience, their staff were very responsive, they were very accommodating, the procedures were organized, and the program itself is really globally competitive. That inspires me to be at my best as an applicant of the program and recommend it to other students under my university.
+                            </p>
                         </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
                 </div><!-- End: Slideshow -->
