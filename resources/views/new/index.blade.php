@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Zip Travel</title>
-    <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets_v3/css/styles.min.css">
-</head>
+@include('new.partials.head')
 
 <body>
 @include('new.partials.navbar')
@@ -31,7 +24,9 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center" style="font-family: 'Outfit';font-size: 18px;">
                     <p style="margin-bottom: 25px;"><strong>ZIP Travel Philippines</strong> provides intercultural opportunities for Filipinos to become globally competitive and future leaders of society through international programs.</p>
                     <p style="margin-bottom: 25px;">ZIP Travel is a career and education counseling organization helping students and fresh graduates participate in cultural exchanges in the United States, Australia, Canada, Spain, and Asia. Since our founding 30 years ago, ZIP Travel has helped thousands of students worldwide partake in study-and-work programs, internships, and training in some of the acclaimed hotels and restaurants.</p>
-                    <div><button class="btn btn-primary" type="button" style="color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold;">READ MORE</button></div>
+                    <div>
+                        <a href="/about-us" class="btn" type="button" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold;">READ MORE</a>
+                    </div>
                 </div>
             </div>
         </div><!-- End: 1 Row 2 Columns -->
@@ -92,7 +87,7 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
+                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">BridgeUSA</h5>
                                             <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
@@ -100,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/canada_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Canada</h5>
                                             <p class="text-center" style="font-size: 18px;">Canadian Program with Pathway to Permanent Residency</p>
@@ -108,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2015.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2015.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Australia</h5>
                                             <p class="text-center" style="font-size: 18px;">Study and Work<br>Hospitality Trainee</p>
@@ -121,7 +116,7 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/asia_hp.png">
+                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/asia_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Asia</h5>
                                             <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
@@ -129,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2013.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2013.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Canada</h5>
                                             <p class="text-center" style="font-size: 18px;">Canadian Program with Pathway to Permanent Residency</p>
@@ -137,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 6px 17px 15px 3px var(--bs-secondary-color);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2015.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2015.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Australia</h5>
                                             <p class="text-center" style="font-size: 18px;">Study and Work<br>Hospitality Trainee</p>

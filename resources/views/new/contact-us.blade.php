@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>zip-website</title>
-    <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets_v3/css/styles.min.css">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
+@include('new.partials.head')
 
 <body>
     @include('new.partials.navbar')
@@ -27,16 +19,11 @@
 
     <section style="padding: 75px 0;">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2 class="text-center" style="font-family: 'Outfit';">ZIP Travel Philippines Offices</h2>
-                </div>
-            </div>
             <div class="row" style="padding: 16px;">
                 <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Manila Branch" src="assets/img/MANILA.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
-                        <h3 style="font-weight: bold;">Manila Office</h3>
+                        <h3 style="font-weight: bold;">ZIP TRAVEL MANILA OFFICE</h3>
                         <ul class="list-unstyled">
                             <li>
                                 <div class="branch-address"><i class="fas fa-house-damage"></i>
@@ -172,7 +159,8 @@
                         @if(config('services.recaptcha.key'))
                             <div style="margin-bottom: 8px;" class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
                         @endif
-                        <div class="form-group"><button class="btn btn-primary border rounded-0" type="submit" style="background-color: rgb(0,33,87);">Send</button></div>
+                        <div class="form-group">
+                        <button class="btn" type="submit" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold;">Submit</button>
                     </div>
                 </div>
             </form>

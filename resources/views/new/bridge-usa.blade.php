@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>zip-website</title>
-    <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets_v3/css/styles.min.css">
-</head>
+@include('new.partials.head')
 
 <body>
 @include('new.partials.navbar')
@@ -32,23 +25,38 @@
             </div>
             <div class="row">
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="width: 225px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;"><span style="font-family: 'Outfit';font-size: 20px;font-weight: bold;">Summer Work Travel</span></div>
+                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
+                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Summer Work Travel</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="width: 225px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;"><span style="font-family: 'Outfit';font-size: 20px;font-weight: bold;">Internship</span></div>
+                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
+                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Internship</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="width: 225px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;"><span style="font-family: 'Outfit';font-size: 20px;font-weight: bold;">Trainee</span></div>
+                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
+                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Trainee</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="width: 225px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;"><span style="font-family: 'Outfit';font-size: 20px;font-weight: bold;">Camp Counselor</span></div>
+                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
+                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Camp Counselor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
+                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
+                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Teachers Program</span>
+                        </div>
                     </div>
                 </div>
             </div>

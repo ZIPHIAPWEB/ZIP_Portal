@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>zip-website</title>
-    <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets_v3/css/styles.min.css">
-</head>
+@include('new.partials.head')
 
 <body>
 @include('new.partials.navbar')
@@ -72,7 +65,8 @@
     <!-- Start: apply-now -->
     <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
         <div class="container d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. For any questions or concerns, contact the IRS directly.</p><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. For any questions or concerns, contact the IRS directly.</p>
+            <a href="https://taxprep.sprintax.com/sprintax-zip-travel" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')
