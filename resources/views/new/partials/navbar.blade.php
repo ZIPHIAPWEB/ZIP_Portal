@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#" style="width: 148px;height: 48px;text-align: center;background-color: rgba(12, 28, 51, 0.6);border-radius: 40px;border: 1px solid #FFFFFF ;"><i class="far fa-user-circle" style="margin-right: 12px;width: 24px;height: 24px;"></i>Log In</a></li>
+                <li class="nav-item"><a class="nav-link" target="_blank" href="https://ziptravel.com.ph/portal/v2/login" style="width: 148px;height: 48px;text-align: center;background-color: rgba(12, 28, 51, 0.6);border-radius: 40px;border: 1px solid #FFFFFF ;"><i class="far fa-user-circle" style="margin-right: 12px;width: 24px;height: 24px;"></i>Log In</a></li>
             </ul>
         </div>
     </div>

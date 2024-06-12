@@ -38,7 +38,7 @@
                         <li>A pathway to permanent residence in Canada</li>
                     </ul>
                 </div>
-                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;"><img style="height: 337px;width: 225px;" src="assets_v3/img/Rectangle%2011%20(3).png"></div>
+                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;"><img style="height: 337px;width: 225px; border-radius: 40px; object-fit: cover;" src="assets_v3/img/CANADA.png"></div>
             </div>
             <div class="row align-items-center" style="margin-top: 15px;">
                 <div class="col-12">
@@ -112,7 +112,8 @@
     <!-- Start: apply-now -->
     <section class="d-flex align-items-center align-items-xl-center apply-now">
         <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
+            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')

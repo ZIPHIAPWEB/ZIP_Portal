@@ -19,20 +19,21 @@
     <section style="padding: 75px 0;">
         <div class="container">
             <div>
-                <h5 style="font-family: 'Outfit';font-weight: bold;">HOSPITALITY AND CULINARY INTERNSHIP IN SPAIN</h5>
-                <p style="margin-bottom: 25px;">Experience top-notch training at some of the most prestigious 3 to 5-star hotels and Michelin-starred restaurants in Barcelona, Madrid, Toledo, Valencia, and Ibiza. Get an opportunity to learn from the best in the industry, while immersing yourself in the people, the local culture, and the different customs.</p>
-                <p style="margin-bottom: 25px;">Currently enrolled hospitality college/university students can benefit from paid internships lasting 3 to 6 months. They can gain valuable hands-on experience in the hospitality and culinary fields through this program.</p>
+                <h5 style="font-family: 'Outfit'; font-size: 20px; font-weight: bold;">HOSPITALITY AND CULINARY INTERNSHIP IN SPAIN</h5>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">Experience top-notch training at some of the most prestigious 3 to 5-star hotels and Michelin-starred restaurants in Barcelona, Madrid, Toledo, Valencia, and Ibiza. Get an opportunity to learn from the best in the industry, while immersing yourself in the people, the local culture, and the different customs.</p>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">Currently enrolled hospitality college/university students can benefit from paid internships lasting 3 to 6 months. They can gain valuable hands-on experience in the hospitality and culinary fields through this program.</p>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <ul>
+                    <ul style="font-family: 'Inter'; font-size: 18px;">
                         <li>Free housing, meals on duty, and a monthly stipend determined by the company</li>
                         <li>Basic knowledge of Spanish will be advantageous:</li>
                         <li style="margin-left: 55px;">A good command of English is sufficient for culinary and housekeeping positions&nbsp;</li>
                         <li style="margin-left: 55px;">Fluency in Spanish is necessary for front desk and food &amp; beverage roles</li>
                     </ul>
                 </div>
-            </div><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            </div>
+            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: about-us -->
     @include('new.partials.footer')

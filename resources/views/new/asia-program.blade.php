@@ -19,13 +19,13 @@
     <section style="padding: 75px 0;">
         <div class="container">
             <div>
-                <h5 style="font-family: 'Outfit';font-weight: bold;">INTERNSHIP PROGRAM IN ASIA</h5>
-                <p style="margin-bottom: 25px;">The Asia Internship Program is tailored for hospitality students currently enrolled and seeking to gain their first work experience in the hospitality industry while also exploring the rich cultural heritage of Asia and entering the global workforce</p>
-                <p style="margin-bottom: 25px;">The program offers an excellent opportunity for students to expand their networks, enhance their skills, and lay the foundation for a successful career in the hospitality sector. As interns, students get to work at prestigious 3-star to 5-star hotels and resorts across Asia.</p>
+                <h5 style="font-family: 'Outfit';font-weight: bold; font-size: 20px;">INTERNSHIP PROGRAM IN ASIA</h5>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The Asia Internship Program is tailored for hospitality students currently enrolled and seeking to gain their first work experience in the hospitality industry while also exploring the rich cultural heritage of Asia and entering the global workforce</p>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The program offers an excellent opportunity for students to expand their networks, enhance their skills, and lay the foundation for a successful career in the hospitality sector. As interns, students get to work at prestigious 3-star to 5-star hotels and resorts across Asia.</p>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <ul>
+                    <ul style="font-family: 'Inter'; font-size: 18px;">
                         <li>Over 90 colleges and universities to choose from</li>
                         <li>Get a qualification valued around the world</li>
                         <li>Enhance skills and knowledge in the chosen field of study</li>
@@ -36,7 +36,7 @@
                         <li>A pathway to permanent residence in Canada</li>
                     </ul>
                 </div>
-            </div><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            </div><a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: about-us -->
     @include('new.partials.footer')
