@@ -3,6 +3,15 @@
 
 @include('new.partials.head')
 
+<style>
+    .bridge-program__image {
+        min-width: 255px;
+        height: 211px;
+        border-radius: 40px 40px 0 0;
+        object-fit: cover;
+    }
+</style>
+
 <body>
 @include('new.partials.navbar')
     <div id="heading" style="background: var(--bs-body-color); height: 885px; width: 100%; overflow: hidden; position: relative;">
@@ -25,39 +34,54 @@
             </div>
             <div class="row">
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
-                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Summer Work Travel</span>
+                    <a href="/program-swt" style="color:#2A2A2A; text-decoration: none;">
+                        <div style="width: 255px; height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                            <img class="bridge-program__image" src="assets_v3/img/B_SWT.png">
+                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                                <span style=" font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Summer Work Travel</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
-                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Internship</span>
+                    <a href="/program-internship" style="color:#2A2A2A; text-decoration: none;">
+                        <div style="width: 255px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                            <img class="bridge-program__image" src="assets_v3/img/B_INTERN.png">
+                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                                <span style=" font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Internship</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
-                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Trainee</span>
+                    <a href="/program-career" style="color:#2A2A2A; text-decoration: none;">
+                        <div style="width: 255px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                            <img class="bridge-program__image" src="assets_v3/img/B_TRAINEE.png">
+                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                                <span style=" font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Trainee</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
-                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Camp Counselor</span>
+                    <a href="/program-camp-counselor" style="color:#2A2A2A; text-decoration: none;">
+                        <div style="width: 255px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                            <img class="bridge-program__image" src="assets_v3/img/B_CAMP.png">
+                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                                <span style=" font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Camp Counselor</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
-                    <div style="height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 211px;" src="assets_v3/img/Rectangle%2011%20(1).png">
-                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
-                            <span style="font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Teachers Program</span>
+                    <a href="/program-teacher-program" style="color:#2A2A2A; text-decoration: none;">
+                        <div style="width: 255px;height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                            <img class="bridge-program__image" src="assets_v3/img/B_TEACHERS.png">
+                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center" style="width: 100%;height: 82px;">
+                                <span style=" font-family: 'Outfit';font-size: 20px; font-weight: lighter;">Teachers Program</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -109,7 +133,8 @@
     <!-- Start: apply-now -->
     <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
         <div class="container d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
+            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')

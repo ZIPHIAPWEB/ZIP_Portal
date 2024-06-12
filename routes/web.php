@@ -32,6 +32,8 @@ Route::view('/program-spain', 'new.spain-program')->name('program.spain');
 Route::view('/program-career', 'new.trainee-program')->name('program-career');
 Route::view('/program-internship', 'new.intern-program')->name('program-internship');
 Route::view('/program-swt', 'new.swt-program')->name('program-swt');
+Route::view('/program-camp-counselor', 'new.camp-counselor')->name('program-camp');
+Route::view('/program-teacher-program', 'new.teachers-program')->name('program-teacher-program');
 Route::view('/social-stream', 'new.social-streams')->name('social-stream');
 Route::view('/tax-services', 'new.tax-services')->name('tax-services');
 
