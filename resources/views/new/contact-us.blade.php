@@ -168,8 +168,7 @@
     </section>
 
     @include('new.partials.footer')
-    <script src="assets_v3/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets_v3/js/script.min.js"></script>
+    @include('new.partials.scripts')
 </body>
 
 </html>
