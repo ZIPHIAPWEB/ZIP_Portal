@@ -23,8 +23,8 @@
                 <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Manila Branch" src="assets/img/MANILA.jpg" style="width: 100%;"></div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
-                        <h3 style="font-weight: bold;">ZIP TRAVEL MANILA OFFICE</h3>
-                        <ul class="list-unstyled">
+                        <h3 style="font-weight: bold; font-family: 'Louis George Cafe';">ZIP TRAVEL MANILA OFFICE</h3>
+                        <ul class="list-unstyled" style="font-size: 18px; font-family: 'Outfit';">
                             <li>
                                 <div class="branch-address"><i class="fas fa-house-damage"></i>
                                     <p>2F University Center Building, 1985 C.M. Recto Avenue, Manila, 1008</p>
@@ -125,7 +125,7 @@
                 {{ csrf_field() }}
                 <div class="row" style="margin-bottom: 16px;">
                     <div class="col text-center">
-                        <h5 style="margin: 20px; font-family: 'Outfit';">We'd love to hear from you. We're here to help and answer your inquiries. Please fill out this form:<br></h5>
+                        <h5 style="margin: 20px; font-family: 'Louis George Cafe';">We'd love to hear from you. We're here to help and answer your inquiries. Please fill out this form:<br></h5>
                     </div>
                 </div>
                 @if(session('message'))
@@ -147,7 +147,7 @@
                 </div>
                 @endif
 
-                <div class="form-row">
+                <div class="form-row" style="font-family: 'Louis George Cafe';">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="form-group "><label>FULLNAME (Required)</label><input name="name" class="form-control" type="text" placeholder="Enter your fullname here..."></div>
                     </div>

@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center" style="margin-top: 56px;">
+            <!-- <div class="row align-items-center" style="margin-top: 56px;">
                 <div class="col-12">
                     <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px;">TESTIMONIALS</h5>
                 </div>
@@ -83,7 +83,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis finibus consequat. Quisque lobortis semper lectus non ornare. Nam porta dolor sem, et ultricies justo dictum quis. Fusce sodales bibendum ipsum ac bibendum. Praesent at massa elit. Sed ut posuere nibh, sed sagittis augue. Aliquam congue consequat imperdiet.</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section><!-- End: about-us -->
     <!-- Start: application-guide -->
@@ -133,7 +133,8 @@
     <!-- Start: apply-now -->
     <section class="d-flex align-items-center align-items-xl-center apply-now">
         <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
+            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')

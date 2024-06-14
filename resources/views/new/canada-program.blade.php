@@ -22,7 +22,7 @@
                 <p style="margin-bottom: 25px;">Known for having the most polite citizens, Canada ranks #3 in quality of life based on factors including health system, safety, job market, and economic stability. International students feel welcomed thanks to the country’s diversity and multiculturalism.</p>
             </div>
             <div class="row">
-                <div class="col-12 col-lg-7">
+                <div class="col-12 col-lg-7" style="font-size: 18px; font-family: 'Inter';">
                     <div>
                         <h5 style="font-family: 'Outfit';font-weight: bold;">STUDY. WORK. LIVE.</h5>
                         <p style="margin-bottom: 25px;">Known for having the most polite citizens, Canada ranks #3 in quality of life based on factors including health system, safety, job market, and economic stability. International students feel welcomed thanks to the country’s diversity and multiculturalism.</p>
