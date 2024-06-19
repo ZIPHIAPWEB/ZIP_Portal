@@ -5,7 +5,7 @@
 
 <body>
 @include('new.partials.navbar')
-    <div id="heading" style="background: var(--bs-body-color); height: 885px; width: 100%; overflow: hidden; position: relative;">
+    <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/HOMEPAGE_HEADER.mp4') }}" type="video/mp4">
         </video>
@@ -13,7 +13,7 @@
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
                 <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">INTERNATIONAL EXCHANGE PROGRAMS</h1>
                 <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Zip Travel Philippines believes that every Filipino deserves the opportunity to become a global leader. That's why we offer<br>intercultural educational and cultural exchange programs that will equip you with the skills and knowledge you need to<br>compete on a global scale.</p>
-                <a href="https://ziptravel.com.ph/portal/v2" target="_blank" style="text-decoration: none;color: #FFFFFF;border-radius: 40px;border: solid #FFFFFF 1px;padding: 9px 28px;font-size: 20px;text-align: center;background-color: rgba(12, 28, 51, 0.6);width: 339px;height: 52px;font-family: 'Outfit';">YOUR JOURNEY STARTS HERE!</a>
+                <a href="https://ziptravel.com.ph/online-registration" target="_blank" style="text-decoration: none;color: #FFFFFF;border-radius: 40px;border: solid #FFFFFF 1px;padding: 9px 28px;font-size: 20px;text-align: center;background-color: rgba(12, 28, 51, 0.6);width: 339px;height: 52px;font-family: 'Outfit';">YOUR JOURNEY STARTS HERE!</a>
             </div>
         </div>
     </div>
@@ -125,18 +125,18 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2013.png">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/spain_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Canada</h5>
-                                            <p class="text-center" style="font-size: 18px;">Canadian Program with Pathway to Permanent Residency</p>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Spain</h5>
+                                            <p class="text-center" style="font-size: 18px;">Hospitality and Culinary Internship</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);width: 346px;"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/Rectangle%2015.png">
+                                    <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/usa_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Australia</h5>
-                                            <p class="text-center" style="font-size: 18px;">Study and Work<br>Hospitality Trainee</p>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">BridgeUSA</h5>
+                                            <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/manganaey_testimonial.png">
                             <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Rutherford Kenth Carlos Mangangey</h6><span style="font-size: 18px;">University of Baguio</span>
                             <p style="margin-top: 35px;text-align: center;font-size: 18px;">
-                                If you're planning to take your Internship abroad, Zip Travel is the Agency for you. They are very Approachable and detailed and the Employees are very kind to you and you can ask them and they will answer your questions in a Minute! Thank you Zip travel for helping me to start my culinary journey for this internship program.
+                            If you're planning to take your Internship abroad, Zip Travel is the Agency for you. They are very Approachable and detailed and the Employees are very kind to you and you can ask them and they will answer your questions in a Minute! Thank you Zip travel for helping me to start my culinary journey for this internship program
                             </p>
                         </div><!-- End: Slide -->
                         <!-- Start: Slide -->
@@ -187,10 +187,10 @@
                             </p>
                         </div><!-- End: Slide -->
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/trazo_testimonial.png">
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide"><img style="width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/rillaroza_testimonial.png">
                             <h6 style="margin: 0;font-weight: bold;font-size: 20px;">Jewel Reign Rilloraza</h6><span style="font-size: 18px;">University of Baguio</span>
                             <p style="margin-top: 35px;text-align: center;font-size: 18px;">
-                                ZIP Travel Philippines has a really nice program which is a big leap for students like me to develop our technical and soft skills while performing at par with international standards. With my experience, their staff were very responsive, they were very accommodating, the procedures were organized, and the program itself is really globally competitive. That inspires me to be at my best as an applicant of the program and recommend it to other students under my university.
+                            ZIP Travel Philippines has a really nice program which is a big leap for students like me to develop our technical and soft skills while performing at par with international standards. With my experience, their staff were very responsive, they were very accommodating, the procedures were organized, and the program itself is really globally competitive. That inspires me to be at my best as an applicant of the program and recommend it to other students under my university
                             </p>
                         </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->

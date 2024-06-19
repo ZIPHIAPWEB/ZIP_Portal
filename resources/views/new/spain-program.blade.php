@@ -5,7 +5,7 @@
 
 <body>
 @include('new.partials.navbar')
-    <div id="heading" style="background: var(--bs-body-color); height: 885px; width: 100%; overflow: hidden; position: relative;">
+    <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/SPAIN_HEADER.mp4') }}" type="video/mp4">
         </video>

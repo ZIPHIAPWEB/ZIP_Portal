@@ -5,7 +5,7 @@
 
 <body>
 @include('new.partials.navbar')
-    <div id="heading" style="background: var(--bs-body-color); height: 885px; width: 100%; overflow: hidden; position: relative;">
+    <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/TEACHER_HEADER.mp4') }}" type="video/mp4">
         </video>
@@ -153,7 +153,7 @@
     <section class="d-flex align-items-center align-items-xl-center apply-now">
         <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
             <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
-            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <a href="https://ziptravel.com.ph/online-registration" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')

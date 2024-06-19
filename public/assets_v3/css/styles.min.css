@@ -931,3 +931,10 @@ p {
   }
 }
 
+.heading {
+  background: var(--bs-body-color); 
+  height: 100vh; 
+  width: 100%; 
+  overflow: hidden; 
+  position: relative;
+}
