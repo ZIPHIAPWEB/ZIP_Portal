@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+    <meta name="title" content="About Us | ZIP Travel Philippines">
+    <meta name="description" content="ZIP Travel Philippines has provided international internships and cultural exchanges to over 50,000 participants since its operations in 2009.">
 
-<body>
-    @include('new.partials.navbar')
+    <meta property="og:title" content="About Us | ZIP Travel Philippines" />
+    <meta property="og:description" content="ZIP Travel Philippines has provided international internships and cultural exchanges to over 50,000 participants since its operations in 2009.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/about-us" />
+
+    <meta name="twitter:title" content="About Us | ZIP Travel Philippines">
+    <meta name="twitter:description" content="ZIP Travel Philippines has provided international internships and cultural exchanges to over 50,000 participants since its operations in 2009.">
+@endsection
+
+@section('title', 'About Us | Zip Travel Philippines')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/ABOUT US_HEADER.mp4') }}" type="video/mp4">
@@ -93,8 +104,4 @@
             </div>
         </div>
     </section><!-- End: partners -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
-
-</html>
+@endsection

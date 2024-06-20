@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+<meta name="title" content="ZIP Travel Philippines | Tax Services">
+    <meta name="description" content="Once in the USA, participants are required to file a tax return.">
 
-<body>
-@include('new.partials.navbar')
+    <meta property="og:title" content="ZIP Travel Philippines | Tax Services" />
+    <meta property="og:description" content="Once in the USA, participants are required to file a tax return.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/tax-services" />
+
+    <meta name="twitter:title" content="ZIP Travel Philippines | Tax Services">
+    <meta name="twitter:description" content="Once in the USA, participants are required to file a tax return.">
+@endsection
+
+@section('title', 'ZIP Travel Philippines | Tax Services')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/TAX_HEADER.mp4') }}" type="video/mp4">
@@ -69,8 +80,4 @@
             <a href="https://taxprep.sprintax.com/sprintax-zip-travel" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
-
-</html>
+@endsection

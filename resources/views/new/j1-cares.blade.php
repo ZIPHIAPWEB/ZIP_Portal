@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+<meta name="title" content="ZIP Travel Philippines | J1 Cares">
+    <meta name="description" content="J1 Cares is a foundation with past participants as a way to share their blessings through charitable works.">
 
-<body>
-@include('new.partials.navbar')
+    <meta property="og:title" content="ZIP Travel Philippines | J1 Cares" />
+    <meta property="og:description" content="J1 Cares is a foundation with past participants as a way to share their blessings through charitable works.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/j1-cares" />
+
+    <meta name="twitter:title" content="ZIP Travel Philippines | J1 Cares">
+    <meta name="twitter:description" content="J1 Cares is a foundation with past participants as a way to share their blessings through charitable works.">
+@endsection
+
+@section('title', 'ZIP Travel Philippines | J1 Cares')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/J1 CARES_HEADER.mp4') }}" type="video/mp4">
@@ -140,8 +151,5 @@
             <p style="font-family: 'Inter';font-size: 18px;font-weight: normal;">Are you a J1 Alumnus? We invite you to join us in helping underprivileged students embark on their journey. Get in touch with us on how to sponsor your own Bag of Hope for one learner. <strong>Email us at j1cares@ziptravel.com.ph</strong></p>
         </div>
     </section><!-- End: apply-now -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
+@endsection
 
-</html>

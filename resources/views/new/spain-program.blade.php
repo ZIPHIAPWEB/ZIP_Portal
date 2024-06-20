@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+<meta name="title" content="Spain Program | ZIP Travel Philippines">
+    <meta name="description" content="Join our International programs and explore the world’s wonders, unlock your potential, and seize opportunities for personal and professional growth.">
 
-<body>
-@include('new.partials.navbar')
+    <meta property="og:title" content="Spain Program | ZIP Travel Philippines" />
+    <meta property="og:description" content="Join our International programs and explore the world’s wonders, unlock your potential, and seize opportunities for personal and professional growth.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/program-spain" />
+
+    <meta name="twitter:title" content="Spain Program | ZIP Travel Philippines">
+    <meta name="twitter:description" content="Join our International programs and explore the world’s wonders, unlock your potential, and seize opportunities for personal and professional growth.">
+@endsection
+
+@section('title', 'Spain Program | ZIP Travel Philippines')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/SPAIN_HEADER.mp4') }}" type="video/mp4">
@@ -36,8 +47,4 @@
             <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: about-us -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
-
-</html>
+@endsection

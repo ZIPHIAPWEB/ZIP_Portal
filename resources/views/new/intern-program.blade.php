@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+    <meta name="title" content="BridgeUSA Internship Program | ZIP Travel Philippines">
+    <meta name="description" content="The BridgeUSA Program is for college students and new graduates to explore America through hands-on experience.">
 
-<body>
-@include('new.partials.navbar')
+    <meta property="og:title" content="BridgeUSA Internship Program | ZIP Travel Philippines" />
+    <meta property="og:description" content="The BridgeUSA Program is for college students and new graduates to explore America through hands-on experience.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/program-internship" />
+
+    <meta name="twitter:title" content="BridgeUSA Internship Program | ZIP Travel Philippines">
+    <meta name="twitter:description" content="The BridgeUSA Program is for college students and new graduates to explore America through hands-on experience.">
+@endsection
+
+@section('title', 'BridgeUSA Internship Program | ZIP Travel Philippines')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/TRAINEE_HEADER.mp4') }}" type="video/mp4">
@@ -138,8 +149,4 @@
             <a href="https://ziptravel.com.ph/online-registration" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
-
-</html>
+@endsection

@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+@extends('new.layouts.app')
 
-@include('new.partials.head')
+@section('meta')
+    <meta name="title" content="ZIP Travel Philippines | Home">
+    <meta name="description" content="We offer J1 Visa BridgeUSA Programs for students and new graduates to gain work and cultural experience in the United States of America.">
 
-<body>
-@include('new.partials.navbar')
+    <meta property="og:title" content="ZIP Travel Philippines | Home" />
+    <meta property="og:description" content="We offer J1 Visa BridgeUSA Programs for students and new graduates to gain work and cultural experience in the United States of America.">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ziptravel.com.ph/" />
+
+    <meta name="twitter:title" content="ZIP Travel Philippines | Home">
+    <meta name="twitter:description" content="We offer J1 Visa BridgeUSA Programs for students and new graduates to gain work and cultural experience in the United States of America.">
+@endsection
+
+@section('title', 'ZIP Travel Philippines | Home')
+
+@section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/HOMEPAGE_HEADER.mp4') }}" type="video/mp4">
@@ -198,8 +209,4 @@
             </div><!-- End: Simple Slider -->
         </div>
     </section><!-- End: Testimonials -->
-    @include('new.partials.footer')
-    @include('new.partials.scripts')
-</body>
-
-</html>
+@endsection
