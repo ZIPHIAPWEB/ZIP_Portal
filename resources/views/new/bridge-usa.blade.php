@@ -45,7 +45,7 @@
                 <p style="margin-bottom: 25px;">Under the J1 Visa BridgeUSA program, the country welcomes around 300,000 participants from 200 countries annually. It allows foreign nationals to participate in work-and-study-based programs such as teaching, studying, or receiving on-the-job training for several weeks or years.</p>
                 <p style="margin-bottom: 25px;">The BridgeUSA program is administered by the U.S. Department of State's Bureau of Educational and Cultural Affairs.</p>
             </div>
-            <div class="row">
+            <div class="row" style="font-size: 20px;font-family: 'Outfit';font-weight:600">
                 <div class="col d-xl-flex justify-content-xl-center align-items-xl-center" style="padding: 0;">
                     <a href="/program-swt" style="color:#2A2A2A; text-decoration: none;">
                         <div style="width: 255px; height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);">
@@ -102,41 +102,41 @@
     <!-- Start: application-guide -->
     <section class="d-xl-flex justify-content-xl-center align-items-xl-center" style="height: 378px;width: 100%;background: #F1F1F1;">
         <div class="container">
-            <h1 style="font-family: 'Louis George Cafe';font-size: 28px;font-weight: bold;margin-bottom: 19px;">APPLICATION GUIDE</h1>
+            <h1 style="font-family: 'Louis George Cafe';font-size: 28px;font-weight: 500;margin-bottom: 19px;">APPLICATION GUIDE</h1>
             <div class="row align-items-center">
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Program Orientation and Assessment</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
+                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Host Company Interview</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
+                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Online Registration</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
+                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">J1 Visa Processing</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
+                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Submission of Documents</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>06</span></div>
+                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>06</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Departure and Program Proper</p>
                     </div>
                 </div>

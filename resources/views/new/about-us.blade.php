@@ -36,7 +36,7 @@
             </div>
             <div style="margin-top: 25px;">
 
-            <ul class="nav nav-tabs" style="display: flex;justify-content: center;gap: 29px;font-family: 'Outfit';font-size: 20px;font-weight: bold;margin-top: 75px;" id="myTab" role="tablist">
+            <ul class="nav nav-tabs" style="display: flex;justify-content: center;gap: 29px;font-family: 'Outfit';font-size: 20px;font-weight: 600;margin-top: 75px;" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button style="background-color: #0C1C33;color: #FFFFFF;" class="nav-link active text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">VISION</button>
                 </li>

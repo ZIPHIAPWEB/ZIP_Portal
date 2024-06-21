@@ -129,31 +129,31 @@
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="d-flex flex-row align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Registration and Program Orientation</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">J1 Visa Processing</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Screening</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Departure and Program Proper</p>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Host School Matching and Interview</p>
                     </div>
                 </div>
