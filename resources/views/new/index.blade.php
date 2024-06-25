@@ -131,7 +131,7 @@
                                     <div style="height: 503px;border-radius: 50px;width: 346px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/asia_hp.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Asia</h5>
-                                            <p class="text-center" style="font-size: 18px;">Summer Work Travel<br>Internship<br>Trainee<br>Camp Counselor</p>
+                                            <p class="text-center" style="font-size: 18px;">Internship</p>
                                         </div>
                                     </div>
                                 </div>

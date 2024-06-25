@@ -34,7 +34,7 @@
                             </li>
                             <li>
                                 <div class="branch-address"><i class="fas fa-phone"></i>
-                                    <p>(02)559-8213 | 0917-522-8213</p>
+                                    <p>(02) 8559-8213 | 0917 522 8213 | 0922 876 8213</p>
                                 </div>
                             </li>
                             <li></li>

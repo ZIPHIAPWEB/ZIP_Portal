@@ -30,21 +30,27 @@
     <section style="padding: 75px 0;">
         <div class="container">
             <div>
-                <h5 style="font-family: 'Outfit';font-weight: bold; font-size: 20px;">INTERNSHIP PROGRAM IN ASIA</h5>
                 <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The Asia Internship Program is tailored for hospitality students currently enrolled and seeking to gain their first work experience in the hospitality industry while also exploring the rich cultural heritage of Asia and entering the global workforce</p>
                 <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The program offers an excellent opportunity for students to expand their networks, enhance their skills, and lay the foundation for a successful career in the hospitality sector. As interns, students get to work at prestigious 3-star to 5-star hotels and resorts across Asia.</p>
+            </div>
+            <div>
+                <h5 style="font-family: 'Outfit';font-weight: bold; font-size: 20px;">WORK AND TRAVEL ASIA</h5>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The program specifically targets students eager to travel and expand their horizons by participating in Asian cultural immersion activities for up to 5 months.</p>
+            </div>
+            <div>
+                <h5 style="font-family: 'Outfit';font-weight: bold; font-size: 20px;">HOSPITALITY AND BUSINESS INTERNSHIP</h5>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">A 6-to-12-month hands-on internship program for enrolled students and recent graduates who wish to gain their first work experience in the hospitality industry and explore the rich cultural heritage of Asia.</p>
+            </div>
+            <div>
+                <h5 style="font-family: 'Outfit';font-weight: bold; font-size: 20px;">MANAGEMENT TRAINING PROGRAM</h5>
+                <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The program is designed to provide career development in 6, 12, and up to 18 months. Participants will undertake training tasks to enhance and refine supervisory skills for their future managerial roles.</p>
             </div>
             <div class="row">
                 <div class="col-12">
                     <ul style="font-family: 'Inter'; font-size: 18px;">
-                        <li>Over 90 colleges and universities to choose from</li>
-                        <li>Get a qualification valued around the world</li>
-                        <li>Enhance skills and knowledge in the chosen field of study</li>
-                        <li>Work part-time during school semesters and full-time on official school breaks</li>
-                        <li>Affordable education and quality of life</li>
-                        <li>More affordable tuition fees for international students than in other countries without sacrificing the quality of education</li>
-                        <li>Open to all courses: business, hospitality, culinary, engineering, health sciences, etc.</li>
-                        <li>A pathway to permanent residence in Canada</li>
+                        <li>Immerse yourself in rich and diverse Asian cultures while gaining academic credits and international experience.</li>
+                        <li>Experience travel, improve interpersonal skills, and build global networks within Asia's global market.</li>
+                        <li>Receive allowances and living arrangements provided by host organizations.</li>
                     </ul>
                 </div>
             </div><a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>

@@ -47,7 +47,7 @@
                     <button style="background-color: #0C1C33;color: #FFFFFF;" class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">CORPORATE PHILOSOPHY</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: #0C1C33;color: #FFFFFF;" class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" id="creed-tab" data-bs-toggle="tab" data-bs-target="#creed" type="button" role="tab" aria-controls="creed" aria-selected="false">INTERNATION CREED</button>
+                    <button style="background-color: #0C1C33;color: #FFFFFF;" class="nav-link text-center d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center about-us-link" id="creed-tab" data-bs-toggle="tab" data-bs-target="#creed" type="button" role="tab" aria-controls="creed" aria-selected="false">INTERNATIONAL CREED</button>
                 </li>
             </ul>
             <div class="tab-content" style="margin-top: 32px;color: #2A2A2A;font-family: 'Outfit';font-size: 18px;" id="myTabContent">
