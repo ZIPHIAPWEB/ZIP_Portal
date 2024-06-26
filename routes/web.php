@@ -26,7 +26,7 @@ Route::view('/contact-us', 'new.contact-us')->name('contact_us');
 Route::view('/j1-cares', 'new.j1-cares')->name('j1');
 Route::view('/program-bridgeusa', 'new.bridge-usa')->name('program-bridgeusa');
 Route::view('/program-asia', 'new.asia-program')->name('program-asia');
-Route::view('/program-australian', 'new.australia-program')->name('program-australian');
+Route::view('/program-australia', 'new.australia-program')->name('program-australian');
 Route::view('/program-canada', 'new.canada-program')->name('program-canada');
 Route::view('/program-spain', 'new.spain-program')->name('program.spain');
 Route::view('/program-career', 'new.trainee-program')->name('program-career');

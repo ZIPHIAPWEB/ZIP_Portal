@@ -5,6 +5,17 @@
 
 <body>
     @include('new.partials.navbar')
+    <div id="heading" class="heading">
+        <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
+            <source src="{{ asset('assets_v3/videos/AUSTRALIA_HEADER.mp4') }}" type="video/mp4">
+        </video>
+        <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
+            <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
+                <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">AUSTRALIAN PROGRAM</h1>
+                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">There is much more to Australia than the Outback, kangaroos, koalas, and Sydney Opera House. It is the third most popular destination among international students for its breathtaking scenery, friendly citizens, and high quality of education. The country also ranked the 22nd Most Peaceful Countries in the 2023 Global Peace Index. </p>
+            </div>
+        </div>
+    </div>
     <!-- Start: about-us -->
     <section style="padding: 75px 0;">
         <div class="container">
@@ -36,32 +47,38 @@
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="d-flex flex-row align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Program Orientation and Assessment</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Visa Processing and Filing</p>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
+                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Submission of Document</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Online Registration</p>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
+                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Admission and Enrollment (for Study and Work)</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
+                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Visa Processing and Lodging</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
+                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Matching and Hiring (for Culinary Trainee)</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
+                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>06</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Departure and Program Proper</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Submission of Documents</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +87,8 @@
     <!-- Start: apply-now -->
     <section class="d-flex align-items-center align-items-xl-center apply-now">
         <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p><a class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
+            <a href="https://ziptravel.com.ph/online-registration" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
     @include('new.partials.footer')
