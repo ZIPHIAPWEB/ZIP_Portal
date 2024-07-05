@@ -44,6 +44,7 @@ await superadminCoordsStore.searchSuperaminCoordData(toBeSearch.value);
                             <i class="fas fa-search"></i>
                           </button>
                         </div>
+                        <button @click="isAddCoordFormOpen = true" class="btn btn-primary btn-sm">Add coordinator</button>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0" style="height: 75vh">
