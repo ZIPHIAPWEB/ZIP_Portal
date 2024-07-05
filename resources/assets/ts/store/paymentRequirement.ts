@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { AxiosError } from "axios";
 
 export interface IStudentPaymentRequirementForm {
     bank_code: string;
@@ -37,6 +38,7 @@ export interface PaymentRequirementState {
     isLoading: boolean;
     requirements: IPaymentRequirement[];
     error: string | undefined;
+    errors: string | undefined;
 }
 
 export const useStudentPaymentRequirement = defineStore({
@@ -45,6 +47,7 @@ export const useStudentPaymentRequirement = defineStore({
         isSuccess: false,
         isLoading: false,
         error: undefined,
+        errors: undefined,
         requirements: [],
     }),
     getters: {
@@ -66,7 +69,6 @@ export const useStudentPaymentRequirement = defineStore({
         },
 
         async storePaymentRequirement(requirementId: any, data: IStudentPaymentRequirementForm) {
-            console.log(requirementId);
             try {
                 this.isLoading = true;
                 const response = await StudentAPI.storePaymentRequirement(requirementId, data);
@@ -81,8 +83,11 @@ export const useStudentPaymentRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                this.error = error.response.data.message;
+            } catch (e) {
+                const errors = e as AxiosError;
+                this.error = errors.response.data.message;
+                this.errors = errors.response.data.errors;
+
                 this.isLoading = false;
                 this.isSuccess = false;
             }

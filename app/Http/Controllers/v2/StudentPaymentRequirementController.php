@@ -33,6 +33,16 @@ class StudentPaymentRequirementController extends Controller
     {
         $user = auth()->user();
 
+        $request->validate([
+            'requirement_id' => ['required'],
+            'bank_code' => ['required'],
+            'reference_no' => ['required'],
+            'date_deposit' => ['required'],
+            'bank_account_no' => ['required'],
+            'amount' => ['required'],
+            'file' => ['required']
+        ]);
+
         $uploadedPayment = $user->studentPayment()->create([
             'requirement_id' => $requirement->id,
             'bank_code' => $request->bank_code,
