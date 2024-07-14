@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets_v3/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets_v3/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets_v3/css/styles.min.css">
+    <link rel="stylesheet" href="assets_v3/css/custom.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">

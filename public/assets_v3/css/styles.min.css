@@ -857,7 +857,6 @@ p {
 }
 
 .partners-section {
-  background: #F1F1F1;
   height: fit-content;
   display: flex;
   align-items: center;
@@ -865,7 +864,6 @@ p {
 
 @media (min-width: 768px) {
   .partners-section {
-    background: #F1F1F1;
     height: 230px;
     display: flex;
     align-items: center;
