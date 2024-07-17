@@ -18,7 +18,7 @@
 @section('content')
     <div id="heading" class="heading">
         <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
-            <source src="{{ asset('assets_v3/videos/HOMEPAGE_HEADER.mp4') }}" type="video/mp4">
+            <source src="{{ asset('assets_v3/videos/HOMEPAGE_HEADERv2.mp4') }}" type="video/mp4">
         </video>
         <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
@@ -39,7 +39,9 @@
                         <a href="/about-us" class="btn" type="button" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold;">READ MORE</a>
                     </div>
                 </div>
-                <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;"><img src="assets_v3/img/hp_1.png" style="width: 397px;height: 369px;filter: blur(0px);object-fit: contain;border-radius: 50px;"></div>
+                <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;">
+                    <img src="assets_v3/img/hp_2.jpg" style="width: 100%; height: 369px;filter: blur(0px);object-fit: cover;border-radius: 50px;">
+                </div>
             </div>
         </div><!-- End: 1 Row 2 Columns -->
     </section>
@@ -60,7 +62,7 @@
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/usa_hp.png">
+                                        <img src="assets_v3/img/usa_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">BridgeUSA</h5>
                                             <ul>
@@ -74,7 +76,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/canada_hp.png">
+                                        <img src="assets_v3/img/canada_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">Canada</h5>
                                             <ul>
@@ -85,7 +87,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/Rectangle%2015.png">
+                                        <img src="assets_v3/img/aus_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">Australia</h5>
                                             <ul>
@@ -102,7 +104,7 @@
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/asia_hp.png">
+                                        <img src="assets_v3/img/asia_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5>Asia</h5>
                                             <ul>
@@ -115,7 +117,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/spain_hp.png">
+                                        <img src="assets_v3/img/spain_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">Spain</h5>
                                             <ul>
@@ -126,7 +128,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="int-program-card-item">
-                                        <img src="assets_v3/img/usa_hp.png">
+                                        <img src="assets_v3/img/usa_hp2.png">
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">BridgeUSA</h5>
                                             <ul>
@@ -169,43 +171,66 @@
                     <p class="d-flex align-items-xxl-center">Diverse and wide range of program offerings</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-items-xxl-center" src="assets_v3/img/rate.png">
-                    <p class="d-flex align-items-xxl-center">Three decades of extensive experience</p>
+                    <p class="d-flex align-items-xxl-center">Strong customer testimonials and satisfaction</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-content-center align-items-xxl-center" src="assets_v3/img/international_relations.png">
                     <p class="d-flex align-content-center align-items-xxl-center">International memberships and affiliations</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-items-center" src="assets_v3/img/high.png">
-                    <p class="d-flex align-items-center">Three decades of extensive experience</p>
+                    <p class="d-flex align-items-center">High visa approval rate</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-items-center" src="assets_v3/img/salary.png" width="56" height="56">
                     <p class="d-flex align-items-center">Competitive &amp; transparent fee structure</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-items-center" src="assets_v3/img/shield.png">
-                    <p class="d-flex align-items-center">Three decades of extensive experience</p>
+                    <p class="d-flex align-items-center">Robust safety and security measures for participants</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img class="d-flex align-items-center" src="assets_v3/img/rating.png">
                     <p class="d-flex align-items-center">Customer-Centric Approach</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center gap-4 py-3" style="display: flex;"><img src="assets_v3/img/assessment.png">
-                    <p>Three decades of extensive experience</p>
+                    <p>Continuous program evaluation and improvement</p>
                 </div>
             </div>
         </div><!-- End: 2 Rows 1+2 Columns -->
     </section>
     <!-- Start: Partners -->
-    <section class="py-5 partners-section">
+    <section class="partners-section">
         <div class="container">
-            <div class="row gy-4 d-sm-flex align-items-center">
-                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
-                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
-                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
-                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
-                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
-            </div>
+            <div class="simple-slider">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
+                            </div>
+                        </div><!-- End: Slide -->
+                        <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_WESTIN.png" style="width: 150px;"></div>
+                            </div>
+                        </div><!-- End: Slide -->
+                    </div><!-- End: Slide Wrapper -->
+                </div><!-- End: Slideshow -->
+            </div><!-- End: Simple Slider -->
         </div>
     </section><!-- End: Partners -->
     <!-- Start: Testimonials -->
-    <section style="padding: 55px 0;background:#F1F1F1; border-bottom: #FFFFFF solid 5px;">
+    <section style="padding: 55px 0;background: url('assets_v3/img/zipbg_black.jpg'); border-bottom: #FFFFFF solid 5px;">
         <div class="container">
             <!-- Start: Simple Slider -->
             <div class="simple-slider">
@@ -240,9 +265,9 @@
                         </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
                     <!-- Start: Previous -->
-                    <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
+                    <div class="d-none swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
                     <!-- Start: Next -->
-                    <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
+                    <div class="d-none swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
                 </div><!-- End: Slideshow -->
             </div><!-- End: Simple Slider -->
         </div>

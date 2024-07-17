@@ -1,4 +1,12 @@
+:root {
+    --heading-title-text-color: #FFC452;
+    --heading-desc-text-color: #FFFFFF;
 
+    --section-title-text-color: #0C3E87;
+    --section-desc-text-color: #2A2A2A;
+}
+
+/* international program card */
 .int-program-card-item {
     height: 503px;
     border-radius: 50px;
@@ -32,4 +40,85 @@
     margin-bottom: 10px;
     font-weight: bold;
     color: #0C3E87;
+}
+
+/* internation membership  */
+.int-membership-section {
+    height: 266px;background-color: #F1F1F1;display: flex;align-items: center;
+}
+.int-membership-section__title {
+    font-family: 'Outfit';font-weight: bolder;font-size: 28px;margin-bottom: 20px;color: var(--section-title-text-color);
+}
+.int-membership-section__description {
+    font-family: 'Inter';font-size: 18px;
+}
+
+/* about-us partners */
+.about-us-partners-section {
+    height: 266px;display: flex;align-items: center;
+}
+.about-us-partners-section__image {
+    width: 156px;height: 156px;
+}
+
+/* bridgeusa programs */
+.bridge-usa-program-card {
+    padding: 0;
+}
+.bridge-usa-program-card__content {
+    width: 255px; height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);
+}
+.bridge-usa-program-card a {
+    color: var(--section-title-text-color);
+    font-family: 'Outfit';
+    font-weight: bolder;
+}
+.bridge-usa-program-card a:link {
+    text-decoration: none;
+}
+.bridge-usa-program-card__image {
+    min-width: 255px;
+    height: 211px;
+    border-radius: 40px 40px 0 0;
+    object-fit: cover;
+}
+.bridge-usa-program-card__text-wrapper {
+    width: 100%;
+    height: 82px;
+}
+.bridge-usa-program-card__text {
+    font-family: 'Outfit';font-size: 20px; font-weight: lighter;
+}
+
+/* application guide */
+.app-guide-section {
+    height: 378px;width: 100%;background: #F1F1F1;
+}
+.app-guide-section__title {
+    font-family: 'Outfit';
+    font-weight: bolder !important;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 19px;
+    color: var(--section-title-text-color);
+}
+.app-guide-sequence-item {
+    padding: 15px 0;
+}
+.app-guide-sequence-item__step {
+    width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;
+}
+.app-guide-sequence-item__description {
+    font-family: 'Inter';font-style: normal;font-size: 18px;
+}
+
+/* apply now section */
+.apply-now-section {
+    height: 280px;width: 100%;
+}
+.apply-now-section__description {
+    margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;
+}
+.apply-now-section__action {
+    width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: var(--section-title-text-color);padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;
 }

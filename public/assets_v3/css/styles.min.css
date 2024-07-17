@@ -936,3 +936,31 @@ p {
   overflow: hidden; 
   position: relative;
 }
+
+.heading__video {
+  position: absolute;
+  z-index: 0;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: fill;
+  overflow: hidden;
+}
+
+.heading__content {
+  position: relative;
+  z-index: 2;
+}
+
+.heading__content-title {
+  margin-bottom: 17px;
+  font-family: 'Outfit';
+  font-weight: 900;
+  color: var(--heading-title-text-color);
+}
+
+.heading__content-description {
+  margin-bottom: 25px;
+  font-family: 'Inter';
+  font-size: 18px;
+  color: var(--heading-desc-text-color);
+}

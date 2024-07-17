@@ -17,13 +17,13 @@
 
 @section('content')
     <div id="heading" class="heading">
-        <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
+        <video class="heading__video" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/ABOUT US_HEADER.mp4') }}" type="video/mp4">
         </video>
-        <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
-            <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
-                <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">ABOUT US</h1>
-                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">ZIP Travel is an international company that has been at the forefront of providing educational and cultural exchange programs to students and young professionals since its establishment in Europe in 1993.</p>
+        <div class="heading__content container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100">
+            <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="margin-bottom: 43px;">
+                <h1 class="heading__content-title text-center">ABOUT US</h1>
+                <p class="heading__content-description text-center text-sm-center text-md-start">ZIP Travel is an international company that has been at the forefront of providing educational and cultural exchange programs to students and young professionals since its establishment in Europe in 1993.</p>
             </div>
         </div>
     </div><!-- Start: about-us -->
@@ -53,7 +53,7 @@
             <div class="tab-content" style="margin-top: 32px;color: #2A2A2A;font-family: 'Outfit';font-size: 18px;" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <p style="border: 0;">
-                        Reaching out to encourage a lifelong journey of global peace, respect, independence, and understanding.
+                        Reaching out to encourage a lifelong journey of learning, global peace, respect, independence, and understanding.
                     </p>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -83,24 +83,24 @@
         </div>
     </section><!-- End: about-us -->
     <!-- Start: international membership -->
-    <section style="height: 266px;background-color: #F1F1F1;display: flex;align-items: center;">
+    <section class="int-membership-section">
         <div class="container">
             <div class="row">
-                <h1 style="font-family: 'Louis George Cafe';font-weight: bold;font-size: 28px;margin-bottom: 20px;">INTERNATIONAL MEMBERSHIP</h1>
-                <p style="font-family: 'Inter';font-size: 18px;">ZIP Travel is a member of the World Youth Student &amp; Educational (WYSE) Travel Confederation, the world’s largest youth and student travel services network. Zip Travel Philippines is a vetted member of the Alliance of Cultural Exchange Providers in the Philippines (ACEPP), a collective group of Philippine Corporations offering international programs for Filipino students, graduates, and young professionals.</p>
+                <h1 class="int-membership-section__title">INTERNATIONAL MEMBERSHIP</h1>
+                <p class="int-membership-section__description">ZIP Travel is a member of the World Youth Student &amp; Educational (WYSE) Travel Confederation, the world’s largest youth and student travel services network. Zip Travel Philippines is a vetted member of the Alliance of Cultural Exchange Providers in the Philippines (ACEPP), a collective group of Philippine Corporations offering international programs for Filipino students, graduates, and young professionals.</p>
             </div>
         </div>
     </section><!-- End: international membership -->
     <!-- Start: partners -->
-    <section style="height: 266px;display: flex;align-items: center;">
+    <section class="about-us-partners-section">
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <div class="col"><img src="assets_v3/img/LOGO_HIAP%201.png" style="width: 156px;height: 156px;"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_ACEPP%201.png" style="width: 156px;height: 156px;"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_EMBASSY%201.png" style="width: 156px;height: 156px;"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_CFO%201.png" style="width: 156px;height: 156px;"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_AAHRMEI2%201.png" style="width: 156px;height: 156px;"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_WYSETRAVEL%201.png" style="width: 156px;height: 156px;"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_HIAP%201.png" class="about-us-partners-section__image"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_ACEPP%201.png" class="about-us-partners-section__image"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_EMBASSY%201.png" class="about-us-partners-section__image"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_CFO%201.png" class="about-us-partners-section__image"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_AAHRMEI2%201.png" class="about-us-partners-section__image"></div>
+                <div class="col"><img src="assets_v3/img/LOGO_WYSETRAVEL%201.png" class="about-us-partners-section__image"></div>
             </div>
         </div>
     </section><!-- End: partners -->
