@@ -6,6 +6,18 @@
     --section-desc-text-color: #2A2A2A;
 }
 
+/* utils */
+.content-body-title {
+    font-family: 'Outfit';
+    font-weight: bold; 
+    font-size: 24px;
+    color: var(--section-title-text-color);
+}
+.content-body {
+    font-family: 'Inter'; 
+    font-size: 18px;
+}
+
 /* international program card */
 .int-program-card-item {
     height: 503px;
