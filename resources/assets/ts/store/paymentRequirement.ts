@@ -38,7 +38,7 @@ export interface PaymentRequirementState {
     isLoading: boolean;
     requirements: IPaymentRequirement[];
     error: string | undefined;
-    errors: string | undefined;
+    errors: [] | undefined;
 }
 
 export const useStudentPaymentRequirement = defineStore({
@@ -107,8 +107,11 @@ export const useStudentPaymentRequirement = defineStore({
                 });
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                this.error = error.response.data.message;
+            } catch (e) {
+                const errors = e as AxiosError;
+                this.error = errors.response.data.message;
+                this.errors = errors.response.data.errors;
+
                 this.isLoading = false;
                 this.isSuccess = false;
             }

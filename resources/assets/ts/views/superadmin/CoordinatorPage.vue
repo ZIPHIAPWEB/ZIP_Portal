@@ -19,7 +19,7 @@ onMounted(async () => {
 
 const searchCoordData = async () => {
 
-await superadminCoordsStore.searchSuperaminCoordData(toBeSearch.value);
+    await superadminCoordsStore.searchSuperaminCoordData(toBeSearch.value);
 }
 
 </script>
