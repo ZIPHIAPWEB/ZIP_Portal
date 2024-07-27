@@ -17,20 +17,28 @@
 
 @section('content')
     <div id="heading" class="heading">
-        <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
+        <video class="heading__video" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/TAX_HEADER.mp4') }}" type="video/mp4">
         </video>
-        <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
+        <div class="heading__content container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100">
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
-                <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">US TAX SERVICES</h1>
-                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">The BridgeUSA Program participants are issued the J-1 visa, identifying them as nonimmigrants engaging in exchange visitor programs in the United States. Once physically in America, all J-1 participants are obligated to pay federal, state, and local taxes.</p>
+                <h1 class="text-center heading__content-title">US TAX SERVICES</h1>
+                <p class="text-center text-sm-center text-md-start heading__content-description">
+                The BridgeUSA Program participants are issued the J-1 visa, identifying them as nonimmigrants engaging in exchange visitor programs in the United States. Once physically in America, all J-1 participants are obligated to pay federal, state, and local taxes.
+                </p>
             </div>
         </div>
-    </div><!-- Start: about-us -->
+    </div>
+    <!-- Start: about-us -->
     <section style="padding: 75px 0;">
         <div class="container">
             <div style="font-size: 18px;font-family: 'Inter';color: #2A2A2A;">
-                <p style="margin-bottom: 25px;">J visa holders must file annual income tax reports with the Internal Revenue Service (IRS), the US Government agency responsible for collecting federal taxes.<br><br>If a non-resident J1 participant earns any US income, they should file a federal tax return with the IRS by law. Failure to file a Federal tax return will breach IRS regulations and may inhibit participants from returning to the US on any future visas. Depending on the circumstances, you may also need to file a state tax return(s).</p>
+                <p>
+                    J visa holders must file annual income tax reports with the Internal Revenue Service (IRS), the US Government agency responsible for collecting federal taxes.
+                    <br>
+                    <br>
+                    If a non-resident J1 participant earns any US income, they should file a federal tax return with the IRS by law. Failure to file a Federal tax return will breach IRS regulations and may inhibit participants from returning to the US on any future visas. Depending on the circumstances, you may also need to file a state tax return(s).
+                </p>
             </div>
         </div>
     </section><!-- End: about-us -->
@@ -76,8 +84,8 @@
     <!-- Start: apply-now -->
     <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
         <div class="container d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. For any questions or concerns, contact the IRS directly.</p>
-            <a href="https://taxprep.sprintax.com/sprintax-zip-travel" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. <a href="#" style="color: #2A2A2A;">For any questions or concerns, contact the IRS directly.</a></p>
+            <a href="https://taxprep.sprintax.com/sprintax-zip-travel" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
 @endsection

@@ -6,19 +6,18 @@
 <body>
     @include('new.partials.navbar')
     <div id="heading" class="heading">
-        <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
+        <video class="heading__video" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/CONTACT_HEADER.mp4') }}" type="video/mp4">
         </video>
-        <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
+        <div class="heading__content container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100">
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
-                <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">CONTACT US</h1>
-                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">
+                <h1 class="text-center heading__content-title">CONTACT US</h1>
+                <p class="text-center text-sm-center text-md-start heading__content-description">
                     Your Journey Starts Here! Contact Us and Discover New Horizons with Us
                 </p>
             </div>
         </div>
     </div>
-
     <section style="padding: 75px 0;">
         <div class="container">
             <div class="row" style="padding: 16px;">

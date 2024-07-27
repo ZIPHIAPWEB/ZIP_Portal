@@ -43,8 +43,9 @@
         </div><!-- End: 1 Row 2 Columns -->
     </section><!-- End: j1-description -->
     <!-- Start: outreach-programs -->
-    <section class="d-flex justify-content-center align-items-center" style="height: 623px;background: #F1F1F1;">
+    <section class="d-flex justify-content-center align-items-center" style="height: 700px;background: #F1F1F1;">
         <div class="container">
+            <h1 class="app-guide-section__title">OUTREACH PROGRAMS</h1>
             <!-- Start: Simple Slider -->
             <div class="simple-slider">
                 <!-- Start: Slideshow -->
@@ -58,7 +59,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_1.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Giving is Caring</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Giving is Caring</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2024<br>St. Ezekiel Moreno Hall</p>
                                         </div>
                                     </div>
@@ -67,7 +68,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_2.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Caring the J1 Way</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Caring the J1 Way</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2015<br>Hospicio De San Jose Elderly Home</p>
                                         </div>
                                     </div>
@@ -76,7 +77,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_3.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Happy Child, Happy Life</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Happy Child, Happy Life</h5>
                                             <p class="text-center" style="font-size: 18px;">August 2016<br>Virlanie Children’s Home</p>
                                         </div>
                                     </div>
@@ -90,7 +91,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_5.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Cares on the Road</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Cares on the Road</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2017<br>Streets of Manila</p>
                                         </div>
                                     </div>
@@ -99,7 +100,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_6.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Groove to Care: Dance for a Cause</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Groove to Care: Dance for a Cause</h5>
                                             <p class="text-center" style="font-size: 18px;">February 2018<br>Dapitan Sports Complex</p>
                                         </div>
                                     </div>
@@ -108,7 +109,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_7.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">A Bag of Hope 2018</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2018</h5>
                                             <p class="text-center" style="font-size: 18px;"> June 2018<br>Sitio Haduan & Marcos VIllage</p>
                                         </div>
                                     </div>
@@ -122,7 +123,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_5.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">Groove to Care: Dance for a Cause</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Groove to Care: Dance for a Cause</h5>
                                             <p class="text-center" style="font-size: 18px;">February 2018<br>Dapitan Sports Complex</p>
                                         </div>
                                     </div>
@@ -131,7 +132,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_6.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">A Bag of Hope 2018</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2018</h5>
                                             <p class="text-center" style="font-size: 18px;"> June 2018<br>Sitio Haduan & Marcos VIllage</p>
                                         </div>
                                     </div>
@@ -140,7 +141,7 @@
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
                                         <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_8.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
-                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;">A Bag of Hope 2023</h5>
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2023</h5>
                                             <p class="text-center" style="font-size: 18px;">September 2023<br>Pampanga</p>
                                         </div>
                                     </div>
@@ -159,8 +160,8 @@
     <!-- Start: apply-now -->
     <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
         <div class="container d-xl-flex flex-column align-items-xl-start">
-            <h5 style="font-weight: bold;font-family: 'Outfit';">SPONSOR A BAG OF HOPE</h5>
-            <p style="font-family: 'Inter';font-size: 18px;font-weight: normal;">Are you a J1 Alumnus? We invite you to join us in helping underprivileged students embark on their journey. Get in touch with us on how to sponsor your own Bag of Hope for one learner. <strong>Email us at j1cares@ziptravel.com.ph</strong></p>
+            <h5 style="font-weight: bold;font-family: 'Outfit';color: var(--section-title-text-color);">SPONSOR A BAG OF HOPE</h5>
+            <p style="font-family: 'Inter';font-size: 18px;font-weight: normal;">Are you a J1 Alumnus? We invite you to join us in helping underprivileged students embark on their journey. Get in touch with us on how to sponsor your own Bag of Hope for one learner. <strong style="color: var(--section-title-text-color);">Email us at j1cares@ziptravel.com.ph</strong></p>
         </div>
     </section><!-- End: apply-now -->
 @endsection
