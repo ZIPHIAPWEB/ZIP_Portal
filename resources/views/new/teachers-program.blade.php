@@ -17,16 +17,19 @@
 
 @section('content')
     <div id="heading" class="heading">
-        <video style="position: absolute;z-index: 0;min-height: 100%;min-width: 100%;object-fit: fill;overflow: hidden;" muted autoplay loop>
+        <video class="heading__video" muted autoplay loop>
             <source src="{{ asset('assets_v3/videos/TEACHER_HEADER.mp4') }}" type="video/mp4">
         </video>
-        <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
+        <div class="heading__content container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100">
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
-                <h1 class="text-center" style="margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">TEACHERS PROGRAM</h1>
-                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Experience teaching in accredited primary and secondary schools in the United States through the BridgeUSA Teacher Program, a US State Department designated sponsor for the J1 teacher category. This visa allows experienced educators to explore a new educational and cultural environment.&nbsp;</p>
+                <h1 class="text-center heading__content-title">TEACHERS PROGRAM</h1>
+                <p class="text-center text-sm-center text-md-start heading__content-description">
+                Experience teaching in accredited primary and secondary schools in the United States through the BridgeUSA Teacher Program, a US State Department designated sponsor for the J1 teacher category. This visa allows experienced educators to explore a new educational and cultural environment.     
+                </p>
             </div>
         </div>
-    </div><!-- Start: about-us -->
+    </div>
+    <!-- Start: about-us -->
     <section style="padding: 75px 0;">
         <div class="container">
             <div style="font-size: 18px;font-family: 'Inter';color: #2A2A2A;">
@@ -48,7 +51,7 @@
             </div>
             <div class="row align-items-center" style="margin-top: 56px;">
                 <div class="col-12">
-                    <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px;">CULTURAL ENRICHMENT</h5>
+                    <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px; color: var(--section-title-text-color);">CULTURAL ENRICHMENT</h5>
                 </div>
                 <div class="col-12 d-flex align-items-lg-center" style="font-size: 18px; font-family: 'Inter';">
                     <p>As part of BridgeUSA, international teachers are expected to facilitate at least two opportunities for learning between their home country and the United States.</p>
@@ -62,7 +65,7 @@
             </div>
             <div class="row align-items-center" style="margin-top: 56px;">
                 <div class="col-12">
-                    <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px;">PROGRAM DURATION</h5>
+                    <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px;color: var(--section-title-text-color);  ">PROGRAM DURATION</h5>
                 </div>
                 <div class="col-12 d-flex align-items-lg-center" style="font-size: 18px; font-family: 'Inter';">
                     <p>Teachers are expected to start their program at the beginning of the school year. The host school determines the duration of a teaching program that lasts up to 3 years.</p>
@@ -70,102 +73,79 @@
             </div>
             <div class="row align-items-center" style="margin-top: 56px;">
                 <div class="col-12">
-                    <h5 style="font-family: 'Outfit';font-weight: bold;">ELIGIBILITY</h5>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex d-xl-flex flex-row" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg" style="width: 34px;height: 52px;">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"></path>
-                            </svg>
-                        </div>
-                        <div style="font-family: 'Inter';font-style: normal;font-size: 18px;">
-                            <p style="margin-bottom: 15px;">
-                                Be working as a teacher in the home country or country of legal residence at the time of application, or otherwise meet the eligibility qualifications and:
-                            </p>
+                    <h5 style="font-family: 'Outfit';font-weight: bold; color: var(--section-title-text-color);">ELIGIBILITY</h5>
+                    <ul class="content-body">
+                        <li>
+                        Be working as a teacher in the home country or country of legal residence at the time of application, or otherwise meet <br> the eligibility qualifications and:
                             <ul>
-                                <li>Have recently (within 12 months of application) completed an advanced degree and;</li>
-                                <li>Have two years of full-time teaching experience within the past eight years;</li>
+                                <li>have recently (within 12 months of application) completed an advanced degree and;</li>
+                                <li>have two years of full-time teaching experience within the past eight years;</li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class=" d-flex d-xl-flex flex-row align-items-lg-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg" style="width: 34px;height: 52px;">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"></path>
-                            </svg></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Have a degree equivalent to a U.S. bachelor’s degree in either education or the academic subject field in which they intend to teach;</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex d-xl-flex flex-row align-items-lg-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg" style="width: 34px;height: 52px;">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"></path>
-                            </svg></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Have a minimum of two years (24 months) of teaching or related professional experience;</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex d-xl-flex flex-row align-items-lg-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg" style="width: 34px;height: 52px;">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"></path>
-                            </svg></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Be of good reputation and character;</p>
-                    </div>
-                    <div class="d-flex d-xl-flex flex-row align-items-lg-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-check-lg" style="width: 34px;height: 52px;">
-                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"></path>
-                            </svg></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Possess sufficient proficiency in the English language.</p>
-                    </div>
+                        </li>
+                        <li>Have a degree equivalent to a U.S. bachelor’s degree in either education or the academic subject field in which they intend to teach;</li>
+                        <li>Have a minimum of two years (24 months) of teaching or related professional experience;</li>
+                        <li>Be of good reputation and character;</li>
+                        <li>Possess sufficient proficiency in the English language.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section><!-- End: about-us -->
     <!-- Start: application-guide -->
-    <section class="d-xl-flex justify-content-xl-center align-items-xl-center app-guide">
+    <section class="d-xl-flex justify-content-xl-center align-items-xl-center app-guide-section">
         <div class="container">
-            <h1 style="font-family: 'Louis George Cafe';font-size: 28px;font-weight: bold;margin-bottom: 19px;">APPLICATION GUIDE</h1>
+            <h1 class="app-guide-section__title">APPLICATION GUIDE</h1>
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
-                    <div class="d-flex flex-row align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Registration and Program Orientation</p>
+                    <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
+                            <span>01</span>
+                        </div>
+                        <p class="app-guide-sequence-item__description">Registration and Program Orientation</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">J1 Visa Processing</p>
+                    <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
+                            <span>04</span>
+                        </div>
+                        <p class="app-guide-sequence-item__description">J1 Visa Processing</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Screening</p>
+                    <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
+                            <span>02</span>
+                        </div>
+                        <p class="app-guide-sequence-item__description">Screening</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Departure and Program Proper</p>
+                    <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
+                            <span>05</span>
+                        </div>
+                        <p class="app-guide-sequence-item__description">Departure and Program Proper</p>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="d-flex d-xl-flex align-items-center align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: 500;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Host School Matching and Interview</p>
+                <div class="col-12 col-lg-6">
+                    <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
+                            <span>03</span>
+                        </div>
+                        <p class="app-guide-sequence-item__description">Host School Matching and Interview</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section><!-- End: application-guide -->
+    </section>
+    <!-- End: application-guide -->
     <!-- Start: apply-now -->
-    <section class="d-flex align-items-center align-items-xl-center apply-now">
+    <section class="d-flex align-items-center align-items-xl-center apply-now-section">
         <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
-            <a href="https://ziptravel.com.ph/online-registration" target="_blank" class="btn btn-primary" role="button" style="width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: #510A0A;padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;">APPLY NOW!</a>
+            <p class="apply-now-section__description">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
+            <a href="https://ziptravel.com.ph/online-registration" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>
-    </section><!-- End: apply-now -->
-
+    </section>
+    <!-- End: apply-now -->
 @endsection
