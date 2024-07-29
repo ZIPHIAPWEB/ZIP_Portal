@@ -35,7 +35,7 @@
                 <p style="margin-bottom: 25px;">Known for having the most polite citizens, Canada ranks #3 in quality of life based on factors including health system, safety, job market, and economic stability. International students feel welcomed thanks to the country’s diversity and multiculturalism.</p>
             </div>
             <div class="row">
-                <div class="col-12 col-lg-7" style="font-size: 18px; font-family: 'Inter';">
+                <div class="col-12" style="font-size: 18px; font-family: 'Inter';">
                     <div>
                         <h5 style="font-family: 'Outfit';font-weight: bold; color: var(--section-title-text-color)">STUDY. WORK. LIVE.</h5>
                         <p>1 to 2 years</p>
@@ -59,9 +59,6 @@
                             <li>Must be an effective communicator in an English-speaking environment</li>
                         </ul>
                     </div>
-                </div>
-                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;">
-                    <img style="height: 558px;width: 369px; border-radius: 40px; object-fit: cover;" src="assets_v3/img/CANADA.png">
                 </div>
             </div>
         </div>

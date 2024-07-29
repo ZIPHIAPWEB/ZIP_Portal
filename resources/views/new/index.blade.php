@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;">
-                    <img src="assets_v3/img/hp_2.jpg" style="width: 100%; height: 369px;filter: blur(0px);object-fit: cover;border-radius: 50px;">
+                    <img src="assets_v3/img/hp_1_crop.jpg" style="width: 100%; height: 369px;filter: blur(0px);object-fit: cover;border-radius: 50px;">
                 </div>
             </div>
         </div><!-- End: 1 Row 2 Columns -->
@@ -80,7 +80,7 @@
                                         <div class="int-program-card-item__content">
                                             <h5 class="text-center">Canada</h5>
                                             <ul>
-                                                <li>Canadian Program with Pathway to Permanent Residency</li>
+                                                <li>Study and Work Program with Pathway to Permanent Residency</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -199,31 +199,37 @@
         <div class="container">
             <div class="simple-slider">
                 <!-- Start: Slideshow -->
-                <div class="swiper-container">
+                <div class="swiper-container carousel slide" data-bs-ride="carousel">
                     <!-- Start: Slide Wrapper -->
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper carousel-inner">
                         <!-- Start: Slide -->
-                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
-                            <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
+                        <div class="carousel-item active">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
+                                </div>
                             </div>
-                        </div><!-- End: Slide -->
+                        </div>
+                        <!-- End: Slide -->
                         <!-- Start: Slide -->
-                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
-                            <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
-                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_WESTIN.png" style="width: 150px;"></div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_WESTIN.png" style="width: 150px;"></div>
+                                </div>
                             </div>
-                        </div><!-- End: Slide -->
+                        </div>
+                        <!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
                 </div><!-- End: Slideshow -->
             </div><!-- End: Simple Slider -->
@@ -235,34 +241,43 @@
             <!-- Start: Simple Slider -->
             <div class="simple-slider">
                 <!-- Start: Slideshow -->
-                <div class="swiper-container">
+                <div class="swiper-container carousel slide" data-bs-ride="carousel">
                     <!-- Start: Slide Wrapper -->
-                    <div class="swiper-wrapper" style="font-family: Outfit, sans-serif; color: #FFFFFF;">
+                    <div class="swiper-wrapper carousel-inner" style="font-family: Outfit, sans-serif; color: #FFFFFF;">
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
-                            <img style="border: solid #FFFFFF 5px; width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/manganaey_testimonial.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Rutherford Kenth Carlos Mangangey</h6>
-                            <span style="font-size: 18px;">University of Baguio</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
-                            If you're planning to take your Internship abroad, Zip Travel is the Agency for you. They are very Approachable and detailed and the Employees are very kind to you and you can ask them and they will answer your questions in a Minute! Thank you Zip travel for helping me to start my culinary journey for this internship program
-                            </p>
-                        </div><!-- End: Slide -->
+                         <div class="carousel-item active">
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
+                                <img style="border: solid #FFFFFF 5px; width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/manganaey_testimonial.png">
+                                <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Rutherford Kenth Carlos Mangangey</h6>
+                                <span style="font-size: 18px;">University of Baguio</span>
+                                <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                                If you're planning to take your Internship abroad, Zip Travel is the Agency for you. They are very Approachable and detailed and the Employees are very kind to you and you can ask them and they will answer your questions in a Minute! Thank you Zip travel for helping me to start my culinary journey for this internship program
+                                </p>
+                            </div>
+                            <!-- End: Slide -->
+                         </div>
                         <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
-                            <img style="border: solid #FFFFFF 5px;width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/trazo_testimonial.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Paul Christian Trazo</h6><span style="font-size: 18px;">University of Santo Tomas</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
-                            ZIP Travel Philippines opened its door as they gave me the opportunity to experience the Internship in the USA. I wouldn't have achieved this journey without them. From the start, they gave me assurance and  guidance with this process. They always keep their contacts in line. I appreciate their effort. Thank you, ZIP TRAVEL!
-                            </p>
-                        </div><!-- End: Slide -->
-                        <!-- Start: Slide -->
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
-                            <img style="border: solid #FFFFFF 5px;width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/rillaroza_testimonial.png">
-                            <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Jewel Reign Rilloraza</h6><span style="font-size: 18px;">University of Baguio</span>
-                            <p style="margin-top: 35px;text-align: center;font-size: 18px;">
-                            ZIP Travel Philippines has a really nice program which is a big leap for students like me to develop our technical and soft skills while performing at par with international standards. With my experience, their staff were very responsive, they were very accommodating, the procedures were organized, and the program itself is really globally competitive. That inspires me to be at my best as an applicant of the program and recommend it to other students under my university
-                            </p>
-                        </div><!-- End: Slide -->
+                        <div class="carousel-item">
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
+                                <img style="border: solid #FFFFFF 5px;width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/trazo_testimonial.png">
+                                <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Paul Christian Trazo</h6><span style="font-size: 18px;">University of Santo Tomas</span>
+                                <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                                ZIP Travel Philippines opened its door as they gave me the opportunity to experience the Internship in the USA. I wouldn't have achieved this journey without them. From the start, they gave me assurance and  guidance with this process. They always keep their contacts in line. I appreciate their effort. Thank you, ZIP TRAVEL!
+                                </p>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                        <div class="carousel-item">
+                            <!-- Start: Slide -->
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center swiper-slide">
+                                <img style="border: solid #FFFFFF 5px;width: 130px;height: 130px;border-radius: 100%;margin-bottom: 35px;" src="assets_v3/img/rillaroza_testimonial.png">
+                                <h6 style="margin: 0;font-weight: bold;font-size: 20px;color:#FFC452;">Jewel Reign Rilloraza</h6><span style="font-size: 18px;">University of Baguio</span>
+                                <p style="margin-top: 35px;text-align: center;font-size: 18px;">
+                                ZIP Travel Philippines has a really nice program which is a big leap for students like me to develop our technical and soft skills while performing at par with international standards. With my experience, their staff were very responsive, they were very accommodating, the procedures were organized, and the program itself is really globally competitive. That inspires me to be at my best as an applicant of the program and recommend it to other students under my university
+                                </p>
+                            </div>
+                            <!-- End: Slide -->
+                        </div>
                     </div><!-- End: Slide Wrapper -->
                     <!-- Start: Previous -->
                     <div class="d-none swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->

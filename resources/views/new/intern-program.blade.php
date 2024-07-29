@@ -69,7 +69,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row align-items-center" style="margin-top: 56px;">
+            <!-- <div class="row align-items-center" style="margin-top: 56px;">
                 <div class="col-12">
                     <h5 style="font-family: 'Outfit';font-weight: bold;font-size: 20px; color: var(--section-title-text-color);">TESTIMONIALS</h5>
                 </div>
@@ -81,7 +81,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis finibus consequat. Quisque lobortis semper lectus non ornare. Nam porta dolor sem, et ultricies justo dictum quis. Fusce sodales bibendum ipsum ac bibendum. Praesent at massa elit. Sed ut posuere nibh, sed sagittis augue. Aliquam congue consequat imperdiet.</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section><!-- End: about-us -->
     <!-- Start: application-guide -->
