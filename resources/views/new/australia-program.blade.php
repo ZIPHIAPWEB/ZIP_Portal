@@ -42,14 +42,14 @@
             </div>
             <div class="row" style="margin-top: 60px;">
                 <div class="col">
-                    <div data-bs-toggle="modal" data-bs-target="#studyWorkModal" style="cursor: pointer; width: 100%;height: 434px;border-radius: 40px;box-shadow: 10px 13px 20px 0px var(--bs-secondary-color);"><img style="height: 352px;width: 100%;object-fit: cover;" src="assets_v3/img/Rectangle%2011%20(5).png">
+                    <div data-bs-toggle="modal" data-bs-target="#studyWorkModal" style="cursor: pointer; width: 100%;height: 434px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="height: 352px;width: 100%;object-fit: cover;" src="assets_v3/img/Rectangle%2011%20(5).png">
                         <div class="d-flex justify-content-center align-items-center" style="height: 82px;width: 100%;">
                             <p style="font-family: 'Outfit';font-weight: bold;font-size: 20px; color: var(--section-title-text-color);">Study and Work</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div data-bs-toggle="modal" data-bs-target="#hospitalityTraineeModal" style="cursor: pointer; width: 100%;height: 434px;border-radius: 40px;box-shadow: 10px 13px 20px 0px var(--bs-secondary-color);"><img style="height: 352px;width: 100%;object-fit: cover;" src="assets_v3/img/Rectangle%2020.png">
+                    <div data-bs-toggle="modal" data-bs-target="#hospitalityTraineeModal" style="cursor: pointer; width: 100%;height: 434px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);"><img style="height: 352px;width: 100%;object-fit: cover;" src="assets_v3/img/Rectangle%2020.png">
                         <div class="d-flex justify-content-center align-items-center" style="height: 82px;width: 100%;">
                             <p style="font-family: 'Outfit';font-weight: bold;font-size: 20px;color: var(--section-title-text-color);">Hospitality Trainee</p>
                         </div>

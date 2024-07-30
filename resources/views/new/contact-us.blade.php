@@ -21,7 +21,9 @@
     <section style="padding: 75px 0;">
         <div class="container">
             <div class="row" style="padding: 16px;">
-                <div class="col-xl-6" style="padding: 15px;"><img alt="Image containing the map of ZIP Travel Philippines Manila Branch" src="assets/img/MANILA.jpg" style="width: 100%;"></div>
+                <div class="col-xl-6" style="padding: 15px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.949494212746!2d120.98546407604097!3d14.60195298588453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca0d7df32613%3A0x72b73e2761c0031d!2sZip%20Travel%20(Inner%20Outer%20Travel%2C%20Inc)!5e0!3m2!1sen!2sph!4v1722346295046!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
                 <div class="col-xl-6 d-xl-flex align-items-xl-center" style="padding: 15px;">
                     <div>
                         <h3 style="font-weight: bold; font-family: 'Louis George Cafe';">ZIP TRAVEL MANILA OFFICE</h3>
