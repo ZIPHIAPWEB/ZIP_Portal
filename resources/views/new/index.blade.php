@@ -36,7 +36,7 @@
                     <p style="margin-bottom: 25px;"><strong style="color: #0C3E87;">ZIP Travel Philippines</strong> provides intercultural opportunities for Filipinos to become globally competitive and future leaders of society through international programs.</p>
                     <p style="margin-bottom: 25px;">ZIP Travel is a career and education counseling organization helping students and fresh graduates participate in cultural exchanges in the United States, Australia, Canada, Spain, and Asia. Since our founding 30 years ago, ZIP Travel has helped thousands of students worldwide partake in study-and-work programs, internships, and training in some of the acclaimed hotels and restaurants.</p>
                     <div>
-                        <a href="/about-us" class="btn" type="button" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold;">READ MORE</a>
+                        <a href="/about-us" class="btn" type="button" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold; padding: 9px;">READ MORE</a>
                     </div>
                 </div>
                 <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;">
@@ -61,41 +61,47 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/usa_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5 class="text-center">BridgeUSA</h5>
-                                            <ul>
-                                                <li>Summer Work Travel</li>
-                                                <li>Internship</li>
-                                                <li>Trainee</li>
-                                                <li>Camp Counselor</li>
-                                            </ul>
+                                    <a href="/program-bridgeusa" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/usa_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">BridgeUSA</h5>
+                                                <ul>
+                                                    <li>Summer Work Travel</li>
+                                                    <li>Internship</li>
+                                                    <li>Trainee</li>
+                                                    <li>Camp Counselor</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/canada_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5 class="text-center">Canada</h5>
-                                            <ul>
-                                                <li>Study and Work Program with Pathway to Permanent Residency</li>
-                                            </ul>
+                                    <a href="/program-canada" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/canada_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">Canada</h5>
+                                                <ul>
+                                                    <li>Study and Work Program with Pathway to Permanent Residency</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/aus_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5 class="text-center">Australia</h5>
-                                            <ul>
-                                                <li>Study and Work</li>
-                                                <li>Hospitality Trainee</li>
-                                            </ul>
+                                    <a href="/program-australia" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/aus_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">Australia</h5>
+                                                <ul>
+                                                    <li>Study and Work</li>
+                                                    <li>Hospitality Trainee</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div><!-- End: Slide -->
@@ -103,42 +109,48 @@
                         <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/asia_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5>Asia</h5>
-                                            <ul>
-                                                <li>Work and Travel Asia</li>
-                                                <li>Hospitality and Business Internship</li>
-                                                <li>Management Training Program</li>
-                                            </ul>
+                                    <a href="/program-asia" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/asia_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5>Asia</h5>
+                                                <ul>
+                                                    <li>Work and Travel Asia</li>
+                                                    <li>Hospitality and Business Internship</li>
+                                                    <li>Management Training Program</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/spain_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5 class="text-center">Spain</h5>
-                                            <ul>
-                                                <li>Hospitality and Culinary Internship</li>
-                                            </ul>
+                                    <a href="/program-spain" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/spain_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">Spain</h5>
+                                                <ul>
+                                                    <li>Hospitality and Culinary Internship</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <div class="int-program-card-item">
-                                        <img src="assets_v3/img/usa_hp2.png">
-                                        <div class="int-program-card-item__content">
-                                            <h5 class="text-center">BridgeUSA</h5>
-                                            <ul>
-                                                <li>Summer Work Travel</li>
-                                                <li>Internship</li>
-                                                <li>Trainee</li>
-                                                <li>Camp Counselor</li>
-                                            </ul>
+                                    <a href="/program-bridgeusa" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/usa_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">BridgeUSA</h5>
+                                                <ul>
+                                                    <li>Summer Work Travel</li>
+                                                    <li>Internship</li>
+                                                    <li>Trainee</li>
+                                                    <li>Camp Counselor</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div><!-- End: Slide -->
