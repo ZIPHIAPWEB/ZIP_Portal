@@ -21,9 +21,9 @@
             <source src="{{ asset('assets_v3/videos/HOMEPAGE_HEADERv2.mp4') }}" type="video/mp4">
         </video>
         <div class="container d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-end align-items-lg-start h-100" style="position: relative; z-index: 2;">
-            <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
+            <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
                 <h1 class="text-center" style="color: #FFC452; margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">INTERNATIONAL EXCHANGE PROGRAMS</h1>
-                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Zip Travel Philippines believes that every Filipino deserves the opportunity to become a global leader. That's why we offer<br>intercultural educational and cultural exchange programs that will equip you with the skills and knowledge you need to<br>compete on a global scale.</p>
+                <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Zip Travel Philippines believes that every Filipino deserves the opportunity to become a global leader. That's why we offer intercultural educational and cultural exchange programs that will equip you with the skills and knowledge you need to compete on a global scale.</p>
                 <a href="https://ziptravel.com.ph/online-registration" target="_blank" style="text-decoration: none;color: #FFFFFF;border-radius: 40px;border: solid #FFFFFF 1px;padding: 9px 28px;font-size: 20px;text-align: center;background-color: rgba(12, 28, 51, 0.6);width: 339px;height: 52px;font-family: 'Outfit';">YOUR JOURNEY STARTS HERE!</a>
             </div>
         </div>
@@ -33,13 +33,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center" style="font-family: 'Outfit';font-size: 18px;">
-                    <p style="margin-bottom: 25px;"><strong style="color: #0C3E87;">ZIP Travel Philippines</strong> provides intercultural opportunities for Filipinos to become globally competitive and future leaders of society through international programs.</p>
-                    <p style="margin-bottom: 25px;">ZIP Travel is a career and education counseling organization helping students and fresh graduates participate in cultural exchanges in the United States, Australia, Canada, Spain, and Asia. Since our founding 30 years ago, ZIP Travel has helped thousands of students worldwide partake in study-and-work programs, internships, and training in some of the acclaimed hotels and restaurants.</p>
-                    <div>
+                    <p style="margin-bottom: 25px;" class="text-center text-md-start"><strong style="color: #0C3E87;">ZIP Travel Philippines</strong> provides intercultural opportunities for Filipinos to become globally competitive and future leaders of society through international programs.</p>
+                    <p style="margin-bottom: 25px;" class="text-center text-md-start">ZIP Travel is a career and education counseling organization helping students and fresh graduates participate in cultural exchanges in the United States, Australia, Canada, Spain, and Asia. Since our founding 30 years ago, ZIP Travel has helped thousands of students worldwide partake in study-and-work programs, internships, and training in some of the acclaimed hotels and restaurants.</p>
+                    <div class="d-flex justify-content-center justify-content-md-start">
                         <a href="/about-us" class="btn" type="button" style="border-color: none; color: #FFFFFF;background: #0C1C33;border-radius: 40px;width: 165px;height: 49px;font-size: 20px;font-family: 'Louis George Cafe';font-weight: bold; padding: 9px;">READ MORE</a>
                     </div>
                 </div>
-                <div class="col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;">
+                <div class="d-none d-sm-flex col-lg-6 align-items-center justify-content-center py-5" style="display: flex;padding-right: 0px;">
                     <img src="assets_v3/img/hp_1_crop.jpg" style="width: 100%; height: 369px;filter: blur(0px);object-fit: cover;border-radius: 50px;">
                 </div>
             </div>
@@ -47,18 +47,18 @@
     </section>
     
     <!-- Start: international-programs -->
-    <section class="py-5">
+    <section class="py-5" style="height: 90vh;">
         <div class="container">
             <div class="col">
                 <h2 class="text-center text-md-start" style="margin: 0;font-size: 28px;font-family: 'Outfit';font-weight: bolder;color:#0C3E87;">INTERNATIONAL PROGRAMS</h2>
             </div><!-- Start: Simple Slider -->
-            <div class="simple-slider">
+            <div class="simple-slider d-none d-xl-flex">
                 <!-- Start: Slideshow -->
                 <div class="swiper-container">
                     <!-- Start: Slide Wrapper -->
                     <div class="swiper-wrapper" style="padding: 35px 0;">
                         <!-- Start: Slide -->
-                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <a href="/program-bridgeusa" style="text-decoration: none;">
@@ -161,12 +161,116 @@
                     <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
                 </div><!-- End: Slideshow -->
             </div><!-- End: Simple Slider -->
+            <div class="simple-slider d-flex d-xl-none">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper" style="padding: 35px 0;">
+                        <!-- Start: Slide -->
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col">
+                                    <a href="/program-bridgeusa" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/usa_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">BridgeUSA</h5>
+                                                <ul>
+                                                    <li>Summer Work Travel</li>
+                                                    <li>Internship</li>
+                                                    <li>Trainee</li>
+                                                    <li>Camp Counselor</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col">
+                                    <a href="/program-canada" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/canada_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">Canada</h5>
+                                                <ul>
+                                                    <li>Study and Work Program with Pathway to Permanent Residency</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col">
+                                    <a href="/program-australia" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/aus_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5 class="text-center">Australia</h5>
+                                                <ul>
+                                                    <li>Study and Work</li>
+                                                    <li>Hospitality Trainee</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col">
+                                    <a href="/program-asia" style="text-decoration: none;">
+                                        <div class="int-program-card-item">
+                                            <img src="assets_v3/img/asia_hp2.png">
+                                            <div class="int-program-card-item__content">
+                                                <h5>Asia</h5>
+                                                <ul>
+                                                    <li>Work and Travel Asia</li>
+                                                    <li>Hospitality and Business Internship</li>
+                                                    <li>Management Training Program</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col">
+                                        <a href="/program-spain" style="text-decoration: none;">
+                                            <div class="int-program-card-item">
+                                                <img src="assets_v3/img/spain_hp2.png">
+                                                <div class="int-program-card-item__content">
+                                                    <h5 class="text-center">Spain</h5>
+                                                    <ul>
+                                                        <li>Hospitality and Culinary Internship</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div><!-- End: Slide -->
+                    </div><!-- End: Slide Wrapper -->
+                    <!-- Start: Previous -->
+                    <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
+                    <!-- Start: Next -->
+                    <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
+                </div><!-- End: Slideshow -->
+            </div><!-- End: Simple Slider -->
         </div>
     </section>
     <!-- End: international-programs -->
-    <section id="advantage" class="py-5" style="background-color: #F1F1F1;">
+    <section id="advantage" class="py-5" style="height: 100%; background-color: #F1F1F1;">
         <!-- Start: 2 Rows 1+2 Columns -->
-        <div class="container ps-xl-0">
+        <div class="container p-5 p-md-0 ps-xl-0">
             <div class="row">
                 <div class="col">
                     <h2 class="text-center text-md-start" style="color: #0C3E87; margin: 0;font-size: 28px;font-family: 'Outfit';font-weight: bolder;">OUR COMPETITIVE ADVANTAGE</h2>
@@ -209,31 +313,38 @@
     <!-- Start: Partners -->
     <section class="partners-section">
         <div class="container">
-            <div class="simple-slider">
+        <div class="simple-slider d-none d-md-none d-xl-flex">
                 <!-- Start: Slideshow -->
                 <div class="swiper-container carousel slide" data-bs-ride="carousel">
                     <!-- Start: Slide Wrapper -->
                     <div class="swiper-wrapper carousel-inner">
                         <!-- Start: Slide -->
                         <div class="carousel-item active">
-                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
-                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 3rem;">
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
-                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
-                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
                                 </div>
                             </div>
                         </div>
                         <!-- End: Slide -->
                         <!-- Start: Slide -->
                         <div class="carousel-item">
-                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
-                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 3rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 3rem;">
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
                                     <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
@@ -241,10 +352,147 @@
                                 </div>
                             </div>
                         </div>
+                    </div><!-- End: Slide Wrapper -->
+                </div><!-- End: Slideshow -->
+            </div>
+            <div class="simple-slider d-none d-md-flex d-xl-none">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container carousel slide" data-bs-ride="carousel">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper carousel-inner">
+                        <!-- Start: Slide -->
+                        <div class="carousel-item active">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- End: Slide -->
+                        <!-- Start: Slide -->
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center" style="gap: 2rem;">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_WESTIN.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div><!-- End: Slide Wrapper -->
                 </div><!-- End: Slideshow -->
             </div><!-- End: Simple Slider -->
+            <div class="simple-slider d-flex d-md-none p-5 p-md-0">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container carousel slide" data-bs-ride="carousel">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/MHRLogoColor_PNG_MEDIUM%201.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/RitzCarlton%201.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Fairmont_Logo%201.png" style="width: 150px;"></div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/JW_Marriott_Hotel__and__Resorts%201.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/Four_Seasons_Hotels_and_Resorts%201.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_SHERATON.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_GAYLORD.png" style="width: 150px;"></div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HILTON.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_HYATT.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_OMNI.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_PEABODY.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                                <div class="row d-sm-flex align-items-center">
+                                    <div class="col-12 col-md text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><img src="assets_v3/img/LOGO_WESTIN.png" style="width: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section><!-- End: Partners -->
     <!-- Start: Testimonials -->

@@ -857,17 +857,9 @@ p {
 }
 
 .partners-section {
-  height: fit-content;
+  height: 230px;
   display: flex;
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .partners-section {
-    height: 230px;
-    display: flex;
-    align-items: center;
-  }
 }
 
 .nav-tabs {
