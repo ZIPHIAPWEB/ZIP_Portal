@@ -71,6 +71,7 @@
                                                     <li>Internship</li>
                                                     <li>Trainee</li>
                                                     <li>Camp Counselor</li>
+                                                    <li>Teachers Program</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -147,6 +148,7 @@
                                                     <li>Internship</li>
                                                     <li>Trainee</li>
                                                     <li>Camp Counselor</li>
+                                                    <li>Teachers Program</li>
                                                 </ul>
                                             </div>
                                         </div>
