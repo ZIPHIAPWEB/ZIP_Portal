@@ -31,7 +31,7 @@
             </div>
         </div>
     </div><!-- Start: about-us -->
-    <section style="padding: 75px 0;">
+    <section style="padding: 75px 0;" class="px-2 px-md-0">
         <div class="container">
             <div>
                 <p style="margin-bottom: 25px; font-family: 'Inter'; font-size: 18px;">The Asia Internship Program is tailored for hospitality students currently enrolled and seeking to gain their first work experience in the hospitality industry while also exploring the rich cultural heritage of Asia and entering the global workforce</p>

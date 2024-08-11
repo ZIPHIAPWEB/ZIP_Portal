@@ -30,7 +30,7 @@
         </div>
     </div>
     <!-- Start: about-us -->
-    <section style="padding: 75px 0;">
+    <section style="padding: 75px 0;" class="px-2 px-md-0">
         <div class="container">
             <div style="font-size: 18px;font-family: 'Inter';color: #2A2A2A;">
                 <p style="margin-bottom: 25px;">
@@ -143,8 +143,8 @@
     </section>
     <!-- End: application-guide -->
     <!-- Start: apply-now -->
-    <section class="d-flex align-items-center align-items-xl-center apply-now-section">
-        <div class="container text-center text-lg-start d-xl-flex flex-column align-items-xl-start">
+    <section class="d-flex align-items-center align-items-center apply-now-section">
+        <div class="container text-start d-flex flex-column align-items-start">
             <p class="apply-now-section__description">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
             <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>

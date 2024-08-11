@@ -29,7 +29,7 @@
             </div>
         </div>
     </div><!-- Start: about-us -->
-    <section style="padding: 75px 0;">
+    <section style="padding: 75px 0;" class="px-2 px-md-0">
         <div class="container">
             <div>
                 <h5 style="font-family: 'Outfit'; font-size: 20px; font-weight: bolder !important;color:var(--section-title-text-color)">HOSPITALITY AND CULINARY INTERNSHIP IN SPAIN</h5>

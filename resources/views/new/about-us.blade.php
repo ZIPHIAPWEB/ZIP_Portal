@@ -95,12 +95,12 @@
     <section class="about-us-partners-section">
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <div class="col"><img src="assets_v3/img/LOGO_HIAP%201.png" class="about-us-partners-section__image"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_ACEPP%201.png" class="about-us-partners-section__image"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_EMBASSY%201.png" class="about-us-partners-section__image"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_CFO%201.png" class="about-us-partners-section__image"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_AAHRMEI2%201.png" class="about-us-partners-section__image"></div>
-                <div class="col"><img src="assets_v3/img/LOGO_WYSETRAVEL%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_HIAP%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_ACEPP%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_EMBASSY%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_CFO%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_AAHRMEI2%201.png" class="about-us-partners-section__image"></div>
+                <div class="col-12 col-md-2 d-flex justify-content-center"><img src="assets_v3/img/LOGO_WYSETRAVEL%201.png" class="about-us-partners-section__image"></div>
             </div>
         </div>
     </section><!-- End: partners -->

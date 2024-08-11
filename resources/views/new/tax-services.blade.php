@@ -30,7 +30,7 @@
         </div>
     </div>
     <!-- Start: about-us -->
-    <section style="padding: 75px 0;">
+    <section style="padding: 75px 0;" class="px-2 px-md-0">
         <div class="container">
             <div style="font-size: 18px;font-family: 'Inter';color: #2A2A2A;">
                 <p>
@@ -43,38 +43,38 @@
         </div>
     </section><!-- End: about-us -->
     <!-- Start: application-guide -->
-    <section class="d-xl-flex justify-content-xl-center align-items-xl-center" style="height: 488px;width: 100%;background: #F1F1F1;">
+    <section class="d-flex justify-content-center align-items-center tax-guide-section">
         <div class="container">
             <h1 style="font-family: 'Louis George Cafe';font-size: 28px;font-weight: bold;margin-bottom: 19px;">HOW TO APPLY</h1>
             <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Non-residents can use an online resource that legally provides federal and state tax preparation. It can determine your tax status based on a series of questions about the time spent in the United States.<br><br>Once determined to be a non-resident alien, it will help complete and generate the forms needed to be submitted to the IRS.</p>
             <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex justify-content-center align-items-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>01</span></div>
-                        <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Gather Documents</p>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center app-guide-sequence-item">
+                        <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step"><span>01</span></div>
+                        <p class="app-guide-sequence-item__description">Gather Documents</p>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center app-guide-sequence-item" style="padding: 15px 0;">
+                        <div class="d-flex d-flex justify-content-center align-items-center app-guide-sequence-item__step" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>04</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Complete State Tax Return (if required)</p>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center app-guide-sequence-item" style="padding: 15px 0;">
+                        <div class="d-flex d-flex justify-content-center align-items-center app-guide-sequence-item__step" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>02</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Create Accounts</p>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center app-guide-sequence-item" style="padding: 15px 0;">
+                        <div class="d-flex d-flex justify-content-center align-items-center app-guide-sequence-item__step" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>05</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Mail Forms to the IRS</p>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="d-xl-flex align-items-xl-center" style="padding: 15px 0;">
-                        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center app-guide-sequence-item" style="padding: 15px 0;">
+                        <div class="d-flex d-flex justify-content-center align-items-center app-guide-sequence-item__step" style="width: 52px;height: 52px;background: #0C1C33;color: #FFFFFF;font-family: 'Outfit';font-weight: bold;border-radius: 10px;margin-right: 20px;"><span>03</span></div>
                         <p style="font-family: 'Inter';font-style: normal;font-size: 18px;">Answer Questions &amp; Follow the instructions</p>
                     </div>
                 </div>
@@ -82,9 +82,9 @@
         </div>
     </section><!-- End: application-guide -->
     <!-- Start: apply-now -->
-    <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
+    <section class="d-flex align-items-center apply-now-section">
         <div class="container d-xl-flex flex-column align-items-xl-start">
-            <p style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. <a href="#" style="color: #2A2A2A;">For any questions or concerns, contact the IRS directly.</a></p>
+            <p class="apply-now-section__description">DISCLAIMER: Our institution is NOT permitted to assist nonresidents with any IRS tax form preparation or tax-related questions. The information provided above is intended for your benefit. <a href="#" style="color: #2A2A2A;">For any questions or concerns, contact the IRS directly.</a></p>
             <a href="https://taxprep.sprintax.com/sprintax-zip-travel" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>
     </section><!-- End: apply-now -->
