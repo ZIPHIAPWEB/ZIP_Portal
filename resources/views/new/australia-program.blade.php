@@ -65,7 +65,7 @@
         <div class="container">
         <h1 class="app-guide-section__title">APPLICATION GUIDE</h1>
             <div class="row align-items-center">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-0 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>01</span>
@@ -73,7 +73,7 @@
                         <p class="app-guide-sequence-item__description">Program Orientation and Assessment</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-3 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>04</span>
@@ -81,7 +81,7 @@
                         <p class="app-guide-sequence-item__description">Submission of Document</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-1 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>02</span>
@@ -89,7 +89,7 @@
                         <p class="app-guide-sequence-item__description">Admission and Enrollment (for Study and Work)</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-4 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>05</span>
@@ -97,7 +97,7 @@
                         <p class="app-guide-sequence-item__description">Visa Processing and Lodging</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-2 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>03</span>
@@ -105,7 +105,7 @@
                         <p class="app-guide-sequence-item__description">Matching and Hiring (for Culinary Trainee)</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6 order-5 order-md-0">
                     <div class="d-flex flex-row align-items-center align-items-xl-center app-guide-sequence-item">
                         <div class="d-flex justify-content-center align-items-center app-guide-sequence-item__step">
                             <span>06</span>
