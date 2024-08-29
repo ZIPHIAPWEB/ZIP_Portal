@@ -15,6 +15,7 @@
     border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color);
     border-radius: var(--bs-navbar-toggler-border-radius);
     transition: var(--bs-navbar-toggler-transition);
+}
 
 /* utils */
 .content-body-title {
@@ -167,6 +168,16 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .nav-sm-bg {
+        background: white;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav-sm-bg a {
+        color: #2A2A2A !important;
+    }
+
     .int-membership-section {
         height: 100%;
         padding: 2rem 0;
