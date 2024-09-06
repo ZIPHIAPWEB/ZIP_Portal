@@ -167,7 +167,28 @@
     width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: var(--section-title-text-color);padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;
 }
 
+.hero-button {
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: solid #FFFFFF 1px;
+    padding: 9px 28px;
+    font-size: 20px;
+    text-align: center;
+    background-color: rgba(12, 28, 51, 0.6);
+    width: 339px;
+    height: 52px;
+    font-family: 'Outfit';
+}
+
+@media only screen and (max-width: 375px) {
+    .hero-button {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 768px) {
+
     .nav-sm-bg {
         background: white;
         border-radius: 1rem;
