@@ -78,7 +78,7 @@ export const useAuthStore = defineStore({
 
                 this.isLoading = false;
 
-                if (this.auth.role == 'superadmin') {
+                if (this.auth.role == 'superadmin' || this.auth.role == 'administator') {
                     
                     this.router.push({ name: 'superadmin-dashboard' });
 

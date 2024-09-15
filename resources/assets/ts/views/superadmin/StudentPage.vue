@@ -3,6 +3,9 @@ import SuperadminLayout from '../../components/layouts/SuperadminLayout.vue';
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 
+import { useAuthStore } from '../../store/auth';
+const authStore = useAuthStore();
+
 import { useSuperadminStudent } from '../../store/superadminStudents';
 const superadminStudentStore = useSuperadminStudent();
 const { isLoading, isSuccess, students } = storeToRefs(superadminStudentStore);
@@ -66,7 +69,8 @@ const searchStudentData = async () => {
                                 <td class="text-center">
                                     <button @click="superadminStudentStore.verifyStudent(student.user_id)" v-if="!student.is_verified" class="btn btn-primary btn-xs mr-1">Verify</button>
                                     <button @click="superadminStudentStore.unverifyStudent(student.user_id)" v-if="student.is_verified" class="btn btn-primary btn-xs mr-1">Unverify</button>
-                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="superadminStudentStore.resetAccountPassword(student.user_id)" class="btn btn-success btn-xs mr-1">Reset password</button>
+                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" v-if="authStore.getAuthRole == 'superadmin'" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

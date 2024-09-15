@@ -102,6 +102,21 @@ export const useSuperadminStudent = defineStore({
                 this.isLoading = false;
                 this.isSuccess = false;
             }
+        },
+        async resetAccountPassword(userId : number | string) {
+            try {
+                this.isLoading = true;
+                this.isSuccess = false;
+
+                const response = (await SuperadminApi.resetUserPassword(userId)).data;
+                await this.loadSuperadminStudentsData();
+
+                this.isLoading = false;
+                this.isSuccess = true;
+            } catch (error : any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+            }
         }
     }
 });
