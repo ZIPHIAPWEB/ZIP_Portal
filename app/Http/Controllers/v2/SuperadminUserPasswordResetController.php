@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 
 class SuperadminUserPasswordResetController extends Controller
 {
-    const RESET_PASSWORD = 'p@ssw0rd';
+    public const RESET_PASSWORD = 'p@ssw0rd';
 
     public function __invoke(User $user)
     {
@@ -21,7 +21,7 @@ class SuperadminUserPasswordResetController extends Controller
         }
 
         $user->update([
-            'password' => self::RESET_PASSWORD
+            'password' => bcrypt(self::RESET_PASSWORD)
         ]);
 
         return response()->json([

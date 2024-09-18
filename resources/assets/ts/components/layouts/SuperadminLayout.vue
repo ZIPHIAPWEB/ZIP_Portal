@@ -58,7 +58,7 @@ const gotoDashboard = () => {
                   <img :src="require('../../../../../public/logo.png')" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                  <a href="#" class="d-block">Superadministrator</a>
+                  <a href="#" class="d-block">{{ authStore.auth.username }}</a>
                 </div>
               </div>
         

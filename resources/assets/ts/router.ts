@@ -25,6 +25,7 @@ import SuperadminPrelimReqsPage from './views/superadmin/requirements/Preliminar
 import SuperadminAdditionalReqsPage from './views/superadmin/requirements/AdditionalPage.vue';
 import SuperadminSponsorReqPage from './views/superadmin/requirements/VisaSponsorPage.vue';
 import SuperadminPaymentReqPage from './views/superadmin/requirements/PaymentPage.vue';
+import SuperadminSelectedStudentPage from './views/superadmin/SelectedStudentPage.vue';
 
 let basePath = '/portal/v2';
 
@@ -120,6 +121,14 @@ let routes:Array<RouteRecordRaw> = [
         path: basePath + "/sa/students",
         name: "superadmin-student-lists",
         component: SuperadminStudentPage,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: basePath + "/sa/student-profile/:id",
+        name: "superadmin-student-profile",
+        component: SuperadminSelectedStudentPage,
         meta: {
             requiresAuth: true
         }
