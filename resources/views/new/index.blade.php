@@ -24,7 +24,7 @@
             <div class="d-flex d-sm-flex d-md-flex d-xxl-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-md-start justify-content-xxl-start" style="color: #FFFFFF;margin-bottom: 43px;">
                 <h1 class="text-center" style="color: #FFC452; margin-bottom: 17px;font-family: 'Outfit';font-weight: 900;">INTERNATIONAL EXCHANGE PROGRAMS</h1>
                 <p class="text-center text-sm-center text-md-start" style="margin-bottom: 25px;font-family: 'Inter';font-size: 18px;">Zip Travel Philippines believes that every Filipino deserves the opportunity to become a global leader. That's why we offer intercultural educational and cultural exchange programs that will equip you with the skills and knowledge you need to compete on a global scale.</p>
-                <a class="hero-button" href="https://ziptravel.com.ph/online-registration" target="_blank">YOUR JOURNEY STARTS HERE!</a>
+                <a class="hero-button" href="https://ziptravel.com.ph/online-registration" target="_blank">CLICK HERE TO START YOUR JOURNEY!</a>
             </div>
         </div>
     </div>
