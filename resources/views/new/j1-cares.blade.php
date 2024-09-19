@@ -161,7 +161,7 @@
     <section class="d-xl-flex align-items-xl-center" style="height: 280px;width: 100%;">
         <div class="container d-xl-flex flex-column align-items-xl-start">
             <h5 style="font-weight: bold;font-family: 'Outfit';color: var(--section-title-text-color);">SPONSOR A BAG OF HOPE</h5>
-            <p style="font-family: 'Inter';font-size: 18px;font-weight: normal;">Are you a J1 Alumnus? We invite you to join us in helping underprivileged students embark on their journey. Get in touch with us on how to sponsor your own Bag of Hope for one learner. <strong style="color: var(--section-title-text-color);">Email us at j1cares@ziptravel.com.ph</strong></p>
+            <p style="font-family: 'Inter';font-size: 18px;font-weight: normal;">Are you a J1 Alumnus? We invite you to join us in helping underprivileged students embark on their journey. Get in touch with us on how to sponsor your own Bag of Hope for one learner. <strong style="color: var(--section-title-text-color);">Email us at j1caresprogram@ziptravel.com.ph</strong></p>
         </div>
     </section><!-- End: apply-now -->
 @endsection

@@ -34,58 +34,187 @@
                 <p style="margin-bottom: 25px;">Under the J1 Visa BridgeUSA program, the country welcomes around 300,000 participants from 200 countries annually. It allows foreign nationals to participate in work-and-study-based programs such as teaching, studying, or receiving on-the-job training for several weeks or years.</p>
                 <p style="margin-bottom: 25px;">The BridgeUSA program is administered by the U.S. Department of State's Bureau of Educational and Cultural Affairs.</p>
             </div>
-            <div class="row gap-3" style="font-size: 20px;font-family: 'Outfit';font-weight:600;margin-top: 5rem;">
-                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
-                    <a href="/program-swt">
-                        <div class="bridge-usa-program-card__content">
-                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_SWT.png">
-                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
-                                <span class="bridge-usa-program-card__text">Summer Work Travel</span>
+            <div class="simple-slider d-none d-xl-flex">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper" style="padding: 35px 0;">
+                        <!-- Start: Slide -->
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="padding: 23px 85px">
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-swt">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_SWT.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Summer Work Travel</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-internship">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_INTERN.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Internship</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-career">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TRAINEE.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Trainee</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-camp-counselor">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_CAMP.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Camp Counselor</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div><!-- End: Slide -->
+                        <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="padding: 23px 85px">
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-internship">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_INTERN.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Internship</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-career">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TRAINEE.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Trainee</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-camp-counselor">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_CAMP.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Camp Counselor</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                <a href="/program-teacher-program">
+                                    <div class="bridge-usa-program-card__content">
+                                        <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TEACHERS.png">
+                                        <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                            <span class="bridge-usa-program-card__text">Teachers Program</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div><!-- End: Slide -->
+                    </div><!-- End: Slide Wrapper -->
+                    <!-- Start: Previous -->
+                    <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
+                    <!-- Start: Next -->
+                    <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
+                </div><!-- End: Slideshow -->
+            </div><!-- End: Simple Slider -->
+            <div class="simple-slider d-flex d-xl-none">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper" style="padding: 35px 0;">
+                        <!-- Start: Slide -->
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                    <a href="/program-swt">
+                                        <div class="bridge-usa-program-card__content">
+                                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_SWT.png">
+                                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                                <span class="bridge-usa-program-card__text">Summer Work Travel</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
-                    <a href="/program-internship">
-                        <div class="bridge-usa-program-card__content">
-                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_INTERN.png">
-                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
-                                <span class="bridge-usa-program-card__text">Internship</span>
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                    <a href="/program-internship">
+                                        <div class="bridge-usa-program-card__content">
+                                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_INTERN.png">
+                                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                                <span class="bridge-usa-program-card__text">Internship</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
-                    <a href="/program-career">
-                        <div class="bridge-usa-program-card__content">
-                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TRAINEE.png">
-                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
-                                <span class="bridge-usa-program-card__text">Trainee</span>
+                        <div class="d-flex justify-content-center align-items-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                    <a href="/program-career">
+                                        <div class="bridge-usa-program-card__content">
+                                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TRAINEE.png">
+                                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                                <span class="bridge-usa-program-card__text">Trainee</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
-                    <a href="/program-camp-counselor">
-                        <div class="bridge-usa-program-card__content">
-                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_CAMP.png">
-                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
-                                <span class="bridge-usa-program-card__text">Camp Counselor</span>
+                        <div class="d-flex align-items-center justify-content-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                    <a href="/program-camp-counselor">
+                                        <div class="bridge-usa-program-card__content">
+                                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_CAMP.png">
+                                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                                <span class="bridge-usa-program-card__text">Camp Counselor</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
-                    <a href="/program-teacher-program">
-                        <div class="bridge-usa-program-card__content">
-                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TEACHERS.png">
-                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
-                                <span class="bridge-usa-program-card__text">Teachers Program</span>
+                        <div class="d-flex align-items-center justify-content-center d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col d-flex justify-content-center align-items-center bridge-usa-program-card">
+                                    <a href="/program-teacher-program">
+                                        <div class="bridge-usa-program-card__content">
+                                            <img class="bridge-usa-program-card__image" src="assets_v3/img/B_TEACHERS.png">
+                                            <div class="d-flex justify-content-center align-items-center justify-content-xl-center bridge-usa-program-card__text-wrapper">
+                                                <span class="bridge-usa-program-card__text">Teachers Program</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                        </div><!-- End: Slide -->
+                    </div><!-- End: Slide Wrapper -->
+                    <!-- Start: Previous -->
+                    <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
+                    <!-- Start: Next -->
+                    <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
+                </div><!-- End: Slideshow -->
+            </div><!-- End: Simple Slider -->
         </div>
     </section><!-- End: about-us -->
     <!-- Start: application-guide -->
