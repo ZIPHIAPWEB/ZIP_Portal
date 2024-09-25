@@ -1,0 +1,235 @@
+:root {
+    --heading-title-text-color: #FFC452;
+    --heading-desc-text-color: #FFFFFF;
+
+    --section-title-text-color: #0C3E87;
+    --section-desc-text-color: #2A2A2A;
+}
+
+.navbar-toggler {
+    padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
+    font-size: var(--bs-navbar-toggler-font-size);
+    line-height: 1;
+    color: white;
+    background-color: white;
+    border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color);
+    border-radius: var(--bs-navbar-toggler-border-radius);
+    transition: var(--bs-navbar-toggler-transition);
+}
+
+/* utils */
+.content-body-title {
+    font-family: 'Outfit';
+    font-weight: bold; 
+    font-size: 24px;
+    color: var(--section-title-text-color);
+}
+.content-body {
+    font-family: 'Inter'; 
+    font-size: 18px;
+}
+
+/* international program card */
+.int-program-card-item {
+    height: 520px;
+    border-radius: 50px;
+    width: 346px;
+    box-shadow: 0px 6px 18px rgb(141,153,164);
+}
+
+.int-program-card-item img {
+    width: 100%;
+    height: 320px;
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
+}
+
+.int-program-card-item__content {
+    height: 183px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding-top: 25px;
+    padding-left: 30px;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    font-family: 'Outfit';
+    font-size: 18px;
+    color: #0C1C33;
+}
+
+.int-program-card-item__content h5 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #0C3E87;
+}
+
+/* internation membership  */
+.int-membership-section {
+    height: 266px;
+    background-color: #F1F1F1;
+    display: flex;
+    align-items: center;
+}
+.int-membership-section__title {
+    font-family: 'Outfit';font-weight: bolder;font-size: 28px;margin-bottom: 20px;color: var(--section-title-text-color);
+}
+.int-membership-section__description {
+    font-family: 'Inter';font-size: 18px;
+}
+
+/* about-us partners */
+.about-us-partners-section {
+    height: 266px;display: flex;align-items: center;
+}
+.about-us-partners-section__image {
+    width: 156px;height: 156px;
+}
+
+/* bridgeusa programs */
+.bridge-usa-program-card {
+    padding: 0;
+}
+.bridge-usa-program-card__content {
+    width: 255px; height: 293px;border-radius: 40px;box-shadow: 0px 6px 18px rgb(141,153,164);
+}
+.bridge-usa-program-card a {
+    color: var(--section-title-text-color);
+    font-family: 'Outfit';
+    font-weight: bolder;
+}
+.bridge-usa-program-card a:link {
+    text-decoration: none;
+}
+.bridge-usa-program-card__image {
+    min-width: 255px;
+    height: 211px;
+    border-radius: 40px 40px 0 0;
+    object-fit: cover;
+}
+.bridge-usa-program-card__text-wrapper {
+    width: 100%;
+    height: 82px;
+}
+.bridge-usa-program-card__text {
+    font-family: 'Outfit';font-size: 20px; font-weight: lighter;
+}
+
+/* tax service guide */
+.tax-guide-section {
+    height: 488px;
+    width: 100%;
+    background: #F1F1F1;
+}
+
+/* application guide */
+.app-guide-section {
+    height: 378px;
+    width: 100%;
+    background: #F1F1F1;
+}
+.app-guide-section__title {
+    font-family: 'Outfit';
+    font-weight: bolder !important;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 19px;
+    color: var(--section-title-text-color);
+}
+.app-guide-sequence-item {
+    padding: 15px 0;
+}
+.app-guide-sequence-item__step {
+    min-width: 52px;
+    min-height: 52px;
+    background: #0C1C33;
+    color: #FFFFFF;
+    font-family: 'Outfit';
+    font-weight: 500;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.app-guide-sequence-item__description {
+    font-family: 'Inter';font-style: normal;font-size: 18px;
+}
+
+/* apply now section */
+.apply-now-section {
+    height: 280px;
+    width: 100%;
+}
+.apply-now-section__description {
+    margin-bottom: 25px;font-family: 'Inter';font-size: 18px;font-weight: 400;
+}
+.apply-now-section__action {
+    width: 173px;height: 53px;vertical-align: text-bottom;text-align: center;background: var(--section-title-text-color);padding: 10px;font-size: 20px;font-family: 'Outfit';margin-top: 12px;border-radius: 40px;border: 0;
+}
+
+.hero-button {
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: solid #FFFFFF 1px;
+    padding: 12px 28px;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(12, 28, 51, 0.6);
+    width: fit-content;
+    height: 52px;
+    font-family: 'Outfit';
+}
+
+@media only screen and (max-width: 425px) {
+    .hero-button {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .nav-sm-bg {
+        background: white;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav-sm-bg a {
+        color: #2A2A2A !important;
+    }
+
+    .int-membership-section {
+        height: 100%;
+        padding: 2rem 0;
+        background-color: #F1F1F1;
+        display: flex;
+        align-items: center;
+    }
+
+    .about-us-partners-section {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .app-guide-section {
+        height: 100%;
+        padding: 2rem 1rem;
+        width: 100%;
+        background: 
+        #F1F1F1;
+    }
+    .tax-guide-section {
+        height: 100%;
+        padding: 2rem 0.5rem;
+        width: 100%;
+        background: #F1F1F1;
+    }
+    
+    .apply-now-section {
+        height: 100%;
+        padding: 2rem 0.5rem;
+        width: 100%;
+    }
+}
