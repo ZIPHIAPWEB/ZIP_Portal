@@ -157,6 +157,11 @@
                             </div>
                         </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
+
+                    <!-- Start: Swiper pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- End: Swiper pagination -->
+                     
                     <!-- Start: Previous -->
                     <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
                     <!-- Start: Next -->
@@ -261,6 +266,11 @@
                             </div>
                         </div><!-- End: Slide -->
                     </div><!-- End: Slide Wrapper -->
+
+                    <!-- Start: Swiper pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- End: Swiper pagination -->
+
                     <!-- Start: Previous -->
                     <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
                     <!-- Start: Next -->

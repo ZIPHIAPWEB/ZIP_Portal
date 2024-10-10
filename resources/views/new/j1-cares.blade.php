@@ -47,7 +47,7 @@
         <div class="container">
             <h1 class="app-guide-section__title">OUTREACH PROGRAMS</h1>
             <!-- Start: Simple Slider -->
-            <div class="simple-slider">
+            <div class="simple-slider d-none d-md-flex">
                 <!-- Start: Slideshow -->
                 <div class="swiper-container">
                     <!-- Start: Slide Wrapper -->
@@ -57,7 +57,7 @@
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_1.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_1.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Giving is Caring</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2014<br>St. Ezekiel Moreno Hall</p>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_2.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_2.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Caring the J1 Way</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2015<br>Hospicio De San Jose Elderly Home</p>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_3.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_3.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Happy Child, Happy Life</h5>
                                             <p class="text-center" style="font-size: 18px;">August 2016<br>Virlanie Children’s Home</p>
@@ -89,7 +89,7 @@
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_5.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_5.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Cares on the Road</h5>
                                             <p class="text-center" style="font-size: 18px;">December 2017<br>Streets of Manila</p>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_6.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_6.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Groove to Care: Dance for a Cause</h5>
                                             <p class="text-center" style="font-size: 18px;">February 2018<br>Dapitan Sports Complex</p>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_7.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_7.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2018</h5>
                                             <p class="text-center" style="font-size: 18px;"> June 2018<br>Sitio Haduan & Marcos VIllage</p>
@@ -121,7 +121,7 @@
                             <div class="row" style="height: 100%;">
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_5.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_5.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Groove to Care: Dance for <br> a Cause</h5>
                                             <p class="text-center" style="font-size: 18px;">February 2018<br>Dapitan Sports Complex</p>
@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_6.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_6.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2018</h5>
                                             <p class="text-center" style="font-size: 18px;"> June 2018<br>Sitio Haduan & Marcos VIllage</p>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="col">
                                     <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
-                                        <img style="width: 100%;height: 320px;border-top-right-radius: inherit;border-top-left-radius: inherit;" src="assets_v3/img/j1_8.png">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_8.png">
                                         <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
                                             <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2023</h5>
                                             <p class="text-center" style="font-size: 18px;">September 2023<br>Pampanga</p>
@@ -148,7 +148,151 @@
                                 </div>
                             </div>
                         </div><!-- End: Slide -->
-                    </div><!-- End: Slide Wrapper -->
+                    </div>
+                    <!-- End: Slide Wrapper -->
+                    
+                    <!-- Start: Swiper pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- End: Swiper pagination -->
+
+                    <!-- Start: Previous -->
+                    <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
+                    <!-- Start: Next -->
+                    <div class="swiper-button-next" style="background: url(&quot;assets_v3/img/arrow-right%201.png&quot;);height: 65px;width: 65px;"></div><!-- End: Next -->
+                </div><!-- End: Slideshow -->
+            </div><!-- End: Simple Slider -->
+            <div class="simple-slider d-flex d-md-none">
+                <!-- Start: Slideshow -->
+                <div class="swiper-container">
+                    <!-- Start: Slide Wrapper -->
+                    <div class="swiper-wrapper" style="padding: 35px 0;">
+                        <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_1.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Giving is Caring</h5>
+                                            <p class="text-center" style="font-size: 18px;">December 2014<br>St. Ezekiel Moreno Hall</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_2.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Caring the J1 Way</h5>
+                                            <p class="text-center" style="font-size: 18px;">December 2015<br>Hospicio De San Jose Elderly Home</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_3.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Happy Child, Happy Life</h5>
+                                            <p class="text-center" style="font-size: 18px;">August 2016<br>Virlanie Children’s Home</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_3.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Happy Child, Happy Life</h5>
+                                            <p class="text-center" style="font-size: 18px;">August 2016<br>Virlanie Children’s Home</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_5.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Cares on the Road</h5>
+                                            <p class="text-center" style="font-size: 18px;">December 2017<br>Streets of Manila</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_6.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">Groove to Care: Dance for a Cause</h5>
+                                            <p class="text-center" style="font-size: 18px;">February 2018<br>Dapitan Sports Complex</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_6.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2018</h5>
+                                            <p class="text-center" style="font-size: 18px;"> June 2018<br>Sitio Haduan & Marcos VIllage</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                            <!-- Start: Slide -->
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center swiper-slide" style="/*background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;*/">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-12">
+                                    <div style="height: 503px;border-radius: 50px;box-shadow: 0px 6px 18px rgb(141,153,164);">
+                                        <img class="j1-card-image" src="assets_v3/img/j1_8.png">
+                                        <div style="height: 183px;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: start;padding-top: 25px;border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;font-family: 'Outfit';font-size: 18px;">
+                                            <h5 class="text-center" style="margin-bottom: 10px;font-weight: bold;color: var(--section-title-text-color);">A Bag of Hope 2023</h5>
+                                            <p class="text-center" style="font-size: 18px;">September 2023<br>Pampanga</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End: Slide -->
+                    </div>
+                    <!-- End: Slide Wrapper -->
+
+                    <!-- Start: Swiper pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- End: Swiper pagination -->
+
                     <!-- Start: Previous -->
                     <div class="swiper-button-prev" style="background: url(&quot;assets_v3/img/arrow-right%202.png&quot;);width: 65px;height: 65px;"></div><!-- End: Previous -->
                     <!-- Start: Next -->

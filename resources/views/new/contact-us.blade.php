@@ -30,7 +30,7 @@
                         <ul class="list-unstyled" style="font-size: 18px; font-family: 'Outfit';">
                             <li>
                                 <div class="branch-address"><i class="fas fa-house-damage"></i>
-                                    <p>2F University Center Building, 1985 C.M. Recto Avenue, Manila, 1008</p>
+                                    <p>2F University Center Building, 1985 C.M. Recto Avenue, Sampaloc, Manila, 1008</p>
                                 </div>
                             </li>
                             <li>
