@@ -35,7 +35,7 @@ class StudentPaymentRequirementController extends Controller
 
         $uploadedPayment = $user->studentPayment()->create([
             'requirement_id' => $requirement->id,
-            'bank_code' => $request->bank_code,
+            'bank_code' => $request->bank_code ?? 'N/A',
             'reference_no' => $request->reference_no,
             'date_deposit' => $request->date_deposit,
             'bank_account_no' => $request->bank_account_no,
