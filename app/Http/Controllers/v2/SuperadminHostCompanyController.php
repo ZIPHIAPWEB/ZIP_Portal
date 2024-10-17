@@ -4,8 +4,8 @@ namespace App\Http\Controllers\v2;
 
 use App\HostCompany;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HostCompanyCreateUpdateRequest;
 use App\Http\Resources\SuperadminHostCompanyResource;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminHostCompanyController extends Controller
@@ -30,7 +30,7 @@ class SuperadminHostCompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HostCompanyCreateUpdateRequest $request)
     {
         $createdHostCompany = HostCompany::create([
             'name' => $request->input('name'),
@@ -67,7 +67,7 @@ class SuperadminHostCompanyController extends Controller
      * @param  \App\HostCompany  $hostCompany
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HostCompany $hostCompany)
+    public function update(HostCompanyCreateUpdateRequest $request, HostCompany $hostCompany)
     {
         $hostCompany->update([
             'name' => $request->input('name'),

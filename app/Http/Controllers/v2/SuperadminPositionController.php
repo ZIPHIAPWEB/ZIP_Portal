@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PositionCreateUpdateRequest;
 use App\Position;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminPositionController extends Controller
@@ -33,7 +33,7 @@ class SuperadminPositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PositionCreateUpdateRequest $request)
     {
         $createdPosition = Position::create([
             'name' => $request->input('name'),
@@ -69,7 +69,7 @@ class SuperadminPositionController extends Controller
      * @param  \App\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Position $position)
+    public function update(PositionCreateUpdateRequest $request, Position $position)
     {
         $position->update([
             'name' => $request->input('name'),
