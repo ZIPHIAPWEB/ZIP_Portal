@@ -58,7 +58,7 @@ const gotoDashboard = () => {
                   <img :src="require('../../../../../public/logo.png')" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                  <a href="#" class="d-block">Superadministrator</a>
+                  <a href="#" class="d-block">{{ authStore.auth.username }}</a>
                 </div>
               </div>
         
@@ -102,7 +102,7 @@ const gotoDashboard = () => {
                         </router-link>
                       </li>
 
-                      <li class="nav-item">
+                      <li v-if="authStore.getAuthRole == 'superadmin'" class="nav-item">
                         <router-link class="nav-link" tag="a" :to="{ name: 'superadmin-coords-lists'}">
                           <i class="far fa-circle nav-icon"></i>
                           <p class="text-sm" style="vertical-align: text-bottom;">Coordinators</p>
@@ -110,8 +110,8 @@ const gotoDashboard = () => {
                       </li>
                     </ul>
                   </li>
-                  <li class="nav-header">Settings</li>
-                  <li class="nav-item menu-open">
+                  <li v-if="authStore.getAuthRole == 'superadmin'" class="nav-header">Settings</li>
+                  <li v-if="authStore.getAuthRole == 'superadmin'" class="nav-item menu-open">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
@@ -168,7 +168,7 @@ const gotoDashboard = () => {
                       </li>
                     </ul>
                   </li>
-                  <li class="nav-item menu-open">
+                  <li v-if="authStore.getAuthRole == 'superadmin'" class="nav-item menu-open">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>

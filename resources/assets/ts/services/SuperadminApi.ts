@@ -28,6 +28,9 @@ export default {
     deactivateUserAccount(userId : string | number) {
         return ApiRequest.put(`/sa/user/${userId}/deactivate`);
     },
+    resetUserPassword(userId : string | number) {
+        return ApiRequest.put(`/sa/user/${userId}/reset-password`);
+    },
 
     getSearchCoordByUsername(toBeSearch : string) : Promise<AxiosResponse> {
         

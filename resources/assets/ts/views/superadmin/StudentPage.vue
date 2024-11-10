@@ -2,6 +2,10 @@
 import SuperadminLayout from '../../components/layouts/SuperadminLayout.vue';
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import router from '../../router';
+
+import { useAuthStore } from '../../store/auth';
+const authStore = useAuthStore();
 
 import { useSuperadminStudent } from '../../store/superadminStudents';
 const superadminStudentStore = useSuperadminStudent();
@@ -18,6 +22,22 @@ const searchStudentData = async () => {
     await superadminStudentStore.searchSuperaminStudentData(toBeSearch.value);
 }
 
+const resetSelectedAccountPassword = async (userId : string | number) => {
+    
+    await superadminStudentStore.resetAccountPassword(userId);
+
+    alert('User password set to p@ssw0rd');
+}
+
+const viewStudent = (userId: number | string) => {
+
+    router.push({
+        name: "superadmin-student-profile",
+        params: {
+            id: userId
+        }
+    });
+}
 </script>
 
 <template>
@@ -64,9 +84,11 @@ const searchStudentData = async () => {
                                 </td>
                                 <td class="text-center">{{ student.registered_at }}</td>
                                 <td class="text-center">
+                                    <button @click="viewStudent(student.user_id)" class="btn btn-default btn-xs mr-1">View</button>
                                     <button @click="superadminStudentStore.verifyStudent(student.user_id)" v-if="!student.is_verified" class="btn btn-primary btn-xs mr-1">Verify</button>
                                     <button @click="superadminStudentStore.unverifyStudent(student.user_id)" v-if="student.is_verified" class="btn btn-primary btn-xs mr-1">Unverify</button>
-                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="resetSelectedAccountPassword(student.user_id)" class="btn btn-success btn-xs mr-1">Reset password</button>
+                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" v-if="authStore.getAuthRole == 'superadmin'" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

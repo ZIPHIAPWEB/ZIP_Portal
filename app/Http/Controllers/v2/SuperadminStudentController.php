@@ -55,8 +55,12 @@ class SuperadminStudentController extends Controller
     public function deleteUser(User $user)
     {
         DB::transaction(function () use ($user) {
-            $user->student()->logs();
-            $user->student()->delete();
+
+            if($user->isFilled) {
+                $user->student()->logs();
+                $user->student()->delete();
+            }
+
             $user->delete();
         });
 
