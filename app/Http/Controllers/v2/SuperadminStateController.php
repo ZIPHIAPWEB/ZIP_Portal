@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StateCreateUpdateRequest;
 use App\State;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminStateController extends Controller
@@ -33,7 +33,7 @@ class SuperadminStateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StateCreateUpdateRequest $request)
     {
         $createdState = State::create([
             'name' => $request->input('name'),
@@ -70,7 +70,7 @@ class SuperadminStateController extends Controller
      * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, State $state)
+    public function update(StateCreateUpdateRequest $request, State $state)
     {
         $state->update([
             'name' => $request->input('name'),

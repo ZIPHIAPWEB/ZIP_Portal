@@ -88,7 +88,7 @@ const viewStudent = (userId: number | string) => {
                                     <button @click="superadminStudentStore.verifyStudent(student.user_id)" v-if="!student.is_verified" class="btn btn-primary btn-xs mr-1">Verify</button>
                                     <button @click="superadminStudentStore.unverifyStudent(student.user_id)" v-if="student.is_verified" class="btn btn-primary btn-xs mr-1">Unverify</button>
                                     <button @click="resetSelectedAccountPassword(student.user_id)" class="btn btn-success btn-xs mr-1">Reset password</button>
-                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" v-if="authStore.getAuthRole == 'superadmin'" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="superadminStudentStore.deleteSuperadminStudent(student.user_id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

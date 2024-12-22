@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PrelimRequirementCreateUpdateRequest;
 use App\Http\Resources\SuperadminPrelimRequirementResource;
 use App\PreliminaryRequirement;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class SuperadminPrelimReqsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PrelimRequirementCreateUpdateRequest $request)
     {
         $createdReqs = PreliminaryRequirement::create([
             'program_id' => $request->input('program_id'),
@@ -70,7 +71,7 @@ class SuperadminPrelimReqsController extends Controller
      * @param  \App\PreliminaryRequirement  $preliminaryRequirement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PreliminaryRequirement $preliminaryRequirement)
+    public function update(PrelimRequirementCreateUpdateRequest $request, PreliminaryRequirement $preliminaryRequirement)
     {
         if (!($preliminaryRequirement->path == '' || $preliminaryRequirement->path == null)) {
 

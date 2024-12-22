@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v2;
 
 use App\Actions\UploadedFilePathAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SponsorRequirementsCreateUpdateRequest;
 use App\Http\Resources\SuperadminSponsorRequirementResource;
 use App\SponsorRequirement;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class SuperadminSponsorReqsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SponsorRequirementsCreateUpdateRequest $request)
     {
         $createdReqs = SponsorRequirement::create([
             'sponsor_id' => $request->input('sponsor_id'),
@@ -70,7 +71,7 @@ class SuperadminSponsorReqsController extends Controller
      * @param  \App\SponsorRequirement  $sponsorRequirement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SponsorRequirement $sponsorRequirement)
+    public function update(SponsorRequirementsCreateUpdateRequest $request, SponsorRequirement $sponsorRequirement)
     {
         $sponsorRequirement->update([
             'sponsor_id' => $request->input('sponsor_id'),

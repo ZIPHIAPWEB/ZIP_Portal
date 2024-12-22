@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaymentRequirementCreateUpdateRequest;
 use App\Http\Resources\SuperadminPaymentRequirementResource;
 use App\PaymentRequirement;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminPaymentReqsController extends Controller
@@ -30,7 +30,7 @@ class SuperadminPaymentReqsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PaymentRequirementCreateUpdateRequest $request)
     {
         $createdReqs = PaymentRequirement::create([
             'program_id' => $request->input('program_id'),
@@ -73,7 +73,7 @@ class SuperadminPaymentReqsController extends Controller
      * @param  \App\PaymentRequirement  $paymentRequirement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PaymentRequirement $paymentRequirement)
+    public function update(PaymentRequirementCreateUpdateRequest $request, PaymentRequirement $paymentRequirement)
     {
         if(!$paymentRequirement->exists()) {
 
