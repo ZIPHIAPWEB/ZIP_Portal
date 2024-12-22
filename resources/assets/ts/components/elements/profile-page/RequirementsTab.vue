@@ -7,7 +7,7 @@ import { useStudentPaymentRequirement, IPaymentRequirement, IStudentPaymentRequi
 import { storeToRefs } from 'pinia';
 
 const studentPaymentRequirementStore = useStudentPaymentRequirement();
-const { isLoading, isSuccess, requirements } = storeToRefs(studentPaymentRequirementStore);
+const { isLoading, isSuccess, requirements, errors } = storeToRefs(studentPaymentRequirementStore);
 
 import { useAuthStore } from '../../../store/auth';
 const authStore = useAuthStore();
@@ -61,27 +61,27 @@ const fileUploadHandler = (e : Event) => {
 
 <template>
     <Teleport to="body">
-        <PopUp v-if="isPopUpOpen" :title="selectedRequirement?.name" size="md">
+        <PopUp v-if="isPopUpOpen" :title="selectedRequirement?.name" :with-close="false" size="md">
             <form @submit.prevent="submitRequirement">
                 <div class="form-group">
                     <label>Bank name</label>
-                    <input v-model="requirement.bank_code" type="text" class="form-control" placeholder="Enter bank name">
+                    <input v-model="requirement.bank_code" type="text" class="form-control" :class="{ 'is-invalid' : 'bank_code' in errors }" placeholder="Enter bank name">
                 </div>
                 <div class="form-group">
                     <label>Reference No.</label>
-                    <input v-model="requirement.reference_no" type="text" class="form-control" placeholder="Enter reference no.">
+                    <input v-model="requirement.reference_no" type="text" class="form-control" :class="{ 'is-invalid' : 'reference_no' in errors }" placeholder="Enter reference no.">
                 </div>
                 <div class="form-group">
                     <label>Date deposit</label>
-                    <input v-model="requirement.date_deposit" type="date" class="form-control" placeholder="Enter date deposit">
+                    <input v-model="requirement.date_deposit" type="date" class="form-control" :class="{ 'is-invalid' : 'date_deposit' in errors }" placeholder="Enter date deposit">
                 </div>
                 <div class="form-group">
                     <label>Bank account no.</label>
-                    <input v-model="requirement.bank_account_no" type="text" class="form-control" placeholder="Enter bank account no.">
+                    <input v-model="requirement.bank_account_no" type="text" class="form-control" :class="{ 'is-invalid' : 'bank_account_no' in errors }" placeholder="Enter bank account no.">
                 </div>
                 <div class="form-group">
                     <label>Amount</label>
-                    <input v-model="requirement.amount" type="number" class="form-control" placeholder="Enter amount">
+                    <input v-model="requirement.amount" type="number" class="form-control" :class="{ 'is-invalid' : 'amount' in errors }" placeholder="Enter amount">
                 </div>
                 <div class="form-group">
                     <input @change="fileUploadHandler" type="file">

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProgramCreateUpdateRequest;
 use App\Http\Resources\SuperadminProgramResource;
 use App\Program;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminProgramController extends Controller
@@ -30,7 +30,7 @@ class SuperadminProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProgramCreateUpdateRequest $request)
     {
         $createdProgram = Program::create([
             'name' => $request->input('name'),
@@ -68,7 +68,7 @@ class SuperadminProgramController extends Controller
      * @param Program $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(ProgramCreateUpdateRequest $request, Program $program)
     {
 
         $program->update([

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SponsorCreateUpdateRequest;
 use App\Http\Resources\SuperadminVisaSponsorResource;
 use App\Sponsor;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminSponsorController extends Controller
@@ -31,7 +31,7 @@ class SuperadminSponsorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SponsorCreateUpdateRequest $request)
     {
         $createdSponsor = Sponsor::create([
             'name' => $request->input('name'),
@@ -69,7 +69,7 @@ class SuperadminSponsorController extends Controller
      * @param  \App\Sponsor  $sponsor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sponsor $sponsor)
+    public function update(SponsorCreateUpdateRequest $request, Sponsor $sponsor)
     {
         $sponsor->update([
             'name' => $request->input('name'),

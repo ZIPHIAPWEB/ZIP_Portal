@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SchoolCreateUpdateRequest;
 use App\Http\Resources\SuperadminSchoolResource;
 use App\School;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SuperadminSchoolController extends Controller
@@ -30,7 +30,7 @@ class SuperadminSchoolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolCreateUpdateRequest $request)
     {
         $createdSchool = School::create([
             'name' => $request->input('name'),
@@ -68,7 +68,7 @@ class SuperadminSchoolController extends Controller
      * @param  \App\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, School $school)
+    public function update(SchoolCreateUpdateRequest $request, School $school)
     {
         $school->update([
             'name' => $request->input('name'),
