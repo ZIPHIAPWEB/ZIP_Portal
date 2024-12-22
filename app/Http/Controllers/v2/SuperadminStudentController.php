@@ -34,7 +34,7 @@ class SuperadminStudentController extends Controller
 
         $query->when($isSearch && $request->input('search') !== null, function ($q) use ($request) {
 
-            return $q->where('name', 'like', '%'.$request->input('search').'%');
+            return $q->where('email', 'like', '%'.$request->input('search').'%');
         });
 
         $query->when(!$isSearch && $request->input('from_date') !== null, function ($q) use ($request) {
