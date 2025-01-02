@@ -38,7 +38,7 @@ export interface PaymentRequirementState {
     isLoading: boolean;
     requirements: IPaymentRequirement[];
     error: string | undefined;
-    errors: [] | undefined;
+    errors: [];
 }
 
 export const useStudentPaymentRequirement = defineStore({
@@ -47,7 +47,7 @@ export const useStudentPaymentRequirement = defineStore({
         isSuccess: false,
         isLoading: false,
         error: undefined,
-        errors: undefined,
+        errors: [],
         requirements: [],
     }),
     getters: {
