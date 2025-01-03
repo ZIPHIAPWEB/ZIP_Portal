@@ -5,8 +5,8 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
 //let url = 'http://localhost:8000/api';
-let url = 'https://prototype.ziptravel.com.ph/api';
-//let url = 'https://ziptravel.com.ph/api';
+// let url = 'https://prototype.ziptravel.com.ph/api';
+let url = 'https://ziptravel.com.ph/api';
 
 export const ApiRequest = axios.create({
     baseURL: url,
