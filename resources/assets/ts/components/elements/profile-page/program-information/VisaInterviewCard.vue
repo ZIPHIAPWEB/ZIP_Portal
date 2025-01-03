@@ -3,9 +3,13 @@ import DetailsCard from '../../DetailsCard.vue';
 import { storeToRefs } from 'pinia';
 import { useStudentVisaInterview } from '../../../../store/studentVisaInterview';
 import { onMounted } from 'vue';
+import { useAuthStore } from '../../../../store/auth';
 
 const studentVisaInterviewStore = useStudentVisaInterview();
 const { isLoading, isSuccess, visaInterview } = storeToRefs(studentVisaInterviewStore);
+
+const authStore = useAuthStore();
+const { auth } = storeToRefs(authStore);
 
 onMounted(async () => {
     await studentVisaInterviewStore.loadVisaInterview();
@@ -39,11 +43,11 @@ onMounted(async () => {
                     <td style="width: 40%">Visa Interview Time</td>
                     <td>{{ visaInterview?.visa_interview_time }}</td>
                 </tr>
-                <tr>
+                <tr v-if="auth.program != 'Internship Program' && auth.program != 'Career Training'">
                     <td style="width: 40%">Trial Interview Schedule</td>
                     <td>{{ visaInterview?.trial_interview_schedule }}</td>
                 </tr>
-                <tr>
+                <tr v-if="auth.program != 'Internship Program' && auth.program != 'Career Training'">
                     <td style="width: 40%">Trial Interview Time</td>
                     <td>{{ visaInterview?.trial_interview_time }}</td>
                 </tr>

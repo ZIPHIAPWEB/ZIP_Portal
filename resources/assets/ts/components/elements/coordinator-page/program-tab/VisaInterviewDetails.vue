@@ -3,9 +3,13 @@ import { ref, onMounted } from 'vue';
 import { useCoordStudentInterviewInfo } from '../../../../store/coordStudentInterviewInfo';
 import { storeToRefs } from 'pinia';
 import { IVisaInterview } from '../../../../store/studentVisaInterview';
+import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
 
 const coordStudentInterviewInfoStore = useCoordStudentInterviewInfo();
 const { isLoading, visaInterview } = storeToRefs(coordStudentInterviewInfoStore);
+
+const coordSelectedStudentStore = useCoordSelectedStudent();
+const { userInfo } = storeToRefs(coordSelectedStudentStore);
 
 const visaInterviewIsEdit = ref<boolean>(false);
 const visaInterviewForm = ref<IVisaInterview>({
@@ -84,14 +88,14 @@ const updateVisaInterviewDetails = async () => {
                         <input v-model="visaInterviewForm.visa_interview_time" type="text" class="form-control form-control-sm">
                     </td>
                 </tr>
-                <tr>
+                <tr v-if="userInfo.program != 'Internship Program' && userInfo.program != 'Career Training'">
                     <td style="width: 40%">Trial Interview Schedule</td>
                     <td v-if="!visaInterviewIsEdit">{{ visaInterview.formatted_trial_interview_schedule }}</td>
                     <td v-if="visaInterviewIsEdit">
                         <input v-model="visaInterviewForm.trial_interview_schedule" type="date" class="form-control form-control-sm">
                     </td>
                 </tr>
-                <tr>
+                <tr v-if="userInfo.program != 'Internship Program' && userInfo.program != 'Career Training'">
                     <td style="width: 40%">Trial Interview Time</td>
                     <td v-if="!visaInterviewIsEdit">{{ visaInterview.trial_interview_time }}</td>
                     <td v-if="visaInterviewIsEdit">
