@@ -5,8 +5,8 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
 //let url = 'http://localhost:8000/api';
-let url = 'https://prototype.ziptravel.com.ph/api';
-//let url = 'https://ziptravel.com.ph/api';
+// let url = 'https://prototype.ziptravel.com.ph/api';
+let url = 'https://ziptravel.com.ph/api';
 
 export const ApiRequest = axios.create({
     baseURL: url,
@@ -40,6 +40,11 @@ ApiRequest.interceptors.response.use((response) => {
         authStore.clearAuthData();        
     }
 
+    if (err.response && 419 === err.response.status) {
+
+        window.location.reload();
+    }
+
     return Promise.reject(err);
 });
 
@@ -52,6 +57,11 @@ ApiRequestWithFile.interceptors.response.use((response) => {
     if (err.response.status === 401) {
 
         authStore.clearAuthData();        
+    }
+
+    if (err.response && 419 === err.response.status) {
+        
+        window.location.reload();
     }
 
     return Promise.reject(err);
