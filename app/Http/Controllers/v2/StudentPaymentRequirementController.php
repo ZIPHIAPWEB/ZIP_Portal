@@ -22,6 +22,7 @@ class StudentPaymentRequirementController extends Controller
             ->with(['studentPayment' => function ($query) use ($student) {
                 $query->where('user_id', $student->user_id);
             }])
+            ->orderBy('created_at', 'ASC')
             ->get();
 
         return response()->json([
