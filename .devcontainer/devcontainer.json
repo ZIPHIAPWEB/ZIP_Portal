@@ -1,0 +1,27 @@
+{
+  "name": "Laravel Dev Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "vscode",
+
+  "settings": {
+    "php.validate.executablePath": "/usr/local/bin/php",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+
+  "extensions": [
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "Vue.volar"
+  ],
+
+  "forwardPorts": [8080, 3306, 5173],
+
+  "postCreateCommand": "composer install --ignore-platform-reqs || true",
+
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=composer_cache,target=/tmp/composer/cache,type=volume"
+  ]
+}
