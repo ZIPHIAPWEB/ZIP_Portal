@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - composer-cache:/tmp/composer/cache
+    ports:
+      - "8080:80"     # Apache
+      - "5173:5173"   # Vite dev server
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: "1"
+      APACHE_DOCUMENT_ROOT: /workspace/public
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - devnet
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - devnet
+
+volumes:
+  db-data:
+  composer-cache:
+
+networks:
+  devnet:
+    driver: bridge

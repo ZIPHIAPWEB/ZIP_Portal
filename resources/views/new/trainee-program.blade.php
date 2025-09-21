@@ -146,7 +146,7 @@
     <section class="d-flex align-items-center align-items-center apply-now-section">
         <div class="container text-start d-flex flex-column align-items-start">
             <p class="apply-now-section__description">ZIP Travel is here to help you make the most of your international journey. We are dedicated to delivering the highest quality international opportunities and committed to providing exceptional support and guidance to participants throughout the program.</p>
-            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
+            <a href="{{ url('/portal/v2/login') }}" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>
     </section>
     <!-- End: apply-now -->
