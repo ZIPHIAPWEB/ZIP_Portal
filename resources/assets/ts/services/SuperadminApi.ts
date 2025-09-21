@@ -194,7 +194,7 @@ export default {
     },
     removeAdditionalReqFile(additionalId: string | number) : Promise<AxiosResponse> {
         
-        return ApiRequest.put(`/sa/sponsor-reqs/${additionalId}/file/remove`);
+        return ApiRequest.put(`/sa/additional-reqs/${additionalId}/file/remove`);
     },
 
     getAllVisaSponsorRequirements() : Promise<AxiosResponse> {

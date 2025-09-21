@@ -46,7 +46,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="https://ziptravel.com.ph/portal/v2/login" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
+            <a href="{{ url('/portal/v2/login') }}" target="_blank" class="btn btn-primary apply-now-section__action" role="button">APPLY NOW!</a>
         </div>
     </section><!-- End: about-us -->
 @endsection
