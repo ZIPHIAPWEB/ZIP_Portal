@@ -59,7 +59,7 @@ const downloadFileHandler = async (requirementId : string | number | undefined) 
                 </td>
                 <td>
                     <UploadButton v-if="!requirement.student_preliminary?.status" :requirementId="requirement.id" @getFile="uploadFileHander" />
-                    <button v-if="requirement.path" class="btn btn-primary btn-xs">Download File</button>
+                    <button v-if="requirement.path" @click="downloadFileHandler(requirement.id)" class="btn btn-primary btn-xs">Download File</button>
                     <button v-if="requirement.student_preliminary?.status" @click="deleteFileHandler(requirement)" class="btn btn-danger btn-xs">Delete File</button>
                 </td>
             </tr>
