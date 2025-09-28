@@ -12,12 +12,6 @@ class SchoolController extends Controller
     {
         $schools = School::all();
 
-        return response()->json([
-            'status_code' => 200,
-            'data' => [
-                'message' => 'Schools retrieved successfully',
-                'schools' => SchoolResource::collection($schools)
-            ]
-        ], 200);
+        return response()->json(SchoolResource::collection($schools), 200);
     }
 }

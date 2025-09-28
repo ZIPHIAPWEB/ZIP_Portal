@@ -37,7 +37,7 @@ onMounted(async () => {
 const loadSchool = async () => {
     try {
         const response = await SchoolAPI.getSchools();
-        schools.value = response.data.data.schools;
+        schools.value = response.data;
     } catch (error: any) {
         console.log(error);
     }

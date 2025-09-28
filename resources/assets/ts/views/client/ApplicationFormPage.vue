@@ -2,6 +2,9 @@
 import AuthLayout from '../../components/layouts/AuthLayout.vue';
 import OverlayLoading from '../../components/elements/OverlayLoading.vue';
 import PopUp from '../../components/elements/PopUp.vue';
+import AppForm from '../../components/elements/app-form-page/AppForm.vue';
+import BasicForm from '../../components/elements/app-form-page/BasicDetailsForm.vue';
+import SchoolForm from '../../components/elements/app-form-page/SchoolDetailsForm.vue';
 
 import { ref, reactive, computed, onMounted } from 'vue';
 import {useStudentAppFormStore} from '../../store/studentAppForm';
@@ -11,8 +14,6 @@ const { isSuccess, isLoading, error } = storeToRefs(studentAppFormStore);
 
 import ProgramAPI from '../../services/ProgramAPI';
 import {ApplicationFormType} from '../../types/ApplicationFormType';
-import SchoolAPI from '../../services/SchoolAPI';
-import { SchoolType } from '../../types/SchoolType';
 import DegreeAPI from '../../services/DegreeAPI';
 import { DegreeType } from '../../types/DegreeType';
 import { storeToRefs } from 'pinia';
@@ -21,6 +22,7 @@ import { IProgramCategory } from '../../interfaces/IProgramCategory';
 import { IProgram } from '../../interfaces/IProgram';
 
 const applicationFormData = reactive<ApplicationFormType>({
+    step: 1,
     firstName: '',
     middleName: '',
     lastName: '',
@@ -39,20 +41,55 @@ const applicationFormData = reactive<ApplicationFormType>({
     dateGraduated: '',
     fbLink: '',
     skypeId: '',
+    secondarySchool: '',
+    secondaryAddress: '',
+    secondaryStartDate: '',
+    secondaryEndDate: '',
+    
+    fatherFirstName: '',
+    fatherMiddleName: '',
+    fatherLastName: '',
+    fatherOccupation: '',
+    fatherContactNo: '',
+    motherFirstName: '',
+    motherMiddleName: '',
+    motherLastName: '',
+    motherOccupation: '',
+    motherContactNo: '',
+    fatherCompany: '',
+    motherCompany: ''
 });
 
 const otherDegree = ref<String>(''); 
 const isOtherDegreeShow = ref<Boolean>(false);
 const isTermAndConditionOpen = ref<Boolean>(true);
 const programs = ref<IProgram[]>([]);
-const schools = ref<SchoolType[]>([]);
 const degrees = ref<DegreeType[]>([]);
 
 onMounted(() => {
     loadPrograms();
-    loadSchools();
     loadDegrees();
+    loadCachedFormData();
 })
+
+const loadCachedFormData = () => {
+    const appFormDataKey = 'APP_FORM_DATA';
+
+    if (!localStorage.getItem(appFormDataKey)) {
+
+        localStorage.setItem(appFormDataKey, JSON.stringify(applicationFormData));
+
+        return;
+    }
+
+    let cachedFormData = JSON.parse(localStorage.getItem(appFormDataKey)) as ApplicationFormType[] | null;
+
+    Object.entries(cachedFormData).forEach(([key, value]) => {
+        applicationFormData[key] = value;
+    });
+
+    console.log(applicationFormData);
+}
 
 const loadPrograms = async () => {
     try {
@@ -69,15 +106,6 @@ const loadPrograms = async () => {
         console.log(error.response);
     }
 };
-
-const loadSchools = async () => {
-    try {
-        const response = await SchoolAPI.getSchools();
-        schools.value = response.data.data.schools;
-    } catch (error: any) {
-        console.log(error.response);
-    }
-}
 
 const loadDegrees = async () => {
     try {
@@ -120,8 +148,12 @@ const submitApplicationForm = async () => {
         >
             <TermsAndConditionCard />
         </PopUp>
+
+        <SchoolForm />
+        
         <div class="card card-primary" style="overflow-y: auto; height: 94vh;">
             <OverlayLoading v-if="isLoading" />
+            
             <form @submit.prevent="submitApplicationForm">
                 <div class="card-body">
                     <div class="row mb-2">
@@ -208,7 +240,6 @@ const submitApplicationForm = async () => {
                             <label for="school">School <span class="text-red">*</span></label>
                             <select v-model="applicationFormData.schoolId" :class="{ 'is-invalid' : 'schoolId' in error }" class="form-control">
                                 <option selected value="">Select school</option>
-                                <option v-for="school in schools" :value="school.id">{{ school.display_name }}</option>
                             </select>
                         </div>
                     </div>
