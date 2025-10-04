@@ -10,4 +10,5 @@ export interface IBasicForm {
     mobileNumber: string;
     skypeId: string;
     fbLink: string;
+    programId: number;
 }

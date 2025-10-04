@@ -11,10 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(LaratrustSeeder::class);
-        $this->call(ProgramSeeder::class);
-        $this->call(HostCompanySeeder::class);
-        $this->call(SponsorSeeder::class);
-        $this->call(SchoolSeeder::class);
+        // $this->call(LaratrustSeeder::class);
+        // $this->call(ProgramSeeder::class);
+        // $this->call(HostCompanySeeder::class);
+        // $this->call(SponsorSeeder::class);
+        // $this->call(SchoolSeeder::class);
+
+        if (app()->environment('local', 'development')) {
+            // $this->call(DegreeSeeder::class);
+            $this->call(ProgramSeeder::class);
+        }
     }
 }

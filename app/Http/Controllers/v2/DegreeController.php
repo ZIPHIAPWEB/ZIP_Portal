@@ -12,12 +12,6 @@ class DegreeController extends Controller
     {
         $degrees = Degree::all();
 
-        return response()->json([
-            'status_code' => 200,
-            'data' => [
-                'message' => 'Degrees retrieved successfully',
-                'degrees' => DegreeResource::collection($degrees)
-            ]
-        ], 200);
+        return response()->json(DegreeResource::collection($degrees), 200);
     }
 }

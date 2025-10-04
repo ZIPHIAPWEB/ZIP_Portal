@@ -1,6 +1,9 @@
+import { ProgramCategoryType } from "./ProgramCategoryType"
+
 export type ProgramType = {
-    id: Number,
-    name: String,
-    display_name: String,
-    description: String
+    id: number,
+    name: string,
+    display_name: string,
+    description: string,
+    category: ProgramCategoryType | null
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Program;
+use App\ProgramCategory;
 
 class ProgramSeeder extends Seeder
 {
@@ -12,36 +13,46 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        $program = new Program();
+        $programCategories = [
+            'US Programs',
+            'Canada Programs',
+        ];
 
-        $program->name = 'SWT - Spring';
-        $program->display_name = 'Summer Work and Travel - Spring';
-        $program->description = 'SWT-SP';
+        ProgramCategory::truncate();
+        foreach ($programCategories as $category) {
+            \App\ProgramCategory::firstOrCreate(['name' => $category, 'display_name' => $category, 'description' => $category]);
+        }
 
-        $program->save();
+        $programs = [
+            [
+            'name' => 'SWT - Spring',
+            'display_name' => 'Summer Work and Travel - Spring',
+            'description' => 'SWT-SP',
+            ],
+            [
+            'name' => 'Internship',
+            'display_name' => 'Internship',
+            'description' => 'INT',
+            ],
+            [
+            'name' => 'Career Training',
+            'display_name' => 'Career Training',
+            'description' => 'CTP',
+            ],
+            [
+            'name' => 'SWT - Summer',
+            'display_name' => 'Summer Work and Travel - Summer',
+            'description' => 'SWT-SM',
+            ],
+        ];
 
-        $program = new Program();
+        Program::truncate();
 
-        $program->name = 'Internship';
-        $program->display_name = 'Internship';
-        $program->description = 'INT';
+        foreach ($programs as $programData) {
+            $program = Program::create($programData);
 
-        $program->save();
-
-        $program = new Program();
-
-        $program->name = 'Career Training';
-        $program->display_name = 'Career Training';
-        $program->description = 'CTP';
-
-        $program->save();
-
-        $program = new Program();
-
-        $program->name = 'SWT - Summer';
-        $program->display_name = 'Summer Work and Travel - Summer';
-        $program->description = 'SWT-SM';
-
-        $program->save();
+            $program->programCategory()->associate(1);
+            $program->save();
+        }
     }
 }

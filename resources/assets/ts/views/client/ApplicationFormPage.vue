@@ -5,22 +5,22 @@ import PopUp from '../../components/elements/PopUp.vue';
 import AppForm from '../../components/elements/app-form-page/AppForm.vue';
 import BasicForm from '../../components/elements/app-form-page/BasicDetailsForm.vue';
 import SchoolForm from '../../components/elements/app-form-page/SchoolDetailsForm.vue';
+import ParentDetailsForm from '../../components/elements/app-form-page/ParentDetailsForm.vue';
+import WorkExperienceForm from '../../components/elements/app-form-page/WorkExperienceForm.vue';
 
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted, computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import {useStudentAppFormStore} from '../../store/studentAppForm';
 
 const studentAppFormStore = useStudentAppFormStore();
 const { isSuccess, isLoading, error } = storeToRefs(studentAppFormStore);
 
-import ProgramAPI from '../../services/ProgramAPI';
 import {ApplicationFormType} from '../../types/ApplicationFormType';
-import DegreeAPI from '../../services/DegreeAPI';
-import { DegreeType } from '../../types/DegreeType';
-import { storeToRefs } from 'pinia';
 import TermsAndConditionCard from '../../components/elements/TermsAndConditionCard.vue';
-import { IProgramCategory } from '../../interfaces/IProgramCategory';
-import { IProgram } from '../../interfaces/IProgram';
+// Removed Program and Degree loading for stepper approach; subforms handle their own data
 
+const appFormDataKey = 'APP_FORM_DATA';
+const currentStep = ref<number>(1);
 const applicationFormData = reactive<ApplicationFormType>({
     step: 1,
     firstName: '',
@@ -60,78 +60,70 @@ const applicationFormData = reactive<ApplicationFormType>({
     motherCompany: ''
 });
 
-const otherDegree = ref<String>(''); 
-const isOtherDegreeShow = ref<Boolean>(false);
 const isTermAndConditionOpen = ref<Boolean>(true);
-const programs = ref<IProgram[]>([]);
-const degrees = ref<DegreeType[]>([]);
+const childFormRef = ref<any>(null);
 
 onMounted(() => {
-    loadPrograms();
-    loadDegrees();
     loadCachedFormData();
+    startStepSync();
 })
 
 const loadCachedFormData = () => {
-    const appFormDataKey = 'APP_FORM_DATA';
-
     if (!localStorage.getItem(appFormDataKey)) {
-
         localStorage.setItem(appFormDataKey, JSON.stringify(applicationFormData));
-
+        currentStep.value = 1;
         return;
     }
 
-    let cachedFormData = JSON.parse(localStorage.getItem(appFormDataKey)) as ApplicationFormType[] | null;
-
-    Object.entries(cachedFormData).forEach(([key, value]) => {
-        applicationFormData[key] = value;
+    const cached = JSON.parse(localStorage.getItem(appFormDataKey) || '{}') as any;
+    Object.entries(cached).forEach(([key, value]) => {
+        // @ts-ignore dynamic assign
+        applicationFormData[key] = value as any;
     });
-
-    console.log(applicationFormData);
+    currentStep.value = Number(cached.step || 1);
 }
 
-const loadPrograms = async () => {
-    try {
-        const response = await ProgramAPI.getPrograms();
-
-        response.data.data.programs.forEach((p : IProgramCategory) => {
-
-            p.programs.forEach(prog => {
-
-                programs.value.push(prog);
+let stepSyncTimer: number | undefined;
+const startStepSync = () => {
+    stepSyncTimer = window.setInterval(() => {
+        const cached = JSON.parse(localStorage.getItem(appFormDataKey) || '{}');
+        const nextStep = Number(cached?.step || 1);
+        if (nextStep !== currentStep.value) {
+            currentStep.value = nextStep;
+            // Refresh aggregate form data too
+            Object.entries(cached || {}).forEach(([key, value]) => {
+                // @ts-ignore dynamic assign
+                applicationFormData[key] = value as any;
             });
-        });
-    } catch (error: any) {
-        console.log(error.response);
-    }
-};
-
-const loadDegrees = async () => {
-    try {
-        const response = await DegreeAPI.getDegrees();
-        degrees.value = response.data.data.degrees;
-    } catch (error: any) {
-        console.log(error.response);
-    }
+        }
+    }, 400);
 }
 
-const isOtherDegree = (e : Event) => {
-    const target = e.target as HTMLSelectElement;
-    
-    if (target.value == 'others') {
-        isOtherDegreeShow.value = true;
-
-        return;
-    } 
-
-    isOtherDegreeShow.value = false;
-}
+onUnmounted(() => {
+    if (stepSyncTimer) window.clearInterval(stepSyncTimer);
+});
 
 const submitApplicationForm = async () => {
-    
     await studentAppFormStore.submitApplicationForm(applicationFormData);
 }
+
+const goBack = () => {
+    const next = Math.max(1, Number(currentStep.value) - 1);
+    currentStep.value = next;
+    // Update only the step in cached data while preserving existing payload
+    const cached = JSON.parse(localStorage.getItem(appFormDataKey) || '{}');
+    localStorage.setItem(appFormDataKey, JSON.stringify({ ...cached, ...applicationFormData, step: next }));
+}
+
+const handleNext = () => {
+    // Trigger form submission in child component
+    if (childFormRef.value?.submitForm) {
+        childFormRef.value.submitForm();
+    }
+}
+
+const totalSteps = 4;
+const isLastStep = computed(() => currentStep.value >= totalSteps);
 
 </script>
 
@@ -149,133 +141,58 @@ const submitApplicationForm = async () => {
             <TermsAndConditionCard />
         </PopUp>
 
-        <SchoolForm />
-        
-        <div class="card card-primary" style="overflow-y: auto; height: 94vh;">
+        <AppForm>
             <OverlayLoading v-if="isLoading" />
-            
-            <form @submit.prevent="submitApplicationForm">
-                <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-4">
-                            <label for="first-name">First name <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.firstName" :class="{ 'is-invalid' : 'firstName' in error }" type="text" class="form-control" placeholder="Juan">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="middle-name">Middle name</label>
-                            <input v-model="applicationFormData.middleName" :class="{ 'is-invalid' : 'middleName' in error }" type="text" class="form-control" placeholder="Dela Cruz">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="last-name">Last name <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.lastName" :class="{ 'is-invalid' : 'lastName' in error }" type="text" class="form-control" placeholder="Dela Cruz">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label for="birthdate">Birthdate <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.birthDate" :class="{ 'is-invalid' : 'birthDate' in error }" type="date" class="form-control">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="gender">Gender <span class="text-red">*</span></label>
-                            <select v-model="applicationFormData.gender" :class="{ 'is-invalid' : 'gender' in error }" class="form-control">
-                                <option selected value="">Select gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label for="permanent-address">Permanent address <span class="text-red">*</span></label>
-                            <input type="text" v-model="applicationFormData.permanentAddress" :class="{ 'is-invalid' : 'permanentAddress' in error }" class="form-control">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="provincial-address">Provincial address</label>
-                            <input type="text" v-model="applicationFormData.provincialAddress" :class="{ 'is-invalid' : 'provincialAddress' in error }" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label for="home-number">Home Number</label>
-                            <input v-model="applicationFormData.homeNumber" :class="{ 'is-invalid' : 'homeNumber' in error }" type="text" class="form-control" placeholder="123456789">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="mobile-number">Mobile Number <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.mobileNumber" :class="{ 'is-invalid' : 'mobileNumber' in error }" type="text" class="form-control" placeholder="123456789">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label for="program">Program <span class="text-red">*</span></label>
-                            <select v-model="applicationFormData.programId" :class="{ 'is-invalid' : 'programId' in error }" class="form-control">
-                                <option selected value="0">Select program</option>
-                                <option v-for="(program, index) in programs" :key="index" :value="program.id">{{ program.display_name }}</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="year-level">Year level <span class="text-red">*</span></label>
-                            <select v-model="applicationFormData.yearLevel" :class="{ 'is-invalid' : 'yearLevel' in error }" class="form-control">
-                                <option value="">Select year level</option>
-                                <option value="First Year">First Year</option>
-                                <option value="Second Year">Second Year</option>
-                                <option value="Third Year">Third Year</option>
-                                <option value="Fourth Year">Fourth Year</option>
-                                <option value="Graduated">Graduated</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12 col-md-6">
-                            <label for="skype-id">Skype ID</label>
-                            <input v-model="applicationFormData.skypeId" :class="{ 'is-invalid' : 'skypeId' in error }" type="text" class="form-control">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="fb-link">Facebook link</label>
-                            <input v-model="applicationFormData.fbLink" :class="{ 'is-invalid' : 'fbLink' in error }" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <label for="school">School <span class="text-red">*</span></label>
-                            <select v-model="applicationFormData.schoolId" :class="{ 'is-invalid' : 'schoolId' in error }" class="form-control">
-                                <option selected value="">Select school</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <label for="degree">Degree <span class="text-red">*</span></label>
-                            <select @change="isOtherDegree" v-model="applicationFormData.degree" :class="{ 'is-invalid' : 'degree' in error }" class="form-control">
-                                <option selected value="">Select degree</option>
-                                <option v-for="(degree, index) in degrees" :key="index" :value="degree.id">{{ degree.display_name }}</option>
-                                <option value="others">Other degree...</option>
-                            </select>
-
-                            <input v-if="isOtherDegreeShow" v-model="otherDegree" :class="{ 'is-invalid' : 'degree' in error }" type="text" class="mt-2 form-control input-sm" placeholder="Enter other degree">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <label for="address">School address <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.address" :class="{ 'is-invalid' : 'address' in error }" type="text" class="form-control" placeholder="Address">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-12 col-md-6">
-                            <label for="start-date">School admission date <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.startDate" :class="{ 'is-invalid' : 'startDate' in error }" type="date" class="form-control">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="date-graduate">Expected date of graduation <span class="text-red">*</span></label>
-                            <input v-model="applicationFormData.dateGraduated" :class="{ 'is-invalid' : 'dateGraduated' in error }" type="date" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-block btn-primary">Submit</button>
-                    </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="mr-2 font-weight-bold">Step {{ currentStep }}</div>
+                    <div class="text-muted">of {{ totalSteps }}</div>
                 </div>
-            </form>
-        </div>
+
+                <keep-alive>
+                    <component 
+                        :is="
+                            currentStep === 1 ? BasicForm :
+                            currentStep === 2 ? SchoolForm :
+                            currentStep === 3 ? ParentDetailsForm :
+                            WorkExperienceForm
+                        "
+                        ref="childFormRef"
+                    />
+                </keep-alive>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <button
+                        v-if="currentStep > 1"
+                        type="button"
+                        class="btn btn-secondary"
+                        :disabled="isLoading"
+                        @click="goBack"
+                    >Back</button>
+                    
+                    <button
+                        v-if="!isLastStep"
+                        type="button"
+                        class="btn btn-primary ml-auto"
+                        :disabled="isLoading"
+                        @click="handleNext"
+                    >Next</button>
+                    
+                    <button
+                        v-if="isLastStep"
+                        type="button"
+                        class="btn btn-primary ml-auto"
+                        :disabled="isLoading"
+                        @click="submitApplicationForm"
+                    >
+                        <span v-if="isLoading">
+                            <span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+                            Submitting...
+                        </span>
+                        <span v-else>Submit Application</span>
+                    </button>
+                </div>
+            </div>
+        </AppForm>
     </AuthLayout>
 </template>
