@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentMnlDepartDetails {
     mnl_departure_date: string;
@@ -54,7 +55,7 @@ export const useStudentFlightDetailsStore = defineStore({
 
     },
     actions: {
-        async loadStudentFlightDetails() {
+    async loadStudentFlightDetails(): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -67,10 +68,12 @@ export const useStudentFlightDetailsStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                this.error = error.response.data.message;
+                return { success: true, data: response.data };
+            } catch (error: any) {
+                this.error = error.response?.data?.message ?? 'Failed to load flight details';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error.response?.data?.message ?? 'Failed to load flight details', errors: error.response?.data?.errors ?? {} };
             }
 
         }

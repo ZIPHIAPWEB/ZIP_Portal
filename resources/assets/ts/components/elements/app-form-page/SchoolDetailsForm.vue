@@ -6,6 +6,7 @@ import DegreeAPI from '../../../services/DegreeAPI';
 import { DegreeType } from '@/types/DegreeType';
 import { SchoolType } from '@/types/SchoolType';
 import { onMounted, reactive, ref } from 'vue';
+import AlertService from '../../../services/AlertService';
 
 const appFormDataKey = 'APP_FORM_DATA';
 
@@ -109,7 +110,7 @@ const submitForm = async () => {
             Object.entries(apiErrors).forEach(([k, v]) => { errors[k] = v; });
             return;
         }
-        alert('Oppps... Something went wrong')
+        AlertService.error('Oppps... Something went wrong')
     }
 }
 
@@ -130,6 +131,7 @@ defineExpose({
             <div class="col-12">
                 <label for="school">School <span class="text-red">*</span></label>
                 <select v-model="schoolForm.schoolId" name="school" :class="['form-control', { 'is-invalid': !!errors.schoolId }]">
+                    <option value="" disabled selected>Select a school</option>
                     <option v-for="school in schools" :value="school.id">{{ school.display_name }}</option>
                 </select>
                 <div v-if="errors.schoolId" class="invalid-feedback">{{ errors.schoolId[0] }}</div>
@@ -147,8 +149,7 @@ defineExpose({
                 <label for="degree">Degree <span class="text-red">*</span></label>
                 <select 
                     v-if="!isDegreeOther"
-                    :value="schoolForm.degree" 
-                    @change="handleDegreeChange(($event.target as HTMLSelectElement).value)"
+                    v-model="schoolForm.degree"
                     name="degree" 
                     :class="['form-control', { 'is-invalid': !!errors.degree }]"
                 >

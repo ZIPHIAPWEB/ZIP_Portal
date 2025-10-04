@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
 import { downloadFile } from "../hooks/useFileDownload";
+import { IActionResult, IActionResultVoid } from "../interfaces/IActionResult";
 
 export interface IStudentVisaSponsorRequirement {
     id?: number;
@@ -38,7 +39,7 @@ export const useStudentVisaSponsorRequirement = defineStore({
 
     },
     actions: {
-        async loadVisaSponsorRequirements() {
+    async loadVisaSponsorRequirements(): Promise<IActionResult<IVisaSponsorRequirement[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess= false;
@@ -48,27 +49,31 @@ export const useStudentVisaSponsorRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.requirements };
             } catch (error : any) {
-                this.error = error.response.data.message;
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.error = error?.response?.data?.message;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to load requirements', errors: error?.response?.data?.errors ?? {} };
             }
         },
 
-        async downloadVisaSponsorRequirement(requirementId: string | number | undefined) {
+    async downloadVisaSponsorRequirement(requirementId: string | number | undefined): Promise<IActionResultVoid> {
             try {
                 this.isLoading = true;
                 const response = (await StudentAPI.downloadVisaSponsorRequirement(requirementId)).data;
                 downloadFile(response);
                 this.isLoading = false;
+        return { success: true };
             } catch (error : any) {
-                this.error = error.response.data.message;
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.error = error?.response?.data?.message;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to download file', errors: error?.response?.data?.errors ?? {} };
             }
         },
 
-        async storeVisaSponsorRequirement(requirementId: string | number | undefined, file : File) : Promise<void> {
+    async storeVisaSponsorRequirement(requirementId: string | number | undefined, file : File) : Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -84,15 +89,16 @@ export const useStudentVisaSponsorRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: response.data.data };
             } catch (error : any) {
-                this.error = error.response.data.message;
-                this.isLoading = false;
-                this.isSuccess = false;
-                return error.response.data;
+        this.error = error?.response?.data?.message;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to upload file', errors: error?.response?.data?.errors ?? {} };
             }
         },
 
-        async deleteVisaSponsorRequirement(requirement : IVisaSponsorRequirement) : Promise<void> {
+    async deleteVisaSponsorRequirement(requirement : IVisaSponsorRequirement) : Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -108,12 +114,12 @@ export const useStudentVisaSponsorRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error : any) {
-
-                this.error = error.response.data.message;
-                this.isLoading = false;
-                this.isSuccess = false;
-                return error.response.data;
+        this.error = error?.response?.data?.message;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to delete file', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

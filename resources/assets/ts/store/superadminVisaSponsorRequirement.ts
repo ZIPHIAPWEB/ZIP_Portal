@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import SuperadminApi from "../services/SuperadminApi";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminVisaSponsorRequirement {
     id: string | number;
@@ -28,7 +29,7 @@ export const useSuperadminVisaSponsorRequirementStore = defineStore({
         sponsorReqs: []
     }),
     actions: {
-        async loadSuperadminVisaSponsorRequriements() {
+    async loadSuperadminVisaSponsorRequriements(): Promise<IActionResult<ISuperadminVisaSponsorRequirement[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -39,84 +40,96 @@ export const useSuperadminVisaSponsorRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.sponsorReqs };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to load visa sponsor requirements', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminVisaSponsorRequirement(data : ISuperadminVisaSponsorRequirement) {
+    async storeSuperadminVisaSponsorRequirement(data : ISuperadminVisaSponsorRequirement): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storeVisaSponsorRequirement(data);
-                this.loadSuperadminVisaSponsorRequriements();
+        await this.loadSuperadminVisaSponsorRequriements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to store visa sponsor requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminVisaSponsorRequirement(data : ISuperadminVisaSponsorRequirement, sponsorId : string | number) {
+    async updateSuperadminVisaSponsorRequirement(data : ISuperadminVisaSponsorRequirement, sponsorId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updateVisaSponsorRequirement(data, sponsorId);
-                this.loadSuperadminVisaSponsorRequriements();
+        await this.loadSuperadminVisaSponsorRequriements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to update visa sponsor requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminVisaSponsorRequriement(sponsorId : string | number) {
+    async deleteSuperadminVisaSponsorRequriement(sponsorId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deleteVisaSponsorRequirement(sponsorId);
-                this.loadSuperadminVisaSponsorRequriements();
+        await this.loadSuperadminVisaSponsorRequriements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to delete visa sponsor requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async uploadSuperadminVisaSponsorRequirementFile(file: File, sponsorId : string | number | undefined) {
+    async uploadSuperadminVisaSponsorRequirementFile(file: File, sponsorId : string | number | undefined): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.uploadVisaSponsorReqFile(file, sponsorId);
-                this.loadSuperadminVisaSponsorRequriements();
+        await this.loadSuperadminVisaSponsorRequriements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to upload visa sponsor file', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async removeSuperadminVisaSponsorRequirementFile(sponsorId : string | number) {
+    async removeSuperadminVisaSponsorRequirementFile(sponsorId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.removeVisaSponsorReqFile(sponsorId);
-                this.loadSuperadminVisaSponsorRequriements();
+        await this.loadSuperadminVisaSponsorRequriements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to remove visa sponsor file', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

@@ -10,6 +10,7 @@ import { DegreeType } from '../../../../types/DegreeType';
 
 const studentTertiaryStore = useStudentTertiaryStore();
 const { isLoading, isSuccess, tertiary } = storeToRefs(studentTertiaryStore)
+import AlertService from '../../../../services/AlertService';
 
 import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
@@ -28,7 +29,12 @@ const tertiaryFormData = ref<IStudentTertiary>({
 });
 
 onMounted(async () => {
-    await studentTertiaryStore.loadStudentTertiaryDetails();
+    const res = await studentTertiaryStore.loadStudentTertiaryDetails();
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to load tertiary details');
+        return;
+    }
+
     await loadSchool();
     await loadDegree();
     tertiaryFormData.value = {...tertiary.value};
@@ -46,7 +52,7 @@ const loadSchool = async () => {
 const loadDegree = async () => {
     try {
         const response = await DegreeAPI.getDegrees();
-        degrees.value = response.data.data.degrees;
+        degrees.value = response.data;
     } catch (error: any) {
         console.log(error);
     }
@@ -55,8 +61,14 @@ const loadDegree = async () => {
 const updateTertiaryDetails = async () => {
     tertiaryFormData.value.school = ''+schools.value.find((school: SchoolType) => school.id === tertiaryFormData.value.school_id)?.name;
 
-    await studentTertiaryStore.updateStudentTertiaryDetails(tertiaryFormData.value);
-    tertiaryIsEdit.value = false;
+    const res = await studentTertiaryStore.updateStudentTertiaryDetails(tertiaryFormData.value);
+    if (res.success) {
+        tertiaryIsEdit.value = false;
+        await AlertService.success('Tertiary details updated successfully.');
+    } else {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to update tertiary details');
+    }
 }
 </script>
 

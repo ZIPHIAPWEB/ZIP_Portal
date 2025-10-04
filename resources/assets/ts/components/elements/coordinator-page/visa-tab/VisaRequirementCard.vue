@@ -4,6 +4,7 @@ import { userCoordStudentVisaSponsorRequirement } from '../../../../store/coordS
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../../../store/auth';
 import UploadButton from '../../profile-page/program-requirements/UploadButton.vue';
+import AlertService from '../../../../services/AlertService';
 
 const authStore = useAuthStore();
 
@@ -11,12 +12,26 @@ const coordStudentVisaSponsorRequirementStore = userCoordStudentVisaSponsorRequi
 const { isLoading, sponsorRequirements } = storeToRefs(coordStudentVisaSponsorRequirementStore);
 
 onMounted(async () => {
-    await coordStudentVisaSponsorRequirementStore.loadSelectedStudentSponsorRequirement();
+    const res = await coordStudentVisaSponsorRequirementStore.loadSelectedStudentSponsorRequirement();
+    if (!res.success) AlertService.error(res.message || 'Failed to load requirements');
 })
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await coordStudentVisaSponsorRequirementStore.uploadSelectedStudentVisaSponsorRequirement(requirementId, file);
+    if (res.success) AlertService.success('File uploaded', 'Success');
+    else if (res.errors) AlertService.validation(res.errors);
+    else AlertService.error(res.message || 'Failed to upload file');
+}
 
-    await coordStudentVisaSponsorRequirementStore.uploadSelectedStudentVisaSponsorRequirement(requirementId, file);
+const downloadHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentVisaSponsorRequirementStore.downloadSelectedStudentVisaSponsorRequirement(requirementId as any);
+    if (!res.success) AlertService.error(res.message || 'Failed to download file');
+}
+
+const removeHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentVisaSponsorRequirementStore.removeSelectedStudentVisaSponsorRequirement(requirementId as any);
+    if (res.success) AlertService.success('File removed', 'Success');
+    else AlertService.error(res.message || 'Failed to remove file');
 }
 </script>
 
@@ -44,11 +59,11 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                         </td>
                         <td v-if="authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'superadmin'" class="text-center">
                             <UploadButton v-if="!item.student_visa" :requirement-id="item.id" @getFile="uploadFileHander" />
-                            <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.downloadSelectedStudentVisaSponsorRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.removeSelectedStudentVisaSponsorRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
+                            <button v-if="item.student_visa" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_visa" @click="removeHandler(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                         <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
-                            <button v-if="item.student_visa" @click="coordStudentVisaSponsorRequirementStore.downloadSelectedStudentVisaSponsorRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_visa" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                         </td>
                     </tr>
                 </tbody>

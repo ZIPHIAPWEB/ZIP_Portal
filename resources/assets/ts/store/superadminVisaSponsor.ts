@@ -2,6 +2,7 @@ import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminVisaSponsor {
     id: string | number;
@@ -25,7 +26,7 @@ export const useSuperadminVisaSponsorStore = defineStore({
         links: []
     }),
     actions: {
-        async loadSuperadminVisaSponsors() {
+    async loadSuperadminVisaSponsors(): Promise<IActionResult<ISuperadminVisaSponsor[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -34,56 +35,64 @@ export const useSuperadminVisaSponsorStore = defineStore({
                 this.sponsors = response.data;
                 this.links = response.meta.links;
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true, data: this.sponsors };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to load visa sponsors', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminVisaSponsor(data : ISuperadminVisaSponsor) {
+    async storeSuperadminVisaSponsor(data : ISuperadminVisaSponsor): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storeVisaSponsor(data);
-                this.loadSuperadminVisaSponsors();
+        await this.loadSuperadminVisaSponsors();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to store visa sponsor', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminVisaSponsor(data : ISuperadminVisaSponsor, sponsorId : string | number) {
+    async updateSuperadminVisaSponsor(data : ISuperadminVisaSponsor, sponsorId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updateProgram(data, sponsorId);
-                this.loadSuperadminVisaSponsors();
+        await this.loadSuperadminVisaSponsors();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to update visa sponsor', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminVisaSponsor(sponsorId : string | number) {
+    async deleteSuperadminVisaSponsor(sponsorId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deleteVisaSponsor(sponsorId);
-                this.loadSuperadminVisaSponsors();
+        await this.loadSuperadminVisaSponsors();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to delete visa sponsor', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

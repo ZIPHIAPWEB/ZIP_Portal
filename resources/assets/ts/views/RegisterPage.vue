@@ -3,6 +3,8 @@ import AuthLayout from '../components/layouts/AuthLayout.vue';
 import AuthAPI from '../services/AuthAPI';
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import AlertService from '../services/AlertService';
 
 import { useAuthStore } from '../store/auth';
 const authStore = useAuthStore();
@@ -12,9 +14,20 @@ const email = ref<string>('');
 const password = ref<string>('');
 const password_confirmation = ref<string>('');
 
+const router = useRouter();
+
 const register = async () => {
-    
-    await authStore.register(username.value, email.value, password.value, password_confirmation.value);
+    const result = await authStore.register(username.value, email.value, password.value, password_confirmation.value);
+
+    if (result.success) {
+        if (result.data?.redirect) router.push({ name: result.data.redirect });
+    } else {
+        if (result.errors) {
+            await AlertService.validation(result.errors);
+        } else {
+            await AlertService.error(result.message || 'Registration failed.');
+        }
+    }
 
 }
 

@@ -43,10 +43,18 @@ const loadPrograms = async () => {
     }
 };
 
-const submitCoordFormHandler = async () => {
+import AlertService from '../../../services/AlertService';
 
-    await superadminCoordStore.createSuperadminCoord(coordForm.value);
-    emits('submitSuccessEvent');
+const submitCoordFormHandler = async () => {
+    const res = await superadminCoordStore.createSuperadminCoord(coordForm.value);
+    if (res && res.success) {
+        await AlertService.success('Coordinator created', 'Success');
+        emits('submitSuccessEvent');
+    } else if (res && res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res?.message || 'Failed to create coordinator');
+    }
 }
 </script>
 

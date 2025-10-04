@@ -4,7 +4,7 @@ import ProfileTab from '../../components/elements/profile-page/ProfileTab.vue';
 import RequirementsTab from '../../components/elements/profile-page/RequirementsTab.vue';
 import ProgramRequirementsTab from '../../components/elements/profile-page/ProgramRequirementsTab.vue';
 
-import { ref, onMounted } from 'vue';
+import { shallowRef, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import { useAuthStore } from '../../store/auth';
@@ -15,7 +15,7 @@ const studentPersonal = useStudentPersonal();
 const { auth } = storeToRefs(authStore);
 const { getFullname } = storeToRefs(studentPersonal);
 
-const selectedTab = ref(ProfileTab);
+const selectedTab = shallowRef(ProfileTab);
 const tabs = [
     {
         name: 'Payment Requirements',

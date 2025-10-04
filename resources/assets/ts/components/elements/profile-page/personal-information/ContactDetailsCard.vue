@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import { useStudentContactStore, IStudentContactInfo } from '../../../../store/studentContact';
 const studentContactStore = useStudentContactStore();
 const { isLoading, isSuccess, contact } = storeToRefs(studentContactStore);
+import AlertService from '../../../../services/AlertService';
 
 import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
@@ -19,13 +20,24 @@ const contactFormData = ref<IStudentContactInfo>({
 });
 
 onMounted(async () => {
-    await studentContactStore.loadStudentContactDetails();
+    const res = await studentContactStore.loadStudentContactDetails();
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to load contact details');
+        return;
+    }
+
     contactFormData.value = contact.value;
 })
 
 const updateContactDetails = async () => {
-    await studentContactStore.updateStudentContactDetails(contactFormData.value);
-    contactIsEdit.value = false;
+    const res = await studentContactStore.updateStudentContactDetails(contactFormData.value);
+    if (res.success) {
+        contactIsEdit.value = false;
+        await AlertService.success('Contact details updated successfully.');
+    } else {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to update contact details');
+    }
 };
 </script>
 

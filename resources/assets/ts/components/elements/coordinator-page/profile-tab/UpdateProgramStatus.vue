@@ -13,6 +13,7 @@ const emits = defineEmits<{
 }>();
 
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import AlertService from '../../../../services/AlertService';
 const useCoordStudent = useCoordSelectedStudent();
 
 const isAppStatusEdit = ref<boolean>(false);
@@ -38,11 +39,22 @@ const updateApplicationStatus = async (payload : Event) => {
         return;
     }
 
-    if (confirm(`Tag student to ${nextStatus}`)) {
+    const confirmed = await AlertService.confirm(`Tag student to ${nextStatus}`, 'Confirm');
 
-        await useCoordStudent.updateProgramStatus(nextStatus);
-
+    if (!confirmed) {
         isAppStatusEdit.value = false;
+        return;
+    }
+
+    const res = await useCoordStudent.updateProgramStatus(nextStatus);
+
+    if (res.success) {
+        isAppStatusEdit.value = false;
+        AlertService.success('Status updated', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to update status');
     }
 }
 </script>

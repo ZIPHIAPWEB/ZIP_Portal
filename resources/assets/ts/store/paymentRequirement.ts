@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
 import { AxiosError } from "axios";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentPaymentRequirementForm {
     bank_code: string;
@@ -54,21 +55,23 @@ export const useStudentPaymentRequirement = defineStore({
 
     },
     actions: {
-        async loadStudentPaymentRequirements() {
+    async loadStudentPaymentRequirements(): Promise<IActionResult<IPaymentRequirement[]>> {
             try {
                 this.isLoading = true;
                 const response = await StudentAPI.getPaymentRequirements();
                 this.requirements = response.data.data;
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.requirements };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: this.error, errors: error.response?.data?.errors };
             }
         },
 
-        async storePaymentRequirement(requirementId: any, data: IStudentPaymentRequirementForm) {
+    async storePaymentRequirement(requirementId: any, data: IStudentPaymentRequirementForm): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 const response = await StudentAPI.storePaymentRequirement(requirementId, data);
@@ -83,6 +86,7 @@ export const useStudentPaymentRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: response.data };
             } catch (e) {
                 const errors = e as AxiosError;
                 this.error = errors.response.data.message;
@@ -90,10 +94,11 @@ export const useStudentPaymentRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: this.error, errors: this.errors };
             }
         },
 
-        async removePaymentRequirement(requirementId: any) {
+    async removePaymentRequirement(requirementId: any): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 await StudentAPI.removePaymentRequirement(requirementId);
@@ -107,6 +112,7 @@ export const useStudentPaymentRequirement = defineStore({
                 });
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (e) {
                 const errors = e as AxiosError;
                 this.error = errors.response.data.message;
@@ -114,6 +120,7 @@ export const useStudentPaymentRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: this.error, errors: this.errors };
             }
         }
     }

@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import { useStudentMotherStore, IStudentMother } from '../../../../store/studentMother';
 const studentMotherStore = useStudentMotherStore();
 const { isLoading, isSuccess, mother } = storeToRefs(studentMotherStore);
+import AlertService from '../../../../services/AlertService';
 
 import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
@@ -21,13 +22,24 @@ const motherFormData = ref<IStudentMother>({
 });
 
 onMounted(async () => {
-    await studentMotherStore.loadStudentMotherDetails();  
+    const res = await studentMotherStore.loadStudentMotherDetails();
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to load mother details');
+        return;
+    }
+
     motherFormData.value = {...mother.value};
 })
 
 const updateMotherDetails = async () => {
-    await studentMotherStore.updateMotherDetails(motherFormData.value);
-    motherIsEdit.value = false;
+    const res = await studentMotherStore.updateMotherDetails(motherFormData.value);
+    if (res.success) {
+        motherIsEdit.value = false;
+        await AlertService.success('Mother details updated successfully.');
+    } else {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to update mother details');
+    }
 }
 </script>
 

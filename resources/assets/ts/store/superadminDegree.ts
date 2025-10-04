@@ -2,6 +2,7 @@ import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import SuperadminApi from "../services/SuperadminApi";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminDegree {
     id: string | number;
@@ -24,7 +25,7 @@ export const useSuperadminDegreeStore = defineStore({
         degrees: []
     }),
     actions: {
-        async loadSuperadminDegrees() {
+    async loadSuperadminDegrees(): Promise<IActionResult<ISuperadminDegree[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -32,56 +33,64 @@ export const useSuperadminDegreeStore = defineStore({
                 const response = (await SuperadminApi.getAllDegrees()).data;
                 this.degrees = response.data;
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true, data: this.degrees };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to load degrees', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminDegree(data : ISuperadminDegree) {
+    async storeSuperadminDegree(data : ISuperadminDegree): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 (await SuperadminApi.storeDegree(data));
-                this.loadSuperadminDegrees();
+        await this.loadSuperadminDegrees();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to store degree', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminDegree(data : ISuperadminDegree, degreeId : string | number) {
+    async updateSuperadminDegree(data : ISuperadminDegree, degreeId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 (await SuperadminApi.updateDegree(data, degreeId));
-                this.loadSuperadminDegrees();
+        await this.loadSuperadminDegrees();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to update degree', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminDegree(degreeId : string | number) {
+    async deleteSuperadminDegree(degreeId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 (await SuperadminApi.deleteDegree(degreeId));
-                this.loadSuperadminDegrees();
+        await this.loadSuperadminDegrees();
 
-                this.isLoading = false;
-                this.isSuccess = true;
+        this.isLoading = false;
+        this.isSuccess = true;
+        return { success: true };
             } catch (error) {
-                this.isLoading = false;
-                this.isSuccess = false;
+        this.isLoading = false;
+        this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to delete degree', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

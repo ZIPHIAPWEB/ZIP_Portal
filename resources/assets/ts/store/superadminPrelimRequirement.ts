@@ -2,6 +2,7 @@ import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminPrelimRequirement {
     id: string | number;
@@ -32,7 +33,7 @@ export const useSuperadminPrelimRequirementStore = defineStore({
         links: []
     }),
     actions : {
-        async loadSuperadminPrelimRequirements() {
+    async loadSuperadminPrelimRequirements(): Promise<IActionResult<ISuperadminPrelimRequirement[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -43,12 +44,14 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.prelims };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to load prelim requirements', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement) {
+    async storeSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -58,12 +61,14 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to store prelim requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement, prelimId : string | number) {
+    async updateSuperadminPrelimRequirement(data : ISuperadminPrelimRequirement, prelimId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -73,12 +78,14 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to update prelim requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminPrelimRequirement(prelimId : string | number) {
+    async deleteSuperadminPrelimRequirement(prelimId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -88,12 +95,14 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to delete prelim requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async uploadSuperadminPrelimRequirementFile(file: File, prelimId : string | number | undefined) {
+    async uploadSuperadminPrelimRequirementFile(file: File, prelimId : string | number | undefined): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -103,12 +112,14 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to upload prelim file', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async removeSuperadminPrelimRequirementFile(prelimId : string | number) {
+    async removeSuperadminPrelimRequirementFile(prelimId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -118,9 +129,11 @@ export const useSuperadminPrelimRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error?.response?.data?.message ?? 'Failed to remove prelim file', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

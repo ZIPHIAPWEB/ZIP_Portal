@@ -7,6 +7,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import UploadButton from '../../../components/elements/profile-page/program-requirements/UploadButton.vue';
 
 import { ISuperadminPrelimRequirement, useSuperadminPrelimRequirementStore } from '../../../store/superadminPrelimRequirement';
+import AlertService from '../../../services/AlertService';
 const superadminPrelimRequirementStore = useSuperadminPrelimRequirementStore();
 const { prelims, error, isLoading, isSuccess, links } = storeToRefs(superadminPrelimRequirementStore);
 
@@ -48,11 +49,19 @@ const openPrelimRequirementForm = (prelim?: ISuperadminPrelimRequirement) => {
 const submitActionHandler = async () => {
 
     if (!isPrelimForEdit.value) {
-
-        await superadminPrelimRequirementStore.storeSuperadminPrelimRequirement(prelimForm.value);
+        const res = await superadminPrelimRequirementStore.storeSuperadminPrelimRequirement(prelimForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store requirement');
+            return;
+        }
     } else {
-
-        await superadminPrelimRequirementStore.updateSuperadminPrelimRequirement(prelimForm.value, prelimForm.value.id);
+        const res = await superadminPrelimRequirementStore.updateSuperadminPrelimRequirement(prelimForm.value, prelimForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update requirement');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -79,8 +88,39 @@ const resetFormHandler = () => {
 
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await superadminPrelimRequirementStore.uploadSuperadminPrelimRequirementFile(file, requirementId);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to upload file');
+        return;
+    }
 
-    await superadminPrelimRequirementStore.uploadSuperadminPrelimRequirementFile(file, requirementId);
+    await AlertService.success('File uploaded', 'Uploaded');
+}
+
+const onRemoveFile = async (id: string | number) => {
+    const res = await superadminPrelimRequirementStore.removeSuperadminPrelimRequirementFile(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to remove file');
+        return;
+    }
+
+    await AlertService.success('File removed', 'Removed');
+}
+
+const onDeletePrelim = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this requirement?');
+    if (!confirmed) return;
+
+    const res = await superadminPrelimRequirementStore.deleteSuperadminPrelimRequirement(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete requirement');
+        return;
+    }
+
+    await AlertService.success('Requirement deleted', 'Deleted');
 }
 
 </script>
@@ -165,9 +205,9 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                                 <td>{{ req.created_at }}</td>
                                 <td>
                                     <UploadButton v-if="(req.path == '' || req.path == null)" :requirementId="req.id" @getFile="uploadFileHander" />
-                                    <button v-if="!(req.path == '' || req.path == null)" @click="superadminPrelimRequirementStore.removeSuperadminPrelimRequirementFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
+                                    <button v-if="!(req.path == '' || req.path == null)" @click="onRemoveFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
                                     <button @click="openPrelimRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminPrelimRequirementStore.deleteSuperadminPrelimRequirement(req.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeletePrelim(req.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

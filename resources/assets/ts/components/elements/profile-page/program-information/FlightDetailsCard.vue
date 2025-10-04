@@ -3,12 +3,16 @@ import DetailsCard from '../../DetailsCard.vue';
 import {useStudentFlightDetailsStore} from '../../../../store/studentFlightDetails';
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
+import AlertService from '../../../../services/AlertService';
 
 const studentFlightDetailsStore = useStudentFlightDetailsStore();
 const { isLoading, isSuccess, mnlDeparture, usArrival, usDeparture, mnlArrival } = storeToRefs(studentFlightDetailsStore);
 
 onMounted(async () => {
-    await studentFlightDetailsStore.loadStudentFlightDetails();
+    const res = await studentFlightDetailsStore.loadStudentFlightDetails();
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to load flight details');
+    }
 })
 </script>
 

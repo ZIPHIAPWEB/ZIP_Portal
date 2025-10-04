@@ -6,6 +6,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import SuperadminLayout from '../../../components/layouts/SuperadminLayout.vue';
 
 import { ISuperadminDegree, useSuperadminDegreeStore } from '../../../store/superadminDegree';
+import AlertService from '../../../services/AlertService';
 const superadminDegreeStore = useSuperadminDegreeStore();
 const { isLoading, isSuccess, degrees, links } = storeToRefs(superadminDegreeStore);
 
@@ -39,11 +40,19 @@ const openDegreeForm = (company? : ISuperadminDegree) => {
 const submitActionHandler = async () => {
 
     if (!isDegreeForEdit.value) {
-
-        await superadminDegreeStore.storeSuperadminDegree(degreeForm.value);
+        const res = await superadminDegreeStore.storeSuperadminDegree(degreeForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store degree');
+            return;
+        }
     } else {
-
-        await superadminDegreeStore.updateSuperadminDegree(degreeForm.value, degreeForm.value.id);
+        const res = await superadminDegreeStore.updateSuperadminDegree(degreeForm.value, degreeForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update degree');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -64,6 +73,20 @@ const resetFormHandler = () => {
     degreeForm.value.display_name = '';
     degreeForm.value.name = '';
     degreeForm.value.id = '';
+}
+
+const onDeleteDegree = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this degree?');
+    if (!confirmed) return;
+
+    const res = await superadminDegreeStore.deleteSuperadminDegree(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete degree');
+        return;
+    }
+
+    await AlertService.success('Degree deleted', 'Deleted');
 }
 
 </script>
@@ -124,7 +147,7 @@ const resetFormHandler = () => {
                                 <td>{{ degree.created_at }}</td>
                                 <td>
                                     <button @click="openDegreeForm(degree)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminDegreeStore.deleteSuperadminDegree(degree.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteDegree(degree.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

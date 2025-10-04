@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentPdosCfoSchedule {
     pdos_schedule: string;
@@ -29,7 +30,7 @@ export const useStudentPdosCfoSchedule = defineStore({
 
     },
     actions: {
-        async loadStudentPdosCfoSchedule() {
+    async loadStudentPdosCfoSchedule(): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -39,10 +40,12 @@ export const useStudentPdosCfoSchedule = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                this.error = error.response.data.message;
+                return { success: true, data: this.schedule };
+            } catch (error: any) {
+                this.error = error.response?.data?.message ?? 'Failed to load PDOS/CFO schedule';
                 this.isSuccess = false;
                 this.isLoading = false;
+                return { success: false, message: error.response?.data?.message ?? 'Failed to load PDOS/CFO schedule', errors: error.response?.data?.errors ?? {} };
             }
         }
     }

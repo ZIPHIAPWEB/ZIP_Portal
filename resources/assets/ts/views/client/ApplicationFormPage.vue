@@ -10,10 +10,14 @@ import WorkExperienceForm from '../../components/elements/app-form-page/WorkExpe
 
 import { ref, reactive, onMounted, onUnmounted, computed } from 'vue';
 import { storeToRefs } from 'pinia';
+import AlertService from '../../services/AlertService';
+import { useRouter } from 'vue-router';
 import {useStudentAppFormStore} from '../../store/studentAppForm';
 
 const studentAppFormStore = useStudentAppFormStore();
 const { isSuccess, isLoading, error } = storeToRefs(studentAppFormStore);
+
+const router = useRouter();
 
 import {ApplicationFormType} from '../../types/ApplicationFormType';
 import TermsAndConditionCard from '../../components/elements/TermsAndConditionCard.vue';
@@ -104,7 +108,23 @@ onUnmounted(() => {
 });
 
 const submitApplicationForm = async () => {
-    await studentAppFormStore.submitApplicationForm(applicationFormData);
+    const result = await studentAppFormStore.submitApplicationForm(applicationFormData);
+
+    if (result.success) {
+        // Clear cached form data
+        localStorage.removeItem(appFormDataKey);
+
+        await AlertService.success('Your application has been submitted successfully. Press Continue to go to your dashboard.', 'Success!');
+
+        router.push({ name: 'student-dashboard' });
+    } else {
+        // Show error alert; prefer first validation error when available
+        if (result.errors) {
+            await AlertService.validation(result.errors);
+        } else {
+            await AlertService.error(result.message || 'Failed to submit application.');
+        }
+    }
 }
 
 const goBack = () => {

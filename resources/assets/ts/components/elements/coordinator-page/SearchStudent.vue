@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useCoordStudent } from '../../../store/coordStudents'
+import AlertService from '../../../services/AlertService';
 const coordStudent = useCoordStudent();
 
 const props = defineProps<{
@@ -10,7 +11,8 @@ const props = defineProps<{
 const searchField = ref<string>('');
 
 const searchHandler = async () => {
-    await coordStudent.searchStudentData(props.program, searchField.value)
+    const res = await coordStudent.searchStudentData(props.program, searchField.value);
+    if (!res.success) AlertService.error(res.message || 'Failed to search students');
 }
 </script>
 

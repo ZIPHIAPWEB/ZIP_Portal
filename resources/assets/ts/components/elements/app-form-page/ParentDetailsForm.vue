@@ -2,6 +2,7 @@
 import { IParentsForm } from '../../../interfaces/IParentsForm';
 import ApplicationFormAPI from '../../../services/ApplicationFormAPI';
 import { reactive } from 'vue';
+import AlertService from '../../../services/AlertService';
 
 const appFormDataKey = 'APP_FORM_DATA';
 
@@ -34,7 +35,7 @@ const submitForm = async () => {
             Object.entries(apiErrors).forEach(([k, v]) => { errors[k] = v; });
             return;
         }
-        alert('Oppps... Something went wrong');
+    await AlertService.error('Oppps... Something went wrong');
     }
 }
 

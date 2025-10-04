@@ -3,12 +3,14 @@ import { ref, onMounted } from 'vue';
 import { useCoordStudentPdosCfoInfo } from '../../../../store/coordStudentPdosCfoInfo';
 import { storeToRefs } from 'pinia';
 import { IStudentPdosCfoSchedule } from '../../../../store/studentPdosCfoSchedule';
+import AlertService from '../../../../services/AlertService';
 
 const coordStudentPdosCfoInfo = useCoordStudentPdosCfoInfo();
 const { isLoading, pdosCfoSchedule } = storeToRefs(coordStudentPdosCfoInfo);
 
 onMounted(async () => {
-    await coordStudentPdosCfoInfo.loadPdosCfoInfo();
+    const res = await coordStudentPdosCfoInfo.loadPdosCfoInfo();
+    if (!res.success) AlertService.error(res.message || 'Failed to load PDOS/CFO info');
     pdosCfoForm.value = { ...pdosCfoSchedule.value };
 });
 
@@ -23,9 +25,15 @@ const pdosCfoForm = ref<IStudentPdosCfoSchedule>({
 })
 
 const updatePdosCfoInfo = async () => {
-    await coordStudentPdosCfoInfo.updatePdosCfoInfo(pdosCfoForm.value);
-    pdosCfoIsEdit.value = false;
-    alert('PDOS and CFO details updated!')
+    const res = await coordStudentPdosCfoInfo.updatePdosCfoInfo(pdosCfoForm.value);
+    if (res.success) {
+        pdosCfoIsEdit.value = false;
+        AlertService.success('PDOS and CFO details updated!', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to update PDOS/CFO details');
+    }
 }
 </script>
 

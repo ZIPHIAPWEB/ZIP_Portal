@@ -1,6 +1,7 @@
 import { IBaseState } from "../interfaces/IBaseState";
 import SuperadminApi from "../services/SuperadminApi";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminHostCompany {
     id: string | number;
@@ -22,7 +23,7 @@ export const useSuperadminHostCompanyStore = defineStore({
         hostCompanies: []
     }),
     actions : {
-        async loadSuperadminHostCompanies() {
+    async loadSuperadminHostCompanies(): Promise<IActionResult<ISuperadminHostCompany[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -32,54 +33,62 @@ export const useSuperadminHostCompanyStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true, data: this.hostCompanies };
+            } catch (error: any) {
                 this.isSuccess = false;
                 this.isLoading = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load host companies', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminHostCompany(data : ISuperadminHostCompany) {
+    async storeSuperadminHostCompany(data : ISuperadminHostCompany): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storeHostCompany(data);
-                this.loadSuperadminHostCompanies();
+                await this.loadSuperadminHostCompanies();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isSuccess = false;
                 this.isLoading = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to store host company', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminHostCompany(data : ISuperadminHostCompany, companyId : string | number) {
+    async updateSuperadminHostCompany(data : ISuperadminHostCompany, companyId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updateHostCompany(data, companyId);
-                this.loadSuperadminHostCompanies();
+                await this.loadSuperadminHostCompanies();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isSuccess = false;
                 this.isLoading = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to update host company', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadmonHostCompany(companyId : string | number) {
+    async deleteSuperadmonHostCompany(companyId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deleteHostCompany(companyId);
-                this.loadSuperadminHostCompanies();
+                await this.loadSuperadminHostCompanies();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isSuccess = false;
                 this.isLoading = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete host company', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

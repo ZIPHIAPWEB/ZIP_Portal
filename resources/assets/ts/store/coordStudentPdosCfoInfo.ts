@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { IStudentPdosCfoSchedule } from "./studentPdosCfoSchedule";
 import CoordinatorApi from "../services/CoordinatorApi";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ICoordStudentPdosCfoInfoState {
     isSuccess: boolean;
@@ -18,7 +19,7 @@ export const useCoordStudentPdosCfoInfo = defineStore({
     }),
     getters: {},
     actions: {
-        async loadPdosCfoInfo() {
+    async loadPdosCfoInfo(): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -30,13 +31,21 @@ export const useCoordStudentPdosCfoInfo = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
+
+                return { success: true, data: this.pdosCfoSchedule };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+
+                return {
+                    success: false,
+                    message: error?.response?.data?.message || 'Failed to load PDOS/CFO info',
+                    errors: error?.response?.data?.errors ?? null
+                };
             }
         },
 
-        async updatePdosCfoInfo(data : IStudentPdosCfoSchedule) {
+    async updatePdosCfoInfo(data: IStudentPdosCfoSchedule): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -48,8 +57,17 @@ export const useCoordStudentPdosCfoInfo = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                
+
+                return { success: true, data: this.pdosCfoSchedule };
+            } catch (error: any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+
+                return {
+                    success: false,
+                    message: error?.response?.data?.message || 'Failed to update PDOS/CFO info',
+                    errors: error?.response?.data?.errors ?? null
+                };
             }
         }
     }

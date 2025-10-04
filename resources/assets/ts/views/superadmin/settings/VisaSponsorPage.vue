@@ -6,6 +6,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import SuperadminLayout from '../../../components/layouts/SuperadminLayout.vue';
 
 import { ISuperadminVisaSponsor, useSuperadminVisaSponsorStore } from '../../../store/superadminVisaSponsor';
+import AlertService from '../../../services/AlertService';
 const superadminVisaSponsorStore = useSuperadminVisaSponsorStore();
 const { isLoading, isSuccess, sponsors } = storeToRefs(superadminVisaSponsorStore);
 
@@ -42,11 +43,19 @@ const openVisaSponsorForm = (sponsor?: ISuperadminVisaSponsor) => {
 const submitActionHandler = async () => {
 
     if (!isVisaSponsorForEdit.value) {
-
-        await superadminVisaSponsorStore.storeSuperadminVisaSponsor(visaSponsorForm.value);
+        const res = await superadminVisaSponsorStore.storeSuperadminVisaSponsor(visaSponsorForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store sponsor');
+            return;
+        }
     } else {
-
-        await superadminVisaSponsorStore.updateSuperadminVisaSponsor(visaSponsorForm.value, visaSponsorForm.value.id);
+        const res = await superadminVisaSponsorStore.updateSuperadminVisaSponsor(visaSponsorForm.value, visaSponsorForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update sponsor');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -68,6 +77,20 @@ const resetFormHandler = () => {
     visaSponsorForm.value.display_name = '';
     visaSponsorForm.value.name = '';
     visaSponsorForm.value.id = '';
+}
+
+const onDeleteSponsor = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this sponsor?');
+    if (!confirmed) return;
+
+    const res = await superadminVisaSponsorStore.deleteSuperadminVisaSponsor(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete sponsor');
+        return;
+    }
+
+    await AlertService.success('Sponsor deleted', 'Deleted');
 }
 
 </script>
@@ -135,7 +158,7 @@ const resetFormHandler = () => {
                                 <td>{{ sponsor.created_at }}</td>
                                 <td>
                                     <button @click="openVisaSponsorForm(sponsor)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminVisaSponsorStore.deleteSuperadminVisaSponsor(sponsor.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteSponsor(sponsor.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

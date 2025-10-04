@@ -2,6 +2,7 @@ import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from '../interfaces/IPagination';
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ISuperadminStudent {
     user_id: string | number;
@@ -26,7 +27,7 @@ export const useSuperadminStudent = defineStore({
         links: []
     }),
     actions: {
-        async deleteSuperadminStudent(userId : number | string) {
+    async deleteSuperadminStudent(userId : number | string): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -36,12 +37,14 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete student', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async searchSuperaminStudentData(searchData : string) {
+    async searchSuperaminStudentData(searchData : string): Promise<IActionResult<ISuperadminStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -52,12 +55,14 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true, data: this.students };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to search students', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async loadSuperadminStudentsData() {
+    async loadSuperadminStudentsData(): Promise<IActionResult<ISuperadminStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -68,12 +73,14 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true, data: this.students };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load students', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async verifyStudent(userId : number | string) {
+    async verifyStudent(userId : number | string): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -83,12 +90,14 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to verify student', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async unverifyStudent(userId : number | string) {
+    async unverifyStudent(userId : number | string): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -98,12 +107,14 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to unverify student', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async resetAccountPassword(userId : number | string) {
+    async resetAccountPassword(userId : number | string): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -113,9 +124,11 @@ export const useSuperadminStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to reset password', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

@@ -1,6 +1,7 @@
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import SuperadminApi from "../services/SuperadminApi";
+import { IActionResult } from "../interfaces/IActionResult";
 import { defineStore } from "pinia";
 
 export interface ISuperadminProgram {
@@ -26,7 +27,7 @@ export const useSuperadminProgram = defineStore({
         programs: []
     }),
     actions: {
-        async loadSuperadminPrograms() {
+    async loadSuperadminPrograms(): Promise<IActionResult<ISuperadminProgram[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -36,11 +37,14 @@ export const useSuperadminProgram = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true, data: this.programs };
+            } catch (error: any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load programs', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminProgram(programId : string | number) {
+    async deleteSuperadminProgram(programId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -50,8 +54,11 @@ export const useSuperadminProgram = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true };
+            } catch (error: any) {
+                this.isLoading = false;
+                this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete program', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

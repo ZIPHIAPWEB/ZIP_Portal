@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { IStudentMnlArrivalDetails, IStudentMnlDepartDetails, IStudentUsArrivalDetails, IStudentUsDepartDetails } from "./studentFlightDetails";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
 import CoordinatorApi from "../services/CoordinatorApi";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ICoordStudentFlightInfoState {
     isSuccess: boolean;
@@ -26,7 +27,7 @@ export const useCoordStudentFlightInfo = defineStore({
     }),
     getters: {},
     actions: {
-        async loadSelectedStudentFlightInfo() {
+    async loadSelectedStudentFlightInfo(): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -41,12 +42,16 @@ export const useCoordStudentFlightInfo = defineStore({
                 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: response.data };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to load flight info';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
-        async updateSelectedStudentFlightInfo(data : any) {
+    async updateSelectedStudentFlightInfo(data : any): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -61,9 +66,13 @@ export const useCoordStudentFlightInfo = defineStore({
                 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: response.data };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to update flight info';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         }
     }

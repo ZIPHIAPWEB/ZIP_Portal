@@ -5,6 +5,7 @@ import ApplicationFormAPI from '../../../services/ApplicationFormAPI';
 import { onMounted, reactive } from 'vue';
 import { ProgramType } from '@/types/ProgramType';
 import ProgramAPI from '../../../services/ProgramAPI';
+import AlertService from '../../../services/AlertService';
 
 const appFormDataKey = 'APP_FORM_DATA';
 const basicForm = reactive<IBasicForm>({
@@ -37,7 +38,7 @@ const loadPrograms = async () => {
         const response = await ProgramAPI.getPrograms();
         programs.push(...response.data);
     } catch (error) {
-        alert('Oppps... Something went wrong while loading programs');
+    await AlertService.error('Oppps... Something went wrong while loading programs');
     }
 }
 
@@ -66,7 +67,7 @@ const submitForm = async () => {
             });
             return;
         }
-        alert('Oppps... Something went wrong!');
+    await AlertService.error('Oppps... Something went wrong!');
     }
 }
 
@@ -123,38 +124,38 @@ defineExpose({
         </div>
         <div class="row">
             <div class="col-12">
-                <label for="perma_address">Permanent address</label>
+                <label for="perma_address">Permanent address <span class="text-red">*</span></label>
                 <textarea v-model="basicForm.permanentAddress" name="perma_address" :class="['form-control', { 'is-invalid': !!errors.permanentAddress }]" placeholder="123 Main Street, Barangay, City, Province"></textarea>
                 <div v-if="errors.permanentAddress" class="invalid-feedback">{{ errors.permanentAddress[0] }}</div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <label for="provincial_address">Provincial address</label>
+                <label for="provincial_address">Provincial address <span class="text-red">*</span></label>
                 <textarea v-model="basicForm.provincialAddress" name="provincial_address" :class="['form-control', { 'is-invalid': !!errors.provincialAddress }]" placeholder="456 Provincial Road, Barangay, City, Province"></textarea>
                 <div v-if="errors.provincialAddress" class="invalid-feedback">{{ errors.provincialAddress[0] }}</div>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-6">
-                <label for="home_number">Home number</label>
+                <label for="home_number">Home number <span class="text-red">*</span></label>
                 <input v-model="basicForm.homeNumber" :class="['form-control', { 'is-invalid': !!errors.homeNumber }]" type="text" placeholder="(02) 1234-5678">
                 <div v-if="errors.homeNumber" class="invalid-feedback">{{ errors.homeNumber[0] }}</div>
             </div>
             <div class="col-12 col-md-6">
-                <label for="mobile_number">Mobile number</label>
+                <label for="mobile_number">Mobile number <span class="text-red">*</span></label>
                 <input v-model="basicForm.mobileNumber" :class="['form-control', { 'is-invalid': !!errors.mobileNumber }]" type="text" placeholder="09XX-XXX-XXXX">
                 <div v-if="errors.mobileNumber" class="invalid-feedback">{{ errors.mobileNumber[0] }}</div>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-6">
-                <label for="skype_id">Alternate email</label>
+                <label for="skype_id">Alternate email <span class="text-red">*</span></label>
                 <input v-model="basicForm.skypeId" :class="['form-control', { 'is-invalid': !!errors.skypeId }]" type="email" placeholder="example@email.com">
                 <div v-if="errors.skypeId" class="invalid-feedback">The altername email is required.</div>
             </div>
             <div class="col-12 col-md-6">
-                <label for="fb_link">Facebook link</label>
+                <label for="fb_link">Facebook link <span class="text-red">*</span></label>
                 <input v-model="basicForm.fbLink" :class="['form-control', { 'is-invalid': !!errors.fbLink }]" type="text" placeholder="https://facebook.com/yourprofile">
                 <div v-if="errors.fbLink" class="invalid-feedback">{{ errors.fbLink[0] }}</div>
             </div>

@@ -10,6 +10,8 @@ import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
 
+import AlertService from '../../../../services/AlertService';
+
 const secondaryIsEdit = ref<boolean>(false);
 const secondaryFormData = ref<IStudentSecondary>({
     school: '',
@@ -19,13 +21,24 @@ const secondaryFormData = ref<IStudentSecondary>({
 });
 
 onMounted(async () => {
-    await studentSecondaryStore.loadStudentSecondaryDetails();  
+    const res = await studentSecondaryStore.loadStudentSecondaryDetails();
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to load secondary details');
+    }
+
     secondaryFormData.value = {...secondary.value};
 })
 
 const updateSecondaryDetails = async () => {
-    await studentSecondaryStore.updateSecondaryDetails(secondaryFormData.value);
-    secondaryIsEdit.value = false;
+    const res = await studentSecondaryStore.updateSecondaryDetails(secondaryFormData.value);
+    if (res.success) {
+        secondaryIsEdit.value = false;
+        AlertService.success('Secondary details updated', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to update secondary details');
+    }
 }
 </script>
 

@@ -10,6 +10,8 @@ import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
 
+import AlertService from '../../../../services/AlertService';
+
 const personalIsEdit = ref<boolean>(false);
 const personalFormData = ref<IStudentPersonalInfo>({
     first_name: '',
@@ -22,13 +24,24 @@ const personalFormData = ref<IStudentPersonalInfo>({
 });
 
 onMounted(async () => {
-    await studentPersonalStore.loadStudentPersonalDetails();
+    const res = await studentPersonalStore.loadStudentPersonalDetails();
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to load personal details');
+    }
+
     personalFormData.value = {...personal.value};
 })
 
 const updatePersonalDetails = async () => {
-    await studentPersonalStore.updateStudentPersonalDetails(personalFormData.value);
-    personalIsEdit.value = false;
+    const res = await studentPersonalStore.updateStudentPersonalDetails(personalFormData.value);
+    if (res.success) {
+        personalIsEdit.value = false;
+        AlertService.success('Personal details updated', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to update personal details');
+    }
 }
 </script>
 

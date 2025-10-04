@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useCoordStudentFlightInfo } from '../../../../store/coordStudentFlightInfo';
 import { storeToRefs } from 'pinia';
+import AlertService from '../../../../services/AlertService';
 
 const coordStudentFlightInfoStore = useCoordStudentFlightInfo();
 const { isLoading, mnlDeparture, usArrival, usDeparture, mnlArrival } = storeToRefs(coordStudentFlightInfoStore);
@@ -16,7 +17,9 @@ const deptFromUsForm = ref();
 const arrToMnlForm = ref();
 
 onMounted(async () => {
-    await coordStudentFlightInfoStore.loadSelectedStudentFlightInfo();
+    const res = await coordStudentFlightInfoStore.loadSelectedStudentFlightInfo();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load flight info');
+
     deptFromMnlForm.value = {...mnlDeparture.value};
     arrToUsForm.value = {...usArrival.value};
     deptFromUsForm.value = {...usDeparture.value};
@@ -24,7 +27,7 @@ onMounted(async () => {
 })
 
 const updateDepartureFromManilaInfo = async (flightType : string) => {
-    let data = {};
+    let data = {} as any;
 
     switch (flightType) {
         case 'depart-mnl':
@@ -48,8 +51,14 @@ const updateDepartureFromManilaInfo = async (flightType : string) => {
         break;
     }
 
-    await coordStudentFlightInfoStore.updateSelectedStudentFlightInfo({data: data});
-    alert(flightType + ' flight details Updated!');
+    const res = await coordStudentFlightInfoStore.updateSelectedStudentFlightInfo({data: data});
+    if (res.success) {
+        await AlertService.success('Flight details updated', 'Success');
+    } else if (res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res.message || 'Failed to update flight details');
+    }
 }
 
 </script>

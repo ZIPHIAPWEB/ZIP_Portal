@@ -1,6 +1,7 @@
 import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
+import { IActionResult } from "../interfaces/IActionResult";
 import { defineStore } from "pinia";
 
 export interface ISuperadminPaymentRequirement {
@@ -27,7 +28,7 @@ export const useSuperadminPaymentRequirementStore = defineStore({
         paymentReqs: []
     }),
     actions: {
-        async loadSuperadminPaymentRequirements() {
+    async loadSuperadminPaymentRequirements(): Promise<IActionResult<ISuperadminPaymentRequirement[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -38,54 +39,62 @@ export const useSuperadminPaymentRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true, data: this.paymentReqs };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load payment requirements', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminPaymentRequirement(data : ISuperadminPaymentRequirement) {
+    async storeSuperadminPaymentRequirement(data : ISuperadminPaymentRequirement): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storePaymentRequirement(data);
-                this.loadSuperadminPaymentRequirements();
+                await this.loadSuperadminPaymentRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to store payment requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminPaymentRequirement(data : ISuperadminPaymentRequirement, paymentId: string | number) {
+    async updateSuperadminPaymentRequirement(data : ISuperadminPaymentRequirement, paymentId: string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updatePaymentRequirement(data, paymentId);
-                this.loadSuperadminPaymentRequirements();
+                await this.loadSuperadminPaymentRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to update payment requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminPaymentRequirement(paymentId: string | number) {
+    async deleteSuperadminPaymentRequirement(paymentId: string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deletePaymentRequirement(paymentId);
-                this.loadSuperadminPaymentRequirements();
+                await this.loadSuperadminPaymentRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete payment requirement', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

@@ -6,6 +6,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import SuperadminLayout from '../../../components/layouts/SuperadminLayout.vue';
 
 import { ISuperadminHostCompany, useSuperadminHostCompanyStore } from '../../../store/superadminHosCompany';
+import AlertService from '../../../services/AlertService';
 const superadminHostCompanyStore = useSuperadminHostCompanyStore();
 const { isLoading, isSuccess, hostCompanies } = storeToRefs(superadminHostCompanyStore);
 
@@ -39,11 +40,19 @@ const openHostCompanyForm = (company? : ISuperadminHostCompany) => {
 const submitActionHandler = async () => {
 
     if (!isHostCompanyForEdit.value) {
-
-        await superadminHostCompanyStore.storeSuperadminHostCompany(hostCompanyForm.value);
+        const res = await superadminHostCompanyStore.storeSuperadminHostCompany(hostCompanyForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store host company');
+            return;
+        }
     } else {
-
-        await superadminHostCompanyStore.updateSuperadminHostCompany(hostCompanyForm.value, hostCompanyForm.value.id);
+        const res = await superadminHostCompanyStore.updateSuperadminHostCompany(hostCompanyForm.value, hostCompanyForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update host company');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -64,6 +73,20 @@ const resetFormHandler = () => {
     hostCompanyForm.value.description = '';
     hostCompanyForm.value.name = '';
     hostCompanyForm.value.id = '';
+}
+
+const onDeleteHostCompany = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this host company?');
+    if (!confirmed) return;
+
+    const res = await superadminHostCompanyStore.deleteSuperadmonHostCompany(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete host company');
+        return;
+    }
+
+    await AlertService.success('Host company deleted', 'Deleted');
 }
 
 </script>
@@ -124,7 +147,7 @@ const resetFormHandler = () => {
                                 <td>{{ company.created_at }}</td>
                                 <td>
                                     <button @click="openHostCompanyForm(company)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminHostCompanyStore.deleteSuperadmonHostCompany(company.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteHostCompany(company.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

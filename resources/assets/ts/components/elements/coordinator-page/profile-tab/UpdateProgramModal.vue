@@ -8,6 +8,7 @@ import { onMounted, ref } from 'vue';
 const emit = defineEmits<{ (event: 'cancelEvent') : void, (event: 'updatedEvent') : void }>()
 
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import AlertService from '../../../../services/AlertService';
 
 const useCoordStudent = useCoordSelectedStudent();
 
@@ -39,9 +40,15 @@ const updateProgramHandler = async () => {
         return;
     }
 
-    await useCoordStudent.updateProgramInfo(selectedProgram.value)
+    const res = await useCoordStudent.updateProgramInfo(selectedProgram.value)
 
-    emit('updatedEvent');
+    if (res.success) {
+        emit('updatedEvent');
+        AlertService.success('Program updated', 'Success');
+    } else {
+        if (res.errors) AlertService.validation(res.errors);
+        else AlertService.error(res.message || 'Failed to update program');
+    }
 }
 
 const selectProgramHandler = (e: Event) => {

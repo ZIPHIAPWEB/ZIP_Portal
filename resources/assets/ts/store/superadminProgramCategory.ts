@@ -1,6 +1,7 @@
 import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IProgramCategoryForm {
     name: string;
@@ -29,7 +30,7 @@ export const useSuperadminProgramCategory = defineStore({
         programCategories: []
     }),
     actions : {
-        async loadProgramCategories() {
+    async loadProgramCategories(): Promise<IActionResult<ISuperadminProgramCategory[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -39,58 +40,62 @@ export const useSuperadminProgramCategory = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true, data: this.programCategories };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load program categories', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeProgramCategory(data : IProgramCategoryForm) {
+    async storeProgramCategory(data : IProgramCategoryForm): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storeProgramCategory(data);
-                this.loadProgramCategories();
+                await this.loadProgramCategories();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to store program category', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateProgramCategory(data : IProgramCategoryForm, categoryId : string | number) {
+    async updateProgramCategory(data : IProgramCategoryForm, categoryId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updateProgramCategory(data, categoryId);
-                this.loadProgramCategories();
+                await this.loadProgramCategories();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to update program category', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteProgramCategory(categoryId : string | number) {
+    async deleteProgramCategory(categoryId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deleteProgramCategory(categoryId);
-                this.loadProgramCategories();
+                await this.loadProgramCategories();
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
-                
+                return { success: true };
+            } catch (error: any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete program category', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

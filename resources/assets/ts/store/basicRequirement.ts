@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
 import { downloadFile } from "../hooks/useFileDownload";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentBasicRequirement {
     id?: number;
@@ -38,21 +39,23 @@ export const useStudentBasicRequirement = defineStore({
         
     },
     actions: {
-        async loadStudentBasicRequirements() {
+    async loadStudentBasicRequirements(): Promise<IActionResult<IBasicRequirement[]>> {
             try {
                 this.isLoading = true;
                 const response = await StudentAPI.getStudentBasicRequirements();
                 this.requirements = response.data.data;
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.requirements };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: this.error, errors: error.response?.data?.errors };
             }
         },
 
-        async downloadBasicRequirement(requirementId: string | number | undefined) {
+    async downloadBasicRequirement(requirementId: string | number | undefined): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 
@@ -60,14 +63,16 @@ export const useStudentBasicRequirement = defineStore({
                 downloadFile(response);
 
                 this.isLoading = false;
+        return { success: true };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: this.error };
             }
         },
 
-        async storeStudentBasicRequirement(requirementId: string | number | undefined, file : File) {
+    async storeStudentBasicRequirement(requirementId: string | number | undefined, file : File): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -84,16 +89,16 @@ export const useStudentBasicRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-                return response.data;
+        return { success: true, data: response.data };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
-                return error.response.data;
+        return { success: false, message: this.error, errors: error.response?.data?.errors };
             }
         },
 
-        async removeStudentBasicRequirement(requirement : IBasicRequirement) : Promise<void> {
+    async removeStudentBasicRequirement(requirement : IBasicRequirement) : Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -110,11 +115,12 @@ export const useStudentBasicRequirement = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
-                return error.response.data;
+        return { success: false, message: this.error, errors: error.response?.data?.errors };
             }
         }
     }

@@ -1,7 +1,8 @@
+import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
+import { IActionResult } from "../interfaces/IActionResult";
 import { defineStore } from "pinia";
-import SuperadminApi from "../services/SuperadminApi";
 
 export interface ISuperadminAdditionalRequirement {
     id: string | number;
@@ -14,21 +15,25 @@ export interface ISuperadminAdditionalRequirement {
     created_at?: string;
 }
 
-export interface ISuperadminAdditionalRequirementState extends IBaseState, IPagination{
-    additionals: ISuperadminAdditionalRequirement[]
+export interface ISuperadminAdditionalRequirementWithFile extends ISuperadminAdditionalRequirement {
+    file : File;
+}
+
+export interface ISuperadminAdditionalRequirementState extends IBaseState, IPagination {
+    additionals: ISuperadminAdditionalRequirement[];
 }
 
 export const useSuperadminAdditionalRequirementStore = defineStore({
     id: 'superadminAdditionalRequirement',
     state: () : ISuperadminAdditionalRequirementState => ({
-        additionals: [],
         error: undefined,
         isLoading: false,
         isSuccess: false,
+        additionals: [],
         links: []
     }),
-    actions: {
-        async loadSuperadminAdditionalRequirements() {
+    actions : {
+    async loadSuperadminAdditionalRequirements(): Promise<IActionResult<ISuperadminAdditionalRequirement[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -39,84 +44,96 @@ export const useSuperadminAdditionalRequirementStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.additionals };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load additional requirements', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async storeSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement) {
+    async storeSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.storeAdditionalRequirement(data);
-                this.loadSuperadminAdditionalRequirements();
+                await this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to store additional requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async updateSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement, additionalId : string | number) {
+    async updateSuperadminAdditionalRequirement(data : ISuperadminAdditionalRequirement, additionalId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.updateAdditionalRequirement(data, additionalId);
-                this.loadSuperadminAdditionalRequirements();
+                await this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to update additional requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deleteSuperadminAdditionalRequriement(additionalId : string | number) {
+    async deleteSuperadminAdditionalRequirement(additionalId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.deleteAdditionalRequirement(additionalId);
-                this.loadSuperadminAdditionalRequirements();
+                await this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete additional requirement', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async uploadSuperadminAdditionalRequirementFile(file: File, additionalId : string | number | undefined) {
+    async uploadSuperadminAdditionalRequirementFile(file: File, additionalId : string | number | undefined): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.uploadAdditionalReqFile(file, additionalId);
-                this.loadSuperadminAdditionalRequirements();
+                await this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to upload additional file', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async removeSuperadminAdditionalRequirementFile(additionalId : string | number) {
+    async removeSuperadminAdditionalRequirementFile(additionalId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
 
                 await SuperadminApi.removeAdditionalReqFile(additionalId);
-                this.loadSuperadminAdditionalRequirements();
+                await this.loadSuperadminAdditionalRequirements();
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to remove additional file', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

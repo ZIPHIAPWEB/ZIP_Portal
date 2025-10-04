@@ -7,6 +7,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import UploadButton from '../../../components/elements/profile-page/program-requirements/UploadButton.vue';
 
 import { ISuperadminVisaSponsorRequirement, useSuperadminVisaSponsorRequirementStore } from '../../../store/superadminVisaSponsorRequirement';
+import AlertService from '../../../services/AlertService';
 const superadminVisaSponsorRequirementStore = useSuperadminVisaSponsorRequirementStore();
 const { sponsorReqs, isLoading, isSuccess, links } = storeToRefs(superadminVisaSponsorRequirementStore);
 
@@ -48,11 +49,19 @@ const openSponsorRequirementForm = (sponsorReq?: ISuperadminVisaSponsorRequireme
 const submitActionHandler = async () => {
 
     if (!isSponsorForEdit.value) {
-
-        await superadminVisaSponsorRequirementStore.storeSuperadminVisaSponsorRequirement(sponsorForm.value);
+        const res = await superadminVisaSponsorRequirementStore.storeSuperadminVisaSponsorRequirement(sponsorForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store requirement');
+            return;
+        }
     } else {
-
-        await superadminVisaSponsorRequirementStore.updateSuperadminVisaSponsorRequirement(sponsorForm.value, sponsorForm.value.id);
+        const res = await superadminVisaSponsorRequirementStore.updateSuperadminVisaSponsorRequirement(sponsorForm.value, sponsorForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update requirement');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -79,8 +88,39 @@ const resetFormHandler = () => {
 
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await superadminVisaSponsorRequirementStore.uploadSuperadminVisaSponsorRequirementFile(file, requirementId);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to upload file');
+        return;
+    }
 
-await superadminVisaSponsorRequirementStore.uploadSuperadminVisaSponsorRequirementFile(file, requirementId);
+    await AlertService.success('File uploaded', 'Uploaded');
+}
+
+const onRemoveFile = async (id: string | number) => {
+    const res = await superadminVisaSponsorRequirementStore.removeSuperadminVisaSponsorRequirementFile(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to remove file');
+        return;
+    }
+
+    await AlertService.success('File removed', 'Removed');
+}
+
+const onDeleteSponsorReq = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this requirement?');
+    if (!confirmed) return;
+
+    const res = await superadminVisaSponsorRequirementStore.deleteSuperadminVisaSponsorRequriement(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete requirement');
+        return;
+    }
+
+    await AlertService.success('Requirement deleted', 'Deleted');
 }
 </script>
 
@@ -164,9 +204,9 @@ await superadminVisaSponsorRequirementStore.uploadSuperadminVisaSponsorRequireme
                                 <td>{{ req.created_at }}</td>
                                 <td>
                                     <UploadButton v-if="(req.path == '' || req.path == null)" :requirementId="req.id" @getFile="uploadFileHander" />
-                                    <button v-if="!(req.path == '' || req.path == null)" @click="superadminVisaSponsorRequirementStore.removeSuperadminVisaSponsorRequirementFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
+                                    <button v-if="!(req.path == '' || req.path == null)" @click="onRemoveFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
                                     <button @click="openSponsorRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminVisaSponsorRequirementStore.deleteSuperadminVisaSponsorRequriement(req.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteSponsorReq(req.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentWorkExperience {
     id?: string | number;
@@ -21,7 +22,7 @@ export const useStudentWorkExperienceStore = defineStore({
     getters: {},
     actions: {
 
-        async loadWorkExperiences() {
+    async loadWorkExperiences(): Promise<IActionResult<IStudentWorkExperience[]>> {
 
             try {
                 this.isLoading = true;
@@ -32,13 +33,16 @@ export const useStudentWorkExperienceStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.experiences };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, errors: this.errors, message: error.response?.data?.message ?? 'Failed to load experiences' };
             }
         },
 
-        async storeWorkExperience(data: IStudentWorkExperience) {
+    async storeWorkExperience(data: IStudentWorkExperience): Promise<IActionResult<IStudentWorkExperience>> {
 
             try {
                 this.isLoading = true;
@@ -49,13 +53,16 @@ export const useStudentWorkExperienceStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: response.data.data };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, errors: this.errors, message: error.response?.data?.message ?? 'Failed to store experience' };
             }
         },
 
-        async updateWorkExperience(data: IStudentWorkExperience) {
+    async updateWorkExperience(data: IStudentWorkExperience): Promise<IActionResult<IStudentWorkExperience>> {
 
             try {
                 this.isLoading = true;
@@ -70,13 +77,16 @@ export const useStudentWorkExperienceStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: response.data.data };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, errors: this.errors, message: error.response?.data?.message ?? 'Failed to update experience' };
             }
         },
 
-        async deleteWorkExperience(data: IStudentWorkExperience) {
+    async deleteWorkExperience(data: IStudentWorkExperience): Promise<IActionResult> {
 
             try {
                 this.isLoading = true;
@@ -87,9 +97,12 @@ export const useStudentWorkExperienceStore = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, errors: this.errors, message: error.response?.data?.message ?? 'Failed to delete experience' };
             }
         }
     }

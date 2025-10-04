@@ -7,6 +7,7 @@ import PopUp from '../../../components/elements/PopUp.vue';
 import UploadButton from '../../../components/elements/profile-page/program-requirements/UploadButton.vue';
 
 import { ISuperadminAdditionalRequirement, useSuperadminAdditionalRequirementStore } from '../../../store/superadminAdditionalRequirement';
+import AlertService from '../../../services/AlertService';
 const superadminAdditionalRequirementStore = useSuperadminAdditionalRequirementStore();
 const { additionals, isLoading, isSuccess, links } = storeToRefs(superadminAdditionalRequirementStore);
 
@@ -48,11 +49,19 @@ const openAdditionalRequirementForm = (additional?: ISuperadminAdditionalRequire
 const submitActionHandler = async () => {
 
     if (!isAdditionalForEdit.value) {
-
-        await superadminAdditionalRequirementStore.storeSuperadminAdditionalRequirement(additionalForm.value);
+        const res = await superadminAdditionalRequirementStore.storeSuperadminAdditionalRequirement(additionalForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store requirement');
+            return;
+        }
     } else {
-
-        await superadminAdditionalRequirementStore.updateSuperadminAdditionalRequirement(additionalForm.value, additionalForm.value.id);
+        const res = await superadminAdditionalRequirementStore.updateSuperadminAdditionalRequirement(additionalForm.value, additionalForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update requirement');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -79,8 +88,39 @@ const resetFormHandler = () => {
 
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await superadminAdditionalRequirementStore.uploadSuperadminAdditionalRequirementFile(file, requirementId);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to upload file');
+        return;
+    }
 
-    await superadminAdditionalRequirementStore.uploadSuperadminAdditionalRequirementFile(file, requirementId);
+    await AlertService.success('File uploaded', 'Uploaded');
+}
+
+const onRemoveFile = async (id: string | number) => {
+    const res = await superadminAdditionalRequirementStore.removeSuperadminAdditionalRequirementFile(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to remove file');
+        return;
+    }
+
+    await AlertService.success('File removed', 'Removed');
+}
+
+const onDeleteAdditional = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this requirement?');
+    if (!confirmed) return;
+
+    const res = await superadminAdditionalRequirementStore.deleteSuperadminAdditionalRequirement(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete requirement');
+        return;
+    }
+
+    await AlertService.success('Requirement deleted', 'Deleted');
 }
 </script>
 
@@ -164,9 +204,9 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                                 <td>{{ req.created_at }}</td>
                                 <td>
                                     <UploadButton v-if="(req.path == '' || req.path == null)" :requirementId="req.id" @getFile="uploadFileHander" />
-                                    <button v-if="!(req.path == '' || req.path == null)" @click="superadminAdditionalRequirementStore.removeSuperadminAdditionalRequirementFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
+                                    <button v-if="!(req.path == '' || req.path == null)" @click="onRemoveFile(req.id)" class="btn btn-default btn-xs mr-1">Remove file</button>
                                     <button @click="openAdditionalRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminAdditionalRequirementStore.deleteSuperadminAdditionalRequriement(req.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteAdditional(req.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

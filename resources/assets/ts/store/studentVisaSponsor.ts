@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IVisaSponsor {
     visa_sponsor: string,
@@ -34,7 +35,7 @@ export const useStudentVisaSponsor = defineStore({
 
     },
     actions: {
-        async loadStudentVisaSponsor() {
+    async loadStudentVisaSponsor(): Promise<IActionResult<IVisaSponsor>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -44,10 +45,12 @@ export const useStudentVisaSponsor = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error : any) {
-                this.error = error.response.data.message;
+                return { success: true, data: this.visaSponsor };
+            } catch (error: any) {
+                this.error = error.response?.data?.message ?? 'Failed to load visa sponsor';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error.response?.data?.message ?? 'Failed to load visa sponsor', errors: error.response?.data?.errors ?? {} };
             }
         }
     }

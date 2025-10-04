@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IStudentPersonalInfo {
     id?: string | number;
@@ -31,7 +32,7 @@ export const useStudentPersonal = defineStore({
     },
     actions: {
         
-        async loadStudentPersonalDetails() {
+    async loadStudentPersonalDetails(): Promise<IActionResult<IStudentPersonalInfo>> {
             try {
                 this.isLoading = true;
                 
@@ -40,13 +41,16 @@ export const useStudentPersonal = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.personal };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, message: error.response?.data?.message ?? 'Failed to load personal details', errors: this.errors };
             }
         },
 
-        async updateStudentPersonalDetails(data: IStudentPersonalInfo) {
+    async updateStudentPersonalDetails(data: IStudentPersonalInfo): Promise<IActionResult<IStudentPersonalInfo>> {
             try {
                 this.isLoading = true;
 
@@ -55,9 +59,12 @@ export const useStudentPersonal = defineStore({
                 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.personal };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+        this.errors = error.response?.data?.errors ?? {};
+        return { success: false, message: error.response?.data?.message ?? 'Failed to update personal details', errors: this.errors };
             }
         }
     }

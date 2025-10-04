@@ -2,6 +2,7 @@ import SuperadminApi from "../services/SuperadminApi";
 import { IBaseState } from "../interfaces/IBaseState";
 import { IPagination } from "../interfaces/IPagination";
 import { defineStore } from "pinia";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ICoord {
     username: string;
@@ -35,7 +36,7 @@ export const useSuperadminCoord = defineStore({
         coordinators: []
     }),
     actions: {
-        async deleteSuperadminCoord(userId : string | number) {
+    async deleteSuperadminCoord(userId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -45,12 +46,14 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to delete coordinator', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async searchSuperaminCoordData(searchData : string) {
+    async searchSuperaminCoordData(searchData : string): Promise<IActionResult<ISuperadminCoord[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -61,12 +64,14 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true, data: this.coordinators };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to search coordinators', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async createSuperadminCoord(coordData : ICoord) {
+    async createSuperadminCoord(coordData : ICoord): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -76,12 +81,14 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to create coordinator', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async loadSuperadminCoordsData() {
+    async loadSuperadminCoordsData(): Promise<IActionResult<ISuperadminCoord[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -92,12 +99,14 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
-            } catch (error) {
+                return { success: true, data: this.coordinators };
+            } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to load coordinators', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async activateCoordUser(userId : string | number) {
+    async activateCoordUser(userId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -107,12 +116,14 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to activate coordinator', errors: error?.response?.data?.errors ?? {} };
             }
         },
-        async deactivateCoordUser(userId : string | number) {
+    async deactivateCoordUser(userId : string | number): Promise<IActionResult> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -122,9 +133,11 @@ export const useSuperadminCoord = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;                
+                return { success: true };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: error?.response?.data?.message ?? 'Failed to deactivate coordinator', errors: error?.response?.data?.errors ?? {} };
             }
         }
     }

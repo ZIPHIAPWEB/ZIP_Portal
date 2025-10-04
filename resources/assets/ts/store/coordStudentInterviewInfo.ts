@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { IVisaInterview } from "./studentVisaInterview";
 import CoordinatorApi from "../services/CoordinatorApi";
 import { useCoordSelectedStudent } from "./coordSelectedStudent";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ICoordStudentInterviewInfoState {
     isSuccess: boolean;
@@ -20,7 +21,7 @@ export const useCoordStudentInterviewInfo = defineStore({
     }),
     getters: {},
     actions: {
-        async loadCoordStudentInterviewInfo() {
+    async loadCoordStudentInterviewInfo(): Promise<IActionResult<IVisaInterview>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -31,14 +32,18 @@ export const useCoordStudentInterviewInfo = defineStore({
                 this.visaInterview = response.data.data;
 
                 this.isLoading = false;
-                this.isSuccess = true;                
+                this.isSuccess = true;  
+                return { success: true, data: this.visaInterview };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false; 
+                const message = error.response?.data?.message ?? 'Failed to load interview info';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
 
-        async updateCoordStudentInterviewInfo(data : IVisaInterview) {
+    async updateCoordStudentInterviewInfo(data : IVisaInterview): Promise<IActionResult<IVisaInterview>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -50,9 +55,13 @@ export const useCoordStudentInterviewInfo = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;     
+                return { success: true, data: this.visaInterview };
             } catch (error : any) {
                 this.isLoading = false;
                 this.isSuccess = false; 
+                const message = error.response?.data?.message ?? 'Failed to update interview info';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         }
     }

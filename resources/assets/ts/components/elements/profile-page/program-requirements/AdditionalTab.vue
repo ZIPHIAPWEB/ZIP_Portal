@@ -6,6 +6,8 @@ import { useStudentAdditionalRequirement } from '../../../../store/studentAdditi
 import { storeToRefs } from 'pinia';
 import { IAdditionalRequirement } from '../../../../store/studentAdditionalRequirement';
 
+import AlertService from '../../../../services/AlertService';
+
 const studentAdditionalRequirementStore = useStudentAdditionalRequirement();
 const { isLoading, isSuccess, requirements } = storeToRefs(studentAdditionalRequirementStore);
 
@@ -14,19 +16,37 @@ const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
 
 onMounted(async () => {
-    await studentAdditionalRequirementStore.loadStudentAdditionalRequirements();
+    const res = await studentAdditionalRequirementStore.loadStudentAdditionalRequirements();
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to load requirements');
+    }
 })
 
 const uploadFileHander = async (file : File, requirementId : string | number | undefined) => {
-    await studentAdditionalRequirementStore.storeStudentAdditionalRequirement(requirementId, file)
+    const res = await studentAdditionalRequirementStore.storeStudentAdditionalRequirement(requirementId, file);
+    if (res.success) {
+        AlertService.success('File uploaded', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to upload file');
+    }
 }
 
 const deleteFileHandler = async (requirement : IAdditionalRequirement) => {
-    await studentAdditionalRequirementStore.removeStudentAdditionalRequirement(requirement);
+    const res = await studentAdditionalRequirementStore.removeStudentAdditionalRequirement(requirement);
+    if (res.success) {
+        AlertService.success('File deleted', 'Success');
+    } else {
+        AlertService.error(res.message || 'Failed to delete file');
+    }
 }
 
 const downloadFileHandler = async (requirementId : string | number | undefined) => {
-    await studentAdditionalRequirementStore.downloadAdditionalRequirement(requirementId);
+    const res = await studentAdditionalRequirementStore.downloadAdditionalRequirement(requirementId);
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to download file');
+    }
 }
 
 </script>

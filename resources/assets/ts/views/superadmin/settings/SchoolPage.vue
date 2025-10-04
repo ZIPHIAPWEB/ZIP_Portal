@@ -6,6 +6,7 @@ import SuperadminLayout from '../../../components/layouts/SuperadminLayout.vue';
 import PopUp from '../../../components/elements/PopUp.vue';
 
 import { ISuperadminSchool, useSuperadminSchoolStore } from '../../../store/superadminSchool';
+import AlertService from '../../../services/AlertService';
 const superadminSchoolStore = useSuperadminSchoolStore();
 const { isSuccess, schools } = storeToRefs(superadminSchoolStore);
 
@@ -42,11 +43,19 @@ const openCategoryForm = async (school?: ISuperadminSchool) => {
 const submitActionHandler = async () => {
 
     if (!isSchoolForEdit.value) {
-
-        await superadminSchoolStore.storeSuperadminSchool(schoolForm.value);
+        const res = await superadminSchoolStore.storeSuperadminSchool(schoolForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store school');
+            return;
+        }
     } else {
-
-        await superadminSchoolStore.updateSuperadminSchool(schoolForm.value, schoolForm.value.id);
+        const res = await superadminSchoolStore.updateSuperadminSchool(schoolForm.value, schoolForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update school');
+            return;
+        }
     }
 
     if (isSuccess.value) {
@@ -68,6 +77,20 @@ const resetFormHandler = () => {
     schoolForm.value.display_name = '';
     schoolForm.value.name = '';
     schoolForm.value.id = '';
+}
+
+const onDeleteSchool = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this school?');
+    if (!confirmed) return;
+
+    const res = await superadminSchoolStore.deleteSuperadminSchool(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete school');
+        return;
+    }
+
+    await AlertService.success('School deleted', 'Deleted');
 }
 </script>
 
@@ -134,7 +157,7 @@ const resetFormHandler = () => {
                                 <td>{{ school.created_at }}</td>
                                 <td>
                                     <button @click="openCategoryForm(school)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminSchoolStore.deleteSuperadminSchool(school.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="onDeleteSchool(school.id)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

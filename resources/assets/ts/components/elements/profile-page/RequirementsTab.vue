@@ -6,6 +6,8 @@ import PopUp from '../PopUp.vue';
 import { useStudentPaymentRequirement, IPaymentRequirement, IStudentPaymentRequirementForm } from '../../../store/paymentRequirement';
 import { storeToRefs } from 'pinia';
 
+import AlertService from '../../../services/AlertService';
+
 const studentPaymentRequirementStore = useStudentPaymentRequirement();
 const { isLoading, isSuccess, requirements, errors } = storeToRefs(studentPaymentRequirementStore);
 
@@ -26,18 +28,32 @@ const requirement = ref<IStudentPaymentRequirementForm>({
 });
 
 onMounted(async () => {
-    await studentPaymentRequirementStore.loadStudentPaymentRequirements();
+    const res = await studentPaymentRequirementStore.loadStudentPaymentRequirements();
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to load requirements');
+    }
 })
 
 const submitRequirement = async () => {
-    await studentPaymentRequirementStore.storePaymentRequirement(selectedRequirement.value?.id, requirement.value);
-    isPopUpOpen.value = false;
+    const res = await studentPaymentRequirementStore.storePaymentRequirement(selectedRequirement.value?.id, requirement.value);
+    if (res.success) {
+        isPopUpOpen.value = false;
+        AlertService.success('Requirement uploaded successfully', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to upload requirement');
+    }
 }
 
 const removeRequirement = async () => {
-    await studentPaymentRequirementStore.removePaymentRequirement(selectedRequirement.value?.id);
+    const res = await studentPaymentRequirementStore.removePaymentRequirement(selectedRequirement.value?.id);
     isDeletePopUpOpen.value = false;
-    alert('Requirement removed!');
+    if (res.success) {
+        AlertService.success('Requirement removed', 'Success');
+    } else {
+        AlertService.error(res.message || 'Failed to remove requirement');
+    }
 }
 
 const openRequirement = (requirement : IPaymentRequirement) => {

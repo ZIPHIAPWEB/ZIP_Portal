@@ -2,6 +2,8 @@
 import AuthLayout from '../components/layouts/AuthLayout.vue';
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import AlertService from '../services/AlertService';
 
 import { useAuthStore } from '../store/auth';
 const authStore = useAuthStore();
@@ -9,9 +11,20 @@ const authStore = useAuthStore();
 const username = ref<string>('');
 const password = ref<string>('');
 
-const login = async () => {
+const router = useRouter();
 
-    await authStore.login(username.value, password.value);
+const login = async () => {
+    const result = await authStore.login(username.value, password.value);
+
+    if (result.success) {
+        if (result.data?.redirect) router.push({ name: result.data.redirect });
+    } else {
+        if (result.errors) {
+            await AlertService.validation(result.errors);
+        } else {
+            await AlertService.error(result.message || 'Login failed.');
+        }
+    }
 
 }
 </script>

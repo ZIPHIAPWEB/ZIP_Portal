@@ -4,12 +4,16 @@ import DetailsCard from '../../DetailsCard.vue';
 import { storeToRefs } from 'pinia';
 
 import { onMounted } from 'vue';
+import AlertService from '../../../../services/AlertService';
 
 const studentVisaSponsorStore = useStudentVisaSponsor();
 const { isLoading, isSuccess, visaSponsor } = storeToRefs(studentVisaSponsorStore);
 
 onMounted(async () => {
-    await studentVisaSponsorStore.loadStudentVisaSponsor();
+    const res = await studentVisaSponsorStore.loadStudentVisaSponsor();
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to load host company');
+    }
 })
 
 

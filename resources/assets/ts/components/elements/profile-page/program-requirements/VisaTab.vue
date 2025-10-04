@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
+import AlertService from '../../../../services/AlertService';
 import { IVisaSponsorRequirement, useStudentVisaSponsorRequirement } from '../../../../store/studentVisaSponsorRequirement';
 import { storeToRefs } from 'pinia';
 import UploadButton from './UploadButton.vue';
@@ -12,19 +13,33 @@ const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
 
 onMounted(async () => {
-    await studentVisaSponsorRequirementStore.loadVisaSponsorRequirements();
+    const res = await studentVisaSponsorRequirementStore.loadVisaSponsorRequirements();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load requirements');
 })
 
 const uploadFileHander = async (file : File, requirementId : string | number | undefined) => {
-    await studentVisaSponsorRequirementStore.storeVisaSponsorRequirement(requirementId, file);
+    const res = await studentVisaSponsorRequirementStore.storeVisaSponsorRequirement(requirementId, file);
+    if (res.success) {
+        await AlertService.success('File uploaded', 'Success');
+    } else if (res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res.message || 'Failed to upload file');
+    }
 }
 
 const deleteFileHandler = async (requirement : IVisaSponsorRequirement) => {
-    await studentVisaSponsorRequirementStore.deleteVisaSponsorRequirement(requirement);
+    const res = await studentVisaSponsorRequirementStore.deleteVisaSponsorRequirement(requirement);
+    if (res.success) {
+        await AlertService.success('File deleted', 'Success');
+    } else {
+        await AlertService.error(res.message || 'Failed to delete file');
+    }
 }
 
 const downloadFileHandler = async (requirementId : string | number | undefined) => {
-    await studentVisaSponsorRequirementStore.downloadVisaSponsorRequirement(requirementId);
+    const res = await studentVisaSponsorRequirementStore.downloadVisaSponsorRequirement(requirementId);
+    if (!res.success) await AlertService.error(res.message || 'Failed to download file');
 }
 </script>
 

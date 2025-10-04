@@ -7,6 +7,7 @@ import { IStudentFather } from "./studentFather";
 import { IStudentMother } from "./studentMother";
 import { IStudentWorkExperience } from "./studentWorkExperience";
 import CoordinatorApi from "../services/CoordinatorApi";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IUserInfo {
     id: string | number;
@@ -52,7 +53,7 @@ export const useCoordSelectedStudent = defineStore({
         experiences: []
     }),
     actions: {
-        async loadSelectedStudent(userId : number | string) {
+    async loadSelectedStudent(userId : number | string): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -69,14 +70,18 @@ export const useCoordSelectedStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: response.data.data };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to load student';
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to load student';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
 
-        async updateProgramInfo(programId : number | string) {
+    async updateProgramInfo(programId : number | string): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -86,14 +91,18 @@ export const useCoordSelectedStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.userInfo };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to update program';
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to update program';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
 
-        async updateProgramCompliance(status : string) {
+    async updateProgramCompliance(status : string): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -103,14 +112,18 @@ export const useCoordSelectedStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.userInfo };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to update program compliance';
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to update program compliance';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
 
-        async updateProgramStatus(status : string) {
+    async updateProgramStatus(status : string): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -125,14 +138,18 @@ export const useCoordSelectedStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.userInfo };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to update program status';
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to update program status';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         },
 
-        async cancelStudentProgram(reason : string) {
+    async cancelStudentProgram(reason : string): Promise<IActionResult<any>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -142,10 +159,14 @@ export const useCoordSelectedStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.userInfo };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to cancel program';
                 this.isLoading = false;
                 this.isSuccess = false;
+                const message = error.response?.data?.message ?? 'Failed to cancel program';
+                const errors = error.response?.data?.errors ?? {};
+                return { success: false, message, errors };
             }
         }
     }

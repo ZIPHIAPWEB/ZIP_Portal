@@ -4,6 +4,7 @@ import { userCoordStudentAdditionalRequirement } from '../../../../store/coordSt
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../../../store/auth';
 import UploadButton from '../../profile-page/program-requirements/UploadButton.vue';
+import AlertService from '../../../../services/AlertService';
 
 const authStore = useAuthStore();
 
@@ -11,12 +12,30 @@ const coordStudentAdditionalRequirementStore = userCoordStudentAdditionalRequire
 const { isLoading, additionalRequirement } = storeToRefs(coordStudentAdditionalRequirementStore);
 
 onMounted(async () => {
-    await coordStudentAdditionalRequirementStore.loadSelectedStudentAdditionalRequirement();
+    const res = await coordStudentAdditionalRequirementStore.loadSelectedStudentAdditionalRequirement();
+    if (!res.success) AlertService.error(res.message || 'Failed to load requirements');
 })
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await coordStudentAdditionalRequirementStore.uploadSelectedStudentAdditionalRequirement(requirementId, file);
+    if (res.success) {
+        AlertService.success('File uploaded', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to upload file');
+    }
+}
 
-await coordStudentAdditionalRequirementStore.uploadSelectedStudentAdditionalRequirement(requirementId, file)
+const downloadHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentAdditionalRequirementStore.downloadSelectedStudentAdditionalRequirement(requirementId as any);
+    if (!res.success) AlertService.error(res.message || 'Failed to download file');
+}
+
+const removeHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentAdditionalRequirementStore.removeSelectedStudentAdditionalRequirement(requirementId as any);
+    if (res.success) AlertService.success('File removed', 'Success');
+    else AlertService.error(res.message || 'Failed to remove file');
 }
 </script>
 
@@ -44,11 +63,11 @@ await coordStudentAdditionalRequirementStore.uploadSelectedStudentAdditionalRequ
                         </td>
                         <td v-if="authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'superadmin'" class="text-center">
                             <UploadButton v-if="!item.student_additional" :requirementId="item.id" @getFile="uploadFileHander" />
-                            <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.removeSelectedStudentAdditionalRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
+                            <button v-if="item.student_additional" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_additional" @click="removeHandler(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                         <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
-                            <button v-if="item.student_additional" @click="coordStudentAdditionalRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_additional" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                         </td>
                     </tr>
                 </tbody>

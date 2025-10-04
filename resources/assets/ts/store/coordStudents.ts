@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import CoordinatorApi from "../services/CoordinatorApi";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface ICoordinatorStudent {
     id: number | string,
@@ -40,7 +41,7 @@ export const useCoordStudent = defineStore({
     }),
     getters: {},
     actions: {
-        async searchStudentData(program : string | string[], toBeSearch : string) {
+    async searchStudentData(program : string | string[], toBeSearch : string): Promise<IActionResult<ICoordinatorStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -51,13 +52,15 @@ export const useCoordStudent = defineStore({
                 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.students };
             } catch (error : any) {
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to search students';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: this.error, errors: error.response?.data?.errors ?? {} };
             }
         },
-        async loadCoordStudentsData(program : string | string[]) {
+    async loadCoordStudentsData(program : string | string[]): Promise<IActionResult<ICoordinatorStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -68,15 +71,16 @@ export const useCoordStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.students };
             } catch (error : any) {
-                
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to load students';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: this.error, errors: error.response?.data?.errors ?? {} };
             }
         },
 
-        async filterCoordStudentsData(program : string | string[], from : string, to : string, status : string) {
+    async filterCoordStudentsData(program : string | string[], from : string, to : string, status : string): Promise<IActionResult<ICoordinatorStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -87,15 +91,16 @@ export const useCoordStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.students };
             } catch (error : any) {
-                
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to filter students';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: this.error, errors: error.response?.data?.errors ?? {} };
             }
         },
         
-        async loadPaginatedStudentsData(page : number, program : string | string[], from : string, to : string, status : string) {
+    async loadPaginatedStudentsData(page : number, program : string | string[], from : string, to : string, status : string): Promise<IActionResult<ICoordinatorStudent[]>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -106,11 +111,12 @@ export const useCoordStudent = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+                return { success: true, data: this.students };
             } catch (error : any) {
-                
-                this.error = error.response.data.message;
+                this.error = error.response?.data?.message ?? 'Failed to load paginated students';
                 this.isLoading = false;
                 this.isSuccess = false;
+                return { success: false, message: this.error, errors: error.response?.data?.errors ?? {} };
             }
         }
     }

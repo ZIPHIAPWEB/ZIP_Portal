@@ -5,6 +5,7 @@ import { IVisaSponsor } from '../../../../store/studentVisaSponsor';
 import { storeToRefs } from 'pinia';
 import VisaSponsorAPI from '../../../../services/VisaSponsorAPI';
 import HostCompaniesAPI from '../../../../services/HostCompaniesAPI';
+import AlertService from '../../../../services/AlertService';
 
 const coordStudentHostInfoStore = useCoordStudentHostInfo();
 const { isLoading, visaSponsor } = storeToRefs(coordStudentHostInfoStore);
@@ -26,16 +27,24 @@ const hostCompanyForm = ref<IVisaSponsor>({
 });
 
 onMounted(async () => {
-    await coordStudentHostInfoStore.loadCoordStudentHostInfo();
+    const res = await coordStudentHostInfoStore.loadCoordStudentHostInfo();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load host/company info');
+
     sponsors.value = (await VisaSponsorAPI.getAllVisaSponsors()).data;
     companies.value = (await HostCompaniesAPI.getAllHostCompanies()).data;
     hostCompanyForm.value = {...visaSponsor.value};
 })
 
 const updateHostCompany = async () => {
-    await coordStudentHostInfoStore.updateCoordStudentHostInfo(hostCompanyForm.value);
-    hostCompanyIsEdit.value = false;
-    alert('Host company updated!');
+    const res = await coordStudentHostInfoStore.updateCoordStudentHostInfo(hostCompanyForm.value);
+    if (res.success) {
+        hostCompanyIsEdit.value = false;
+        await AlertService.success('Host/company information updated', 'Success');
+    } else if (res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res.message || 'Failed to update host/company info');
+    }
 }
 </script>
 

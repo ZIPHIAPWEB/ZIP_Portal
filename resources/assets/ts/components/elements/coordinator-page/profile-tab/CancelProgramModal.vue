@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, defineEmits } from 'vue';
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import AlertService from '../../../../services/AlertService';
 const coordSelectedStudentStore = useCoordSelectedStudent();
 
 const emits = defineEmits<{
@@ -11,8 +12,15 @@ const emits = defineEmits<{
 const reason = ref<string>('');
 
 const cancelStudentHandler = async () => {
-    await coordSelectedStudentStore.cancelStudentProgram(reason.value);
-    emits('submitEventTrigger');
+    const res = await coordSelectedStudentStore.cancelStudentProgram(reason.value);
+    if (res.success) {
+        AlertService.success('Student cancelled', 'Success');
+        emits('submitEventTrigger');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to cancel student');
+    }
 }
 
 </script>

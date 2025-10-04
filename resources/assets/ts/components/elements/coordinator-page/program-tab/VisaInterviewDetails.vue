@@ -4,6 +4,7 @@ import { useCoordStudentInterviewInfo } from '../../../../store/coordStudentInte
 import { storeToRefs } from 'pinia';
 import { IVisaInterview } from '../../../../store/studentVisaInterview';
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import AlertService from '../../../../services/AlertService';
 
 const coordStudentInterviewInfoStore = useCoordStudentInterviewInfo();
 const { isLoading, visaInterview } = storeToRefs(coordStudentInterviewInfoStore);
@@ -25,14 +26,22 @@ const visaInterviewForm = ref<IVisaInterview>({
 })
 
 onMounted(async () => {
-    await coordStudentInterviewInfoStore.loadCoordStudentInterviewInfo();
+    const res = await coordStudentInterviewInfoStore.loadCoordStudentInterviewInfo();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load interview info');
+
     visaInterviewForm.value = {...visaInterview.value};
 })
 
 const updateVisaInterviewDetails = async () => {
-    await coordStudentInterviewInfoStore.updateCoordStudentInterviewInfo(visaInterviewForm.value)
-    visaInterviewIsEdit.value = false;
-    alert('Interview info updated!');
+    const res = await coordStudentInterviewInfoStore.updateCoordStudentInterviewInfo(visaInterviewForm.value)
+    if (res.success) {
+        visaInterviewIsEdit.value = false;
+        await AlertService.success('Interview info updated', 'Success');
+    } else if (res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res.message || 'Failed to update interview info');
+    }
 }
 
 </script>

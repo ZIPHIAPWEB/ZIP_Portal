@@ -6,6 +6,7 @@ import SuperadminLayout from '../../../components/layouts/SuperadminLayout.vue';
 import PopUp from '../../../components/elements/PopUp.vue';
 
 import { ISuperadminPaymentRequirement, useSuperadminPaymentRequirementStore } from '../../../store/superadminPaymentRequirement';
+import AlertService from '../../../services/AlertService';
 const superadminPaymentRequirementStore = useSuperadminPaymentRequirementStore();
 const { paymentReqs, isLoading, isSuccess, links } = storeToRefs(superadminPaymentRequirementStore);
 
@@ -47,15 +48,22 @@ const openPaymentRequirementForm = (payment?: ISuperadminPaymentRequirement) => 
 const submitActionHandler = async () => {
 
     if (!isPaymentForEdit.value) {
-
-        await superadminPaymentRequirementStore.storeSuperadminPaymentRequirement(paymentForm.value);
+        const res = await superadminPaymentRequirementStore.storeSuperadminPaymentRequirement(paymentForm.value);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to store payment requirement');
+            return;
+        }
     } else {
-
-        await superadminPaymentRequirementStore.updateSuperadminPaymentRequirement(paymentForm.value, paymentForm.value.id);
+        const res = await superadminPaymentRequirementStore.updateSuperadminPaymentRequirement(paymentForm.value, paymentForm.value.id);
+        if (!res.success) {
+            if (res.errors) await AlertService.validation(res.errors);
+            else await AlertService.error(res.message || 'Failed to update payment requirement');
+            return;
+        }
     }
 
     if (isSuccess.value) {
-
         isPaymentReqFormOpen.value = false;
         resetFormHandler();
     }
@@ -74,6 +82,20 @@ const resetFormHandler = () => {
     paymentForm.value.program_id = '';
     paymentForm.value.name = '';
     paymentForm.value.id = '';
+}
+
+const onDeleteRequirement = async (id: string | number) => {
+    const confirmed = await AlertService.confirm('Are you sure you want to delete this requirement?');
+    if (!confirmed) return;
+
+    const res = await superadminPaymentRequirementStore.deleteSuperadminPaymentRequirement(id);
+    if (!res.success) {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to delete payment requirement');
+        return;
+    }
+
+    await AlertService.success('Payment requirement deleted', 'Deleted');
 }
 
 </script>
@@ -157,9 +179,9 @@ const resetFormHandler = () => {
                                 </td>
                                 <td>{{ req.created_at }}</td>
                                 <td>
-                                    <button @click="openPaymentRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
-                                    <button @click="superadminPaymentRequirementStore.deleteSuperadminPaymentRequirement(req.id)" class="btn btn-danger btn-xs">Delete</button>
-                                </td>
+                                        <button @click="openPaymentRequirementForm(req)" class="btn btn-success btn-xs mr-1">Edit</button>
+                                        <button @click="onDeleteRequirement(req.id)" class="btn btn-danger btn-xs">Delete</button>
+                                    </td>
                             </tr>
                         </tbody>
                     </table>

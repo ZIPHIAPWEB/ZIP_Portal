@@ -11,6 +11,7 @@ const { isLoading, isSuccess, experiences } = storeToRefs(studentWorkExperienceS
 import { useAuthStore } from '../../../../store/auth';
 const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
+import AlertService from '../../../../services/AlertService';
 
 const experiencesIsAdd = ref<boolean>(false);
 const experienceFormData = ref<IStudentWorkExperience>({
@@ -22,20 +23,29 @@ const experienceFormData = ref<IStudentWorkExperience>({
 });
 
 onMounted(async () => {
-    await studentWorkExperienceStore.loadWorkExperiences();
+    const res = await studentWorkExperienceStore.loadWorkExperiences();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load work experiences');
 })
 
 const addWorkExperience = async () => {
-    await studentWorkExperienceStore.storeWorkExperience(experienceFormData.value);
-    experiencesIsAdd.value = false;
+    const res = await studentWorkExperienceStore.storeWorkExperience(experienceFormData.value);
+    if (res.success) {
+        experiencesIsAdd.value = false;
+        await AlertService.success('Work experience added successfully.');
+    } else {
+        if (res.errors) await AlertService.validation(res.errors);
+        else await AlertService.error(res.message || 'Failed to add work experience');
+    }
 }
 
 const updateWorkExperience = async (experience: IStudentWorkExperience) => {
-    await studentWorkExperienceStore.updateWorkExperience(experience)
+    const res = await studentWorkExperienceStore.updateWorkExperience(experience)
+    if (!res.success) await AlertService.error(res.message || 'Failed to update experience');
 }
 
 const removeWorkExperience = async (experience: IStudentWorkExperience) => {
-    await studentWorkExperienceStore.deleteWorkExperience(experience)
+    const res = await studentWorkExperienceStore.deleteWorkExperience(experience)
+    if (!res.success) await AlertService.error(res.message || 'Failed to delete experience');
 }
 </script>
 

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import StudentAPI from "../services/StudentAPI";
+import { IActionResult } from "../interfaces/IActionResult";
 
 export interface IVisaInterview {
     visa_interview_status: string;
@@ -32,7 +33,7 @@ export const useStudentVisaInterview = defineStore({
 
     },
     actions: {
-        async loadVisaInterview() {
+    async loadVisaInterview(): Promise<IActionResult<IVisaInterview>> {
             try {
                 this.isLoading = true;
                 this.isSuccess = false;
@@ -42,10 +43,12 @@ export const useStudentVisaInterview = defineStore({
 
                 this.isLoading = false;
                 this.isSuccess = true;
+        return { success: true, data: this.visaInterview };
             } catch (error : any) {
                 this.error = error.response.data.message;
                 this.isLoading = false;
                 this.isSuccess = false;
+        return { success: false, message: error.response?.data?.message ?? 'Failed to load visa interview', errors: error.response?.data?.errors ?? {} };
             }
         }
     }

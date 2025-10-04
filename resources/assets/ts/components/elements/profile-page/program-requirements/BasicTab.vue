@@ -6,6 +6,8 @@ import { onMounted } from 'vue';
 import { useStudentBasicRequirement, IBasicRequirement } from '../../../../store/basicRequirement';
 import { storeToRefs } from 'pinia';
 
+import AlertService from '../../../../services/AlertService';
+
 const studentBasicRequirementStore = useStudentBasicRequirement();
 const { isLoading, isSuccess, requirements } = storeToRefs(studentBasicRequirementStore);
 
@@ -14,19 +16,37 @@ const authStore = useAuthStore();
 const { auth } = storeToRefs(authStore);
 
 onMounted(async () => {
-    await studentBasicRequirementStore.loadStudentBasicRequirements();
+    const res = await studentBasicRequirementStore.loadStudentBasicRequirements();
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to load requirements');
+    }
 });
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
-    await studentBasicRequirementStore.storeStudentBasicRequirement(requirementId, file)
+    const res = await studentBasicRequirementStore.storeStudentBasicRequirement(requirementId, file);
+    if (res.success) {
+        AlertService.success('File uploaded', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to upload file');
+    }
 }
 
 const deleteFileHandler = async (requirement : IBasicRequirement) => {
-    await studentBasicRequirementStore.removeStudentBasicRequirement(requirement);
+    const res = await studentBasicRequirementStore.removeStudentBasicRequirement(requirement);
+    if (res.success) {
+        AlertService.success('File deleted', 'Success');
+    } else {
+        AlertService.error(res.message || 'Failed to delete file');
+    }
 }
 
 const downloadFileHandler = async (requirementId : string | number | undefined) => {
-    await studentBasicRequirementStore.downloadBasicRequirement(requirementId);
+    const res = await studentBasicRequirementStore.downloadBasicRequirement(requirementId);
+    if (!res.success) {
+        AlertService.error(res.message || 'Failed to download file');
+    }
 }
 
 </script>

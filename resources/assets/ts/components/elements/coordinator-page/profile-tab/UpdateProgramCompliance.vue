@@ -9,6 +9,7 @@ const props = defineProps({
 });
 
 import { useCoordSelectedStudent } from '../../../../store/coordSelectedStudent';
+import AlertService from '../../../../services/AlertService';
 const useCoordStudent = useCoordSelectedStudent();
 
 const isProgramStatusEdit = ref<boolean>(false);
@@ -21,8 +22,15 @@ const updateProgramComplianceHandler = async (payload : Event) => {
     const target = payload.target as HTMLSelectElement;
     const toUpdateStatus = target.value; 
         
-    await useCoordStudent.updateProgramCompliance(toUpdateStatus);
-    isProgramStatusEdit.value = false;
+    const res = await useCoordStudent.updateProgramCompliance(toUpdateStatus);
+    if (res.success) {
+        isProgramStatusEdit.value = false;
+        AlertService.success('Program compliance updated', 'Success');
+    } else if (res.errors) {
+        AlertService.validation(res.errors);
+    } else {
+        AlertService.error(res.message || 'Failed to update program compliance');
+    }
 }
 </script>
 

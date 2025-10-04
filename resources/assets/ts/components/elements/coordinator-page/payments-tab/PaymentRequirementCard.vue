@@ -3,14 +3,28 @@ import { onMounted } from 'vue';
 import { useCoordStudentPaymentRequirement } from '../../../../store/coordStudentPaymentRequirement';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../../../store/auth';
+import AlertService from '../../../../services/AlertService';
 
 const authStore = useAuthStore();
 const coordStudentPaymentRequirementStore = useCoordStudentPaymentRequirement();
 const { isLoading, paymentRequirements } = storeToRefs(coordStudentPaymentRequirementStore);
 
 onMounted(async () => {
-    await coordStudentPaymentRequirementStore.loadSelectedStudentAdditionalRequirement();
+    const res = await coordStudentPaymentRequirementStore.loadSelectedStudentAdditionalRequirement();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load payment requirements');
 })
+
+const downloadHandler = async (id: string | number | undefined) => {
+    const res = await coordStudentPaymentRequirementStore.downloadSelectedStudentAdditionalRequirement(id as any);
+    if (!res.success) await AlertService.error(res.message || 'Failed to download file');
+}
+
+const acknowledgeHandler = async (id: string | number | undefined) => {
+    const res = await coordStudentPaymentRequirementStore.acknowledgeStudentPayment(id as any);
+    if (res.success) await AlertService.success('Payment acknowledged', 'Success');
+    else if (res.errors) await AlertService.validation(res.errors);
+    else await AlertService.error(res.message || 'Failed to acknowledge payment');
+}
 
 </script>
 
@@ -49,8 +63,8 @@ onMounted(async () => {
                         </td>
                         <td class="text-center">
                             <span v-if="!item.student_payment">Not uploaded yet</span>
-                            <button v-if="item.student_payment && (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="coordStudentPaymentRequirementStore.downloadSelectedStudentAdditionalRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button v-if="item.student_payment && (authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="coordStudentPaymentRequirementStore.acknowledgeStudentPayment(item.id)" class="btn btn-success btn-xs mr-1">Verify</button>
+                            <button v-if="item.student_payment && (authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_payment && (authStore.getAuthRole == 'accounting' || authStore.getAuthRole == 'superadmin')" @click="acknowledgeHandler(item.id)" class="btn btn-success btn-xs mr-1">Verify</button>
                         </td>
                     </tr>
                 </tbody>

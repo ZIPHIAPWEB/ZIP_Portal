@@ -2,6 +2,7 @@
 import { IWorkForm } from '../../../interfaces/IWorkForm';
 import ApplicationFormAPI from '../../../services/ApplicationFormAPI';
 import { onMounted, reactive } from 'vue';
+import AlertService from '../../../services/AlertService';
 
 const appFormDataKey = 'APP_FORM_DATA';
 const workFormDefault = {
@@ -31,7 +32,7 @@ const submitForm = async () => {
             Object.entries(apiErrors).forEach(([k, v]) => { errors[k] = v; });
             return;
         }
-        alert('Oppps... Something went wrong')
+        AlertService.error('Oppps... Something went wrong')
     }
 }
 
@@ -55,33 +56,33 @@ defineExpose({
             </div>
             <div class="row">
                 <div class="col-12">
-                    <label for="company_name">Company name</label>
+                    <label for="company_name">Company name <span class="text-red">*</span></label>
                     <input v-model="work.companyName" type="text" name="company_name" :class="['form-control', { 'is-invalid': !!errors[`${key}.companyName`] }]" placeholder="Enter company name">
                     <div v-if="errors[`${key}.companyName`]" class="invalid-feedback">{{ errors[`${key}.companyName`][0] }}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <label for="company_address">Company address</label>
+                    <label for="company_address">Company address <span class="text-red">*</span></label>
                     <input v-model="work.companyAddress" type="text" name="company_address" :class="['form-control', { 'is-invalid': !!errors[`${key}.companyAddress`] }]" placeholder="Enter complete company address">
                     <div v-if="errors[`${key}.companyAddress`]" class="invalid-feedback">{{ errors[`${key}.companyAddress`][0] }}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <label for="start_date">Start date</label>
+                    <label for="start_date">Start date <span class="text-red">*</span></label>
                     <input v-model="work.startDate" type="date" name="start_date" :class="['form-control', { 'is-invalid': !!errors[`${key}.startDate`] }]">
                     <div v-if="errors[`${key}.startDate`]" class="invalid-feedback">{{ errors[`${key}.startDate`][0] }}</div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <label for="end_date">End date</label>
+                    <label for="end_date">End date <span class="text-red">*</span></label>
                     <input v-model="work.endDate" type="date" name="end_date" :class="['form-control', { 'is-invalid': !!errors[`${key}.endDate`] }]">
                     <div v-if="errors[`${key}.endDate`]" class="invalid-feedback">{{ errors[`${key}.endDate`][0] }}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <label for="job_description">Job description</label>
+                    <label for="job_description">Job description <span class="text-red">*</span></label>
                     <textarea v-model="work.jobDescription" name="job_description" :class="['form-control', { 'is-invalid': !!errors[`${key}.jobDescription`] }]" placeholder="Describe your role and responsibilities" rows="3"></textarea>
                     <div v-if="errors[`${key}.jobDescription`]" class="invalid-feedback">{{ errors[`${key}.jobDescription`][0] }}</div>
                 </div>

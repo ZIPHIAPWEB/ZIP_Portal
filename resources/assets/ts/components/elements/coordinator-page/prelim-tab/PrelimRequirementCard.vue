@@ -5,6 +5,7 @@ import { userCoordStudentPrelimRequirement } from '../../../../store/coordStuden
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../../../store/auth';
 import UploadButton from '../../profile-page/program-requirements/UploadButton.vue';
+import AlertService from '../../../../services/AlertService';
 
 const authStore = useAuthStore();
 
@@ -12,12 +13,35 @@ const coordStudentPrelimRequirementStore = userCoordStudentPrelimRequirement();
 const { isLoading, prelimRequirement } = storeToRefs(coordStudentPrelimRequirementStore);
 
 onMounted(async () => {
-    await coordStudentPrelimRequirementStore.loadSelectedStudentPrelimRequirement();
+    const res = await coordStudentPrelimRequirementStore.loadSelectedStudentPrelimRequirement();
+    if (!res.success) await AlertService.error(res.message || 'Failed to load requirements');
 })
 
 const uploadFileHander = async (file: File, requirementId : string | number | undefined) => {
+    const res = await coordStudentPrelimRequirementStore.uploadSelectedStudentPrelimRequirement(requirementId, file);
+    if (res.success) {
+        await AlertService.success('File uploaded', 'Success');
+    } else if (res.errors) {
+        await AlertService.validation(res.errors);
+    } else {
+        await AlertService.error(res.message || 'Failed to upload file');
+    }
+}
 
-    await coordStudentPrelimRequirementStore.uploadSelectedStudentPrelimRequirement(requirementId, file)
+const downloadHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentPrelimRequirementStore.downloadSelectedStudentPrelimRequirement(requirementId as any);
+    if (!res.success) {
+        await AlertService.error(res.message || 'Failed to download file');
+    }
+}
+
+const removeHandler = async (requirementId: string | number | undefined) => {
+    const res = await coordStudentPrelimRequirementStore.removeSelectedStudentPrelimRequirement(requirementId as any);
+    if (res.success) {
+        await AlertService.success('File removed', 'Success');
+    } else {
+        await AlertService.error(res.message || 'Failed to remove file');
+    }
 }
 
 </script>
@@ -46,11 +70,11 @@ const uploadFileHander = async (file: File, requirementId : string | number | un
                         </td>
                         <td v-if="authStore.getAuthRole == 'coordinator' || authStore.getAuthRole == 'superadmin'" class="text-center">
                             <UploadButton v-if="!item.student_preliminary" :requirement-id="item.id" @getFile="uploadFileHander" />
-                            <button v-if="item.student_preliminary" @click="coordStudentPrelimRequirementStore.downloadSelectedStudentPrelimRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
-                            <button v-if="item.student_preliminary" @click="coordStudentPrelimRequirementStore.removeSelectedStudentPrelimRequirement(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
+                            <button v-if="item.student_preliminary" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_preliminary" @click="removeHandler(item.id)" class="btn btn-danger btn-xs mr-1">Delete</button>
                         </td>
                         <td v-if="authStore.getAuthRole == 'accounting'" class="text-center">
-                            <button v-if="item.student_preliminary" @click="coordStudentPrelimRequirementStore.downloadSelectedStudentPrelimRequirement(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
+                            <button v-if="item.student_preliminary" @click="downloadHandler(item.id)" class="btn btn-primary btn-xs mr-1">Download</button>
                         </td>
                     </tr>
                 </tbody>
